@@ -1,0 +1,332 @@
+{
+  "creator": "Original Erdynth assets",
+  "source": "scripts/build-erdynth-assets.mjs",
+  "assets": [
+    {
+      "name": "Resident_mira",
+      "bytes": 1242588,
+      "triangles": 23308,
+      "meshes": 75,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_rowan",
+      "bytes": 1273396,
+      "triangles": 21756,
+      "meshes": 64,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_hana",
+      "bytes": 1248040,
+      "triangles": 23216,
+      "meshes": 76,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_ethan",
+      "bytes": 1355912,
+      "triangles": 23068,
+      "meshes": 70,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_marna",
+      "bytes": 1635560,
+      "triangles": 28300,
+      "meshes": 86,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_bron",
+      "bytes": 1464828,
+      "triangles": 25468,
+      "meshes": 75,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_vera",
+      "bytes": 1427608,
+      "triangles": 25396,
+      "meshes": 81,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_taron",
+      "bytes": 1433580,
+      "triangles": 25660,
+      "meshes": 79,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_silen",
+      "bytes": 1160008,
+      "triangles": 23164,
+      "meshes": 77,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_ael",
+      "bytes": 1305440,
+      "triangles": 22788,
+      "meshes": 68,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_lien",
+      "bytes": 1126308,
+      "triangles": 22036,
+      "meshes": 72,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_elion",
+      "bytes": 1305448,
+      "triangles": 22788,
+      "meshes": 68,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_dew",
+      "bytes": 1162996,
+      "triangles": 23236,
+      "meshes": 78,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_mist",
+      "bytes": 1129288,
+      "triangles": 22108,
+      "meshes": 73,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_lana",
+      "bytes": 1634548,
+      "triangles": 29800,
+      "meshes": 92,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_kai",
+      "bytes": 1488652,
+      "triangles": 25152,
+      "meshes": 72,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_fia",
+      "bytes": 1172252,
+      "triangles": 23188,
+      "meshes": 76,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Resident_eil",
+      "bytes": 1351388,
+      "triangles": 23940,
+      "meshes": 72,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Walk_Carry",
+        "Work",
+        "Pickup",
+        "Drop",
+        "Attack"
+      ]
+    },
+    {
+      "name": "Tugboat",
+      "bytes": 603840,
+      "triangles": 11416,
+      "meshes": 29,
+      "clips": []
+    },
+    {
+      "name": "PatrolBoat",
+      "bytes": 717516,
+      "triangles": 12232,
+      "meshes": 31,
+      "clips": []
+    },
+    {
+      "name": "Lighthouse",
+      "bytes": 438112,
+      "triangles": 5704,
+      "meshes": 20,
+      "clips": []
+    },
+    {
+      "name": "Pickaxe",
+      "bytes": 189036,
+      "triangles": 2220,
+      "meshes": 5,
+      "clips": []
+    },
+    {
+      "name": "Axe",
+      "bytes": 163792,
+      "triangles": 1700,
+      "meshes": 4,
+      "clips": []
+    },
+    {
+      "name": "Hammer",
+      "bytes": 236424,
+      "triangles": 2448,
+      "meshes": 5,
+      "clips": []
+    },
+    {
+      "name": "Lantern",
+      "bytes": 154200,
+      "triangles": 2000,
+      "meshes": 8,
+      "clips": []
+    },
+    {
+      "name": "Bucket",
+      "bytes": 17184,
+      "triangles": 576,
+      "meshes": 2,
+      "clips": []
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+Title: Forest Ambience
+Creator: TinyWorlds
+Source: https://opengameart.org/content/forest-ambience
+Direct file: https://opengameart.org/sites/default/files/Forest_Ambience.mp3
+License: Creative Commons Zero 1.0 Universal (CC0-1.0)
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+Modifications: None.
+Loop: Creator identifies this as a seamless loop. Original MP3 unchanged; a short Web Audio crossfade can hide codec/replay gaps if audible.
+
+Title: calm theme
+Creator: pebonius
+Source: https://opengameart.org/content/calm-theme
+Direct file: https://opengameart.org/sites/default/files/calm_theme.ogg
+License: Creative Commons Zero 1.0 Universal (CC0-1.0)
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+Modifications: None.
+Loop: No seamless-loop promise in creator description; treat as background music and fade/crossfade at replay. No trimming performed.

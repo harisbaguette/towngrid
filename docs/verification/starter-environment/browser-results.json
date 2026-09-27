@@ -1,0 +1,260 @@
+{
+  "passed": true,
+  "initial": {
+    "buildings": 9,
+    "residents": 6,
+    "types": [
+      "warehouse",
+      "house",
+      "lumber",
+      "sawmill",
+      "well",
+      "field"
+    ],
+    "sprites": true,
+    "time": 2.049999999999998
+  },
+  "views": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ]
+  ],
+  "runtime": {
+    "ghosts": [
+      {
+        "type": "warehouse",
+        "view": 0,
+        "row": 0,
+        "sprite": true
+      },
+      {
+        "type": "house",
+        "view": 0,
+        "row": 0,
+        "sprite": true
+      },
+      {
+        "type": "well",
+        "view": 0,
+        "row": 0,
+        "sprite": true
+      },
+      {
+        "type": "field",
+        "view": 0,
+        "row": 0,
+        "sprite": true
+      },
+      {
+        "type": "lumber",
+        "view": 0,
+        "row": 0,
+        "sprite": true
+      },
+      {
+        "type": "sawmill",
+        "view": 0,
+        "row": 0,
+        "sprite": true
+      },
+      {
+        "type": "warehouse",
+        "view": 1,
+        "row": 1,
+        "sprite": true
+      },
+      {
+        "type": "house",
+        "view": 1,
+        "row": 1,
+        "sprite": true
+      },
+      {
+        "type": "well",
+        "view": 1,
+        "row": 1,
+        "sprite": true
+      },
+      {
+        "type": "field",
+        "view": 1,
+        "row": 1,
+        "sprite": true
+      },
+      {
+        "type": "lumber",
+        "view": 1,
+        "row": 1,
+        "sprite": true
+      },
+      {
+        "type": "sawmill",
+        "view": 1,
+        "row": 1,
+        "sprite": true
+      },
+      {
+        "type": "warehouse",
+        "view": 2,
+        "row": 2,
+        "sprite": true
+      },
+      {
+        "type": "house",
+        "view": 2,
+        "row": 2,
+        "sprite": true
+      },
+      {
+        "type": "well",
+        "view": 2,
+        "row": 2,
+        "sprite": true
+      },
+      {
+        "type": "field",
+        "view": 2,
+        "row": 2,
+        "sprite": true
+      },
+      {
+        "type": "lumber",
+        "view": 2,
+        "row": 2,
+        "sprite": true
+      },
+      {
+        "type": "sawmill",
+        "view": 2,
+        "row": 2,
+        "sprite": true
+      },
+      {
+        "type": "warehouse",
+        "view": 3,
+        "row": 3,
+        "sprite": true
+      },
+      {
+        "type": "house",
+        "view": 3,
+        "row": 3,
+        "sprite": true
+      },
+      {
+        "type": "well",
+        "view": 3,
+        "row": 3,
+        "sprite": true
+      },
+      {
+        "type": "field",
+        "view": 3,
+        "row": 3,
+        "sprite": true
+      },
+      {
+        "type": "lumber",
+        "view": 3,
+        "row": 3,
+        "sprite": true
+      },
+      {
+        "type": "sawmill",
+        "view": 3,
+        "row": 3,
+        "sprite": true
+      }
+    ],
+    "rows": [
+      {
+        "type": "warehouse",
+        "frame": 0
+      },
+      {
+        "type": "house",
+        "frame": 1
+      },
+      {
+        "type": "house",
+        "frame": 1
+      },
+      {
+        "type": "house",
+        "frame": 1
+      },
+      {
+        "type": "lumber",
+        "frame": 1
+      },
+      {
+        "type": "sawmill",
+        "frame": 2
+      },
+      {
+        "type": "well",
+        "frame": 1
+      },
+      {
+        "type": "field",
+        "frame": 2
+      },
+      {
+        "type": "field",
+        "frame": 0
+      }
+    ],
+    "renderingPreservesSave": true,
+    "produced": {
+      "grain": 68,
+      "water": 42,
+      "wood": 36,
+      "plank": 24
+    },
+    "deliveries": 195
+  },
+  "existingSavePreserved": true,
+  "errors": [],
+  "failedAssets": []
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>타운그리드 · 픽셀 환경 샘플</title>
+ <style>
+  *{box-sizing:border-box}body{margin:0;background:#edf0e6;color:#263d38;font:15px/1.65 system-ui,sans-serif}main{max-width:1180px;margin:0 auto;padding:48px 30px}header{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:28px}h1{font-size:29px;letter-spacing:-1px;margin:0}header p{margin:5px 0 0;color:#66766b}a{color:#285c54}header a{padding:10px 18px;background:#244e45;color:white;border-radius:8px;text-decoration:none;white-space:nowrap}.samples{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}article{background:#fbfcf6;border:1px solid #ccd5c4;border-radius:14px;overflow:hidden}article h2{margin:18px 22px 0;font-size:20px}article .view{height:292px;display:grid;place-items:center;background:#dce5d0;margin:14px 0 0}canvas{width:100%;max-width:336px;height:292px;image-rendering:pixelated}.controls{display:flex;gap:6px;flex-wrap:wrap;padding:18px 18px 0;min-height:88px;align-content:flex-start}select{font:inherit;font-size:13px;background:#fbfcf6;border:1px solid #bccab7;border-radius:6px;color:#315b4c;padding:6px}button{font:inherit;font-size:13px;line-height:1.4;cursor:pointer;border:1px solid #bccab7;background:transparent;color:#465847;border-radius:6px;padding:6px 9px}button[aria-pressed=true]{background:#315b4c;border-color:#315b4c;color:#fff}button:focus-visible,a:focus-visible{outline:3px solid #a67c31;outline-offset:3px}.description{margin:8px 22px 20px;min-height:48px;font-size:13px;color:#62715e}.product{display:inline-flex;align-items:center;gap:6px;color:#795225}.product img{width:30px;height:30px;image-rendering:pixelated;vertical-align:middle}footer{margin-top:24px;color:#697466;font-size:13px}footer p{margin:5px 0}#load-error{color:#a53c26}.note{border-top:1px solid #cbd4c1;padding-top:16px;margin-top:16px}@media(max-width:780px){main{padding:28px 16px}header{align-items:flex-start}h1{font-size:22px}.samples{grid-template-columns:1fr}article .view{height:292px}.controls{min-height:unset;padding-bottom:8px}.description{min-height:unset}header a{font-size:12px;padding:8px}}
+ </style>
+</head>
+<body><main>
+ <header><div><h1>픽셀 환경 샘플</h1><p>타운그리드 · 제재소, 참나무, 물 타일</p></div><a href="/">게임에서 보기 ↗</a></header>
+ <div class="samples">
+  <article><h2>01 · 제재소</h2><div class="view"><canvas id="sawmill" width="336" height="292" aria-label="제재소 애니메이션"></canvas></div><div class="controls" data-target="sawmill"><button data-state="working" aria-pressed="true">생산 중</button><button data-state="idle" aria-pressed="false">대기</button><button data-state="disabled" aria-pressed="false">가동 중지</button></div><p class="description"><select id="sawmill-view" aria-label="제재소 방향"><option value="0">남동 · 정면과 오른쪽</option><option value="1">북동 · 뒷면과 오른쪽</option><option value="2">북서 · 뒷면과 왼쪽</option><option value="3">남서 · 정면과 왼쪽</option></select><br>통나무를 켜서 판재를 만듭니다.<br><span class="product"><img src="/assets/pixel-environment/plank.png" alt="판재 아이콘">생산물 · 판재</span></p></article>
+  <article><h2>02 · 참나무</h2><div class="view"><canvas id="oak" width="336" height="292" aria-label="참나무 상태별 애니메이션"></canvas></div><div class="controls" data-target="oak"><button data-state="idle" aria-pressed="true">바람</button><button data-state="harvest" aria-pressed="false">채집</button><button data-state="stump" aria-pressed="false">그루터기</button><button data-state="sapling" aria-pressed="false">묘목</button><button data-state="young" aria-pressed="false">성장</button></div><p class="description">잎 움직임 · 채집 흔적 · 단계별 성장<br>게임에서는 심은 나무가 기존 조림 시간에 맞춰 자랍니다.</p></article>
+  <article><h2>03 · 물 타일</h2><div class="view"><canvas id="water" width="336" height="292" aria-label="물 타일 수면 애니메이션"></canvas></div><div class="controls" data-target="water"><button data-state="flow" aria-pressed="true">흐름</button><button data-state="still" aria-pressed="false">정지</button></div><p class="description">수면 무늬가 바뀌는 4프레임 애니메이션<br>게임의 강·해안 타일에 적용했습니다.</p></article>
+ </div>
+ <p id="load-error" role="alert"></p>
+ <footer><p>이 페이지의 상태 버튼은 아트 확인용입니다. 실제 게임에서는 생산·벌목·조림 상태에 따라 바뀝니다.</p><p class="note">3종 시험 적용 · 같은 팔레트와 윤곽선 · 캐릭터 파일 변경 없음<br>카메라와 제재소는 90° 간격 네 방향입니다. 원거리 안개는 후속 작업입니다.</p></footer>
+</main>
+<script>
+ const images={},state={sawmill:'working',oak:'idle',water:'flow'},frames={sawmill:0,oak:0,water:0};
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(reduced){state.sawmill='idle';state.water='still';}
+ document.querySelectorAll('.controls').forEach(group=>{
+  const id=group.dataset.target;
+  group.querySelectorAll('button').forEach(button=>{
+   button.setAttribute('aria-pressed',String(button.dataset.state===state[id]));
+   button.onclick=()=>{state[id]=button.dataset.state;group.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));};
+  });
+ });
+ Promise.all(['sawmill','oak','water'].map(id=>new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>{images[id]=img;resolve()};img.onerror=reject;img.src='/assets/pixel-environment/'+id+'.png'}))).then(()=>requestAnimationFrame(draw)).catch(()=>document.querySelector('#load-error').textContent='이미지를 불러오지 못했습니다. 개발 서버가 실행 중인지 확인해 주세요.');
+ function draw(now){
+  const time=now/1000;
+  frames.sawmill=state.sawmill==='working'?[1,2,3,2][Math.floor(time*5)%4]:0;
+  frames.oak=({stump:4,sapling:5,young:6})[state.oak]??(state.oak==='harvest'?[0,3,1,3][Math.floor(time*6)%4]:reduced?0:[0,1,2,1][Math.floor(time*2)%4]);
+  if(state.water==='flow')frames.water=Math.floor(time*3)%4;
+  for(const id of Object.keys(images)){
+   const canvas=document.getElementById(id),ctx=canvas.getContext('2d');ctx.clearRect(0,0,336,292);ctx.imageSmoothingEnabled=false;ctx.save();
+   if(id==='water'){ctx.translate(168,62);ctx.transform(.40,.23,-.40,.23,0,0);ctx.drawImage(images[id],frames[id]*192,0,192,192,0,0,192,192);ctx.drawImage(images[id],frames[id]*192,0,192,192,192,0,192,192);ctx.drawImage(images[id],frames[id]*192,0,192,192,0,192,192,192);ctx.drawImage(images[id],frames[id]*192,0,192,192,192,192,192,192);}
+   else ctx.drawImage(images[id],frames[id]*192,id==="sawmill"?Number(document.getElementById("sawmill-view").value)*192:0,192,192,40,16,256,256);
+   ctx.restore();canvas.dataset.frame=String(frames[id]);canvas.dataset.state=state[id];
+  }
+  requestAnimationFrame(draw);
+ }
+</script></body></html>

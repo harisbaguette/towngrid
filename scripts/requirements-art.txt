@@ -1,0 +1,4 @@
+# Optional: only needed to repack the original character artwork.
+Pillow>=10,<13
+numpy>=1.26,<3
+scipy>=1.11,<2

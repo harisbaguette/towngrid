@@ -1,0 +1,435 @@
+[
+  {
+    "id": "silen",
+    "source": "art-source/pixel-characters/silen-v1.png",
+    "cutoff": 564
+  },
+  {
+    "id": "hana",
+    "source": "art-source/pixel-characters/hana-v1.png",
+    "cutoff": 500
+  },
+  {
+    "id": "rowan",
+    "source": "art-source/pixel-characters/rowan-v1.png",
+    "cutoff": 628
+  },
+  {
+    "id": "ethan",
+    "source": "art-source/pixel-characters/ethan-v1.png",
+    "cutoff": 540,
+    "frame_boxes": [
+      {
+        "row": 4,
+        "column": 0,
+        "box": [
+          551,
+          518,
+          621,
+          645
+        ]
+      }
+    ]
+  },
+  {
+    "id": "marna",
+    "source": "art-source/pixel-characters/marna-v1.png",
+    "cutoff": 514
+  },
+  {
+    "id": "bron",
+    "source": "art-source/pixel-characters/bron-v1.png",
+    "cutoff": 535
+  },
+  {
+    "id": "vera",
+    "source": "art-source/pixel-characters/vera-v1.png",
+    "cutoff": 478,
+    "columns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8
+    ],
+    "split_rows": [
+      128,
+      256,
+      384,
+      512,
+      640,
+      768,
+      896
+    ],
+    "replace_columns": [
+      {
+        "index": 6,
+        "source": "art-source/pixel-characters/vera-windup-correction.png",
+        "body_height": 336
+      }
+    ]
+  },
+  {
+    "id": "taron",
+    "source": "art-source/pixel-characters/taron-v1.png",
+    "cutoff": 582
+  },
+  {
+    "id": "ael",
+    "source": "art-source/pixel-characters/ael-v1.png",
+    "cutoff": 555
+  },
+  {
+    "id": "ravik",
+    "source": "art-source/pixel-characters/demon-ravik-original.png"
+  },
+  {
+    "id": "grum",
+    "source": "art-source/pixel-characters/orc-grum-original.png"
+  },
+  {
+    "id": "niki",
+    "source": "art-source/pixel-characters/goblin-niki-original.png"
+  },
+  {
+    "id": "kael",
+    "source": "art-source/pixel-characters/dragon-kael-original.png"
+  },
+  {
+    "id": "neris",
+    "source": "art-source/pixel-characters/aquatic-neris-original.png"
+  },
+  {
+    "id": "sora",
+    "source": "art-source/pixel-characters/beast-sora-original.png",
+    "source_rows": 7,
+    "insert_rows": [
+      {
+        "index": 5,
+        "source": "art-source/pixel-characters/beast-sora-northeast-row.png"
+      }
+    ]
+  },
+  {
+    "id": "mira",
+    "source": "art-source/pixel-characters/mira-v1.png",
+    "cutoff": 552,
+    "source_rows": 7,
+    "insert_rows": [
+      {
+        "index": 4,
+        "source": "art-source/pixel-characters/mira-n-strip.png",
+        "direction": "N",
+        "alpha_components_gt200": [
+          {
+            "bbox": [
+              1136,
+              268,
+              1334,
+              709
+            ],
+            "area": 45495
+          },
+          {
+            "bbox": [
+              195,
+              324,
+              377,
+              712
+            ],
+            "area": 38440
+          },
+          {
+            "bbox": [
+              11,
+              326,
+              190,
+              709
+            ],
+            "area": 39408
+          },
+          {
+            "bbox": [
+              392,
+              326,
+              537,
+              712
+            ],
+            "area": 34643
+          },
+          {
+            "bbox": [
+              551,
+              326,
+              742,
+              712
+            ],
+            "area": 38731
+          },
+          {
+            "bbox": [
+              764,
+              333,
+              929,
+              709
+            ],
+            "area": 37862
+          },
+          {
+            "bbox": [
+              959,
+              333,
+              1118,
+              712
+            ],
+            "area": 37929
+          },
+          {
+            "bbox": [
+              1324,
+              396,
+              1536,
+              709
+            ],
+            "area": 37527
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lien",
+    "source": "art-source/pixel-characters/lien-v1.png",
+    "cutoff": 498,
+    "source_rows": 8,
+    "columns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "split_rows": [
+      894
+    ],
+    "replace_rows": [
+      {
+        "index": 5,
+        "source": "art-source/pixel-characters/lien-ne-strip.png",
+        "source_rows": 1,
+        "source_row": 0
+      },
+      {
+        "index": 6,
+        "source": "art-source/pixel-characters/lien-east-southeast-correction.png",
+        "source_rows": 2,
+        "source_row": 0
+      },
+      {
+        "index": 7,
+        "source": "art-source/pixel-characters/lien-east-southeast-correction.png",
+        "source_rows": 2,
+        "source_row": 1
+      }
+    ]
+  },
+  {
+    "id": "elion",
+    "source": "art-source/pixel-characters/elion-v1.png",
+    "cutoff": 555,
+    "source_rows": 8,
+    "columns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8
+    ]
+  },
+  {
+    "id": "dew",
+    "source": "art-source/pixel-characters/dew-v1.png",
+    "cutoff": 498,
+    "source_rows": 8,
+    "columns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "replace_rows": [
+      {
+        "index": 5,
+        "source": "art-source/pixel-characters/dew-ne-e-strip.png",
+        "source_rows": 2,
+        "source_row": 0
+      },
+      {
+        "index": 6,
+        "source": "art-source/pixel-characters/dew-ne-e-strip.png",
+        "source_rows": 2,
+        "source_row": 1
+      }
+    ]
+  },
+  {
+    "id": "mist",
+    "source": "art-source/pixel-characters/mist-v1.png",
+    "cutoff": 498,
+    "source_rows": 8,
+    "columns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "replace_rows": [
+      {
+        "index": 5,
+        "source": "art-source/pixel-characters/mist-ne-e-strip.png",
+        "source_rows": 2,
+        "source_row": 0
+      },
+      {
+        "index": 6,
+        "source": "art-source/pixel-characters/mist-ne-e-strip.png",
+        "source_rows": 2,
+        "source_row": 1
+      }
+    ]
+  },
+  {
+    "id": "lana",
+    "source": "art-source/pixel-characters/lana-v1.png",
+    "cutoff": 490,
+    "source_rows": 8,
+    "columns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "split_rows": [
+      899
+    ],
+    "replace_rows": [
+      {
+        "index": 5,
+        "source": "art-source/pixel-characters/lana-ne-e-strip.png",
+        "source_rows": 2,
+        "source_row": 0
+      },
+      {
+        "index": 6,
+        "source": "art-source/pixel-characters/lana-ne-e-strip.png",
+        "source_rows": 2,
+        "source_row": 1
+      }
+    ]
+  },
+  {
+    "id": "kai",
+    "source": "art-source/pixel-characters/kai-v1.png",
+    "cutoff": 538,
+    "source_rows": 8,
+    "columns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "replace_rows": [
+      {
+        "index": 6,
+        "source": "art-source/pixel-characters/kai-e-strip.png",
+        "source_rows": 1,
+        "source_row": 0
+      }
+    ]
+  },
+  {
+    "id": "fia",
+    "source": "art-source/pixel-characters/fia-v1.png",
+    "cutoff": 533,
+    "source_rows": 8,
+    "columns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "replace_rows": [
+      {
+        "index": 5,
+        "source": "art-source/pixel-characters/fia-ne-e-strip.png",
+        "source_rows": 2,
+        "source_row": 0
+      },
+      {
+        "index": 6,
+        "source": "art-source/pixel-characters/fia-ne-e-strip.png",
+        "source_rows": 2,
+        "source_row": 1
+      }
+    ]
+  },
+  {
+    "id": "eil",
+    "source": "art-source/pixel-characters/eil-v1.png",
+    "cutoff": 529,
+    "source_rows": 8,
+    "columns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "replace_rows": [
+      {
+        "index": 5,
+        "source": "art-source/pixel-characters/eil-ne-e-strip.png",
+        "source_rows": 2,
+        "source_row": 0
+      },
+      {
+        "index": 6,
+        "source": "art-source/pixel-characters/eil-ne-e-strip.png",
+        "source_rows": 2,
+        "source_row": 1
+      }
+    ]
+  }
+]

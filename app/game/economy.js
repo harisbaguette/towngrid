@@ -1,0 +1,45 @@
+import { BUILDINGS, RESOURCES } from './simulation.js';
+import { unlockRank } from './world.js';
+
+export function reserveFor(sim, item) {
+ const production = sim.buildings.filter(b => b.enabled !== false && b.health > 0)
+  .reduce((n, b) => n + (BUILDINGS[b.type].inputs?.[item] || 0) * 2, 0);
+ const freight = (sim.campaign?.routes || []).filter(r => r.from === sim.siteId && r.enabled && r.item === item)
+  .reduce((n, r) => n + r.amount, 0);
+ const contract = sim.contract();
+ return Math.max(sim.reserves?.[item] || 0, production) + freight + (contract.item === item ? contract.amount : 0);
+}
+
+export function purchase(sim, item, quantity) {
+ if (!RESOURCES[item] || !Number.isInteger(quantity) || quantity < 1 || quantity > 100)
+  return {ok:false,error:'1~100개의 수입 수량을 선택하세요'};
+ const producers = Object.entries(BUILDINGS).filter(([,d]) => d.output === item);
+ if (!producers.some(([id]) => unlockRank(id) <= sim.rank))
+  return {ok:false,error:'생산 허가를 얻은 자원만 수입할 수 있습니다'};
+ if(sim.stock[item]+quantity>sim.storageCapacity)return {ok:false,error:'창고가 가득 찹니다. 재고를 팔거나 자재 보관소를 지으세요'};
+ const cost = Math.ceil(RESOURCES[item].price * 1.85) * quantity;
+ if (sim.money < cost) return {ok:false,error:`수입 비용 ${cost}G가 필요합니다`};
+ sim.money -= cost; sim.stock[item] += quantity; sim.sound('delivery');
+ return {ok:true,cost};
+}
+
+export function plant(sim, x, z) {
+ const t = sim.tile(x,z);
+ if (!t || t.terrain === 'water' || !sim.ownedAt(x,z) || sim.at(x,z) || t.nature || sim.roads.has(`${x},${z}`))
+  return {ok:false,error:'소유한 빈 땅에 묘목을 심으세요'};
+ if (sim.money < 15 || sim.stock.water < 2) return {ok:false,error:'조림 비용 15G와 물 2개가 필요합니다'};
+ sim.money -= 15; sim.stock.water -= 2; t.nature = 'sapling'; t.remaining = 0; t.growAt = sim.time + 160;
+ sim.revision++; sim.sound('plant'); return {ok:true};
+}
+
+export function restructure(sim) {
+ const last = sim.campaign?.treasury.lastRecoveryDay ?? sim.lastRecoveryDay ?? -10;
+ if (sim.money > 150) return {ok:false,error:'보유 자금이 150G 이하일 때 회생 자금을 신청할 수 있습니다'};
+ if (sim.day - last < 5) return {ok:false,error:`${5-(sim.day-last)}일 후 다시 신청할 수 있습니다`};
+ const grant = 500 - sim.money;
+ sim.money += grant; sim.debt += Math.ceil(grant * 1.3);
+ if (sim.campaign) {sim.campaign.treasury.lastRecoveryDay = sim.day; sim.campaign.support = Math.max(10,sim.campaign.support-8);}
+ else sim.lastRecoveryDay = sim.day;
+ sim.notify(`회생 자금 ${grant}G 지급 · 채무 ${Math.ceil(grant*1.3)}G 추가`,'warning');
+ return {ok:true};
+}

@@ -1,0 +1,15 @@
+Use case: stylized-concept. Asset type: video-game eight-direction windup animation strip.
+Create ONE NEW CORRECTION STRIP showing ONLY EIGHT detached, full-body small pixel sprites of the SAME Vera character in the reference. No large portrait and no second row.
+Preserve character identity and the ORIGINAL MINIATURE SPRITE proportions: adult female artisan with warm pale skin, pointed ears, long swept silver-white hair with a small gold/teal hair ornament, teal earrings and subtle teal arm markings, ivory split-tail work coat with brass shoulder armor over charcoal top, dark mechanic trousers, brown work boots, brass utility belt. She holds the same compact brass/gold mallet or work hammer with a short dark handle. Practical adult feminine presentation, fully clothed. Style is crisp intricate dot-pixel RPG art with thin dark pixel outlines and deliberately limited colors; no smooth painting, no vector, no voxel, no3D. Body about3.5heads tall like reference mini sprites.
+ALL EIGHT poses show ONE ACTION: hammer/tool-raised WINDUP, hammer hand raised above shoulder ready to strike, the other arm balanced naturally, full body and both boots visible. Same scale, identity, proportions and action phase across all8 figures. Tool is clearly connected to her hand and its ENTIRE head and handle are visible. Do not use contact, hammer-down or carry-box poses.
+LEFT TO RIGHT EXACT EIGHT DIRECTIONS, each genuinely different body/head orientation:
+1 SOUTH — straight front toward viewer, face and coat front visible.
+2 SOUTHWEST — front-left three-quarter, face/chest turned down-left.
+3 WEST — true left side profile, nose and toes toward left edge.
+4 NORTHWEST — back-left three-quarter facing upper-left, mostly back of hair and coat, no frontal face.
+5 NORTH — full straight back away from viewer, back of hair and coat, no face.
+6 NORTHEAST — back-right three-quarter facing upper-right, mostly back of hair and coat, no frontal face.
+7 EAST — true right side profile, nose and toes toward right edge.
+8 SOUTHEAST — front-right three-quarter, face/chest turned down-right.
+Composition: landscape PNG with a single horizontal row of exactly8 small sprites, evenly spaced, feet aligned on one baseline. All8 figures centered vertically with generous blank transparent space above heads/tools and below boots. At least40px empty-alpha gap between every two figures and at least40px empty-alpha margin at all canvas edges. No character, hair, tool, or foot may touch a canvas boundary or neighboring figure.
+Background MUST be genuine transparent RGBA with alpha0 in all empty space. No backdrop, gradient, checkerboard, floor, shadows, detached flecks, labels, grid lines, text, watermark, or extra figures. Keep all original art identity details. Make the full hammer and full boots easy to crop cleanly.

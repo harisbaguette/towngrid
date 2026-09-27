@@ -1,0 +1,226 @@
+{
+  "date": "2026-09-26",
+  "test": "tests/full-campaign.mjs",
+  "method": "Normal paid player actions and elapsed time; no injected cash, stock, production or ranks. Roads built through player actions. Periodic save/restore.",
+  "result": {
+    "day": 41,
+    "sites": 7,
+    "revenue": 386220,
+    "produced": {
+      "water": 2325,
+      "wood": 1468,
+      "grain": 2588,
+      "fish": 1360,
+      "stone": 180,
+      "plank": 912,
+      "flour": 570,
+      "bread": 1050,
+      "gear": 974,
+      "iron": 688,
+      "coal": 692,
+      "steel": 450,
+      "oil": 796,
+      "fuel": 404,
+      "polymer": 414,
+      "mana": 322,
+      "circuit": 230,
+      "car": 80,
+      "medicine": 306
+    },
+    "milestones": 32
+  },
+  "promotions": [
+    {
+      "rank": 2,
+      "name": "등록 농노",
+      "day": 1,
+      "money": 318
+    },
+    {
+      "rank": 3,
+      "name": "개간 농노",
+      "day": 1,
+      "money": 258
+    },
+    {
+      "rank": 4,
+      "name": "계약 농노",
+      "day": 2,
+      "money": 1063
+    },
+    {
+      "rank": 5,
+      "name": "준자유민",
+      "day": 3,
+      "money": 1578
+    },
+    {
+      "rank": 6,
+      "name": "임차 사업주",
+      "day": 3,
+      "money": 998
+    },
+    {
+      "rank": 7,
+      "name": "등록 사업주",
+      "day": 3,
+      "money": 1177
+    },
+    {
+      "rank": 8,
+      "name": "지역 공급자",
+      "day": 3,
+      "money": 1576
+    },
+    {
+      "rank": 9,
+      "name": "제조 허가업자",
+      "day": 5,
+      "money": 3005
+    },
+    {
+      "rank": 10,
+      "name": "지역 납품업자",
+      "day": 7,
+      "money": 4626
+    },
+    {
+      "rank": 11,
+      "name": "공인 계약업자",
+      "day": 11,
+      "money": 16920
+    },
+    {
+      "rank": 12,
+      "name": "개척 사업자",
+      "day": 11,
+      "money": 17008
+    },
+    {
+      "rank": 13,
+      "name": "동력 제조업자",
+      "day": 12,
+      "money": 17566
+    },
+    {
+      "rank": 14,
+      "name": "법인 대표",
+      "day": 13,
+      "money": 17330
+    },
+    {
+      "rank": 15,
+      "name": "중공업 사업자",
+      "day": 13,
+      "money": 18158
+    },
+    {
+      "rank": 16,
+      "name": "에너지 사업자",
+      "day": 15,
+      "money": 14561
+    },
+    {
+      "rank": 17,
+      "name": "산업단지 운영자",
+      "day": 16,
+      "money": 15358
+    },
+    {
+      "rank": 18,
+      "name": "정밀 제조업자",
+      "day": 17,
+      "money": 13306
+    },
+    {
+      "rank": 19,
+      "name": "광역 투자자",
+      "day": 19,
+      "money": 12395
+    },
+    {
+      "rank": 20,
+      "name": "자동차 제조사",
+      "day": 19,
+      "money": 8768
+    },
+    {
+      "rank": 21,
+      "name": "기술 기업군",
+      "day": 20,
+      "money": 9370
+    },
+    {
+      "rank": 22,
+      "name": "기반시설 운영자",
+      "day": 22,
+      "money": 12340
+    },
+    {
+      "rank": 23,
+      "name": "개발구 운영권자",
+      "day": 22,
+      "money": 97
+    },
+    {
+      "rank": 24,
+      "name": "치안권 보유자",
+      "day": 23,
+      "money": 2710
+    },
+    {
+      "rank": 25,
+      "name": "재정 운영권자",
+      "day": 24,
+      "money": 1238
+    },
+    {
+      "rank": 26,
+      "name": "자치구 대표",
+      "day": 24,
+      "money": 367
+    },
+    {
+      "rank": 27,
+      "name": "자치정부 수장",
+      "day": 26,
+      "money": 839
+    },
+    {
+      "rank": 28,
+      "name": "독립 선언국",
+      "day": 28,
+      "money": 654
+    },
+    {
+      "rank": 29,
+      "name": "승인 독립국",
+      "day": 30,
+      "money": 99
+    },
+    {
+      "rank": 30,
+      "name": "지역 강국",
+      "day": 32,
+      "money": 2479
+    },
+    {
+      "rank": 31,
+      "name": "다지역 연방",
+      "day": 32,
+      "money": 1149
+    },
+    {
+      "rank": 32,
+      "name": "열강",
+      "day": 41,
+      "money": 69616
+    },
+    {
+      "rank": 33,
+      "name": "패권국",
+      "day": 41,
+      "money": 52651
+    }
+  ]
+}

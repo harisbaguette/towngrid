@@ -1,0 +1,14 @@
+Use case: stylized-concept. Create ONE NEW SUPPLEMENTARY ANIMATION ROW for the SAME original adult female fox beastkin Sora shown in the reference. This is a new image containing only 8 small full-body sprites, with a genuine transparent RGBA background. No portrait, no other rows, no diagram, no text, no grid, no ground or shadows.
+Preserve exactly her warm long dark-brown hair, two fox ears, fluffy brown fox tail with ivory tip, khaki expedition jacket, navy trousers, brown boots, short spear, detailed hard-edged pixel art. Small adult humanlike upright body, about3.5heads high.
+ALL EIGHT FIGURES face the SAME direction: NORTHEAST, a TRUE BACK-RIGHT THREE-QUARTER VIEW, moving toward the upper-right of the screen. Viewer sees mostly BACK OF HEAD, BACK OF JACKET, and BACK/RIGHT shoulder. Face is almost completely hidden, perhaps a tiny right cheek. Both the back surface and right side must be visible. This is NOT a right-facing side profile. Chest/front of jacket NEVER visible. They all face away from camera to upper-right.
+Composition: landscape1536x1024 with one single evenly spaced horizontal row of exactly8 full-body figures, each approximately100pixels tall, located across middle of canvas with abundant empty transparency above and below. Feet on same baseline. Nothing touches other figures, ears/tail/weapon stay isolated.
+Positions left to right ONLY these EIGHT poses:
+(1) Idle standing back-right with spear stowed;
+(2) Walk, left foot forward toward upper-right, right foot back;
+(3) Walk passing phase, feet together beneath body;
+(4) Walk, right foot forward toward upper-right, left foot back;
+(5) Walk carrying one small wooden supply box in both hands, left foot forward;
+(6) Walk carrying one small wooden supply box in both hands, right foot forward;
+(7) Spear attack windup, spear raised above right shoulder aimed upper-right, back to viewer;
+(8) Spear attack contact thrust into upper-right, body leaning into thrust, back to viewer.
+Exactly8 figures. No additional idle weapon pose. All poses same back-right direction. Keep true PNG alpha, no colored or gradient backdrop.

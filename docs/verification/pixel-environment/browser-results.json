@@ -1,0 +1,103 @@
+{
+  "passed": true,
+  "checks": [
+    "sample state controls",
+    "mobile overflow",
+    "four UI views",
+    "90 degree buttons",
+    "Q/E keys",
+    "key repeat suppression",
+    "right drag no free rotation",
+    "zoom and reset",
+    "matching facade and ghost directions",
+    "tile picking in all views",
+    "transparent pixel picking",
+    "stump depletion and expiry",
+    "CPU sprite rendering",
+    "water above background",
+    "asset HTTP",
+    "no page errors"
+  ],
+  "runtime": {
+    "views": [
+      {
+        "index": 0,
+        "row": 0,
+        "ghostRow": 0,
+        "alphaTest": 0.01,
+        "opacity": 0.42,
+        "angle": 0.7853981633974483,
+        "polar": 0.9553166181245092
+      },
+      {
+        "index": 1,
+        "row": 1,
+        "ghostRow": 1,
+        "alphaTest": 0.01,
+        "opacity": 0.42,
+        "angle": 2.356194490192345,
+        "polar": 0.9553166181245092
+      },
+      {
+        "index": 2,
+        "row": 2,
+        "ghostRow": 2,
+        "alphaTest": 0.01,
+        "opacity": 0.42,
+        "angle": -2.356194490192345,
+        "polar": 0.9553166181245092
+      },
+      {
+        "index": 3,
+        "row": 3,
+        "ghostRow": 3,
+        "alphaTest": 0.01,
+        "opacity": 0.42,
+        "angle": -0.7853981633974483,
+        "polar": 0.9553166181245092
+      }
+    ],
+    "tiles": [
+      [
+        12,
+        7
+      ],
+      [
+        12,
+        7
+      ],
+      [
+        12,
+        7
+      ],
+      [
+        12,
+        7
+      ]
+    ],
+    "focused": [
+      11.999999999999998,
+      2.2565508630592612e-17,
+      6.999999999999998
+    ],
+    "selected": [
+      12,
+      7
+    ],
+    "expected": [
+      12,
+      7
+    ],
+    "cornerHits": 0,
+    "stumpFrame": 4,
+    "expired": true,
+    "waterY": -0.17000000178813934,
+    "waterFrame": 0,
+    "waterNext": 1,
+    "colored": 6049,
+    "cpuRow": 2,
+    "renderer": "webgl"
+  },
+  "errors": [],
+  "failedAssets": []
+}

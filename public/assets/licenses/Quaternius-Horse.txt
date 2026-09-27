@@ -1,0 +1,6 @@
+Creator: Quaternius
+License: Creative Commons Zero 1.0 Universal (CC0-1.0)
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+Official source: https://quaternius.itch.io/lowpoly-animated-animals
+Acquired: 2026-09-26
+Original geometry and material colors preserved. Repackaged to GLB from the creator-distributed OBJ/MTL (farm) or FBX (horse).

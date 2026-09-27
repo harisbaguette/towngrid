@@ -1,0 +1,675 @@
+[
+  {
+    "path": "public/assets/factory/robot-arm-a.glb",
+    "file": "factory/robot-arm-a.glb",
+    "bytes": 62436,
+    "sha256": "572a9a4ee65bdf67188853f91aa457d7609ac33b8c12522b500044b795b0f914",
+    "triangles": 472,
+    "animations": [],
+    "nodes": [
+      "robot-arm-a",
+      "element-a",
+      "element-b",
+      "element-c",
+      "element-d",
+      "element-e",
+      "element-f",
+      "claw-a",
+      "claw-b"
+    ],
+    "author": "Kenney",
+    "pack": "Factory Kit 3.0",
+    "source": "https://kenney.nl/assets/factory-kit",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/factory/crane.glb",
+    "file": "factory/crane.glb",
+    "bytes": 65264,
+    "sha256": "01f8272db859c66ed1795693f03bde5367d532ba54976a8baed541285375169f",
+    "triangles": 564,
+    "animations": [],
+    "nodes": [
+      "crane",
+      "arm"
+    ],
+    "author": "Kenney",
+    "pack": "Factory Kit 3.0",
+    "source": "https://kenney.nl/assets/factory-kit",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/factory/conveyor-long-stripe-sides.glb",
+    "file": "factory/conveyor-long-stripe-sides.glb",
+    "bytes": 38504,
+    "sha256": "dd8d2e934a0607950eaf88857bbe788d65fe7b3b2780bd54c84beb1081e44ada",
+    "triangles": 276,
+    "animations": [],
+    "nodes": [
+      "conveyor-long-stripe-sides"
+    ],
+    "author": "Kenney",
+    "pack": "Factory Kit 3.0",
+    "source": "https://kenney.nl/assets/factory-kit",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/factory/hopper-high-round.glb",
+    "file": "factory/hopper-high-round.glb",
+    "bytes": 28512,
+    "sha256": "b6f3986dffcc520cafe782109237619fd2623eb1561fa8faeea35b9334d253f1",
+    "triangles": 176,
+    "animations": [],
+    "nodes": [
+      "hopper-high-round"
+    ],
+    "author": "Kenney",
+    "pack": "Factory Kit 3.0",
+    "source": "https://kenney.nl/assets/factory-kit",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/factory/piston-square.glb",
+    "file": "factory/piston-square.glb",
+    "bytes": 41264,
+    "sha256": "7e55ee0debe740a878e9da6742266c05c675ad5ca19586c63d8b457bd56274fa",
+    "triangles": 180,
+    "animations": [
+      {
+        "name": "toggle-on",
+        "duration": 0.20000000298023224
+      },
+      {
+        "name": "toggle-off",
+        "duration": 0.20000000298023224
+      },
+      {
+        "name": "toggle",
+        "duration": 0.5
+      }
+    ],
+    "nodes": [
+      "piston-square",
+      "top",
+      "arm"
+    ],
+    "author": "Kenney",
+    "pack": "Factory Kit 3.0",
+    "source": "https://kenney.nl/assets/factory-kit",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/factory/machine-window.glb",
+    "file": "factory/machine-window.glb",
+    "bytes": 50684,
+    "sha256": "8ef176d49d98f028fcb256231f14f0f88399e58d09165bd742aeced56d3de1d3",
+    "triangles": 428,
+    "animations": [],
+    "nodes": [
+      "machine-window"
+    ],
+    "author": "Kenney",
+    "pack": "Factory Kit 3.0",
+    "source": "https://kenney.nl/assets/factory-kit",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/factory/scanner-high.glb",
+    "file": "factory/scanner-high.glb",
+    "bytes": 33528,
+    "sha256": "600050d93f7cc1eeaf5bb51dfbd00b09c5bd5a46a25573e5dd7024f03d7b3897",
+    "triangles": 240,
+    "animations": [],
+    "nodes": [
+      "scanner-high"
+    ],
+    "author": "Kenney",
+    "pack": "Factory Kit 3.0",
+    "source": "https://kenney.nl/assets/factory-kit",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/watercraft/boat-fishing-small.glb",
+    "file": "watercraft/boat-fishing-small.glb",
+    "bytes": 31820,
+    "sha256": "b4238f6b78d4c0f7a1bb5eeb98645ffc47019f8fcf5a61380aea34c02639ec3a",
+    "triangles": 237,
+    "animations": [],
+    "nodes": [
+      "boat-fishing-small"
+    ],
+    "author": "Kenney",
+    "pack": "Watercraft Kit 2.1",
+    "source": "https://kenney.nl/assets/watercraft-kit",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/watercraft/ship-cargo-a.glb",
+    "file": "watercraft/ship-cargo-a.glb",
+    "bytes": 106908,
+    "sha256": "898fd151e1e9a4ce7767ce6f8ee77bb281fb9c08070be7d49c0c498cdf74a0af",
+    "triangles": 1060,
+    "animations": [],
+    "nodes": [
+      "ship-cargo-a",
+      "cargo-c",
+      "cargo-b",
+      "cargo-a"
+    ],
+    "author": "Kenney",
+    "pack": "Watercraft Kit 2.1",
+    "source": "https://kenney.nl/assets/watercraft-kit",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/watercraft/ship-large.glb",
+    "file": "watercraft/ship-large.glb",
+    "bytes": 164640,
+    "sha256": "e4d69c8c3e5da99ea0203e16044683e79672544d2e9f486ae215dd0795c2f88f",
+    "triangles": 1849,
+    "animations": [],
+    "nodes": [
+      "ship-large",
+      "sail-b",
+      "sail-a",
+      "flag-c",
+      "flag-b",
+      "flag-a"
+    ],
+    "author": "Kenney",
+    "pack": "Watercraft Kit 2.1",
+    "source": "https://kenney.nl/assets/watercraft-kit",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/trains/train-locomotive-a.glb",
+    "file": "trains/train-locomotive-a.glb",
+    "bytes": 167324,
+    "sha256": "e2ebc82c951baa839f74f1b14155f454e5c3fe4a779f78d8eace12ea6f6fb293",
+    "triangles": 1666,
+    "animations": [],
+    "nodes": [
+      "train-locomotive-a",
+      "wheels-front",
+      "wheel",
+      "wheel",
+      "wheel",
+      "wheel"
+    ],
+    "author": "Kenney",
+    "pack": "Train Kit 1.1",
+    "source": "https://kenney.nl/assets/train-kit",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/trains/train-carriage-coal.glb",
+    "file": "trains/train-carriage-coal.glb",
+    "bytes": 122960,
+    "sha256": "3236a8c926ea96c58ec6075ff68d84c4aa8514aaf805907b2c9b55cb9f5f2249",
+    "triangles": 1184,
+    "animations": [],
+    "nodes": [
+      "train-carriage-coal",
+      "wheels-front",
+      "wheels-back",
+      "cargo"
+    ],
+    "author": "Kenney",
+    "pack": "Train Kit 1.1",
+    "source": "https://kenney.nl/assets/train-kit",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/trains/train-carriage-tank.glb",
+    "file": "trains/train-carriage-tank.glb",
+    "bytes": 119484,
+    "sha256": "ae2d64accb98292baa7862716bab197f95d7dd7ee5a2f06c74bc4ad0af3b7c6e",
+    "triangles": 1146,
+    "animations": [],
+    "nodes": [
+      "train-carriage-tank",
+      "wheels-front",
+      "wheels-back"
+    ],
+    "author": "Kenney",
+    "pack": "Train Kit 1.1",
+    "source": "https://kenney.nl/assets/train-kit",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/trains/train-carriage-lumber.glb",
+    "file": "trains/train-carriage-lumber.glb",
+    "bytes": 123036,
+    "sha256": "3907c690b826343e25cd9275a3fe2403b8eb5050d3361d36e51beb846daefcc5",
+    "triangles": 1170,
+    "animations": [],
+    "nodes": [
+      "train-carriage-lumber",
+      "wheels-front",
+      "wheels-back",
+      "cargo"
+    ],
+    "author": "Kenney",
+    "pack": "Train Kit 1.1",
+    "source": "https://kenney.nl/assets/train-kit",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/commercial/building-c.glb",
+    "file": "commercial/building-c.glb",
+    "bytes": 113848,
+    "sha256": "35ec81c361067c932eb0437e40a3d7ab528b66a84d51dd5a581acf2b5615ced0",
+    "triangles": 1195,
+    "animations": [],
+    "nodes": [
+      "building-c"
+    ],
+    "author": "Kenney",
+    "pack": "City Kit Commercial 2.1",
+    "source": "https://kenney.nl/assets/city-kit-commercial",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/commercial/building-e.glb",
+    "file": "commercial/building-e.glb",
+    "bytes": 139264,
+    "sha256": "ec55119fc76d83f4ecd70fb5e7180f42322c78722a575ffe8fd9af3b3a4e0eb9",
+    "triangles": 1509,
+    "animations": [],
+    "nodes": [
+      "building-e"
+    ],
+    "author": "Kenney",
+    "pack": "City Kit Commercial 2.1",
+    "source": "https://kenney.nl/assets/city-kit-commercial",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/farm/Barn.glb",
+    "file": "farm/Barn.glb",
+    "bytes": 146808,
+    "sha256": "5f8a06b70ab56941c82a05c3a6908817502783a611c8f814f42ee4f0056caf0a",
+    "triangles": 2908,
+    "animations": [],
+    "nodes": [
+      "Barn",
+      "Barn_Door",
+      "Barn_Door2",
+      "Barn_Window",
+      "Barn_Window2"
+    ],
+    "author": "Quaternius",
+    "pack": "Farm Buildings Pack",
+    "source": "https://quaternius.com/packs/farmbuildings.html",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/farm/Silo.glb",
+    "file": "farm/Silo.glb",
+    "bytes": 78128,
+    "sha256": "5357a54bd73969f99947073a758756440e176917c5051c3cae5ac16ac0f21c60",
+    "triangles": 1592,
+    "animations": [],
+    "nodes": [
+      "Silo"
+    ],
+    "author": "Quaternius",
+    "pack": "Farm Buildings Pack",
+    "source": "https://quaternius.com/packs/farmbuildings.html",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/farm/ChickenCoop.glb",
+    "file": "farm/ChickenCoop.glb",
+    "bytes": 52876,
+    "sha256": "23502100006416e1e34b6a69228c220794bd198ed3865d1f3ec0473f4fe7da08",
+    "triangles": 948,
+    "animations": [],
+    "nodes": [
+      "ChickenCoop"
+    ],
+    "author": "Quaternius",
+    "pack": "Farm Buildings Pack",
+    "source": "https://quaternius.com/packs/farmbuildings.html",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/farm/Windmill.glb",
+    "file": "farm/Windmill.glb",
+    "bytes": 82244,
+    "sha256": "250c819195d77155a17bcc4d6de822229d43bf5982b3b96c144b0491cfac8734",
+    "triangles": 1438,
+    "animations": [],
+    "nodes": [
+      "Windmill",
+      "Windmill_Blades"
+    ],
+    "author": "Quaternius",
+    "pack": "Farm Buildings Pack",
+    "source": "https://quaternius.com/packs/farmbuildings.html",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/farm/Well.glb",
+    "file": "farm/Well.glb",
+    "bytes": 168444,
+    "sha256": "6da90c5af7167d77ac1589a9d39f4cb9bbf3a934d917f55e5e6f889d06681dac",
+    "triangles": 2868,
+    "animations": [],
+    "nodes": [
+      "Well"
+    ],
+    "author": "Quaternius",
+    "pack": "Farm Buildings Pack",
+    "source": "https://quaternius.com/packs/farmbuildings.html",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/farm/OpenBarn.glb",
+    "file": "farm/OpenBarn.glb",
+    "bytes": 84416,
+    "sha256": "35940bcb2fd8022e6895a7014a23f36bf60655a002ffcfd8141000b7ca64eb19",
+    "triangles": 1611,
+    "animations": [],
+    "nodes": [
+      "OpenBarn"
+    ],
+    "author": "Quaternius",
+    "pack": "Farm Buildings Pack",
+    "source": "https://quaternius.com/packs/farmbuildings.html",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/characters/Robot.glb",
+    "file": "characters/Robot.glb",
+    "bytes": 1460524,
+    "sha256": "fbe7f19a1f80ddcf5fb2a6356705816f7d6a03e08f5a9c13f027fd1ae65bf686",
+    "triangles": 3236,
+    "animations": [
+      {
+        "name": "RobotArmature|Robot_No",
+        "duration": 1.6666666269302368
+      },
+      {
+        "name": "RobotArmature|Robot_Sitting",
+        "duration": 0.4166666567325592
+      },
+      {
+        "name": "RobotArmature|Robot_Punch",
+        "duration": 0.8333333134651184
+      },
+      {
+        "name": "RobotArmature|Robot_Dance",
+        "duration": 3.3333332538604736
+      },
+      {
+        "name": "RobotArmature|Robot_Standing",
+        "duration": 0.4166666567325592
+      },
+      {
+        "name": "RobotArmature|Robot_Idle",
+        "duration": 3.3333332538604736
+      },
+      {
+        "name": "RobotArmature|Robot_WalkJump",
+        "duration": 0.8333333134651184
+      },
+      {
+        "name": "RobotArmature|Robot_Yes",
+        "duration": 1.6666666269302368
+      },
+      {
+        "name": "RobotArmature|Robot_Wave",
+        "duration": 1.8333333730697632
+      },
+      {
+        "name": "RobotArmature|Robot_Death",
+        "duration": 0.9583333134651184
+      },
+      {
+        "name": "RobotArmature|Robot_Walking",
+        "duration": 0.9583333134651184
+      },
+      {
+        "name": "RobotArmature|Robot_Running",
+        "duration": 0.9583333134651184
+      },
+      {
+        "name": "RobotArmature|Robot_ThumbsUp",
+        "duration": 1.5833333730697632
+      },
+      {
+        "name": "RobotArmature|Robot_Jump",
+        "duration": 0.7083333134651184
+      }
+    ],
+    "nodes": [
+      "",
+      "RobotArmature",
+      "Bone",
+      "Bone",
+      "FootL",
+      "FootL",
+      "FootL_end",
+      "FootL",
+      "PoleTargetL",
+      "PoleTargetL",
+      "PoleTargetL_end",
+      "PoleTargetR",
+      "PoleTargetR",
+      "PoleTargetR_end",
+      "FootR",
+      "FootR",
+      "FootR_end",
+      "FootR",
+      "Body",
+      "Body",
+      "Hips",
+      "Hips",
+      "Abdomen",
+      "Abdomen",
+      "Torso",
+      "Torso",
+      "ShoulderR",
+      "ShoulderR",
+      "UpperArmR",
+      "UpperArmR",
+      "LowerArmR",
+      "LowerArmR",
+      "Palm3R",
+      "Palm3R",
+      "Ring1R",
+      "Ring1R",
+      "Ring2R",
+      "Ring2R",
+      "Ring2R_end",
+      "ThumbR",
+      "ThumbR",
+      "Thumb2R",
+      "Thumb2R",
+      "Thumb2R_end",
+      "Palm1R",
+      "Palm1R",
+      "IndexR",
+      "IndexR",
+      "Index2R",
+      "Index2R",
+      "Index2R_end",
+      "Palm2R",
+      "Palm2R",
+      "Middle1R",
+      "Middle1R",
+      "Middle2R",
+      "Middle2R",
+      "Middle2R_end",
+      "ArmR",
+      "ShoulderR",
+      "Neck",
+      "Neck",
+      "Head",
+      "Head",
+      "Head_end",
+      "Head",
+      "ShoulderL",
+      "ShoulderL",
+      "UpperArmL",
+      "UpperArmL",
+      "LowerArmL",
+      "LowerArmL",
+      "Palm2L",
+      "Palm2L",
+      "Middle1L",
+      "Middle1L",
+      "Middle2L",
+      "Middle2L",
+      "Middle2L_end",
+      "Palm3L",
+      "Palm3L",
+      "Ring1L",
+      "Ring1L",
+      "Ring2L",
+      "Ring2L",
+      "Ring2L_end",
+      "ThumbL",
+      "ThumbL",
+      "Thumb2L",
+      "Thumb2L",
+      "Thumb2L_end",
+      "Palm1L",
+      "Palm1L",
+      "IndexL",
+      "IndexL",
+      "Index2L",
+      "Index2L",
+      "Index2L_end",
+      "ArmL",
+      "ShoulderL",
+      "UpperLegR",
+      "UpperLegR",
+      "LegR",
+      "LowerLegR",
+      "LowerLegR",
+      "LowerLegR_end",
+      "LowerLegR",
+      "Torso",
+      "UpperLegL",
+      "UpperLegL",
+      "LegL",
+      "LowerLegL",
+      "LowerLegL",
+      "LowerLegL",
+      "LowerLegL_end",
+      "HandL",
+      "HandR"
+    ],
+    "author": "Quaternius",
+    "pack": "Animated Robot Pack",
+    "source": "https://quaternius.itch.io/lowpoly-robot",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  },
+  {
+    "path": "public/assets/characters/Horse.glb",
+    "file": "characters/Horse.glb",
+    "bytes": 557172,
+    "sha256": "ca8f0afd460b9d00ce792ea3c4ebde99fb2ef64cba384413ebba948b7ed635a9",
+    "triangles": 690,
+    "animations": [
+      {
+        "name": "Armature|WalkSlow",
+        "duration": 2
+      },
+      {
+        "name": "Armature|Death",
+        "duration": 1.0833333730697632
+      },
+      {
+        "name": "Armature|Jump",
+        "duration": 1.5
+      },
+      {
+        "name": "Armature|Idle",
+        "duration": 6.25
+      },
+      {
+        "name": "Armature|Walk",
+        "duration": 2.6666667461395264
+      },
+      {
+        "name": "Armature|Run",
+        "duration": 0.8333333134651184
+      }
+    ],
+    "nodes": [
+      "",
+      "Horse",
+      "Armature",
+      "root",
+      "BackFootR",
+      "BackFootR_end",
+      "FrontFootR",
+      "FrontFootR_end",
+      "BackFootL",
+      "BackFootL_end",
+      "FrontFootL",
+      "FrontFootL_end",
+      "Body",
+      "BackLegL",
+      "BackUpLegL",
+      "BackLowLegL",
+      "BackLowLegL_end",
+      "Shoulders",
+      "Neck",
+      "Head",
+      "Head_end",
+      "FrontLegL",
+      "FrontUpLegL",
+      "FrontLowLegL",
+      "FrontLowLegL_end",
+      "Hips",
+      "Torso",
+      "Torso_end",
+      "Back",
+      "Tail1",
+      "Tail2",
+      "Tail3",
+      "Tail4",
+      "Tail4_end",
+      "FrontLegR",
+      "FrontUpLegR",
+      "FrontLowLegR",
+      "FrontLowLegR_end",
+      "BackLegR",
+      "BackUpLegR",
+      "BackLowLegR",
+      "BackLowLegR_end"
+    ],
+    "author": "Quaternius",
+    "pack": "Farm Animal Pack",
+    "source": "https://quaternius.itch.io/lowpoly-animated-animals",
+    "license": "CC0-1.0",
+    "texture_dependencies": []
+  }
+]

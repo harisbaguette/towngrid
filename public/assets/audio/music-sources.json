@@ -1,0 +1,35 @@
+[
+  {
+    "file": "audio/forest-ambience.mp3",
+    "author": "TinyWorlds",
+    "title": "Forest Ambience",
+    "source": "https://opengameart.org/content/forest-ambience",
+    "download": "https://opengameart.org/sites/default/files/Forest_Ambience.mp3",
+    "license": "CC0-1.0",
+    "duration_seconds": 44.76,
+    "sample_rate": 48000,
+    "channels": 2,
+    "loop_notes": "Creator identifies this as a seamless loop. Original MP3 unchanged; a short Web Audio crossfade can hide codec/replay gaps if audible.",
+    "modifications": "None; original download bytes.",
+    "path": "public/assets/audio/forest-ambience.mp3",
+    "bytes": 716670,
+    "sha256": "9850aa1d0d5d66bd9c5daf8bb77c6d852e01f2f4de22f283bd5621e8bed13b75"
+  },
+  {
+    "file": "audio/calm-theme.ogg",
+    "author": "pebonius",
+    "title": "calm theme",
+    "source": "https://opengameart.org/content/calm-theme",
+    "creator_url": "https://pebonius.itch.io/",
+    "download": "https://opengameart.org/sites/default/files/calm_theme.ogg",
+    "license": "CC0-1.0",
+    "duration_seconds": 117.202721,
+    "sample_rate": 44100,
+    "channels": 2,
+    "loop_notes": "No seamless-loop promise in creator description; treat as background music and fade/crossfade at replay. No trimming performed.",
+    "modifications": "None; original download bytes.",
+    "path": "public/assets/audio/calm-theme.ogg",
+    "bytes": 1271470,
+    "sha256": "8a701a803f365c8fe1257b2e18276a7fa8b0d62a9af601f973d43ccf4e354705"
+  }
+]

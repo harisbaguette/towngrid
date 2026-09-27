@@ -1,0 +1,18 @@
+Use case: stylized-concept. Asset type: two-direction game animation correction sheet.
+Create ONE NEW image containing exactly SIXTEEN detached full-body miniature pixel sprites in EXACTLY TWO HORIZONTAL ROWS OF EIGHT. Use the same original character Lien from the reference. No portrait and no third row.
+IDENTITY AND SCALE: Match the ORIGINAL MINIATURE SPRITES, not the large illustration's realistic body proportions. Adult female elf about3.5heads tall, pale skin, long pointed ears, violet eyes, long lilac/lavender hair woven into one thick braid, dark plum long work coat with gold trim over ivory blouse, charcoal utility trousers, brown ankle boots, brass belt and a small purple gemstone. Same small adult head/body scale and same outfit throughout. Tool is her short slender brass wand with a purple crystal tip. Beautiful crisp detailed dot-pixel RPG art with thin dark outlines and restrained palette. No smooth painted render, no vector, no voxel, no3D.
+DIRECTIONS ARE THE MAIN CORRECTION:
+TOP ROW: all8 figures face EAST — true RIGHT-FACING SIDE PROFILE, looking and moving directly toward the RIGHT EDGE OF THE IMAGE. Nose points right, one eye visible, toes point right, side of torso visible. Braid trails behind her to the LEFT. NEVER face the camera, never face left, never face away diagonally. Even raised-tool and contact poses maintain the same right-facing profile body direction.
+BOTTOM ROW: all8 figures face SOUTHEAST — TRUE FRONT-RIGHT THREE-QUARTER, looking and moving diagonally toward the lower-right of the image. Face and chest rotate45degrees toward SCREEN RIGHT; both eyes may be seen but the far eye is narrower, nose and feet clearly angle down-right. The viewer sees the front and right side. This is neither a straight-front pose nor a back-right pose. NEVER face left. Keep this front-right direction for all8 actions.
+EXACT EIGHT ACTION COLUMNS IN EACH ROW, left to right:
+1 idle stance, wand stowed;
+2 walking with left foot forward and right foot back;
+3 walking passing with feet near each other under body;
+4 walking with right foot forward and left foot back;
+5 carrying one small wooden supply box in both hands while left foot steps forward;
+6 carrying the same wooden box while right foot steps forward;
+7 tool raised windup, wand in hand lifted above shoulder, ready to work;
+8 tool contact, wand thrust or swept forward toward the direction of travel, body follow-through, very small compact purple magic spark beside wand tip.
+Exactly8 columns and2 rows, total16 characters. No extra neutral/weapon column. All characters full-body with identical body size and consistent feet baselines per row. Walk poses must visibly differ. Carry poses really hold boxes, not duplicate idle poses.
+COMPOSITION: wide landscape canvas, a clean row of8 sprites across the upper half and a clean row of8 across lower half. Generous transparent padding above tools and beneath boots; at least60px empty transparent gap between the two rows, and at least24px between neighboring figures. Keep all hair, boxes, tools and tiny magic effects entirely inside each figure's own empty space. No touching between neighboring figures or rows, no clipped body parts or tools.
+Background must be GENUINELY TRANSPARENT RGBA with alpha0 in empty pixels. No colored background, gradient, checkerboard, floor, shadows, text, labels, grid, borders, decorative marks, detached flecks, or large illustration.

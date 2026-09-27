@@ -1,0 +1,8 @@
+Stan - The Golem
+Creator: Shyr
+Verified original source: https://shyr-games.itch.io/stan-the-golem
+Asset license: Creative Commons Zero v1.0 Universal (CC0)
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+Free file downloaded: Stan.fbx (2.1 MB). Paid source .blend was not downloaded.
+Verified: 2026-09-24
+Local conversion to GLB preserved the mesh, rig, animation clips, and embedded source texture; game-facing animation aliases were added.

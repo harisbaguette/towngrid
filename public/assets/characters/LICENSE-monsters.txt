@@ -1,0 +1,12 @@
+License evidence for selected Ghost and Demon models
+
+Creator: Quaternius
+Pack: Textured Cute Monster Pack / Cute Animated Monsters - Aug 2020
+License: Creative Commons Zero, CC0 1.0 Universal
+Canonical license: https://creativecommons.org/publicdomain/zero/1.0/
+Primary author-uploaded source: https://opengameart.org/content/textured-cute-monster-pack
+Official author catalog: https://quaternius.com/
+Local source snapshot: cute-monsters-license-source.html
+
+The author-uploaded source lists CC0 and permits personal and commercial projects.
+This is a local source/license record, not an original license file from the archive.

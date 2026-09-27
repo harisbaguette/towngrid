@@ -1,0 +1,13 @@
+// An offline render of GameScene. This checks game geometry, not browser interaction.
+import {createRequire} from 'node:module';import fs from 'node:fs/promises';
+const require=createRequire(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES+'/local.js');const {createCanvas,loadImage}=require('@napi-rs/canvas');
+const noop=()=>{};const storage=new Map();globalThis.localStorage={getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)};
+const NativeRequest=globalThis.Request;globalThis.Request=class extends NativeRequest{constructor(url,opts){super(typeof url==='string'&&url.startsWith('/')?'https://assets.invalid'+url:url,opts);}};const nativeFetch=globalThis.fetch;globalThis.fetch=async (url,opts)=>{let path=typeof url==='string'?url:url.url;path=path.replace('https://assets.invalid','');if(path.startsWith('/assets/'))return new Response(await fs.readFile('public'+path),{status:200});return nativeFetch(url,opts);};
+globalThis.self=globalThis;globalThis.ProgressEvent=class{constructor(t,p){Object.assign(this,p)}};globalThis.createImageBitmap=async blob=>loadImage(Buffer.from(await blob.arrayBuffer()));
+globalThis.window={devicePixelRatio:1,addEventListener:noop,removeEventListener:noop};globalThis.requestAnimationFrame=()=>0;globalThis.cancelAnimationFrame=noop;globalThis.ResizeObserver=class{observe(){}disconnect(){}};
+globalThis.document={addEventListener:noop,removeEventListener:noop,createElement(){const c=createCanvas(1,1),context=c.getContext.bind(c);c.getContext=(type,opts)=>type==='2d'?context(type,opts):null;c.dataset={};c.style={};c.remove=noop;c.setAttribute=noop;c.addEventListener=noop;c.removeEventListener=noop;c.getRootNode=()=>document;c.ownerDocument=document;c.getBoundingClientRect=()=>({left:0,top:0,width:c.width,height:c.height});return c;}};
+const {loadAssets,assetStatus}=await import('../app/game/assets.js');await loadAssets('human');await loadAssets('dwarf');await loadAssets('titan');if(assetStatus.failed.length)throw new Error('Missing assets: '+assetStatus.failed.join(','));
+const {GameScene}=await import('../app/game/scene.js');const {createShowcase}=await import('../app/game/simulation.js');
+const sim=createShowcase();for(let i=0;i<100;i++)sim.tick(.25);sim.paused=true;
+const container={clientWidth:1440,clientHeight:1040,appendChild:noop,removeChild:noop};const game=new GameScene(container,sim);game.camera.zoom=.77;game.camera.updateProjectionMatrix();game.controls.target.set(11.5,0,11);game.controls.update();game.loop(performance.now()+100);
+await fs.writeFile('docs/revised-settlement-render.png',game.renderer.domElement.toBuffer('image/png'));game.dispose();console.log('docs/revised-settlement-render.png');

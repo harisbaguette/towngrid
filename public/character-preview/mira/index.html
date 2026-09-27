@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>미라 · 캐릭터 시안 | TownGrid</title>
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <main>
+    <header><a href="/">TOWNGRID</a><span>캐릭터 시안 01</span><span class="badge">검토용 · 미라 1명</span></header>
+    <div class="intro"><div><p class="eyebrow">인족 / 인간 / 기술자</p><h1>미라 <span>Mira</span></h1></div><p>갈색 포니테일, 청록 작업복, 황동 공구.<br>같은 인물의 일러스트와 동작을 확인하세요.</p></div>
+    <div class="workspace">
+      <section class="portrait-panel" aria-labelledby="portrait-heading">
+        <h2 id="portrait-heading">고유 일러스트</h2>
+        <canvas id="portrait" width="384" height="612" aria-label="갈색 포니테일과 청록 작업복을 입은 기술자 미라의 픽셀 일러스트"></canvas>
+        <p>표정·머리색·복장·소품을 공유하는 한 인물</p>
+      </section>
+      <section class="motion-panel" aria-labelledby="motion-heading">
+        <div class="stage-heading"><h2 id="motion-heading">동작 미리보기</h2><output id="frame-label">이미지 준비 중</output></div>
+        <div class="actions" role="group" aria-label="동작 선택">
+          <button data-action="walk" aria-pressed="true">걷기</button>
+          <button data-action="idle" aria-pressed="false">대기</button>
+          <button data-action="rotation" aria-pressed="false">4방향 쿼터뷰</button>
+          <button data-action="work" aria-pressed="false">도구 작업</button>
+          <button data-action="greet" aria-pressed="false">인사</button>
+          <button data-action="cargo" aria-pressed="false">상자 들고 놓기</button>
+        </div>
+        <div id="walk-directions" class="direction-controls" role="group" aria-label="걷기 방향">
+          <span>걷기 방향</span>
+          <button data-direction="SW" aria-pressed="true">↙ 왼쪽 앞</button>
+          <button data-direction="NW" aria-pressed="false">↖ 왼쪽 뒤</button>
+          <button data-direction="NE" aria-pressed="false">↗ 오른쪽 뒤</button>
+          <button data-direction="SE" aria-pressed="false">↘ 오른쪽 앞</button>
+          <label class="check"><input id="view-all" type="checkbox"> 네 방향 함께</label>
+        </div>
+        <div class="stage-wrap"><canvas id="stage" width="900" height="420" aria-label="미라의 동작 재생 화면"></canvas><p id="loading" role="status">시안을 불러오는 중입니다.</p></div>
+        <p id="action-description">8프레임 보행 · 이동 거리와 발걸음 속도를 함께 조절합니다.</p>
+        <div class="transport">
+          <button id="play" type="button" aria-label="일시정지">일시정지</button>
+          <button id="step" type="button">한 프레임씩</button>
+          <label>속도 <select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option></select></label>
+          <label>크기 <select id="scale"><option value="1">1×</option><option value="2" selected>2×</option><option value="3">3×</option></select></label>
+          <label class="check"><input id="travel" type="checkbox" checked> 이동하며 보기</label>
+          <label class="check"><input id="anchor" type="checkbox"> 발 기준점</label>
+        </div>
+        <div id="frames" class="frames" role="group" aria-label="프레임 직접 선택"></div>
+        <p class="hint">프레임을 누르면 정지해서 볼 수 있습니다. 걷기 방향은 Q·E로도 바꿀 수 있습니다.</p>
+      </section>
+    </div>
+    <footer><strong>이번 시안의 범위</strong><p>미라 1명의 화풍·비율과 대표 동작을 검토하는 화면입니다. 걷기는 네 대각선 방향 × 8프레임으로 새로 제작했습니다. 좌우 발의 교대, 포즈 사이 얼굴·머리카락·체형 차이는 더 다듬어야 합니다. 대기·작업·인사·상자 동작은 이전 오른쪽 방향 시안이며, 네 방향 전체 행동·전투 작화는 아직 없습니다. 크림색 배경이 있는 검토용 원본이며 게임용 투명 아틀라스는 아닙니다.</p><p>게임에는 타일 경계의 이동량 손실과 속도 변경에 따른 걷기 프레임 건너뜀을 수정했습니다. 이 새 화풍은 검토용으로 유지하며, 게임은 기존 24종 아트의 네 방향을 사용합니다.</p><a href="study.png" target="_blank" rel="noopener">일러스트 시안 원본</a><a href="walk-quarter.png" target="_blank" rel="noopener">4방향 걷기 원화</a><a href="motions.png" target="_blank" rel="noopener">대기·행동 원화</a></footer>
+  </main>
+  <script src="frames.js"></script>
+  <script src="preview.js"></script>
+</body>
+</html>
