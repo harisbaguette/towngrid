@@ -1,0 +1,66 @@
+import { pathToFileURL } from 'node:url';
+const { chromium } = await import(pathToFileURL(process.argv[2]).href);
+const OUT = process.argv[4];
+const NL = String.fromCharCode(10);
+const browser = await chromium.launch({ headless: true, executablePath: process.argv[3], args: ['--enable-unsafe-swiftshader'] });
+const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+await ctx.addInitScript(() => { window.WebSocket = class { constructor() { this.readyState = 0; } addEventListener() {} removeEventListener() {} send() {} close() {} }; });
+const page = await ctx.newPage(); const errs = [];
+page.on('pageerror', e => errs.push(e.message)); page.on('console', m => { if (m.type() === 'error') errs.push(m.text().slice(0, 200)); });
+const R = {};
+const hook = () => page.evaluate(async () => { const { GameScene } = await import('/src/app/game/scene.js'); if (GameScene.prototype.__h) return; const o = GameScene.prototype.setSimulation; GameScene.prototype.setSimulation = function (s) { window.tgScene = this; return o.call(this, s); }; GameScene.prototype.__h = 1; });
+const home = async (name) => { const t = Date.now(); await page.goto('http://localhost:5181'); const title = await page.getByRole('button', { name: '화면을 눌러 시작', exact: true }).waitFor({ timeout: 30000 }).then(() => Date.now() - t).catch(() => null); for (let i = 0; i < 40 && !(await page.getByRole('button', { name }).count()); i++) { await page.getByRole('button', { name: '화면을 눌러 시작', exact: true }).click().catch(() => {}); await page.waitForTimeout(300); } await page.getByRole('button', { name }).first().waitFor(); return { titleMs: title, homeMs: Date.now() - t }; };
+R.warmLoad = await home('새 게임'); await hook();
+await page.getByRole('button', { name: '새 게임' }).click();
+await page.getByRole('button', { name: /이 땅에서 시작/ }).click();
+await page.waitForFunction(() => window.tgScene?.mode === 'warehouse', null, { timeout: 60000 });
+const proj = (x, y, z) => page.evaluate(([x, y, z]) => { const s = window.tgScene, v = s.camera.position.clone().set(x, y, z); v.project(s.camera); const r = s.renderer.domElement.getBoundingClientRect(); return { px: r.left + (v.x + 1) / 2 * r.width, py: r.top + (1 - v.y) / 2 * r.height }; }, [x, y, z]);
+const wh = await page.evaluate(() => { const s = window.tgScene.sim; const land = [...s.owned].map(k => k.split(',').map(Number)); const cx = land.reduce((a, p) => a + p[0], 0) / land.length, cz = land.reduce((a, p) => a + p[1], 0) / land.length; return land.filter(([x, z]) => !s.canBuild('warehouse', x, z)).sort((a, b) => Math.hypot(a[0] - cx, a[1] - cz) - Math.hypot(b[0] - cx, b[1] - cz))[0]; });
+let p = await proj(wh[0], 0, wh[1]); await page.mouse.click(p.px, p.py); await page.waitForTimeout(800);
+// A. what is the small white chip above the hovered tile?
+R.chip = await page.evaluate(([x, y]) => { const out = []; for (let dy = -120; dy <= 0; dy += 10) { const els = document.elementsFromPoint(x, y + dy).filter(e => e.tagName !== 'CANVAS' && !['HTML', 'BODY', 'MAIN'].includes(e.tagName)).slice(0, 3).map(e => ({ tag: e.tagName, cls: String(e.className).slice(0, 80), text: e.textContent.trim().slice(0, 40), html: e.outerHTML.slice(0, 240) })); if (els.length) out.push({ dy, els }); } return out; }, [p.px, p.py]);
+await page.screenshot({ path: OUT + '/diag-chip.png', clip: { x: p.px - 150, y: p.py - 170, width: 300, height: 240 } });
+// C. save/reload exactness with work in flight
+await page.evaluate(() => { const s = window.tgScene.sim; s.rank = 32; s.money = 5e6; for (const r of Object.keys(s.stock)) s.stock[r] = 200; for (const t of s.tiles) s.owned.add(t.x + ',' + t.z); s.revision++; });
+const built = await page.evaluate(([wx, wz]) => { const s = window.tgScene.sim, out = []; const ring = []; for (let x = 0; x < 24; x++) for (let z = 0; z < 24; z++) ring.push([x, z]); ring.sort((a, b) => Math.hypot(a[0] - wx, a[1] - wz) - Math.hypot(b[0] - wx, b[1] - wz)); const used = new Set([wx + ',' + wz]); const free = (x, z) => { for (let dx = -1; dx <= 1; dx++) for (let dz = -1; dz <= 1; dz++) if (used.has((x + dx) + ',' + (z + dz))) return false; return true; }; for (const t of ['watermill', 'coppermine', 'wiremill', 'confectionery', 'henhouse', 'house', 'house', 'house', 'house']) { const sp = ring.find(([x, z]) => free(x, z) && !s.canBuild(t, x, z)); if (sp) { used.add(sp.join(',')); out.push([t, sp, s.build(t, sp[0], sp[1]).ok]); } } const wm = out.find(o => o[0] === 'wiremill'); if (wm) { for (const [a, c] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) if (s.build('road', wm[1][0] + a, wm[1][1] + c).ok) break; } return out; }, wh);
+R.diagBuilt = built;
+await page.getByRole('button', { name: '4×' }).click();
+await page.waitForTimeout(20000);
+await page.getByRole('button', { name: '일시정지', exact: true }).click();
+await page.waitForTimeout(7000);
+const snap = () => page.evaluate(() => { const s = window.tgScene.sim; return { paused: s.paused, time: +s.time.toFixed(3), money: +s.money.toFixed(2), stock: Object.fromEntries(Object.entries(s.stock).filter(([, v]) => v).map(([k, v]) => [k, +v.toFixed(3)])), tasks: s.workers.filter(w => w.task).map(w => w.task.kind + ':' + w.task.item + ':' + w.task.amount + ':' + w.phase), bOut: s.buildings.map(b => b.type + ':' + (b.out || 0) + ':' + JSON.stringify(b.inputs)) }; });
+R.before = await snap();
+R.savedRaw = await page.evaluate(async () => { const P = await import('/src/app/game/persistence.js'); const raw = localStorage.getItem(P.SAVE_KEY); const d = P.decodeSave(raw); const sites = d.sites || []; const act = sites.find(x => x.id === d.activeId)?.sim || sites[0]?.sim || d; return { keys: Object.keys(d).slice(0, 12), time: act?.time, copper: act?.stock?.copper, wire: act?.stock?.wire }; }).catch(e => ({ err: e.message }));
+await page.reload(); await home('이어하기'); await hook();
+await page.getByRole('button', { name: /이어하기/ }).click();
+await page.waitForFunction(() => window.tgScene?.sim?.buildings.length > 3, null, { timeout: 60000 });
+R.after = await snap();
+await page.waitForTimeout(3000);
+R.after3s = { paused: (await snap()).paused, time: (await snap()).time };
+R.stockDiff = Object.keys({ ...R.before.stock, ...R.after.stock }).filter(k => R.before.stock[k] !== R.after.stock[k]).map(k => [k, R.before.stock[k], R.after.stock[k]]);
+// E. confectionery card by clicking its model body
+const conf = built.find(b => b[0] === 'confectionery');
+await page.evaluate(([x, z]) => { const s = window.tgScene; s.controls.target.set(x, 0, z); s.setQuarterView(0); }, conf[1]);
+await page.waitForTimeout(300);
+p = await proj(conf[1][0], 0.45, conf[1][1]); await page.mouse.click(p.px, p.py); await page.waitForTimeout(500);
+R.confCard = (await page.locator('.facility-card').count()) ? (await page.locator('.facility-card').innerText()).replace(/\s+/g, ' ').slice(0, 200) : null;
+await page.screenshot({ path: OUT + '/06b-process-confectionery-card.png' });
+await page.getByRole('button', { name: '시설 정보 닫기' }).click().catch(() => {});
+// B. phone tabs reachability
+const mctx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2, storageState: await ctx.storageState() });
+await mctx.addInitScript(() => { window.WebSocket = class { constructor() { this.readyState = 0; } addEventListener() {} removeEventListener() {} send() {} close() {} }; });
+const m = await mctx.newPage(); m.on('pageerror', e => errs.push('m:' + e.message));
+await m.goto('http://localhost:5181');
+for (let i = 0; i < 40 && !(await m.getByRole('button', { name: /이어하기/ }).count()); i++) { await m.getByRole('button', { name: '화면을 눌러 시작', exact: true }).tap().catch(() => {}); await m.waitForTimeout(400); }
+await m.getByRole('button', { name: /이어하기/ }).tap();
+await m.getByRole('button', { name: '건설 목록 열기' }).waitFor({ timeout: 60000 });
+await m.waitForTimeout(1500);
+await m.getByRole('button', { name: '건설 목록 열기' }).tap();
+await m.waitForTimeout(500);
+R.phoneTabs = await m.evaluate(() => { const list = document.querySelector('.build-dock [role=tablist]'); const chain = []; for (let e = list; e && e !== document.body; e = e.parentElement) { const cs = getComputedStyle(e); chain.push({ cls: String(e.className).slice(0, 60), ox: cs.overflowX, jc: cs.justifyContent, sw: e.scrollWidth, cw: e.clientWidth }); } return { chain: chain.slice(0, 5), tabs: [...list.querySelectorAll('[role=tab]')].map(t => { const r = t.getBoundingClientRect(); return [t.textContent.trim(), Math.round(r.left), Math.round(r.right)]; }) }; });
+const tryTab = async name => { const t = m.getByRole('tab', { name }); let how = 'tap'; try { await t.tap({ timeout: 3000 }); } catch (e) { how = 'tap-failed: ' + e.message.split(NL)[0].slice(0, 160); } await m.waitForTimeout(300); return { name, how, selected: await t.getAttribute('aria-selected'), rect: await t.evaluate(e => { const r = e.getBoundingClientRect(); return [Math.round(r.left), Math.round(r.right)]; }) }; };
+R.phoneTabTap = [await tryTab("기초"), await tryTab("도시"), await tryTab("기초")];
+await m.screenshot({ path: OUT + '/10b-phone-390x844-tabs-edges.png' });
+R.errors = errs;
+console.log(JSON.stringify(R, null, 1));
+await browser.close();
