@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import {Campaign} from '../app/game/campaign.js';
-import {BUILDINGS,RESOURCES} from '../app/game/simulation.js';
-import {RANKS,NATIONS,unlockRank} from '../app/game/world.js';
-import {encodeSave,decodeSave} from '../app/game/persistence.js';
+import {Campaign} from '../src/app/game/campaign.js';
+import {BUILDINGS,RESOURCES} from '../src/app/game/simulation.js';
+import {RANKS,NATIONS,unlockRank} from '../src/app/game/world.js';
+import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
 // This driver uses only player actions and elapsed time. It never grants money,
 // stock, production totals, rank or contract completions.
 let c=new Campaign(),lastRank=-1,lastAction=0;const milestones=[];

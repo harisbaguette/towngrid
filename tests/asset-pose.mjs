@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {clone} from 'three/addons/utils/SkeletonUtils.js';
-import {posedBounds} from '../app/game/assets.js';
+import {posedBounds} from '../src/app/game/assets.js';
 // Geometry-only loading: textures are tested by the live browser, skinning here.
 globalThis.self=globalThis;
 globalThis.ProgressEvent=class{constructor(type,values){Object.assign(this,values);}};

@@ -65,7 +65,7 @@ try {
  // user's React refs and browser saves. Includes the CPU fallback path.
  const runtime = await page.evaluate(async () => {
   const [{GameScene},{createShowcase},{loadAssets},{SoftwareRenderer}] = await Promise.all([
-   import('/app/game/scene.js'),import('/app/game/simulation.js'),import('/app/game/assets.js'),import('/app/game/software-renderer.js'),
+   import('/src/app/game/scene.js'),import('/src/app/game/simulation.js'),import('/src/app/game/assets.js'),import('/src/app/game/software-renderer.js'),
   ]);
   await loadAssets('human');
   const host=document.createElement('div');host.style.cssText='position:fixed;inset:0;width:960px;height:720px;z-index:99999;background:#fff';document.body.append(host);

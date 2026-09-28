@@ -6,7 +6,7 @@
 
 ## 최신 추가: 기본 수출길과 수출 관문
 
-모든 지도는 서쪽 끝 관문 `EXPORT_GATE` (0,11)에서 시작 땅 (8,11)까지 이어지는 8칸 수출길을 기본으로 가진다. 규칙은 `app/game/export-route.js`에 모여 있다. 판매(`sell`)와 자동 판매는 창고에서 관문까지 길을 찾아 수출 마차를 보낸다. 재고는 실을 때 빠지고, 대금·판매 실적은 마차가 관문에 도착할 때 들어온다. 마차는 최대 3대이며 돌아와야 다음 마차를 보낼 수 있다. 수출길 타일은 아직 사지 않은 땅이어도 마차가 지나갈 수 있지만, 주민 이동 규칙은 그대로다.
+모든 지도는 서쪽 끝 관문 `EXPORT_GATE` (0,11)에서 시작 땅 (8,11)까지 이어지는 8칸 수출길을 기본으로 가진다. 규칙은 `src/app/game/export-route.js`에 모여 있다. 판매(`sell`)와 자동 판매는 창고에서 관문까지 길을 찾아 수출 마차를 보낸다. 재고는 실을 때 빠지고, 대금·판매 실적은 마차가 관문에 도착할 때 들어온다. 마차는 최대 3대이며 돌아와야 다음 마차를 보낼 수 있다. 수출길 타일은 아직 사지 않은 땅이어도 마차가 지나갈 수 있지만, 주민 이동 규칙은 그대로다.
 
 저장 형식은 버전 8을 유지하고 `shipments`, `nextShipmentId`를 선택 필드로 추가했다. 기존 저장은 불러올 때 수출길을 다시 깔고, 그 위의 나무는 치운다. `persistence.js`는 마차 수, 품목, 수량, 경로, 진행 위치를 검사해 조작된 저장을 거부한다. 화면에는 `makeExportGate` 관문 모형과 이동하는 화물 마차가 보이고, 판매 패널에 연결 상태와 운행 중인 마차 수가 표시된다.
 
@@ -28,7 +28,7 @@ WebGL은 기존 3D 환경과 픽셀 캐릭터를 합성한다. 제재소·창고
 
 | 기능 | 주요 파일 |
 | --- | --- |
-| 게임 화면/입력/전체 연결 | `app/game/Game.tsx` |
+| 게임 화면/입력/전체 연결 | `src/app/game/Game.tsx` |
 | 시작 국가 선택·세계 지도 | `WorldMap.tsx`, `WorldAtlas.tsx`, `world.js`, `territory.js` |
 | 주민 목록·일러스트·미리보기 | `ResidentRoster.tsx`, `CharacterSprite.tsx`, `resident-roster.js` |
 | 캐릭터 ID/방향/행동/앵커 | `pixel-character-data.js`, `pixel-character-meta.js`, `pixel-characters.js` |
@@ -38,9 +38,9 @@ WebGL은 기존 3D 환경과 픽셀 캐릭터를 합성한다. 제재소·창고
 | 캠페인·승급·외부 변수 | `campaign.js`, `progression.js`, `encounters.js`, `world.js` |
 | 저장/복구/이전 형식 | `persistence.js` |
 | 사운드 | `audio.js`, `public/assets/audio/` |
-| 게임 UI 스타일 | `app/game-ui.css`, `app/globals.css` |
+| 게임 UI 스타일 | `src/app/game-ui.css`, `src/app/globals.css` |
 
-표의 파일명만 적힌 경로는 `app/game/` 기준이다. 기존 `docs/TOWNSTAR_RULES.md`와 `docs/GAME_DESIGN.md`도 참고하되, 모든 계획이 구현된 것으로 간주하지 않는다.
+표의 파일명만 적힌 경로는 `src/app/game/` 기준이다. 기존 `docs/TOWNSTAR_RULES.md`와 `docs/GAME_DESIGN.md`도 참고하되, 모든 계획이 구현된 것으로 간주하지 않는다.
 
 ## 실제 구현된 범위
 
@@ -98,7 +98,9 @@ WebGL은 기존 3D 환경과 픽셀 캐릭터를 합성한다. 제재소·창고
 - Bash 전용 설치 명령 대신 Windows/macOS/Linux에서 호출할 수 있는 `npm run setup`을 추가했다. 패키지 버전과 잠금 파일은 유지했다.
 - `npm test`는 기존 `simulation`, `campaign`, `release`, 픽셀 캐릭터 검사를 묶는다. 새로운 게임 규칙을 만들지 않는다.
 - `.sites-runtime/execution-profile.json`이 없는 압축 해제 상태는 기존 런처의 `portable` 경로로 실행한다. 호스팅 전용 프로필이나 토큰을 복사할 필요가 없다.
-- `.openai/hosting.json`, `build/sites-vite-plugin.ts` 등은 Vite 설정이 참조하므로 보존했다. 기존 프로젝트 ID는 비밀 키가 아니며 로컬 실행 권한을 대신하지도 않는다. `build`는 외부 배포를 수행하지 않는다.
+- Windows 실행기 `TownGrid.exe`(원본 `scripts/launcher/TownGrid.cs`, 빌드 `npm run build:launcher`)는 `node scripts/run-framework.mjs dev`를 숨김으로 켜고, 서버 로그의 주소를 읽어 Chrome/Edge `--app` 창을 전용 프로필 `%LOCALAPPDATA%\TownGrid\browser`로 연다. 창이 닫히면 서버 프로세스 트리를 끈다. 이미 5173에 타운그리드가 떠 있으면 새 서버 없이 창만 연다. 기록은 `%LOCALAPPDATA%\TownGrid\launcher.log`.
+- 2026-09-28 루트 정리: 소스를 `src/`로, Vite 보조 플러그인을 `scripts/vite/`로, 참고 자료를 `art-source/references/`로 옮겼다. 쓰이지 않던 D1 예제·Drizzle 설정·빈 `next.config.ts`·워크스페이스 파일을 지우고 PostCSS 설정은 `vite.config.ts`에 넣었다.
+- `.openai/hosting.json`, `scripts/vite/sites-vite-plugin.ts` 등은 Vite 설정이 참조하므로 보존했다. 기존 프로젝트 ID는 비밀 키가 아니며 로컬 실행 권한을 대신하지도 않는다. `build`는 외부 배포를 수행하지 않는다.
 - 이전 서버의 Git 이력/자격 증명은 제외하고 원본 커밋 번호를 기록했다. 전체 원본 소스와 자산은 유지했다.
 - 다른 주소에서의 세이브는 자동 이전되지 않는다. 원래 게임 설정에서 JSON 내보내기 → 로컬 설정에서 불러오기 순서로 옮긴다.
 - `docs/LOCAL_VERIFICATION.md`는 이번 ZIP 기준의 검증 결과다. 과거 `RELEASE_QA.md` 등의 완료 표시와 혼동하지 않는다.
@@ -118,6 +120,6 @@ WebGL은 기존 3D 환경과 픽셀 캐릭터를 합성한다. 제재소·창고
 - 승인된 첫 픽셀 시안 3장을 바탕으로 대기 → 홈 → 새 게임 국가 선택 흐름을 적용했다. 홈에서 이어하기, 파일 불러오기, 설정, 초반 마을 테스트와 산업도시 시연을 연다. 승인 로고와 실제 HTML 버튼을 사용한다.
 - 기존 미라·마르나·실렌 작업 장면에 로웬·하나·브론 3장을 추가했다. 시작/저장 불러오기/거점 이동 로딩에 6장을 섞어 사용한다. 같은 묶음 안에서 중복하지 않고, 묶음 경계에서도 연속 반복하지 않는다. 오래 걸리는 로딩은 8초마다 교체하며 준비가 끝나면 즉시 종료한다.
 - 홈의 **마을의 하루**에서 6장을 직접 감상한다. 플레이 도중 강제로 등장하는 팝업은 없다.
-- 코드: `app/game/StartScreens.tsx`, `app/game/screen-art.js`, `app/start-screens.css`, 연결은 `Game.tsx`. 실행용 9개 WebP는 `public/assets/screens/`, 원본·프롬프트·명세는 `art-source/screen-concepts/2026-09-27/`에 있다. 첫 시안 3장은 그대로 보존했다.
+- 코드: `src/app/game/StartScreens.tsx`, `src/app/game/screen-art.js`, `src/app/start-screens.css`, 연결은 `Game.tsx`. 실행용 9개 WebP는 `public/assets/screens/`, 원본·프롬프트·명세는 `art-source/screen-concepts/2026-09-27/`에 있다. 첫 시안 3장은 그대로 보존했다.
 - `node scripts/pack-screen-art.mjs`로 다시 변환한다. 해상도를 유지한 실행용 9장은 합계 약 3.73MB로 원본보다 84% 작다. 그림 표시 이력 키 `towngrid-screen-art-v1`은 게임 저장 형식/키와 별개다.
 - 검증: `tests/screen-art.mjs`, `tests/start-screens-browser.mjs`, `docs/verification/start-screens/`. 빠른 로딩은 그림이 짧게 보일 수 있으며, 배경은 정지 일러스트다.

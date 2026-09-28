@@ -37,7 +37,7 @@ try {
 
   // Hold a real, previously unloaded elf image only in this disposable test context.
   const raw = await page.evaluate(async () => {
-    const [{ Campaign }, { encodeSave }] = await Promise.all([import('/app/game/campaign.js'), import('/app/game/persistence.js')]);
+    const [{ Campaign }, { encodeSave }] = await Promise.all([import('/src/app/game/campaign.js'), import('/src/app/game/persistence.js')]);
     return encodeSave(new Campaign({ race: 'elf' }).save());
   });
   let release;
@@ -55,13 +55,13 @@ try {
   await page.getByRole('button', { name: '게임 설정', exact: true }).click();
   await page.getByRole('button', { name: '시작 화면으로', exact: true }).click();
   assert.equal(await page.getByRole('button', { name: '이어하기', exact: true }).isEnabled(), true);
-  const preserved = await page.evaluate(async () => { const { SAVE_KEY } = await import('/app/game/persistence.js'); return localStorage.getItem(SAVE_KEY); });
+  const preserved = await page.evaluate(async () => { const { SAVE_KEY } = await import('/src/app/game/persistence.js'); return localStorage.getItem(SAVE_KEY); });
   await page.getByRole('button', { name: '초반 마을 테스트', exact: true }).click();
   await page.getByRole('button', { name: '오른쪽 90도 회전', exact: true }).waitFor();
   await page.getByRole('button', { name: '시작 화면', exact: true }).click();
-  assert.equal(await page.evaluate(async () => { const { SAVE_KEY } = await import('/app/game/persistence.js'); return localStorage.getItem(SAVE_KEY); }), preserved);
+  assert.equal(await page.evaluate(async () => { const { SAVE_KEY } = await import('/src/app/game/persistence.js'); return localStorage.getItem(SAVE_KEY); }), preserved);
   const sequence = await page.evaluate(async () => {
-    const { createArtworkPicker } = await import('/app/game/screen-art.js');
+    const { createArtworkPicker } = await import('/src/app/game/screen-art.js');
     const pick = createArtworkPicker(localStorage); return [pick().id, pick().id];
   });
   assert.notEqual(sequence[0], sequence[1]);

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
-import {SoftwareRenderer} from '../app/game/software-renderer.js';
+import {SoftwareRenderer} from '../src/app/game/software-renderer.js';
 // Crossed surfaces exercise the old painter-order failure: each side has a
 // different nearest material even though both triangles share a centre depth.
 globalThis.document={createElement(){const canvas={};canvas.getContext=()=>({createImageData(w,h){return {data:new Uint8ClampedArray(w*h*4),width:w,height:h};},putImageData(buffer){canvas.pixels=buffer.data;}});return canvas;}};

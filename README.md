@@ -4,8 +4,14 @@
 
 ## 바로 실행
 
+Windows에서는 프로젝트 폴더의 **`TownGrid.exe`를 두 번 누르면** 게임이 열립니다. 실행기는 필요하면 의존성을 설치하고, 게임 서버를 켠 뒤 Chrome 또는 Edge 앱 창으로 게임을 보여 줍니다. 게임 창을 닫으면 서버도 함께 꺼집니다. Node.js 24 LTS가 먼저 설치되어 있어야 하며, 최초 실행에는 인터넷이 필요합니다.
+
+실행기 창의 저장 진행은 전용 브라우저 프로필(`%LOCALAPPDATA%\TownGrid\browser`)에 보관됩니다. 평소 쓰는 브라우저에서 `localhost:5173`으로 저장한 진행은 실행기 창에 보이지 않으므로, 필요하면 게임의 내보내기/불러오기로 옮기세요. 실행 기록은 `%LOCALAPPDATA%\TownGrid\launcher.log`에 남습니다.
+
+개발 서버를 직접 켜려면 다음 순서를 따릅니다.
+
 1. Node.js 24 LTS와 VS Code를 설치합니다. 최초 의존성 설치에는 인터넷이 필요합니다.
-2. ZIP을 **전부 압축 해제**하고 `TownGrid.code-workspace`를 VS Code로 엽니다. Windows에서는 `C:\dev\TownGrid`처럼 짧은 경로를 권장합니다.
+2. ZIP을 **전부 압축 해제**하고 프로젝트 폴더를 VS Code로 엽니다. Windows에서는 `C:\dev\TownGrid`처럼 짧은 경로를 권장합니다.
 3. VS Code 터미널에서 아래 두 명령을 순서대로 실행합니다.
 
 ```sh
@@ -55,6 +61,7 @@ AGENTS.md, docs/LOCAL_HANDOFF.md, docs/LOCAL_VERIFICATION.md를 먼저 읽고
 | `npm run build` | 배포 가능한 산출물 빌드; 외부 업로드 없음 |
 | `npm start` | 빌드 후 Wrangler 로컬 실행; 실제 주소는 로그 확인 |
 | `npm run lint` | 기존 ESLint 규칙 검사; 전체 기존 코드의 무경고를 보장하지 않음 |
+| `npm run build:launcher` | `scripts/launcher/TownGrid.cs`로 루트의 `TownGrid.exe`를 다시 만듦; Windows 전용 |
 
 VS Code의 `Terminal → Run Task`에서도 위 작업을 실행할 수 있습니다. 추가 회귀 검사는 `tests/`에 보존했습니다. `tests/render-*.mjs`는 이전 제작 환경 전용 시각 자료 생성기이며 기본 로컬 검사에 포함되지 않습니다.
 
@@ -62,11 +69,14 @@ VS Code의 `Terminal → Run Task`에서도 위 작업을 실행할 수 있습�
 
 | 경로 | 내용 |
 | --- | --- |
-| `app/game/` | 게임 UI, 시뮬레이션, 세계 지도, 경제, 물류, 렌더러, 캐릭터 |
+| `TownGrid.exe` | Windows 실행기; 아이콘은 브랜드 심볼 |
+| `src/app/game/` | 게임 UI, 시뮬레이션, 세계 지도, 경제, 물류, 렌더러, 캐릭터 |
+| `src/components/`, `src/hooks/`, `src/lib/`, `src/vendor/` | 공용 UI 부품과 보조 코드 |
 | `public/assets/` | 픽셀 캐릭터, 3D 건물/소품, 사운드, 로고/심볼과 기존 자산 |
 | `art-source/pixel-characters/` | 캐릭터 생성/수정 원본 35개 PNG, 프롬프트, 패킹 명세 |
-| `references/` | 회수한 사용자 제공 시각 참고 자료; 런타임 자산과 구별 |
+| `art-source/references/` | 회수한 사용자 제공 시각 참고 자료; 런타임 자산과 구별 |
 | `scripts/` | 설치/빌드 보조 코드, 에셋 제작/패킹 코드, 검사 코드 |
+| `scripts/launcher/` | 실행기 원본(`TownGrid.cs`)과 빌드 스크립트 |
 | `tests/` | 기존 자동 검사 |
 | `docs/` | 최신 인수인계, 기존 기획·룰 분석·작업 기록·스크린샷 |
 | `docs/EXPORT_MANIFEST.json` | ZIP 내부 파일 목록·크기·SHA-256 및 원본 커밋 |

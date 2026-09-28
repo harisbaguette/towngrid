@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import {Simulation,BUILDINGS,createShowcase} from '../app/game/simulation.js';
-import {CONTINENTS,NATIONS,FACTIONS,factionOf} from '../app/game/world.js';
-import {Campaign} from '../app/game/campaign.js';
-import {encodeSave,decodeSave} from '../app/game/persistence.js';
+import {Simulation,BUILDINGS,createShowcase} from '../src/app/game/simulation.js';
+import {CONTINENTS,NATIONS,FACTIONS,factionOf} from '../src/app/game/world.js';
+import {Campaign} from '../src/app/game/campaign.js';
+import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
 const run=(s,t)=>{for(let i=0;i<t*4;i++)s.tick(.25);};
 assert.equal(CONTINENTS.length,1);assert.equal(new Set(Object.values(NATIONS).map(n=>n.continent)).size,1);assert.equal(Object.keys(NATIONS).length,30);
 for(const alliance of ['human','elf']){const s=new Simulation('river',null,{race:alliance});for(const [i,type]of ['warehouse','well','field','house','lumber','quarry'].entries())s.build(type,9+i,12,true);assert.ok(s.buildings.every(b=>FACTIONS[alliance].members.includes(b.race)));assert.ok(s.workers.length===1&&s.workers.every(w=>w.race===FACTIONS[alliance].members[0]),'the starter house holds the base race; other members arrive through their own houses');}

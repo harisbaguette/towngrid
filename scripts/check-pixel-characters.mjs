@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
-import { pixelDirection, pixelAction, pixelFrame, pixelRoster, pixelAtlasFrame, PIXEL_DIRECTIONS, PIXEL_ENEMIES } from '../app/game/pixel-character-data.js';
-import { RESIDENT_LOOKS } from '../app/game/resident-roster.js';
+import { pixelDirection, pixelAction, pixelFrame, pixelRoster, pixelAtlasFrame, PIXEL_DIRECTIONS, PIXEL_ENEMIES } from '../src/app/game/pixel-character-data.js';
+import { RESIDENT_LOOKS } from '../src/app/game/resident-roster.js';
 import * as THREE from 'three';
-import { createPixelCharacter, animatePixelCharacter } from '../app/game/pixel-characters.js';
-import { pixelMetadata } from '../app/game/pixel-character-meta.js';
-import { SoftwareRenderer } from '../app/game/software-renderer.js';
+import { createPixelCharacter, animatePixelCharacter } from '../src/app/game/pixel-characters.js';
+import { pixelMetadata } from '../src/app/game/pixel-character-meta.js';
+import { SoftwareRenderer } from '../src/app/game/software-renderer.js';
 
 // Cardinal headings must stay correct while the user rotates the world camera.
 for (let camera = 0; camera < 4; camera++) {

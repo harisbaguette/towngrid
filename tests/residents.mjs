@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
-import {Simulation,BUILDINGS} from '../app/game/simulation.js';
-import {assignJob,canEnter} from '../app/game/logistics.js';
+import {Simulation,BUILDINGS} from '../src/app/game/simulation.js';
+import {assignJob,canEnter} from '../src/app/game/logistics.js';
 const run=(s,secs)=>{for(let i=0;i<secs*4;i++)s.tick(.25);};
 const town=(race='human')=>{const s=new Simulation('river',null,{race});s.nextEvent=1e9;s.autoSell={};s.money=1e5;s.debt=0;return s;};
 

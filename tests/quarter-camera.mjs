@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { configureQuarterControls, applyQuarterView, QUARTER_POLAR, QUARTER_TURN, QUARTER_DISTANCE, quarterAzimuth, normalizeQuarter } from '../app/game/quarter-camera.js';
+import { configureQuarterControls, applyQuarterView, QUARTER_POLAR, QUARTER_TURN, QUARTER_DISTANCE, quarterAzimuth, normalizeQuarter } from '../src/app/game/quarter-camera.js';
 
 const near = (a, b, message) => assert.ok(Math.abs(a - b) < 1e-9, `${message}: ${a} != ${b}`);
 const camera = new THREE.OrthographicCamera(-8, 8, 8, -8, .1, 120);

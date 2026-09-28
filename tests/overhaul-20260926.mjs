@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import {Simulation,createShowcase,BUILDINGS} from '../app/game/simulation.js';
-import {Campaign} from '../app/game/campaign.js';
-import {encodeSave,decodeSave} from '../app/game/persistence.js';
-import {startRaid} from '../app/game/encounters.js';
+import {Simulation,createShowcase,BUILDINGS} from '../src/app/game/simulation.js';
+import {Campaign} from '../src/app/game/campaign.js';
+import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
+import {startRaid} from '../src/app/game/encounters.js';
 const run=(s,t)=>{for(let i=0;i<t*4;i++)s.tick(.25);};
 const s=new Simulation();s.rank=12;s.money=5000;s.nextEvent=1e9;s.autoSell={};
 for(const [type,x,z]of [['warehouse',10,13],['house',8,13],['well',10,10],['field',11,10],['lumber',10,8],['mill',13,10],['bakery',13,12]])assert.ok(s.build(type,x,z).ok,type);

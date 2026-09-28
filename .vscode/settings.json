@@ -1,0 +1,16 @@
+{
+  "files.encoding": "utf8",
+  "files.exclude": {
+    "**/.next": true,
+    "**/.vinext": true,
+    "**/.wrangler": true,
+    "**/.sites-runtime": true,
+    "**/.kilo": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.sites-runtime": true,
+    "**/.wrangler": true,
+    "**/dist": true
+  }
+}

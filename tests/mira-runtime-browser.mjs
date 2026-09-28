@@ -17,7 +17,7 @@ try {
  await page.getByRole('button', { name: '초반 마을 테스트', exact: true }).waitFor({ timeout: 120000 });
  await page.evaluate(async () => {
   const urls = performance.getEntriesByType('resource').map(e => e.name).filter(url => /\/app\/game\/scene\.js(?:\?|$)/.test(url));
-  for (const url of new Set([...urls, '/app/game/scene.js'])) {
+  for (const url of new Set([...urls, '/src/app/game/scene.js'])) {
    const { GameScene } = await import(url), original = GameScene.prototype.setSimulation;
    GameScene.prototype.setSimulation = function(sim) { window.miraScene = this; return original.call(this, sim); };
   }

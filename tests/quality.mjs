@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {Campaign} from '../app/game/campaign.js';
-import {Simulation,BUILDINGS,RESOURCES,N} from '../app/game/simulation.js';
-import {RANKS,RACES,unlockRank} from '../app/game/world.js';
-import {startRaid,tickRaid} from '../app/game/encounters.js';
-import {encodeSave,decodeSave,writeSave,SAVE_KEY} from '../app/game/persistence.js';
-import {FILES} from '../app/game/audio.js';
+import {Campaign} from '../src/app/game/campaign.js';
+import {Simulation,BUILDINGS,RESOURCES,N} from '../src/app/game/simulation.js';
+import {RANKS,RACES,unlockRank} from '../src/app/game/world.js';
+import {startRaid,tickRaid} from '../src/app/game/encounters.js';
+import {encodeSave,decodeSave,writeSave,SAVE_KEY} from '../src/app/game/persistence.js';
+import {FILES} from '../src/app/game/audio.js';
 const run=(s,seconds)=>{for(let i=0;i<seconds*4;i++)s.tick(.25);};
 const fresh=()=>{const s=new Simulation();s.nextEvent=1e9;return s;};
 let checks=0;const passed=name=>{checks++;console.log('PASS',name);};

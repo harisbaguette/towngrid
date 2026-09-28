@@ -3,7 +3,7 @@ import {createRequire} from 'node:module';
 import fs from 'node:fs/promises';
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
-import {SoftwareRenderer} from '../app/game/software-renderer.js';
+import {SoftwareRenderer} from '../src/app/game/software-renderer.js';
 const require=createRequire(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES+'/local.js');
 const {createCanvas}=require('@napi-rs/canvas');
 globalThis.document={createElement(){const c=createCanvas(1,1);c.dataset={};return c;}};

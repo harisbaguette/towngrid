@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
-import { createArtworkPicker, WORK_ART, SCREEN_ART_KEY, SCREEN_BACKGROUNDS } from '../app/game/screen-art.js';
+import { createArtworkPicker, WORK_ART, SCREEN_ART_KEY, SCREEN_BACKGROUNDS } from '../src/app/game/screen-art.js';
 
 const memory = new Map([['existing-game-save', 'untouched']]);
 const storage = { getItem: key => memory.get(key), setItem: (key, value) => memory.set(key, value) };

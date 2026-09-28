@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { ENVIRONMENT_ASSETS, ENVIRONMENT_CELL, PIXEL_BUILDINGS, pixelBuildingFrame, sawmillFrame, oakFrame, waterFrame } from '../app/game/pixel-environment-data.js';
-import { makePixelBuilding, makePixelSawmill, makePixelTree, makePixelWater } from '../app/game/pixel-environment.js';
-import { Simulation } from '../app/game/simulation.js';
-import { Campaign } from '../app/game/campaign.js';
-import { NATIONS } from '../app/game/world.js';
-import { decodeSave } from '../app/game/persistence.js';
+import { ENVIRONMENT_ASSETS, ENVIRONMENT_CELL, PIXEL_BUILDINGS, pixelBuildingFrame, sawmillFrame, oakFrame, waterFrame } from '../src/app/game/pixel-environment-data.js';
+import { makePixelBuilding, makePixelSawmill, makePixelTree, makePixelWater } from '../src/app/game/pixel-environment.js';
+import { Simulation } from '../src/app/game/simulation.js';
+import { Campaign } from '../src/app/game/campaign.js';
+import { NATIONS } from '../src/app/game/world.js';
+import { decodeSave } from '../src/app/game/persistence.js';
 
 // Production status must govern the art, including repairs, pauses and shortages.
 for (const building of [{ working: false }, { working: true, enabled: false }, { working: true, health: 0 }]) {

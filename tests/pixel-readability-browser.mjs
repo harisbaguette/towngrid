@@ -19,7 +19,7 @@ try {
  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);await shot('comparison-mobile.png');
  await page.setViewportSize({ width: 1100, height: 850 });
  const facilities = await page.evaluate(async () => {
-  const [{GameScene},{Simulation},{loadAssets}] = await Promise.all([import('/app/game/scene.js'),import('/app/game/simulation.js'),import('/app/game/assets.js')]);
+  const [{GameScene},{Simulation},{loadAssets}] = await Promise.all([import('/src/app/game/scene.js'),import('/src/app/game/simulation.js'),import('/src/app/game/assets.js')]);
   await loadAssets('human');
   document.body.innerHTML = '<div id="map" style="position:fixed;inset:0"></div><div style="position:fixed;top:18px;left:18px;background:#ffffe9;padding:12px 18px;border-radius:8px;z-index:2;color:#24463c;font:16px system-ui">흰 테두리 = 실제 1×1 타일 · 픽셀 시설 6종</div>';
   const sim = new Simulation();sim.rank = 20;sim.paused = true;

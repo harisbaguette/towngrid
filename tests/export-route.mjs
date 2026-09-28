@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import {Simulation,createShowcase} from '../app/game/simulation.js';
-import {createStarterShowcase} from '../app/game/starter-demo.js';
-import {encodeSave,decodeSave} from '../app/game/persistence.js';
-import {EXPORT_GATE,EXPORT_TILES,EXPORT_CARTS} from '../app/game/export-route.js';
+import {Simulation,createShowcase} from '../src/app/game/simulation.js';
+import {createStarterShowcase} from '../src/app/game/starter-demo.js';
+import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
+import {EXPORT_GATE,EXPORT_TILES,EXPORT_CARTS} from '../src/app/game/export-route.js';
 const run=(s,t)=>{for(let i=0;i<t*4;i++)s.tick(.25);};
 const fresh=()=>{const s=new Simulation('river');s.nextEvent=1e9;s.autoSell={};return s;};
 

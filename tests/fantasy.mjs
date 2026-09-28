@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {Simulation,BUILDINGS} from '../app/game/simulation.js';
-import {NATIONS,RACES,RANKS,FACTIONS,factionOf} from '../app/game/world.js';
+import {Simulation,BUILDINGS} from '../src/app/game/simulation.js';
+import {NATIONS,RACES,RANKS,FACTIONS,factionOf} from '../src/app/game/world.js';
 const run=(s,t)=>{for(let i=0;i<t*4;i++)s.tick(.25);};
 // Starting landscape changes waterways; a field's multiplier belongs to its tile.
 const inland=new Simulation('river'),coast=new Simulation('coast');

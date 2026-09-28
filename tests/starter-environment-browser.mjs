@@ -18,7 +18,7 @@ try {
  await page.getByRole('button', { name: '초반 마을 테스트', exact: true }).waitFor({ timeout: 120000 });
  // Only this new, disposable browser context is seeded. User storage is untouched.
  const saved = await page.evaluate(async () => {
-  const [{ Campaign }, { encodeSave, SAVE_KEY, RECOVERY_KEY, BACKUP_KEY }] = await Promise.all([import('/app/game/campaign.js'), import('/app/game/persistence.js')]);
+  const [{ Campaign }, { encodeSave, SAVE_KEY, RECOVERY_KEY, BACKUP_KEY }] = await Promise.all([import('/src/app/game/campaign.js'), import('/src/app/game/persistence.js')]);
   const campaign = new Campaign();campaign.active.money = 1234;
   const raw = encodeSave(campaign.save()), snapshot = {};
   for (const key of [SAVE_KEY, RECOVERY_KEY, BACKUP_KEY]) { localStorage.setItem(key, raw);snapshot[key] = raw; }
@@ -31,7 +31,7 @@ try {
  // Capture the real scene through its existing entry point in the test browser.
  await page.evaluate(async () => {
   const urls = performance.getEntriesByType('resource').map(e => e.name).filter(url => /\/app\/game\/scene\.js(?:\?|$)/.test(url));
-  for (const url of new Set([...urls, '/app/game/scene.js'])) {
+  for (const url of new Set([...urls, '/src/app/game/scene.js'])) {
    const { GameScene } = await import(url), original = GameScene.prototype.setSimulation;
    GameScene.prototype.setSimulation = function (sim) { window.starterScene = this;return original.call(this, sim); };
   }
@@ -97,7 +97,7 @@ try {
   for (let i = 0; i < 1200; i++) game.sim.campaign.tick(.1);
   game.sim.paused = true;game.rebuild();game.setQuarterView(0);
   for (const b of game.sim.buildings) rows.push({ type: b.type, frame: game.models.get(b.id).userData.frame });
-  const { SoftwareRenderer } = await import('/app/game/software-renderer.js');
+  const { SoftwareRenderer } = await import('/src/app/game/software-renderer.js');
   const software = new SoftwareRenderer({ alpha: true });software.setSize(1440, 1000);
   software.render(game.scene, game.camera);const softwarePng = software.domElement.toDataURL();software.dispose();
   return { ghosts, rows, renderingPreservesSave, produced: game.sim.produced, deliveries: game.sim.logisticsStats.delivered, softwarePng };

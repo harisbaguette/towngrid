@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import {Campaign} from '../app/game/campaign.js';
-import {Simulation,BUILDINGS,RESOURCES,createShowcase} from '../app/game/simulation.js';
-import {RACES,FACTIONS,NATIONS,RANKS,playableRace} from '../app/game/world.js';
+import {Campaign} from '../src/app/game/campaign.js';
+import {Simulation,BUILDINGS,RESOURCES,createShowcase} from '../src/app/game/simulation.js';
+import {RACES,FACTIONS,NATIONS,RANKS,playableRace} from '../src/app/game/world.js';
 const run=(c,t)=>{for(let i=0;i<t*4;i++)c.tick(.25);};
 assert.equal(Object.keys(NATIONS).length,30);assert.equal(RANKS.length,33);assert.equal(RANKS[0].name,'농노');assert.ok(Object.values(BUILDINGS).every(b=>b.size===1));
 for(const race of ['human','dwarf','titan','elf','spirit','centaur','fae']){assert.ok(playableRace(race));const s=createShowcase('estern',race);run(s,85);assert.ok(s.produced.car>0,race+' can manufacture cars');assert.ok(s.produced.circuit>0,race+' can manufacture circuits');assert.ok(s.produced.medicine>0,race+' can manufacture medicine');}

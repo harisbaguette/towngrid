@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import { advanceCharacterRoute, characterDistance } from '../app/game/character-movement.js';
-import { createPixelCharacter, animatePixelCharacter } from '../app/game/pixel-characters.js';
-import { moveWorkers } from '../app/game/logistics.js';
+import { advanceCharacterRoute, characterDistance } from '../src/app/game/character-movement.js';
+import { createPixelCharacter, animatePixelCharacter } from '../src/app/game/pixel-characters.js';
+import { moveWorkers } from '../src/app/game/logistics.js';
 
 const close = (actual, expected, message) => assert.ok(Math.abs(actual - expected) < 1e-9, `${message}: ${actual} != ${expected}`);
 const actor = route => ({ x: 0, z: 0, dir: 0, route: structuredClone(route), race: 'human' });

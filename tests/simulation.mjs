@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {Simulation,createShowcase} from '../app/game/simulation.js';
+import {Simulation,createShowcase} from '../src/app/game/simulation.js';
 const run=(s,secs)=>{for(let i=0;i<secs*4;i++)s.tick(.25);};
 const s=new Simulation('river');s.nextEvent=999999;s.rank=11;
 const build=(type,x,z)=>{const result=s.build(type,x,z);assert.ok(result.ok,type+': '+result.error);return result.id;};

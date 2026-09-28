@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import {Campaign} from '../app/game/campaign.js';
-import {GameAudio,FILES,SAMPLE_FILES} from '../app/game/audio.js';
-import {SAVE_KEY,RECOVERY_KEY,BACKUP_KEY,encodeSave,decodeSave,writeSave,backupSave,readRecovery} from '../app/game/persistence.js';
+import {Campaign} from '../src/app/game/campaign.js';
+import {GameAudio,FILES,SAMPLE_FILES} from '../src/app/game/audio.js';
+import {SAVE_KEY,RECOVERY_KEY,BACKUP_KEY,encodeSave,decodeSave,writeSave,backupSave,readRecovery} from '../src/app/game/persistence.js';
 
 const memory=()=>{const data=new Map();return {data,getItem:k=>data.get(k)??null,setItem:(k,v)=>data.set(k,v)};};
 const c=new Campaign({demo:true});

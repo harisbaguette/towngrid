@@ -4,7 +4,7 @@ import * as T from 'three';
 import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
 import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
 import fs from 'node:fs/promises';
-import {RESIDENT_LOOKS} from '../app/game/resident-roster.js';
+import {RESIDENT_LOOKS} from '../src/app/game/resident-roster.js';
 
 globalThis.FileReader=class {
  readAsArrayBuffer(blob){blob.arrayBuffer().then(v=>{this.result=v;this.onloadend?.();});}
