@@ -1,8 +1,12 @@
-import {RESOURCES} from './simulation.js';
+import {RESOURCES,BUILDINGS} from './simulation.js';
 // Every map has a fixed export road from the west edge to the starting land.
 // Sold goods leave the warehouse on carts and are paid for when a cart reaches the gate.
 export const EXPORT_GATE={x:0,z:11};
 export const EXPORT_CARTS=3;
+/** Save validation ceiling: the base carts plus the continental exchange's two (M8). */
+export const MAX_EXPORT_CARTS=5;
+/** Carts available now: the base three plus exportCarts of every running facility (M8). */
+export const exportCarts=s=>Math.min(MAX_EXPORT_CARTS,EXPORT_CARTS+s.buildings.reduce((n,b)=>n+(b.health>0&&b.enabled!==false?BUILDINGS[b.type].exportCarts||0:0),0));
 const K=(x,z)=>x+','+z;
 export const EXPORT_TILES=Array.from({length:8},(_,x)=>({x,z:EXPORT_GATE.z}));
 const EXPORT_KEYS=new Set(EXPORT_TILES.map(p=>K(p.x,p.z)));
@@ -25,8 +29,15 @@ export function exportRoute(s){
  return s.exportCache=result;
 }
 
+/** True when a building on (x,z) would cut the open road from the warehouse to the gate (audit X1). */
+export function cutsExportRoute(s,x,z){
+ const {route}=exportRoute(s);if(!route||!route.some(p=>p.x===x&&p.z===z))return false;
+ const base=passable(s),pass=(a,c)=>(a!==x||c!==z)&&base(a,c),tag='export-cut:'+x+','+z+':';
+ return !s.entries(s.warehouse).filter(p=>p.x!==x||p.z!==z).some(door=>s.path(door,EXPORT_GATE,pass,tag));
+}
+
 export function dispatchShipment(s,item,amount,revenue,auto){
- const {route,error}=exportRoute(s);if(!route)return error;if(s.shipments.length>=EXPORT_CARTS)return '수출 마차 '+EXPORT_CARTS+'대가 모두 나가 있습니다';
+ const {route,error}=exportRoute(s);if(!route)return error;const carts=exportCarts(s);if(s.shipments.length>=carts)return '수출 마차 '+carts+'대가 모두 나가 있습니다';
  s.shipments.push({id:(s.nextShipmentId=(s.nextShipmentId||0)+1),item,amount,revenue,auto:!!auto,route:route.map(p=>({x:p.x,z:p.z})),progress:0,phase:'out'});return null;
 }
 
@@ -51,4 +62,4 @@ export function tickShipments(s,dt){
  s.shipments=s.shipments.filter(sh=>sh.phase==='out'||sh.progress>0);
 }
 
-export function exportStatus(s){const {route,error}=exportRoute(s);return {connected:!!route,error,busy:s.shipments.length,carts:EXPORT_CARTS,inTransit:s.shipments.filter(sh=>sh.phase==='out').reduce((n,sh)=>n+sh.revenue,0)};}
+export function exportStatus(s){const {route,error}=exportRoute(s);return {connected:!!route,error,busy:s.shipments.length,carts:exportCarts(s),inTransit:s.shipments.filter(sh=>sh.phase==='out').reduce((n,sh)=>n+sh.revenue,0)};}

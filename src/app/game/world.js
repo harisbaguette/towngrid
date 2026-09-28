@@ -43,10 +43,10 @@ Object.assign(RACES,{
 });
 // Who may work where. A specialist race is the only crew for its workshops while it belongs to the faction;
 // haulers carry double loads but cannot run the high-intelligence facilities (buildings marked skilled).
-Object.assign(RACES.dwarf,{crafts:['workshop','smelter','steamworks'],role:'기계 공장·제철소·증기 기계공장 전담'});
+Object.assign(RACES.dwarf,{crafts:['workshop','smelter','steamworks','mithrilforge','blastfurnace'],role:'기계 공장·제철소·증기 기계공장·미스릴 정련소·용광로 전담'});
 // Spirits and fae are one crew (the elf-side dwarves): they share one house and one set of workshops.
-Object.assign(RACES.spirit,{crafts:['manaextractor','magetower','arcanepower','electronics','laboratory'],role:'요정 포함 · 마력 추출소·마탑·마력 발전소·전자 공장·제약 공장 전담'});
-Object.assign(RACES.fae,{kin:'spirit',role:'정령으로 묶임 · 마력 추출소·마탑·마력 발전소·전자 공장·제약 공장 전담'});
+Object.assign(RACES.spirit,{crafts:['manaextractor','magetower','arcanepower','electronics','laboratory','lampworks','engineworks'],role:'요정 포함 · 마력 추출소·마탑·마력 발전소·전자 공장·제약 공장·마력등 공방·마력 기관 공장 전담'});
+Object.assign(RACES.fae,{kin:'spirit',role:'정령으로 묶임 · 마력 추출소·마탑·마력 발전소·전자 공장·제약 공장·마력등 공방·마력 기관 공장 전담'});
 export const crewOf=race=>RACES[race]?.kin||race;
 Object.assign(RACES.titan,{hauler:true,role:'짐 두 배 · 고지능 작업장 출입 불가'});
 Object.assign(RACES.centaur,{hauler:true,role:'짐 두 배 · 빠른 이동 · 고지능 작업장 출입 불가'});
@@ -76,39 +76,41 @@ for(let i=0;i<nationRows.length;i++){
  const overlord=['발테론 제국','카르제온 연방','아스테라 패권국'][c],point=ATLAS_POINTS[i];
  NATIONS[id]={faction:factionOf(race),playable:playableRace(race),sovereign:['아우렐 독립왕국','네레이드 독립연방','솔름 독립공국'][c],capitalDomain:(old.capital||name.split(' ')[0])+' 수도직할령',manor:(old.fief||name.split(' ')[0])+' 개척장',dependency:'종속 공국',sale:1,production:{},...old,...p,id,name,race,region,continent:'irdea',overlord,policy:p.name,effect:p.effect,color:RACES[race].color,point,subregion:point[1]<240?'north':point[1]>550?'south':point[0]<600?'west':'east',fief:old.fief||name.split(' ')[0]+' 자치주',district:old.capital?old.capital+' 개발구':name.split(' ')[0]+' 산업구',capital:old.capital||name.split(' ')[0],lore:overlord+'의 통제를 받는 종속국. 지방 개발구의 빈 땅을 임차해 사업을 시작합니다.',population:{[race]:65,human:race==='human'?65:20,other:15}};
 }
+// Rank table from the 2026-09-28 balance patch: each rank asks for the output of the facility the previous rank opened.
+// The quarry is in no unlock list, so it is a starting facility. Length 33 is part of the save format.
 export const RANKS=[
  ['농노',0,[],[]],
- ['등록 농노',35,[['produced:water',12,'물 생산'],['produced:grain',12,'밀 생산']],[]],
- ['개간 농노',60,[['contracts',2,'영주 납품'],['produced:wood',24,'목재 생산']],[]],
- ['계약 농노',100,[['produced:grain',56,'밀 생산'],['expansions',1,'개간지 확장']],[]],
- ['준자유민',180,[['debtFree',1,'몸값 채무 청산'],['contracts',3,'영주 납품']],[]],
- ['임차 사업주',400,[['family',1,'가족 구출'],['revenue',1800,'누적 판매 수입']],[]],
- ['등록 사업주',80,[['contracts',4,'납품 계약'],['revenue',2400,'판매 수입']],['quarry']],
- ['지역 공급자',100,[['produced:wood',80,'목재 생산'],['produced:grain',120,'밀 생산']],['sawmill','depot']],
- ['제조 허가업자',150,[['produced:plank',24,'판재 생산'],['contracts',6,'납품 계약']],['mill','reservoir']],
- ['지역 납품업자',110,[['produced:flour',20,'밀가루 생산'],['revenue',4000,'교역 수입']],['bakery','clinic']],
- ['공인 계약업자',140,[['sold:bread',35,'빵 판매'],['contracts',8,'납품 계약']],['stable']],
- ['개척 사업자',180,[['expansions',2,'부지 확장'],['produced:plank',60,'판재 생산']],['generator','dwarfhouse','spirithouse']],
- ['동력 제조업자',220,[['power',1,'동력 가동'],['produced:plank',100,'판재 생산']],['workshop','windturbine']],
- ['법인 대표',260,[['produced:gear',8,'부품 생산'],['family',1,'가족 구출']],['logistics','ironmine','coalpit','titanhouse','centaurhouse']],
- ['중공업 사업자',320,[['produced:iron',16,'철광석 생산'],['contracts',3,'납품 계약'],['expansions',2,'부지 확장']],['smelter','steamworks']],
- ['에너지 사업자',380,[['produced:steel',18,'강철 생산'],['debtFree',1,'채무 청산']],['oilpump','refinery']],
- ['산업단지 운영자',450,[['produced:fuel',12,'연료 생산'],['sites',2,'운영 거점']],['chemical','manaextractor']],
- ['정밀 제조업자',520,[['produced:polymer',18,'합성 소재 생산'],['produced:mana',8,'마력 결정 생산']],['electronics','magetower']],
- ['광역 투자자',650,[['produced:circuit',12,'회로 생산'],['deliveries',3,'지역 간 운송']],['station','rail']],
- ['자동차 제조사',800,[['railRoutes',1,'철도 운송망'],['produced:steel',60,'강철 생산']],['automotive']],
- ['기술 기업군',1000,[['produced:car',4,'자동차 생산'],['contracts',6,'납품 계약']],['laboratory','hospital']],
- ['기반시설 운영자',1200,[['produced:medicine',12,'의약품 생산'],['sites',3,'운영 거점']],['arcanepower','battery','leyrelay']],
- ['개발구 운영권자',1500,[['revenue',16000,'교역 수입'],['deliveries',12,'지역 간 운송']],['bank','barracks']],
- ['치안권 보유자',1800,[['defense',2,'경비대 편성'],['produced:medicine',30,'의약품 생산']],[]],
- ['재정 운영권자',2200,[['investment',2,'산업 투자'],['contracts',9,'납품 계약']],[]],
- ['자치구 대표',2800,[['sites',4,'운영 거점'],['support',65,'주민 지지'],['debtFree',1,'채무 청산']],[]],
- ['자치정부 수장',3400,[['defense',4,'경비대 편성'],['railRoutes',2,'철도 운송망'],['support',70,'주민 지지']],[]],
- ['독립 선언국',4500,[['recognition',2,'외교 지지국'],['support',75,'주민 지지'],['produced:car',24,'자동차 생산']],[]],
- ['승인 독립국',5500,[['recognition',4,'외교 지지국'],['defense',6,'방위대 편성'],['deliveries',30,'지역 간 운송']],[]],
- ['지역 강국',7500,[['sites',5,'운영 거점'],['revenue',60000,'교역 수입'],['investment',4,'산업 투자']],[]],
- ['다지역 연방',10000,[['territories',3,'자치권 확보 지역'],['support',75,'주민 지지']],[]],
- ['열강',14000,[['sites',7,'운영 거점'],['recognition',8,'외교 지지국'],['produced:car',80,'자동차 생산']],[]],
- ['패권국',20000,[['territories',5,'자치권 확보 지역'],['revenue',160000,'교역 수입'],['defense',12,'방위대 편성']],[]]
+ ['등록 농노',35,[['produced:water',12,'물 생산'],['produced:grain',12,'밀 생산']],['sawmill']],
+ ['개간 농노',60,[['produced:plank',12,'판재 생산'],['contracts',2,'영주 납품']],['mill','smokehouse']],
+ ['계약 농노',100,[['produced:flour',12,'밀가루 생산'],['expansions',1,'개간지 확장']],['bakery','cottonfield']],
+ ['준자유민',160,[['sold:bread',10,'빵 판매'],['debtFree',1,'몸값 채무 청산']],['herbgarden','clinic']],
+ ['임차 사업주',250,[['family',1,'가족 구출'],['produced:herb',8,'약초 생산']],['weaver','depot']],
+ ['등록 사업주',300,[['produced:cloth',8,'직물 생산'],['revenue',2400,'누적 판매 수입']],['henhouse','marketplace']],
+ ['지역 공급자',350,[['produced:egg',20,'달걀 생산'],['contracts',4,'납품 계약']],['confectionery','reservoir']],
+ ['제조 허가업자',400,[['produced:cake',10,'케이크 생산'],['contracts',6,'납품 계약']],['kiln','stable']],
+ ['지역 납품업자',500,[['produced:brick',20,'벽돌 생산'],['revenue',6000,'교역 수입']],['tailor','glassworks']],
+ ['공인 계약업자',600,[['produced:workwear',8,'작업복 생산'],['produced:glass',8,'유리 생산'],['contracts',8,'납품 계약']],['watermill','dwarfhouse','spirithouse']],
+ ['개척 사업자',700,[['expansions',2,'부지 확장'],['produced:plank',120,'판재 생산']],['generator','workshop']],
+ ['동력 제조업자',850,[['power',1,'동력 가동'],['produced:gear',8,'부품 생산']],['windturbine','logistics']],
+ ['법인 대표',1000,[['automatic',1,'자동 물류 가동'],['revenue',20000,'교역 수입']],['ironmine','coalpit','titanhouse','centaurhouse']],
+ ['중공업 사업자',1200,[['produced:iron',16,'철광석 생산'],['produced:coal',16,'석탄 생산'],['expansions',3,'부지 확장']],['smelter','steamworks','wardpost']],
+ ['에너지 사업자',1450,[['produced:steel',18,'강철 생산'],['debtFree',1,'채무 청산']],['oilpump','refinery','coppermine']],
+ ['산업단지 운영자',1700,[['produced:fuel',12,'연료 생산'],['produced:copper',16,'구리광석 생산'],['sites',2,'운영 거점']],['chemical','manaextractor','wiremill']],
+ ['정밀 제조업자',2000,[['produced:polymer',18,'합성 소재 생산'],['produced:wire',12,'전선 생산'],['produced:mana',8,'마력 결정 생산']],['electronics','magetower','cementworks']],
+ ['광역 투자자',2400,[['produced:circuit',12,'회로 생산'],['produced:concrete',12,'콘크리트 생산'],['deliveries',3,'지역 간 운송']],['station','rail','cannery']],
+ ['자동차 제조사',2800,[['railRoutes',1,'철도 운송망'],['produced:canned',12,'통조림 생산']],['automotive']],
+ ['기술 기업군',3300,[['produced:car',6,'자동차 생산'],['contracts',12,'납품 계약']],['laboratory','hospital']],
+ ['기반시설 운영자',3800,[['produced:medicine',24,'의약품 생산'],['sites',3,'운영 거점']],['arcanepower','battery','leyrelay']],
+ ['개발구 운영권자',4400,[['revenue',200000,'교역 수입'],['deliveries',12,'지역 간 운송']],['bank','barracks']],
+ ['치안권 보유자',5000,[['defense',2,'경비대 편성'],['produced:medicine',60,'의약품 생산']],['fortress','lampworks']],
+ ['재정 운영권자',5800,[['investment',2,'산업 투자'],['produced:lamp',24,'마력등 생산'],['contracts',16,'납품 계약']],['engineworks']],
+ ['자치구 대표',6700,[['sites',4,'운영 거점'],['support',65,'주민 지지'],['produced:engine',10,'마력 기관 생산']],['mithrilforge']],
+ ['자치정부 수장',7700,[['defense',4,'경비대 편성'],['railRoutes',2,'철도 운송망'],['produced:mithril',10,'미스릴 강 생산']],['parliament']],
+ ['독립 선언국',8800,[['recognition',2,'외교 지지국'],['support',70,'주민 지지'],['building:parliament',1,'의사당 건립']],['shipyard']],
+ ['승인 독립국',10000,[['recognition',4,'외교 지지국'],['produced:airship',3,'비공정 건조'],['deliveries',30,'지역 간 운송']],['airdock']],
+ ['지역 강국',12500,[['sites',5,'운영 거점'],['investment',4,'산업 투자'],['building:fortress',2,'방위 요새'],['revenue',700000,'교역 수입']],['blastfurnace']],
+ ['다지역 연방',15000,[['territories',3,'자치권 확보 지역'],['support',75,'주민 지지'],['produced:car',80,'자동차 생산']],['assemblyline']],
+ ['열강',18000,[['sites',6,'운영 거점'],['recognition',6,'외교 지지국'],['produced:airship',10,'비공정 건조']],['exchange']],
+ ['패권국',21000,[['territories',5,'자치권 확보 지역'],['revenue',1000000,'교역 수입'],['defense',10,'방위대 편성'],['produced:car',120,'자동차 생산']],[]]
 ].map(([name,fee,requirements,unlocks],id)=>({id,name,fee,requirements,unlocks}));
 export const unlockRank=type=>RANKS.find(r=>r.unlocks.includes(type))?.id||0;

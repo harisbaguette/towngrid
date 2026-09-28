@@ -1,0 +1,202 @@
+{
+ "titleClicksUntilHome": 0,
+ "newGameMs": 154,
+ "initialToast": [
+  "밝은 경계 안의 빈 칸에 창고를 놓으세요."
+ ],
+ "afterWarehouse": {
+  "facilityCardOpen": true,
+  "tutorialVisible": false
+ },
+ "tutorial": [
+  {
+   "step": "주민 주택",
+   "tutorialVisibleBefore": false,
+   "hadToCloseFacilityCard": true,
+   "tutorialButtonFound": true,
+   "built": true
+  },
+  {
+   "step": "우물",
+   "tutorialVisibleBefore": false,
+   "hadToCloseFacilityCard": true,
+   "tutorialButtonFound": true,
+   "built": true
+  },
+  {
+   "step": "밀밭",
+   "tutorialVisibleBefore": false,
+   "hadToCloseFacilityCard": true,
+   "tutorialButtonFound": true,
+   "built": true
+  },
+  {
+   "step": "벌목장",
+   "tutorialVisibleBefore": false,
+   "hadToCloseFacilityCard": true,
+   "tutorialButtonFound": true,
+   "built": true
+  }
+ ],
+ "afterBuild": {
+  "t": 2,
+  "rank": 0,
+  "money": 765,
+  "contracts": 0,
+  "stock": {
+   "wood": 36,
+   "water": 16,
+   "grain": 8,
+   "stone": 25
+  },
+  "buildings": [
+   "warehouse:운반 중",
+   "house:정상 운영",
+   "well:생산 중",
+   "field:물 대기",
+   "lumber:생산 중"
+  ],
+  "workers": 1,
+  "owned": 64
+ },
+ "contractReadyAt": {
+  "t": 33,
+  "rank": 0,
+  "money": 765,
+  "contracts": 0,
+  "stock": {
+   "wood": 39,
+   "water": 22,
+   "grain": 12,
+   "stone": 25
+  },
+  "buildings": [
+   "warehouse:운반 중",
+   "house:정상 운영",
+   "well:생산 중",
+   "field:생산 중",
+   "lumber:생산 중"
+  ],
+  "workers": 1,
+  "owned": 64,
+  "ui": {
+   "tutorialText": [
+    "×\n6 / 7\n첫 납품\n\n창고에 모인 재고로 납품 계약을 완료하세요.\n\n신분과 권한 열기"
+   ],
+   "tutorialCard": true,
+   "facilityCard": false,
+   "tile": false,
+   "operationsCard": false
+  },
+  "tutorialButtonOpenedDialog": true
+ },
+ "contract": {
+  "after": {
+   "t": 34,
+   "rank": 0,
+   "money": 911,
+   "contracts": 1,
+   "stock": {
+    "wood": 39,
+    "water": 22,
+    "grain": 0,
+    "stone": 25
+   },
+   "buildings": [
+    "warehouse:운반 중",
+    "house:정상 운영",
+    "well:생산 중",
+    "field:생산 중",
+    "lumber:생산 중"
+   ],
+   "workers": 1,
+   "owned": 64
+  }
+ },
+ "rank1": {
+  "state": {
+   "t": 50,
+   "rank": 1,
+   "money": 876,
+   "contracts": 1,
+   "stock": {
+    "wood": 42,
+    "water": 26,
+    "grain": 3,
+    "stone": 25
+   },
+   "buildings": [
+    "warehouse:운반 중",
+    "house:정상 운영",
+    "well:생산 중",
+    "field:생산 중",
+    "lumber:생산 중"
+   ],
+   "workers": 1,
+   "owned": 64
+  },
+  "tutorialCard": false,
+  "operationsCard": false,
+  "promotionReadyChip": false
+ },
+ "market": {
+  "exportStatus": "수출길 연결됨 · 마차 0/3대 운행 중",
+  "rows": 19,
+  "moneyDelta": 333
+ },
+ "expand": {
+  "tilePanel": true,
+  "expandButton": 1,
+  "ownedAfter": 80,
+  "toasts": [
+   "새로운 땅 16칸을 확보했습니다.",
+   "목재 42개 수출 완료 · +333G",
+   "목재 42개 수출 출발 · 관문 도착 시 +333G",
+   "등록 농노 승급"
+  ]
+ },
+ "firstEvent": {
+  "t": 191,
+  "events": [
+   "storm"
+  ],
+  "broken": [
+   "well"
+  ],
+  "rank": 1,
+  "bottleneck": [],
+  "healthAlert": []
+ },
+ "phone": {
+  "overlaps": [],
+  "offscreen": []
+ },
+ "quota": {
+  "chars": 869001,
+  "encodeMs": 14,
+  "writes": [
+   "save ok",
+   "save+recovery ok",
+   "backup ok"
+  ],
+  "persistMs": 28
+ },
+ "mainFrameNavigations": 3,
+ "errors": [],
+ "consoleErrors": [],
+ "failedRequests": [],
+ "steps": [
+  "screenshot 01-home.png",
+  "screenshot 02-world-map.png",
+  "screenshot 03-new-game.png",
+  "screenshot 04-after-warehouse.png",
+  "screenshot 05-five-buildings.png",
+  "screenshot 06a-contract-ready.png",
+  "screenshot 06-goals-dialog.png",
+  "screenshot 07-rank1-hud.png",
+  "screenshot 08-market.png",
+  "screenshot 09-unowned-tile.png",
+  "screenshot 10-after-first-event.png",
+  "screenshot 11-phone-hud.png"
+ ]
+}

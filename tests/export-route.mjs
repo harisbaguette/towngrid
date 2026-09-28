@@ -27,8 +27,12 @@ run(s,12);assert.equal(s.shipments.length,0,'carts come back and free their slot
 assert.equal(s.demolish(3,EXPORT_GATE.z).ok,false);assert.ok(s.roads.has('3,'+EXPORT_GATE.z));
 s.money=5000;assert.ok(s.expand(1,2).ok);assert.match(s.canBuild('house',5,EXPORT_GATE.z,true),/수출길/);
 
-// Blocking the only way out stops sales without losing stock.
-const blocked=fresh();blocked.build('warehouse',10,12);blocked.build('house',8,EXPORT_GATE.z,true);assert.equal(blocked.exportStatus().connected,false);const before=blocked.stock.wood;assert.equal(blocked.sell('wood',5).ok,false);assert.equal(blocked.stock.wood,before);
+// A building may not cut the only way out (audit X1); roads may still go there.
+const guard=fresh();guard.build('warehouse',10,12);assert.match(guard.canBuild('house',8,EXPORT_GATE.z,true),/수출길을 막는/);assert.equal(guard.build('house',8,EXPORT_GATE.z,true).ok,false);assert.equal(guard.canBuild('house',9,9,true),null);
+// An older save can still hold a building there: sales stop without losing stock, and auto-sale says so once.
+const oldBlock=guard.save();oldBlock.buildings.push({...structuredClone(oldBlock.buildings[0]),id:oldBlock.nextId++,type:'house',x:8,z:EXPORT_GATE.z});
+const blocked=new Simulation('river',oldBlock);blocked.nextEvent=1e9;blocked.autoSell={};assert.equal(blocked.exportStatus().connected,false);const before=blocked.stock.wood;assert.equal(blocked.sell('wood',5).ok,false);assert.equal(blocked.stock.wood,before);
+blocked.stock.wood=200;blocked.autoSell={wood:true};const n0=blocked.notices.length;run(blocked,30);assert.equal(blocked.notices.slice(n0).filter(n=>n.text.startsWith('자동 판매 멈춤')).length,1,'blocked auto-sale warns once');
 blocked.demolish(8,EXPORT_GATE.z);assert.equal(blocked.exportStatus().connected,true);
 
 // Older saves without the road get it back, clearing any tree on it.

@@ -6,7 +6,7 @@ import {startRaid} from '../src/app/game/encounters.js';
 const run=(s,t)=>{for(let i=0;i<t*4;i++)s.tick(.25);};
 const s=new Simulation();s.rank=12;s.money=5000;s.nextEvent=1e9;s.autoSell={};
 for(const [type,x,z]of [['warehouse',10,13],['house',8,13],['well',10,10],['field',11,10],['lumber',10,8],['mill',13,10],['bakery',13,12]])assert.ok(s.build(type,x,z).ok,type);
-const home=s.buildings.find(b=>b.type==='house');s.stock.wood+=6;assert.ok(s.upgrade(home.id).ok&&s.upgrade(home.id).ok&&s.workers.length===3,'house upgrades add residents');
+const home=s.buildings.find(b=>b.type==='house');s.stock.wood+=6;s.stock.brick+=3;assert.ok(s.upgrade(home.id).ok&&s.upgrade(home.id).ok&&s.workers.length===3,'house upgrades add residents');
 run(s,180);assert.ok(s.logisticsStats.direct>0,'factory-to-factory deliveries occur');assert.ok(s.produced.bread>0,'bread chain completes');
 const carrying=s.workers.find(w=>w.task?.carried);assert.ok(carrying,'cargo is physically in transit');
 const before=encodeSave(s.save());const restored=new Simulation(s.region,decodeSave(before));assert.equal(encodeSave(restored.save()).split('"game":')[1],before.split('"game":')[1]);
@@ -26,5 +26,5 @@ const c=new Campaign();const state=c.spawnState('estern','강변 공국');assert
 // Defense is local: absent guards/wards cannot damage distant attackers merely through a scalar.
 const battle=createShowcase();battle.nextEvent=1e9;startRaid(battle);const hp=battle.attackers[0].hp;battle.attackers.forEach(w=>{w.delay=5;});run(battle,1);assert.equal(battle.attackers[0].hp,hp);assert.ok(battle.mobilize().ok);assert.equal(battle.guards.length>=2,true);run(battle,65);assert.ok(battle.raid.finished);assert.ok(battle.raid.defeated>0,'visible guards intercept attackers');
 // Seven new rights trials are actual requirements rather than decoration.
-s.rank=8;s.money=1e6;s.produced.plank=100;s.contracts=20;s.produced.flour=100;s.totalRevenue=10000;s.logisticsStats.direct=0;assert.equal(s.promotion().ready,false);s.logisticsStats.direct=12;assert.equal(s.promotion().ready,true);
+s.rank=8;s.money=1e6;s.produced.plank=100;s.contracts=20;s.produced.flour=100;s.produced.brick=100;s.totalRevenue=10000;s.logisticsStats.direct=0;assert.equal(s.promotion().ready,false);s.logisticsStats.direct=12;assert.equal(s.promotion().ready,true);
 console.log(JSON.stringify({result:'PASS',direct:s.logisticsStats.direct,bread:restored.produced.bread,market:{normal,saturated},family:family.family,split:state.provinceIds,raid:{defeated:battle.raid.defeated,damage:battle.raid.damage},checks:['physical cargo conservation','in-flight save round trip','direct supply chain','market saturation/recovery','persistent infection and care','five-step family rescue','territorial split with real border costs','local defenders','promotion trial gate']},null,2));

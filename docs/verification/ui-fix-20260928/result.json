@@ -1,0 +1,183 @@
+{
+ "W1": [
+  {
+   "after": "warehouse",
+   "tutorial": true,
+   "facilityCard": false
+  },
+  {
+   "after": "house",
+   "buttonFound": true,
+   "built": true,
+   "tutorial": true,
+   "facilityCard": false,
+   "text": "물을 공급하세요"
+  },
+  {
+   "after": "well",
+   "buttonFound": true,
+   "built": true,
+   "tutorial": true,
+   "facilityCard": false,
+   "text": "밀을 생산하세요"
+  },
+  {
+   "after": "field",
+   "buttonFound": true,
+   "built": true,
+   "tutorial": true,
+   "facilityCard": false,
+   "text": "목재를 확보하세요"
+  },
+  {
+   "after": "lumber",
+   "buttonFound": true,
+   "built": true,
+   "tutorial": true,
+   "facilityCard": false,
+   "text": "첫 납품"
+  }
+ ],
+ "H3": {
+  "upgrade": {
+   "disabled": true,
+   "text": "생산 개선 +30%\n90G · 판재 0/3 · 등록 농노 승급 후"
+  },
+  "specialize": {
+   "disabled": true,
+   "text": "판재 · 등록 농노 승급 후"
+  },
+  "tutorialWithCard": true
+ },
+ "M2": {
+  "rows": 8,
+  "names": [
+   "목재",
+   "석재",
+   "물",
+   "밀",
+   "빵",
+   "생선",
+   "훈제 생선",
+   "케이크"
+  ],
+  "more": [
+   "잠긴 품목 28개 보기"
+  ]
+ },
+ "contractReady": {
+  "tutorial": "첫 납품"
+ },
+ "H8": {
+  "stock": 12,
+  "available": 12,
+  "need": 12,
+  "disabled": false
+ },
+ "H7": [
+  {
+   "gauge": 89,
+   "ready": false,
+   "money": 1206,
+   "fee": 35
+  },
+  {
+   "gauge": 100,
+   "ready": true,
+   "money": 1206,
+   "fee": 35
+  },
+  {
+   "gauge": 63,
+   "ready": false,
+   "money": 1171,
+   "fee": 60
+  }
+ ],
+ "U1": {
+  "rank": 1,
+  "tutorial": false,
+  "operations": true,
+  "nextGoal": [
+   "개간 농노\n판재 생산 0/12"
+  ]
+ },
+ "buildMenu": [
+  {
+   "tab": "기초",
+   "items": 6,
+   "scrollable": false
+  },
+  {
+   "tab": "주거",
+   "items": 3,
+   "scrollable": false
+  },
+  {
+   "tab": "농축산",
+   "items": 7,
+   "scrollable": false
+  },
+  {
+   "tab": "가공",
+   "items": 9,
+   "scrollable": true
+  },
+  {
+   "tab": "중공업",
+   "items": 14,
+   "scrollable": true
+  },
+  {
+   "tab": "동력·마법",
+   "items": 8,
+   "scrollable": true
+  },
+  {
+   "tab": "첨단",
+   "items": 8,
+   "scrollable": true
+  },
+  {
+   "tab": "운송",
+   "items": 4,
+   "scrollable": false
+  },
+  {
+   "tab": "도시",
+   "items": 8,
+   "scrollable": true
+  }
+ ],
+ "buildMenuWheelScroll": 240,
+ "X2": {
+  "cutAt": {
+   "stubbed": true
+  },
+  "connected": false,
+  "card": [
+   "수출길 막힘"
+  ],
+  "warehouseMarker": {
+   "fault": true,
+   "label": "창고 · 수출길 막힘"
+  }
+ },
+ "H6": "01\n\n창고부터 지으세요.\n빈 칸을 누르고 건설을 선택하세요. 각 건물은 1칸입니다. 그다음 주거 탭에서 주민 주택을 지으면 주민이 나와 자동으로 운반합니다. 주택은 처음에 1명이 살고, 개선할 때마다 1명씩 늘어 최대 3명입니다.\n\n02\n\n생산 흐름을 연결하세요.\n우물 → 밀밭 → 제분소 → 빵집. 벌목장이 장작을 공급합니다.\n\n03\n\n물·그늘·오염·바람을 확인하세요.\n담수 두 칸 안의 밀밭은 물 운반이 필요 없습니다. 공장의 오염과 높은 건물의 그늘은 농업을 늦추고, 제분소·풍력기는 바람이 트여야 빠릅니다.\n\n04\n\n도로로 운반하고 묶음 출하하세요.\n흙길 이동은 70% 빠릅니다. 자동 판매는 원료를 남기고 10개씩 판매합니다. 제철·정유·회로·자동차 산업까지 발전합니다. 모든 진영이 고산업까지 가지만 일부 작업장은 전담 종족 주민이 있어야 가동합니다.\n\n드워프 전담: 기계 공장·제철소·증기 기계공장·미스릴 정련소·용광로\n티탄은 마탑·전자 공장·제약 공장·종합 병원·마력등 공방·마력 기관 공장에 들어가지 못합니다\n05\n\n땅을 넓히고 위기에 대비하세요.\n인접한 16칸을 확보하거나 세계 지도에서 다른 거점으로 진출합니다. 파손 시설을 선택하면 수리할 수 있습니다.\n\n이동: 왼쪽·오른쪽 드래그 · 확대: 휠\n90° 회전: Q·E / 회전 버튼 · 네 방향 쿼터뷰\n건설 목록: B · 일시정지: Space · 취소: Esc\n모바일: 한 손가락 이동 · 두 손가락 확대\n빈 칸 → 여기에 건설 → 시설 선택\n배치 모드: 선택한 칸을 다시 터치",
+ "M1": {
+  "overlaps": [],
+  "toastTop": 677,
+  "stripBottom": 274
+ },
+ "phoneFacility": {
+  "overlaps": [],
+  "card": true,
+  "toasters": [
+   "top --front-toast-height: 55px; --width: 356px; --gap: 14px; --offset-top: 284px; --offset-right: 24px; --offset-bottom: 24px; --offset-left: 24px; --mobile-offset-top: 284px; --mobile-offset-right: 16px; --mobile-offset-bottom: 16px; --mobile-offset-left: 16px;"
+  ]
+ },
+ "errors": [],
+ "consoleErrors": [],
+ "shadowWarning": [],
+ "failed": []
+}

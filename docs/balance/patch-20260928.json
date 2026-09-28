@@ -1,0 +1,2279 @@
+{
+ "meta": {
+  "id": "balance-20260928",
+  "date": "2026-09-28",
+  "preview": "node scripts/balance-report.mjs --patch docs/balance/patch-20260928.json",
+  "rankIndex": "단계 번호 = 코드의 rank 값(농노 0 ~ 패권국 32)",
+  "saveCompat": "자원·시설 ID는 추가만 하고 삭제·개명하지 않는다. RANKS 길이 33 유지. 저장 version 8 유지.",
+  "mergeRule": "buildings.change의 inputs·materials는 통째로 교체한다. 나머지 필드는 덮어쓴다. 빈 객체는 데이터 변경 없음(해금 이동만 ranks에 있음).",
+  "newFields": {
+   "final": "자원: 최종 소비재 표시. 게임 동작 없음, balance-report의 소비처 판정용",
+   "irrigable": "시설: M3 물가 관개 대상",
+   "nearWater": "시설: M2 물가 반경(칸)",
+   "wardRadius": "시설: M4 결계 반경(칸)",
+   "transitFactor": "시설: M5 운송 시간 배율",
+   "marketRecovery": "시설: M6 시세 회복 배율",
+   "unrestRelief": "시설: M7 하루 불만 감소량",
+   "exportCarts": "시설: M8 수출 마차 추가 대수"
+  }
+ },
+ "resources": {
+  "add": {
+   "cotton": {
+    "name": "목화",
+    "color": "#f1ece0",
+    "price": 13
+   },
+   "herb": {
+    "name": "약초",
+    "color": "#78b46a",
+    "price": 20
+   },
+   "egg": {
+    "name": "달걀",
+    "color": "#f3dfb4",
+    "price": 25
+   },
+   "smokedfish": {
+    "name": "훈제 생선",
+    "color": "#b9804f",
+    "price": 51
+   },
+   "cloth": {
+    "name": "직물",
+    "color": "#d9c9ec",
+    "price": 79
+   },
+   "cake": {
+    "name": "케이크",
+    "color": "#f0a7b8",
+    "price": 200,
+    "final": true
+   },
+   "brick": {
+    "name": "벽돌",
+    "color": "#b8583e",
+    "price": 41
+   },
+   "workwear": {
+    "name": "작업복",
+    "color": "#5f7fa8",
+    "price": 235,
+    "final": true
+   },
+   "glass": {
+    "name": "유리",
+    "color": "#a9dbe6",
+    "price": 88
+   },
+   "copper": {
+    "name": "구리광석",
+    "color": "#c07a4a",
+    "price": 19
+   },
+   "wire": {
+    "name": "구리 전선",
+    "color": "#d9964f",
+    "price": 90
+   },
+   "concrete": {
+    "name": "콘크리트",
+    "color": "#b7b3aa",
+    "price": 105
+   },
+   "canned": {
+    "name": "통조림",
+    "color": "#9aa9b3",
+    "price": 185
+   },
+   "lamp": {
+    "name": "마력등",
+    "color": "#f4d97a",
+    "price": 400,
+    "final": true
+   },
+   "engine": {
+    "name": "마력 기관",
+    "color": "#8c7ad8",
+    "price": 1800
+   },
+   "mithril": {
+    "name": "미스릴 강",
+    "color": "#c9e3f2",
+    "price": 1260
+   },
+   "airship": {
+    "name": "비공정",
+    "color": "#e3b04b",
+    "price": 12000,
+    "final": true
+   }
+  },
+  "change": {
+   "fish": {
+    "price": 12
+   },
+   "gear": {
+    "price": 120
+   },
+   "steel": {
+    "price": 105
+   },
+   "fuel": {
+    "price": 75
+   },
+   "polymer": {
+    "price": 95
+   },
+   "circuit": {
+    "price": 355
+   },
+   "car": {
+    "price": 2200,
+    "final": true
+   },
+   "medicine": {
+    "price": 350
+   },
+   "bread": {
+    "final": true
+   }
+  }
+ },
+ "resourceReasons": {
+  "fish": "무투입 원료인데 타일당 분당 가치가 339G로 빵(279G)보다 높아 가공할 이유를 없앤다. 12G면 169G로 목재(166G)와 같은 원료 등급이 된다.",
+  "gear": "가공 3단계(판재·석재→부품) 목표 밀도 300G에 맞춘다. 증기 기계공장 경로는 상위 경로가 된다.",
+  "steel": "중공업 목표 밀도 420G에 맞춘다. 현재 260G라 빵집(279G)보다 낮아 중공업으로 갈 이유가 승급 조건뿐이다.",
+  "fuel": "목표 밀도 460G. 현재 281G로 빵과 같다.",
+  "polymer": "목표 밀도 470G. 현재 284G.",
+  "circuit": "첨단 목표 밀도 680G. 현재 362G.",
+  "car": "자동차 공장이 원료 사슬보다 타일당 가치가 낮다(가공 우위 0.78). 2,200G에서 1.15 이상이 된다.",
+  "medicine": "새 투입(약초·유리)을 넣은 사슬 기준 목표 밀도 760G.",
+  "bread": "최종 소비재 표시만 추가(판매·복지 협약·민생 지원에 쓰임)."
+ },
+ "buildings": {
+  "add": {
+   "cottonfield": {
+    "name": "목화밭",
+    "group": "farm",
+    "cost": 55,
+    "materials": {
+     "wood": 3
+    },
+    "period": 18,
+    "inputs": {
+     "water": 1
+    },
+    "output": "cotton",
+    "amount": 3,
+    "irrigable": true,
+    "description": "물을 받아 목화를 기릅니다. 강이나 급수탑 옆이면 물 운반 없이 자랍니다."
+   },
+   "herbgarden": {
+    "name": "약초원",
+    "group": "farm",
+    "cost": 70,
+    "materials": {
+     "wood": 4
+    },
+    "period": 20,
+    "inputs": {
+     "water": 1
+    },
+    "output": "herb",
+    "amount": 2,
+    "irrigable": true,
+    "description": "약초를 재배합니다. 진료소 치료와 결계 초소, 제약 공장에 쓰입니다."
+   },
+   "henhouse": {
+    "name": "양계장",
+    "group": "farm",
+    "cost": 120,
+    "materials": {
+     "plank": 4,
+     "stone": 2
+    },
+    "period": 20,
+    "inputs": {
+     "grain": 1,
+     "water": 1
+    },
+    "output": "egg",
+    "amount": 3,
+    "description": "밀과 물을 먹여 달걀을 얻습니다. 오염에 약합니다."
+   },
+   "smokehouse": {
+    "name": "훈제장",
+    "group": "craft",
+    "cost": 130,
+    "materials": {
+     "wood": 6,
+     "stone": 3
+    },
+    "period": 16,
+    "inputs": {
+     "fish": 2,
+     "wood": 1
+    },
+    "output": "smokedfish",
+    "amount": 2,
+    "description": "생선을 장작 연기로 훈제해 오래 두는 식품으로 만듭니다."
+   },
+   "weaver": {
+    "name": "방직소",
+    "group": "craft",
+    "cost": 160,
+    "materials": {
+     "plank": 4,
+     "stone": 2
+    },
+    "period": 20,
+    "inputs": {
+     "cotton": 3
+    },
+    "output": "cloth",
+    "amount": 2,
+    "description": "목화에서 실을 뽑아 직물을 짭니다."
+   },
+   "confectionery": {
+    "name": "제과점",
+    "group": "craft",
+    "cost": 260,
+    "materials": {
+     "plank": 5,
+     "stone": 4
+    },
+    "period": 24,
+    "inputs": {
+     "flour": 2,
+     "egg": 2
+    },
+    "output": "cake",
+    "amount": 2,
+    "description": "밀가루와 달걀로 케이크를 굽습니다. 초반 최고가 식품입니다."
+   },
+   "kiln": {
+    "name": "벽돌 가마",
+    "group": "craft",
+    "cost": 200,
+    "materials": {
+     "stone": 8,
+     "wood": 4
+    },
+    "period": 18,
+    "inputs": {
+     "stone": 2,
+     "wood": 1
+    },
+    "output": "brick",
+    "amount": 3,
+    "description": "석재를 구워 벽돌을 만듭니다. 3단계 개선과 중급 시설 건설에 쓰입니다. 연기가 한 칸 퍼집니다."
+   },
+   "tailor": {
+    "name": "봉제소",
+    "group": "craft",
+    "cost": 320,
+    "materials": {
+     "plank": 6,
+     "brick": 4
+    },
+    "period": 24,
+    "inputs": {
+     "cloth": 3
+    },
+    "output": "workwear",
+    "amount": 2,
+    "description": "직물로 작업복을 짓습니다. 경비대 편성에도 쓰입니다."
+   },
+   "glassworks": {
+    "name": "유리 공방",
+    "group": "craft",
+    "cost": 340,
+    "materials": {
+     "brick": 6,
+     "plank": 4
+    },
+    "period": 22,
+    "inputs": {
+     "stone": 2,
+     "wood": 2
+    },
+    "output": "glass",
+    "amount": 2,
+    "description": "석재를 장작 불로 녹여 유리를 만듭니다. 연기가 두 칸 퍼집니다."
+   },
+   "coppermine": {
+    "name": "구리 광산",
+    "group": "industry",
+    "cost": 400,
+    "materials": {
+     "brick": 6,
+     "gear": 2
+    },
+    "period": 18,
+    "output": "copper",
+    "amount": 3,
+    "description": "타일 광물량에 따라 구리광석을 캡니다."
+   },
+   "wiremill": {
+    "name": "전선 공장",
+    "group": "industry",
+    "cost": 1100,
+    "materials": {
+     "brick": 6,
+     "steel": 4,
+     "gear": 2
+    },
+    "period": 20,
+    "inputs": {
+     "copper": 2,
+     "coal": 1
+    },
+    "output": "wire",
+    "amount": 3,
+    "power": true,
+    "road": true,
+    "description": "구리를 녹여 전선을 뽑습니다. 회로와 마력 기관에 쓰입니다."
+   },
+   "cementworks": {
+    "name": "시멘트 공장",
+    "group": "industry",
+    "cost": 1200,
+    "materials": {
+     "brick": 8,
+     "steel": 4
+    },
+    "period": 24,
+    "inputs": {
+     "stone": 3,
+     "coal": 1,
+     "water": 1
+    },
+    "output": "concrete",
+    "amount": 3,
+    "power": true,
+    "road": true,
+    "description": "석재와 석탄으로 콘크리트를 만듭니다. 후반 시설의 건설 자재입니다."
+   },
+   "cannery": {
+    "name": "통조림 공장",
+    "group": "industry",
+    "cost": 1500,
+    "materials": {
+     "steel": 6,
+     "glass": 2,
+     "gear": 2
+    },
+    "period": 22,
+    "inputs": {
+     "smokedfish": 2,
+     "steel": 1
+    },
+    "output": "canned",
+    "amount": 4,
+    "power": true,
+    "road": true,
+    "description": "훈제 생선을 강철 캔에 담습니다. 방위 요새와 경비대 편성의 보급품입니다."
+   },
+   "lampworks": {
+    "name": "마력등 공방",
+    "group": "advanced",
+    "cost": 2600,
+    "materials": {
+     "steel": 6,
+     "glass": 6,
+     "concrete": 4
+    },
+    "period": 24,
+    "inputs": {
+     "glass": 1,
+     "wire": 1,
+     "mana": 1
+    },
+    "output": "lamp",
+    "amount": 2,
+    "power": true,
+    "road": true,
+    "description": "유리 등갓에 마력 결정과 전선을 넣어 마력등을 조립합니다."
+   },
+   "engineworks": {
+    "name": "마력 기관 공장",
+    "group": "advanced",
+    "cost": 4200,
+    "materials": {
+     "steel": 8,
+     "concrete": 6,
+     "circuit": 3
+    },
+    "period": 30,
+    "inputs": {
+     "gear": 2,
+     "wire": 2,
+     "mana": 1
+    },
+    "output": "engine",
+    "amount": 1,
+    "power": true,
+    "road": true,
+    "description": "부품과 전선에 마력 결정을 넣어 비공정용 마력 기관을 만듭니다."
+   },
+   "mithrilforge": {
+    "name": "미스릴 정련소",
+    "group": "advanced",
+    "cost": 4800,
+    "materials": {
+     "concrete": 8,
+     "steel": 8,
+     "circuit": 2
+    },
+    "period": 30,
+    "inputs": {
+     "steel": 2,
+     "mana": 2
+    },
+    "output": "mithril",
+    "amount": 1,
+    "power": true,
+    "road": true,
+    "description": "강철에 마력을 녹여 가볍고 단단한 미스릴 강을 만듭니다. 열기가 두 칸 퍼집니다."
+   },
+   "shipyard": {
+    "name": "비공정 조선소",
+    "group": "advanced",
+    "cost": 9000,
+    "materials": {
+     "concrete": 12,
+     "mithril": 4,
+     "circuit": 4
+    },
+    "period": 60,
+    "inputs": {
+     "engine": 2,
+     "mithril": 2,
+     "cloth": 4,
+     "fuel": 2
+    },
+    "output": "airship",
+    "amount": 1,
+    "power": true,
+    "road": true,
+    "description": "마력 기관·미스릴 선체·직물 기낭을 조립해 비공정을 띄웁니다."
+   },
+   "blastfurnace": {
+    "name": "용광로",
+    "group": "industry",
+    "cost": 3500,
+    "materials": {
+     "concrete": 8,
+     "steel": 6
+    },
+    "period": 30,
+    "inputs": {
+     "iron": 5,
+     "coal": 2
+    },
+    "output": "steel",
+    "amount": 6,
+    "power": true,
+    "road": true,
+    "description": "대형 고로에서 강철을 한 번에 여섯 개씩 뽑아 냅니다. 오염이 세 칸 퍼집니다."
+   },
+   "assemblyline": {
+    "name": "자동 조립 공장",
+    "group": "advanced",
+    "cost": 9500,
+    "materials": {
+     "concrete": 12,
+     "steel": 10,
+     "circuit": 6
+    },
+    "period": 45,
+    "inputs": {
+     "steel": 3,
+     "gear": 3,
+     "circuit": 2,
+     "polymer": 3,
+     "glass": 2
+    },
+    "output": "car",
+    "amount": 2,
+    "power": true,
+    "road": true,
+    "description": "컨베이어 조립 라인으로 자동차를 두 대씩 생산합니다. 같은 자동차를 더 적은 부품으로 만듭니다."
+   },
+   "watermill": {
+    "name": "물레방아",
+    "group": "energy",
+    "cost": 300,
+    "materials": {
+     "plank": 8,
+     "stone": 6
+    },
+    "period": 30,
+    "output": "power",
+    "amount": 1,
+    "nearWater": 2,
+    "description": "강이나 호수에서 두 칸 이내에 지으면 원료 없이 전력을 만듭니다."
+   },
+   "marketplace": {
+    "name": "장터",
+    "group": "civic",
+    "cost": 350,
+    "materials": {
+     "plank": 6,
+     "stone": 6
+    },
+    "unique": true,
+    "marketRecovery": 1.3,
+    "description": "상인이 모여 판매 후 떨어진 시세가 30% 빨리 회복됩니다."
+   },
+   "wardpost": {
+    "name": "결계 초소",
+    "group": "civic",
+    "cost": 450,
+    "materials": {
+     "brick": 6,
+     "plank": 4
+    },
+    "period": 30,
+    "inputs": {
+     "herb": 2
+    },
+    "output": "ward",
+    "amount": 1,
+    "wardRadius": 3,
+    "description": "약초를 태워 반경 3칸에 결계를 칩니다. 결계 안의 시설은 습격 피해를 받지 않고 들어온 습격자는 약해집니다. 결계가 유지되는 동안 마족의 전력 교란도 막습니다."
+   },
+   "fortress": {
+    "name": "방위 요새",
+    "group": "civic",
+    "cost": 2500,
+    "materials": {
+     "concrete": 10,
+     "steel": 6
+    },
+    "period": 30,
+    "inputs": {
+     "canned": 1,
+     "concrete": 1
+    },
+    "output": "ward",
+    "amount": 1,
+    "wardRadius": 5.5,
+    "description": "통조림과 콘크리트를 받으면 반경 5.5칸에 방어선을 칩니다. 방어선 안의 시설은 습격 피해를 받지 않고 들어온 습격자는 약해집니다. 방어선이 유지되는 동안 마족의 전력 교란도 막습니다."
+   },
+   "parliament": {
+    "name": "의사당",
+    "group": "civic",
+    "cost": 6000,
+    "materials": {
+     "concrete": 12,
+     "glass": 6,
+     "lamp": 4
+    },
+    "unique": true,
+    "unrestRelief": 2,
+    "description": "모든 거점의 불만이 매일 2씩 더 내려갑니다. 독립 선언의 조건입니다."
+   },
+   "airdock": {
+    "name": "비공정 선착장",
+    "group": "transport",
+    "cost": 5000,
+    "materials": {
+     "concrete": 8,
+     "steel": 6,
+     "engine": 2
+    },
+    "period": 30,
+    "inputs": {
+     "fuel": 2
+    },
+    "output": "transit",
+    "amount": 1,
+    "transitFactor": 0.6,
+    "unique": true,
+    "power": true,
+    "description": "양쪽 거점에 운송 가속 시설이 가동하면 트럭·철도 운송 시간이 40% 짧아집니다."
+   },
+   "exchange": {
+    "name": "대륙 거래소",
+    "group": "civic",
+    "cost": 8000,
+    "materials": {
+     "concrete": 10,
+     "glass": 6,
+     "mithril": 2
+    },
+    "unique": true,
+    "exportCarts": 2,
+    "description": "수출 마차가 2대 늘어 동시에 5대가 운행합니다."
+   }
+  },
+  "change": {
+   "electronics": {
+    "inputs": {
+     "wire": 2,
+     "mana": 1
+    },
+    "materials": {
+     "steel": 6,
+     "glass": 4,
+     "gear": 4
+    },
+    "cost": 1600
+   },
+   "automotive": {
+    "inputs": {
+     "steel": 2,
+     "gear": 2,
+     "circuit": 1,
+     "polymer": 2,
+     "glass": 1
+    },
+    "cost": 3000
+   },
+   "laboratory": {
+    "inputs": {
+     "water": 1,
+     "herb": 2,
+     "polymer": 1,
+     "glass": 1
+    },
+    "materials": {
+     "steel": 4,
+     "glass": 4,
+     "circuit": 3
+    },
+    "cost": 2000
+   },
+   "magetower": {
+    "materials": {
+     "brick": 6,
+     "steel": 4,
+     "glass": 2,
+     "circuit": 2
+    },
+    "wardRadius": 4.5,
+    "description": "마력 결정과 회로로 반경 4.5칸에 결계를 칩니다. 결계 안의 시설은 습격 피해를 받지 않고 들어온 습격자는 약해집니다. 결계가 유지되는 동안 마족의 전력 교란도 막습니다."
+   },
+   "leyrelay": {
+    "transitFactor": 0.8
+   },
+   "dock": {
+    "nearWater": 3
+   },
+   "field": {
+    "irrigable": true
+   },
+   "quarry": {},
+   "station": {
+    "materials": {
+     "steel": 8,
+     "concrete": 6,
+     "gear": 4
+    },
+    "cost": 1400
+   },
+   "hospital": {
+    "materials": {
+     "concrete": 6,
+     "glass": 4,
+     "circuit": 3
+    },
+    "cost": 1800
+   },
+   "bank": {
+    "materials": {
+     "concrete": 6,
+     "glass": 3,
+     "gear": 3
+    },
+    "cost": 1800
+   },
+   "barracks": {
+    "materials": {
+     "concrete": 8,
+     "steel": 6,
+     "gear": 3
+    },
+    "cost": 1900
+   },
+   "battery": {
+    "materials": {
+     "steel": 6,
+     "wire": 6,
+     "circuit": 3
+    },
+    "cost": 1400
+   },
+   "arcanepower": {
+    "materials": {
+     "steel": 8,
+     "wire": 4,
+     "circuit": 3
+    },
+    "cost": 1900
+   },
+   "smelter": {
+    "cost": 900
+   },
+   "refinery": {
+    "cost": 1000
+   },
+   "chemical": {
+    "cost": 1000
+   },
+   "ironmine": {
+    "cost": 380
+   },
+   "coalpit": {
+    "cost": 330
+   },
+   "manaextractor": {
+    "cost": 620
+   }
+  }
+ },
+ "buildingReasons": {
+  "electronics": "회로 원료를 강철에서 구리 전선으로 바꿔 구리 사슬에 소비처를 만든다. 유리 자재 소비.",
+  "automotive": "차창 유리 1 추가. 새 가격 기준 회수 시간을 동급 수준으로 맞춘다.",
+  "laboratory": "약초·유리 소비처. 순이익 1,008G/분(가공 우위 2.04)으로 튀던 값을 사슬 원가로 흡수한다.",
+  "magetower": "벽돌·유리 소비. 결계 반경을 코드 상수에서 데이터로 옮긴다(값 동일).",
+  "leyrelay": "운송 가속 배율을 데이터로 옮긴다(값 동일).",
+  "dock": "물가 조건을 데이터로 옮긴다(값 동일).",
+  "field": "관개 규칙을 데이터로 옮긴다(값 동일).",
+  "quarry": "해금을 6단계에서 시작 시설로 당긴다. 우물·주민 주택이 석재를 쓰는데 채석장이 6단계라 시작 석재 30개를 다 쓰면 수입도 막혀 멈춘다(수입은 생산 시설이 해금된 자원만 가능).",
+  "station": "콘크리트 소비.",
+  "hospital": "콘크리트·유리 소비.",
+  "bank": "콘크리트·유리 소비.",
+  "barracks": "콘크리트 소비.",
+  "battery": "구리 전선 소비.",
+  "arcanepower": "구리 전선 소비.",
+  "smelter": "강철 가격 인상 뒤 회수 시간을 3분대로 맞춘다.",
+  "refinery": "연료 가격 인상 뒤 회수 3분대.",
+  "chemical": "합성 소재 가격 인상 뒤 회수 3분대.",
+  "ironmine": "원료 시설 회수 3분대.",
+  "coalpit": "원료 시설 회수 3분대.",
+  "manaextractor": "원료 시설 회수 3분대."
+ },
+ "ranks": {
+  "table": [
+   {
+    "name": "농노",
+    "fee": 0,
+    "requirements": [],
+    "unlocks": [],
+    "id": 0
+   },
+   {
+    "name": "등록 농노",
+    "fee": 35,
+    "requirements": [
+     [
+      "produced:water",
+      12,
+      "물 생산"
+     ],
+     [
+      "produced:grain",
+      12,
+      "밀 생산"
+     ]
+    ],
+    "unlocks": [
+     "sawmill"
+    ],
+    "id": 1
+   },
+   {
+    "name": "개간 농노",
+    "fee": 60,
+    "requirements": [
+     [
+      "produced:plank",
+      12,
+      "판재 생산"
+     ],
+     [
+      "contracts",
+      2,
+      "영주 납품"
+     ]
+    ],
+    "unlocks": [
+     "mill",
+     "smokehouse"
+    ],
+    "id": 2
+   },
+   {
+    "name": "계약 농노",
+    "fee": 100,
+    "requirements": [
+     [
+      "produced:flour",
+      12,
+      "밀가루 생산"
+     ],
+     [
+      "expansions",
+      1,
+      "개간지 확장"
+     ]
+    ],
+    "unlocks": [
+     "bakery",
+     "cottonfield"
+    ],
+    "id": 3
+   },
+   {
+    "name": "준자유민",
+    "fee": 160,
+    "requirements": [
+     [
+      "sold:bread",
+      10,
+      "빵 판매"
+     ],
+     [
+      "debtFree",
+      1,
+      "몸값 채무 청산"
+     ]
+    ],
+    "unlocks": [
+     "herbgarden",
+     "clinic"
+    ],
+    "id": 4
+   },
+   {
+    "name": "임차 사업주",
+    "fee": 250,
+    "requirements": [
+     [
+      "family",
+      1,
+      "가족 구출"
+     ],
+     [
+      "produced:herb",
+      8,
+      "약초 생산"
+     ]
+    ],
+    "unlocks": [
+     "weaver",
+     "depot"
+    ],
+    "id": 5
+   },
+   {
+    "name": "등록 사업주",
+    "fee": 300,
+    "requirements": [
+     [
+      "produced:cloth",
+      8,
+      "직물 생산"
+     ],
+     [
+      "revenue",
+      2400,
+      "누적 판매 수입"
+     ]
+    ],
+    "unlocks": [
+     "henhouse",
+     "marketplace"
+    ],
+    "id": 6
+   },
+   {
+    "name": "지역 공급자",
+    "fee": 350,
+    "requirements": [
+     [
+      "produced:egg",
+      20,
+      "달걀 생산"
+     ],
+     [
+      "contracts",
+      4,
+      "납품 계약"
+     ]
+    ],
+    "unlocks": [
+     "confectionery",
+     "reservoir"
+    ],
+    "id": 7
+   },
+   {
+    "name": "제조 허가업자",
+    "fee": 400,
+    "requirements": [
+     [
+      "produced:cake",
+      10,
+      "케이크 생산"
+     ],
+     [
+      "contracts",
+      6,
+      "납품 계약"
+     ]
+    ],
+    "unlocks": [
+     "kiln",
+     "stable"
+    ],
+    "id": 8
+   },
+   {
+    "name": "지역 납품업자",
+    "fee": 500,
+    "requirements": [
+     [
+      "produced:brick",
+      20,
+      "벽돌 생산"
+     ],
+     [
+      "revenue",
+      6000,
+      "교역 수입"
+     ]
+    ],
+    "unlocks": [
+     "tailor",
+     "glassworks"
+    ],
+    "id": 9
+   },
+   {
+    "name": "공인 계약업자",
+    "fee": 600,
+    "requirements": [
+     [
+      "produced:workwear",
+      8,
+      "작업복 생산"
+     ],
+     [
+      "produced:glass",
+      8,
+      "유리 생산"
+     ],
+     [
+      "contracts",
+      8,
+      "납품 계약"
+     ]
+    ],
+    "unlocks": [
+     "watermill",
+     "dwarfhouse",
+     "spirithouse"
+    ],
+    "id": 10
+   },
+   {
+    "name": "개척 사업자",
+    "fee": 700,
+    "requirements": [
+     [
+      "expansions",
+      2,
+      "부지 확장"
+     ],
+     [
+      "produced:plank",
+      120,
+      "판재 생산"
+     ]
+    ],
+    "unlocks": [
+     "generator",
+     "workshop"
+    ],
+    "id": 11
+   },
+   {
+    "name": "동력 제조업자",
+    "fee": 850,
+    "requirements": [
+     [
+      "power",
+      1,
+      "동력 가동"
+     ],
+     [
+      "produced:gear",
+      8,
+      "부품 생산"
+     ]
+    ],
+    "unlocks": [
+     "windturbine",
+     "logistics"
+    ],
+    "id": 12
+   },
+   {
+    "name": "법인 대표",
+    "fee": 1000,
+    "requirements": [
+     [
+      "automatic",
+      1,
+      "자동 물류 가동"
+     ],
+     [
+      "revenue",
+      20000,
+      "교역 수입"
+     ]
+    ],
+    "unlocks": [
+     "ironmine",
+     "coalpit",
+     "titanhouse",
+     "centaurhouse"
+    ],
+    "id": 13
+   },
+   {
+    "name": "중공업 사업자",
+    "fee": 1200,
+    "requirements": [
+     [
+      "produced:iron",
+      16,
+      "철광석 생산"
+     ],
+     [
+      "produced:coal",
+      16,
+      "석탄 생산"
+     ],
+     [
+      "expansions",
+      3,
+      "부지 확장"
+     ]
+    ],
+    "unlocks": [
+     "smelter",
+     "steamworks",
+     "wardpost"
+    ],
+    "id": 14
+   },
+   {
+    "name": "에너지 사업자",
+    "fee": 1450,
+    "requirements": [
+     [
+      "produced:steel",
+      18,
+      "강철 생산"
+     ],
+     [
+      "debtFree",
+      1,
+      "채무 청산"
+     ]
+    ],
+    "unlocks": [
+     "oilpump",
+     "refinery",
+     "coppermine"
+    ],
+    "id": 15
+   },
+   {
+    "name": "산업단지 운영자",
+    "fee": 1700,
+    "requirements": [
+     [
+      "produced:fuel",
+      12,
+      "연료 생산"
+     ],
+     [
+      "produced:copper",
+      16,
+      "구리광석 생산"
+     ],
+     [
+      "sites",
+      2,
+      "운영 거점"
+     ]
+    ],
+    "unlocks": [
+     "chemical",
+     "manaextractor",
+     "wiremill"
+    ],
+    "id": 16
+   },
+   {
+    "name": "정밀 제조업자",
+    "fee": 2000,
+    "requirements": [
+     [
+      "produced:polymer",
+      18,
+      "합성 소재 생산"
+     ],
+     [
+      "produced:wire",
+      12,
+      "전선 생산"
+     ],
+     [
+      "produced:mana",
+      8,
+      "마력 결정 생산"
+     ]
+    ],
+    "unlocks": [
+     "electronics",
+     "magetower",
+     "cementworks"
+    ],
+    "id": 17
+   },
+   {
+    "name": "광역 투자자",
+    "fee": 2400,
+    "requirements": [
+     [
+      "produced:circuit",
+      12,
+      "회로 생산"
+     ],
+     [
+      "produced:concrete",
+      12,
+      "콘크리트 생산"
+     ],
+     [
+      "deliveries",
+      3,
+      "지역 간 운송"
+     ]
+    ],
+    "unlocks": [
+     "station",
+     "rail",
+     "cannery"
+    ],
+    "id": 18
+   },
+   {
+    "name": "자동차 제조사",
+    "fee": 2800,
+    "requirements": [
+     [
+      "railRoutes",
+      1,
+      "철도 운송망"
+     ],
+     [
+      "produced:canned",
+      12,
+      "통조림 생산"
+     ]
+    ],
+    "unlocks": [
+     "automotive"
+    ],
+    "id": 19
+   },
+   {
+    "name": "기술 기업군",
+    "fee": 3300,
+    "requirements": [
+     [
+      "produced:car",
+      6,
+      "자동차 생산"
+     ],
+     [
+      "contracts",
+      12,
+      "납품 계약"
+     ]
+    ],
+    "unlocks": [
+     "laboratory",
+     "hospital"
+    ],
+    "id": 20
+   },
+   {
+    "name": "기반시설 운영자",
+    "fee": 3800,
+    "requirements": [
+     [
+      "produced:medicine",
+      24,
+      "의약품 생산"
+     ],
+     [
+      "sites",
+      3,
+      "운영 거점"
+     ]
+    ],
+    "unlocks": [
+     "arcanepower",
+     "battery",
+     "leyrelay"
+    ],
+    "id": 21
+   },
+   {
+    "name": "개발구 운영권자",
+    "fee": 4400,
+    "requirements": [
+     [
+      "revenue",
+      200000,
+      "교역 수입"
+     ],
+     [
+      "deliveries",
+      12,
+      "지역 간 운송"
+     ]
+    ],
+    "unlocks": [
+     "bank",
+     "barracks"
+    ],
+    "id": 22
+   },
+   {
+    "name": "치안권 보유자",
+    "fee": 5000,
+    "requirements": [
+     [
+      "defense",
+      2,
+      "경비대 편성"
+     ],
+     [
+      "produced:medicine",
+      60,
+      "의약품 생산"
+     ]
+    ],
+    "unlocks": [
+     "fortress",
+     "lampworks"
+    ],
+    "id": 23
+   },
+   {
+    "name": "재정 운영권자",
+    "fee": 5800,
+    "requirements": [
+     [
+      "investment",
+      2,
+      "산업 투자"
+     ],
+     [
+      "produced:lamp",
+      24,
+      "마력등 생산"
+     ],
+     [
+      "contracts",
+      16,
+      "납품 계약"
+     ]
+    ],
+    "unlocks": [
+     "engineworks"
+    ],
+    "id": 24
+   },
+   {
+    "name": "자치구 대표",
+    "fee": 6700,
+    "requirements": [
+     [
+      "sites",
+      4,
+      "운영 거점"
+     ],
+     [
+      "support",
+      65,
+      "주민 지지"
+     ],
+     [
+      "produced:engine",
+      10,
+      "마력 기관 생산"
+     ]
+    ],
+    "unlocks": [
+     "mithrilforge"
+    ],
+    "id": 25
+   },
+   {
+    "name": "자치정부 수장",
+    "fee": 7700,
+    "requirements": [
+     [
+      "defense",
+      4,
+      "경비대 편성"
+     ],
+     [
+      "railRoutes",
+      2,
+      "철도 운송망"
+     ],
+     [
+      "produced:mithril",
+      10,
+      "미스릴 강 생산"
+     ]
+    ],
+    "unlocks": [
+     "parliament"
+    ],
+    "id": 26
+   },
+   {
+    "name": "독립 선언국",
+    "fee": 8800,
+    "requirements": [
+     [
+      "recognition",
+      2,
+      "외교 지지국"
+     ],
+     [
+      "support",
+      70,
+      "주민 지지"
+     ],
+     [
+      "building:parliament",
+      1,
+      "의사당 건립"
+     ]
+    ],
+    "unlocks": [
+     "shipyard"
+    ],
+    "id": 27
+   },
+   {
+    "name": "승인 독립국",
+    "fee": 10000,
+    "requirements": [
+     [
+      "recognition",
+      4,
+      "외교 지지국"
+     ],
+     [
+      "produced:airship",
+      3,
+      "비공정 건조"
+     ],
+     [
+      "deliveries",
+      30,
+      "지역 간 운송"
+     ]
+    ],
+    "unlocks": [
+     "airdock"
+    ],
+    "id": 28
+   },
+   {
+    "name": "지역 강국",
+    "fee": 12500,
+    "requirements": [
+     [
+      "sites",
+      5,
+      "운영 거점"
+     ],
+     [
+      "investment",
+      4,
+      "산업 투자"
+     ],
+     [
+      "building:fortress",
+      2,
+      "방위 요새"
+     ],
+     [
+      "revenue",
+      700000,
+      "교역 수입"
+     ]
+    ],
+    "unlocks": [
+     "blastfurnace"
+    ],
+    "id": 29
+   },
+   {
+    "name": "다지역 연방",
+    "fee": 15000,
+    "requirements": [
+     [
+      "territories",
+      3,
+      "자치권 확보 지역"
+     ],
+     [
+      "support",
+      75,
+      "주민 지지"
+     ],
+     [
+      "produced:car",
+      80,
+      "자동차 생산"
+     ]
+    ],
+    "unlocks": [
+     "assemblyline"
+    ],
+    "id": 30
+   },
+   {
+    "name": "열강",
+    "fee": 18000,
+    "requirements": [
+     [
+      "sites",
+      6,
+      "운영 거점"
+     ],
+     [
+      "recognition",
+      6,
+      "외교 지지국"
+     ],
+     [
+      "produced:airship",
+      10,
+      "비공정 건조"
+     ]
+    ],
+    "unlocks": [
+     "exchange"
+    ],
+    "id": 31
+   },
+   {
+    "name": "패권국",
+    "fee": 21000,
+    "requirements": [
+     [
+      "territories",
+      5,
+      "자치권 확보 지역"
+     ],
+     [
+      "revenue",
+      1000000,
+      "교역 수입"
+     ],
+     [
+      "defense",
+      10,
+      "방위대 편성"
+     ],
+     [
+      "produced:car",
+      120,
+      "자동차 생산"
+     ]
+    ],
+    "unlocks": [],
+    "id": 32
+   }
+  ],
+  "previous": [
+   {
+    "id": 0,
+    "fee": 0,
+    "requirements": "",
+    "unlocks": []
+   },
+   {
+    "id": 1,
+    "fee": 35,
+    "requirements": "물 생산 12 · 밀 생산 12",
+    "unlocks": []
+   },
+   {
+    "id": 2,
+    "fee": 60,
+    "requirements": "영주 납품 2 · 목재 생산 24",
+    "unlocks": []
+   },
+   {
+    "id": 3,
+    "fee": 100,
+    "requirements": "밀 생산 56 · 개간지 확장 1",
+    "unlocks": []
+   },
+   {
+    "id": 4,
+    "fee": 180,
+    "requirements": "몸값 채무 청산 1 · 영주 납품 3",
+    "unlocks": []
+   },
+   {
+    "id": 5,
+    "fee": 400,
+    "requirements": "가족 구출 1 · 누적 판매 수입 1800",
+    "unlocks": []
+   },
+   {
+    "id": 6,
+    "fee": 80,
+    "requirements": "납품 계약 4 · 판매 수입 2400",
+    "unlocks": [
+     "quarry"
+    ]
+   },
+   {
+    "id": 7,
+    "fee": 100,
+    "requirements": "목재 생산 80 · 밀 생산 120",
+    "unlocks": [
+     "sawmill",
+     "depot"
+    ]
+   },
+   {
+    "id": 8,
+    "fee": 150,
+    "requirements": "판재 생산 24 · 납품 계약 6",
+    "unlocks": [
+     "mill",
+     "reservoir"
+    ]
+   },
+   {
+    "id": 9,
+    "fee": 110,
+    "requirements": "밀가루 생산 20 · 교역 수입 4000",
+    "unlocks": [
+     "bakery",
+     "clinic"
+    ]
+   },
+   {
+    "id": 10,
+    "fee": 140,
+    "requirements": "빵 판매 35 · 납품 계약 8",
+    "unlocks": [
+     "stable"
+    ]
+   },
+   {
+    "id": 11,
+    "fee": 180,
+    "requirements": "부지 확장 2 · 판재 생산 60",
+    "unlocks": [
+     "generator",
+     "dwarfhouse",
+     "spirithouse"
+    ]
+   },
+   {
+    "id": 12,
+    "fee": 220,
+    "requirements": "동력 가동 1 · 판재 생산 100",
+    "unlocks": [
+     "workshop",
+     "windturbine"
+    ]
+   },
+   {
+    "id": 13,
+    "fee": 260,
+    "requirements": "부품 생산 8 · 가족 구출 1",
+    "unlocks": [
+     "logistics",
+     "ironmine",
+     "coalpit",
+     "titanhouse",
+     "centaurhouse"
+    ]
+   },
+   {
+    "id": 14,
+    "fee": 320,
+    "requirements": "철광석 생산 16 · 납품 계약 3 · 부지 확장 2",
+    "unlocks": [
+     "smelter",
+     "steamworks"
+    ]
+   },
+   {
+    "id": 15,
+    "fee": 380,
+    "requirements": "강철 생산 18 · 채무 청산 1",
+    "unlocks": [
+     "oilpump",
+     "refinery"
+    ]
+   },
+   {
+    "id": 16,
+    "fee": 450,
+    "requirements": "연료 생산 12 · 운영 거점 2",
+    "unlocks": [
+     "chemical",
+     "manaextractor"
+    ]
+   },
+   {
+    "id": 17,
+    "fee": 520,
+    "requirements": "합성 소재 생산 18 · 마력 결정 생산 8",
+    "unlocks": [
+     "electronics",
+     "magetower"
+    ]
+   },
+   {
+    "id": 18,
+    "fee": 650,
+    "requirements": "회로 생산 12 · 지역 간 운송 3",
+    "unlocks": [
+     "station",
+     "rail"
+    ]
+   },
+   {
+    "id": 19,
+    "fee": 800,
+    "requirements": "철도 운송망 1 · 강철 생산 60",
+    "unlocks": [
+     "automotive"
+    ]
+   },
+   {
+    "id": 20,
+    "fee": 1000,
+    "requirements": "자동차 생산 4 · 납품 계약 6",
+    "unlocks": [
+     "laboratory",
+     "hospital"
+    ]
+   },
+   {
+    "id": 21,
+    "fee": 1200,
+    "requirements": "의약품 생산 12 · 운영 거점 3",
+    "unlocks": [
+     "arcanepower",
+     "battery",
+     "leyrelay"
+    ]
+   },
+   {
+    "id": 22,
+    "fee": 1500,
+    "requirements": "교역 수입 16000 · 지역 간 운송 12",
+    "unlocks": [
+     "bank",
+     "barracks"
+    ]
+   },
+   {
+    "id": 23,
+    "fee": 1800,
+    "requirements": "경비대 편성 2 · 의약품 생산 30",
+    "unlocks": []
+   },
+   {
+    "id": 24,
+    "fee": 2200,
+    "requirements": "산업 투자 2 · 납품 계약 9",
+    "unlocks": []
+   },
+   {
+    "id": 25,
+    "fee": 2800,
+    "requirements": "운영 거점 4 · 주민 지지 65 · 채무 청산 1",
+    "unlocks": []
+   },
+   {
+    "id": 26,
+    "fee": 3400,
+    "requirements": "경비대 편성 4 · 철도 운송망 2 · 주민 지지 70",
+    "unlocks": []
+   },
+   {
+    "id": 27,
+    "fee": 4500,
+    "requirements": "외교 지지국 2 · 주민 지지 75 · 자동차 생산 24",
+    "unlocks": []
+   },
+   {
+    "id": 28,
+    "fee": 5500,
+    "requirements": "외교 지지국 4 · 방위대 편성 6 · 지역 간 운송 30",
+    "unlocks": []
+   },
+   {
+    "id": 29,
+    "fee": 7500,
+    "requirements": "운영 거점 5 · 교역 수입 60000 · 산업 투자 4",
+    "unlocks": []
+   },
+   {
+    "id": 30,
+    "fee": 10000,
+    "requirements": "자치권 확보 지역 3 · 주민 지지 75",
+    "unlocks": []
+   },
+   {
+    "id": 31,
+    "fee": 14000,
+    "requirements": "운영 거점 7 · 외교 지지국 8 · 자동차 생산 80",
+    "unlocks": []
+   },
+   {
+    "id": 32,
+    "fee": 20000,
+    "requirements": "자치권 확보 지역 5 · 교역 수입 160000 · 방위대 편성 12",
+    "unlocks": []
+   }
+  ]
+ },
+ "codeSinks": [
+  {
+   "resource": "brick",
+   "where": "upgrade(2→3단계 개선 자재)"
+  },
+  {
+   "resource": "herb",
+   "where": "living-economy(진료소 치료)"
+  },
+  {
+   "resource": "workwear",
+   "where": "campaign(경비대 편성)"
+  },
+  {
+   "resource": "canned",
+   "where": "campaign(경비대 편성)"
+  }
+ ],
+ "constants": {
+  "simulation.upgradeItem": {
+   "file": "src/app/game/simulation.js",
+   "current": "home ? 'wood' : 'plank'",
+   "next": "b.level>=2 ? 'brick' : (home ? 'wood' : 'plank')",
+   "reason": "벽돌의 상시 소비처. 벽돌 가마(8단계) 전에는 2단계까지만 개선된다."
+  },
+  "simulation.repairCost": {
+   "file": "src/app/game/simulation.js",
+   "current": "ceil((100−health)/100 × (드워프 특화 25 : 50)), 최소 5",
+   "next": "ceil((100−health)/100 × max(50, 건설비×0.1) × (드워프 특화 0.5 : 1)), 최소 5",
+   "reason": "폭풍·습격 피해가 후반에도 의미를 갖게 한다. 건설비 500G 이하 시설은 지금과 같다(최대 50G). 비공정 조선소는 최대 900G."
+  },
+  "simulation.expansionCost": {
+   "file": "src/app/game/simulation.js",
+   "current": "(180+90n)×(rank≥3 ? 0.9 : 1)",
+   "next": "(180+90n+15n²)×(rank≥3 ? 0.9 : 1)",
+   "reason": "n=10에서 1,080G→2,580G, n=20에서 1,980G→7,980G. 후반 토지 확장을 자금 소비처로 만든다(n≤3은 차이 135G 이하)."
+  },
+  "simulation.autoSell": {
+   "file": "src/app/game/simulation.js",
+   "current": "{bread:true,fish:true,gear:false}",
+   "next": "{bread:true,cake:true,smokedfish:true,fish:false,gear:false}",
+   "reason": "생선이 훈제장 원료가 되었으므로 새 게임의 기본 자동 판매를 끈다. 기존 저장의 autoSell은 그대로 둔다."
+  },
+  "simulation.contract.pools": {
+   "file": "src/app/game/simulation.js",
+   "current": "stage 기준 6구간(밀·목재 → 자동차·의약품·회로)",
+   "next": [
+    {
+     "rankBelow": 3,
+     "items": [
+      "grain",
+      "wood"
+     ]
+    },
+    {
+     "rankBelow": 5,
+     "items": [
+      "plank",
+      "flour"
+     ]
+    },
+    {
+     "rankBelow": 7,
+     "items": [
+      "bread",
+      "smokedfish",
+      "plank"
+     ]
+    },
+    {
+     "rankBelow": 9,
+     "items": [
+      "cloth",
+      "cake",
+      "bread"
+     ]
+    },
+    {
+     "rankBelow": 11,
+     "items": [
+      "brick",
+      "workwear",
+      "cake"
+     ]
+    },
+    {
+     "rankBelow": 14,
+     "items": [
+      "glass",
+      "gear",
+      "workwear"
+     ]
+    },
+    {
+     "rankBelow": 17,
+     "items": [
+      "steel",
+      "glass",
+      "brick"
+     ]
+    },
+    {
+     "rankBelow": 20,
+     "items": [
+      "wire",
+      "concrete",
+      "fuel"
+     ]
+    },
+    {
+     "rankBelow": 24,
+     "items": [
+      "circuit",
+      "car",
+      "medicine",
+      "canned"
+     ]
+    },
+    {
+     "rankBelow": 28,
+     "items": [
+      "lamp",
+      "engine",
+      "car"
+     ]
+    },
+    {
+     "rankBelow": 99,
+     "items": [
+      "mithril",
+      "airship",
+      "engine"
+     ]
+    }
+   ],
+   "amountRule": "airship 1 · car/engine/mithril 2 · 가격 150G 이상 6 · 그 외 12+min(contracts×2,16)",
+   "reason": "해금 직후 품목이 계약에 나오게 한다. 각 구간 품목은 그 구간 첫 단계에 이미 해금되어 있다(계약은 완료 전까지 품목이 바뀌지 않으므로 필수). 보상 배율(1.35/1.45)은 유지."
+  },
+  "campaign.stateOrder.pools": {
+   "file": "src/app/game/campaign.js",
+   "current": "['grain','wood','bread'] / ['steel','fuel','plank'] / ['circuit','medicine','car']",
+   "next": "['grain','wood','bread','cloth'] / ['steel','fuel','brick','glass'] / ['circuit','medicine','car','lamp']",
+   "reason": "신생국 교역에 새 제품을 넣는다. 자동차 1대 규칙과 보상 배율 1.45는 유지."
+  },
+  "campaign.council.defense": {
+   "file": "src/app/game/campaign.js",
+   "current": "800G · 강철 6 · 부품 4",
+   "next": "1200G · 강철 4 · 작업복 4 · 통조림 4",
+   "reason": "작업복·통조림의 상시 소비처."
+  },
+  "campaign.council.invest": {
+   "file": "src/app/game/campaign.js",
+   "current": "1600G · 기본 배당 45G/일",
+   "next": "2500G · 기본 배당 80G/일",
+   "reason": "후반 수입 상승에 맞춰 출자금을 올리고 회수 기간을 35일에서 31일로 줄인다."
+  },
+  "campaign.council.territory": {
+   "file": "src/app/game/campaign.js",
+   "current": "1800G",
+   "next": "3000G",
+   "reason": "후반 목표 수입(2~3만G/일) 대비 명목 비용 보정."
+  },
+  "campaign.council.recognition": {
+   "file": "src/app/game/campaign.js",
+   "current": "650G · 자동차 1 (stateAction recognition 동일)",
+   "next": "1200G · 자동차 1 (두 곳 모두)",
+   "reason": "같은 이유."
+  },
+  "living-economy.clinic": {
+   "file": "src/app/game/living-economy.js",
+   "current": "물 2 · 밀 1 소비, 감염 −9, 16초 간격",
+   "next": "약초 1 · 물 1 소비, 감염 −9, 16초 간격",
+   "reason": "약초의 초반 소비처. 진료소가 4단계로 당겨져 약초원과 함께 열린다."
+  },
+  "progression.trials.right": {
+   "file": "src/app/game/progression.js",
+   "current": "7: 제재소·자재 보관소 / 9: 빵집·진료소 / 12: 기계 공장·풍력",
+   "next": {
+    "7": "제과점과 급수탑을 운영합니다.",
+    "9": "봉제소와 유리 공방을 운영합니다.",
+    "12": "풍력 발전과 자동 물류센터를 운영합니다."
+   },
+   "reason": "시험 보상 문구를 새 해금표와 맞춘다. 시험 key·target은 유지."
+  },
+  "Game.tsx.hudResources": {
+   "file": "src/app/game/Game.tsx",
+   "current": "stage>=9 ? ['wood','steel','fuel','circuit','car'] : ['wood','stone','water','grain','bread']",
+   "next": [
+    {
+     "rankBelow": 8,
+     "items": [
+      "wood",
+      "stone",
+      "water",
+      "grain",
+      "bread"
+     ]
+    },
+    {
+     "rankBelow": 14,
+     "items": [
+      "plank",
+      "brick",
+      "cloth",
+      "cake",
+      "glass"
+     ]
+    },
+    {
+     "rankBelow": 23,
+     "items": [
+      "steel",
+      "fuel",
+      "wire",
+      "circuit",
+      "car"
+     ]
+    },
+    {
+     "rankBelow": 99,
+     "items": [
+      "concrete",
+      "lamp",
+      "engine",
+      "mithril",
+      "airship"
+     ]
+    }
+   ],
+   "reason": "상단 자원 막대가 지금 단계의 주력 품목을 보여 준다."
+  },
+  "export-route.EXPORT_CARTS": {
+   "file": "src/app/game/export-route.js · persistence.js",
+   "current": "3(상수, 저장 검증도 3)",
+   "next": "3 + 가동 중 exportCarts 합. 저장 검증 상한 5",
+   "reason": "대륙 거래소. 후반 출하 한계(마차 3대)를 푼다."
+  }
+ },
+ "mechanics": [
+  {
+   "id": "M1",
+   "rule": "전력 판정을 시설 종류 목록에서 output===\"power\"로 일반화",
+   "where": "simulation.js get power",
+   "why": "물레방아가 기존 전력 규칙을 그대로 쓴다"
+  },
+  {
+   "id": "M2",
+   "rule": "물가 조건을 d.nearWater(칸)로 일반화. 어항 3, 물레방아 2. 오류 문구 \"강이나 바다에서 N칸 이내에 놓으세요\"",
+   "where": "simulation.js canBuild·nearWater",
+   "why": "어항 전용 분기를 없앤다"
+  },
+  {
+   "id": "M3",
+   "rule": "관개를 d.irrigable로 일반화(밀밭·목화밭·약초원): placementEffects의 water 계산, effectiveInputs의 물 생략, tileMultiplier의 비옥도 적용",
+   "where": "proximity.js, simulation.js",
+   "why": "새 작물이 밀밭과 같은 물가 이점을 받는다"
+  },
+  {
+   "id": "M4",
+   "rule": "결계를 output===\"ward\"로 일반화. 반경은 d.wardRadius(마탑 4.5·결계 초소 3·방위 요새 5.5)",
+   "where": "encounters.js tickRaid",
+   "why": "초중반 방어 수단 추가"
+  },
+  {
+   "id": "M5",
+   "rule": "운송 가속: 출발·도착 양쪽에 가동 중인 output===\"transit\" 시설이 있으면 duration×max(출발 쪽 최소 배율, 도착 쪽 최소 배율). 배율은 d.transitFactor(마력 중계소 0.8·선착장 0.6)",
+   "where": "campaign.js tickRoute",
+   "why": "마력 중계소 규칙 재사용"
+  },
+  {
+   "id": "M6",
+   "rule": "장터: 가동 중(health>0·enabled)이면 시세 압력 감소 속도×1.3(교역 헌장 1.4와 곱)",
+   "where": "living-economy.js tickEconomy",
+   "why": "새 규칙. 여러 품목 판매를 보상"
+  },
+  {
+   "id": "M7",
+   "rule": "의사당: 어느 거점이든 가동 중이면 worldDay에서 모든 거점 unrest −2 추가",
+   "where": "campaign.js worldDay",
+   "why": "새 규칙. 후반 지지율 조건을 시설로 대응"
+  },
+  {
+   "id": "M8",
+   "rule": "수출 마차 수 = 3 + 가동 중 d.exportCarts 합(대륙 거래소 +2). 저장 검증 shipments 상한 5",
+   "where": "export-route.js, persistence.js",
+   "why": "새 규칙"
+  },
+  {
+   "id": "M9",
+   "rule": "배치 표 추가: EMISSIONS{kiln:1,glassworks:2,cementworks:2,wiremill:1,mithrilforge:2,blastfurnace:3,shipyard:1,cannery:1} · HEIGHTS{parliament:3,shipyard:3,cementworks:2,fortress:2,airdock:2,exchange:2,blastfurnace:3,watermill:1,marketplace:1} · 오염 민감 목록에 cottonfield·herbgarden·henhouse · tileMultiplier 광물량 대상에 coppermine",
+   "where": "proximity.js, simulation.js",
+   "why": "기존 배치 규칙 재사용"
+  },
+  {
+   "id": "M10",
+   "rule": "전담 종족: RACES.dwarf.crafts += mithrilforge, blastfurnace · RACES.spirit.crafts += lampworks, engineworks · skilled += lampworks, engineworks",
+   "where": "world.js, simulation.js",
+   "why": "특화는 전담·효율 차이로만 둔다. 해당 종족이 없는 진영은 누구나 운영한다"
+  },
+  {
+   "id": "M11",
+   "rule": "사운드: 새 시설 26종을 기존 표본에 연결(cottonfield·herbgarden=clothBelt, kiln·glassworks·cementworks·blastfurnace=metalPot3, weaver·tailor=cloth3, smokehouse·confectionery=metalPot2, henhouse=creak2, coppermine=metalPot1, wiremill·cannery·engineworks·assemblyline=metalClick, lampworks·mithrilforge·wardpost·fortress·parliament=bookOpen, shipyard·airdock=beltHandle1, watermill=creak1, marketplace·exchange=handleCoins)",
+   "where": "audio.js FILES",
+   "why": "소리 없는 시설을 만들지 않는다. 새 음원 없이 기존 표본 재사용"
+  },
+  {
+   "id": "M12",
+   "rule": "임시 외형: models.js modern()의 기본 분기에 그룹 색 본체와 기존 addProductionProps 산출 상자를 쓰는 자리표시 모형을 둔다. 픽셀 에셋은 후속 범위",
+   "where": "models.js",
+   "why": "에셋 없이 먼저 추가(사용자 지시). 아트 승인 범위는 건드리지 않는다"
+  }
+ ],
+ "verification": {
+  "staticCheck": "node scripts/balance-report.mjs --strict (패치 적용 후 코드 기준 C1~C8 전부 PASS)",
+  "targetCurve": [
+   {
+    "segment": "A 개척",
+    "ranks": "1~6",
+    "endDay": 6,
+    "incomePerDay": [
+     800,
+     1500
+    ]
+   },
+   {
+    "segment": "B 가공",
+    "ranks": "7~13",
+    "endDay": 16,
+    "incomePerDay": [
+     1500,
+     5000
+    ]
+   },
+   {
+    "segment": "C 중공업",
+    "ranks": "14~19",
+    "endDay": 27,
+    "incomePerDay": [
+     5000,
+     12000
+    ]
+   },
+   {
+    "segment": "D 첨단",
+    "ranks": "20~23",
+    "endDay": 35,
+    "incomePerDay": [
+     12000,
+     20000
+    ]
+   },
+   {
+    "segment": "E 자치",
+    "ranks": "24~28",
+    "endDay": 47,
+    "incomePerDay": [
+     20000,
+     32000
+    ]
+   },
+   {
+    "segment": "F 국가",
+    "ranks": "29~32",
+    "endDay": 60,
+    "incomePerDay": [
+     32000,
+     45000
+    ]
+   }
+  ],
+  "botAcceptance": [
+   {
+    "id": "A1",
+    "rule": "각 구간 종료일이 목표의 ±25% 안(패권국 도달 45~75일)"
+   },
+   {
+    "id": "A2",
+    "rule": "같은 날 승급 3회 이상 없음(현재는 4일째에 4·5·6단계 3회)"
+   },
+   {
+    "id": "A3",
+    "rule": "13~31단계 동안 일말 자금 300G 미만인 날이 20% 이하"
+   },
+   {
+    "id": "A4",
+    "rule": "승급 간 최장 간격 5일 이하, 마지막 3개 승급 사이 최대 보유 자금이 최종 수수료의 2배 이하"
+   },
+   {
+    "id": "A5",
+    "rule": "구간별 평균 일일 수입이 A→F로 단조 증가하고 E 평균이 C 평균의 2배 이상"
+   }
+  ],
+  "botChanges": [
+   "build 목록에 새 시설을 해금 순서대로 추가(목화밭·약초원 2, 나머지 1; 용광로·조립 공장 1; 방위 요새 2). 초반 목록은 제재소·제분소·빵집을 어항보다 먼저 둔다",
+   "기본 주택은 4채에서 시작해 두 단계마다 1채씩 늘린다(최대 18채)",
+   "시설에 「원료 대기」가 뜨면 그 원료의 생산 시설을 한 채 더 짓는다(같은 종류 최대 3채)",
+   "autoSell 제외 목록에 중간재 추가: cotton·herb·egg·cloth·brick·glass·copper·wire·concrete·canned·engine·mithril·smokedfish(통조림 공장 해금 후). 가격 1,000G 이상 완제품은 10개를 기다리지 않고 바로 판다",
+   "경비대 편성 전 작업복 8개 비축, 통조림은 판매하지 않는다. 20단계 전에는 빵을 비축하지 않는다",
+   "다음 승급 조건이 확장·채무 청산이면 그 행동을 먼저 한다. 가족 구출은 400G부터 진행한다",
+   "다음 수수료+1,000G를 넘는 자금은 토지 확장, 그다음 산업 투자에 쓴다(23단계부터)",
+   "날이 바뀌는 순간에도 한 번 행동한 뒤 일말 자금을 기록한다",
+   "일별 기록(일·단계·자금·당일 수입·시설 수)을 docs/FULL_CAMPAIGN_RESULT.json에 함께 저장하고 A1~A5를 assert",
+   "종료 assert는 최종 단계의 자동차·비공정 요구 수를 코드에서 읽는다"
+  ],
+  "testsToRevisit": [
+   "tests/full-campaign.mjs(봇 갱신 항목 전체)",
+   "tests/overhaul-20260926.mjs 29행(8단계 가정의 승급 조건)",
+   "tests/simulation.mjs 4·20행(rank 11 가정 — 새 해금표에서도 유효한지)",
+   "tests/fantasy.mjs 16행(0단계 제분소 불가 — 제분소 2단계라 유지)",
+   "tests/quality.mjs 13~17행(선행 해금 검사 — 새 표로 통과해야 함)"
+  ]
+ },
+ "calibration": {
+  "note": "봇 합격 기준(A1~A5)을 맞추려고 조정한 승급 조건. 코드(world.js RANKS)와 이 파일의 ranks.table이 같은 값이다.",
+  "ranks": [
+   {
+    "rank": 6,
+    "name": "등록 사업주",
+    "before": "직물 생산 12 · 누적 판매 수입 2400",
+    "after": "직물 생산 8 · 누적 판매 수입 2400",
+    "reason": "직물 12개는 방직소 6주기(120초)라 A 구간 목표(하루 80초에 한 단계)보다 길다. 8개(80초)로 줄였다."
+   },
+   {
+    "rank": 20,
+    "name": "기술 기업군",
+    "before": "자동차 생산 4 · 납품 계약 12",
+    "after": "자동차 생산 6 · 납품 계약 12",
+    "reason": "자동차 공장 34초 주기에서 4대는 하루 안에 채워져 D 구간이 목표보다 빨랐다."
+   },
+   {
+    "rank": 21,
+    "name": "기반시설 운영자",
+    "before": "의약품 생산 12 · 운영 거점 3",
+    "after": "의약품 생산 24 · 운영 거점 3",
+    "reason": "제약 공장 가동 하루 만에 12개를 채워 D 구간이 목표보다 빨랐다."
+   },
+   {
+    "rank": 22,
+    "name": "개발구 운영권자",
+    "before": "교역 수입 100000 · 지역 간 운송 12",
+    "after": "교역 수입 200000 · 지역 간 운송 12",
+    "reason": "10만 G는 22단계 도달 전에 이미 채워져 조건 역할을 하지 못했다."
+   },
+   {
+    "rank": 23,
+    "name": "치안권 보유자",
+    "before": "경비대 편성 2 · 의약품 생산 30",
+    "after": "경비대 편성 2 · 의약품 생산 60",
+    "reason": "의약품 30개는 앞 단계 조건과 겹쳐 대기가 생기지 않았다."
+   },
+   {
+    "rank": 24,
+    "name": "재정 운영권자",
+    "before": "산업 투자 2 · 마력등 생산 12 · 납품 계약 16",
+    "after": "산업 투자 2 · 마력등 생산 24 · 납품 계약 16",
+    "reason": "마력등 공방 가동 하루 만에 12개를 채워 E 구간이 목표보다 빨랐다."
+   },
+   {
+    "rank": 25,
+    "name": "자치구 대표",
+    "before": "운영 거점 4 · 주민 지지 65 · 마력 기관 생산 4",
+    "after": "운영 거점 4 · 주민 지지 65 · 마력 기관 생산 10",
+    "reason": "마력 기관 4개는 하루 안에 채워졌다."
+   },
+   {
+    "rank": 26,
+    "name": "자치정부 수장",
+    "before": "경비대 편성 4 · 철도 운송망 2 · 미스릴 강 생산 6",
+    "after": "경비대 편성 4 · 철도 운송망 2 · 미스릴 강 생산 10",
+    "reason": "미스릴 강 6개는 하루 안에 채워졌다."
+   },
+   {
+    "rank": 28,
+    "name": "승인 독립국",
+    "before": "외교 지지국 4 · 비공정 건조 2 · 지역 간 운송 30",
+    "after": "외교 지지국 4 · 비공정 건조 3 · 지역 간 운송 30",
+    "reason": "비공정 2척을 채우는 동안 29·30단계 조건이 미리 채워져 같은 날 세 번 승급했다(A2)."
+   },
+   {
+    "rank": 29,
+    "name": "지역 강국",
+    "before": "운영 거점 5 · 산업 투자 4 · 방위 요새 2",
+    "after": "운영 거점 5 · 산업 투자 4 · 방위 요새 2 · 교역 수입 700000",
+    "reason": "29단계 조건이 모두 앞서 채워져 28·29·30단계가 같은 날 이어졌다. 누적 교역 수입 조건을 더해 간격을 만든다."
+   },
+   {
+    "rank": 30,
+    "name": "다지역 연방",
+    "before": "자치권 확보 지역 3 · 주민 지지 75 · 자동차 생산 40",
+    "after": "자치권 확보 지역 3 · 주민 지지 75 · 자동차 생산 80",
+    "reason": "자동차 40대는 30단계 도달 전에 이미 채워졌다."
+   },
+   {
+    "rank": 31,
+    "name": "열강",
+    "before": "운영 거점 6 · 외교 지지국 6 · 비공정 건조 6",
+    "after": "운영 거점 6 · 외교 지지국 6 · 비공정 건조 10",
+    "reason": "비공정 6척은 31단계 도달 전에 채워졌다."
+   },
+   {
+    "rank": 32,
+    "name": "패권국",
+    "before": "자치권 확보 지역 5 · 교역 수입 500000 · 방위대 편성 10 · 자동차 생산 60",
+    "after": "자치권 확보 지역 5 · 교역 수입 1000000 · 방위대 편성 10 · 자동차 생산 120",
+    "reason": "자동차 60대·교역 수입 50만 G는 마지막 단계 전에 채워져 F 구간이 목표(60일)보다 한참 빨랐다."
+   }
+  ]
+ }
+}

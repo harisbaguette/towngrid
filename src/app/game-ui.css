@@ -75,7 +75,7 @@ button:focus-visible { outline: 3px solid #dfb94e; outline-offset: 3px; }
 .side-tools i { margin: 0 8px; border-color: #e9ffe99a; }
 .camera-controls { right: 22px; bottom: 228px; gap: 6px; padding: 0; background: none; border: 0; box-shadow: none; }
 .camera-controls button { height: 35px; width: 35px; border-radius: 50%; background: #f3fbefde; border: 1px solid #fffced; color: #4d87a7; box-shadow: inset 0 0 0 2px #9dbfcb,0 2px 3px #1c464533; }
-.camera-controls button:hover { background: #d5edf4; transform: scale(1.06); }
+.camera-controls button:hover { background: #d5edf4; box-shadow: inset 0 0 0 2px #6fa6ba,0 2px 3px #1c464533; }
 
 /* The shop: paper catalog tabs, striped valance, inventory cards and a shelf. */
 .build-dock { width: 920px; min-width: 0; max-width: calc(100vw - 170px); bottom: 17px; left: 50%; right: auto; transform: translateX(-50%); padding: 0 12px 13px; border: 2px solid #e8faff; border-bottom: 7px solid #79aec7; border-radius: 3px; background: #b9dce9; box-shadow: 0 0 0 2px #578ba8,0 4px 0 #416e8c,0 9px 18px #1b40524d; overflow: visible; }
@@ -528,3 +528,67 @@ button:focus-visible { outline: 3px solid #dfb94e; outline-offset: 3px; }
 .pixel-resident-list .resident-choice small { display: block; font-size: 13px; }
 @media(max-width:700px) { .resident-illustration { height: 262px; }.resident-profile-info { padding-inline: 3px; }.resident-mini { height: 139px; }.alliance-residents .resident-pair .resident-mini img { height: 92px; } }
 @media(prefers-reduced-motion:reduce) { .pixel-character { animation: none; } }
+
+/* World trade routes (trade-routes.js): major routes are thick, small feeder routes thin and dashed. */
+.trade-network polyline, .trade-network path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.trade-route .casing { stroke: #3b2f22; stroke-width: 6.5; opacity: .35; }
+.trade-route.silk polyline:last-child { stroke: #f0b43c; stroke-width: 4; stroke-dasharray: 14 5; }
+.trade-route.paved polyline:last-child { stroke: #f3ecd9; stroke-width: 3.6; }
+.water-lane.river { stroke: #0f4f8e; stroke-width: 3; stroke-dasharray: 7 6; opacity: .85; }
+.water-lane.coast { stroke: #f4fbff; stroke-width: 2.6; stroke-dasharray: 10 8; opacity: .85; }
+.trade-link { stroke-width: 1.5; stroke-dasharray: 3 4; opacity: .8; }
+.trade-link.rural { stroke: #8f6134; }
+.trade-link.mountain { stroke: #6a4535; }
+.trade-link.river, .trade-link.lake, .trade-link.canal, .trade-link.stream, .trade-link.ferry { stroke: #1f6fa8; }
+.trade-link.silk, .trade-link.paved { stroke: #f3ecd9; }
+/* Lakes, canals, streams and small waterways drawn over the painted atlas (WATERWAYS). */
+.waterway path, .waterway polyline { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.waterway.lake path { fill: #3f9fcf; stroke: #e6f6f8; stroke-width: 2.4; }
+.waterway.lake text { font-size: 8px; font-weight: 700; fill: #f4fbff; paint-order: stroke; stroke: #1f5f84; stroke-width: 2px; }
+.waterway .bank { stroke: #e9dcb4; opacity: .9; }
+.waterway.canal .bank { stroke-width: 7; }
+.waterway.canal polyline:last-child { stroke: #2f86bf; stroke-width: 4; }
+.waterway.stream .bank { stroke-width: 4.6; opacity: .6; }
+.waterway.stream polyline:last-child { stroke: #3d9fd3; stroke-width: 2.6; }
+.waterway.ferry .bank { stroke-width: 3.4; opacity: .55; }
+.waterway.ferry polyline:last-child { stroke: #5cb4df; stroke-width: 1.6; }
+.trade-mine polyline, .trade-mine path { stroke: #ff6a3d; stroke-width: 3; opacity: .75; }
+.trade-mine path { stroke-width: 2.6; stroke-dasharray: none; opacity: 1; }
+.trade-mine circle { fill: #ff6a3d; stroke: #fff; stroke-width: 2.5; }
+.atlas-legend .legend-trade i { width: 18px; height: 0; border: 0; border-radius: 0; background: none; border-top: 4px dashed #f0b43c; }
+.atlas-legend .legend-trade i.paved { border-top: 4px solid #cfc5ab; }
+.atlas-legend .legend-trade i.river { border-top-color: #0f4f8e; }
+.atlas-legend .legend-trade i.sea { border-top: 3px dashed #7fb4d3; }
+.atlas-legend .legend-trade i.minor { border-top: 2px dashed #8f6134; }
+.atlas-legend .legend-trade i.lake { width: 14px; height: 9px; border: 2px solid #e6f6f8; border-radius: 50%; background: #3f9fcf; box-shadow: 0 0 0 1px #7fb4d3; }
+.trade-route-card { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; align-items: center; margin: 0 0 10px; padding: 9px 11px; border-radius: 10px; background: #eef5fa; border: 1px solid #c4dbe8; color: #2f5670; }
+.trade-route-card strong { display: block; font-size: 14px; }
+.trade-route-card small { font-size: 12px; color: #52748b; }
+.trade-route-card dl { display: flex; gap: 12px; margin: 0; }
+.trade-route-card dl div { text-align: center; }
+.trade-route-card dt { font-size: 11px; color: #52748b; }
+.trade-route-card dd { margin: 0; font-size: 16px; font-weight: 800; }
+.trade-route-card label { grid-column: 1 / -1; display: flex; gap: 8px; align-items: center; font-size: 13px; }
+.trade-route-card select { flex: 1; min-width: 0; padding: 5px 7px; border-radius: 7px; border: 1px solid #a9c6d8; background: #fff; }
+.is-playing .facility-labels.minimal .facility-marker.production:not(.chosen) span{display:block}
+.is-playing .facility-labels.minimal .facility-marker.production:not(.chosen)>svg:first-child{display:block;flex-shrink:0}
+.is-playing .facility-marker.production{height:27px;padding:3px 5px 5px;gap:5px}
+.is-playing .facility-marker.production>i{bottom:0;background:#cca33e}
+.is-playing .facility-marker.production[data-production="working"]{border-color:#e2bf67}
+.is-playing .facility-marker.production[data-production="ready"]{border-color:#71aa84}
+/* Next promotion goal: stays on the operations card after the guide ends (U1); names the first unmet condition (H7). */
+.next-goal{display:flex;align-items:center;gap:7px;width:100%;padding:8px 9px;text-align:left;background:#e4f0f6;border-top:1px solid #c9dde6;color:var(--town-ink)}
+.next-goal>svg{flex-shrink:0;color:var(--town-blue)}.next-goal span{flex:1;min-width:0}.next-goal strong,.next-goal small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.next-goal strong{font-size:13px}.next-goal small{margin-top:2px;font-size:12px;opacity:.75}
+.next-goal:hover{background:#d6e9f2}
+.is-playing .bottleneck.export-blocked{background:#fbe0d3;color:#8a3f24}
+.market-more{display:block;width:100%;margin-top:8px;padding:9px;border:1px dashed #a9c6d8;border-radius:8px;background:var(--town-paper);color:var(--town-blue);font-size:13px;font-weight:700}
+.market-more:hover{background:#fff}
+.help-crews{margin:6px 0 0;padding-left:16px;font-size:12px;line-height:1.6;color:var(--town-ink);opacity:.8}
+/* The strip is a vertical column, so names fit beside the icons outside phone width (M2). */
+@media(min-width:701px){.is-playing .resource-strip button span{display:inline;font-size:12px;font-weight:700;color:var(--town-ink);opacity:.62}}
+/* Phone: the guide and the operations card share the top-right slot with a tall facility card, so they yield while it is open. */
+@media(max-width:700px){.is-playing.facility-open .tutorial-card,.is-playing.facility-open .operations-card{display:none}}
+/* Locked upgrade and specialty buttons keep their reason readable instead of fading to 50% (H3). */
+.facility-card [data-slot=button]:disabled{opacity:1;background:#e3ebef;color:#5b7483;border-color:#c5d5de;box-shadow:none}
+.facility-card [data-slot=button]:disabled small{color:#8a5a2b;font-weight:700}

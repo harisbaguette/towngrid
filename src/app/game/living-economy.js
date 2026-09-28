@@ -1,5 +1,6 @@
 import {RESOURCES, BUILDINGS} from './simulation.js';
 import {NATIONS} from './world.js';
+import {tradeConnection} from './trade-routes.js';
 export function marketFactor(s,item,extra=0){
  const demand=1+Math.sin(Math.floor(s.day/3)*1.71+Object.keys(RESOURCES).indexOf(item)*.83)*.12;
  const pressure=(s.market.pressure[item]||0)+extra;
@@ -7,13 +8,16 @@ export function marketFactor(s,item,extra=0){
  const border=s.campaign?.tradeConditions?.(s.siteId)?.market??1;
  return Math.max(.5,Math.min(1.3,demand-pressure*.009))*policy*border*(s.sanctionUntil>s.time?.75:1);
 }
-export function saleQuote(s,item,amount=1){let total=0;for(let i=0;i<amount;i++)total+=RESOURCES[item].price*marketFactor(s,item,i);return Math.round(total);}
+// The trade route a site sells through adds its own premium or middleman cut (trade-routes.js).
+export function saleQuote(s,item,amount=1){let total=0;for(let i=0;i<amount;i++)total+=RESOURCES[item].price*marketFactor(s,item,i);return Math.round(total*tradeConnection(s).price);}
 export function tickEconomy(s,dt){
- for(const item of Object.keys(s.market.pressure))s.market.pressure[item]=Math.max(0,s.market.pressure[item]-dt*.085*(s.charter==='trade'?1.4:1));
+ // M6: a running marketplace speeds price recovery (marketRecovery), multiplied with the trade charter.
+ const market=Math.max(1,...s.buildings.filter(b=>b.health>0&&b.enabled!==false).map(b=>BUILDINGS[b.type].marketRecovery||1));
+ for(const item of Object.keys(s.market.pressure))s.market.pressure[item]=Math.max(0,s.market.pressure[item]-dt*.085*(s.charter==='trade'?1.4:1)*market);
  const h=s.health;if(!h.infection)return;
  const clinic=s.buildings.some(b=>b.type==='clinic'&&b.health>0&&b.enabled!==false);
  const hospital=s.buildings.some(b=>b.type==='hospital'&&b.health>0&&b.enabled!==false&&b.activeUntil>s.time);
- if(clinic&&s.stage<15&&s.time>=h.nextCare&&s.availableStock('water')>=2&&s.availableStock('grain')>=1){s.stock.water-=2;s.stock.grain--;h.infection=Math.max(0,h.infection-9);h.nextCare=s.time+16;s.sound('heal');}
+ if(clinic&&s.stage<15&&s.time>=h.nextCare&&s.availableStock('herb')>=1&&s.availableStock('water')>=1){s.stock.herb--;s.stock.water--;h.infection=Math.max(0,h.infection-9);h.nextCare=s.time+16;s.sound('heal');}
  const sanitation=h.sanitationUntil>s.time,care=hospital||s.healthUntil>s.time;
  const growth=care?-.9:sanitation?(s.charter==='commons'?-.34:-.27):clinic&&s.stage<15?-.025:.075+(s.stage>=15?.045:0);
  h.infection=Math.max(0,Math.min(100,h.infection+growth*dt));

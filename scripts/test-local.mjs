@@ -6,18 +6,23 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const suites = [
   'tests/simulation.mjs',
   'tests/export-route.mjs',
+  'tests/trade-routes.mjs',
   'tests/residents.mjs',
   'tests/character-movement.mjs',
   'tests/campaign.mjs',
+  'tests/balance-20260928.mjs',
   'tests/release.mjs',
   'tests/pixel-environment.mjs',
   'tests/quarter-camera.mjs',
   'tests/screen-art.mjs',
   'scripts/check-pixel-characters.mjs',
+  // 2026-09-28 audit probes whose simulation-side defects are fixed; --regression fails if one comes back.
+  ...['export-chokepoint','raid-gated-trial','events-early','progression-and-docs','stock-ledger','save-edges','debt-spiral','branch-site','sapling-timer'].map(p=>['tests/audit/'+p+'.mjs','--regression']),
 ];
-for (const suite of suites) {
+for (const entry of suites) {
+  const [suite, ...args] = [].concat(entry);
   console.log(`\n[${suite}]`);
-  const result = spawnSync(process.execPath, [suite], { cwd: root, stdio: 'inherit' });
+  const result = spawnSync(process.execPath, [suite, ...args], { cwd: root, stdio: 'inherit' });
   if (result.error) throw result.error;
   if (result.status !== 0) process.exit(result.status ?? 1);
 }

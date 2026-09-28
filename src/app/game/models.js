@@ -14,6 +14,8 @@ export function ball(g,rx,ry,rz,c,x=0,y=0,z=0){const m=mesh(g,geo('sphere',()=>n
 export function cyl(g,rt,rb,h,c,x=0,y=0,z=0,s=14){return mesh(g,geo(['cyl',rt,rb,h,s].join(),()=>new THREE.CylinderGeometry(rt,rb,h,s)),c,x,y,z);}
 export function group(parent,x=0,y=0,z=0){const g=new THREE.Group();g.position.set(x,y,z);if(parent)parent.add(g);return g;}
 function beam(g,a,b,r,c){const v=new THREE.Vector3(...a),w=new THREE.Vector3(...b),m=cyl(g,r,r,v.distanceTo(w),c);m.position.copy(v.add(w).multiplyScalar(.5));m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),new THREE.Vector3(...b).sub(new THREE.Vector3(...a)).normalize());return m;}
+// M12 placeholder body colours by facility group, used until the new facilities get pixel art.
+const PLACEHOLDER_COLORS={farm:'#9dbb62',craft:'#c99a62',industry:'#8f9ea6',advanced:'#7fa7b8',energy:'#9f8fc9',civic:'#c7b38a',transport:'#b79a6b',base:'#b9a27f'};
 const C={wood:'#996333',woodLight:'#bd8348',darkWood:'#684b30',cream:'#f0ddb2',roof:'#e87e2d',roofLight:'#f59638',stone:'#b4b9ac',blue:'#4284a3',deepBlue:'#266286',metal:'#a8b6ba',hay:'#eac24c'};
 export function crate(parent,x=0,y=0,z=0,scale=1){const g=group(parent,x,y,z);box(g,.31,.3,.31,'#cc9659',0,.15);box(g,.045,.305,.318,'#eed6a1',0,.15);box(g,.315,.04,.31,'#ad7845',0,.05);g.scale.setScalar(scale);return g;}
 function sack(parent,x,y,z,scale=1){const g=group(parent,x,y,z);ball(g,.18,.23,.15,'#e7d6af',0,.21);cyl(g,.05,.075,.11,'#d4bd91',0,.44);g.scale.setScalar(scale);return g;}
@@ -288,7 +290,12 @@ function modern(g,type,race){
  else if(type==='battery'){add('industrial','shipping-container-b',.87);for(let i=0;i<3;i++){const gauge=box(g,.12,.05,.02,'#7ed9b0',-.19+i*.19,.34,.35);moving(gauge,'pulse',{index:i});}}
  else if(type==='barracks'){add('industrial','building-a',.88);add('town','banner-red',.16,-.30,.52,.3);moving(add('vehicles','truck',.35,.23,0,.3),'park');}
  else if(type==='manaextractor'||type==='arcanepower'||type==='leyrelay'){add('industrial',type==='arcanepower'?'detail-tank-large':'water-tower',.55);for(const x of [-.30,.30]){add('town','pillar-stone',.13,x,0,.12);const crystal=mesh(g,new THREE.OctahedronGeometry(type==='arcanepower'?.13:.10),'#bb98e5',x,.60,.1);moving(crystal,'magic');}const ring=mesh(g,new THREE.TorusGeometry(.32,.02,6,20),'#d7bc70',0,.76,0);ring.rotation.x=Math.PI/2;moving(ring,'spin');}
- else add('industrial','building-o',.9);
+ else{
+  // M12 placeholder: a body in the group colour with a band in the output colour; addProductionProps adds the output crates.
+  const d=BUILDINGS[type]||{},accent=RESOURCES[d.output]?.color||'#e9dcc0';
+  if(d.irrigable)for(let i=0;i<4;i++)moving(box(g,.16,.10,.80,accent,-.3+i*.2,.10,0,.03),'pulse',{index:i});
+  else{box(g,.80,.48,.66,PLACEHOLDER_COLORS[d.group]||PLACEHOLDER_COLORS.base,0,.29,-.08,.05);box(g,.88,.09,.74,r.roof,0,.57,-.08,.04);box(g,.82,.07,.02,accent,0,.40,.26,.01);box(g,.18,.26,.02,'#5a4632',-.22,.18,.26,.01);moving(box(g,.12,.08,.02,'#ffe39a',.2,.24,.26,.01),'heat');}
+ }
  const flag=add('town','banner-green',.13,-.37,.29,-.3);if(flag){flag.traverse(m=>{if(m.isMesh){m.material=m.material.clone();m.material.color.set(r.color);m.material.map=null;m.material.vertexColors=false;m.userData.ownedMaterial=true;}});moving(flag,'flag');}
  if(['smelter','refinery','steamworks','chemical'].includes(type))for(let i=0;i<2;i++)moving(ball(g,.045,.065,.045,'#ebeff0',.22,.9,-.16),'steam',{index:i});
  return {animate:(t,b,sim)=>{const work=b.working&&b.health!==0&&b.enabled!==false,clock=b.animationTime??t;for(const a of moves){const n=a.node;if(a.kind==='flag')n.rotation.y=Math.sin(t*1.6)*.12;else if(a.kind==='steam'){n.visible=work;n.position.y=a.base.y+(clock*.2+a.index*.20)%.5;}else if(a.kind==='rotor'&&work)n.rotation.z=clock*2.3;else if(a.kind==='spin'&&work)n.rotation.z=clock*1.5;else if(a.kind==='swing'&&work)n.rotation.x=Math.sin(clock*1.8)*.28;else if(a.kind==='press'&&work)n.position.y=a.base.y+Math.sin(clock*4)*.06;else if(a.kind==='car'&&work)n.position.x=a.base.x+Math.sin(clock*.65)*.16;else if(a.kind==='cargo'&&work)n.position.x=a.base.x+Math.sin(clock*.7+(a.index||0))*.055;else if(a.kind==='magic'){n.rotation.y=t*(work?1.3:.25);n.position.y=a.base.y+Math.sin(t*1.7)*.025;}else if(a.kind==='pulse')n.scale.y=work?1+Math.sin(clock*2+(a.index||0))*.04:1;else if(a.kind==='heat')n.visible=work;else if(a.kind==='shine')n.rotation.z=Math.sin(t*.3)*.08;}}};

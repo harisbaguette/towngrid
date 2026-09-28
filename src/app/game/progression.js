@@ -1,9 +1,9 @@
 const trials={
  2:{key:'delivery',target:18,name:'주민이 자원 18개 운반',right:'첫 납품 보너스가 10% 늘어납니다.'},
  3:{key:'reserves',target:1,name:'목재 12 · 물 8 비축',right:'개간 허가로 다음 확장 비용이 10% 줄어듭니다.'},
- 7:{key:'diversity',target:2,name:'서로 다른 두 품목 판매',right:'제재소와 별도 자재 보관소를 운영합니다.'},
- 9:{key:'direct',target:12,name:'시설 간 직송 12개',right:'빵집과 진료소를 열 수 있습니다.'},
- 12:{key:'uptime',target:50,name:'생산 시설 3곳을 50초 연속 가동',right:'기계 공장과 풍력 발전을 운영합니다.'},
+ 7:{key:'diversity',target:2,name:'서로 다른 두 품목 판매',right:'제과점과 급수탑을 운영합니다.'},
+ 9:{key:'direct',target:12,name:'시설 간 직송 12개',right:'봉제소와 유리 공방을 운영합니다.'},
+ 12:{key:'uptime',target:50,name:'생산 시설 3곳을 50초 연속 가동',right:'풍력 발전과 자동 물류센터를 운영합니다.'},
  17:{key:'healthy',target:60,name:'감염 15% 이하로 60초 운영',right:'마탑과 정밀 회로 산업을 허가받습니다.'},
  20:{key:'diversity',target:7,name:'일곱 품목을 시장에 공급',right:'의약품 제조와 종합 병원을 운영합니다.'},
  23:{key:'defended',target:1,name:'현장에서 습격 한 번 격퇴',right:'자체 경비대의 경계 범위가 늘어납니다.'},
@@ -14,7 +14,7 @@ const trials={
 };
 export function trialValue(s,key){
  const sites=s.campaign?.sites.map(v=>v.sim)||[s];
- return ({delivery:sites.reduce((n,v)=>n+v.logisticsStats.delivered,0),direct:sites.reduce((n,v)=>n+v.logisticsStats.direct,0),reserves:+(s.stock.wood>=12&&s.stock.water>=8),diversity:Object.values(s.sold).filter(n=>n>0).length,uptime:s.challenge.bestUptime||0,healthy:s.challenge.bestHealthy||0,defended:s.campaign?.battles.filter(v=>v.defeated>=3).length||0,stableSites:s.campaign?.sites.filter(v=>v.territory&&v.unrest<40).length||0})[key]||0;
+ return ({delivery:sites.reduce((n,v)=>n+v.logisticsStats.delivered,0),direct:sites.reduce((n,v)=>n+v.logisticsStats.direct,0),reserves:+(s.stock.wood>=12&&s.stock.water>=8),diversity:Object.values(s.sold).filter(n=>n>0).length,uptime:s.challenge.bestUptime||0,healthy:s.challenge.bestHealthy||0,defended:s.campaign?.battles.filter(v=>v.defeated>=3||!v.damage).length||0,stableSites:s.campaign?.sites.filter(v=>v.territory&&v.unrest<40).length||0})[key]||0;
 }
 export function nextTrial(s){const t=trials[s.rank+1];return t?{...t,current:trialValue(s,t.key),done:trialValue(s,t.key)>=t.target}:null;}
 export function tickChallenges(s,dt){

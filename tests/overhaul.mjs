@@ -17,8 +17,8 @@ console.log('PASS single continent and two mixed playable alliances');
 }
 {
  const s=new Simulation();s.build('warehouse',10,12,true);s.build('generator',10,10,true);s.warehouse.enabled=true;s.buildings[1].activeUntil=200;s.build('refinery',12,12,true);const b=s.at(12,12);b.inputs={oil:9,water:3};run(s,1);assert.equal(b.status,'도로 연결 필요');s.build('road',12,11,true);run(s,2);assert.equal(b.working,true);assert.ok(b.progress>0);
- s.stock.oil=240;s.rank=32;assert.equal(s.buy('oil',1).ok,false);s.build('depot',14,12,true);assert.equal(s.storageCapacity,360);assert.equal(s.buy('oil',1).ok,true);
- const field=s.build('field',11,14,true);s.at(11,14).out=10;s.stock.grain=360;for(const w of s.workers)s.refundTask(w);run(s,1);assert.equal(s.at(11,14).out,10,'full warehouse does not reserve unstoreable cargo');
+ s.rank=32;s.stock.oil=s.storageCapacity;assert.equal(s.buy('oil',1).ok,false);const base=s.storageCapacity;s.build('depot',14,12,true);assert.equal(s.storageCapacity,base+120);assert.equal(s.buy('oil',1).ok,true);
+ const field=s.build('field',11,14,true);s.at(11,14).out=10;s.stock.grain=s.storageCapacity;for(const w of s.workers)s.refundTask(w);run(s,1);assert.equal(s.at(11,14).out,10,'full warehouse does not reserve unstoreable cargo');
  console.log('PASS road-gated industry and storage limits preserve production cargo');
 }
 {

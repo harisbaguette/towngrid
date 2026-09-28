@@ -3,6 +3,9 @@ import {BUILDINGS} from './simulation.js';
 import {assignResidentAppearance} from './resident-roster.js';
 import {advanceCharacterRoute} from './character-movement.js';
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
+// Running ward facilities (output 'ward') cover d.wardRadius tiles (M4): attackers inside weaken and facilities inside
+// take no raid damage. While any ward holds (sim.wardUntil) demons cannot cut the power (audit H5).
+export const wardAt=(s,p)=>s.buildings.find(b=>BUILDINGS[b.type].output==='ward'&&b.health>0&&b.enabled!==false&&b.activeUntil>s.time&&distance(b,p)<BUILDINGS[b.type].wardRadius);
 export function startRaid(sim){
  if(sim.raid&&!sim.raid.finished)return;
  const sequence=sim.raidCount||0,faction=['demon','orc','beast'][sequence%3],strength=1+Math.max(0,sim.stage-8)*.055;
@@ -47,7 +50,7 @@ export function tickRaid(s,dt){
  }
  for(const w of active){
   w.delay=Math.max(0,w.delay-dt);if(w.delay)continue;
-  const ward=s.buildings.find(b=>b.type==='magetower'&&b.health>0&&b.enabled!==false&&b.activeUntil>s.time&&distance(b,w)<4.5);
+  const ward=wardAt(s,w);
   if(ward){w.hp=Math.max(0,w.hp-dt*15);w.hitUntil=s.time+.12;}
   if(w.hp<=0){r.defeated++;w.walking=false;w.attacking=false;w.until=s.time+2;s.sound('defeat',w.x,w.z);continue;}
   const guard=s.guards.filter(g=>g.hp>0&&distance(g,w)<1.35).sort((a,b)=>distance(a,w)-distance(b,w))[0];
@@ -62,8 +65,9 @@ export function tickRaid(s,dt){
   else{w.walking=false;w.dir=Math.atan2(target.x-w.x,target.z-w.z);if(s.time>=w.lastAttack+(guard?1.05:3.2)){
    w.lastAttack=s.time;s.sound('impact',w.x,w.z);
    if(guard)guard.hp=Math.max(0,guard.hp-5*r.strength);
+   else if(wardAt(s,target))s.sound('defend',target.x,target.z);
    else{target.health=Math.max(target.type==='warehouse'?15:0,target.health-10*r.strength);const loss=Math.min(Math.max(0,s.money)*.015,32*r.strength);s.money-=loss;r.damage+=loss;if(target.health===0)s.revision++;
-    if(!r.disrupted){r.disrupted=true;if(r.faction==='demon')s.outageUntil=s.time+20;if(r.faction==='beast')for(const route of s.campaign?.routes||[])if(route.from===s.siteId||route.to===s.siteId)route.ambush=25;}
+    if(!r.disrupted&&!(r.faction==='demon'&&s.wardUntil>s.time)){r.disrupted=true;if(r.faction==='demon')s.outageUntil=s.time+20;if(r.faction==='beast')for(const route of s.campaign?.routes||[])if(route.from===s.siteId||route.to===s.siteId)route.ambush=25;}
    }
   }}
  }
