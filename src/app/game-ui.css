@@ -349,7 +349,7 @@ button:focus-visible { outline: 3px solid #dfb94e; outline-offset: 3px; }
 .is-playing .build-dock::before,.is-playing .shop-awning,.is-playing .build-item::before{display:none}
 .is-playing .dock-header{height:43px;margin:0 0 3px;gap:8px;align-items:center;border:0}
 .is-playing .dock-title{font-family:inherit;font-size:16px;padding:0;color:#fffbe4}
-.is-playing .dock-header>[data-slot=tabs]{align-self:stretch;display:flex;align-items:center}
+.is-playing .dock-header>[data-slot=tabs]{align-self:stretch;display:flex;align-items:safe center}
 .is-playing .dock-header [data-slot=tabs-list]{height:36px;align-items:center;gap:2px;padding:0}
 .is-playing .dock-header [data-slot=tabs-trigger]{clip-path:none;height:32px;min-height:32px;padding:5px 9px;border:0;border-radius:7px;box-shadow:none;background:transparent;color:#e2f0f6;font-size:14px}
 .is-playing .dock-header [data-slot=tabs-trigger][data-state=active]{height:32px;padding:5px 9px;background:#fff7d7;color:#325c77;box-shadow:0 2px 0 #254f6c}
@@ -426,7 +426,7 @@ button:focus-visible { outline: 3px solid #dfb94e; outline-offset: 3px; }
 .is-playing .promotion-ready{font-size:13px;padding:8px}
 .is-playing .facility-marker{height:27px;border:2px solid #fffcef;border-radius:8px;color:#476376;background:#fffdefed;box-shadow:0 2px 0 #315d4580;padding:3px 5px;gap:4px;min-width:27px}
 .is-playing .facility-marker span{font-size:12px}
-.is-playing .facility-labels.minimal .facility-marker:not(.chosen) span,.is-playing .facility-labels.minimal .facility-marker:not(.chosen)>svg:last-of-type{display:none}
+.is-playing .facility-labels.minimal .facility-marker:not(.chosen) span,.is-playing .facility-labels.minimal .facility-marker:not(.chosen)>svg:last-of-type:not(:first-child){display:none}
 .is-playing .facility-labels.minimal .facility-marker.chosen span,.is-playing .facility-labels.minimal .facility-marker:hover span{display:block}
 .is-playing .facility-marker.fault{border-color:#ffe7a6;background:#fff5d8}
 .is-playing .facility-marker>i{height:3px;bottom:-2px;background:#67ad64}

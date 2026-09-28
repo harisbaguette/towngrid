@@ -1,0 +1,3774 @@
+{
+ "stateOverrides": [
+  {
+   "what": "sim.rank=max, sim.money=5e6, sim.stock[all goods]=400, sim.owned=all tiles, via page.evaluate",
+   "before": {
+    "rank": 0,
+    "money": 1020,
+    "owned": 64
+   },
+   "after": {
+    "rank": 32,
+    "rankName": "패권국",
+    "money": 5000000,
+    "owned": 576,
+    "stockEach": 400
+   }
+  }
+ ],
+ "errors": [],
+ "consoleErrors": [],
+ "failedRequests": [],
+ "steps": [
+  "new game + warehouse",
+  "build tabs at rank 0",
+  "build tabs at max rank",
+  "built 26/26 via UI",
+  "key e mem {\"heapMB\":107,\"fps\":\"60\"}",
+  "key e mem {\"heapMB\":85,\"fps\":\"60\"}",
+  "key e mem {\"heapMB\":90,\"fps\":\"60\"}",
+  "key e mem {\"heapMB\":94,\"fps\":\"60\"}",
+  "key q mem {\"heapMB\":98,\"fps\":\"60\"}",
+  "26 sheets + fps",
+  "processing",
+  "save/reload",
+  "phone",
+  "software"
+ ],
+ "load": {
+  "firstButtonMs": null,
+  "homeMs": 20996,
+  "newGameToWarehouseModeMs": 259
+ },
+ "renderer": {
+  "isSoftware": false,
+  "dataset": {
+   "engine": "three.js r186",
+   "cameraView": "남동",
+   "cameraQuarter": "0",
+   "cameraAzimuth": "0.7853981633974483",
+   "cameraPolar": "0.9553166181245092",
+   "fps": "2",
+   "renderer": "webgl",
+   "geometries": "0",
+   "textures": "0",
+   "models": "45",
+   "gameTime": "0.5",
+   "characterStyle": "pixel",
+   "characterFrames": "0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0"
+  }
+ },
+ "inputReaction": {
+  "warehouseClickChangedFrame": true,
+  "warehouse": [
+   11,
+   11
+  ]
+ },
+ "audioAfterFirstInput": "running",
+ "criterion1": {
+  "errorsAfterNewGame": 0,
+  "consoleErrorsAfterNewGame": 0,
+  "failedRequestsAfterNewGame": 0
+ },
+ "criterion2": {
+  "atStart": {
+   "tabs": {
+    "base": [
+     {
+      "label": "창고 건설",
+      "price": "건설됨",
+      "disabled": true,
+      "title": "재고와 출하의 중심입니다. 주민은 가까운 생산 시설끼리 직접 운반할 수도 있습니다. · 목재 6",
+      "imgOk": true
+     },
+     {
+      "label": "흙길 건설",
+      "price": "4",
+      "disabled": false,
+      "title": "운반자가 길 위에서 70% 빠르게 이동합니다.",
+      "imgOk": true
+     },
+     {
+      "label": "우물 건설",
+      "price": "60",
+      "disabled": false,
+      "title": "물통을 끌어올려 물을 공급합니다. · 석재 4",
+      "imgOk": true
+     },
+     {
+      "label": "벌목장 건설",
+      "price": "90",
+      "disabled": false,
+      "title": "네 칸 이내의 나무를 베어 목재를 얻습니다. · 목재 4",
+      "imgOk": true
+     },
+     {
+      "label": "채석장 건설",
+      "price": "100",
+      "disabled": false,
+      "title": "네 칸 이내의 바위에서 석재를 캡니다. · 목재 5",
+      "imgOk": true
+     },
+     {
+      "label": "자재 보관소 건설",
+      "price": "임차 사업주",
+      "disabled": true,
+      "title": "임차 사업주 승급 필요 · 각 자원의 보관 한도를 120개 늘립니다. 여러 곳 건설할 수 있습니다. · 판재 6 / 석재 4",
+      "imgOk": true
+     }
+    ],
+    "home": [
+     {
+      "label": "주민 주택 건설",
+      "price": "60",
+      "disabled": false,
+      "title": "가장 싼 기본 주택. 진영의 기본 종족(인간·엘프) 주민 1명이 살며 어느 시설이든 운반합니다. 개선할 때마다 1명씩 늘어 최대 3명이 삽니다.",
+      "imgOk": true
+     },
+     {
+      "label": "드워프 주택 건설",
+      "price": "공인 계약업자",
+      "disabled": true,
+      "title": "공인 계약업자 승급 필요 · 드워프 주민 1명이 삽니다. 개선할 때마다 1명씩 늘어 최대 3명이 삽니다. 기계 공장·제철소·증기 기계공장·미스릴",
+      "imgOk": true
+     },
+     {
+      "label": "티탄 주택 건설",
+      "price": "법인 대표",
+      "disabled": true,
+      "title": "법인 대표 승급 필요 · 티탄 주민 1명이 삽니다. 개선할 때마다 1명씩 늘어 최대 3명이 삽니다. 짐을 두 배로 나르지만 전자 공장·제약 공장",
+      "imgOk": true
+     }
+    ],
+    "farm": [
+     {
+      "label": "밀밭 건설",
+      "price": "45",
+      "disabled": false,
+      "title": "물을 공급받아 밀을 재배합니다. 강이나 급수탑 옆이면 물 운반 없이 자랍니다.",
+      "imgOk": true
+     },
+     {
+      "label": "어항 건설",
+      "price": "180",
+      "disabled": false,
+      "title": "강이나 바다에서 세 칸 이내에 건설하세요. 생선은 훈제장 원료가 됩니다. · 목재 10",
+      "imgOk": true
+     },
+     {
+      "label": "목화밭 건설",
+      "price": "계약 농노",
+      "disabled": true,
+      "title": "계약 농노 승급 필요 · 물을 받아 목화를 기릅니다. 강이나 급수탑 옆이면 물 운반 없이 자랍니다. · 목재 3",
+      "imgOk": true
+     },
+     {
+      "label": "약초원 건설",
+      "price": "준자유민",
+      "disabled": true,
+      "title": "준자유민 승급 필요 · 약초를 재배합니다. 진료소 치료와 결계 초소, 제약 공장에 쓰입니다. · 목재 4",
+      "imgOk": true
+     },
+     {
+      "label": "양계장 건설",
+      "price": "등록 사업주",
+      "disabled": true,
+      "title": "등록 사업주 승급 필요 · 밀과 물을 먹여 달걀을 얻습니다. 오염에 약합니다. · 판재 4 / 석재 2",
+      "imgOk": true
+     },
+     {
+      "label": "급수탑 건설",
+      "price": "지역 공급자",
+      "disabled": true,
+      "title": "지역 공급자 승급 필요 · 물 3개로 60초간 주변 두 칸의 밀밭에 관개합니다. 주민의 물 운반을 줄여줍니다. · 목재 8 / 석재 6",
+      "imgOk": true
+     },
+     {
+      "label": "말 축사 건설",
+      "price": "제조 허가업자",
+      "disabled": true,
+      "title": "제조 허가업자 승급 필요 · 먹이와 물을 공급하면 운반 속도가 35% 빨라집니다. · 목재 10",
+      "imgOk": true
+     }
+    ],
+    "craft": [
+     {
+      "label": "제재소 건설",
+      "price": "등록 농노",
+      "disabled": true,
+      "title": "등록 농노 승급 필요 · 원목을 투입하고 노출된 톱날로 판재를 가공합니다. · 목재 8 / 석재 3",
+      "imgOk": true
+     },
+     {
+      "label": "제분소 건설",
+      "price": "개간 농노",
+      "disabled": true,
+      "title": "개간 농노 승급 필요 · 밀을 갈아 밀가루 포대를 만듭니다. · 목재 10 / 석재 4",
+      "imgOk": true
+     },
+     {
+      "label": "훈제장 건설",
+      "price": "개간 농노",
+      "disabled": true,
+      "title": "개간 농노 승급 필요 · 생선을 장작 연기로 훈제해 오래 두는 식품으로 만듭니다. · 목재 6 / 석재 3",
+      "imgOk": true
+     },
+     {
+      "label": "빵집 건설",
+      "price": "계약 농노",
+      "disabled": true,
+      "title": "계약 농노 승급 필요 · 반죽을 장작 화덕에 넣어 빵을 굽습니다. · 목재 8 / 석재 6",
+      "imgOk": true
+     },
+     {
+      "label": "방직소 건설",
+      "price": "임차 사업주",
+      "disabled": true,
+      "title": "임차 사업주 승급 필요 · 목화에서 실을 뽑아 직물을 짭니다. · 판재 4 / 석재 2",
+      "imgOk": true
+     },
+     {
+      "label": "제과점 건설",
+      "price": "지역 공급자",
+      "disabled": true,
+      "title": "지역 공급자 승급 필요 · 밀가루와 달걀로 케이크를 굽습니다. 초반 최고가 식품입니다. · 판재 5 / 석재 4",
+      "imgOk": true
+     },
+     {
+      "label": "벽돌 가마 건설",
+      "price": "제조 허가업자",
+      "disabled": true,
+      "title": "제조 허가업자 승급 필요 · 석재를 구워 벽돌을 만듭니다. 3단계 개선과 중급 시설 건설에 쓰입니다. 연기가 한 칸 퍼집니다. · 석재 8 / ",
+      "imgOk": true
+     },
+     {
+      "label": "봉제소 건설",
+      "price": "지역 납품업자",
+      "disabled": true,
+      "title": "지역 납품업자 승급 필요 · 직물로 작업복을 짓습니다. 경비대 편성에도 쓰입니다. · 판재 6 / 벽돌 4",
+      "imgOk": true
+     },
+     {
+      "label": "유리 공방 건설",
+      "price": "지역 납품업자",
+      "disabled": true,
+      "title": "지역 납품업자 승급 필요 · 석재를 장작 불로 녹여 유리를 만듭니다. 연기가 두 칸 퍼집니다. · 벽돌 6 / 판재 4",
+      "imgOk": true
+     }
+    ],
+    "industry": [
+     {
+      "label": "진료소 건설",
+      "price": "준자유민",
+      "disabled": true,
+      "title": "준자유민 승급 필요 · 약초 1개와 물 1개를 정기적으로 소비해 초기 감염을 치료합니다. 산업화 뒤에는 병원과 의약품이 필요합니다. · 판재 6",
+      "imgOk": true
+     },
+     {
+      "label": "증기 발전소 건설",
+      "price": "개척 사업자",
+      "disabled": true,
+      "title": "개척 사업자 승급 필요 · 장작과 물로 증기를 만들어 산업 설비에 전력을 공급합니다. · 판재 8 / 석재 10",
+      "imgOk": true
+     },
+     {
+      "label": "기계 공장 건설",
+      "price": "개척 사업자",
+      "disabled": true,
+      "title": "개척 사업자 승급 필요 · 전력을 받아 판재와 석재를 기계 부품으로 가공합니다. · 판재 8 / 석재 8",
+      "imgOk": true
+     },
+     {
+      "label": "자동 물류센터 건설",
+      "price": "동력 제조업자",
+      "disabled": true,
+      "title": "동력 제조업자 승급 필요 · 전력이 공급되면 운반량이 두 배가 되고 운반 속도가 빨라집니다. · 판재 10 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "철광산 건설",
+      "price": "법인 대표",
+      "disabled": true,
+      "title": "법인 대표 승급 필요 · 타일의 광물량에 따라 철광석을 채굴합니다. · 판재 8 / 기계 부품 2",
+      "imgOk": true
+     },
+     {
+      "label": "탄광 건설",
+      "price": "법인 대표",
+      "disabled": true,
+      "title": "법인 대표 승급 필요 · 물을 공급해 석탄을 채굴합니다. 타일 광물량이 작업 속도에 영향을 줍니다. · 판재 6 / 기계 부품 2",
+      "imgOk": true
+     },
+     {
+      "label": "증기 기계공장 건설",
+      "price": "중공업 사업자",
+      "disabled": true,
+      "title": "중공업 사업자 승급 필요 · 강철·석탄·물을 사용해 증기기관으로 기계 부품을 대량 가공합니다. · 강철 8 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "제철소 건설",
+      "price": "중공업 사업자",
+      "disabled": true,
+      "title": "중공업 사업자 승급 필요 · 철광석과 석탄을 강철로 제련합니다. · 석재 12 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "구리 광산 건설",
+      "price": "에너지 사업자",
+      "disabled": true,
+      "title": "에너지 사업자 승급 필요 · 타일 광물량에 따라 구리광석을 캡니다. · 벽돌 6 / 기계 부품 2",
+      "imgOk": true
+     },
+     {
+      "label": "화학 공장 건설",
+      "price": "산업단지 운영자",
+      "disabled": true,
+      "title": "산업단지 운영자 승급 필요 · 원유를 가공해 자동차와 의약품에 쓰는 합성 소재를 생산합니다. · 강철 8 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "전선 공장 건설",
+      "price": "산업단지 운영자",
+      "disabled": true,
+      "title": "산업단지 운영자 승급 필요 · 구리를 녹여 전선을 뽑습니다. 회로와 마력 기관에 쓰입니다. · 벽돌 6 / 강철 4 / 기계 부품 2",
+      "imgOk": true
+     },
+     {
+      "label": "시멘트 공장 건설",
+      "price": "정밀 제조업자",
+      "disabled": true,
+      "title": "정밀 제조업자 승급 필요 · 석재와 석탄으로 콘크리트를 만듭니다. 후반 시설의 건설 자재입니다. · 벽돌 8 / 강철 4",
+      "imgOk": true
+     },
+     {
+      "label": "통조림 공장 건설",
+      "price": "광역 투자자",
+      "disabled": true,
+      "title": "광역 투자자 승급 필요 · 훈제 생선을 강철 캔에 담습니다. 방위 요새와 경비대 편성의 보급품입니다. · 강철 6 / 유리 2 / 기계 부품 2",
+      "imgOk": true
+     },
+     {
+      "label": "용광로 건설",
+      "price": "지역 강국",
+      "disabled": true,
+      "title": "지역 강국 승급 필요 · 대형 고로에서 강철을 한 번에 여섯 개씩 뽑아 냅니다. 오염이 세 칸 퍼집니다. · 콘크리트 8 / 강철 6",
+      "imgOk": true
+     }
+    ],
+    "energy": [
+     {
+      "label": "물레방아 건설",
+      "price": "공인 계약업자",
+      "disabled": true,
+      "title": "공인 계약업자 승급 필요 · 강이나 호수에서 두 칸 이내에 지으면 원료 없이 전력을 만듭니다. · 판재 8 / 석재 6",
+      "imgOk": true
+     },
+     {
+      "label": "풍력 발전기 건설",
+      "price": "동력 제조업자",
+      "disabled": true,
+      "title": "동력 제조업자 승급 필요 · 연료 없이 발전합니다. 주변 높은 건물이 바람을 가리면 느려집니다. · 판재 10 / 기계 부품 2",
+      "imgOk": true
+     },
+     {
+      "label": "유정 건설",
+      "price": "에너지 사업자",
+      "disabled": true,
+      "title": "에너지 사업자 승급 필요 · 타일의 지하 자원량에 따라 원유를 추출합니다. · 기계 부품 4 / 강철 4",
+      "imgOk": true
+     },
+     {
+      "label": "정유소 건설",
+      "price": "에너지 사업자",
+      "disabled": true,
+      "title": "에너지 사업자 승급 필요 · 원유와 물을 받아 운송 연료를 생산합니다. · 강철 8 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "마력 추출소 건설",
+      "price": "산업단지 운영자",
+      "disabled": true,
+      "title": "산업단지 운영자 승급 필요 · 타일의 마력 농도에 따라 마력 결정을 추출합니다. · 석재 10 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "마탑 건설",
+      "price": "정밀 제조업자",
+      "disabled": true,
+      "title": "정밀 제조업자 승급 필요 · 마력 결정과 회로로 반경 4.5칸에 결계를 칩니다. 결계 안의 시설은 습격 피해를 받지 않고 들어온 습격자는 약해집",
+      "imgOk": true
+     },
+     {
+      "label": "마력 발전소 건설",
+      "price": "기반시설 운영자",
+      "disabled": true,
+      "title": "기반시설 운영자 승급 필요 · 마력 결정으로 전력을 공급합니다. 모든 종족이 같은 발전 기술을 연구합니다. · 강철 8 / 구리 전선 4 / 회",
+      "imgOk": true
+     },
+     {
+      "label": "축전 시설 건설",
+      "price": "기반시설 운영자",
+      "disabled": true,
+      "title": "기반시설 운영자 승급 필요 · 정상 전력을 저장해 마력 폭풍 중에도 전력 공급을 유지합니다. · 강철 6 / 구리 전선 6 / 회로 3",
+      "imgOk": true
+     }
+    ],
+    "advanced": [
+     {
+      "label": "전자 공장 건설",
+      "price": "정밀 제조업자",
+      "disabled": true,
+      "title": "정밀 제조업자 승급 필요 · 구리 전선과 마력 결정으로 전자·마력 제어 회로를 조립합니다. · 강철 6 / 유리 4 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "자동차 공장 건설",
+      "price": "자동차 제조사",
+      "disabled": true,
+      "title": "자동차 제조사 승급 필요 · 강철·기계 부품·회로·합성 소재·유리를 공급해 자동차를 조립합니다. 모든 종족이 운영합니다. · 강철 12 / 기계",
+      "imgOk": true
+     },
+     {
+      "label": "제약 공장 건설",
+      "price": "기술 기업군",
+      "disabled": true,
+      "title": "기술 기업군 승급 필요 · 물·약초·합성 소재·유리로 의약품을 제조합니다. · 강철 4 / 유리 4 / 회로 3",
+      "imgOk": true
+     },
+     {
+      "label": "마력등 공방 건설",
+      "price": "치안권 보유자",
+      "disabled": true,
+      "title": "치안권 보유자 승급 필요 · 유리 등갓에 마력 결정과 전선을 넣어 마력등을 조립합니다. · 강철 6 / 유리 6 / 콘크리트 4",
+      "imgOk": true
+     },
+     {
+      "label": "마력 기관 공장 건설",
+      "price": "재정 운영권자",
+      "disabled": true,
+      "title": "재정 운영권자 승급 필요 · 부품과 전선에 마력 결정을 넣어 비공정용 마력 기관을 만듭니다. · 강철 8 / 콘크리트 6 / 회로 3",
+      "imgOk": true
+     },
+     {
+      "label": "미스릴 정련소 건설",
+      "price": "자치구 대표",
+      "disabled": true,
+      "title": "자치구 대표 승급 필요 · 강철에 마력을 녹여 가볍고 단단한 미스릴 강을 만듭니다. 열기가 두 칸 퍼집니다. · 콘크리트 8 / 강철 8 / 회",
+      "imgOk": true
+     },
+     {
+      "label": "비공정 조선소 건설",
+      "price": "독립 선언국",
+      "disabled": true,
+      "title": "독립 선언국 승급 필요 · 마력 기관·미스릴 선체·직물 기낭을 조립해 비공정을 띄웁니다. · 콘크리트 12 / 미스릴 강 4 / 회로 4",
+      "imgOk": true
+     },
+     {
+      "label": "자동 조립 공장 건설",
+      "price": "다지역 연방",
+      "disabled": true,
+      "title": "다지역 연방 승급 필요 · 컨베이어 조립 라인으로 자동차를 두 대씩 생산합니다. 같은 자동차를 더 적은 부품으로 만듭니다. · 콘크리트 12 /",
+      "imgOk": true
+     }
+    ],
+    "transport": [
+     {
+      "label": "화물역 건설",
+      "price": "광역 투자자",
+      "disabled": true,
+      "title": "광역 투자자 승급 필요 · 역 옆에 선로가 연결되면 거점 간 철도 화물 노선을 운영할 수 있습니다. · 강철 8 / 콘크리트 6 / 기계 부품 ",
+      "imgOk": true
+     },
+     {
+      "label": "철도 건설",
+      "price": "광역 투자자",
+      "disabled": true,
+      "title": "광역 투자자 승급 필요 · 역에 연결하는 선로. 선로에서 운반자가 빠르게 이동합니다. · 강철 1",
+      "imgOk": true
+     },
+     {
+      "label": "마력 중계소 건설",
+      "price": "기반시설 운영자",
+      "disabled": true,
+      "title": "기반시설 운영자 승급 필요 · 양쪽 거점에서 가동하면 트럭과 철도의 운송 시간이 20% 짧아집니다. · 강철 8 / 회로 4",
+      "imgOk": true
+     },
+     {
+      "label": "비공정 선착장 건설",
+      "price": "승인 독립국",
+      "disabled": true,
+      "title": "승인 독립국 승급 필요 · 양쪽 거점에 운송 가속 시설이 가동하면 트럭·철도 운송 시간이 40% 짧아집니다. · 콘크리트 8 / 강철 6 / 마",
+      "imgOk": true
+     }
+    ],
+    "civic": [
+     {
+      "label": "장터 건설",
+      "price": "등록 사업주",
+      "disabled": true,
+      "title": "등록 사업주 승급 필요 · 상인이 모여 판매 후 떨어진 시세가 30% 빨리 회복됩니다. · 판재 6 / 석재 6",
+      "imgOk": true
+     },
+     {
+      "label": "결계 초소 건설",
+      "price": "중공업 사업자",
+      "disabled": true,
+      "title": "중공업 사업자 승급 필요 · 약초를 태워 반경 3칸에 결계를 칩니다. 결계 안의 시설은 습격 피해를 받지 않고 들어온 습격자는 약해집니다. 결계",
+      "imgOk": true
+     },
+     {
+      "label": "종합 병원 건설",
+      "price": "기술 기업군",
+      "disabled": true,
+      "title": "기술 기업군 승급 필요 · 의약품을 공급하면 마력성 질병을 예방하고 주민 지지를 높입니다. · 콘크리트 6 / 유리 4 / 회로 3",
+      "imgOk": true
+     },
+     {
+      "label": "투자 사무소 건설",
+      "price": "개발구 운영권자",
+      "disabled": true,
+      "title": "개발구 운영권자 승급 필요 · 세계 지도에서 산업 투자에 출자하면 일일 배당을 받습니다. · 콘크리트 6 / 유리 3 / 기계 부품 3",
+      "imgOk": true
+     },
+     {
+      "label": "경비대 본부 건설",
+      "price": "개발구 운영권자",
+      "disabled": true,
+      "title": "개발구 운영권자 승급 필요 · 경비대를 편성해 습격을 방어하고 치안권·독립 조건을 준비합니다. · 콘크리트 8 / 강철 6 / 기계 부품 3",
+      "imgOk": true
+     },
+     {
+      "label": "방위 요새 건설",
+      "price": "치안권 보유자",
+      "disabled": true,
+      "title": "치안권 보유자 승급 필요 · 통조림과 콘크리트를 받으면 반경 5.5칸에 방어선을 칩니다. 방어선 안의 시설은 습격 피해를 받지 않고 들어온 습격",
+      "imgOk": true
+     },
+     {
+      "label": "의사당 건설",
+      "price": "자치정부 수장",
+      "disabled": true,
+      "title": "자치정부 수장 승급 필요 · 모든 거점의 불만이 매일 2씩 더 내려갑니다. 독립 선언의 조건입니다. · 콘크리트 12 / 유리 6 / 마력등 4",
+      "imgOk": true
+     },
+     {
+      "label": "대륙 거래소 건설",
+      "price": "열강",
+      "disabled": true,
+      "title": "열강 승급 필요 · 수출 마차가 2대 늘어 동시에 5대가 운행합니다. · 콘크리트 10 / 유리 6 / 미스릴 강 2",
+      "imgOk": true
+     }
+    ]
+   },
+   "newFacilities": [
+    {
+     "t": "cottonfield",
+     "name": "목화밭",
+     "group": "farm",
+     "unlock": 3,
+     "unlockName": "계약 농노",
+     "cost": 55,
+     "shown": true,
+     "price": "계약 농노",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "herbgarden",
+     "name": "약초원",
+     "group": "farm",
+     "unlock": 4,
+     "unlockName": "준자유민",
+     "cost": 70,
+     "shown": true,
+     "price": "준자유민",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "henhouse",
+     "name": "양계장",
+     "group": "farm",
+     "unlock": 6,
+     "unlockName": "등록 사업주",
+     "cost": 120,
+     "shown": true,
+     "price": "등록 사업주",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "smokehouse",
+     "name": "훈제장",
+     "group": "craft",
+     "unlock": 2,
+     "unlockName": "개간 농노",
+     "cost": 130,
+     "shown": true,
+     "price": "개간 농노",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "weaver",
+     "name": "방직소",
+     "group": "craft",
+     "unlock": 5,
+     "unlockName": "임차 사업주",
+     "cost": 160,
+     "shown": true,
+     "price": "임차 사업주",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "confectionery",
+     "name": "제과점",
+     "group": "craft",
+     "unlock": 7,
+     "unlockName": "지역 공급자",
+     "cost": 260,
+     "shown": true,
+     "price": "지역 공급자",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "kiln",
+     "name": "벽돌 가마",
+     "group": "craft",
+     "unlock": 8,
+     "unlockName": "제조 허가업자",
+     "cost": 200,
+     "shown": true,
+     "price": "제조 허가업자",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "tailor",
+     "name": "봉제소",
+     "group": "craft",
+     "unlock": 9,
+     "unlockName": "지역 납품업자",
+     "cost": 320,
+     "shown": true,
+     "price": "지역 납품업자",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "glassworks",
+     "name": "유리 공방",
+     "group": "craft",
+     "unlock": 9,
+     "unlockName": "지역 납품업자",
+     "cost": 340,
+     "shown": true,
+     "price": "지역 납품업자",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "coppermine",
+     "name": "구리 광산",
+     "group": "industry",
+     "unlock": 15,
+     "unlockName": "에너지 사업자",
+     "cost": 400,
+     "shown": true,
+     "price": "에너지 사업자",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "wiremill",
+     "name": "전선 공장",
+     "group": "industry",
+     "unlock": 16,
+     "unlockName": "산업단지 운영자",
+     "cost": 1100,
+     "shown": true,
+     "price": "산업단지 운영자",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "cementworks",
+     "name": "시멘트 공장",
+     "group": "industry",
+     "unlock": 17,
+     "unlockName": "정밀 제조업자",
+     "cost": 1200,
+     "shown": true,
+     "price": "정밀 제조업자",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "cannery",
+     "name": "통조림 공장",
+     "group": "industry",
+     "unlock": 18,
+     "unlockName": "광역 투자자",
+     "cost": 1500,
+     "shown": true,
+     "price": "광역 투자자",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "lampworks",
+     "name": "마력등 공방",
+     "group": "advanced",
+     "unlock": 23,
+     "unlockName": "치안권 보유자",
+     "cost": 2600,
+     "shown": true,
+     "price": "치안권 보유자",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "engineworks",
+     "name": "마력 기관 공장",
+     "group": "advanced",
+     "unlock": 24,
+     "unlockName": "재정 운영권자",
+     "cost": 4200,
+     "shown": true,
+     "price": "재정 운영권자",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "mithrilforge",
+     "name": "미스릴 정련소",
+     "group": "advanced",
+     "unlock": 25,
+     "unlockName": "자치구 대표",
+     "cost": 4800,
+     "shown": true,
+     "price": "자치구 대표",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "shipyard",
+     "name": "비공정 조선소",
+     "group": "advanced",
+     "unlock": 27,
+     "unlockName": "독립 선언국",
+     "cost": 9000,
+     "shown": true,
+     "price": "독립 선언국",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "blastfurnace",
+     "name": "용광로",
+     "group": "industry",
+     "unlock": 29,
+     "unlockName": "지역 강국",
+     "cost": 3500,
+     "shown": true,
+     "price": "지역 강국",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "assemblyline",
+     "name": "자동 조립 공장",
+     "group": "advanced",
+     "unlock": 30,
+     "unlockName": "다지역 연방",
+     "cost": 9500,
+     "shown": true,
+     "price": "다지역 연방",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "watermill",
+     "name": "물레방아",
+     "group": "energy",
+     "unlock": 10,
+     "unlockName": "공인 계약업자",
+     "cost": 300,
+     "shown": true,
+     "price": "공인 계약업자",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "marketplace",
+     "name": "장터",
+     "group": "civic",
+     "unlock": 6,
+     "unlockName": "등록 사업주",
+     "cost": 350,
+     "shown": true,
+     "price": "등록 사업주",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "wardpost",
+     "name": "결계 초소",
+     "group": "civic",
+     "unlock": 14,
+     "unlockName": "중공업 사업자",
+     "cost": 450,
+     "shown": true,
+     "price": "중공업 사업자",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "fortress",
+     "name": "방위 요새",
+     "group": "civic",
+     "unlock": 23,
+     "unlockName": "치안권 보유자",
+     "cost": 2500,
+     "shown": true,
+     "price": "치안권 보유자",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "parliament",
+     "name": "의사당",
+     "group": "civic",
+     "unlock": 26,
+     "unlockName": "자치정부 수장",
+     "cost": 6000,
+     "shown": true,
+     "price": "자치정부 수장",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "airdock",
+     "name": "비공정 선착장",
+     "group": "transport",
+     "unlock": 28,
+     "unlockName": "승인 독립국",
+     "cost": 5000,
+     "shown": true,
+     "price": "승인 독립국",
+     "disabled": true,
+     "iconLoaded": true
+    },
+    {
+     "t": "exchange",
+     "name": "대륙 거래소",
+     "group": "civic",
+     "unlock": 31,
+     "unlockName": "열강",
+     "cost": 8000,
+     "shown": true,
+     "price": "열강",
+     "disabled": true,
+     "iconLoaded": true
+    }
+   ]
+  },
+  "atMaxRank": {
+   "tabs": {
+    "base": [
+     {
+      "label": "창고 건설",
+      "price": "건설됨",
+      "disabled": true,
+      "title": "재고와 출하의 중심입니다. 주민은 가까운 생산 시설끼리 직접 운반할 수도 있습니다. · 목재 6",
+      "imgOk": true
+     },
+     {
+      "label": "흙길 건설",
+      "price": "4",
+      "disabled": false,
+      "title": "운반자가 길 위에서 70% 빠르게 이동합니다.",
+      "imgOk": true
+     },
+     {
+      "label": "우물 건설",
+      "price": "60",
+      "disabled": false,
+      "title": "물통을 끌어올려 물을 공급합니다. · 석재 4",
+      "imgOk": true
+     },
+     {
+      "label": "벌목장 건설",
+      "price": "90",
+      "disabled": false,
+      "title": "네 칸 이내의 나무를 베어 목재를 얻습니다. · 목재 4",
+      "imgOk": true
+     },
+     {
+      "label": "채석장 건설",
+      "price": "100",
+      "disabled": false,
+      "title": "네 칸 이내의 바위에서 석재를 캡니다. · 목재 5",
+      "imgOk": true
+     },
+     {
+      "label": "자재 보관소 건설",
+      "price": "220",
+      "disabled": false,
+      "title": "각 자원의 보관 한도를 120개 늘립니다. 여러 곳 건설할 수 있습니다. · 판재 6 / 석재 4",
+      "imgOk": true
+     }
+    ],
+    "home": [
+     {
+      "label": "주민 주택 건설",
+      "price": "60",
+      "disabled": false,
+      "title": "가장 싼 기본 주택. 진영의 기본 종족(인간·엘프) 주민 1명이 살며 어느 시설이든 운반합니다. 개선할 때마다 1명씩 늘어 최대 3명이 삽니다.",
+      "imgOk": true
+     },
+     {
+      "label": "드워프 주택 건설",
+      "price": "140",
+      "disabled": false,
+      "title": "드워프 주민 1명이 삽니다. 개선할 때마다 1명씩 늘어 최대 3명이 삽니다. 기계 공장·제철소·증기 기계공장·미스릴 정련소·용광로는 드워프만 다",
+      "imgOk": true
+     },
+     {
+      "label": "티탄 주택 건설",
+      "price": "180",
+      "disabled": false,
+      "title": "티탄 주민 1명이 삽니다. 개선할 때마다 1명씩 늘어 최대 3명이 삽니다. 짐을 두 배로 나르지만 전자 공장·제약 공장·종합 병원·마탑·마력등 ",
+      "imgOk": true
+     }
+    ],
+    "farm": [
+     {
+      "label": "밀밭 건설",
+      "price": "45",
+      "disabled": false,
+      "title": "물을 공급받아 밀을 재배합니다. 강이나 급수탑 옆이면 물 운반 없이 자랍니다.",
+      "imgOk": true
+     },
+     {
+      "label": "어항 건설",
+      "price": "180",
+      "disabled": false,
+      "title": "강이나 바다에서 세 칸 이내에 건설하세요. 생선은 훈제장 원료가 됩니다. · 목재 10",
+      "imgOk": true
+     },
+     {
+      "label": "목화밭 건설",
+      "price": "55",
+      "disabled": false,
+      "title": "물을 받아 목화를 기릅니다. 강이나 급수탑 옆이면 물 운반 없이 자랍니다. · 목재 3",
+      "imgOk": true
+     },
+     {
+      "label": "약초원 건설",
+      "price": "70",
+      "disabled": false,
+      "title": "약초를 재배합니다. 진료소 치료와 결계 초소, 제약 공장에 쓰입니다. · 목재 4",
+      "imgOk": true
+     },
+     {
+      "label": "양계장 건설",
+      "price": "120",
+      "disabled": false,
+      "title": "밀과 물을 먹여 달걀을 얻습니다. 오염에 약합니다. · 판재 4 / 석재 2",
+      "imgOk": true
+     },
+     {
+      "label": "급수탑 건설",
+      "price": "180",
+      "disabled": false,
+      "title": "물 3개로 60초간 주변 두 칸의 밀밭에 관개합니다. 주민의 물 운반을 줄여줍니다. · 목재 8 / 석재 6",
+      "imgOk": true
+     },
+     {
+      "label": "말 축사 건설",
+      "price": "160",
+      "disabled": false,
+      "title": "먹이와 물을 공급하면 운반 속도가 35% 빨라집니다. · 목재 10",
+      "imgOk": true
+     }
+    ],
+    "craft": [
+     {
+      "label": "제재소 건설",
+      "price": "150",
+      "disabled": false,
+      "title": "원목을 투입하고 노출된 톱날로 판재를 가공합니다. · 목재 8 / 석재 3",
+      "imgOk": true
+     },
+     {
+      "label": "제분소 건설",
+      "price": "170",
+      "disabled": false,
+      "title": "밀을 갈아 밀가루 포대를 만듭니다. · 목재 10 / 석재 4",
+      "imgOk": true
+     },
+     {
+      "label": "훈제장 건설",
+      "price": "130",
+      "disabled": false,
+      "title": "생선을 장작 연기로 훈제해 오래 두는 식품으로 만듭니다. · 목재 6 / 석재 3",
+      "imgOk": true
+     },
+     {
+      "label": "빵집 건설",
+      "price": "200",
+      "disabled": false,
+      "title": "반죽을 장작 화덕에 넣어 빵을 굽습니다. · 목재 8 / 석재 6",
+      "imgOk": true
+     },
+     {
+      "label": "방직소 건설",
+      "price": "160",
+      "disabled": false,
+      "title": "목화에서 실을 뽑아 직물을 짭니다. · 판재 4 / 석재 2",
+      "imgOk": true
+     },
+     {
+      "label": "제과점 건설",
+      "price": "260",
+      "disabled": false,
+      "title": "밀가루와 달걀로 케이크를 굽습니다. 초반 최고가 식품입니다. · 판재 5 / 석재 4",
+      "imgOk": true
+     },
+     {
+      "label": "벽돌 가마 건설",
+      "price": "200",
+      "disabled": false,
+      "title": "석재를 구워 벽돌을 만듭니다. 3단계 개선과 중급 시설 건설에 쓰입니다. 연기가 한 칸 퍼집니다. · 석재 8 / 목재 4",
+      "imgOk": true
+     },
+     {
+      "label": "봉제소 건설",
+      "price": "320",
+      "disabled": false,
+      "title": "직물로 작업복을 짓습니다. 경비대 편성에도 쓰입니다. · 판재 6 / 벽돌 4",
+      "imgOk": true
+     },
+     {
+      "label": "유리 공방 건설",
+      "price": "340",
+      "disabled": false,
+      "title": "석재를 장작 불로 녹여 유리를 만듭니다. 연기가 두 칸 퍼집니다. · 벽돌 6 / 판재 4",
+      "imgOk": true
+     }
+    ],
+    "industry": [
+     {
+      "label": "진료소 건설",
+      "price": "220",
+      "disabled": false,
+      "title": "약초 1개와 물 1개를 정기적으로 소비해 초기 감염을 치료합니다. 산업화 뒤에는 병원과 의약품이 필요합니다. · 판재 6 / 석재 6",
+      "imgOk": true
+     },
+     {
+      "label": "증기 발전소 건설",
+      "price": "260",
+      "disabled": false,
+      "title": "장작과 물로 증기를 만들어 산업 설비에 전력을 공급합니다. · 판재 8 / 석재 10",
+      "imgOk": true
+     },
+     {
+      "label": "기계 공장 건설",
+      "price": "280",
+      "disabled": false,
+      "title": "전력을 받아 판재와 석재를 기계 부품으로 가공합니다. · 판재 8 / 석재 8",
+      "imgOk": true
+     },
+     {
+      "label": "자동 물류센터 건설",
+      "price": "350",
+      "disabled": false,
+      "title": "전력이 공급되면 운반량이 두 배가 되고 운반 속도가 빨라집니다. · 판재 10 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "철광산 건설",
+      "price": "380",
+      "disabled": false,
+      "title": "타일의 광물량에 따라 철광석을 채굴합니다. · 판재 8 / 기계 부품 2",
+      "imgOk": true
+     },
+     {
+      "label": "탄광 건설",
+      "price": "330",
+      "disabled": false,
+      "title": "물을 공급해 석탄을 채굴합니다. 타일 광물량이 작업 속도에 영향을 줍니다. · 판재 6 / 기계 부품 2",
+      "imgOk": true
+     },
+     {
+      "label": "증기 기계공장 건설",
+      "price": "560",
+      "disabled": false,
+      "title": "강철·석탄·물을 사용해 증기기관으로 기계 부품을 대량 가공합니다. · 강철 8 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "제철소 건설",
+      "price": "900",
+      "disabled": false,
+      "title": "철광석과 석탄을 강철로 제련합니다. · 석재 12 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "구리 광산 건설",
+      "price": "400",
+      "disabled": false,
+      "title": "타일 광물량에 따라 구리광석을 캡니다. · 벽돌 6 / 기계 부품 2",
+      "imgOk": true
+     },
+     {
+      "label": "화학 공장 건설",
+      "price": "1,000",
+      "disabled": false,
+      "title": "원유를 가공해 자동차와 의약품에 쓰는 합성 소재를 생산합니다. · 강철 8 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "전선 공장 건설",
+      "price": "1,100",
+      "disabled": false,
+      "title": "구리를 녹여 전선을 뽑습니다. 회로와 마력 기관에 쓰입니다. · 벽돌 6 / 강철 4 / 기계 부품 2",
+      "imgOk": true
+     },
+     {
+      "label": "시멘트 공장 건설",
+      "price": "1,200",
+      "disabled": false,
+      "title": "석재와 석탄으로 콘크리트를 만듭니다. 후반 시설의 건설 자재입니다. · 벽돌 8 / 강철 4",
+      "imgOk": true
+     },
+     {
+      "label": "통조림 공장 건설",
+      "price": "1,500",
+      "disabled": false,
+      "title": "훈제 생선을 강철 캔에 담습니다. 방위 요새와 경비대 편성의 보급품입니다. · 강철 6 / 유리 2 / 기계 부품 2",
+      "imgOk": true
+     },
+     {
+      "label": "용광로 건설",
+      "price": "3,500",
+      "disabled": false,
+      "title": "대형 고로에서 강철을 한 번에 여섯 개씩 뽑아 냅니다. 오염이 세 칸 퍼집니다. · 콘크리트 8 / 강철 6",
+      "imgOk": true
+     }
+    ],
+    "energy": [
+     {
+      "label": "물레방아 건설",
+      "price": "300",
+      "disabled": false,
+      "title": "강이나 호수에서 두 칸 이내에 지으면 원료 없이 전력을 만듭니다. · 판재 8 / 석재 6",
+      "imgOk": true
+     },
+     {
+      "label": "풍력 발전기 건설",
+      "price": "330",
+      "disabled": false,
+      "title": "연료 없이 발전합니다. 주변 높은 건물이 바람을 가리면 느려집니다. · 판재 10 / 기계 부품 2",
+      "imgOk": true
+     },
+     {
+      "label": "유정 건설",
+      "price": "420",
+      "disabled": false,
+      "title": "타일의 지하 자원량에 따라 원유를 추출합니다. · 기계 부품 4 / 강철 4",
+      "imgOk": true
+     },
+     {
+      "label": "정유소 건설",
+      "price": "1,000",
+      "disabled": false,
+      "title": "원유와 물을 받아 운송 연료를 생산합니다. · 강철 8 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "마력 추출소 건설",
+      "price": "620",
+      "disabled": false,
+      "title": "타일의 마력 농도에 따라 마력 결정을 추출합니다. · 석재 10 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "마탑 건설",
+      "price": "700",
+      "disabled": false,
+      "title": "마력 결정과 회로로 반경 4.5칸에 결계를 칩니다. 결계 안의 시설은 습격 피해를 받지 않고 들어온 습격자는 약해집니다. 결계가 유지되는 동안 ",
+      "imgOk": true
+     },
+     {
+      "label": "마력 발전소 건설",
+      "price": "1,900",
+      "disabled": false,
+      "title": "마력 결정으로 전력을 공급합니다. 모든 종족이 같은 발전 기술을 연구합니다. · 강철 8 / 구리 전선 4 / 회로 3",
+      "imgOk": true
+     },
+     {
+      "label": "축전 시설 건설",
+      "price": "1,400",
+      "disabled": false,
+      "title": "정상 전력을 저장해 마력 폭풍 중에도 전력 공급을 유지합니다. · 강철 6 / 구리 전선 6 / 회로 3",
+      "imgOk": true
+     }
+    ],
+    "advanced": [
+     {
+      "label": "전자 공장 건설",
+      "price": "1,600",
+      "disabled": false,
+      "title": "구리 전선과 마력 결정으로 전자·마력 제어 회로를 조립합니다. · 강철 6 / 유리 4 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "자동차 공장 건설",
+      "price": "3,000",
+      "disabled": false,
+      "title": "강철·기계 부품·회로·합성 소재·유리를 공급해 자동차를 조립합니다. 모든 종족이 운영합니다. · 강철 12 / 기계 부품 8 / 회로 4",
+      "imgOk": true
+     },
+     {
+      "label": "제약 공장 건설",
+      "price": "2,000",
+      "disabled": false,
+      "title": "물·약초·합성 소재·유리로 의약품을 제조합니다. · 강철 4 / 유리 4 / 회로 3",
+      "imgOk": true
+     },
+     {
+      "label": "마력등 공방 건설",
+      "price": "2,600",
+      "disabled": false,
+      "title": "유리 등갓에 마력 결정과 전선을 넣어 마력등을 조립합니다. · 강철 6 / 유리 6 / 콘크리트 4",
+      "imgOk": true
+     },
+     {
+      "label": "마력 기관 공장 건설",
+      "price": "4,200",
+      "disabled": false,
+      "title": "부품과 전선에 마력 결정을 넣어 비공정용 마력 기관을 만듭니다. · 강철 8 / 콘크리트 6 / 회로 3",
+      "imgOk": true
+     },
+     {
+      "label": "미스릴 정련소 건설",
+      "price": "4,800",
+      "disabled": false,
+      "title": "강철에 마력을 녹여 가볍고 단단한 미스릴 강을 만듭니다. 열기가 두 칸 퍼집니다. · 콘크리트 8 / 강철 8 / 회로 2",
+      "imgOk": true
+     },
+     {
+      "label": "비공정 조선소 건설",
+      "price": "9,000",
+      "disabled": false,
+      "title": "마력 기관·미스릴 선체·직물 기낭을 조립해 비공정을 띄웁니다. · 콘크리트 12 / 미스릴 강 4 / 회로 4",
+      "imgOk": true
+     },
+     {
+      "label": "자동 조립 공장 건설",
+      "price": "9,500",
+      "disabled": false,
+      "title": "컨베이어 조립 라인으로 자동차를 두 대씩 생산합니다. 같은 자동차를 더 적은 부품으로 만듭니다. · 콘크리트 12 / 강철 10 / 회로 6",
+      "imgOk": true
+     }
+    ],
+    "transport": [
+     {
+      "label": "화물역 건설",
+      "price": "1,400",
+      "disabled": false,
+      "title": "역 옆에 선로가 연결되면 거점 간 철도 화물 노선을 운영할 수 있습니다. · 강철 8 / 콘크리트 6 / 기계 부품 4",
+      "imgOk": true
+     },
+     {
+      "label": "철도 건설",
+      "price": "12",
+      "disabled": false,
+      "title": "역에 연결하는 선로. 선로에서 운반자가 빠르게 이동합니다. · 강철 1",
+      "imgOk": true
+     },
+     {
+      "label": "마력 중계소 건설",
+      "price": "880",
+      "disabled": false,
+      "title": "양쪽 거점에서 가동하면 트럭과 철도의 운송 시간이 20% 짧아집니다. · 강철 8 / 회로 4",
+      "imgOk": true
+     },
+     {
+      "label": "비공정 선착장 건설",
+      "price": "5,000",
+      "disabled": false,
+      "title": "양쪽 거점에 운송 가속 시설이 가동하면 트럭·철도 운송 시간이 40% 짧아집니다. · 콘크리트 8 / 강철 6 / 마력 기관 2",
+      "imgOk": true
+     }
+    ],
+    "civic": [
+     {
+      "label": "장터 건설",
+      "price": "350",
+      "disabled": false,
+      "title": "상인이 모여 판매 후 떨어진 시세가 30% 빨리 회복됩니다. · 판재 6 / 석재 6",
+      "imgOk": true
+     },
+     {
+      "label": "결계 초소 건설",
+      "price": "450",
+      "disabled": false,
+      "title": "약초를 태워 반경 3칸에 결계를 칩니다. 결계 안의 시설은 습격 피해를 받지 않고 들어온 습격자는 약해집니다. 결계가 유지되는 동안 마족의 전력",
+      "imgOk": true
+     },
+     {
+      "label": "종합 병원 건설",
+      "price": "1,800",
+      "disabled": false,
+      "title": "의약품을 공급하면 마력성 질병을 예방하고 주민 지지를 높입니다. · 콘크리트 6 / 유리 4 / 회로 3",
+      "imgOk": true
+     },
+     {
+      "label": "투자 사무소 건설",
+      "price": "1,800",
+      "disabled": false,
+      "title": "세계 지도에서 산업 투자에 출자하면 일일 배당을 받습니다. · 콘크리트 6 / 유리 3 / 기계 부품 3",
+      "imgOk": true
+     },
+     {
+      "label": "경비대 본부 건설",
+      "price": "1,900",
+      "disabled": false,
+      "title": "경비대를 편성해 습격을 방어하고 치안권·독립 조건을 준비합니다. · 콘크리트 8 / 강철 6 / 기계 부품 3",
+      "imgOk": true
+     },
+     {
+      "label": "방위 요새 건설",
+      "price": "2,500",
+      "disabled": false,
+      "title": "통조림과 콘크리트를 받으면 반경 5.5칸에 방어선을 칩니다. 방어선 안의 시설은 습격 피해를 받지 않고 들어온 습격자는 약해집니다. 방어선이 유",
+      "imgOk": true
+     },
+     {
+      "label": "의사당 건설",
+      "price": "6,000",
+      "disabled": false,
+      "title": "모든 거점의 불만이 매일 2씩 더 내려갑니다. 독립 선언의 조건입니다. · 콘크리트 12 / 유리 6 / 마력등 4",
+      "imgOk": true
+     },
+     {
+      "label": "대륙 거래소 건설",
+      "price": "8,000",
+      "disabled": false,
+      "title": "수출 마차가 2대 늘어 동시에 5대가 운행합니다. · 콘크리트 10 / 유리 6 / 미스릴 강 2",
+      "imgOk": true
+     }
+    ]
+   },
+   "newFacilities": [
+    {
+     "t": "cottonfield",
+     "name": "목화밭",
+     "group": "farm",
+     "unlock": 3,
+     "unlockName": "계약 농노",
+     "cost": 55,
+     "shown": true,
+     "price": "55",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "herbgarden",
+     "name": "약초원",
+     "group": "farm",
+     "unlock": 4,
+     "unlockName": "준자유민",
+     "cost": 70,
+     "shown": true,
+     "price": "70",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "henhouse",
+     "name": "양계장",
+     "group": "farm",
+     "unlock": 6,
+     "unlockName": "등록 사업주",
+     "cost": 120,
+     "shown": true,
+     "price": "120",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "smokehouse",
+     "name": "훈제장",
+     "group": "craft",
+     "unlock": 2,
+     "unlockName": "개간 농노",
+     "cost": 130,
+     "shown": true,
+     "price": "130",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "weaver",
+     "name": "방직소",
+     "group": "craft",
+     "unlock": 5,
+     "unlockName": "임차 사업주",
+     "cost": 160,
+     "shown": true,
+     "price": "160",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "confectionery",
+     "name": "제과점",
+     "group": "craft",
+     "unlock": 7,
+     "unlockName": "지역 공급자",
+     "cost": 260,
+     "shown": true,
+     "price": "260",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "kiln",
+     "name": "벽돌 가마",
+     "group": "craft",
+     "unlock": 8,
+     "unlockName": "제조 허가업자",
+     "cost": 200,
+     "shown": true,
+     "price": "200",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "tailor",
+     "name": "봉제소",
+     "group": "craft",
+     "unlock": 9,
+     "unlockName": "지역 납품업자",
+     "cost": 320,
+     "shown": true,
+     "price": "320",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "glassworks",
+     "name": "유리 공방",
+     "group": "craft",
+     "unlock": 9,
+     "unlockName": "지역 납품업자",
+     "cost": 340,
+     "shown": true,
+     "price": "340",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "coppermine",
+     "name": "구리 광산",
+     "group": "industry",
+     "unlock": 15,
+     "unlockName": "에너지 사업자",
+     "cost": 400,
+     "shown": true,
+     "price": "400",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "wiremill",
+     "name": "전선 공장",
+     "group": "industry",
+     "unlock": 16,
+     "unlockName": "산업단지 운영자",
+     "cost": 1100,
+     "shown": true,
+     "price": "1,100",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "cementworks",
+     "name": "시멘트 공장",
+     "group": "industry",
+     "unlock": 17,
+     "unlockName": "정밀 제조업자",
+     "cost": 1200,
+     "shown": true,
+     "price": "1,200",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "cannery",
+     "name": "통조림 공장",
+     "group": "industry",
+     "unlock": 18,
+     "unlockName": "광역 투자자",
+     "cost": 1500,
+     "shown": true,
+     "price": "1,500",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "lampworks",
+     "name": "마력등 공방",
+     "group": "advanced",
+     "unlock": 23,
+     "unlockName": "치안권 보유자",
+     "cost": 2600,
+     "shown": true,
+     "price": "2,600",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "engineworks",
+     "name": "마력 기관 공장",
+     "group": "advanced",
+     "unlock": 24,
+     "unlockName": "재정 운영권자",
+     "cost": 4200,
+     "shown": true,
+     "price": "4,200",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "mithrilforge",
+     "name": "미스릴 정련소",
+     "group": "advanced",
+     "unlock": 25,
+     "unlockName": "자치구 대표",
+     "cost": 4800,
+     "shown": true,
+     "price": "4,800",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "shipyard",
+     "name": "비공정 조선소",
+     "group": "advanced",
+     "unlock": 27,
+     "unlockName": "독립 선언국",
+     "cost": 9000,
+     "shown": true,
+     "price": "9,000",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "blastfurnace",
+     "name": "용광로",
+     "group": "industry",
+     "unlock": 29,
+     "unlockName": "지역 강국",
+     "cost": 3500,
+     "shown": true,
+     "price": "3,500",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "assemblyline",
+     "name": "자동 조립 공장",
+     "group": "advanced",
+     "unlock": 30,
+     "unlockName": "다지역 연방",
+     "cost": 9500,
+     "shown": true,
+     "price": "9,500",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "watermill",
+     "name": "물레방아",
+     "group": "energy",
+     "unlock": 10,
+     "unlockName": "공인 계약업자",
+     "cost": 300,
+     "shown": true,
+     "price": "300",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "marketplace",
+     "name": "장터",
+     "group": "civic",
+     "unlock": 6,
+     "unlockName": "등록 사업주",
+     "cost": 350,
+     "shown": true,
+     "price": "350",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "wardpost",
+     "name": "결계 초소",
+     "group": "civic",
+     "unlock": 14,
+     "unlockName": "중공업 사업자",
+     "cost": 450,
+     "shown": true,
+     "price": "450",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "fortress",
+     "name": "방위 요새",
+     "group": "civic",
+     "unlock": 23,
+     "unlockName": "치안권 보유자",
+     "cost": 2500,
+     "shown": true,
+     "price": "2,500",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "parliament",
+     "name": "의사당",
+     "group": "civic",
+     "unlock": 26,
+     "unlockName": "자치정부 수장",
+     "cost": 6000,
+     "shown": true,
+     "price": "6,000",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "airdock",
+     "name": "비공정 선착장",
+     "group": "transport",
+     "unlock": 28,
+     "unlockName": "승인 독립국",
+     "cost": 5000,
+     "shown": true,
+     "price": "5,000",
+     "disabled": false,
+     "iconLoaded": true
+    },
+    {
+     "t": "exchange",
+     "name": "대륙 거래소",
+     "group": "civic",
+     "unlock": 31,
+     "unlockName": "열강",
+     "cost": 8000,
+     "shown": true,
+     "price": "8,000",
+     "disabled": false,
+     "iconLoaded": true
+    }
+   ]
+  }
+ },
+ "criterion3": {
+  "plan": [
+   {
+    "type": "cottonfield",
+    "name": "목화밭",
+    "x": 10,
+    "z": 10
+   },
+   {
+    "type": "herbgarden",
+    "name": "약초원",
+    "x": 10,
+    "z": 12
+   },
+   {
+    "type": "henhouse",
+    "name": "양계장",
+    "x": 12,
+    "z": 10
+   },
+   {
+    "type": "smokehouse",
+    "name": "훈제장",
+    "x": 12,
+    "z": 12
+   },
+   {
+    "type": "weaver",
+    "name": "방직소",
+    "x": 8,
+    "z": 10
+   },
+   {
+    "type": "confectionery",
+    "name": "제과점",
+    "x": 8,
+    "z": 12
+   },
+   {
+    "type": "kiln",
+    "name": "벽돌 가마",
+    "x": 10,
+    "z": 8
+   },
+   {
+    "type": "tailor",
+    "name": "봉제소",
+    "x": 10,
+    "z": 14
+   },
+   {
+    "type": "glassworks",
+    "name": "유리 공방",
+    "x": 12,
+    "z": 8
+   },
+   {
+    "type": "coppermine",
+    "name": "구리 광산",
+    "x": 12,
+    "z": 14
+   },
+   {
+    "type": "wiremill",
+    "name": "전선 공장",
+    "x": 14,
+    "z": 10
+   },
+   {
+    "type": "cementworks",
+    "name": "시멘트 공장",
+    "x": 14,
+    "z": 12
+   },
+   {
+    "type": "cannery",
+    "name": "통조림 공장",
+    "x": 8,
+    "z": 8
+   },
+   {
+    "type": "lampworks",
+    "name": "마력등 공방",
+    "x": 8,
+    "z": 14
+   },
+   {
+    "type": "engineworks",
+    "name": "마력 기관 공장",
+    "x": 14,
+    "z": 8
+   },
+   {
+    "type": "mithrilforge",
+    "name": "미스릴 정련소",
+    "x": 14,
+    "z": 14
+   },
+   {
+    "type": "shipyard",
+    "name": "비공정 조선소",
+    "x": 6,
+    "z": 10
+   },
+   {
+    "type": "blastfurnace",
+    "name": "용광로",
+    "x": 6,
+    "z": 12
+   },
+   {
+    "type": "assemblyline",
+    "name": "자동 조립 공장",
+    "x": 10,
+    "z": 6
+   },
+   {
+    "type": "watermill",
+    "name": "물레방아",
+    "x": 16,
+    "z": 10
+   },
+   {
+    "type": "marketplace",
+    "name": "장터",
+    "x": 10,
+    "z": 16
+   },
+   {
+    "type": "wardpost",
+    "name": "결계 초소",
+    "x": 12,
+    "z": 6
+   },
+   {
+    "type": "fortress",
+    "name": "방위 요새",
+    "x": 12,
+    "z": 16
+   },
+   {
+    "type": "parliament",
+    "name": "의사당",
+    "x": 6,
+    "z": 8
+   },
+   {
+    "type": "airdock",
+    "name": "비공정 선착장",
+    "x": 6,
+    "z": 14
+   },
+   {
+    "type": "exchange",
+    "name": "대륙 거래소",
+    "x": 8,
+    "z": 6
+   }
+  ],
+  "builds": [
+   {
+    "type": "cottonfield",
+    "x": 10,
+    "z": 10,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 474,
+    "mem": {
+     "heapMB": 85,
+     "geo": 397,
+     "tex": 35,
+     "fps": "52"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "herbgarden",
+    "x": 10,
+    "z": 12,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 458,
+    "mem": {
+     "heapMB": 84,
+     "geo": 397,
+     "tex": 35,
+     "fps": "58"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "henhouse",
+    "x": 12,
+    "z": 10,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 441,
+    "mem": {
+     "heapMB": 108,
+     "geo": 401,
+     "tex": 35,
+     "fps": "58"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "smokehouse",
+    "x": 12,
+    "z": 12,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 534,
+    "mem": {
+     "heapMB": 87,
+     "geo": 401,
+     "tex": 35,
+     "fps": "57"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "weaver",
+    "x": 8,
+    "z": 10,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 532,
+    "mem": {
+     "heapMB": 113,
+     "geo": 401,
+     "tex": 35,
+     "fps": "57"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "confectionery",
+    "x": 8,
+    "z": 12,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 496,
+    "mem": {
+     "heapMB": 96,
+     "geo": 401,
+     "tex": 35,
+     "fps": "60"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "kiln",
+    "x": 10,
+    "z": 8,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 484,
+    "mem": {
+     "heapMB": 96,
+     "geo": 401,
+     "tex": 35,
+     "fps": "55"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "tailor",
+    "x": 10,
+    "z": 14,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 486,
+    "mem": {
+     "heapMB": 99,
+     "geo": 401,
+     "tex": 35,
+     "fps": "57"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "glassworks",
+    "x": 12,
+    "z": 8,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 488,
+    "mem": {
+     "heapMB": 102,
+     "geo": 401,
+     "tex": 35,
+     "fps": "57"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "coppermine",
+    "x": 12,
+    "z": 14,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 512,
+    "mem": {
+     "heapMB": 107,
+     "geo": 402,
+     "tex": 35,
+     "fps": "58"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "wiremill",
+    "x": 14,
+    "z": 10,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 497,
+    "mem": {
+     "heapMB": 100,
+     "geo": 402,
+     "tex": 35,
+     "fps": "60"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "cementworks",
+    "x": 14,
+    "z": 12,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 473,
+    "mem": {
+     "heapMB": 101,
+     "geo": 402,
+     "tex": 35,
+     "fps": "57"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "cannery",
+    "x": 8,
+    "z": 8,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 421,
+    "mem": {
+     "heapMB": 104,
+     "geo": 402,
+     "tex": 35,
+     "fps": "57"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "lampworks",
+    "x": 8,
+    "z": 14,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 472,
+    "mem": {
+     "heapMB": 86,
+     "geo": 402,
+     "tex": 35,
+     "fps": "57"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "engineworks",
+    "x": 14,
+    "z": 8,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 448,
+    "mem": {
+     "heapMB": 90,
+     "geo": 402,
+     "tex": 35,
+     "fps": "60"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "mithrilforge",
+    "x": 14,
+    "z": 14,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 497,
+    "mem": {
+     "heapMB": 94,
+     "geo": 402,
+     "tex": 35,
+     "fps": "57"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "shipyard",
+    "x": 6,
+    "z": 10,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 446,
+    "mem": {
+     "heapMB": 94,
+     "geo": 402,
+     "tex": 35,
+     "fps": "60"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "blastfurnace",
+    "x": 6,
+    "z": 12,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 503,
+    "mem": {
+     "heapMB": 96,
+     "geo": 402,
+     "tex": 35,
+     "fps": "57"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "assemblyline",
+    "x": 10,
+    "z": 6,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 565,
+    "mem": {
+     "heapMB": 81,
+     "geo": 402,
+     "tex": 35,
+     "fps": "58"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "watermill",
+    "x": 16,
+    "z": 10,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 519,
+    "mem": {
+     "heapMB": 89,
+     "geo": 402,
+     "tex": 35,
+     "fps": "58"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "marketplace",
+    "x": 10,
+    "z": 16,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 470,
+    "mem": {
+     "heapMB": 102,
+     "geo": 402,
+     "tex": 35,
+     "fps": "60"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "wardpost",
+    "x": 12,
+    "z": 6,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 418,
+    "mem": {
+     "heapMB": 103,
+     "geo": 402,
+     "tex": 35,
+     "fps": "58"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "fortress",
+    "x": 12,
+    "z": 16,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 453,
+    "mem": {
+     "heapMB": 85,
+     "geo": 402,
+     "tex": 35,
+     "fps": "57"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "parliament",
+    "x": 6,
+    "z": 8,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 437,
+    "mem": {
+     "heapMB": 90,
+     "geo": 402,
+     "tex": 35,
+     "fps": "57"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "airdock",
+    "x": 6,
+    "z": 14,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 544,
+    "mem": {
+     "heapMB": 103,
+     "geo": 402,
+     "tex": 35,
+     "fps": "57"
+    },
+    "newErrors": 0
+   },
+   {
+    "type": "exchange",
+    "x": 8,
+    "z": 6,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "ms": 503,
+    "mem": {
+     "heapMB": 90,
+     "geo": 402,
+     "tex": 35,
+     "fps": "58"
+    },
+    "newErrors": 0
+   }
+  ],
+  "builtCount": 26,
+  "meshes": [
+   {
+    "type": "cottonfield",
+    "model": true,
+    "name": "cottonfield",
+    "meshes": 16,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "herbgarden",
+    "model": true,
+    "name": "herbgarden",
+    "meshes": 16,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "henhouse",
+    "model": true,
+    "name": "henhouse",
+    "meshes": 17,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "smokehouse",
+    "model": true,
+    "name": "smokehouse",
+    "meshes": 17,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "weaver",
+    "model": true,
+    "name": "weaver",
+    "meshes": 17,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "confectionery",
+    "model": true,
+    "name": "confectionery",
+    "meshes": 17,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "kiln",
+    "model": true,
+    "name": "kiln",
+    "meshes": 17,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "tailor",
+    "model": true,
+    "name": "tailor",
+    "meshes": 17,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "glassworks",
+    "model": true,
+    "name": "glassworks",
+    "meshes": 17,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "coppermine",
+    "model": true,
+    "name": "coppermine",
+    "meshes": 17,
+    "visibleMeshes": 8,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "wiremill",
+    "model": true,
+    "name": "wiremill",
+    "meshes": 17,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "cementworks",
+    "model": true,
+    "name": "cementworks",
+    "meshes": 17,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "cannery",
+    "model": true,
+    "name": "cannery",
+    "meshes": 17,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "lampworks",
+    "model": true,
+    "name": "lampworks",
+    "meshes": 17,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "engineworks",
+    "model": true,
+    "name": "engineworks",
+    "meshes": 17,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "mithrilforge",
+    "model": true,
+    "name": "mithrilforge",
+    "meshes": 17,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "shipyard",
+    "model": true,
+    "name": "shipyard",
+    "meshes": 17,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "blastfurnace",
+    "model": true,
+    "name": "blastfurnace",
+    "meshes": 14,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "assemblyline",
+    "model": true,
+    "name": "assemblyline",
+    "meshes": 8,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 0.729,
+    "pixel": false
+   },
+   {
+    "type": "watermill",
+    "model": true,
+    "name": "watermill",
+    "meshes": 7,
+    "visibleMeshes": 7,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 1,
+    "pixel": false
+   },
+   {
+    "type": "marketplace",
+    "model": true,
+    "name": "marketplace",
+    "meshes": 7,
+    "visibleMeshes": 6,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 1,
+    "pixel": false
+   },
+   {
+    "type": "wardpost",
+    "model": true,
+    "name": "wardpost",
+    "meshes": 7,
+    "visibleMeshes": 6,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 1,
+    "pixel": false
+   },
+   {
+    "type": "fortress",
+    "model": true,
+    "name": "fortress",
+    "meshes": 7,
+    "visibleMeshes": 6,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 1,
+    "pixel": false
+   },
+   {
+    "type": "parliament",
+    "model": true,
+    "name": "parliament",
+    "meshes": 7,
+    "visibleMeshes": 6,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 1,
+    "pixel": false
+   },
+   {
+    "type": "airdock",
+    "model": true,
+    "name": "airdock",
+    "meshes": 7,
+    "visibleMeshes": 6,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 1,
+    "pixel": false
+   },
+   {
+    "type": "exchange",
+    "model": true,
+    "name": "exchange",
+    "meshes": 7,
+    "visibleMeshes": 6,
+    "badMaterial": 0,
+    "pos": [
+     0,
+     0
+    ],
+    "scale": 1,
+    "pixel": false
+   }
+  ],
+  "bounds": [
+   {
+    "type": "cottonfield",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.38,
+    "withinTile": true
+   },
+   {
+    "type": "herbgarden",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.38,
+    "withinTile": true
+   },
+   {
+    "type": "henhouse",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "smokehouse",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "weaver",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "confectionery",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "kiln",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "tailor",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "glassworks",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "coppermine",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "wiremill",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "cementworks",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "cannery",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "lampworks",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "engineworks",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "mithrilforge",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "shipyard",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "blastfurnace",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "assemblyline",
+    "dx": [
+     -0.46,
+     0.46
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.46,
+    "withinTile": true
+   },
+   {
+    "type": "watermill",
+    "dx": [
+     -0.47,
+     0.47
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.63,
+    "withinTile": true
+   },
+   {
+    "type": "marketplace",
+    "dx": [
+     -0.47,
+     0.47
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.63,
+    "withinTile": true
+   },
+   {
+    "type": "wardpost",
+    "dx": [
+     -0.47,
+     0.47
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.63,
+    "withinTile": true
+   },
+   {
+    "type": "fortress",
+    "dx": [
+     -0.47,
+     0.47
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.63,
+    "withinTile": true
+   },
+   {
+    "type": "parliament",
+    "dx": [
+     -0.47,
+     0.47
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.63,
+    "withinTile": true
+   },
+   {
+    "type": "airdock",
+    "dx": [
+     -0.47,
+     0.47
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.63,
+    "withinTile": true
+   },
+   {
+    "type": "exchange",
+    "dx": [
+     -0.47,
+     0.47
+    ],
+    "dz": [
+     -0.47,
+     0.47
+    ],
+    "h": 0.63,
+    "withinTile": true
+   }
+  ],
+  "overview": [
+   "04-new26-overview-view0.png",
+   "04-new26-overview-view1.png",
+   "04-new26-overview-view2.png",
+   "04-new26-overview-view3.png"
+  ],
+  "qeKeys": [
+   "1",
+   "2",
+   "3",
+   "0",
+   "3"
+  ],
+  "sheets": {
+   "0": "05-new26-webgl-view0.png",
+   "1": "05-new26-webgl-view1.png",
+   "2": "05-new26-webgl-view2.png",
+   "3": "05-new26-webgl-view3.png"
+  },
+  "errorsAfterBuildAndRotate": {
+   "errors": 0,
+   "consoleErrors": 0
+  }
+ },
+ "fps": {
+  "frames": 121,
+  "p50": 16.7,
+  "p95": 16.7,
+  "max": 16.8
+ },
+ "criterion4": {
+  "aux": [
+   {
+    "type": "road",
+    "x": 9,
+    "z": 8,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null,
+    "for": "cannery"
+   },
+   {
+    "type": "house",
+    "x": 10,
+    "z": 11,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null
+   },
+   {
+    "type": "house",
+    "x": 12,
+    "z": 11,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null
+   },
+   {
+    "type": "house",
+    "x": 10,
+    "z": 9,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null
+   },
+   {
+    "type": "house",
+    "x": 10,
+    "z": 13,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null
+   },
+   {
+    "type": "house",
+    "x": 12,
+    "z": 9,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null
+   },
+   {
+    "type": "house",
+    "x": 12,
+    "z": 13,
+    "ok": true,
+    "disabledBefore": false,
+    "clickOnCanvas": true,
+    "coveredBy": null,
+    "toast": null
+   }
+  ],
+  "before": {
+   "money": 4987722,
+   "delivered": 0,
+   "power": false,
+   "workers": 6,
+   "fac": [
+    {
+     "t": "confectionery",
+     "out": "cake",
+     "cycles": 0,
+     "status": "밀가루 대기",
+     "stockOut": 100,
+     "produced": 0
+    },
+    {
+     "t": "weaver",
+     "out": "cloth",
+     "cycles": 0,
+     "status": "목화 대기",
+     "stockOut": 400,
+     "produced": 0
+    },
+    {
+     "t": "kiln",
+     "out": "brick",
+     "cycles": 0,
+     "status": "석재 대기",
+     "stockOut": 364,
+     "produced": 0
+    },
+    {
+     "t": "cannery",
+     "out": "canned",
+     "cycles": 0,
+     "status": "전력 부족",
+     "stockOut": 400,
+     "produced": 0
+    },
+    {
+     "t": "shipyard",
+     "out": "airship",
+     "cycles": 0,
+     "status": "전력 부족",
+     "stockOut": 400,
+     "produced": 0
+    }
+   ]
+  },
+  "after": {
+   "money": 5006044,
+   "time": 247.85570000000695,
+   "delivered": 290,
+   "power": true,
+   "workers": 6,
+   "busy": 6,
+   "fac": [
+    {
+     "t": "confectionery",
+     "out": "cake",
+     "cycles": 5,
+     "status": "생산 중",
+     "inputs": {
+      "flour": 0,
+      "egg": 2
+     },
+     "bufferedOut": 7,
+     "stockOut": 3,
+     "produced": 10
+    },
+    {
+     "t": "weaver",
+     "out": "cloth",
+     "cycles": 9,
+     "status": "생산 중",
+     "inputs": {
+      "cotton": 0
+     },
+     "bufferedOut": 6,
+     "stockOut": 385,
+     "produced": 18
+    },
+    {
+     "t": "kiln",
+     "out": "brick",
+     "cycles": 4,
+     "status": "창고 가득 참",
+     "inputs": {
+      "stone": 4,
+      "wood": 2
+     },
+     "bufferedOut": 12,
+     "stockOut": 364,
+     "produced": 12
+    },
+    {
+     "t": "cannery",
+     "out": "canned",
+     "cycles": 3,
+     "status": "창고 가득 참",
+     "inputs": {
+      "smokedfish": 4,
+      "steel": 1
+     },
+     "bufferedOut": 12,
+     "stockOut": 396,
+     "produced": 12
+    },
+    {
+     "t": "shipyard",
+     "out": "airship",
+     "cycles": 1,
+     "status": "생산 중",
+     "inputs": {
+      "engine": 2,
+      "cloth": 1,
+      "mithril": 2,
+      "fuel": 2
+     },
+     "bufferedOut": 1,
+     "stockOut": 400,
+     "produced": 1
+    }
+   ]
+  },
+  "cards": [
+   {
+    "t": "confectionery",
+    "card": "미스릴 정련소 Lv.1 도로 연결 필요 0/2 0/2 미스릴 강 0 시설 옆에 흙길을 놓고 창고까지 이어주세요. 가동 중지 내구도 100% 효율·개선·특화",
+    "file": "06-process-confectionery.png"
+   },
+   {
+    "t": "weaver",
+    "card": "방직소 Lv.1 생산 중 3/3 직물 0 가동 중지 내구도 100% 효율·개선·특화",
+    "file": "06-process-weaver.png"
+   },
+   {
+    "t": "kiln",
+    "card": "벽돌 가마 Lv.1 창고 가득 참 4/2 2/1 벽돌 12 재고를 팔아 창고 자리를 비우세요. 가동 중지 내구도 100% 효율·개선·특화",
+    "file": "06-process-kiln.png"
+   },
+   {
+    "t": "cannery",
+    "card": "통조림 공장 Lv.1 창고 가득 참 4/2 1/1 통조림 12 재고를 팔아 창고 자리를 비우세요. 가동 중지 내구도 100% 효율·개선·특화",
+    "file": "06-process-cannery.png"
+   },
+   {
+    "t": "shipyard",
+    "card": "비공정 조선소 Lv.1 생산 중 2/2 2/2 7/4 2/2 비공정 1 가동 중지 내구도 100% 효율·개선·특화",
+    "file": "06-process-shipyard.png"
+   }
+  ],
+  "sale": {
+   "buttons": 2,
+   "moneyDelta": 108,
+   "shipments": [
+    "cake:1"
+   ]
+  },
+  "soldCake": 401
+ },
+ "criterion5": {
+  "storageKeys": [
+   [
+    "orvetharn-audio",
+    85
+   ],
+   [
+    "first-land-v1-recovery",
+    46631
+   ],
+   [
+    "first-land-v1",
+    46534
+   ],
+   [
+    "orvetharn-quality",
+    4
+   ],
+   [
+    "towngrid-screen-art-v1",
+    63
+   ]
+  ],
+  "before": {
+   "rank": 32,
+   "newBuildings": 26,
+   "stock": {
+    "cotton": 394,
+    "water": 373,
+    "herb": 388,
+    "egg": 382,
+    "grain": 394,
+    "smokedfish": 3,
+    "fish": 381,
+    "wood": 337,
+    "cloth": 385,
+    "cake": 2,
+    "flour": 382,
+    "brick": 364,
+    "stone": 337,
+    "workwear": 400,
+    "glass": 378,
+    "copper": 400,
+    "wire": 395,
+    "coal": 396,
+    "concrete": 306,
+    "canned": 396,
+    "steel": 329,
+    "lamp": 396,
+    "mana": 396,
+    "engine": 392,
+    "gear": 388,
+    "mithril": 388,
+    "airship": 400,
+    "fuel": 385,
+    "iron": 400,
+    "car": 400,
+    "circuit": 382,
+    "polymer": 397
+   }
+  },
+  "after": {
+   "rank": 32,
+   "newBuildings": 26,
+   "stock": {
+    "cotton": 394,
+    "water": 373,
+    "herb": 388,
+    "egg": 382,
+    "grain": 394,
+    "smokedfish": 3,
+    "fish": 381,
+    "wood": 337,
+    "cloth": 385,
+    "cake": 2,
+    "flour": 382,
+    "brick": 364,
+    "stone": 337,
+    "workwear": 400,
+    "glass": 378,
+    "copper": 399,
+    "wire": 395,
+    "coal": 396,
+    "concrete": 306,
+    "canned": 396,
+    "steel": 329,
+    "lamp": 396,
+    "mana": 396,
+    "engine": 392,
+    "gear": 388,
+    "mithril": 388,
+    "airship": 400,
+    "fuel": 385,
+    "iron": 400,
+    "car": 400,
+    "circuit": 382,
+    "polymer": 397
+   }
+  },
+  "buildingsEqual": true,
+  "newBuildingsEqual": true,
+  "stockEqual": false,
+  "rankEqual": true,
+  "stockDiff": [
+   [
+    "copper",
+    400,
+    399
+   ]
+  ],
+  "meshesAfterLoad": []
+ },
+ "criterion6": {
+  "viewport": [
+   390,
+   844
+  ],
+  "docScrollWidth": 390,
+  "offscreen": [],
+  "tabs": [
+   {
+    "text": "기초",
+    "r": {
+     "l": -27,
+     "t": 580,
+     "r": 15,
+     "b": 612
+    }
+   },
+   {
+    "text": "주거",
+    "r": {
+     "l": 17,
+     "t": 580,
+     "r": 60,
+     "b": 612
+    }
+   },
+   {
+    "text": "농축산",
+    "r": {
+     "l": 62,
+     "t": 580,
+     "r": 115,
+     "b": 612
+    }
+   },
+   {
+    "text": "가공",
+    "r": {
+     "l": 117,
+     "t": 580,
+     "r": 158,
+     "b": 612
+    }
+   },
+   {
+    "text": "중공업",
+    "r": {
+     "l": 160,
+     "t": 580,
+     "r": 213,
+     "b": 612
+    }
+   },
+   {
+    "text": "동력·마법",
+    "r": {
+     "l": 215,
+     "t": 580,
+     "r": 284,
+     "b": 612
+    }
+   },
+   {
+    "text": "첨단",
+    "r": {
+     "l": 286,
+     "t": 580,
+     "r": 328,
+     "b": 612
+    }
+   },
+   {
+    "text": "운송",
+    "r": {
+     "l": 330,
+     "t": 580,
+     "r": 373,
+     "b": 612
+    }
+   },
+   {
+    "text": "도시",
+    "r": {
+     "l": 375,
+     "t": 580,
+     "r": 417,
+     "b": 612
+    }
+   }
+  ],
+  "tablistScrollable": false,
+  "items": [
+   {
+    "l": "제재소 건설",
+    "r": {
+     "l": 17,
+     "t": 624,
+     "r": 110,
+     "b": 735
+    }
+   },
+   {
+    "l": "제분소 건설",
+    "r": {
+     "l": 116,
+     "t": 624,
+     "r": 209,
+     "b": 735
+    }
+   },
+   {
+    "l": "훈제장 건설",
+    "r": {
+     "l": 215,
+     "t": 624,
+     "r": 308,
+     "b": 735
+    }
+   },
+   {
+    "l": "빵집 건설",
+    "r": {
+     "l": 314,
+     "t": 624,
+     "r": 407,
+     "b": 735
+    }
+   },
+   {
+    "l": "방직소 건설",
+    "r": {
+     "l": 413,
+     "t": 624,
+     "r": 506,
+     "b": 735
+    }
+   },
+   {
+    "l": "제과점 건설",
+    "r": {
+     "l": 512,
+     "t": 624,
+     "r": 605,
+     "b": 735
+    }
+   },
+   {
+    "l": "벽돌 가마 건설",
+    "r": {
+     "l": 611,
+     "t": 624,
+     "r": 704,
+     "b": 735
+    }
+   },
+   {
+    "l": "봉제소 건설",
+    "r": {
+     "l": 710,
+     "t": 624,
+     "r": 803,
+     "b": 735
+    }
+   },
+   {
+    "l": "유리 공방 건설",
+    "r": {
+     "l": 809,
+     "t": 624,
+     "r": 902,
+     "b": 735
+    }
+   }
+  ],
+  "stripText": "5,006,152 G 306 396 392 388 400 6"
+ },
+ "criterion3_1": {
+  "renderer": {
+   "isSoftware": true,
+   "quality": "auto",
+   "dataset": {
+    "cameraView": "남동",
+    "cameraQuarter": "0",
+    "cameraAzimuth": "0.7853981633974483",
+    "cameraPolar": "0.9553166181245092",
+    "clears": "1",
+    "renderMs": "3",
+    "fps": "9",
+    "renderer": "canvas",
+    "geometries": "51",
+    "textures": "0",
+    "models": "39",
+    "gameTime": "277.7",
+    "characterStyle": "pixel",
+    "characterFrames": "0:0,0:1,3:4,3:4,3:1,2:4"
+   }
+  },
+  "sheets": {
+   "0": "13-new26-software-view0.png",
+   "1": "13-new26-software-view1.png",
+   "2": "13-new26-software-view2.png",
+   "3": "13-new26-software-view3.png"
+  },
+  "fps": {
+   "frames": 120,
+   "p50": 16.7,
+   "p95": 16.8,
+   "max": 26.2
+  }
+ },
+ "summary": {
+  "errors": 0,
+  "consoleErrors": 0,
+  "failedRequests": 0,
+  "built": 26,
+  "shownInDockAtMax": 26,
+  "processingCycles": [
+   "confectionery:5",
+   "weaver:9",
+   "kiln:4",
+   "cannery:3",
+   "shipyard:1"
+  ],
+  "saleMoneyDelta": 108,
+  "saveOk": true,
+  "software": true
+ },
+ "followup": {
+  "script": "tests/audit/browser-balance-20260928-followup.mjs",
+  "warmLoad": {
+   "titleMs": 73,
+   "homeMs": 2015
+  },
+  "whiteChip": {
+   "element": "<button data-building-id=\"1\" class=\"facility-marker waiting\" aria-label=\"창고 · 운반 중\" title=\"창고 · 운반 중\" style=\"left: 720px; top: 348.418px;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke",
+   "cause": "minimal label mode hides the only svg and the span of a non-production marker (game-ui.css:429) -> blank white marker over the warehouse",
+   "file": "diag-chip.png"
+  },
+  "saveReload": {
+   "beforePaused": true,
+   "beforeTime": 81.202,
+   "afterPaused": false,
+   "afterTime": 81.202,
+   "after3s": {
+    "paused": false,
+    "time": 84.202
+   },
+   "stockDiff": [],
+   "note": "restore is exact; the main run copper 400->399 came from the game resuming unpaused after continue (paused state is not kept)"
+  },
+  "confectioneryCardByModelClick": "제과점 Lv.1 생산 중 2/2 4/2 케이크 2 가동 중지 내구도 100% 효율·개선·특화",
+  "confectioneryCardFile": "06b-process-confectionery-card.png",
+  "confectioneryNote": "main run clicked the ground point of the confectionery tile, which the taller mithrilforge model in front covers; the raycast picked mithrilforge (06-process-confectionery.png)",
+  "phoneTabs": {
+   "tap": [
+    {
+     "name": "기초",
+     "how": "tap-failed: locator.tap: Timeout 3000ms exceeded.",
+     "selected": "true",
+     "rect": [
+      -27,
+      13
+     ]
+    },
+    {
+     "name": "도시",
+     "how": "tap",
+     "selected": "true",
+     "rect": [
+      333,
+      373
+     ]
+    },
+    {
+     "name": "기초",
+     "how": "tap-failed: locator.tap: Timeout 3000ms exceeded.",
+     "selected": "false",
+     "rect": [
+      -27,
+      15
+     ]
+    }
+   ],
+   "layout": {
+    "chain": [
+     {
+      "cls": "group/tabs-list inline-flex w-fit items-center justify-cente",
+      "ox": "visible",
+      "jc": "center",
+      "sw": 445,
+      "cw": 445
+     },
+     {
+      "cls": "group/tabs flex gap-2 data-[orientation=horizontal]:flex-col",
+      "ox": "auto",
+      "jc": "normal",
+      "sw": 400,
+      "cw": 356
+     },
+     {
+      "cls": "dock-header",
+      "ox": "visible",
+      "jc": "space-between",
+      "sw": 356,
+      "cw": 356
+     },
+     {
+      "cls": "build-dock panel",
+      "ox": "hidden",
+      "jc": "normal",
+      "sw": 370,
+      "cw": 370
+     },
+     {
+      "cls": "game-shell is-playing catalog-open ",
+      "ox": "hidden",
+      "jc": "normal",
+      "sw": 390,
+      "cw": 390
+     }
+    ],
+    "tabs": [
+     [
+      "기초",
+      -27,
+      13
+     ],
+     [
+      "주거",
+      15,
+      58
+     ],
+     [
+      "농축산",
+      60,
+      113
+     ],
+     [
+      "가공",
+      115,
+      158
+     ],
+     [
+      "중공업",
+      160,
+      213
+     ],
+     [
+      "동력·마법",
+      215,
+      284
+     ],
+     [
+      "첨단",
+      286,
+      328
+     ],
+     [
+      "운송",
+      330,
+      373
+     ],
+     [
+      "도시",
+      375,
+      417
+     ]
+    ]
+   },
+   "file": "10b-phone-390x844-tabs-edges.png",
+   "cause": ".is-playing .dock-header>[data-slot=tabs]{display:flex;align-items:center} (game-ui.css:352) centres a 445px tab list inside a 356px scroll box; the left 27px overflow is not scrollable"
+  },
+  "swiftshaderCrash": "first attempt with --use-gl=swiftshader: page crashed (Target crashed) at the first Q/E key press after ~6 min at 4-5 fps; not reproduced in a 12-rotation SwiftShader repro nor in the GPU run (0 crashes); treated as environment load, not a game defect",
+  "assetCheck": "game_asset_check.py: ERROR 15 (static false positives: metadata source fields, command strings, runtime-named audio) / WARN 9 incl. no ASSETS.md; browser runtime 404 = 0",
+  "errors": []
+ }
+}

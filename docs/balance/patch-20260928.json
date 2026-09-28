@@ -21,7 +21,7 @@
   "add": {
    "cotton": {
     "name": "목화",
-    "color": "#f1ece0",
+    "color": "#cbc3b1",
     "price": 13
    },
    "herb": {
@@ -31,7 +31,7 @@
    },
    "egg": {
     "name": "달걀",
-    "color": "#f3dfb4",
+    "color": "#dcb46a",
     "price": 25
    },
    "smokedfish": {
