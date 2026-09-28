@@ -2,12 +2,12 @@
 // Foliage reuses its radial silhouette; water lies on the world ground plane.
 export const ENVIRONMENT_CELL = 192;
 export const ENVIRONMENT_ASSETS = {
- sawmill: { building: true, sheet: '/assets/pixel-environment/sawmill.png', frames: 4, directions: 4, anchor: [.5, .81], size: 1.48 },
- warehouse: { building: true, sheet: '/assets/pixel-environment/warehouse.png', frames: 4, directions: 4, anchor: [.5, .83], size: 1.48 },
- house: { building: true, sheet: '/assets/pixel-environment/house.png', frames: 4, directions: 4, anchor: [.5, .83], size: 1.48 },
- well: { building: true, sheet: '/assets/pixel-environment/well.png', frames: 4, directions: 4, anchor: [.5, .82], size: 1.38 },
- lumber: { building: true, sheet: '/assets/pixel-environment/lumber.png', frames: 4, directions: 4, anchor: [.5, .81], size: 1.48 },
- field: { building: true, sheet: '/assets/pixel-environment/field.png', frames: 4, directions: 4, anchor: [.5, .72], size: 1.48 },
+ sawmill: { building: true, sheet: '/assets/pixel-environment/sawmill.png', frames: 4, directions: 4, anchor: [.5, .735], size: 1.4 },
+ warehouse: { building: true, sheet: '/assets/pixel-environment/warehouse.png', frames: 4, directions: 4, anchor: [.5, .75], size: 1.4 },
+ house: { building: true, sheet: '/assets/pixel-environment/house.png', frames: 4, directions: 4, anchor: [.5, .75], size: 1.4 },
+ well: { building: true, sheet: '/assets/pixel-environment/well.png', frames: 4, directions: 4, anchor: [.5, .72], size: 1.4 },
+ lumber: { building: true, sheet: '/assets/pixel-environment/lumber.png', frames: 4, directions: 4, anchor: [.5, .72], size: 1.4 },
+ field: { building: true, sheet: '/assets/pixel-environment/field.png', frames: 4, directions: 4, anchor: [.5, .665], size: 1.4 },
  oak: { sheet: '/assets/pixel-environment/oak.png', frames: 7, anchor: [.5, .91], size: 1.68 },
  water: { sheet: '/assets/pixel-environment/water.png', frames: 4 },
 };

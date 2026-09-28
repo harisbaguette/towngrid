@@ -9,7 +9,7 @@ assert.equal(inland.tileMultiplier('field',10,10),coast.tileMultiplier('field',1
 assert.notEqual(inland.tileMultiplier('field',10,10),inland.tileMultiplier('field',11,10));
 const elf=new Simulation('river',null,{nation:'silvaen',race:'elf'}),human=new Simulation('river');
 assert.equal(elf.countryMultiplier('sawmill'),1.12);assert.equal(human.countryMultiplier('sawmill'),1);
-const humanSale=human.sell('wood',1),elfSale=elf.sell('wood',1);assert.ok(humanSale.revenue>elfSale.revenue);
+human.build('warehouse',10,12,true);elf.build('warehouse',10,12,true);const humanSale=human.sell('wood',1),elfSale=elf.sell('wood',1);assert.ok(humanSale.revenue>elfSale.revenue);
 const orc=new Simulation('highland',null,{nation:'urkan',race:'orc'});assert.ok(orc.buildCost('warehouse')<human.buildCost('warehouse'));
 for(const [nation,n]of Object.entries(NATIONS).filter(([,n])=>n.playable)){const s=new Simulation(n.region,null,{nation,race:n.race});assert.equal(s.build('warehouse',10,12).ok,true);assert.ok(s.workers.every(w=>FACTIONS[factionOf(n.race)].members.includes(w.race)&&w.name));assert.ok(FACTIONS[factionOf(n.race)].members.includes(s.buildings[0].race));const restored=new Simulation(s.region,s.save());assert.equal(restored.nation,nation);assert.equal(restored.race,n.race);}
 // A fresh game must earn its first promotions through real production and delivery.

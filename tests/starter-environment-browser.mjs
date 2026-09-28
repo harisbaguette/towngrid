@@ -14,6 +14,7 @@ const screenshot = name => page.screenshot({ path: fileURLToPath(new URL(name, o
 const origin = process.env.TOWNGRID_URL || 'http://localhost:5173';
 try {
  await page.goto(origin);
+ await page.getByRole('button', { name: '화면을 눌러 시작', exact: true }).click();
  await page.getByRole('button', { name: '초반 마을 테스트', exact: true }).waitFor({ timeout: 120000 });
  // Only this new, disposable browser context is seeded. User storage is untouched.
  const saved = await page.evaluate(async () => {
@@ -24,6 +25,7 @@ try {
   return snapshot;
  });
  await page.reload();
+ await page.getByRole('button', { name: '화면을 눌러 시작', exact: true }).click();
  await page.getByRole('button', { name: '초반 마을 테스트', exact: true }).waitFor({ timeout: 120000 });
  await screenshot('start-screen.png');
  // Capture the real scene through its existing entry point in the test browser.
@@ -55,7 +57,17 @@ try {
  const wellPoint = await page.evaluate(() => {
   const game = window.starterScene, well = game.sim.buildings.find(b => b.type === 'well');
   game.focusBuilding(well.id);game.scene.updateMatrixWorld(true);game.camera.updateMatrixWorld();
-  const p = game.models.get(well.id).position.clone();p.y += .82;p.project(game.camera);
+  const model = game.models.get(well.id), u = model.userData, sprite = u.sprite;
+  const canvas = document.createElement('canvas');canvas.width = canvas.height = 192;
+  const ctx = canvas.getContext('2d');ctx.drawImage(u.image, u.frame * 192, u.direction * 192, 192, 192, 0, 0, 192, 192);
+  const pixels = ctx.getImageData(0, 0, 192, 192).data;let pick = null, distance = Infinity;
+  for (let y = 15; y < 165; y++) for (let x = 15; x < 177; x++) {
+   const d = (x - 96) ** 2 + (y - 100) ** 2;
+   if (pixels[(y * 192 + x) * 4 + 3] > 200 && d < distance) { pick = { x: x + .5, y: y + .5 };distance = d; }
+  }
+  const p = sprite.getWorldPosition(model.position.clone()), scale = sprite.getWorldScale(model.position.clone());
+  const right = p.clone().setFromMatrixColumn(game.camera.matrixWorld, 0), up = p.clone().setFromMatrixColumn(game.camera.matrixWorld, 1);
+  p.addScaledVector(right, (pick.x / 192 - sprite.center.x) * scale.x).addScaledVector(up, (1 - pick.y / 192 - sprite.center.y) * scale.y).project(game.camera);
   const r = game.renderer.domElement.getBoundingClientRect();
   return { x: r.x + (p.x + 1) * r.width / 2, y: r.y + (1 - p.y) * r.height / 2 };
  });

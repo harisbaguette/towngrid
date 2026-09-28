@@ -31,6 +31,7 @@ try {
  await screenshot('samples-mobile.png');
  await page.setViewportSize({ width: 1440, height: 1000 });
  await page.goto(origin, { waitUntil: 'domcontentloaded' });
+ await page.getByRole('button', { name: '화면을 눌러 시작', exact: true }).click();
  await page.getByRole('button', { name: '산업도시 둘러보기', exact: true }).click({ timeout: 120000 });
  await page.getByRole('button', { name: '오른쪽 90도 회전', exact: true }).waitFor();
  const map = page.locator('canvas[role="application"]');

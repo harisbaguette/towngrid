@@ -10,7 +10,8 @@ import {NATIONS,FACTIONS} from './world';
 export function MarketPanel({sim:s,onAction,refresh}:any){
  const [mode,setMode]=useState('sell');
  return <div className="market-panel"><Tabs value={mode} onValueChange={setMode}><TabsList><TabsTrigger value="sell">판매</TabsTrigger><TabsTrigger value="buy">수입</TabsTrigger></TabsList></Tabs>
- <p className="market-note">{mode==='sell'?'같은 품목을 계속 팔면 가격이 내려갑니다. 수요는 시간에 따라 회복됩니다. 운반 예약 재고는 판매하지 않습니다.':'생산 허가를 얻은 자원을 수입합니다. 수입품은 생산 실적으로 인정되지 않습니다.'}</p>
+ <p className="market-note">{mode==='sell'?'판 물건은 수출 마차가 서쪽 수출 관문까지 싣고 가야 돈이 들어옵니다. 같은 품목을 계속 팔면 가격이 내려가고, 수요는 시간이 지나면 회복됩니다. 운반 예약 재고는 팔지 않습니다.':'생산 허가를 얻은 자원을 수입합니다. 수입품은 생산 실적으로 인정되지 않습니다.'}</p>
+ {mode==='sell'&&(()=>{const e=s.exportStatus();return <p className={'export-status'+(e.connected?'':' blocked')} role="status">{e.connected?`수출길 연결됨 · 마차 ${e.busy}/${e.carts}대 운행 중${e.inTransit?` · 도착 대기 ${e.inTransit}G`:''}`:e.error}</p>;})()}
  <div className="market-rows">{Object.entries(RESOURCES).map(([id,r]:any)=>{const price=mode==='buy'?Math.ceil(r.price*1.85):s.saleQuote(id,1);return <div className="market-row" key={id}>
  <span className="resource-dot" style={{background:r.color}}/>
  <div><strong>{r.name}</strong><small>1개 {price}G{mode==='sell'&&<em className={s.marketFactor(id)<.85?'market-low':'market-high'}> · 수요 {Math.round(s.marketFactor(id)*100)}%</em>}</small></div><b aria-label={r.name+' 재고'}>{Math.floor(s.stock[id])}</b>

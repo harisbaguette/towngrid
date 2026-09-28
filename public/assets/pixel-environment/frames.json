@@ -1,12 +1,12 @@
 {
-  "version": 1,
+  "version": 2,
   "source": "pilot-atlas-source.png",
   "cellSize": 192,
   "pixelScale": 1,
-  "style": "dark teal outlines, honey timber, teal roofs, olive foliage, turquoise water; upper-left light",
+  "style": "Readable 16-bit pixel art: broad hand-pixelled clusters, dark teal outlines, honey wood, fewer small details; compact props within one square 1x1 tile",
   "assets": {
     "warehouse": {
-      "source": "warehouse-source.png",
+      "source": "simplified-v2/warehouse-source.png",
       "grid": [
         4,
         4
@@ -24,7 +24,7 @@
       "baseline": 181,
       "anchor": [
         0.5,
-        0.83
+        0.75
       ],
       "states": {
         "idle": [
@@ -36,10 +36,33 @@
           3,
           2
         ]
-      }
+      },
+      "rowBounds": [
+        [
+          0,
+          330
+        ],
+        [
+          330,
+          630
+        ],
+        [
+          630,
+          931
+        ],
+        [
+          931,
+          1254
+        ]
+      ],
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "size": 1.4
     },
     "house": {
-      "source": "house-source.png",
+      "source": "simplified-v2/house-source.png",
       "grid": [
         4,
         4
@@ -47,18 +70,18 @@
       "rowBounds": [
         [
           0,
-          326
+          375
         ],
         [
-          326,
-          628
+          375,
+          695
         ],
         [
-          628,
-          918
+          695,
+          992
         ],
         [
-          918,
+          992,
           1254
         ]
       ],
@@ -75,7 +98,7 @@
       "baseline": 181,
       "anchor": [
         0.5,
-        0.83
+        0.75
       ],
       "states": {
         "empty": [
@@ -87,10 +110,15 @@
           3,
           2
         ]
-      }
+      },
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "size": 1.4
     },
     "well": {
-      "source": "well-source.png",
+      "source": "simplified-v2/well-source.png",
       "grid": [
         4,
         4
@@ -108,7 +136,7 @@
       "baseline": 181,
       "anchor": [
         0.5,
-        0.82
+        0.72
       ],
       "states": {
         "idle": [
@@ -120,10 +148,33 @@
           3,
           2
         ]
-      }
+      },
+      "rowBounds": [
+        [
+          0,
+          330
+        ],
+        [
+          330,
+          640
+        ],
+        [
+          640,
+          931
+        ],
+        [
+          931,
+          1254
+        ]
+      ],
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "size": 1.4
     },
     "lumber": {
-      "source": "lumber-source.png",
+      "source": "simplified-v2/lumber-source.png",
       "grid": [
         4,
         4
@@ -141,7 +192,7 @@
       "baseline": 181,
       "anchor": [
         0.5,
-        0.81
+        0.72
       ],
       "states": {
         "idle": [
@@ -153,10 +204,33 @@
           3,
           2
         ]
-      }
+      },
+      "rowBounds": [
+        [
+          0,
+          353
+        ],
+        [
+          353,
+          664
+        ],
+        [
+          664,
+          970
+        ],
+        [
+          970,
+          1254
+        ]
+      ],
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "size": 1.4
     },
     "field": {
-      "source": "field-source.png",
+      "source": "simplified-v2/field-source.png",
       "grid": [
         4,
         4
@@ -164,18 +238,18 @@
       "rowBounds": [
         [
           0,
-          345
+          330
         ],
         [
-          345,
-          628
+          330,
+          630
         ],
         [
-          628,
-          940
+          630,
+          931
         ],
         [
-          940,
+          931,
           1254
         ]
       ],
@@ -192,11 +266,11 @@
       "baseline": 181,
       "anchor": [
         0.5,
-        0.72
+        0.665
       ],
       "iconFrame": 3,
       "states": {
-        "sown": [
+        "planted": [
           0
         ],
         "sprouts": [
@@ -208,114 +282,20 @@
         "ripe": [
           3
         ]
-      }
+      },
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "size": 1.4
     },
     "sawmill": {
-      "source": "sawmill-directions-source.png",
-      "columns": 4,
+      "source": "simplified-v2/sawmill-source.png",
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
-      ],
-      "rects": [
-        [
-          0,
-          10,
-          314,
-          310
-        ],
-        [
-          314,
-          10,
-          314,
-          310
-        ],
-        [
-          628,
-          10,
-          314,
-          310
-        ],
-        [
-          942,
-          10,
-          312,
-          310
-        ],
-        [
-          0,
-          334,
-          314,
-          286
-        ],
-        [
-          314,
-          334,
-          314,
-          286
-        ],
-        [
-          628,
-          334,
-          314,
-          286
-        ],
-        [
-          942,
-          334,
-          312,
-          286
-        ],
-        [
-          0,
-          641,
-          314,
-          281
-        ],
-        [
-          314,
-          641,
-          314,
-          281
-        ],
-        [
-          628,
-          641,
-          314,
-          281
-        ],
-        [
-          942,
-          641,
-          312,
-          281
-        ],
-        [
-          0,
-          940,
-          314,
-          292
-        ],
-        [
-          314,
-          940,
-          314,
-          292
-        ],
-        [
-          628,
-          940,
-          314,
-          292
-        ],
-        [
-          942,
-          940,
-          312,
-          292
-        ]
       ],
       "fit": [
         176,
@@ -324,7 +304,7 @@
       "baseline": 181,
       "anchor": [
         0.5,
-        0.81
+        0.735
       ],
       "states": {
         "idle": [
@@ -336,7 +316,34 @@
           3,
           2
         ]
-      }
+      },
+      "grid": [
+        4,
+        4
+      ],
+      "rowBounds": [
+        [
+          0,
+          330
+        ],
+        [
+          330,
+          630
+        ],
+        [
+          630,
+          931
+        ],
+        [
+          931,
+          1254
+        ]
+      ],
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "size": 1.4
     },
     "oak": {
       "rects": [

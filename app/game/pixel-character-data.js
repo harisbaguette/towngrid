@@ -52,8 +52,11 @@ export function pixelAction(worker) {
  if (worker.working) return 'work';
  return 'idle';
 }
-export function pixelFrame(action, time, speed = 1) {
- const clip = PIXEL_CLIPS[action] || PIXEL_CLIPS.idle;
+export function pixelClip(action, metadata) {
+ return metadata?.clips?.[action] || PIXEL_CLIPS[action] || PIXEL_CLIPS.idle;
+}
+export function pixelFrame(action, time, speed = 1, metadata) {
+ const clip = pixelClip(action, metadata);
  const step = Math.max(0, Math.floor(time * clip.fps * speed));
  return clip.frames[clip.once ? Math.min(step, clip.frames.length - 1) : step % clip.frames.length];
 }

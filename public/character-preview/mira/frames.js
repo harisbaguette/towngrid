@@ -1,7 +1,7 @@
 window.MIRA_PREVIEW = {
   "version": 2,
   "identity": "mira",
-  "status": "approval-prototype",
+  "status": "in-game-test",
   "background": "#eeeae0",
   "images": {
     "study": "study.png",

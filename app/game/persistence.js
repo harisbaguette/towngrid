@@ -1,6 +1,7 @@
 import {PROVINCES} from './territory.js';
 import {BUILDINGS,RESOURCES,N,homeCapacity} from './simulation.js';
 import {NATIONS,RANKS,RACES} from './world.js';
+import {EXPORT_CARTS} from './export-route.js';
 export const SAVE_KEY='first-land-v1';
 export const RECOVERY_KEY=SAVE_KEY+'-recovery';
 export const BACKUP_KEY=SAVE_KEY+'-backup';
@@ -36,6 +37,7 @@ function validateSimulation(s){
  for(const b of s.buildings){if(b.level!==undefined&&(!Number.isInteger(b.level)||b.level<1||b.level>3))fail();if(b.race&&!ref(RACES,b.race))fail();numericFields(b,['activeUntil','age','animationTime','cycles']);numericFields(b,['priority'],0,2);flags(b,['enabled','working','specialized','armorUsed']);}
  if(s.nextId!==undefined&&(!Number.isInteger(s.nextId)||[...ids].some(id=>id>=s.nextId)))fail();
  for(const key of ['roads','rails'])if(s[key]&&(!Array.isArray(s[key])||!s[key].every(point)))fail();
+ if(s.shipments!==undefined&&(!Array.isArray(s.shipments)||s.shipments.length>EXPORT_CARTS))fail();for(const sh of s.shipments||[]){if(!sh||!Number.isInteger(sh.id)||!ref(RESOURCES,sh.item)||!Number.isInteger(sh.amount)||!number(sh.amount,1,1e6)||!number(sh.revenue)||!route(sh.route)||!sh.route.length||!number(sh.progress,0,sh.route.length-1)||!['out','back'].includes(sh.phase))fail();flags(sh,['auto']);}if(s.nextShipmentId!==undefined&&!Number.isInteger(s.nextShipmentId))fail();
  if(s.workers&&(!Array.isArray(s.workers)||s.workers.length>Math.max(100,s.buildings.reduce((n,b)=>n+homeCapacity(b),0))))fail();if(s.nextWorkerId!==undefined&&!Number.isInteger(s.nextWorkerId))fail();
  const workerIds=new Set();for(const w of s.workers||[]){if(!w||!Number.isInteger(w.id)||workerIds.has(w.id)||!number(w.x,-1,N)||!number(w.z,-1,N)||!route(w.route))fail();workerIds.add(w.id);if(w.task?.sourceId&&!ids.has(w.task.sourceId))fail();if(w.task?.targetId&&!ids.has(w.task.targetId))fail();if(w.race&&!ref(RACES,w.race))fail();if(w.homeId!==undefined&&!ids.has(w.homeId))fail();numericFields(w,['dir','think'],-1e12);if(w.task&&(!ref(RESOURCES,w.task.item)||!number(w.task.amount)||!['pickup','supply'].includes(w.task.kind)||!ids.has(w.task.building)||(w.task.dest&&!route([w.task.dest]))))fail();}
  if(s.guards&&(!Array.isArray(s.guards)||s.guards.length>8))fail();for(const g of s.guards||[]){if(!g||!ref(RACES,g.race)||!route(g.route)||!number(g.x,-1,N)||!number(g.z,-1,N)||!number(g.hp,0,75)||!ids.has(g.homeId))fail();}

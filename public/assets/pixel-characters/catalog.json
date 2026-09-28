@@ -2381,7 +2381,9 @@
   },
   {
     "id": "mira",
-    "source": "mira-v1.png",
+    "source": "art-source/pixel-characters/prototypes/mira-v2/runtime-pack.json",
+    "revision": "mira-quarter-test-1",
+    "status": "in-game-test",
     "directions": [
       "SW",
       "NW",
@@ -2394,38 +2396,63 @@
     ],
     "columns": [
       "idle",
-      "walk-left",
-      "walk-pass",
-      "walk-right",
+      "walk-1",
+      "walk-2",
+      "walk-3",
+      "walk-4",
+      "walk-5",
+      "walk-6",
+      "walk-7",
+      "walk-8",
       "carry-left",
       "carry-right",
       "work-windup",
       "work-contact"
     ],
-    "frames": 32,
+    "frames": 52,
     "portrait": "portrait.png",
     "atlas": "sprites.png",
-    "bodyPixels": 97,
+    "bodyPixels": 103,
     "sourceGrid": [
       8,
-      7
+      4
     ],
     "anchors": [
       [
         [
-          0.46667,
+          0.5,
           0.90625
         ],
         [
-          0.36979,
+          0.5,
           0.90625
         ],
         [
-          0.39427,
+          0.5,
           0.90625
         ],
         [
-          0.36927,
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
           0.90625
         ],
         [
@@ -2447,19 +2474,39 @@
       ],
       [
         [
-          0.42656,
+          0.5,
           0.90625
         ],
         [
-          0.4776,
+          0.5,
           0.90625
         ],
         [
-          0.41927,
+          0.5,
           0.90625
         ],
         [
-          0.38333,
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
           0.90625
         ],
         [
@@ -2481,19 +2528,39 @@
       ],
       [
         [
-          0.58021,
+          0.5,
           0.90625
         ],
         [
-          0.52656,
+          0.5,
           0.90625
         ],
         [
-          0.6026,
+          0.5,
           0.90625
         ],
         [
-          0.49687,
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
           0.90625
         ],
         [
@@ -2515,19 +2582,39 @@
       ],
       [
         [
-          0.66432,
+          0.5,
           0.90625
         ],
         [
-          0.58542,
+          0.5,
           0.90625
         ],
         [
-          0.60938,
+          0.5,
           0.90625
         ],
         [
-          0.61198,
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
+          0.90625
+        ],
+        [
+          0.5,
           0.90625
         ],
         [
@@ -2547,6 +2634,824 @@
           0.90625
         ]
       ]
+    ],
+    "clips": {
+      "idle": {
+        "frames": [
+          0
+        ],
+        "fps": 1
+      },
+      "walk": {
+        "frames": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "fps": 10
+      },
+      "carry": {
+        "frames": [
+          9,
+          10
+        ],
+        "fps": 6
+      },
+      "work": {
+        "frames": [
+          11,
+          11,
+          12,
+          12
+        ],
+        "fps": 6
+      },
+      "attack": {
+        "frames": [
+          0,
+          11,
+          12,
+          12
+        ],
+        "fps": 7
+      },
+      "pickup": {
+        "frames": [
+          0,
+          11,
+          12,
+          9
+        ],
+        "fps": 7,
+        "once": true
+      },
+      "drop": {
+        "frames": [
+          9,
+          12,
+          11,
+          0
+        ],
+        "fps": 7,
+        "once": true
+      },
+      "defeat": {
+        "frames": [
+          0
+        ],
+        "fps": 1,
+        "once": true
+      }
+    },
+    "sourceFrames": [
+      [
+        {
+          "image": "motions.png",
+          "rect": [
+            268,
+            12,
+            95,
+            191
+          ],
+          "anchor": [
+            307,
+            201
+          ],
+          "scale": 0.5478723404255319,
+          "cellOffset": [
+            43,
+            12
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            42,
+            14,
+            139,
+            245
+          ],
+          "anchor": [
+            109,
+            256
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            35,
+            12
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            234,
+            14,
+            135,
+            245
+          ],
+          "anchor": [
+            298,
+            256
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            37,
+            12
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            429,
+            12,
+            128,
+            247
+          ],
+          "anchor": [
+            485,
+            256
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            40,
+            11
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            601,
+            14,
+            137,
+            245
+          ],
+          "anchor": [
+            670,
+            256
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            34,
+            12
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            792,
+            14,
+            138,
+            245
+          ],
+          "anchor": [
+            861,
+            256
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            34,
+            12
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            984,
+            13,
+            134,
+            246
+          ],
+          "anchor": [
+            1047,
+            256
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            37,
+            12
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            1173,
+            12,
+            134,
+            247
+          ],
+          "anchor": [
+            1232,
+            256
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            39,
+            11
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            1355,
+            13,
+            140,
+            246
+          ],
+          "anchor": [
+            1422,
+            256
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            35,
+            12
+          ]
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 0,
+          "column": 4
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 0,
+          "column": 5
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 0,
+          "column": 6
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 0,
+          "column": 7
+        }
+      ],
+      [
+        {
+          "image": "motions.png",
+          "rect": [
+            622,
+            10,
+            96,
+            192
+          ],
+          "anchor": [
+            669,
+            201
+          ],
+          "scale": 0.5478723404255319,
+          "cellOffset": [
+            38,
+            11
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            42,
+            261,
+            141,
+            245
+          ],
+          "anchor": [
+            103,
+            503
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            38,
+            12
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            233,
+            262,
+            142,
+            244
+          ],
+          "anchor": [
+            297,
+            503
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            37,
+            13
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            427,
+            265,
+            136,
+            241
+          ],
+          "anchor": [
+            486,
+            503
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            39,
+            14
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            605,
+            262,
+            140,
+            244
+          ],
+          "anchor": [
+            665,
+            503
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            38,
+            13
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            791,
+            262,
+            141,
+            244
+          ],
+          "anchor": [
+            851,
+            503
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            38,
+            13
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            987,
+            263,
+            137,
+            243
+          ],
+          "anchor": [
+            1047,
+            503
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            38,
+            13
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            1175,
+            265,
+            136,
+            241
+          ],
+          "anchor": [
+            1234,
+            503
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            39,
+            14
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            1354,
+            262,
+            144,
+            244
+          ],
+          "anchor": [
+            1415,
+            503
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            38,
+            13
+          ]
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 1,
+          "column": 4
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 1,
+          "column": 5
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 1,
+          "column": 6
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 1,
+          "column": 7
+        }
+      ],
+      [
+        {
+          "image": "motions.png",
+          "rect": [
+            993,
+            10,
+            96,
+            192
+          ],
+          "anchor": [
+            1048,
+            201
+          ],
+          "scale": 0.5478723404255319,
+          "cellOffset": [
+            34,
+            11
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            42,
+            510,
+            137,
+            245
+          ],
+          "anchor": [
+            120,
+            752
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            31,
+            12
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            233,
+            510,
+            141,
+            245
+          ],
+          "anchor": [
+            311,
+            752
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            31,
+            12
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            426,
+            511,
+            132,
+            244
+          ],
+          "anchor": [
+            502,
+            752
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            31,
+            13
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            608,
+            510,
+            141,
+            245
+          ],
+          "anchor": [
+            689,
+            752
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            29,
+            12
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            791,
+            510,
+            145,
+            245
+          ],
+          "anchor": [
+            877,
+            752
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            27,
+            12
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            983,
+            510,
+            139,
+            245
+          ],
+          "anchor": [
+            1061,
+            752
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            31,
+            12
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            1169,
+            510,
+            130,
+            245
+          ],
+          "anchor": [
+            1248,
+            752
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            30,
+            12
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            1355,
+            510,
+            139,
+            245
+          ],
+          "anchor": [
+            1436,
+            752
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            29,
+            12
+          ]
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 2,
+          "column": 4
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 2,
+          "column": 5
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 2,
+          "column": 6
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 2,
+          "column": 7
+        }
+      ],
+      [
+        {
+          "image": "motions.png",
+          "rect": [
+            1366,
+            12,
+            100,
+            190
+          ],
+          "anchor": [
+            1428,
+            201
+          ],
+          "scale": 0.5478723404255319,
+          "cellOffset": [
+            30,
+            12
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            31,
+            757,
+            142,
+            243
+          ],
+          "anchor": [
+            106,
+            997
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            32,
+            13
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            217,
+            757,
+            136,
+            243
+          ],
+          "anchor": [
+            291,
+            997
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            32,
+            13
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            407,
+            756,
+            128,
+            244
+          ],
+          "anchor": [
+            480,
+            997
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            33,
+            13
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            591,
+            757,
+            141,
+            243
+          ],
+          "anchor": [
+            667,
+            997
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            31,
+            13
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            782,
+            757,
+            141,
+            243
+          ],
+          "anchor": [
+            859,
+            997
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            31,
+            13
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            971,
+            756,
+            140,
+            244
+          ],
+          "anchor": [
+            1047,
+            997
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            31,
+            13
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            1163,
+            757,
+            132,
+            243
+          ],
+          "anchor": [
+            1236,
+            997
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            33,
+            13
+          ]
+        },
+        {
+          "image": "walk-quarter.png",
+          "rect": [
+            1345,
+            757,
+            139,
+            243
+          ],
+          "anchor": [
+            1418,
+            997
+          ],
+          "scale": 0.42916666666666664,
+          "cellOffset": [
+            33,
+            13
+          ]
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 3,
+          "column": 4
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 3,
+          "column": 5
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 3,
+          "column": 6
+        },
+        {
+          "image": "legacy-actions.png",
+          "row": 3,
+          "column": 7
+        }
+      ]
+    ],
+    "legacyActions": [
+      "carry",
+      "work",
+      "attack",
+      "pickup",
+      "drop"
     ]
   },
   {

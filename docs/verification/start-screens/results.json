@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "checked": [
+    "title keyboard entry, no-save continue disabled, home/settings/world navigation, six illustration gallery",
+    "actual save import, long-load artwork advances, immediate completion, playable demo, saved game preserved",
+    "390px mobile, short landscape, reduced motion"
+  ],
+  "errors": [],
+  "failed": [],
+  "first": "silen",
+  "second": "marna",
+  "gallery": [
+    "미라의 정비소",
+    "마르나의 공방",
+    "실렌의 온실",
+    "로웬의 철도 정비",
+    "하나의 배송 준비",
+    "브론의 목공소"
+  ]
+}

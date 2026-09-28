@@ -115,6 +115,7 @@
   },
   {
     "id": "mira",
+    "runtimePrototype": "art-source/pixel-characters/prototypes/mira-v2/runtime-pack.json",
     "source": "art-source/pixel-characters/mira-v1.png",
     "cutoff": 552,
     "source_rows": 7,

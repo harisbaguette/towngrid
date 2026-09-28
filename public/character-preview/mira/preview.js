@@ -166,4 +166,5 @@
     find('loading').hidden = true; resize(); selectAction('walk');
     document.documentElement.dataset.previewReady = 'true';
   }).catch(error => { find('loading').textContent = `${error.message}. 이 폴더의 PNG 파일과 함께 열어 주세요.`; });
-  requestAni
+  requestAnimationFrame(animate);
+})();

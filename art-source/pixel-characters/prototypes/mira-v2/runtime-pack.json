@@ -1,0 +1,14 @@
+{
+  "id": "mira",
+  "status": "in-game-test",
+  "previewManifest": "pack-manifest.json",
+  "cell": 128,
+  "baseline": 116,
+  "bodyHeight": 103,
+  "portrait": { "source": "study.png", "rect": [0, 0, 384, 612] },
+  "legacyAtlas": "legacy-actions.png",
+  "legacyMetadata": "legacy-frames.json",
+  "legacyColumns": [4, 5, 6, 7],
+  "background": { "minimumChannel": 165, "maximumSpread": 55 },
+  "notes": "New portrait, four idle facings, four directions x eight walking drawings. Carry, work, attack and handling still use authored legacy Mira poses. Source RGB is preserved; packing only masks connected cream background, crops, aligns and nearest-neighbour scales."
+}

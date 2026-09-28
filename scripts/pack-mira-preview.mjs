@@ -27,7 +27,7 @@ const origins = {
 const baselines = { rotation: 201, idle: 404, work: 608, greet: 810, cargo: 1001, walk: [498,498,498,498,982,985,985,983] };
 const fps = { rotation: 2, idle: 4, work: 8, greet: 7, cargo: 5, walk: 10 };
 const manifest = {
-  version: 2, identity: 'mira', status: 'approval-prototype', background: '#eeeae0',
+  version: 2, identity: 'mira', status: 'in-game-test', background: '#eeeae0',
   images: { study: 'study.png', motions: 'motions.png', walk: 'walk.png', walkQuarter: 'walk-quarter.png' },
   directions: ['SW','NW','NE','SE'],
   notes: '68 source poses: walking has SW/NW/NE/SE x 8 frames; rotation has four diagonal idle views. Other actions still face E. Opaque cream review sheets, not production RGBA sprites. Rects and anchors use source-image pixels. Fixed scale per clip preserves drawn anticipation/crouching. The walking draft still needs clearer opposite-leg contacts and silhouette cleanup.',

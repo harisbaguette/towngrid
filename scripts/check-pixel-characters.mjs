@@ -36,29 +36,31 @@ assert.equal(identities.length, 24);
 for (const identity of identities) {
  for (const file of [identity.portrait, identity.sheet]) assert.ok(existsSync(`public${file}`), `${identity.id}: missing ${file}`);
  const png = readFileSync(`public${identity.sheet}`);
- assert.equal(png.readUInt32BE(16), 1024, `${identity.id}: atlas width`);
+ const meta = JSON.parse(readFileSync(`public/assets/pixel-characters/${identity.id}/frames.json`));
+ const columns = identity.id === 'mira' ? 13 : 8;
+ assert.equal(meta.columns.length, columns);
+ assert.equal(png.readUInt32BE(16), columns * 128, `${identity.id}: atlas width`);
  assert.equal(png.readUInt32BE(20), 512, `${identity.id}: atlas height`);
  assert.equal(png[25], 6, `${identity.id}: RGBA atlas required`);
- const meta = JSON.parse(readFileSync(`public/assets/pixel-characters/${identity.id}/frames.json`));
  pixelMetadata.set(identity.id, meta);
- assert.equal(meta.frames, 32);
+ assert.equal(meta.frames, columns * 4);
  assert.deepEqual(meta.directions, PIXEL_DIRECTIONS);
  assert.equal(meta.anchors.length, 4);
- for (let direction = 0; direction < 4; direction++) for (let frame = 0; frame < 8; frame++) {
+ for (let direction = 0; direction < 4; direction++) for (let frame = 0; frame < columns; frame++) {
   const selected = pixelAtlasFrame(direction, frame, meta);
   assert.equal(selected.row, direction);
   assert.equal(selected.rows, 4);
   assert.deepEqual(selected.anchor, meta.anchors[direction][frame]);
  }
  for (const row of meta.anchors) {
-  assert.equal(row.length, 8);
+  assert.equal(row.length, columns);
   for (const [x, y] of row) assert.ok(x >= 0 && x <= 1 && y > 0 && y <= 1, `${identity.id}: invalid foot anchor`);
  }
 }
 // Exercise the actual WebGL texture addressing and CPU crop path together.
 const camera = new THREE.OrthographicCamera(-8, 8, 8, -8, .1, 120);
 const group = createPixelCharacter(0, 'human', 'mira');
-group.userData.image = { width: 1024, height: 512 };
+group.userData.image = { width: 1664, height: 512 };
 let crop;
 const ctx = { save(){}, restore(){}, beginPath(){}, ellipse(){}, fill(){}, translate(){}, rotate(){}, drawImage(...args){crop=args.slice(1,5);} };
 for (let view = 0; view < 4; view++) {
@@ -69,11 +71,17 @@ for (let view = 0; view < 4; view++) {
   animatePixelCharacter(group, worker, .2 + view + heading, camera);
   const u = group.userData;
   assert.equal(u.direction, (view - heading + 4) % 4);
-  assert.deepEqual(u.texture.repeat.toArray(), [1/8, 1/4]);
-  assert.deepEqual(u.texture.offset.toArray(), [u.frame/8, (3-u.direction)/4]);
+  assert.deepEqual(u.texture.repeat.toArray(), [1/13, 1/4]);
+  assert.deepEqual(u.texture.offset.toArray(), [u.frame/13, (3-u.direction)/4]);
   assert.equal(u.sprite.center.x, pixelMetadata.get('mira').anchors[u.direction][u.frame][0]);
   SoftwareRenderer.prototype.drawPixelCharacter.call({ctx,pixelsPerWorldUnit:100},group,{x:100,y:200});
   assert.deepEqual(crop,[u.frame*128,u.direction*128,128,128]);
  }
 }
-console.log('24 character identities, 4 camera/character facings, transport/attack actions and 768 atlas cells verified.');
+const mira = pixelMetadata.get('mira');
+assert.deepEqual(Array.from({length:8},(_,i)=>pixelFrame('walk',i / 10 + .001,1,mira)),[1,2,3,4,5,6,7,8]);
+assert.equal(pixelFrame('walk', .801, 1, mira), 1);
+assert.equal(pixelFrame('carry', .2, 1, mira), 10);
+assert.equal(pixelFrame('drop', 10, 1, mira), 0);
+for (const clip of Object.values(mira.clips)) for (const frame of clip.frames) assert.ok(frame >= 0 && frame < 13);
+console.log('24 character identities, four facings and 788 atlas cells verified, including Mira eight-frame walking and legacy actions.');

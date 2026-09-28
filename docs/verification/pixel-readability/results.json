@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "facilities": [
+    {
+      "type": "warehouse",
+      "size": 1,
+      "x": 9,
+      "z": 9
+    },
+    {
+      "type": "house",
+      "size": 1,
+      "x": 11,
+      "z": 9
+    },
+    {
+      "type": "well",
+      "size": 1,
+      "x": 13,
+      "z": 9
+    },
+    {
+      "type": "field",
+      "size": 1,
+      "x": 9,
+      "z": 12
+    },
+    {
+      "type": "lumber",
+      "size": 1,
+      "x": 11,
+      "z": 12
+    },
+    {
+      "type": "sawmill",
+      "size": 1,
+      "x": 13,
+      "z": 12
+    }
+  ],
+  "errors": [],
+  "failedAssets": [],
+  "note": "Screenshots support manual footprint and pixel-style review; no automated subjective art-quality verdict."
+}

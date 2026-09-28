@@ -1,0 +1,44 @@
+.front-screen{position:absolute;inset:0;z-index:12;overflow:hidden;background:#052c32;color:#fff3d2;isolation:isolate}
+.screen-scenery{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2;user-select:none}
+.screen-button{position:relative;display:flex;align-items:center;justify-content:center;gap:14px;min-height:62px;padding:12px 26px;border:2px solid #dcae61;border-radius:3px;background:linear-gradient(#124952,#06313a);color:#fff2cc;box-shadow:inset 0 0 0 3px #082f36,inset 0 0 0 4px #b3874990,0 4px 0 #082329,0 6px 20px #00131780;font-size:clamp(21px,2.4vw,32px);font-weight:800;text-shadow:0 2px #001c25;letter-spacing:.025em}
+.screen-button:hover:not(:disabled){filter:brightness(1.14);transform:translateY(-1px)}
+.screen-button.primary{background:linear-gradient(#ffe68b,#f5bb39);color:#07313a;text-shadow:0 1px #fff0b8;border-color:#ffe3a0;box-shadow:inset 0 0 0 3px #bd8335,inset 0 0 0 5px #fff0af,0 4px 0 #513818,0 6px 20px #00131780}
+.screen-button:disabled{opacity:.5;cursor:not-allowed}
+.front-screen button:focus-visible{outline:3px solid #fff4bc;outline-offset:5px}
+.title-enter{position:absolute;inset:0;width:100%;height:100%;display:flex;align-items:center;flex-direction:column;justify-content:space-between;padding:3vh 24px 8vh;cursor:pointer}
+.title-enter:focus-visible{outline-offset:-7px!important}
+.title-logo{width:min(47vw,780px);height:auto;max-height:38vh;object-fit:contain;filter:drop-shadow(0 5px 8px #00182570)}
+.title-prompt{font-size:clamp(19px,2.2vw,30px);min-width:300px;padding:17px 32px}
+.screen-sound{position:absolute;right:max(24px,env(safe-area-inset-right));bottom:max(24px,env(safe-area-inset-bottom));display:grid;place-items:center;width:49px;height:49px;background:#07323ded;border:2px solid #d8ae68;box-shadow:inset 0 0 0 3px #07232c;border-radius:4px;color:#fff0c7;z-index:3}
+.home-shade{position:absolute;inset:0;background:linear-gradient(90deg,#001f29a6,transparent 55%);z-index:-1;pointer-events:none}
+.home-content{position:relative;width:37%;max-width:610px;height:100%;padding:4vh 2.5vw 3vh;display:flex;flex-direction:column;justify-content:center;gap:2.5vh;overflow:auto;scrollbar-width:thin}
+.home-logo{width:100%;object-fit:contain;max-height:27vh;filter:drop-shadow(0 3px 5px #00182590)}
+.home-menu{display:grid;gap:1.8vh;padding:0 5%}
+.home-extras{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;padding:0 5%;font-size:13px;color:#fff0c7;text-shadow:0 1px 4px #00151c}
+.home-extras button{min-height:32px;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#d4b37477}
+.home-to-title{align-self:flex-start;margin-left:5%;display:flex;align-items:center;gap:8px;color:#f4e6c6;font-size:14px;min-height:36px;text-shadow:0 1px 4px #00151c}
+.screen-back{position:absolute;top:20px;left:24px;display:flex;align-items:center;gap:8px;padding:10px 15px;border:1px solid #d3b274;background:#082c37e8;border-radius:3px;color:#fff0c7;z-index:3;font-weight:700}
+.world-home-back{position:absolute;top:25px;right:160px;left:auto;z-index:15}
+.screen-loading{position:fixed;z-index:1001}
+.loading-emblem{position:absolute;top:4vh;left:3vw;width:clamp(46px,6vw,100px);filter:drop-shadow(0 3px 6px #001a25)}
+.loading-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(transparent 40%,#00242a44 65%,#012a31f5 94%)}
+.screen-loading-content{position:absolute;bottom:5vh;left:12%;right:12%;text-align:center;text-shadow:0 2px 4px #001f29}
+.screen-loading-content h1{font-size:clamp(24px,3.6vw,48px);font-weight:800;margin:8px 0 20px;line-height:1.2;color:#fff0c6}
+.loading-art-title{font-size:14px;letter-spacing:.05em;color:#f4dfb4}
+.screen-loading-track{max-width:900px;margin:auto;height:23px;padding:3px;border:2px solid #e6bb69;border-radius:3px;background:#052d35;overflow:hidden}
+.screen-loading-track span{display:block;width:35%;height:100%;background:repeating-linear-gradient(90deg,#f8c859 0 14px,#eab044 14px 17px);animation:screen-load 1.9s ease-in-out infinite alternate;box-shadow:0 0 12px #f0c06670}
+.screen-loading-content p{font-size:clamp(13px,1.5vw,19px);margin-top:17px;line-height:1.6;color:#fff0cd}
+.gallery-controls{position:absolute;bottom:4vh;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:28px;padding:13px 20px;background:#042a33ed;border:1px solid #b59361;border-radius:4px;max-width:90%;box-shadow:0 3px 18px #00151e66}
+.gallery-controls button{display:grid;place-items:center;min-width:40px;min-height:40px}
+.gallery-controls>div{display:flex;flex-direction:column;align-items:center;gap:4px;white-space:nowrap}
+.gallery-controls strong{font-size:18px}.gallery-controls span{font-size:12px;color:#d7c499}
+@keyframes screen-load{from{transform:translateX(0)}to{transform:translateX(185%)}}
+@media(max-width:700px){
+ .title-logo{width:90vw;max-height:32vh}.title-enter{padding-top:12vh;padding-bottom:16vh}.title-prompt{min-width:0;width:min(90vw,350px);padding:16px 20px}
+ .home-screen .screen-scenery{object-position:68% center}.home-shade{background:linear-gradient(90deg,#002430a6,#00243077)}
+ .home-content{width:100%;max-width:430px;margin:auto;padding:6vh 24px 8vh;gap:2.4vh}.home-logo{max-height:23vh}.home-menu{gap:14px}.screen-button{min-height:54px;font-size:23px}.home-extras{font-size:12px}.home-to-title{font-size:12px}
+ .screen-sound{right:16px;bottom:16px;width:44px;height:44px}.screen-loading-content{left:6%;right:6%;bottom:8vh}.loading-shade{background:linear-gradient(transparent 20%,#00242a66 55%,#012a31 97%)}
+ .screen-loading-content h1{font-size:26px}.world-home-back{top:63px;right:20px;padding:7px 12px}.gallery-controls{gap:8px;padding:8px}.gallery-controls strong{font-size:15px}
+}
+@media(max-height:560px) and (min-aspect-ratio:1/1){.home-content{width:40%;min-width:280px;margin:0;padding:10px 20px;gap:7px;justify-content:flex-start}.home-logo{height:18vh;max-height:90px;min-height:0;flex-shrink:0}.home-menu{gap:8px}.screen-button{min-height:40px;padding:6px 14px;font-size:20px}.home-extras{gap:0 8px;font-size:10px;padding:0}.home-extras button{min-height:28px}.home-to-title{min-height:26px;font-size:11px;flex-shrink:0}.title-logo{max-height:36vh}.title-enter{padding-bottom:10vh}.screen-loading-content{bottom:4vh}.screen-loading-content h1{font-size:26px;margin-bottom:12px}}
+@media(prefers-reduced-motion:reduce){.screen-loading-track span{animation:none;transform:translateX(90%);opacity:.7}.front-screen button{transition:none}}

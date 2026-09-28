@@ -6,6 +6,7 @@ import { placementEffects } from './proximity.js';
 import { reserveFor, purchase, plant, restructure } from './economy.js';
 import { startRaid, tickRaid, mobilize } from './encounters.js';
 import { MODERN_RESOURCES, MODERN_BUILDINGS } from './industry.js';
+import { layExportRoad, isExportTile, dispatchShipment, tickShipments, exportStatus } from './export-route.js';
 import { NATIONS, RACES, RANKS, unlockRank, RESIDENT_NAMES, FACTIONS, factionOf, playableRace, PROGRESSION_OFFSET, crewOf } from './world.js';
 export const N=24;
 export const RESOURCES={
@@ -54,8 +55,8 @@ export class Simulation{
   this.stock={wood:50,stone:30,water:16,grain:8,plank:0,flour:0,bread:0,fish:0,gear:0};
   for(const r of Object.keys(RESOURCES))this.stock[r]??=0;this.buildings=[];this.roads=new Set();this.owned=new Set();this.workers=[];this.nextId=1;this.nextWorkerId=0;this.revision=0;
   this.events=[];this.notices=[];this.sold={};this.produced={};this.nextEvent=170;this.pendingEvent=null;this.diseaseUntil=0;
-  this.autoSell={bread:true,fish:true,gear:false};this.salesTimer=0;this.totalRevenue=0;this.paused=false;this.speed=1;this.emergencyUsed=false;
-  this.seedMap();if(saved)this.restore(saved);else for(let x=8;x<16;x++)for(let z=8;z<16;z++)this.owned.add(K(x,z));
+  this.autoSell={bread:true,fish:true,gear:false};this.salesTimer=0;this.totalRevenue=0;this.shipments=[];this.paused=false;this.speed=1;this.emergencyUsed=false;
+  this.seedMap();if(saved)this.restore(saved);else{for(let x=8;x<16;x++)for(let z=8;z<16;z++)this.owned.add(K(x,z));layExportRoad(this);}
  }
  seedMap(){
   this.tiles=[];
@@ -100,7 +101,7 @@ export class Simulation{
    const t=this.tile(a,c);if(!t||!this.ownedAt(a,c))return '먼저 이 구역을 확보하세요';
    if(t.terrain==='water')return '물 위에는 건설할 수 없습니다';
    if(this.at(a,c))return '다른 건물이 있는 자리입니다';if(type==='rail'&&this.rails.has(K(a,c)))return '이미 선로가 있는 자리입니다';
-   if(this.roads.has(K(a,c))&&type!=='rail')return '흙길을 먼저 철거하세요';
+   if(this.roads.has(K(a,c))&&type!=='rail')return isExportTile(a,c)?'수출길 위에는 건설할 수 없습니다':'흙길을 먼저 철거하세요';
   }
   if(d.natural&&!this.closestNatural({x,z},d.natural))return d.natural==='tree'?'네 칸 이내에 나무가 필요합니다':'네 칸 이내에 바위가 필요합니다';
   if(!free){if(this.money<this.buildCost(type))return '자금이 부족합니다';for(const[r,v]of Object.entries(d.materials||{}))if(this.availableStock(r)<v)return RESOURCES[r].name+' '+v+'개가 필요합니다';}
@@ -116,13 +117,13 @@ export class Simulation{
  }
  walkable(x,z){const t=this.tile(x,z);return t&&this.ownedAt(x,z)&&t.terrain!=='water'&&!this.at(x,z);}
  entries(b){const p=[];for(let i=0;i<b.size;i++)p.push({x:b.x+i,z:b.z+b.size},{x:b.x+b.size,z:b.z+i},{x:b.x-1,z:b.z+i},{x:b.x+i,z:b.z-1});return p.filter(p=>this.walkable(p.x,p.z));}
- path(start,end){
-  if(!start||!end||!this.walkable(end.x,end.z))return null;
-  const sx=Math.round(start.x),sz=Math.round(start.z),sk=K(sx,sz),goal=K(end.x,end.z);if(sk===goal)return [];if(this.routeRevision!==this.revision){this.routeRevision=this.revision;this.routeCache=new Map();}const cacheKey=sk+'>'+goal;if(this.routeCache.has(cacheKey)){const cached=this.routeCache.get(cacheKey);return cached?cached.map(p=>({...p})):null;}
+ path(start,end,pass=(x,z)=>this.walkable(x,z),tag=''){
+  if(!start||!end||!pass(end.x,end.z))return null;
+  const sx=Math.round(start.x),sz=Math.round(start.z),sk=K(sx,sz),goal=K(end.x,end.z);if(sk===goal)return [];if(this.routeRevision!==this.revision){this.routeRevision=this.revision;this.routeCache=new Map();}const cacheKey=tag+sk+'>'+goal;if(this.routeCache.has(cacheKey)){const cached=this.routeCache.get(cacheKey);return cached?cached.map(p=>({...p})):null;}
   const open=[{x:sx,z:sz,c:0}],cost=new Map([[sk,0]]),prev=new Map();let found=false;
   while(open.length){
    open.sort((a,b)=>a.c-b.c);const p=open.shift(),pk=K(p.x,p.z);if(pk===goal){found=true;break;}
-   for(const[dx,dz]of[[1,0],[-1,0],[0,1],[0,-1]]){const x=p.x+dx,z=p.z+dz,key=K(x,z);if(!this.walkable(x,z))continue;const c=p.c+(this.roads.has(key)?.65:1.05);if(c<(cost.get(key)??Infinity)){cost.set(key,c);prev.set(key,pk);open.push({x,z,c});}}
+   for(const[dx,dz]of[[1,0],[-1,0],[0,1],[0,-1]]){const x=p.x+dx,z=p.z+dz,key=K(x,z);if(!pass(x,z))continue;const c=p.c+(this.roads.has(key)?.65:1.05);if(c<(cost.get(key)??Infinity)){cost.set(key,c);prev.set(key,pk);open.push({x,z,c});}}
   }
   if(!found){this.routeCache.set(cacheKey,null);return null;}const result=[];let key=goal;while(key!==sk){const[x,z]=key.split(',').map(Number);result.unshift({x,z});key=prev.get(key);if(!key)return null;}this.routeCache.set(cacheKey,result);return result.map(p=>({...p}));
  }
@@ -171,6 +172,7 @@ export class Simulation{
     if(d.natural){const t=this.closestNatural(b,d.natural);if(t){t.remaining-=d.amount;if(t.remaining<=0){t.nature=null;this.revision++;}}}
    }
   }
+  tickShipments(this,dt);
   this.salesTimer+=dt;if(this.salesTimer>=8){this.salesTimer=0;for(const[r,on]of Object.entries(this.autoSell))if(on){const reserve=this.minimumStock(r);const n=Math.floor(this.stock[r])-reserve;if(n>=10)this.sell(r,10,true);}}
   if(this.pendingEvent&&this.time>=this.pendingEvent.at)this.resolveEvent();
   if(!this.pendingEvent&&this.time>=this.nextEvent){this.pendingEvent={type:this.chooseEvent(),at:this.time+20};this.notify(this.eventName(this.pendingEvent.type)+' 예고 · 20초 뒤 발생합니다.','warning');}
@@ -200,9 +202,12 @@ export class Simulation{
  sell(item,amount,auto=false){
   if(!RESOURCES[item]||!Number.isInteger(amount)||amount<=0)return {ok:false,error:'판매 수량을 확인하세요'};
   amount=Math.min(amount,Math.floor(this.availableStock(item)));if(amount<=0)return {ok:false,error:'판매할 재고가 없습니다'};
-  const revenue=this.saleQuote(item,amount);this.market.pressure[item]=Math.min(100,(this.market.pressure[item]||0)+amount);this.stock[item]-=amount;this.money+=revenue;this.budget.income+=revenue;this.totalRevenue+=revenue;this.sold[item]=(this.sold[item]||0)+amount;
-  this.sound('sell');if(!auto)this.notify(RESOURCES[item].name+' '+amount+'개 판매 · +'+revenue+'G','success');return {ok:true,amount,revenue};
+  // Payment arrives with the cart at the export gate (export-route.js); price and demand are fixed at loading.
+  const revenue=this.saleQuote(item,amount),error=dispatchShipment(this,item,amount,revenue,auto);if(error)return {ok:false,error};
+  this.market.pressure[item]=Math.min(100,(this.market.pressure[item]||0)+amount);this.stock[item]-=amount;
+  this.sound('sell');if(!auto)this.notify(RESOURCES[item].name+' '+amount+'개 수출 출발 · 관문 도착 시 +'+revenue+'G','success');return {ok:true,amount,revenue};
  }
+ exportStatus(){return exportStatus(this);}
  expansionCost(){return Math.round((180+this.expansions*90)*(this.rank>=3?.9:1));}
  canExpand(cx,cz){if(!Number.isInteger(cx)||!Number.isInteger(cz)||cx<0||cz<0||cx>=6||cz>=6||this.ownedAt(cx*4,cz*4))return false;return [[-1,0],[1,0],[0,-1],[0,1]].some(([a,b])=>this.ownedAt((cx+a)*4,(cz+b)*4));}
  expand(cx,cz){
@@ -214,6 +219,7 @@ export class Simulation{
  upgrade(id){const b=this.buildings.find(b=>b.id===id),d=b&&BUILDINGS[b.type];if(!b||!(d.period||d.home)||b.level>=3)return {ok:false,error:'더 이상 개선할 수 없습니다'};const cost=this.upgradeCost(b),item=this.upgradeItem(b);if(this.money<cost||this.stock[item]<3)return {ok:false,error:cost+'G와 '+RESOURCES[item].name+' 3개가 필요합니다'};this.money-=cost;this.stock[item]-=3;b.level++;this.syncWorkers();this.revision++;return {ok:true};}
  upgradeItem(b){return BUILDINGS[b.type].home?'wood':'plank';}
  demolish(x,z){
+  if(isExportTile(x,z)&&this.roads.has(K(x,z))){if(!this.rails.delete(K(x,z)))return {ok:false,error:'수출길은 철거할 수 없습니다'};this.revision++;return {ok:true};}
   if(this.roads.delete(K(x,z))){this.rails.delete(K(x,z));this.money+=2;this.revision++;return {ok:true};}const b=this.at(x,z);if(!b)return {ok:false,error:'철거할 시설이 없습니다'};
   if(b.type==='warehouse')return {ok:false,error:'창고는 마을의 중심이라 철거할 수 없습니다'};
   for(const g of this.guards)if(g.homeId===b.id){g.homeId=this.warehouse.id;g.route=[];}
@@ -270,13 +276,13 @@ export class Simulation{
   this.workers=this.workers.filter(w=>{const h=this.buildings.find(b=>b.id===w.homeId);return h&&w.race===this.residentOf(h.type);});
   if(before)this.notify('주민이 이제 주택에서 나옵니다. 기존 주민을 위해 주민 주택을 지어 두었습니다.','success');
  }
- save(){return {version:8,nextWorkerId:this.nextWorkerId,charter:this.charter,market:structuredClone(this.market),health:structuredClone(this.health),rescueQuest:structuredClone(this.rescueQuest),logisticsStats:structuredClone(this.logisticsStats),challenge:structuredClone(this.challenge),guards:structuredClone(this.guards),raid:this.raid,raidCount:this.raidCount,eventCount:this.eventCount,lastRecoveryDay:this.lastRecoveryDay,reserves:this.reserves,budget:this.budget,attackers:this.attackers,wardUntil:this.wardUntil,seed:this.seed,availableRaces:this.availableRaces,rails:[...this.rails],healthUntil:this.healthUntil,outageUntil:this.outageUntil,strikeUntil:this.strikeUntil,sanctionUntil:this.sanctionUntil,batteryCharge:this.batteryCharge,nation:this.nation,race:this.race,rank:this.rank,contracts:this.contracts,protected:this.protected,region:this.region,time:this.time,money:this.money,debt:this.debt,family:this.family,expansions:this.expansions,stock:{...this.stock},buildings:structuredClone(this.buildings),roads:[...this.roads],owned:[...this.owned],workers:structuredClone(this.workers),nextId:this.nextId,sold:{...this.sold},produced:{...this.produced},nextEvent:this.nextEvent,pendingEvent:this.pendingEvent,diseaseUntil:this.diseaseUntil,events:this.events,autoSell:this.autoSell,totalRevenue:this.totalRevenue,emergencyUsed:this.emergencyUsed,tiles:this.tiles.map(t=>({nature:t.nature,remaining:t.remaining,...(t.growAt?{growAt:t.growAt}:{})}))};}
+ save(){return {version:8,nextWorkerId:this.nextWorkerId,charter:this.charter,market:structuredClone(this.market),health:structuredClone(this.health),rescueQuest:structuredClone(this.rescueQuest),logisticsStats:structuredClone(this.logisticsStats),challenge:structuredClone(this.challenge),guards:structuredClone(this.guards),raid:this.raid,raidCount:this.raidCount,eventCount:this.eventCount,lastRecoveryDay:this.lastRecoveryDay,reserves:this.reserves,budget:this.budget,attackers:this.attackers,wardUntil:this.wardUntil,seed:this.seed,availableRaces:this.availableRaces,rails:[...this.rails],healthUntil:this.healthUntil,outageUntil:this.outageUntil,strikeUntil:this.strikeUntil,sanctionUntil:this.sanctionUntil,batteryCharge:this.batteryCharge,nation:this.nation,race:this.race,rank:this.rank,contracts:this.contracts,protected:this.protected,region:this.region,time:this.time,money:this.money,debt:this.debt,family:this.family,expansions:this.expansions,stock:{...this.stock},buildings:structuredClone(this.buildings),roads:[...this.roads],owned:[...this.owned],workers:structuredClone(this.workers),nextId:this.nextId,sold:{...this.sold},produced:{...this.produced},nextEvent:this.nextEvent,pendingEvent:this.pendingEvent,diseaseUntil:this.diseaseUntil,events:this.events,autoSell:this.autoSell,shipments:structuredClone(this.shipments),nextShipmentId:this.nextShipmentId||0,totalRevenue:this.totalRevenue,emergencyUsed:this.emergencyUsed,tiles:this.tiles.map(t=>({nature:t.nature,remaining:t.remaining,...(t.growAt?{growAt:t.growAt}:{})}))};}
  restore(s){
   if(![1,2,3,4,5,6,7,8].includes(s.version)||!Array.isArray(s.buildings)||!Array.isArray(s.owned)||!s.stock)throw new Error('저장 형식이 맞지 않습니다');
-  for(const key of ['charter','market','health','rescueQuest','logisticsStats','challenge','guards','raid','raidCount','eventCount','lastRecoveryDay','reserves','budget','attackers','wardUntil','availableRaces','healthUntil','outageUntil','strikeUntil','sanctionUntil','batteryCharge','nation','race','rank','contracts','protected','time','money','debt','family','expansions','stock','buildings','workers','nextId','nextWorkerId','sold','produced','nextEvent','pendingEvent','diseaseUntil','events','autoSell','totalRevenue','emergencyUsed'])if(s[key]!==undefined)this[key]=structuredClone(s[key]);
+  for(const key of ['charter','market','health','rescueQuest','logisticsStats','challenge','guards','raid','raidCount','eventCount','lastRecoveryDay','reserves','budget','attackers','wardUntil','availableRaces','healthUntil','outageUntil','strikeUntil','sanctionUntil','batteryCharge','nation','race','rank','contracts','protected','time','money','debt','family','expansions','stock','buildings','workers','nextId','nextWorkerId','sold','produced','nextEvent','pendingEvent','diseaseUntil','events','autoSell','shipments','nextShipmentId','totalRevenue','emergencyUsed'])if(s[key]!==undefined)this[key]=structuredClone(s[key]);
   if(s.version===1)this.rank=Math.max(PROGRESSION_OFFSET,...this.buildings.map(b=>unlockRank(b.type)));else if(s.version<4)this.rank+=PROGRESSION_OFFSET;if(!playableRace(this.race)){this.race='human';this.nation='estern';}this.availableRaces=[...FACTIONS[factionOf(this.race)].members];this.buildings.forEach(b=>{if(!playableRace(b.race))b.race=this.race;b.race=b.race||this.race;b.size=1;});for(const r of Object.keys(RESOURCES))this.stock[r]??=0;this.rails=new Set(s.rails||[]);if(!this.availableRaces.includes(this.race))this.availableRaces.unshift(this.race);
   for(const w of this.workers)if(!playableRace(w.race)){w.race=this.availableRaces[w.id%this.availableRaces.length];w.name=RESIDENT_NAMES[w.race][w.id%4];}for(const w of this.workers)assignResidentAppearance(w,this.availableRaces);if(s.version<6){for(const w of this.workers){if(w.task){const t=w.task,b=this.buildings.find(b=>b.id===t.building);if(t.kind==='pickup'&&w.phase==='source'&&b)b.out+=t.amount;else this.stock[t.item]=(this.stock[t.item]||0)+t.amount;w.task=null;w.route=[];w.phase='idle';}}if(this.diseaseUntil>this.time)this.health.infection=25;this.rescueQuest.step=this.family?5:0;}
-  if(s.version<5)this.eventCount=this.events.length;this.owned=new Set(s.owned);this.roads=new Set(s.roads);if(s.tiles?.length===N*N)s.tiles.forEach((t,i)=>Object.assign(this.tiles[i],t));this.nextWorkerId??=Math.max(-1,...this.workers.map(w=>w.id))+1;
+  if(s.version<5)this.eventCount=this.events.length;this.owned=new Set(s.owned);this.roads=new Set(s.roads);if(s.tiles?.length===N*N)s.tiles.forEach((t,i)=>Object.assign(this.tiles[i],t));layExportRoad(this);this.nextWorkerId??=Math.max(-1,...this.workers.map(w=>w.id))+1;
   if(s.version<7)this.moveResidentsIntoHouses();else if(s.version<8)this.settleHouseLevels();this.revision++;
  }
 }

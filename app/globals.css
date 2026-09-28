@@ -278,7 +278,7 @@ body{color:#253d42;font-size:16px}.panel{background:#faf9f0f2;border:1px solid #
 .game-dialog small,.site-list span,.route-list span,.world-news small{font-size:12px;line-height:1.55}
 .game-dialog label{font-size:14px}
 .game-dialog input,.game-dialog select{max-width:100%;border:1px solid #cdd8c7;border-radius:8px;background:#fffef8;padding:7px 9px}
-.market-note{margin:10px 0}.market-panel .market-row{grid-template-columns:12px minmax(74px,1fr) 42px 48px 48px 42px;gap:9px}
+.market-note{margin:10px 0}.export-status{margin:-4px 0 10px;padding:6px 10px;border-radius:8px;background:#e5f2dc;color:#3f6b35;font-size:13px;font-weight:700}.export-status.blocked{background:#fbe3dc;color:#9a3b2a}.market-panel .market-row{grid-template-columns:12px minmax(74px,1fr) 42px 48px 48px 42px;gap:9px}
 .resource-dot{width:10px;height:24px;border-radius:4px}.market-row strong{font-size:14px}.market-row small{font-size:12px}
 .reserve-line{grid-column:2/-1;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#60745d}.reserve-line label{font-size:12px}.reserve-line input{width:68px;min-height:32px;font-size:12px;padding:4px 6px}.auto-switch>span{font-size:12px}
 .operation-controls{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;border-block:1px solid #dfe5d7;padding:10px 0;margin:10px 0;font-size:12px}.operation-controls label{display:flex;align-items:center;gap:6px}.operation-controls select{background:#f4f5eb;border:1px solid #d3ddca;border-radius:6px;padding:5px;font:inherit}

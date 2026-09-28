@@ -61,7 +61,6 @@ export function animatePixelCharacter(group, worker, time, camera) {
  if (!u.pixel) return false;
  if (!u.image && images.has(u.identity.id)) { u.image = images.get(u.identity.id); u.texture.image = u.image; u.texture.needsUpdate = true; }
  const action = pixelAction(worker);
- const wasMoving = u.current === 'walk' || u.current === 'carry';
  if (action !== u.current) { u.current = action; u.actionTime = time; }
  const cameraAzimuth = camera ? Math.atan2(camera.matrixWorld.elements[8], camera.matrixWorld.elements[10]) : Math.PI / 4;
  const direction = pixelDirection(worker.dir || 0, cameraAzimuth);
@@ -70,14 +69,15 @@ export function animatePixelCharacter(group, worker, time, camera) {
  if (action === 'walk' || action === 'carry') {
   // Actual travelled distance preserves gait through speed changes and turns.
   // Multiplying total elapsed time by the latest speed made frames jump.
-  u.gaitDistance = (wasMoving ? u.gaitDistance || 0 : 0) + Math.max(0, distance - (u.walkDistance ?? distance));
+  // Keep this phase when the scene rebuilds character models after construction.
+  u.gaitDistance = distance;
   elapsed = u.gaitDistance / 1.25;
  }
- u.walkDistance = distance;
- const frame = pixelFrame(action, elapsed);
- const atlas = pixelAtlasFrame(direction, frame, pixelMetadata.get(u.identity.id));
+ const metadata = pixelMetadata.get(u.identity.id);
+ const frame = pixelFrame(action, elapsed, 1, metadata);
+ const atlas = pixelAtlasFrame(direction, frame, metadata);
  u.sprite.center.set(atlas.anchor[0], 1 - atlas.anchor[1]);
- if (frame !== u.frame || direction !== u.direction || atlas.rows !== u.atlas.rows || atlas.row !== u.atlas.row) {
+ if (frame !== u.frame || direction !== u.direction || atlas.rows !== u.atlas.rows || atlas.row !== u.atlas.row || atlas.columns !== u.atlas.columns) {
   u.frame = frame; u.direction = direction;
   u.texture.repeat.set(1 / atlas.columns, 1 / atlas.rows);
   u.texture.offset.set(frame / atlas.columns, (atlas.rows - 1 - atlas.row) / atlas.rows);

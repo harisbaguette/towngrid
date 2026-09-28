@@ -5,12 +5,14 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const suites = [
   'tests/simulation.mjs',
+  'tests/export-route.mjs',
   'tests/residents.mjs',
   'tests/character-movement.mjs',
   'tests/campaign.mjs',
   'tests/release.mjs',
   'tests/pixel-environment.mjs',
   'tests/quarter-camera.mjs',
+  'tests/screen-art.mjs',
   'scripts/check-pixel-characters.mjs',
 ];
 for (const suite of suites) {

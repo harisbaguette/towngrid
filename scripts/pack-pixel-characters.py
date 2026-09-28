@@ -47,6 +47,9 @@ def cut_object(image, labels, obj):
 
 
 def pack_character(spec, output):
+    if spec.get('runtimePrototype'):
+        from mira_runtime import pack_mira_runtime
+        return pack_mira_runtime(spec['runtimePrototype'], output)
     source_directions = spec.get('directions', LEGACY_DIRECTIONS)
     if any(direction not in source_directions for direction in QUARTER_DIRECTIONS):
         raise ValueError(f"{spec['id']}: missing a quarter-view direction")

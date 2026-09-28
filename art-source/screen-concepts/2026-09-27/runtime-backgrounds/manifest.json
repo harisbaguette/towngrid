@@ -1,0 +1,78 @@
+{
+  "generated": "2026-09-27",
+  "status": "Approved first three concepts adapted into backgrounds; character scenes for rotating loading screens.",
+  "images": [
+    {
+      "id": "waiting-background",
+      "source": "art-source/screen-concepts/2026-09-27/runtime-backgrounds/waiting-background.png",
+      "output": "public/assets/screens/waiting-background.webp",
+      "references": [
+        "art-source/screen-concepts/2026-09-27/01-waiting.png"
+      ],
+      "prompt": "Edit the supplied APPROVED TownGrid screen image into a clean runtime BACKGROUND. Preserve its existing composition, village structures, lighting, colors, perspective and pixel-art style as closely as possible. Full landscape 16:9, same scene. REMOVE ALL superimposed UI: logo, text, icons, frames, buttons, progress bars. Inpaint the removed areas with a natural continuation of the original scene. No text or UI whatsoever, no new logo. This is background extraction from an approved concept, not a redesign. Remove the large central logo, the lower start button and bottom-right speaker icon. Reconstruct dusk sky, mountain horizon and river behind them. Preserve the small physical sprout sign in the landscape and all buildings."
+    },
+    {
+      "id": "loading-background",
+      "source": "art-source/screen-concepts/2026-09-27/runtime-backgrounds/loading-background.png",
+      "output": "public/assets/screens/loading-background.webp",
+      "references": [
+        "art-source/screen-concepts/2026-09-27/02-loading.png"
+      ],
+      "prompt": "Edit the supplied APPROVED TownGrid screen image into a clean runtime BACKGROUND. Preserve its existing composition, village structures, lighting, colors, perspective and pixel-art style as closely as possible. Full landscape 16:9, same scene. REMOVE ALL superimposed UI: logo, text, icons, frames, buttons, progress bars. Inpaint the removed areas with a natural continuation of the original scene. No text or UI whatsoever, no new logo. This is background extraction from an approved concept, not a redesign. Remove upper-left floating diamond symbol and ALL lower loading text, bar, percentage and tip. Continue dark teal landscape naturally below the train. Keep exactly this locomotive, timber/grain/crystal train, sawmill, road bridge and blue river."
+    },
+    {
+      "id": "home-background",
+      "source": "art-source/screen-concepts/2026-09-27/runtime-backgrounds/home-background.png",
+      "output": "public/assets/screens/home-background.webp",
+      "references": [
+        "art-source/screen-concepts/2026-09-27/03-home.png"
+      ],
+      "prompt": "Edit the supplied APPROVED TownGrid screen image into a clean runtime BACKGROUND. Preserve its existing composition, village structures, lighting, colors, perspective and pixel-art style as closely as possible. Full landscape 16:9, same scene. REMOVE ALL superimposed UI: logo, text, icons, frames, buttons, progress bars. Inpaint the removed areas with a natural continuation of the original scene. No text or UI whatsoever, no new logo. This is background extraction from an approved concept, not a redesign. Remove left logo and entire left vertical menu including the exit label and divider. Fill the left third with softly shaded dark evergreen forest continuing the existing background, intentionally quiet to receive real HTML menu later. Preserve the entire right two-thirds town, river, sawmill, factory, truck and rail. Do not place any new major object in left third."
+    },
+    {
+      "id": "rowan-rail",
+      "source": "art-source/screen-concepts/2026-09-27/runtime-backgrounds/rowan-rail.png",
+      "output": "public/assets/screens/rowan-rail.webp",
+      "references": [
+        "public/assets/pixel-characters/rowan/portrait.png",
+        "art-source/screen-concepts/2026-09-27/character-work-v1/01-mira-workshop.png"
+      ],
+      "prompt": "Generate ONE full-bleed 16:9 cinematic anime-style illustration for TownGrid loading-screen rotation. FIRST reference is the existing named adult character: preserve face, hair, eye color, species and distinctive work outfit. SECOND reference is the approved warm sunlit Mira workshop illustration: match this smooth detailed anime rendering, rich tactile everyday work props, warm light, teal/copper tones, close candid composition and fantasy plus modern industrial town. Not pixel art, not a character sheet, no UI, no writing, no logos. Character visibly performs real work with hand/tool contact and coherent anatomy. Keep face and working hands in central 65% safe region for responsive crop. Leave bottom 18% visually quiet for live loading UI. Varied perspective and workplace rather than copying Mira's pose. ROWAN: adult human man with short tousled brown hair, blue-green eyes, light stubble, teal long work coat, cream rolled-sleeve shirt, leather straps, dark trousers and gloves. Scene at a rail depot near sunset: he kneels beside a teal-and-brass freight locomotive and tightens a wheel linkage bolt with a wrench, left hand supporting housing. Camera from track height at a three-quarter angle, his recognizable face and working arms central; rail wagons with timber crates, distant workers and a warehouse in background. Practical focused warm expression; no steam obscuring face. A small cyan energy cell is protected behind the machine's window. Detailed immersive industrial work, not heroic fighting."
+    },
+    {
+      "id": "hana-dispatch",
+      "source": "art-source/screen-concepts/2026-09-27/runtime-backgrounds/hana-dispatch.png",
+      "output": "public/assets/screens/hana-dispatch.webp",
+      "references": [
+        "public/assets/pixel-characters/hana/portrait.png",
+        "art-source/screen-concepts/2026-09-27/character-work-v1/01-mira-workshop.png"
+      ],
+      "prompt": "Generate ONE full-bleed 16:9 cinematic anime-style illustration for TownGrid loading-screen rotation. FIRST reference is the existing named adult character: preserve face, hair, eye color, species and distinctive work outfit. SECOND reference is the approved warm sunlit Mira workshop illustration: match this smooth detailed anime rendering, rich tactile everyday work props, warm light, teal/copper tones, close candid composition and fantasy plus modern industrial town. Not pixel art, not a character sheet, no UI, no writing, no logos. Character visibly performs real work with hand/tool contact and coherent anatomy. Keep face and working hands in central 65% safe region for responsive crop. Leave bottom 18% visually quiet for live loading UI. Varied perspective and workplace rather than copying Mira's pose. HANA: adult human woman with short black bob, warm brown eyes, rust-red cropped jacket, cream blouse, black shorts over dark tights, brown messenger strap/bag and fingerless gloves. Working at a lively riverside freight warehouse dispatch bench, she checks packing tags against an open ledger and ties a parcel with twine using both hands. Cheerful slight smile while looking at package. Close eye-level three-quarter composition, foreground linen wrapping and packed produce, a teal delivery truck outside wide doors, other residents carrying grain sacks in background. Dappled late-morning sun through high windows, river and a town bridge outside. Preserve her black bob and red jacket exactly; adult capable courier, not schoolgirl. Tags/ledger marks are abstract and illegible, no typography."
+    },
+    {
+      "id": "bron-carpentry",
+      "source": "art-source/screen-concepts/2026-09-27/runtime-backgrounds/bron-carpentry.png",
+      "output": "public/assets/screens/bron-carpentry.webp",
+      "references": [
+        "public/assets/pixel-characters/bron/portrait.png",
+        "art-source/screen-concepts/2026-09-27/character-work-v1/01-mira-workshop.png"
+      ],
+      "prompt": "Generate ONE full-bleed 16:9 cinematic anime-style illustration for TownGrid loading-screen rotation. FIRST reference is the existing named adult character: preserve face, hair, eye color, species and distinctive work outfit. SECOND reference is the approved warm sunlit Mira workshop illustration: match this smooth detailed anime rendering, rich tactile everyday work props, warm light, teal/copper tones, close candid composition and fantasy plus modern industrial town. Not pixel art, not a character sheet, no UI, no writing, no logos. Character visibly performs real work with hand/tool contact and coherent anatomy. Keep face and working hands in central 65% safe region for responsive crop. Leave bottom 18% visually quiet for live loading UI. Varied perspective and workplace rather than copying Mira's pose. BRON: adult male dwarf with stout powerful short stature, orange-red hair tied at back, thick flowing ginger beard and mustache, dark blue rolled-sleeve work shirt and trousers, worn brown leather apron with tool pockets, work gloves. Working inside open timber workshop. Both hands actively guide a traditional wood hand-plane along a clamped wooden plank at a bench; curling wood shavings provide motion and believable tool contact. Mid shot from bench height, his strong arms and friendly concentrated adult face central. Morning sunlight from side, racks of lumber, neatly hung tools, a finished crate, a nearby sawmill and small delivery cart outside. Gentle well-earned smile, no weapon or combat, no busy magic effects. Rich wood grain and tactile craft without visual clutter."
+    },
+    {
+      "id": "mira-workshop",
+      "source": "art-source/screen-concepts/2026-09-27/character-work-v1/01-mira-workshop.png",
+      "output": "public/assets/screens/mira-workshop.webp"
+    },
+    {
+      "id": "marna-workshop",
+      "source": "art-source/screen-concepts/2026-09-27/character-work-v1/02-marna-workshop.png",
+      "output": "public/assets/screens/marna-workshop.webp"
+    },
+    {
+      "id": "silen-greenhouse",
+      "source": "art-source/screen-concepts/2026-09-27/character-work-v1/03-silen-greenhouse.png",
+      "output": "public/assets/screens/silen-greenhouse.webp"
+    }
+  ]
+}

@@ -21,7 +21,7 @@ passed('33-rank prerequisite graph has no future-industry deadlock');
  const c=new Campaign(),s=c.active;s.build('warehouse',10,12);s.build('house',9,14);s.build('field',12,12);
  s.rank=32;s.money=2000;s.stock.water=30;s.autoSell={water:true};s.reserves.water=7;
  c.routes.push({from:s.siteId,item:'water',enabled:true,amount:6});
- assert.equal(s.minimumStock('water'),13);s.salesTimer=8;s.tick(.01);assert.equal(s.sold.water,10);assert.ok(s.stock.water>=13,'remaining stock stays above its reserve after workers collect supplies');
+ assert.equal(s.minimumStock('water'),13);s.salesTimer=8;s.tick(.01);assert.equal(s.shipments[0]?.amount,10,'auto-sale loads ten units onto an export cart');assert.ok(s.stock.water>=13,'remaining stock stays above its reserve after workers collect supplies');for(let i=0;i<60&&!s.sold.water;i++)s.tick(.25);assert.equal(s.sold.water,10,'payment arrives when the cart reaches the export gate');
  s.stock.water=13;s.salesTimer=8;s.tick(.01);assert.equal(s.stock.water,13);
  const b=s.buildings.find(v=>v.type==='field');b.health=63;s.money=1000;const cost=s.repairCost(b);assert.ok(s.repair(b.id).ok);assert.equal(b.health,100);assert.equal(s.money,1000-cost);
  s.setOperation(b.id,false,2);run(s,2);assert.equal(b.working,false);assert.equal(b.status,'가동 중지');assert.equal(b.priority,2);

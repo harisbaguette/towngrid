@@ -72,6 +72,11 @@ assert.equal(model.userData.frame, frame, 'no movement means no gait advancement
 advanceCharacterRoute(walker, .1, 4);
 animatePixelCharacter(model, walker, 100.1);
 close(model.userData.gaitDistance, gait + .4, 'new speed advances only new distance');
+const rebuilt = createPixelCharacter(0, 'human', 'mira');
+animatePixelCharacter(rebuilt, walker, 100.1);
+assert.equal(rebuilt.userData.frame, model.userData.frame, 'rebuilding scene models preserves the walking phase');
+close(rebuilt.userData.gaitDistance, model.userData.gaitDistance, 'rebuilt gait distance');
 assert.equal(Object.hasOwn(walker, 'gaitDistance'), false, 'animation phase does not enter save data');
 model.userData.sprite.material.map.dispose(); model.userData.sprite.material.dispose();
+rebuilt.userData.sprite.material.map.dispose(); rebuilt.userData.sprite.material.dispose();
 console.log(JSON.stringify({ result: 'CHARACTER MOVEMENT PASS', comparisons, cornerTraversal: true, blockedNodes: true, logistics: true, speedChangeWithoutPhaseJump: true }, null, 2));
