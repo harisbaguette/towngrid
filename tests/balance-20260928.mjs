@@ -9,6 +9,8 @@ import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
 import {operationHint} from '../src/app/game/proximity.js';
 import {startRaid} from '../src/app/game/encounters.js';
 import {FILES} from '../src/app/game/audio.js';
+// Terminals and networks came after the patch; they join the rank lists without changing the patched ones.
+import {INFRA_BUILDINGS} from '../src/app/game/infrastructure.js';
 const run=(s,t)=>{for(let i=0;i<t*4;i++)s.tick(.25);};
 const town=(region='river')=>{const s=new Simulation(region);s.nextEvent=1e9;s.autoSell={};s.money=1e6;s.debt=0;for(const r of Object.keys(RESOURCES))s.stock[r]=50;s.build('warehouse',11,12);s.build('house',11,14);return s;};
 const patch=JSON.parse(fs.readFileSync(new URL('../docs/balance/patch-20260928.json',import.meta.url),'utf8'));
@@ -18,9 +20,9 @@ for(const [id,d] of Object.entries(patch.resources.add))assert.deepEqual(RESOURC
 for(const [id,d] of Object.entries(patch.resources.change))for(const [k,v] of Object.entries(d))assert.equal(RESOURCES[id][k],v,id+'.'+k);
 for(const [id,d] of Object.entries(patch.buildings.add))for(const [k,v] of Object.entries(d))if(k!=='description')assert.deepEqual(BUILDINGS[id][k],v,id+'.'+k);
 for(const [id,d] of Object.entries(patch.buildings.change))for(const [k,v] of Object.entries(d))assert.deepEqual(BUILDINGS[id][k],v,id+'.'+k);
-assert.equal(RANKS.length,33);patch.ranks.table.forEach((r,i)=>{assert.equal(RANKS[i].name,r.name);assert.equal(RANKS[i].fee,r.fee);assert.deepEqual(RANKS[i].unlocks,r.unlocks);assert.deepEqual(RANKS[i].requirements,r.requirements,'rank '+i);});
+assert.equal(RANKS.length,33);patch.ranks.table.forEach((r,i)=>{assert.equal(RANKS[i].name,r.name);assert.equal(RANKS[i].fee,r.fee);assert.deepEqual(RANKS[i].unlocks.filter(t=>!INFRA_BUILDINGS[t]),r.unlocks);assert.deepEqual(RANKS[i].requirements,r.requirements,'rank '+i);});
 assert.equal(unlockRank('quarry'),0,'the quarry is a starting facility');
-assert.equal(Object.keys(RESOURCES).length,36);assert.equal(Object.keys(BUILDINGS).length,69);
+assert.equal(Object.keys(RESOURCES).length,36);assert.equal(Object.keys(BUILDINGS).filter(t=>!INFRA_BUILDINGS[t]).length,69);
 
 // M1 water mill makes power with no fuel; M2 its water reach is 2 tiles and the message names it.
 {const s=town();s.rank=10;const far=s.canBuild('watermill',11,9);assert.equal(far,'강이나 바다에서 2칸 이내에 놓으세요');const t=s.tiles.find(t=>s.ownedAt(t.x,t.z)&&t.x===15&&!s.at(t.x,t.z)&&s.canBuild('watermill',t.x,t.z)===null);assert.ok(t,'a riverside tile takes a water mill');s.build('watermill',t.x,t.z);run(s,40);assert.equal(s.power,true);}
@@ -37,7 +39,9 @@ assert.equal(Object.keys(RESOURCES).length,36);assert.equal(Object.keys(BUILDING
  const r=c.routes[0],from=c.sites.find(v=>v.id===r.from).sim;from.stock[r.item]=100;c.treasury.money=1e5;c.tickRoute(r,.1);assert.equal(r.cargo,r.amount,r.status);assert.ok(Math.abs(r.duration-(r.mode==='rail'?24:48)*.8)<1e-9,'the slower of the two factors applies: '+r.duration);}
 // M6 marketplace speeds price recovery; M8 the exchange adds two export carts and saves still validate.
 {const s=town();s.market.pressure.wood=50;run(s,10);const plain=s.market.pressure.wood;const m=town();m.rank=6;m.build('marketplace',13,12);m.market.pressure.wood=50;run(m,10);assert.ok(m.market.pressure.wood<plain);
- const e=town();e.rank=31;e.stock.wood=300;const t=e.tiles.find(t=>e.canBuild('exchange',t.x,t.z,true)===null);e.build('exchange',t.x,t.z,true);assert.equal(e.exportStatus().carts,5);for(let i=0;i<5;i++)assert.ok(e.sell('wood',1).ok);assert.equal(e.sell('wood',1).ok,false);assert.equal(decodeSave(encodeSave(e.save())).shipments.length,5);}
+ const e=town();e.rank=31;e.stock.wood=300;const t=e.tiles.find(t=>e.canBuild('exchange',t.x,t.z,true)===null);e.build('exchange',t.x,t.z,true);// Second pass: the exchange's two extra vehicles are fuel vehicles (docs/BALANCE_PATCH_20260928.md 12-4), so they run only on spare fuel.
+ const fuel=e.stock.fuel;e.stock.fuel=0;assert.equal(e.exportStatus().carts,3,'without fuel only the free three run');e.stock.fuel=fuel;
+ assert.equal(e.exportStatus().carts,7);for(let i=0;i<7;i++)assert.ok(e.sell('wood',1).ok);assert.equal(e.sell('wood',1).ok,false);assert.equal(e.stock.fuel,fuel-4,'each fuel vehicle burns one fuel');assert.equal(decodeSave(encodeSave(e.save())).shipments.length,7);}
 // M7 a parliament in any site lowers every site's unrest by 2 a day.
 {const c=new Campaign({demo:true});const [a]=c.sites.map(v=>v.sim);for(const site of c.sites){site.unrest=50;}c.worldDay();const base=c.sites.map(v=>v.unrest);for(const site of c.sites)site.unrest=50;a.build('parliament',6,18,true);c.worldDay();c.sites.forEach((v,i)=>assert.equal(v.unrest,base[i]-2));}
 // M10 crews and M11 sounds.

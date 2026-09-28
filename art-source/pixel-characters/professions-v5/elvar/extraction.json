@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/elvar.png",
+  "portraitRegion": [
+    0,
+    0,
+    540,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        540,
+        0,
+        880,
+        627
+      ],
+      "bbox": [
+        537,
+        59,
+        849,
+        603
+      ],
+      "scale": 0.18382352941176472,
+      "offset": [
+        35,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        880,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        911,
+        59,
+        1225,
+        606
+      ],
+      "scale": 0.18281535648994515,
+      "offset": [
+        35,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

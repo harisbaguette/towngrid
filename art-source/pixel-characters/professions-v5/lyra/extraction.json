@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/lyra.png",
+  "portraitRegion": [
+    0,
+    0,
+    533,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        533,
+        0,
+        875,
+        627
+      ],
+      "bbox": [
+        538,
+        101,
+        818,
+        627
+      ],
+      "scale": 0.19011406844106463,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        875,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        933,
+        100,
+        1215,
+        627
+      ],
+      "scale": 0.18975332068311196,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

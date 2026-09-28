@@ -14,7 +14,8 @@
    "transitFactor": "시설: M5 운송 시간 배율",
    "marketRecovery": "시설: M6 시세 회복 배율",
    "unrestRelief": "시설: M7 하루 불만 감소량",
-   "exportCarts": "시설: M8 수출 마차 추가 대수"
+   "exportCarts": "시설: M8 수출 마차 추가 대수",
+   "recipes": "시설: 2차 개편 대안 제품 목록. recipes[0]은 시설 본래의 inputs·output·amount·period, 나머지는 ALT_RECIPES(industry.js). 건물 인스턴스 recipe에 고른 제품 id를 저장한다"
   }
  },
  "resources": {
@@ -160,12 +161,12 @@
     "materials": {
      "wood": 3
     },
-    "period": 18,
+    "period": 9,
     "inputs": {
      "water": 1
     },
     "output": "cotton",
-    "amount": 3,
+    "amount": 2,
     "irrigable": true,
     "description": "물을 받아 목화를 기릅니다. 강이나 급수탑 옆이면 물 운반 없이 자랍니다."
    },
@@ -176,12 +177,12 @@
     "materials": {
      "wood": 4
     },
-    "period": 20,
+    "period": 8,
     "inputs": {
      "water": 1
     },
     "output": "herb",
-    "amount": 2,
+    "amount": 1,
     "irrigable": true,
     "description": "약초를 재배합니다. 진료소 치료와 결계 초소, 제약 공장에 쓰입니다."
    },
@@ -193,13 +194,13 @@
      "plank": 4,
      "stone": 2
     },
-    "period": 20,
+    "period": 11,
     "inputs": {
      "grain": 1,
      "water": 1
     },
     "output": "egg",
-    "amount": 3,
+    "amount": 2,
     "description": "밀과 물을 먹여 달걀을 얻습니다. 오염에 약합니다."
    },
    "smokehouse": {
@@ -210,7 +211,7 @@
      "wood": 6,
      "stone": 3
     },
-    "period": 16,
+    "period": 10,
     "inputs": {
      "fish": 2,
      "wood": 1
@@ -227,7 +228,7 @@
      "plank": 4,
      "stone": 2
     },
-    "period": 20,
+    "period": 12,
     "inputs": {
      "cotton": 3
     },
@@ -243,7 +244,7 @@
      "plank": 5,
      "stone": 4
     },
-    "period": 24,
+    "period": 16,
     "inputs": {
      "flour": 2,
      "egg": 2
@@ -260,7 +261,7 @@
      "stone": 8,
      "wood": 4
     },
-    "period": 18,
+    "period": 12,
     "inputs": {
      "stone": 2,
      "wood": 1
@@ -277,7 +278,7 @@
      "plank": 6,
      "brick": 4
     },
-    "period": 24,
+    "period": 16,
     "inputs": {
      "cloth": 3
     },
@@ -293,7 +294,7 @@
      "brick": 6,
      "plank": 4
     },
-    "period": 22,
+    "period": 14,
     "inputs": {
      "stone": 2,
      "wood": 2
@@ -384,7 +385,7 @@
      "glass": 6,
      "concrete": 4
     },
-    "period": 24,
+    "period": 29,
     "inputs": {
      "glass": 1,
      "wire": 1,
@@ -405,7 +406,7 @@
      "concrete": 6,
      "circuit": 3
     },
-    "period": 30,
+    "period": 33,
     "inputs": {
      "gear": 2,
      "wire": 2,
@@ -426,7 +427,7 @@
      "steel": 8,
      "circuit": 2
     },
-    "period": 30,
+    "period": 32,
     "inputs": {
      "steel": 2,
      "mana": 2
@@ -467,7 +468,7 @@
      "concrete": 8,
      "steel": 6
     },
-    "period": 30,
+    "period": 36,
     "inputs": {
      "iron": 5,
      "coal": 2
@@ -606,7 +607,7 @@
     },
     "unique": true,
     "exportCarts": 2,
-    "description": "수출 마차가 2대 늘어 동시에 5대가 운행합니다."
+    "description": "연료로 움직이는 트럭·증기선이 2대 늘어 동시에 최대 7대가 운송합니다."
    }
   },
   "change": {
@@ -644,7 +645,9 @@
      "glass": 4,
      "circuit": 3
     },
-    "cost": 2000
+    "cost": 2000,
+    "period": 30,
+    "amount": 3
    },
    "magetower": {
     "materials": {
@@ -660,12 +663,19 @@
     "transitFactor": 0.8
    },
    "dock": {
-    "nearWater": 3
+    "nearWater": 3,
+    "period": 12,
+    "amount": 3
    },
    "field": {
-    "irrigable": true
+    "irrigable": true,
+    "period": 12,
+    "amount": 3
    },
-   "quarry": {},
+   "quarry": {
+    "period": 9,
+    "amount": 2
+   },
    "station": {
     "materials": {
      "steel": 8,
@@ -731,6 +741,26 @@
    },
    "manaextractor": {
     "cost": 620
+   },
+   "well": {
+    "period": 6,
+    "amount": 2
+   },
+   "lumber": {
+    "period": 8,
+    "amount": 3
+   },
+   "sawmill": {
+    "period": 10,
+    "amount": 3
+   },
+   "mill": {
+    "period": 10,
+    "amount": 3
+   },
+   "bakery": {
+    "period": 13,
+    "amount": 5
    }
   }
  },
@@ -844,7 +874,8 @@
     ],
     "unlocks": [
      "herbgarden",
-     "clinic"
+     "clinic",
+     "weaver"
     ],
     "id": 4
    },
@@ -864,7 +895,6 @@
      ]
     ],
     "unlocks": [
-     "weaver",
      "depot"
     ],
     "id": 5
@@ -1451,7 +1481,7 @@
      ],
      [
       "produced:car",
-      80,
+      70,
       "자동차 생산"
      ]
     ],
@@ -2001,9 +2031,9 @@
   },
   "export-route.EXPORT_CARTS": {
    "file": "src/app/game/export-route.js · persistence.js",
-   "current": "3(상수, 저장 검증도 3)",
-   "next": "3 + 가동 중 exportCarts 합. 저장 검증 상한 5",
-   "reason": "대륙 거래소. 후반 출하 한계(마차 3대)를 푼다."
+   "current": "무연료 3대(마차 2 + 뗏목 1, 물이 지도 밖으로 흐르지 않는 거점은 마차 3) + 연료 차량 2대(트럭·증기선). 저장 검증 상한 7",
+   "next": "2차 개편에서 대체됨(secondPass.vehicles)",
+   "reason": "연료를 운송에 쓰는 타운스타 규칙. 연료가 없으면 무연료 3대만 운행한다"
   }
  },
  "mechanics": [
@@ -2178,7 +2208,19 @@
    "tests/simulation.mjs 4·20행(rank 11 가정 — 새 해금표에서도 유효한지)",
    "tests/fantasy.mjs 16행(0단계 제분소 불가 — 제분소 2단계라 유지)",
    "tests/quality.mjs 13~17행(선행 해금 검사 — 새 표로 통과해야 함)"
-  ]
+  ],
+  "secondPass": {
+   "staticCheck": "node scripts/balance-report.mjs --strict (C1~C11)",
+   "bot": "node tests/full-campaign.mjs (A1~A5, A 구간 6일)",
+   "contract": "node tests/audit/first-ten-minutes.mjs --regression",
+   "tests": "tests/second-pass-20260928.mjs",
+   "botChanges": [
+    "계약은 contractStatus().ready일 때 보낸다",
+    "수입은 운송 중인 물량을 세어 모자란 만큼만 주문하고, 창고에 들어온 뒤 짓는다",
+    "대안 제품: 어떤 시설이 그 제품을 기다리거나 다음 승급이 요구하는데 만드는 곳이 없으면 대안으로 바꾸고, 필요가 끝나면 기본으로 되돌린다(시설당 1분에 한 번)",
+    "결과 파일에 보낸 계약 수·제품 전환 수·연료 차량이 태운 연료를 남긴다"
+   ]
+  }
  },
  "calibration": {
   "note": "봇 합격 기준(A1~A5)을 맞추려고 조정한 승급 조건. 코드(world.js RANKS)와 이 파일의 ranks.table이 같은 값이다.",
@@ -2275,5 +2317,819 @@
     "reason": "자동차 60대·교역 수입 50만 G는 마지막 단계 전에 채워져 F 구간이 목표(60일)보다 한참 빨랐다."
    }
   ]
+ },
+ "localTerrain": {
+  "mountainOre": [
+   80,
+   100
+  ],
+  "plainOre": [
+   30,
+   100
+  ],
+  "mountainRockRemaining": 180,
+  "normalRockRemaining": 90,
+  "mountainMiningFactor": 1.25,
+  "legacyResources": "Saved remaining resources are retained; old region templates keep the original resource generation."
+ },
+ "biomes": {
+  "profiles": {
+   "snow": {
+    "name": "눈 덮인 설원",
+    "frame": 0,
+    "color": "#edf5f5",
+    "summary": "설원·침엽수 · 극지 운송",
+    "detail": "눈 덮인 땅과 침엽수림입니다. 밭과 우물은 느리며 극지 항과 스노모빌을 이용합니다.",
+    "fertility": [
+     25,
+     50
+    ],
+    "moisture": [
+     25,
+     50
+    ],
+    "ore": [
+     55,
+     90
+    ],
+    "mana": [
+     30,
+     65
+    ],
+    "tree": 0.17,
+    "rock": 0.13,
+    "wood": 90,
+    "stone": 120
+   },
+   "meadow": {
+    "name": "비옥한 평야",
+    "frame": 1,
+    "color": "#a8b75c",
+    "summary": "높은 비옥도 · 넓은 경작지",
+    "detail": "나무와 바위가 적어 넓게 경작할 수 있습니다. 비옥도가 높으며 담수 옆에서는 물 운반도 줄어듭니다.",
+    "fertility": [
+     80,
+     100
+    ],
+    "moisture": [
+     60,
+     90
+    ],
+    "ore": [
+     30,
+     60
+    ],
+    "mana": [
+     30,
+     65
+    ],
+    "tree": 0.1,
+    "rock": 0.06,
+    "wood": 90,
+    "stone": 90
+   },
+   "forest": {
+    "name": "울창한 숲",
+    "frame": 2,
+    "color": "#527e4f",
+    "summary": "풍부한 목재 · 습한 숲 토양",
+    "detail": "성목이 밀집한 숲입니다. 자연림의 나무 한 그루에는 목재가 150개 있으며, 개간하면 시설을 지을 수 있습니다.",
+    "fertility": [
+     55,
+     80
+    ],
+    "moisture": [
+     65,
+     90
+    ],
+    "ore": [
+     35,
+     65
+    ],
+    "mana": [
+     50,
+     85
+    ],
+    "tree": 0.52,
+    "rock": 0.07,
+    "wood": 150,
+    "stone": 90
+   },
+   "basin": {
+    "name": "광산 분지",
+    "frame": 3,
+    "color": "#928779",
+    "summary": "높은 광물량 · 산악 채굴",
+    "detail": "산으로 둘러싸인 분지에 광석과 바위가 많습니다. 산 타일의 채석장·광산에는 추가 생산 보정이 적용됩니다.",
+    "fertility": [
+     30,
+     55
+    ],
+    "moisture": [
+     30,
+     55
+    ],
+    "ore": [
+     75,
+     100
+    ],
+    "mana": [
+     40,
+     75
+    ],
+    "tree": 0.08,
+    "rock": 0.38,
+    "wood": 90,
+    "stone": 180
+   },
+   "desert": {
+    "name": "사막과 유전",
+    "frame": 4,
+    "color": "#d8b16c",
+    "summary": "유전 · 오아시스 주변 농업",
+    "detail": "검은 원유가 드러난 지점은 유정 효율이 높습니다. 모래에서는 농사와 취수가 느리고, 오아시스 주변은 비옥하고 습합니다.",
+    "fertility": [
+     15,
+     35
+    ],
+    "moisture": [
+     10,
+     30
+    ],
+    "ore": [
+     40,
+     70
+    ],
+    "mana": [
+     30,
+     65
+    ],
+    "tree": 0.04,
+    "rock": 0.12,
+    "wood": 90,
+    "stone": 90
+   },
+   "coast": {
+    "name": "모래 해안",
+    "frame": 5,
+    "color": "#dfd09b",
+    "summary": "어업 · 연안항 · 해안 교역",
+    "detail": "모래사장과 야자수가 바다로 이어집니다. 어업과 연안항에 유리하며, 바닷물은 밭을 관개하지 않습니다.",
+    "fertility": [
+     45,
+     75
+    ],
+    "moisture": [
+     55,
+     80
+    ],
+    "ore": [
+     30,
+     65
+    ],
+    "mana": [
+     30,
+     65
+    ],
+    "tree": 0.12,
+    "rock": 0.07,
+    "wood": 90,
+    "stone": 90
+   },
+   "marsh": {
+    "name": "갈대 습지",
+    "frame": 6,
+    "color": "#818e54",
+    "summary": "풍부한 담수 · 농업·약초",
+    "detail": "작은 담수 웅덩이와 갈대가 이어지는 습지입니다. 수분과 비옥도가 높고 물가 관개를 활용할 수 있습니다.",
+    "fertility": [
+     70,
+     95
+    ],
+    "moisture": [
+     85,
+     100
+    ],
+    "ore": [
+     25,
+     55
+    ],
+    "mana": [
+     55,
+     85
+    ],
+    "tree": 0.22,
+    "rock": 0.05,
+    "wood": 100,
+    "stone": 90
+   },
+   "volcanic": {
+    "name": "화산 고원",
+    "frame": 7,
+    "color": "#686475",
+    "summary": "검은 암반 · 광물·마력",
+    "detail": "검은 화산암에 광물과 마력이 풍부합니다. 농사와 취수에는 불리한 땅입니다.",
+    "fertility": [
+     30,
+     50
+    ],
+    "moisture": [
+     20,
+     45
+    ],
+    "ore": [
+     80,
+     100
+    ],
+    "mana": [
+     75,
+     100
+    ],
+    "tree": 0.06,
+    "rock": 0.4,
+    "wood": 90,
+    "stone": 180
+   }
+  },
+  "oil": {
+   "desertFields": [
+    85,
+    100
+   ],
+   "desertOther": [
+    30,
+    55
+   ],
+   "other": [
+    25,
+    60
+   ]
+  },
+  "oasis": {
+   "freshwaterRadius": 2,
+   "fertility": [
+    70,
+    90
+   ],
+   "moisture": [
+    75,
+    100
+   ]
+  },
+  "legacy": "Missing land.ecology preserves previous resource generation and oil uses ore."
+ },
+ "secondPass": {
+  "date": "2026-09-28",
+  "doc": "docs/BALANCE_PATCH_20260928.md 12절",
+  "contract": {
+   "before": {
+    "premium": [
+     1.35,
+     1.45
+    ],
+    "wait": 0,
+    "payment": "버튼 즉시"
+   },
+   "after": {
+    "premium": [
+     1.2,
+     1.32
+    ],
+    "waitSeconds": 80,
+    "payment": "수출 운송 수단이 터미널에 도착할 때 한 번",
+    "next": "도착 후 CONTRACT_WAIT초 뒤 다음 주문"
+   }
+  },
+  "transport": {
+   "contract": "운송(보상은 도착 시)",
+   "stateTrade": "운송(대금은 도착 시, 상대국 장부는 출발 시)",
+   "import": "주문 시 결제, 운송 수단이 터미널에서 싣고 창고에 돌아오면 입고",
+   "autoSale": "운송 수단 두 대 이상이 놀고 있을 때만 출하(한 대는 계약·수입·수동 판매용으로 남김)"
+  },
+  "vehicles": {
+   "kinds": {
+    "wagon": {
+     "name": "마차",
+     "fuel": false,
+     "load": 1,
+     "land": 1,
+     "water": 0
+    },
+    "raft": {
+     "name": "뗏목",
+     "fuel": false,
+     "load": 1.5,
+     "land": 1,
+     "water": 1.2
+    },
+    "truck": {
+     "name": "트럭",
+     "fuel": true,
+     "load": 2,
+     "land": 2,
+     "water": 0
+    },
+    "steamer": {
+     "name": "증기선",
+     "fuel": true,
+     "load": 3,
+     "land": 1.6,
+     "water": 2.4
+    }
+   },
+   "fuelFree": 3,
+   "fuelFleet": 2,
+   "fuelPerTrip": 1,
+   "exchange": "대륙 거래소 exportCarts 2 = 연료 차량 상한 +2",
+   "saveCeiling": 7,
+   "spareFuel": "창고 연료 − 최소 보유량(생산 투입 2회분·노선 화물·열린 계약·플레이어 비축)만 태운다"
+  },
+  "recipes": {
+   "quarry": [
+    {
+     "id": "copper",
+     "name": "구리 광맥",
+     "inputs": {},
+     "output": "copper",
+     "amount": 2,
+     "period": 14,
+     "unlock": 14
+    }
+   ],
+   "bakery": [
+    {
+     "id": "cake",
+     "name": "케이크",
+     "inputs": {
+      "flour": 2,
+      "egg": 2
+     },
+     "output": "cake",
+     "amount": 1,
+     "period": 14,
+     "unlock": 7
+    }
+   ],
+   "kiln": [
+    {
+     "id": "glass",
+     "name": "가마 유리",
+     "inputs": {
+      "stone": 3,
+      "wood": 2
+     },
+     "output": "glass",
+     "amount": 2,
+     "period": 20,
+     "unlock": 9
+    }
+   ],
+   "glassworks": [
+    {
+     "id": "coalglass",
+     "name": "석탄 유리",
+     "inputs": {
+      "stone": 2,
+      "coal": 1
+     },
+     "output": "glass",
+     "amount": 3,
+     "period": 20,
+     "unlock": 13
+    }
+   ],
+   "workshop": [
+    {
+     "id": "steelgear",
+     "name": "강철 부품",
+     "inputs": {
+      "steel": 1,
+      "plank": 1
+     },
+     "output": "gear",
+     "amount": 3,
+     "period": 15,
+     "unlock": 14
+    }
+   ],
+   "ironmine": [
+    {
+     "id": "copper",
+     "name": "구리 광맥",
+     "inputs": {},
+     "output": "copper",
+     "amount": 3,
+     "period": 18,
+     "unlock": 14
+    }
+   ],
+   "smelter": [
+    {
+     "id": "charcoalsteel",
+     "name": "목탄 제련",
+     "inputs": {
+      "iron": 3,
+      "wood": 4
+     },
+     "output": "steel",
+     "amount": 2,
+     "period": 26,
+     "unlock": 14
+    }
+   ],
+   "steamworks": [
+    {
+     "id": "wire",
+     "name": "구리 전선",
+     "inputs": {
+      "copper": 2,
+      "coal": 1,
+      "water": 1
+     },
+     "output": "wire",
+     "amount": 3,
+     "period": 22,
+     "unlock": 16
+    }
+   ],
+   "refinery": [
+    {
+     "id": "polymer",
+     "name": "합성 소재",
+     "inputs": {
+      "oil": 3,
+      "water": 1
+     },
+     "output": "polymer",
+     "amount": 2,
+     "period": 24,
+     "unlock": 16
+    }
+   ],
+   "chemical": [
+    {
+     "id": "coalfuel",
+     "name": "석탄 액화",
+     "inputs": {
+      "coal": 3,
+      "water": 2
+     },
+     "output": "fuel",
+     "amount": 3,
+     "period": 24,
+     "unlock": 16
+    }
+   ],
+   "cementworks": [
+    {
+     "id": "brick",
+     "name": "대량 벽돌",
+     "inputs": {
+      "stone": 3,
+      "coal": 1
+     },
+     "output": "brick",
+     "amount": 5,
+     "period": 20,
+     "unlock": 17
+    }
+   ],
+   "laboratory": [
+    {
+     "id": "herbal",
+     "name": "약초 제제",
+     "inputs": {
+      "herb": 3,
+      "water": 1,
+      "glass": 1
+     },
+     "output": "medicine",
+     "amount": 2,
+     "period": 26,
+     "unlock": 20
+    }
+   ]
+  },
+  "periods": [
+   {
+    "id": "well",
+    "name": "우물",
+    "before": {
+     "period": 9,
+     "amount": 3
+    },
+    "after": {
+     "period": 6,
+     "amount": 2
+    },
+    "why": "첫 물이 6초 만에 나온다. 분당 생산량은 그대로(20개)"
+   },
+   {
+    "id": "field",
+    "name": "밀밭",
+    "before": {
+     "period": 17,
+     "amount": 4
+    },
+    "after": {
+     "period": 12,
+     "amount": 3
+    },
+    "why": "첫 수확을 12초로 당긴다. 분당 15개(이전 14.1)"
+   },
+   {
+    "id": "lumber",
+    "name": "벌목장",
+    "before": {
+     "period": 13,
+     "amount": 4
+    },
+    "after": {
+     "period": 8,
+     "amount": 3
+    },
+    "why": "첫 목재를 8초로 당기고 분당 22.5개(이전 18.5)로 늘린다. 제재소가 빨라져 늘어난 목재 소모를 받친다"
+   },
+   {
+    "id": "quarry",
+    "name": "채석장",
+    "before": {
+     "period": 16,
+     "amount": 3
+    },
+    "after": {
+     "period": 9,
+     "amount": 2
+    },
+    "why": "첫 석재를 9초로 당긴다. 분당 13.3개(이전 11.3)로 초반 석재 부족을 줄인다"
+   },
+   {
+    "id": "dock",
+    "name": "어항",
+    "before": {
+     "period": 17,
+     "amount": 4
+    },
+    "after": {
+     "period": 12,
+     "amount": 3
+    },
+    "why": "첫 어획을 12초로 당긴다. 분당 15개(이전 14.1)"
+   },
+   {
+    "id": "sawmill",
+    "name": "제재소",
+    "before": {
+     "period": 15,
+     "amount": 3
+    },
+    "after": {
+     "period": 10,
+     "amount": 3
+    },
+    "why": "1단계 해금 시설. 판재 12개 조건까지 기다림을 줄인다(분당 판재 18개, 이전 12)"
+   },
+   {
+    "id": "mill",
+    "name": "제분소",
+    "before": {
+     "period": 15,
+     "amount": 3
+    },
+    "after": {
+     "period": 10,
+     "amount": 3
+    },
+    "why": "2단계 해금 시설. 밀가루 12개 조건까지 기다림을 줄인다"
+   },
+   {
+    "id": "bakery",
+    "name": "빵집",
+    "before": {
+     "period": 19,
+     "amount": 5
+    },
+    "after": {
+     "period": 13,
+     "amount": 5
+    },
+    "why": "3단계 해금 시설. 두 번 구우면(26초) 빵 판매 10개 조건을 채운다"
+   },
+   {
+    "id": "smokehouse",
+    "name": "훈제장",
+    "before": {
+     "period": 16,
+     "amount": 2
+    },
+    "after": {
+     "period": 10,
+     "amount": 2
+    },
+    "why": "초반 가공. 생선 사슬의 결과를 빨리 보여 준다"
+   },
+   {
+    "id": "cottonfield",
+    "name": "목화밭",
+    "before": {
+     "period": 18,
+     "amount": 3
+    },
+    "after": {
+     "period": 9,
+     "amount": 2
+    },
+    "why": "첫 목화를 9초로 당긴다. 분당 13.3개(이전 10)"
+   },
+   {
+    "id": "herbgarden",
+    "name": "약초원",
+    "before": {
+     "period": 20,
+     "amount": 2
+    },
+    "after": {
+     "period": 8,
+     "amount": 1
+    },
+    "why": "첫 약초를 8초로 당긴다. 분당 7.5개(이전 6)"
+   },
+   {
+    "id": "henhouse",
+    "name": "양계장",
+    "before": {
+     "period": 20,
+     "amount": 3
+    },
+    "after": {
+     "period": 11,
+     "amount": 2
+    },
+    "why": "첫 달걀을 11초로 당긴다. 분당 10.9개(이전 9)"
+   },
+   {
+    "id": "weaver",
+    "name": "방직소",
+    "before": {
+     "period": 20,
+     "amount": 2
+    },
+    "after": {
+     "period": 12,
+     "amount": 2
+    },
+    "why": "직물 8개 조건까지 네 번 짜면 된다(48초)"
+   },
+   {
+    "id": "confectionery",
+    "name": "제과점",
+    "before": {
+     "period": 24,
+     "amount": 2
+    },
+    "after": {
+     "period": 16,
+     "amount": 2
+    },
+    "why": "중반 식품 가공. 3단 가공이지만 초반 해금이라 16초"
+   },
+   {
+    "id": "kiln",
+    "name": "벽돌 가마",
+    "before": {
+     "period": 18,
+     "amount": 3
+    },
+    "after": {
+     "period": 12,
+     "amount": 3
+    },
+    "why": "벽돌 20개 조건까지 기다림을 줄인다"
+   },
+   {
+    "id": "tailor",
+    "name": "봉제소",
+    "before": {
+     "period": 24,
+     "amount": 2
+    },
+    "after": {
+     "period": 16,
+     "amount": 2
+    },
+    "why": "3단 가공. 16초"
+   },
+   {
+    "id": "glassworks",
+    "name": "유리 공방",
+    "before": {
+     "period": 22,
+     "amount": 2
+    },
+    "after": {
+     "period": 14,
+     "amount": 2
+    },
+    "why": "유리 8개 조건까지 기다림을 줄인다"
+   },
+   {
+    "id": "laboratory",
+    "name": "제약 공장",
+    "before": {
+     "period": 25,
+     "amount": 3
+    },
+    "after": {
+     "period": 30,
+     "amount": 3
+    },
+    "why": "후반 첨단 가공은 한 번에 더 오래 걸린다(+20%). 이전 봇에서 D~F 구간이 목표보다 5~9일 빨랐다"
+   },
+   {
+    "id": "lampworks",
+    "name": "마력등 공방",
+    "before": {
+     "period": 24,
+     "amount": 2
+    },
+    "after": {
+     "period": 29,
+     "amount": 2
+    },
+    "why": "후반 첨단 가공 +20%"
+   },
+   {
+    "id": "engineworks",
+    "name": "마력 기관 공장",
+    "before": {
+     "period": 30,
+     "amount": 1
+    },
+    "after": {
+     "period": 33,
+     "amount": 1
+    },
+    "why": "비공정 사슬 +10%. 20%로 늘리면 마지막 승급(비공정 10척) 간격이 5일을 넘었다"
+   },
+   {
+    "id": "mithrilforge",
+    "name": "미스릴 정련소",
+    "before": {
+     "period": 30,
+     "amount": 1
+    },
+    "after": {
+     "period": 32,
+     "amount": 1
+    },
+    "why": "비공정 사슬 +7%(2단 가공 평균보다 길게)"
+   },
+   {
+    "id": "blastfurnace",
+    "name": "용광로",
+    "before": {
+     "period": 30,
+     "amount": 6
+    },
+    "after": {
+     "period": 36,
+     "amount": 6
+    },
+    "why": "후반 대형 설비 +20%"
+   }
+  ],
+  "startMoney": {
+   "before": 1100,
+   "after": 1300,
+   "why": "계약 연타로 첫 33초에 들어오던 316G(밀 12·목재 14 즉시 납품)를 시작 자금으로 옮긴다"
+  },
+  "unlocks": {
+   "weaver": {
+    "before": 5,
+    "after": 4,
+    "why": "6단계 조건인 직물을 5단계 동안 미리 준비할 수 있게 한다. 해금 직후 생산 대기가 A 구간 끝을 하루 늦추던 원인"
+   }
+  },
+  "disease": {
+   "before": "미치료 감염 초당 +0.075(하루 +6), 15단계 이상 +0.12",
+   "after": "초당 +0.0086 × 감염도 × (1 − 감염도/100), 15단계 이상 1.5배",
+   "why": "감염자 비율에 비례해 번지는 모형. 32%에서 하루 뒤 48%, 이틀 뒤 65%. 잔여 감염 1~5%는 거의 늘지 않는다"
+  },
+  "storm": {
+   "before": {
+    "day4": 40,
+    "later": 75
+   },
+   "after": {
+    "day4": 30,
+    "day12": 60,
+    "later": 80
+   },
+   "firstEvent": {
+    "before": 170,
+    "after": 170
+   },
+   "why": "초반 폭풍은 흠집(수리 15G 안팎), 13일째부터는 수리비가 보강비(70G + 목재 4)를 넘어 보강이 이득인 선택이 된다. 첫 사건은 튜토리얼 단계 뒤(4일째)로 미룬다"
+  }
  }
 }

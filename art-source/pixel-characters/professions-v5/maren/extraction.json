@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/maren.png",
+  "portraitRegion": [
+    0,
+    0,
+    542,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        542,
+        0,
+        888,
+        627
+      ],
+      "bbox": [
+        544,
+        82,
+        854,
+        627
+      ],
+      "scale": 0.1834862385321101,
+      "offset": [
+        35,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        888,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        923,
+        82,
+        1229,
+        627
+      ],
+      "scale": 0.1834862385321101,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

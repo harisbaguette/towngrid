@@ -4,6 +4,7 @@
 import {Campaign,run,home,snapshot,status,expectBug,finish} from './_harness.mjs';
 import {readFileSync} from 'node:fs';
 import {tutorialStep} from '../../src/app/game/ui-rules.js';
+import {CONTRACT_WAIT} from '../../src/app/game/simulation.js';
 // Game.tsx shows the tutorial below rank 2 and hides the operations card only while the tutorial is up.
 const gameSource=readFileSync(new URL('../../src/app/game/Game.tsx',import.meta.url),'utf8'),opsHiddenByGuide=/<Operations[^>]*hidden={!!guide}/.test(gameSource);
 const c=new Campaign({nation:'estern',race:'human'}),s=home(c);
@@ -19,7 +20,9 @@ let lastRank=s.rank,lastContracts=0,lastEvents=0,firstStorm=null,rank1Window=0;
 const seen=new Set();
 run(c,600,()=>{
  const t=Math.round(s.time);{const guide=s.rank<2?tutorialStep(s):null,ops=!!s.warehouse&&(opsHiddenByGuide?!guide:s.rank>=2);if(!guide&&!ops)rank1Window+=.25;}
- const k=s.contract();if(s.availableStock(k.item)>=k.amount){const r=s.fulfill();if(r.ok)note('납품 완료',{item:k.item,amount:k.amount,reward:k.reward});}
+ // The lord's order goes out when the contract card allows it and is paid when its vehicle arrives.
+ if(s.contractStatus().ready){const k=s.contract();if(s.fulfill().ok)note('납품 출발',{item:k.item,amount:k.amount,reward:k.reward});}
+ if(s.contracts>lastContracts){lastContracts=s.contracts;note('납품 완료',{contracts:s.contracts});}
  const p=s.promotion();if(p?.ready){const r=s.promote();if(r.ok)note('승급 → '+p.name,{fee:p.fee});}
  if(s.events.length>lastEvents){lastEvents=s.events.length;const e=s.events.at(-1);note('사건 발생: '+e.type,{broken:s.buildings.filter(b=>b.health<=0).map(b=>b.type)});if(e.type==='storm'&&!firstStorm)firstStorm={t,broken:s.buildings.filter(b=>b.health<=0).map(b=>b.type)};}
  for(const b of s.buildings){const key=b.type+':'+b.status;if(!seen.has(key)&&/대기|필요|막힘|고갈|가득/.test(b.status)){seen.add(key);note('상태 '+b.type+' = '+b.status);}}
@@ -32,5 +35,16 @@ console.log('다음 승급',JSON.stringify({name:p.name,trial:p.trial,req:p.requ
 // Finding: the only water source is the storm's first target, and nothing restarts it without a 50G repair.
 expectBug('E1-storm-kills-sole-well',firstStorm&&firstStorm.broken.includes('well'),firstStorm);
 // Finding: after the first promotion the tutorial card disappears and the operations card is still hidden (rank<2).
+// Contract spam (balance handoff, second pass): a player who sends every order the moment it is allowed, with the goods
+// already in the warehouse (stock set directly: grain and wood 400), for 10 minutes of real ticks. Each order's market
+// value is what the same goods would have fetched through a sale at that moment (saleQuote).
+{const c2=new Campaign({nation:'estern',race:'human'}),t2=home(c2);t2.build('warehouse',11,12);t2.build('house',11,14);t2.stock.grain=400;t2.stock.wood=400;/* set directly */
+ const orders=[],arrivals=[];let seen=0,sameTick=0;const cash0=t2.money;
+ run(c2,600,()=>{let sent=0;for(let n=0;n<3;n++){if(!t2.contractStatus().ready)break;const k=t2.contract(),market=t2.saleQuote(k.item,k.amount);if(t2.fulfill().ok){sent++;orders.push({t:Math.round(t2.time*100)/100,item:k.item,amount:k.amount,reward:k.reward,market});}}if(sent>1)sameTick++;if(t2.contracts>seen){for(let n=seen;n<t2.contracts;n++)arrivals.push(t2.time);seen=t2.contracts;}});
+ const gaps=arrivals.slice(1).map((v,i)=>v-arrivals[i]),reward=orders.reduce((n,o)=>n+o.reward,0),market=orders.reduce((n,o)=>n+o.market,0);
+ const spam={orders:orders.length,arrivals:arrivals.length,minGap:gaps.length?Math.round(Math.min(...gaps)):null,wait:CONTRACT_WAIT,sameTickDispatches:sameTick,reward,market,ratio:+(reward/Math.max(1,market)).toFixed(3),premiumPerMinute:Math.round((reward-market)/10),cash10min:[cash0,Math.round(t2.money)],before:'이전: 시작 33초에 밀 12·목재 14 두 건이 같은 틱에 끝남, 10분 동안 765→3,150G'};
+ console.log('contract spam',JSON.stringify(spam));
+ expectBug('K1-contract-same-tick',sameTick>0||arrivals.length>1&&Math.min(...gaps)<CONTRACT_WAIT,spam);
+ expectBug('K2-contract-dominates-sale',spam.ratio>1.4,{rule:'10분 동안 계약 보상 합이 같은 물건을 같은 시각 시장에 판 값의 1.4배 이하',...spam});}
 expectBug('U1-rank1-guidance-gap',rank1Window>0,{secondsWithNoGuidanceCard:rank1Window,bot:'optimal bot; a human stays longer',note:'neither the tutorial (ui-rules tutorialStep) nor the operations card (Game.tsx <Operations hidden>) is on screen'});
 finish('first-ten-minutes');

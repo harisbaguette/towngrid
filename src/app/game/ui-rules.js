@@ -3,6 +3,8 @@
 import {BUILDINGS,RESOURCES} from './simulation.js';
 import {RACES,RANKS,unlockRank} from './world.js';
 import {operationHint} from './proximity.js';
+import {provinceZone} from './infrastructure.js';
+import {SERVICE_OUTPUTS} from './production-visuals.js';
 
 const particle=(w,withFinal,without)=>{const c=w.charCodeAt(w.length-1)-0xac00;return w+(c>=0&&c<11172&&c%28?withFinal:without);};
 export const objectOf=w=>particle(w,'을','를');
@@ -39,6 +41,8 @@ export function promotionProgress(s,p){
 
 /** Open first-session guide step, or null once the first promotion is done. */
 export function tutorialStep(s){
+ // The first promotion needs no contract, so a 첫 납품 step still open would keep the guide (and hide the operations card) past it.
+ if(s.rank>0)return null;
  const p=s.promotion(),need=p?[...p.requirements.filter(r=>!r.done).map(r=>r.name+' '+r.target),...(p.trial&&!p.trial.done?[p.trial.name]:[]),...(s.money<p.fee?['승급비 '+p.fee+'G']:[])].join(' · '):'';
  const steps=[
  {done:!!s.warehouse,title:'첫 창고',text:'밝은 경계 안에 창고를 놓으세요.',tool:'warehouse'},
@@ -46,7 +50,7 @@ export function tutorialStep(s){
  {done:s.buildings.some(b=>b.type==='well'),title:'물을 공급하세요',text:'창고 주변에 우물을 지으세요.',tool:'well'},
  {done:s.buildings.some(b=>b.type==='field'),title:'밀을 생산하세요',text:'우물 근처에 밀밭을 놓고 통로를 남기세요.',tool:'field'},
  {done:s.buildings.some(b=>b.type==='lumber'),title:'목재를 확보하세요',text:'나무에서 네 칸 이내에 벌목장을 지으세요.',tool:'lumber'},
- {done:s.contracts>0,title:'첫 납품',text:'창고에 모인 재고로 납품 계약을 완료하세요.',tool:null},
+ {done:s.contracts>0,title:'첫 납품',text:s.contractStatus?.().inTransit?'납품 물건이 관문으로 가는 중입니다. 도착하면 값을 받습니다.':'창고에 모인 재고로 영주에게 납품하세요.',tool:null,action:'contract'},
  {done:s.rank>0,title:'첫 승급',text:need?need+' 달성 후 승급':'지금 승급할 수 있습니다.',tool:null}
  ];
  const index=steps.findIndex(v=>!v.done);return index<0?null:{...steps[index],index,total:steps.length};
@@ -77,4 +81,74 @@ export function crewRules(s){
  const haulers=races.filter(r=>r.hauler).map(r=>r.name),skilled=names(Object.keys(BUILDINGS).filter(k=>BUILDINGS[k].skilled));
  if(haulers.length&&skilled)rules.push(topicOf(haulers.join('·'))+' '+skilled+'에 들어가지 못합니다');
  return rules;
+}
+
+/** Shown in the build dock for this settlement: race housing of the faction and ice/mountain-only facilities of the province. Rank is not checked. */
+export function offered(s,type){
+ const d=BUILDINGS[type];if(!d||(d.resident&&!s.availableRaces.includes(d.resident)))return false;
+ if(!d.ice&&!d.mountain)return true;const zone=provinceZone(s);return (!d.ice||zone.ice)&&(!d.mountain||zone.mountain);
+}
+/** Products of a facility: its recipes, or the single output it always makes. */
+export const productsOf=d=>d?.recipes?.length?d.recipes:d?.output?[{id:null,output:d.output,inputs:d.inputs||{},amount:d.amount,period:d.period}]:[];
+// Services (power, irrigation...) are not stock items; they carry their own names.
+const itemName=k=>RESOURCES[k]?.name||SERVICE_OUTPUTS[k]?.name;
+const chainOf=r=>[Object.keys(r.inputs||{}).map(itemName).filter(Boolean).join('·'),itemName(r.output)].filter(Boolean).join(' → ');
+
+/**
+ * What to build next once the first-session guide is over (rank 1+): an unbuilt producer whose output the next promotion
+ * still needs and nothing built makes, preferring what this rank just opened; otherwise the newest producer of this rank.
+ * null when nothing fits. {type,name,output,chain,text}.
+ */
+export function nextBuild(s){
+ if(!s.warehouse||s.rank<1)return null;
+ const built=new Set(s.buildings.map(b=>b.type)),made=new Set(s.buildings.flatMap(b=>productsOf(BUILDINGS[b.type]).map(r=>r.output)));
+ const wanted=(s.promotion()?.requirements||[]).filter(r=>!r.done&&r.key.startsWith('produced:')).map(r=>r.key.slice(9)).filter(item=>!made.has(item));
+ let best=null,bestScore=0;
+ for(const type of Object.keys(BUILDINGS)){
+  const rank=unlockRank(type),products=productsOf(BUILDINGS[type]);
+  if(built.has(type)||rank>s.rank||!products.length||!offered(s,type))continue;
+  const serving=products.find(r=>wanted.includes(r.output)&&!(r.unlock>s.rank)),score=(serving?2:0)+(rank===s.rank?1:0);
+  if(score>bestScore||(score===bestScore&&score>0&&rank>unlockRank(best.type)))[best,bestScore]=[{type,product:serving||products[0]},score];
+ }
+ if(!best)return null;
+ const d=BUILDINGS[best.type],chain=chainOf(best.product);
+ return {type:best.type,name:d.name,output:best.product.output,chain,text:d.name+' · '+chain};
+}
+
+/** Lock reason of a product ("지역 공급자 승급 후"), '' when it can be chosen. */
+export function recipeLock(s,r){
+ const need=typeof r.unlock==='number'?r.unlock:typeof r.unlock==='string'?RANKS.findIndex(v=>v.name===r.unlock):-1;
+ return need>s.rank?(RANKS[need]?.name||'')+' 승급 후':'';
+}
+/** Product choices of a multi-product facility for the facility card; [] when it makes one thing. */
+export function recipeChoices(s,b){
+ const list=BUILDINGS[b.type]?.recipes;if(!Array.isArray(list)||list.length<2)return [];
+ const current=(typeof s.recipeOf==='function'?s.recipeOf(b)?.id:null)??b.recipe??list[0].id;
+ return list.map(r=>({...r,chain:chainOf(r),current:r.id===current,locked:recipeLock(s,r)}));
+}
+
+/**
+ * Contract button state shared by the quick card and the rank dialog. With the delivery API (contractStatus) the button follows
+ * `ready`, a cooldown shows its seconds and a shipment on the road shows 운송 중; older sims fall back to the stock check.
+ */
+export function contractState(s){
+ const c=s.contract(),have=Math.floor(s.availableStock(c.item)),st=typeof s.contractStatus==='function'?s.contractStatus():null;
+ if(!st)return {contract:c,have,ready:have>=c.amount,label:'납품',note:''};
+ if(st.inTransit)return {contract:c,have,ready:false,label:'운송 중',note:'',transit:true};
+ const wait=Math.ceil(st.wait||0);
+ if(wait>0)return {contract:c,have,ready:false,label:wait+'초',note:'',wait};
+ // A short stock already shows as have/amount; the note is for other stops (export road cut).
+ return {contract:c,have,ready:!!st.ready,label:'납품',note:!st.ready&&have>=c.amount?st.error||'':''};
+}
+
+/**
+ * Export fleet for the market and the operations card: every vehicle slot, how many are out, and a fuel note only when
+ * fuel is what holds shipments back now (every fuel-free vehicle is out and a fuel vehicle waits). null before the fleet API.
+ */
+export function fleetState(s){
+ if(!s.warehouse||typeof s.exportStatus!=='function')return null;const e=s.exportStatus();if(!Array.isArray(e.vehicles))return null;
+ const busy=e.vehicles.filter(v=>v.busy).length,waiting=e.vehicles.filter(v=>v.fuel&&!v.busy),freeOut=e.vehicles.every(v=>v.fuel||v.busy);
+ const names=[...new Set(waiting.map(v=>v.name))].join('·');
+ const short=freeOut&&waiting.length>0&&!e.fuelReady;
+ return {vehicles:e.vehicles,busy,total:e.vehicles.length,fuelNote:short?'연료 부족':'',waiting:short?names+' 대기':''};
 }

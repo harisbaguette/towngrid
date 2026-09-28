@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/borik.png",
+  "portraitRegion": [
+    0,
+    0,
+    548,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        548,
+        0,
+        891,
+        627
+      ],
+      "bbox": [
+        529,
+        96,
+        861,
+        602
+      ],
+      "scale": 0.1976284584980237,
+      "offset": [
+        31,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        891,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        921,
+        96,
+        1247,
+        594
+      ],
+      "scale": 0.20080321285140562,
+      "offset": [
+        31,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

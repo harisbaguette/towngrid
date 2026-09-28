@@ -6,6 +6,7 @@ const { chromium } = await import(process.argv[2] ? pathToFileURL(process.argv[2
 const browser = await chromium.launch({ headless: true, ...(process.argv[3] ? { executablePath: process.argv[3] } : {}), args: ['--enable-unsafe-swiftshader'] });
 const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
 const page = await context.newPage(), errors = [], failedAssets = [];
+page.setDefaultTimeout(45000);
 page.on('pageerror', e => errors.push(e.message));
 page.on('response', r => { if (r.url().includes('/assets/pixel-environment/') && r.status() >= 400) failedAssets.push(r.url()); });
 const output = new URL('../docs/verification/starter-environment/', import.meta.url);
@@ -14,6 +15,7 @@ const screenshot = name => page.screenshot({ path: fileURLToPath(new URL(name, o
 const origin = process.env.TOWNGRID_URL || 'http://localhost:5173';
 try {
  await page.goto(origin);
+ await page.locator('canvas[role="application"]').waitFor({state:"attached",timeout:120000});
  await page.getByRole('button', { name: '화면을 눌러 시작', exact: true }).click();
  await page.getByRole('button', { name: '초반 마을 테스트', exact: true }).waitFor({ timeout: 120000 });
  // Only this new, disposable browser context is seeded. User storage is untouched.
@@ -25,6 +27,7 @@ try {
   return snapshot;
  });
  await page.reload();
+ await page.locator('canvas[role="application"]').waitFor({state:"attached",timeout:120000});
  await page.getByRole('button', { name: '화면을 눌러 시작', exact: true }).click();
  await page.getByRole('button', { name: '초반 마을 테스트', exact: true }).waitFor({ timeout: 120000 });
  await screenshot('start-screen.png');
@@ -79,7 +82,7 @@ try {
  await screenshot('well-stopped.png');
  await facility.getByRole('button', { name: '가동', exact: true }).click();
  await page.getByRole('button', { name: '재개', exact: true }).click();
- await page.waitForFunction(() => { const g = window.starterScene, b = g.sim.buildings.find(b => b.type === 'well');return b.working && g.models.get(b.id).userData.frame > 0; });
+ await page.waitForFunction(() => { const g = window.starterScene, b = g.sim.buildings.find(b => b.type === 'well');return b.working && g.models.get(b.id).userData.production.working; });
  await page.getByRole('button', { name: '일시정지', exact: true }).click();
  await page.keyboard.press('Escape');
  const runtime = await page.evaluate(async () => {
@@ -105,6 +108,13 @@ try {
  assert.ok(runtime.ghosts.every(g => g.row === g.view && g.sprite));assert.equal(runtime.renderingPreservesSave, true);
  for (const resource of ['water', 'grain', 'wood', 'plank']) assert.ok(runtime.produced[resource] > 0);
  assert.ok(runtime.deliveries > 0);
+ await page.waitForFunction(() => {
+  const badges=[...document.querySelectorAll('.facility-marker.production')];
+  return badges.length===5&&badges.every(el=>{
+   const b=window.starterScene.sim.buildings.find(b=>String(b.id)===el.dataset.buildingId);
+   return Number(el.dataset.output)===b.out&&getComputedStyle(el.querySelector('span')).display!=='none';
+  });
+ });
  await writeFile(new URL('village-software.png', output), Buffer.from(runtime.softwarePng.split(',')[1], 'base64'));delete runtime.softwarePng;
  await screenshot('village-produced.png');
  await page.getByRole('button', { name: '게임 설정', exact: true }).click();

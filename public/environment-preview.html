@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>타운그리드 · 지형과 신규 시설 테스트</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#ecf0e7;color:#293f38;font:14px/1.45 system-ui,sans-serif}header{padding:12px 18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}h1{font-size:18px;margin:0}a{color:#285c54}button,select{font:inherit;padding:6px 9px;border:1px solid #aab9a5;border-radius:4px;background:#fffdf4;color:#293f38}button{cursor:pointer}#map{height:calc(100vh - 142px);min-height:400px;position:relative}canvas{display:block;width:100%;height:100%;image-rendering:pixelated}#status{margin:0;padding:10px 18px;background:#fffdf4}#status b{margin-right:12px}footer{padding:7px 18px;font-size:12px;color:#60705f}button:focus-visible,select:focus-visible{outline:3px solid #d1a43c}@media(max-width:700px){header{gap:7px;padding:8px}h1{width:100%}#map{height:65vh}}</style></head>
+<body><header><h1>지형과 신규 시설 테스트</h1><label>지역 <select id="region"><option value="river">강</option><option value="coast">바다</option><option value="highland">하천·산악</option></select></label><label>시설 <select id="layout"><option value="industry">신규 생산·공공</option><option value="transport">물류·항구·전력</option></select></label><label>상태 <select id="state"><option value="working-ready">생산 중 + 재고</option><option value="empty">재고 없음</option><option value="working">생산 중</option><option value="ready">생산 완료</option><option value="disabled">가동 중지</option></select></label><button id="left">↶ 90°</button><button id="right">↷ 90°</button><button id="closer">확대</button><button id="farther">축소</button><button id="pause">동작 멈추기</button><a href="/production-preview.html?group=newfarm">건물별 비교</a><a id="renderer" href="?renderer=canvas">CPU 표시</a><a href="/map-edges-preview.html">네 방향 지형</a><a href="/">게임으로</a></header>
+<div id="map"></div><p id="status">이미지를 불러오고 있습니다.</p><footer>타일을 누르면 시설 이름이 보입니다. Q·E로 회전하고 드래그로 이동합니다. 상태 비교용 샘플이며 저장하지 않습니다. 실제 생산·운반은 게임에서 확인할 수 있습니다.</footer>
+<script type="module">
+import {Simulation,BUILDINGS} from '/src/app/game/simulation.js';
+import {GameScene} from '/src/app/game/scene.js';
+import {loadAssets} from '/src/app/game/assets.js';
+import {EXPANSION_GROUPS} from '/src/app/game/pixel-expansion-data.js';
+import {legacyLayout} from '/src/app/game/world-grid.js';
+import {INFRA_BUILDINGS} from '/src/app/game/infrastructure.js';
+import {SERVICE_OUTPUTS} from '/src/app/game/production-visuals.js';
+await Promise.all(['human','dwarf','titan'].map(loadAssets));
+const params=new URLSearchParams(location.search),status=document.querySelector('#status');
+document.querySelector('#region').add(new Option('얼음 지대','ice'));document.querySelector('#region').add(new Option('사막','desert'));
+let running=true,clock=5,last=performance.now();
+document.querySelector('#region').value=params.get('region')||'river';document.querySelector('#layout').value=params.get('layout')||'industry';
+const alternate=new URLSearchParams(params);if(params.get('renderer')==='canvas'){alternate.delete('renderer');document.querySelector('#renderer').textContent='WebGL 표시';}else alternate.set('renderer','canvas');document.querySelector('#renderer').href='?'+alternate;
+function fixture(){
+ const selected=document.querySelector('#region').value,region=selected==='ice'?'highland':selected==='desert'?'coast':selected;
+ const nation=region==='highland'?'kardum':selected==='desert'?'nubrik':'estern',sim=new Simulation(region,null,{nation,race:'human',land:legacyLayout(region,selected==='ice'?'kardum-4':nation+'-0')});sim.paused=true;sim.rank=22;sim.nextEvent=1e9;
+ // The arctic sample selects a real province without running a campaign.
+ if(selected==='ice'){sim.siteId='preview';sim.campaign={sites:[{id:'preview',provinceId:'kardum-4'}],routes:[],tick(){}};}
+ for(const t of sim.tiles){sim.owned.add(t.x+','+t.z);if(t.x>5&&t.x<17&&t.z>5&&t.z<20)t.nature=null;}
+ const types=document.querySelector('#layout').value==='industry'?Object.values(EXPANSION_GROUPS).flat().filter(t=>!INFRA_BUILDINGS[t]):Object.keys(INFRA_BUILDINGS).filter(t=>!BUILDINGS[t].tile);
+ let land=0,water=0;const waterTiles=sim.tiles.filter(t=>t.terrain==='water'&&t.x>15&&t.z>4&&t.z<20&&sim.tile(t.x-1,t.z)?.terrain!=='water'&&t.z%2===0);
+ for(const type of types){const d=BUILDINGS[type],slot=d.onWater?waterTiles[water++]:null;let x=7+(land%5)*2,z=7+Math.floor(land/5)*2;if(slot){x=slot.x;z=slot.z;}else land++;
+  sim.buildings.push({id:sim.nextId++,type,x,z,size:1,enabled:true,health:100,level:1,race:'human',inputs:{},out:0,progress:0,working:false,animationTime:0,activeUntil:0,status:'대기',age:0,priority:1});
+ }
+ for(let z=6;z<=18;z+=2)for(let x=6;x<=16;x++)if(!sim.at(x,z))sim.roads.add(x+','+z);
+ for(let z=6;z<=18;z++)sim.roads.add('6,'+z);
+ for(let x=6;x<=16;x++){sim.roads.add(x+',18');sim.paved.add(x+',18');}
+ for(const [x,z] of [[8,20],[9,20],[10,20],[11,20],[12,20],[13,20],[14,20],[10,19],[10,21],[10,22],[14,19],[14,18],[14,21],[14,22],[15,22]]){sim.roads.add(x+','+z);sim.rails.add(x+','+z);}
+ for(let x=6;x<11;x++){sim.pipes.add(x+',4');sim.conveyors.add(x+',3');}sim.pipes.add('8,5');sim.conveyors.add('8,2');
+ sim.revision++;return sim;
+}
+const game=new GameScene(document.querySelector('#map'),fixture(),{onClick:(x,z)=>{const b=game.sim.at(x,z);game.select(b?.id);status.textContent=b?BUILDINGS[b.type].name+' · '+(game.models.get(b.id)?.userData.production?.label||'운영 시설'):'타일 '+x+', '+z;}},{forceSoftware:params.get('renderer')==='canvas'});
+function pose(){const state=document.querySelector('#state').value;for(const b of game.sim.buildings){const d=BUILDINGS[b.type],service=SERVICE_OUTPUTS[d.output],working=state==='working'||state==='working-ready',ready=['ready','working-ready','disabled'].includes(state);b.enabled=state!=='disabled';b.inputs=Object.fromEntries(Object.entries(d.inputs||{}).map(([id,n])=>[id,n*3]));b.working=working;b.progress=working?(clock%8)/8:0;b.animationTime=clock;b.out=ready&&!service?8:0;b.activeUntil=service&&ready?clock+50:0;}game.sim.time=clock;game.sim.poweredAt=()=>true;}
+function reset(){game.setSimulation(fixture());pose();game.controls.target.set(11.5,0,11.5);game.camera.zoom=.66;game.camera.updateProjectionMatrix();game.setQuarterView(0);status.textContent=game.sim.buildings.length+'종 · 강·바다·하천과 도로 연결, 생산 상태를 비교하세요.';}
+document.querySelector('#region').onchange=reset;document.querySelector('#layout').onchange=reset;document.querySelector('#state').onchange=()=>{pose();game.lastPaint=null;};
+document.querySelector('#left').onclick=()=>game.rotate(-1);document.querySelector('#right').onclick=()=>game.rotate(1);document.querySelector('#closer').onclick=()=>game.zoom(1.3);document.querySelector('#farther').onclick=()=>game.zoom(1/1.3);document.querySelector('#pause').onclick=e=>{running=!running;e.target.textContent=running?'동작 멈추기':'동작 재개';};
+addEventListener('keydown',e=>{if(/select|input/i.test(e.target.tagName))return;if(e.key.toLowerCase()==='q')game.rotate(-1);if(e.key.toLowerCase()==='e')game.rotate(1);});
+function loop(now){if(running){clock+=Math.min(.1,(now-last)/1000);pose();}last=now;requestAnimationFrame(loop);}reset();requestAnimationFrame(loop);window.environmentPreview={game,reset,pose,setTime:t=>{clock=t;pose();game.lastPaint=null;},pause:()=>{running=false;}};
+</script></body></html>

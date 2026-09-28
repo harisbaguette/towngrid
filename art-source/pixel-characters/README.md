@@ -4,13 +4,24 @@ Original character illustrations and sprite artwork generated for TownGrid on
 2026-09-26. The supplied character images were style references; these sheets
 depict TownGrid's existing named residents and six opposing race identities.
 
-## Roster
+## Current runtime (2026-09-28)
+
+All 51 identities now use 8192×512 atlases with 256 cells and a four-second
+breathing portrait. Mira keeps `prototypes/mira-v3/`; the previous 23 identities
+use [roster-v4](roster-v4/README.md), and 27 added professionals use
+[professions-v5](professions-v5/README.md). The master manifest dispatches to each rig.
+Humans use Mira, dwarves Bron, and titans Taron as their general workforce.
+Other residents are reused as automatic facility staff. Vera is now a human
+medical/research specialist. The legacy artwork and extraction specifications
+below remain archived; the 32-cell descriptions are no longer the runtime.
+
+## Original roster (the 27 additions are listed in professions-v5/cast.json)
 
 | Group | Identities |
 | --- | --- |
-| Human | Mira, Rowan, Hana, Ethan |
+| Human | Mira, Rowan, Hana, Ethan, Vera |
 | Dwarf | Marna, Bron |
-| Titan | Vera, Taron |
+| Titan | Taron |
 | Elf | Silen, Ael, Lien, Elion |
 | Spirit | Dew, Mist |
 | Centaur | Lana, Kai |
@@ -34,7 +45,7 @@ poses, applies supplied correction strips, crops and scales with nearest-neighbo
 sampling, then records a foot anchor for each cell. It does not paint characters.
 Keep the originals and manifest together so the extraction is reproducible.
 
-## Runtime format
+## Legacy format (retained sources)
 
 Each `public/assets/pixel-characters/<id>/` directory contains:
 

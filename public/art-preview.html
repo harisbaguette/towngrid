@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>타운그리드 · 일러스트 테스트</title>
+<style>
+*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:#e9eddf;color:#293c33;font:14px/1.5 system-ui,sans-serif}header{padding:14px 20px;background:#faf8ed;border-bottom:1px solid #bcc5ae;display:flex;align-items:center;flex-wrap:wrap;gap:12px}h1{font-size:19px;margin:0 auto 0 0}a{color:#326353}button,select{font:inherit;color:inherit;background:#fffdf3;border:1px solid #a5b19b;border-radius:4px;padding:7px 10px;cursor:pointer}button:focus-visible,select:focus-visible{outline:3px solid #d1a43c}.controls{display:flex;flex-wrap:wrap;gap:12px;padding:12px 20px;align-items:center}.controls label{display:flex;align-items:center;gap:7px}#cards{padding:0 20px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}.card{background:#faf8ed;border:1px solid #c0cab2;border-radius:6px;overflow:hidden;text-align:center}.card canvas{display:block;width:100%;height:auto;background:#a9bb86;image-rendering:pixelated}.card.water canvas{background:#78bdca}.card img{width:64px;height:64px;object-fit:contain;image-rendering:pixelated;margin:12px}.card p{margin:8px 4px;font-weight:650}#status{padding:0 20px;color:#4d6255}small{font-size:12px}footer{padding:8px 20px;border-top:1px solid #bcc5ae;background:#faf8ed}@media(max-width:600px){header{padding:10px}h1{width:100%}.controls{padding:10px;gap:8px}#cards{padding:0 10px 16px;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
+</style></head><body>
+<header><h1>일러스트 테스트</h1><a href="/biome-preview.html">지형 8종</a><a href="/production-preview.html">생산 동작</a><a id="renderer" href="?renderer=canvas">CPU 표시</a><a href="/">게임으로</a></header>
+<div class="controls"><label>보기 <select id="category"><option value="vehicles">운송 수단 10종</option><option value="damage">파손·수리</option><option value="resources">자원·지원 42종</option><option value="buildings">전체 건물 82종</option></select></label><button id="left" aria-label="왼쪽으로 90도">↶ 90°</button><button id="right" aria-label="오른쪽으로 90도">↷ 90°</button><span id="view">남동</span><label id="loaded-control"><input id="loaded" type="checkbox" checked>화물 적재</label><label id="item-control">화물 <select id="item"></select></label><label id="health-control" hidden>상태 <select id="health"><option value="100">정상</option><option value="65">손상</option><option value="25">심한 손상</option><option value="0">파손</option></select></label><button id="repair" hidden>수리 후 보기</button></div>
+<p id="status" role="status">이미지를 불러오고 있습니다.</p><main id="cards"></main><footer>Q·E로 회전합니다. 적재·파손 상태를 비교할 수 있으며 저장하지 않습니다. 비행기·비공정은 계류·조립 모습입니다.</footer>
+<script type="module">
+import * as THREE from '/node_modules/three/build/three.module.js';
+import {createRenderer} from '/src/app/game/software-renderer.js';
+import {loadPixelEnvironment,makePixelVehicle,makePixelBuilding} from '/src/app/game/pixel-environment.js';
+import {BUILDINGS,RESOURCES} from '/src/app/game/simulation.js';
+import {VEHICLE_ART} from '/src/app/game/vehicle-art.js';
+import {RESOURCE_ICONS} from '/src/app/game/resource-art.js';
+import {quarterAzimuth,QUARTER_POLAR} from '/src/app/game/quarter-camera.js';
+const $=id=>document.getElementById(id),software=new URLSearchParams(location.search).get('renderer')==='canvas';
+if(software){$('renderer').textContent='WebGL 표시';$('renderer').href='?';}
+await loadPixelEnvironment();
+const renderer=createRenderer({alpha:true,antialias:false,preserveDrawingBuffer:true,forceSoftware:software});renderer.setSize(192,172);renderer.setPixelRatio(1);renderer.outputColorSpace=THREE.SRGBColorSpace;
+const names={wagon:'마차',raft:'뗏목',truck:'화물 트럭',steamer:'증기선',rail:'화물 열차',sled:'설원 화물차',plane:'화물 비행기',airship:'비공정',ship:'화물선',ferry:'나룻배',power:'전력',horse:'운반 지원',irrigation:'관개',ward:'결계',transit:'운송 지원',health:'의료'};
+for(const [id,d] of Object.entries(RESOURCES))$('item').add(new Option(d.name,id));$('item').value='wood';
+const scene=new THREE.Scene(),camera=new THREE.OrthographicCamera(-.82,.82,.74,-.74,.1,30),target=new THREE.Vector3(0,.47,0);
+let view=0,clock=0,last=performance.now(),entries=[];
+function dispose(model){model.traverse(n=>{if(n.userData.texture)n.userData.texture.dispose();if(n.material&&!n.material.shared)n.material.dispose();if(n.geometry&&!n.geometry.userData.shared)n.geometry.dispose();});}
+function draw(){camera.position.setFromSphericalCoords(8,QUARTER_POLAR,quarterAzimuth(view)).add(target);camera.lookAt(target);camera.updateMatrixWorld();
+ for(const e of entries){const {model,ctx,b}=e;if(b){b.health=+$('health').value;model.userData.animate(clock,b,{time:clock,power:true,poweredAt:()=>true},view);}else{model.userData.loaded=$('loaded').checked;model.userData.cargoItem=$('item').value;model.userData.animate(clock,null,false,view);}scene.add(model);renderer.render(scene,camera);ctx.clearRect(0,0,192,172);ctx.drawImage(renderer.domElement,0,0);scene.remove(model);}
+ $('view').textContent=['남동','북동','북서','남서'][view];
+}
+function reset(){for(const e of entries)dispose(e.model);entries=[];$('cards').replaceChildren();const kind=$('category').value;
+ $('loaded-control').hidden=$('item-control').hidden=kind!=='vehicles';$('health-control').hidden=$('repair').hidden=!['damage','buildings'].includes(kind);
+ const ids=kind==='vehicles'?Object.keys(VEHICLE_ART):kind==='damage'?['warehouse','house','well','bakery','smelter','bank']:kind==='buildings'?Object.keys(BUILDINGS).filter(id=>!BUILDINGS[id].tile):Object.keys(RESOURCE_ICONS);
+ for(const id of ids){const card=document.createElement('article');card.className='card'+(['raft','steamer','ship','ferry'].includes(id)?' water':'');const label=document.createElement('p');label.textContent=names[id]||RESOURCES[id]?.name||BUILDINGS[id]?.name;
+  if(kind==='resources'){const img=new Image();img.src=RESOURCE_ICONS[id];img.alt='';card.append(img,label);}
+  else{const canvas=document.createElement('canvas');canvas.width=192;canvas.height=172;canvas.setAttribute('aria-label',label.textContent);const model=kind==='vehicles'?makePixelVehicle(id):makePixelBuilding(id,'human'),def=kind==='vehicles'?null:BUILDINGS[id];
+   const b=def?{type:id,health:100,enabled:true,working:false,progress:0,out:6,animationTime:0,activeUntil:9999,inputs:{}}:null;
+   card.append(canvas,label);entries.push({id,model,b,ctx:canvas.getContext('2d')});}
+  $('cards').append(card);
+ }
+ $('status').textContent=ids.length+'종 · '+(kind==='vehicles'?'적재 전후와 네 방향을 비교하세요.':kind==='damage'?'상태를 바꿔 균열·잔해·수리 표시를 확인하세요.':kind==='resources'?'생산품과 UI에서 같은 그림을 사용합니다.':'한 건물은 한 타일에 놓입니다.');draw();
+}
+$('category').onchange=reset;$('loaded').onchange=$('item').onchange=$('health').onchange=draw;
+$('repair').onclick=()=>{$('health').value='100';draw();};
+function rotate(delta){view=(view+delta+4)%4;draw();}$('left').onclick=()=>rotate(-1);$('right').onclick=()=>rotate(1);
+addEventListener('keydown',e=>{if(/select|input/i.test(e.target.tagName))return;if(e.key.toLowerCase()==='q')rotate(-1);if(e.key.toLowerCase()==='e')rotate(1);});
+let effects=false;function tick(now){clock+=Math.min(.1,(now-last)/1000);last=now;const active=entries.some(e=>e.model.userData.conditionEffectUntil>clock);if(active||effects)draw();effects=active;requestAnimationFrame(tick);}reset();requestAnimationFrame(tick);
+window.artPreview={get entries(){return entries;},get view(){return view;},rotate,draw,renderer};
+</script></body></html>

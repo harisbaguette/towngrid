@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/marna.png",
+  "portraitRegion": [
+    0,
+    0,
+    659,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        659,
+        0,
+        1085,
+        1024
+      ],
+      "bbox": [
+        671,
+        235,
+        1047,
+        917
+      ],
+      "scale": 0.1466275659824047,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1085,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1124,
+        249,
+        1487,
+        902
+      ],
+      "scale": 0.15313935681470137,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

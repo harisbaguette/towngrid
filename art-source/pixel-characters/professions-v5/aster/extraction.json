@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/aster.png",
+  "portraitRegion": [
+    0,
+    0,
+    557,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        557,
+        0,
+        890,
+        627
+      ],
+      "bbox": [
+        558,
+        53,
+        861,
+        595
+      ],
+      "scale": 0.18450184501845018,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        890,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        920,
+        56,
+        1237,
+        592
+      ],
+      "scale": 0.1865671641791045,
+      "offset": [
+        34,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "passed": true,
+  "scope": "preview",
+  "checks": [
+    "eight actual province biomes",
+    "four camera views",
+    "WebGL/CPU",
+    "actual production per biome",
+    "oil overlay",
+    "no preview save writes",
+    "mobile"
+  ],
+  "production": {
+    "webgl-snow": {
+      "stone": 54,
+      "water": 46,
+      "wood": 66,
+      "iron": 80,
+      "coal": 72,
+      "grain": 27
+    },
+    "webgl-meadow": {
+      "water": 74,
+      "wood": 66,
+      "stone": 40,
+      "grain": 57
+    },
+    "webgl-forest": {
+      "water": 74,
+      "wood": 66,
+      "stone": 40,
+      "grain": 57,
+      "plank": 57
+    },
+    "webgl-basin": {
+      "water": 60,
+      "stone": 56,
+      "wood": 66,
+      "iron": 80,
+      "grain": 48,
+      "coal": 72
+    },
+    "webgl-desert": {
+      "stone": 48,
+      "wood": 66,
+      "water": 30,
+      "grain": 42,
+      "oil": 44
+    },
+    "webgl-coast": {
+      "water": 72,
+      "wood": 66,
+      "stone": 40,
+      "grain": 54,
+      "fish": 45
+    },
+    "webgl-marsh": {
+      "water": 84,
+      "wood": 66,
+      "stone": 36,
+      "grain": 54,
+      "fish": 45
+    },
+    "webgl-volcanic": {
+      "stone": 56,
+      "water": 54,
+      "wood": 66,
+      "iron": 80,
+      "grain": 48,
+      "coal": 72
+    },
+    "canvas-snow": {
+      "stone": 54,
+      "water": 46,
+      "wood": 66,
+      "iron": 80,
+      "coal": 72,
+      "grain": 27
+    },
+    "canvas-meadow": {
+      "water": 74,
+      "wood": 66,
+      "stone": 40,
+      "grain": 57
+    },
+    "canvas-forest": {
+      "water": 74,
+      "wood": 66,
+      "stone": 40,
+      "grain": 57,
+      "plank": 57
+    },
+    "canvas-basin": {
+      "water": 60,
+      "stone": 56,
+      "wood": 66,
+      "iron": 80,
+      "grain": 48,
+      "coal": 72
+    },
+    "canvas-desert": {
+      "stone": 48,
+      "wood": 66,
+      "water": 30,
+      "grain": 42,
+      "oil": 44
+    },
+    "canvas-coast": {
+      "water": 72,
+      "wood": 66,
+      "stone": 40,
+      "grain": 54,
+      "fish": 45
+    },
+    "canvas-marsh": {
+      "water": 84,
+      "wood": 66,
+      "stone": 36,
+      "grain": 54,
+      "fish": 45
+    },
+    "canvas-volcanic": {
+      "stone": 56,
+      "water": 54,
+      "wood": 66,
+      "iron": 80,
+      "grain": 48,
+      "coal": 72
+    }
+  },
+  "errors": [],
+  "failed": []
+}

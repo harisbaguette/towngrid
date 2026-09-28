@@ -1,11 +1,12 @@
 import * as THREE from 'three';
+import {networkSamples} from './pixel-network.js';
 
 // CPU renderer for devices where WebGL is unavailable. It projects the very same
 // animated Three.js models, with cached model layers and diffuse face lighting.
 export class SoftwareRenderer {
  constructor({alpha=false}={}){
   this.domElement=document.createElement('canvas');this.ctx=this.domElement.getContext('2d',{alpha});this.alpha=alpha;
-  this.shadowMap={};this.cache=new Map();this.poseCache=new Map();this.ratio=1;this.width=1;this.height=1;this.background='#a5bca2';this.isSoftware=true;this.frame=0;
+  this.shadowMap={};this.cache=new Map();this.poseCache=new Map();this.surfacePatterns=new Map();this.ratio=1;this.width=1;this.height=1;this.background='#a5bca2';this.isSoftware=true;this.frame=0;
   this.v=new THREE.Vector3();this.normal=new THREE.Vector3();this.projection=new THREE.Matrix4();this.sun=new THREE.Vector3(-.4,.82,.4).normalize();
  }
  setPixelRatio(n){this.ratio=Math.min(n,1.4);}
@@ -58,7 +59,49 @@ export class SoftwareRenderer {
   const center=this.project(root.matrixWorld.elements[12],root.matrixWorld.elements[13],root.matrixWorld.elements[14]);
   return {canvas,dx:left-center.x,dy:top-center.y,w:right-left,h:bottom-top,time:performance.now()};
  }
+ drawPixelSurface(mesh){
+  const u=mesh.userData,image=u.image;if(!image)return;
+  const ctx=this.ctx,cell=image.height,key=u.environmentId+':'+u.frame+':'+u.network;
+  if(!this.surfacePatterns.has(key)){
+   const tile=document.createElement('canvas');tile.width=tile.height=cell;
+   const tileCtx=tile.getContext('2d');tileCtx.drawImage(image,u.frame*cell,0,cell,cell,0,0,cell,cell);
+   if(u.network!==null&&u.network!==undefined){
+    const source=tileCtx.getImageData(0,0,cell,cell),target=tileCtx.createImageData(cell,cell);
+    for(let y=0;y<cell;y++)for(let x=0;x<cell;x++)for(const [s,t] of networkSamples(u.network,(x+.5)/cell,1-(y+.5)/cell)){
+     const sx=Math.min(cell-1,Math.floor((s-Math.floor(s))*cell)),sy=Math.min(cell-1,Math.floor((1-(t-Math.floor(t)))*cell)),k=(sy*cell+sx)*4;
+     if(source.data[k+3])target.data.set(source.data.subarray(k,k+4),(y*cell+x)*4);
+    }tileCtx.putImageData(target,0,0);
+   }
+   this.surfacePatterns.set(key,ctx.createPattern(tile,'repeat'));
+  }
+  const matrix=new THREE.Matrix4(),color=new THREE.Color(),repeat=u.repeat||[1,1];
+  const corners=[[-.5,.5],[.5,.5],[.5,-.5],[-.5,-.5]];
+  for(let i=0;i<mesh.count;i++){
+   mesh.getMatrixAt(i,matrix);matrix.premultiply(mesh.matrixWorld);
+   const p=corners.map(([x,y])=>{const v=new THREE.Vector3(x,y,0).applyMatrix4(matrix);return this.project(v.x,v.y,v.z);});
+   if(Math.max(...p.map(v=>v.x))<0||Math.min(...p.map(v=>v.x))>this.width||Math.max(...p.map(v=>v.y))<0||Math.min(...p.map(v=>v.y))>this.height)continue;
+   const w=cell*repeat[0],h=cell*repeat[1];
+   ctx.save();ctx.imageSmoothingEnabled=false;ctx.transform((p[1].x-p[0].x)/w,(p[1].y-p[0].y)/w,(p[3].x-p[0].x)/h,(p[3].y-p[0].y)/h,p[0].x,p[0].y);
+   if(u.mask!==null){
+    ctx.beginPath();ctx.rect(w*.21,h*.21,w*.58,h*.58);
+    if(u.mask&1)ctx.rect(w*.21,0,w*.58,h*.5);
+    if(u.mask&2)ctx.rect(w*.5,h*.21,w*.5,h*.58);
+    if(u.mask&4)ctx.rect(w*.21,h*.5,w*.58,h*.5);
+    if(u.mask&8)ctx.rect(0,h*.21,w*.5,h*.58);
+    ctx.clip();
+   }
+   // Overlap opaque ground by a subpixel; rotated Canvas rectangles otherwise
+   // expose hairline gaps through the sea at their antialiased edges.
+   const cover=u.layer<=3&&u.layer!==2&&!u.cells[i]?.vertical;
+   const padX=cover?Math.min(cell*.045,w/Math.hypot(p[1].x-p[0].x,p[1].y-p[0].y)*.7):0;
+   const padY=cover?Math.min(cell*.045,h/Math.hypot(p[3].x-p[0].x,p[3].y-p[0].y)*.7):0;
+   ctx.fillStyle=this.surfacePatterns.get(key);ctx.fillRect(-padX,-padY,w+2*padX,h+2*padY);
+   if(mesh.instanceColor){mesh.getColorAt(i,color);if(color.getHex()!==0xffffff){ctx.globalCompositeOperation='multiply';ctx.fillStyle=color.getStyle(THREE.SRGBColorSpace);ctx.fillRect(-padX,-padY,w+2*padX,h+2*padY);}}
+   ctx.restore();
+  }
+ }
  drawGround(mesh){
+  if(mesh.userData.pixelSurface){this.drawPixelSurface(mesh);return;}
   const ctx=this.ctx,dummy=new THREE.Matrix4(),color=new THREE.Color(),pos=new THREE.Vector3();
   for(let i=0;i<mesh.count;i++){
    mesh.getMatrixAt(i,dummy);pos.setFromMatrixPosition(dummy);const water=mesh.geometry.type==='PlaneGeometry';
@@ -105,11 +148,26 @@ export class SoftwareRenderer {
  }
  drawPixelEnvironment(root,center){
   const u=root.userData,image=u.image,sprite=u.sprite;if(!image)return;
+  const projectPoint=v=>this.project(v.x,v.y,v.z);
+  // Layered production art uses the same poses and inventory in both renderers.
+  if(u.layers){
+   for(const layer of u.layers)if(layer.visible&&layer.userData.behind)this.drawPixelEnvironment(layer,projectPoint(layer.getWorldPosition(new THREE.Vector3())));
+  }
   const scale=root.getWorldScale(new THREE.Vector3()),ctx=this.ctx;
   const width=sprite.scale.x*scale.x*this.pixelsPerWorldUnit,height=sprite.scale.y*scale.y*this.pixelsPerWorldUnit;
   const cell=image.height*(u.texture.repeat.y),x=center.x-width*sprite.center.x,y=center.y-height*(1-sprite.center.y);
   ctx.save();ctx.imageSmoothingEnabled=false;ctx.globalAlpha=sprite.material.opacity;
-  ctx.drawImage(image,u.frame*cell,u.direction*cell,cell,cell,Math.round(x),Math.round(y),Math.round(width),Math.round(height));ctx.restore();
+  if(u.clipLowerHalf){ctx.beginPath();ctx.rect(x,y,width,height*(1-sprite.center.y));ctx.clip();}
+  if(sprite.material.rotation || u.flipX){
+   ctx.translate(center.x,center.y);ctx.rotate(-sprite.material.rotation);if(u.flipX)ctx.scale(-1,1);
+   ctx.drawImage(image,u.frame*cell,u.direction*cell,cell,cell,-width*sprite.center.x,-height*(1-sprite.center.y),width,height);
+  }else ctx.drawImage(image,u.frame*cell,u.direction*cell,cell,cell,Math.round(x),Math.round(y),Math.round(width),Math.round(height));ctx.restore();
+  for(const rope of [...(u.rope?[u.rope]:[]),...(u.ropes||[])])if(rope.visible){
+   const points=rope.geometry.attributes.position;
+   const a=projectPoint(root.localToWorld(new THREE.Vector3().fromBufferAttribute(points,0))),b=projectPoint(root.localToWorld(new THREE.Vector3().fromBufferAttribute(points,1)));
+   ctx.save();ctx.strokeStyle='#705137';ctx.globalAlpha=sprite.material.opacity;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.restore();
+  }
+  if(u.layers)for(const layer of u.layers)if(layer.visible&&!layer.userData.behind)this.drawPixelEnvironment(layer,projectPoint(layer.getWorldPosition(new THREE.Vector3())));
  }
  render(scene,camera){
   this.viewDirection=camera.getWorldDirection(new THREE.Vector3()).negate();const renderStart=performance.now();this.frame++;scene.updateMatrixWorld();scene.traverse(m=>{if(m.isSkinnedMesh)m.skeleton.update();});camera.updateMatrixWorld();this.projection.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);
@@ -120,7 +178,8 @@ export class SoftwareRenderer {
   if(this.alpha)ctx.clearRect(0,0,this.width,this.height);else{ctx.fillStyle=this.background;ctx.fillRect(0,0,this.width,this.height);}
   const ground=[],units=[],lines=[],grass=[];
   const gather=g=>{if(!g.visible)return;if(g.isInstancedMesh){if(g.geometry.type==='ConeGeometry')grass.push(g);else ground.push(g);return;}if(g.isLine){lines.push(g);return;}if(g.isGroup&&(g.userData.pixelEnvironment||g.userData.asset||g.userData.worker||g.children.some(c=>c.isMesh))&&!g.children.some(c=>c.isInstancedMesh)){units.push(g);return;}for(const c of g.children)gather(c);};
-  gather(scene);ground.sort((a,b)=>((a.userData.tiles?2:a.userData.soil?1:0)-(b.userData.tiles?2:b.userData.soil?1:0))||Math.max(b.geometry.parameters?.width||1,b.geometry.parameters?.height||1,b.geometry.parameters?.depth||1)-Math.max(a.geometry.parameters?.width||1,a.geometry.parameters?.height||1,a.geometry.parameters?.depth||1));ground.forEach(g=>this.drawGround(g));grass.forEach(g=>this.grass(g));
+  const groundLayer=m=>m.userData.pixelSurface?m.userData.layer:m.userData.tiles?3:m.userData.soil?2:0;
+  gather(scene);ground.sort((a,b)=>groundLayer(a)-groundLayer(b)||Math.max(b.geometry.parameters?.width||1,b.geometry.parameters?.height||1,b.geometry.parameters?.depth||1)-Math.max(a.geometry.parameters?.width||1,a.geometry.parameters?.height||1,a.geometry.parameters?.depth||1));ground.forEach(g=>this.drawGround(g));grass.forEach(g=>this.grass(g));
   units.sort((a,b)=>this.point(b.matrixWorld.elements[12],b.matrixWorld.elements[13],b.matrixWorld.elements[14]).z-this.point(a.matrixWorld.elements[12],a.matrixWorld.elements[13],a.matrixWorld.elements[14]).z);
   const now=performance.now();const refreshIds=new Set(units.filter(root=>!root.userData.pixel&&!root.userData.pixelEnvironment&&!root.name.startsWith('tree-')&&root.name!=='rock'&&(root.userData.legs||root.userData.worker||root.userData.animate)).sort((a,b)=>(this.cache.get(a.uuid)?.time||0)-(this.cache.get(b.uuid)?.time||0)).slice(0,4).map(root=>root.uuid));
   for(const root of units){
@@ -137,9 +196,10 @@ export class SoftwareRenderer {
   }
   lines.forEach(l=>this.line(l));this.domElement.dataset.renderMs=String(Math.round(performance.now()-renderStart));
  }
- dispose(){this.cache.clear();this.poseCache.clear();}
+ dispose(){this.cache.clear();this.poseCache.clear();this.surfacePatterns.clear();}
 }
-export function createRenderer(options={}){
+export function createRenderer({forceSoftware=false,...options}={}){
+ if(forceSoftware)return new SoftwareRenderer(options);
  const probe=document.createElement('canvas');const gl=probe.getContext('webgl2',{failIfMajorPerformanceCaveat:false});
  if(gl){gl.getExtension('WEBGL_lose_context')?.loseContext();return new THREE.WebGLRenderer(options);}
  return new SoftwareRenderer(options);

@@ -1,19 +1,47 @@
 import * as THREE from 'three';
-import { asset } from './assets.js';
-import { makeTree,makeRock,box,cyl,ball,mat } from './models.js';
-import { noise } from './simulation.js';
-export function makeScenery(region,race){const g=new THREE.Group(),trees=[];g.name='scenery';
- const terrain=new THREE.InstancedMesh(new THREE.BoxGeometry(90,.18,90),mat(region==='highland'?'#83916a':'#71965e'),1),d=new THREE.Object3D();d.position.set(11.5,-.33,11.5);d.updateMatrix();terrain.setMatrixAt(0,d.matrix);g.add(terrain);
- const water=new THREE.InstancedMesh(new THREE.PlaneGeometry(region==='coast'?50:2.2,90),mat('#2a9caa'),1);d.position.set(region==='coast'?43:18.5,-.19,11.5);d.rotation.x=-Math.PI/2;d.updateMatrix();water.setMatrixAt(0,d.matrix);g.add(water);
- for(let i=0;i<115;i++){const x=-17+noise(i,83)*58,z=-17+noise(i,97)*58;if(x>-.8&&x<24.8&&z>-.8&&z<24.8)continue;if(region==='coast'&&x>17.7||region!=='coast'&&Math.abs(x-18.5)<1.8)continue;const tree=makeTree(i%3,1+noise(i,14)*1.5);tree.position.set(x,-.12,z);g.add(tree);trees.push(tree);}
- for(let i=0;i<15;i++){const x=-8+noise(i,23)*40,z=-8+noise(i,49)*40;if(x>-.5&&x<24.5&&z>-.5&&z<24.5)continue;if(region==='coast'&&x>18)continue;const rock=makeRock(2+noise(i,16)*4);rock.position.set(x,-.15,z);g.add(rock);}
- // A small abandoned watchpost belongs to the surrounding world, outside the build grid.
- const ruin=new THREE.Group();ruin.name='ruin';for(let i=0;i<4;i++){const wall=asset('town',i%2?'wall-broken':'wall',{width:1.3,color:'#a6b4a0'});if(wall){wall.position.set((i%2)*1.3,0,Math.floor(i/2)*1.3);wall.rotation.y=i%2?Math.PI/2:0;ruin.add(wall);}}ruin.position.set(-3.4,0,15);g.add(ruin);
- const ships=[];for(let i=0;i<(region==='coast'?3:region==='river'?1:0);i++){const boat=asset('erdynth',region==='coast'&&i===1?'PatrolBoat':'Tugboat',{width:region==='coast'?2.2:1.1});if(boat){boat.position.set(region==='coast'?25+i*3:18.5,-.15,5+i*7);g.add(boat);ships.push({boat,index:i});}}
- const lighthouse=asset('erdynth','Lighthouse',{height:2.7});if(lighthouse){lighthouse.position.set(region==='coast'?19.5:16.8,-.12,-1.5);g.add(lighthouse);const foundation=cyl(g,.85,1.15,.48,'#c5b087',lighthouse.position.x,-.30,-1.5);foundation.name='lighthouse-islet';lighthouse.userData.animate=true;}
- const beacon=lighthouse?.getObjectByName('Beacon');
- const hamlet=[];for(const[name,x,z,w]of [['Barn',-3,4,2.1],['Silo',-5,5,1.1],['ChickenCoop',-3,7,1.0],['OpenBarn',-5,8,1.6],['Windmill',-4,10,1.0],['Well',-2,10,1.0]]){const a=asset('farm',name,{width:w});if(a){a.position.set(x,-.18,z);g.add(a);if(name==='Windmill')hamlet.push(a);}}
- const clouds=[];for(let i=0;i<5;i++){const c=new THREE.Group();c.name='cloud';for(let j=0;j<3;j++)ball(c,1.1,.35,.65,'#e4ecdc',(j-1)*.8,0,0);c.position.set(i*11-15,7.5,-10+(i%2)*42);g.add(c);clouds.push(c);}
- const birds=[];for(let i=0;i<5;i++){const b=new THREE.Group();b.name='bird';const wings=[];for(const side of [-1,1]){const wing=box(b,.23,.025,.08,'#d6dcc6',side*.09,0,0,.01);wings.push(wing);}g.add(b);birds.push({b,wings});}
- return {group:g,animate:t=>{if(beacon)beacon.rotation.y=t*.42;ships.forEach(({boat,index})=>{boat.position.z=((t*.075+index*9)%32)-3;if(region==='river'&&boat.position.z>=0&&boat.position.z<24)boat.position.x=18.5+Math.floor(Math.sin(Math.round(boat.position.z)*.35)*1.3);boat.position.y=boat.position.z>=0&&boat.position.z<24?-.31:-.23+Math.sin(t+index)*.025;boat.rotation.z=Math.sin(t*.6+index)*.02;});hamlet.forEach(a=>{const blades=a.getObjectByName('Windmill_Blades');if(blades)blades.rotation.z=t*.7;});trees.forEach(tree=>tree.userData.animate?.(t));clouds.forEach((c,i)=>c.position.x=((t*.08+i*11)%65)-19);birds.forEach(({b,wings},i)=>{const a=t*.08+i*1.4;b.position.set(12+Math.cos(a)*16,4+i*.25,12+Math.sin(a)*16);b.rotation.y=-a;wings.forEach((w,j)=>w.rotation.z=Math.sin(t*5+i)*(j?1:-1)*.55);});}};
+import {makePixelProp} from './pixel-environment.js';
+import {edgeScenery,outsideSide} from './map-edges.js';
+import {makeBackgroundTerrain} from './pixel-terrain.js';
+import {waterAt,groundOf,legacyLayout,edgePoint,riverMiddle} from './world-grid.js';
+import {noise} from './simulation.js';
+
+export function makeScenery(region,race,sim){
+ const g=new THREE.Group(),objects=[],ships=[],clouds=[],birds=[];g.name='scenery';
+ const terrain=makeBackgroundTerrain(region,sim);g.add(terrain);
+ const layout=sim?.layout||legacyLayout(region),wet=(x,z)=>!!waterAt(layout,Math.round(x),Math.round(z));
+ const add=(id,x,z,scale=1)=>{const p=makePixelProp(id,scale);p.position.set(x,.014,z);g.add(p);objects.push(p);return p;};
+ const landmarks=edgeScenery(layout);
+ for(const prop of landmarks){const p=add(prop.id,prop.x,prop.z,prop.scale);p.userData.mapSide=prop.side;}
+ // Distant details follow the same side; keep the near edge clean enough to read.
+ for(let i=0;i<75;i++){
+  const x=-19+noise(i,83)*62,z=-19+noise(i,97)*62,side=outsideSide(x,z);
+  if(!side||x>-9&&x<33&&z>-9&&z<33||wet(x,z))continue;
+  const kind=layout.edges[side],ground=groundOf(layout,Math.round(x),Math.round(z));
+  const eco=layout.ecology;
+  const id=kind==='mountain'?(eco==='snow'?'snowMountain':eco==='volcanic'?'volcanicMountain':'mountain'):ground==='ice'||eco==='snow'?(eco?'snowPine':'pine'):ground==='sand'||eco==='desert'?(i%4?'rock':eco?'cactus':'palm'):eco==='volcanic'?'oreRock':kind==='forest'||eco==='forest'?(eco?'forestTree':'pine'):eco==='marsh'?'willow':i%3?'bush':'willow';
+  const p=add(id,x,z,kind==='mountain'?1.3:.65+noise(i,14)*.45);p.userData.mapSide=side;
+ }
+ g.userData.edgeProps=landmarks;
+ // Boats sail beyond a sea side, or down the middle of a river side.
+ const sea=['e','n','s','w'].find(s=>layout.edges[s]==='coast'),river=['e','n','s','w'].find(s=>layout.edges[s]==='river');
+ const lane=sea?{side:sea,depth:i=>-2-i*3}:river?{side:river,depth:(i,u)=>riverMiddle(layout,river,u)}:null;
+ for(let i=0;i<(sea?3:river?1:0);i++){
+  const boat=add('fishingBoat',0,0,sea?1.2:.8);
+  boat.userData.vehicle=true;ships.push({boat,index:i});
+ }
+ for(let i=0;i<4;i++){
+  const c=makePixelProp('clouds',.8+noise(i,7)*.5,i);c.position.set(i*14-15,6.5,-10+(i%2)*42);g.add(c);clouds.push(c);
+ }
+ for(let i=0;i<5;i++){const bird=makePixelProp('birds');g.add(bird);birds.push(bird);}
+ return {group:g,animate:(time,view=0)=>{
+  terrain.userData.animate(time);
+  for(const p of objects)p.userData.animate?.(time,{},null,view);
+  for(const {boat,index} of ships){
+   const u=((time*.075+index*9)%32)-3,[x,z]=edgePoint(lane.side,lane.depth(index,u),u);
+   boat.position.x=x;boat.position.z=z;
+   boat.position.y=-.165+Math.sin(time+index)*.008;boat.userData.animate(time,null,false,view);
+  }
+  clouds.forEach((c,i)=>{c.position.x=((time*.08+i*14)%65)-19;c.userData.animate(time,null,false,view);});
+  birds.forEach((b,i)=>{const a=time*.08+i*1.4;b.position.set(12+Math.cos(a)*16,4+i*.25,12+Math.sin(a)*16);b.userData.animate(time+i*.15,null,false,view);});
+ }};
 }

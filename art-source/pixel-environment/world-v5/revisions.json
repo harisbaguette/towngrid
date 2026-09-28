@@ -1,0 +1,26 @@
+[
+  {
+    "id": "rocks",
+    "prompt": "Edit this existing four-row four-column transparent pixel sprite sheet. Remove ONLY every brown/black diamond-shaped foundation slab underneath ALL sixteen rocks. Natural boulders must stand directly on transparent ground with no artificial tile, platform, plinth, shadow ellipse or paving. Preserve the exact rock shapes, moss, ore, cliff size and their four camera angles, their pixel artwork, layout, colours and scale. Do not alter anything else. Clean RGBA alpha around the natural silhouette.",
+    "reference": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-cecc557b-2ce9-474b-bba4-813121cb6800.png",
+    "newFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-6f280068-b028-44d3-b066-162dbfaf0292.png"
+  },
+  {
+    "id": "foliage",
+    "prompt": "Edit this existing four-row four-column transparent pixel sprite sheet. Remove ONLY every brown/black diamond-shaped foundation slab underneath ALL sixteen trees and bushes. Plants stand directly on transparent ground with visible natural roots/trunk ends, absolutely no artificial tile, platform, plinth or shadow ellipse. Keep identical trees, leaves, trunks, bushes, flowers, pixel art, layout, colours, four angles and scale. Clean RGBA alpha around each natural silhouette.",
+    "reference": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-2e8d88b9-6aa7-445f-95d8-6c3a1c841744.png",
+    "newFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-41c9fd59-aa21-4ed4-b112-d8a949272457.png"
+  },
+  {
+    "id": "sceneryProps",
+    "prompt": "Edit ONLY the FIRST ROW of this four-by-four transparent pixel sprite sheet: remove the artificial brown and black diamond foundation tiles under the four reed/cattail plants. Their stalks should root directly on transparent ground, no platform. Preserve all reed artwork, and preserve rows 2, 3 and 4 (ruin, lighthouse, wooden trade gate) entirely unchanged. Same layout, same scale, crisp pixel art.",
+    "reference": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-9e433abe-9c29-4724-90a0-dc968dc4d1f0.png",
+    "newFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-ed690126-b875-48bb-a7c2-c64e7e2259ed.png"
+  },
+  {
+    "id": "networks",
+    "prompt": "Redraw this game atlas precisely. Exact 4 columns by 2 rows. Transparent background, pixel art. In the TOP ROW the first three railway images are wrong: some have only one rail and all have gaps at tile boundaries. All FOUR top-row cells must contain TWO PARALLEL steel rails on wooden sleepers: column1 north-south straight; column2 curve joining NORTH and EAST; column3 T junction joining NORTH/EAST/WEST; column4 crossing NORTH/EAST/SOUTH/WEST. All tracks must connect at the EXACT cell-edge midpoint; railway ENDS TOUCH THE CELL EDGE, no padding or end caps. TWO continuous separated rails along every branch/curve, correct paired rail spacing equal across all cells, small readable dark sleepers. Full orthographic TOP DOWN, not perspective. For bottom row: column1 one narrow horizontal strip of grey riverbank pebbles/silt; column2 one narrow horizontal strip of beige beach sand with a LITTLE pale foam; column3 one narrow strip of rocky creek bank with green grass fringe; column4 one horizontal brown soil cliff cross section with green turf atop. NO WATER filling any bottom-row tile: only narrow boundary strips, transparent above and below. Strips extend horizontally ALL THE WAY to their cell's left and right edges to tile continuously. No text, no labels, no card border. Keep each cell an exact square. The shader supplies flat water separately.",
+    "reference": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-1721375d-56f2-41a4-bd34-466bc08787d8.png",
+    "newFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-031d8d82-1b9d-4c29-870c-1a49343dc2be.png"
+  }
+]

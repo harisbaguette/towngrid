@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/dorin.png",
+  "portraitRegion": [
+    0,
+    0,
+    545,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        545,
+        0,
+        886,
+        627
+      ],
+      "bbox": [
+        526,
+        110,
+        864,
+        627
+      ],
+      "scale": 0.19342359767891681,
+      "offset": [
+        31,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        886,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        908,
+        110,
+        1229,
+        627
+      ],
+      "scale": 0.19342359767891681,
+      "offset": [
+        33,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+  "columns": [
+    "id",
+    "name",
+    "race",
+    "gender",
+    "profession",
+    "tool",
+    "description"
+  ],
+  "characters": [
+    [
+      "dorin",
+      "도린",
+      "dwarf",
+      "male",
+      "miner",
+      "pickaxe",
+      "Stocky male dwarf miner, compact three-head body, thick square chest, dark beard, bright yellow hardhat with a prominent round lamp, charcoal overalls, ochre elbow guards, muddy boots. Pickaxe strapped to belt, both hands empty."
+    ],
+    [
+      "elvar",
+      "엘바르",
+      "elf",
+      "male",
+      "miner",
+      "pickaxe",
+      "Slender male elf miner, long pointed ears visible under amber lamp hardhat, ash-brown short hair, dark green reinforced overalls with orange reflective strips, heavy gloves and boots."
+    ],
+    [
+      "serin",
+      "세린",
+      "elf",
+      "female",
+      "smith",
+      "hammer",
+      "Athletic female elf blacksmith, short auburn hair, pointed ears, dark leather forge apron, rolled cream sleeves, heavy heat-resistant gauntlets, soot marks, blue trousers and iron-toe boots. Hammer loop at belt."
+    ],
+    [
+      "nara",
+      "나라",
+      "human",
+      "female",
+      "textile",
+      "shears",
+      "Human female tailor, dark indigo hair in a bun, plum-purple rolled-sleeve blouse, cream patchwork work apron with very obvious colored thread spools, measuring tape draped around neck, scissors holster, fitted practical dark trousers."
+    ],
+    [
+      "lyra",
+      "리라",
+      "elf",
+      "female",
+      "textile",
+      "shears",
+      "Female elf weaver, silver hair in short braid, long pointed ears, berry-red tunic, linen apron with teal thread spools and measuring ribbon, scissor sheath, fitted work trousers, no skirt below hips."
+    ],
+    [
+      "borik",
+      "보리크",
+      "dwarf",
+      "male",
+      "glass",
+      "blowpipe",
+      "Stocky male dwarf glassblower, bald crown, red side beard, oversized round smoked safety goggles on forehead, teal heatproof leather apron, cream rolled sleeves, long orange heat gauntlets, dark blue work trousers and stout boots."
+    ],
+    [
+      "oriel",
+      "오리엘",
+      "elf",
+      "male",
+      "glass",
+      "blowpipe",
+      "Male elf glass artisan, pale mint short swept hair, pointed ears, blue-tinted round goggles, turquoise heatproof apron, white sleeves and long tan gauntlets, dark trousers, belt holding small clear glass vessels."
+    ],
+    [
+      "garron",
+      "가론",
+      "human",
+      "male",
+      "lumber",
+      "axe",
+      "Burly human male lumberjack, short dark brown hair and beard, red-and-black broad checked rolled-sleeve shirt, leather suspenders, tan tool belt with axe sheath, dark forest trousers, rugged brown boots."
+    ],
+    [
+      "maren",
+      "마렌",
+      "human",
+      "male",
+      "fisher",
+      "net",
+      "Human male fisherman with salt-and-pepper stubble, unmistakable yellow souwester rain hat, yellow oilskin sleeveless coat, navy striped shirt, dark waterproof waders and rubber boots, fish-hook belt and small rolled fishing net attached at hip."
+    ],
+    [
+      "nalia",
+      "날리아",
+      "elf",
+      "female",
+      "fisher",
+      "net",
+      "Elf female fisher, aqua braided hair, pointed ears visible below yellow rain hat, sea-blue oilskin vest over cream striped shirt, navy waterproof waders and tall boots, rolled net and cork floats at belt."
+    ],
+    [
+      "roa",
+      "로아",
+      "human",
+      "female",
+      "rancher",
+      "rope",
+      "Human female rancher, chestnut ponytail, unmistakable broad brown cattle hat, green checked shirt with rolled sleeves, tan leather vest, coiled lasso attached to belt, denim trousers, work boots."
+    ],
+    [
+      "cedric",
+      "세드릭",
+      "human",
+      "male",
+      "mage",
+      "staff",
+      "Human male arcane technician mage, dark blue shoulder-length hair, small deep blue pointed mage hat, blue short robe with strong gold rune bands and a turquoise crystal brooch, open split coat hem ABOVE knees, visible charcoal trousers and boots, spellbook holster. No full-length robe covering legs."
+    ],
+    [
+      "bel",
+      "벨",
+      "human",
+      "female",
+      "merchant",
+      "ledger",
+      "Human female merchant, chestnut bob hair, confident expression, burgundy waistcoat over cream shirt, gold pocketwatch and coin purse, green ledger strapped to waist, dark tailored trousers and polished boots, no work apron."
+    ],
+    [
+      "vian",
+      "비안",
+      "elf",
+      "male",
+      "merchant",
+      "ledger",
+      "Male elf merchant, long pointed ears, sandy swept hair, emerald waistcoat over ivory shirt, burgundy necktie, gold coin pouch and blue ledger holster, dark tailored trousers and polished boots."
+    ],
+    [
+      "oswin",
+      "오스윈",
+      "human",
+      "male",
+      "administrator",
+      "scroll",
+      "Older human male administrator, neat silver hair, round spectacles, navy formal short frock coat over waistcoat, gold lapel seal, white collar and red tie, papers case attached to belt, grey trousers and polished black shoes."
+    ],
+    [
+      "erena",
+      "에레나",
+      "elf",
+      "female",
+      "administrator",
+      "scroll",
+      "Elf female civil administrator, lavender neat bob, sharp pointed ears, thin gold spectacles, white and navy tailored short official jacket, gold seal brooch and red sash, document satchel, charcoal trousers, polished boots."
+    ],
+    [
+      "dax",
+      "닥스",
+      "human",
+      "male",
+      "carrier",
+      "crate",
+      "Human male warehouse carrier, broad physique, blue peaked work cap, orange high visibility safety vest with cream reflective bands, navy shirt and reinforced trousers, leather lifting gloves, utility belt, stout boots."
+    ],
+    [
+      "norin",
+      "노린",
+      "elf",
+      "male",
+      "carrier",
+      "crate",
+      "Male elf warehouse carrier, brown short hair, pointed ears below teal peaked work cap, amber-orange reflective safety vest over deep green workshirt, cream bands, grey reinforced trousers, carrying gloves, work boots."
+    ],
+    [
+      "hugo",
+      "휴고",
+      "human",
+      "male",
+      "sailor",
+      "hook",
+      "Human male harbor sailor, short dark beard, navy-and-white sailor cap, navy double-breasted pea coat with brass buttons and anchor badge, white striped undershirt, rope coiled on belt, navy trousers and waterproof boots."
+    ],
+    [
+      "selia",
+      "셀리아",
+      "elf",
+      "female",
+      "sailor",
+      "hook",
+      "Elf female harbor sailor, pale blue short hair, pointed ears, white sailor cap, navy pea coat with bright brass buttons and anchor emblem, cream scarf, rope belt, dark blue trousers and boots."
+    ],
+    [
+      "otto",
+      "오토",
+      "dwarf",
+      "male",
+      "rail",
+      "signal",
+      "Stocky male dwarf railway conductor, grey moustache and beard, dark navy peaked railway cap with golden winged wheel badge, navy uniform jacket, red neck scarf, brass pocketwatch chain, red signal flag holster, dark trousers and stout black boots."
+    ],
+    [
+      "luth",
+      "루스",
+      "elf",
+      "male",
+      "rail",
+      "signal",
+      "Male elf railway conductor, silver short hair, pointed ears under unmistakable navy peaked stationmaster cap with brass wheel badge, blue uniform jacket, red tie, pocketwatch chain and signal flag holster, navy trousers and black boots."
+    ],
+    [
+      "iris",
+      "아이리스",
+      "human",
+      "female",
+      "aviator",
+      "scroll",
+      "Human female aviator, auburn short bob, leather flight helmet with big round goggles resting on top, brown leather short flight jacket with cream shearling collar and wing badge, pale scarf, navigation pouch, khaki trousers and lace boots."
+    ],
+    [
+      "aira",
+      "아이라",
+      "elf",
+      "female",
+      "aviator",
+      "scroll",
+      "Elf female aviator, mint short hair and pointed ears, brown flight helmet with brass goggles, moss-green leather flight jacket with cream shearling collar and golden wing badge, white scarf, map pouch, khaki trousers and boots."
+    ],
+    [
+      "garen",
+      "가렌",
+      "human",
+      "male",
+      "guard",
+      "sword",
+      "Human male town guard, short black hair, open-faced steel helmet showing entire face, blue surcoat with golden town crest, unmistakable steel breastplate and rounded pauldrons, armored gloves, belt with sword scabbard, dark trousers, greaves and steel-capped boots. No weapon in hands, shield strapped flat on back."
+    ],
+    [
+      "aster",
+      "아스테르",
+      "elf",
+      "male",
+      "guard",
+      "sword",
+      "Male elf town guard, short silver hair, pointed ears, open-faced leaf-shaped steel helmet, emerald surcoat, pale steel breastplate and compact shoulder armor with gold crest, armored gloves, sword sheath, dark trousers and steel greaves. Hands empty, shield strapped flat on back."
+    ],
+    [
+      "terin",
+      "테린",
+      "elf",
+      "male",
+      "engineer",
+      "wrench",
+      "Male elf mechanical engineer, copper swept hair, long pointed ears, goggles on head, slate blue mechanic jumpsuit with rolled sleeves and leather tool harness, visible screwdriver and wrench belt, dark gloves, reinforced kneepads and work boots."
+    ]
+  ],
+  "prompt": "Create an ORIGINAL pixel-art game character production sheet for TownGrid, matching the pixel clusters, dark outlines, limited warm/cool shading and SD four-head proportions of the attached style references. TRANSPARENT background, no glow, no ground, no shadow, no text. Square 1536x1536 canvas, EXACTLY TWO ROWS and THREE COLUMNS, six separate figures with generous empty gaps. Row 1 occupies y=30..735, row 2 y=800..1500; no content crosses y=768. In EACH row: left column x=20..500 is a large waist-up individual portrait, middle x=580..985 is a full-body SD sprite facing FRONT-LEFT/SW (face toward screen left, see front of chest), right x=1080..1490 is SAME SD sprite facing BACK-LEFT/NW (see back of torso and back of head, nose points screen left, NOT front-right). Exact same clothing, facial identity, head/body proportions between portrait and both views. Camera looks down 35 degrees for sprites. Sprites are neutral standing A-pose, arms down and 20 degrees away from body, BOTH HANDS EMPTY, both feet visible with small natural separation; no props occluding hands or legs. Each sprite should occupy around 520px in height with head roughly one quarter of body height, dwarf may be shorter/stouter. Distinct clear occupational silhouette, large pixel-color clusters, readable clothing at 100px body height. Crisp game pixels, not smooth illustration, not blurry, not tiny 16-bit stick figures. The sheet must show these TWO DIFFERENT CHARACTERS:\nTOP ROW: TOP_IDENTITY\nBOTTOM ROW: BOTTOM_IDENTITY\nDo not repeat or merge the two characters. No extra heads, no loose props, no labels. Each row has precisely portrait/front-left/back-left."
+}

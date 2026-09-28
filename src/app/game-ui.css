@@ -159,23 +159,23 @@ button:focus-visible { outline: 3px solid #dfb94e; outline-offset: 3px; }
 .title-seal { display: grid; place-items: center; width: 39px; height: 39px; border-radius: 50%; color: #5189a6; background: #effbf5; border: 2px solid #fffce0; box-shadow: 0 0 0 2px #8ebfd5,inset 0 0 0 2px #b3dce9; flex-shrink: 0; }
 .title-seal svg { width: 22px; height: 22px; }
 .game-dialog>[data-slot=dialog-close] { top: 8px!important; right: 6px!important; width: 33px; height: 33px; min-height: 33px; background: #4286ad; border-radius: 50%; border: 2px solid #f5fff2; box-shadow: 0 0 0 1px #76abc2,inset 0 0 0 2px #73b2cd; color: #faffef; opacity: 1; z-index: 3; }
-.game-dialog p,.market-note,.freight-explainer { color: #59768b; }
+.game-dialog p,.market-note,.freight-explainer { color: #4f6a7d; }
 .game-dialog input,.game-dialog select { background: #fffdf2; border: 1px solid #a7c2d1; border-radius: 2px; box-shadow: inset 0 2px 3px #7696a615; color: #416578; }
 .game-dialog [data-slot=switch],.building-panel [data-slot=switch] { border: 1px solid #8ab1c7; background: #c7d9df; box-shadow: inset 0 1px 2px #678aa950; }
 .game-dialog [data-slot=switch][data-state=checked],.building-panel [data-slot=switch][data-state=checked] { background: #629dbd; }
 .game-dialog [data-slot=tabs-list] { background: #d0e6ed; border-radius: 0; padding: 3px 3px 0; align-items: end; gap: 3px; }
-.game-dialog [data-slot=tabs-trigger] { background: #d8e1c5; border-radius: 2px 2px 0 0; color: #667c74; box-shadow: none; }
+.game-dialog [data-slot=tabs-trigger] { background: #d8e1c5; border-radius: 2px 2px 0 0; color: #4f6356; box-shadow: none; }
 .game-dialog [data-slot=tabs-trigger][data-state=active] { background: #fffbe7; color: #4e7189; box-shadow: 0 -1px #c7ba80; }
 .promotion-box { background: #deeff6; border: 1px solid #a5cddd; border-radius: 2px; padding: 17px; }
-.promotion-box>span { color: #5a7e96; }
+.promotion-box>span { color: #465f73; }
 .promotion-box h3 { color: #786f44; background: #eddea2; padding: 9px 12px; margin: 10px -7px 12px; font-size: 23px; box-shadow: inset 0 0 0 2px #faf1c9; }
 .promotion-box>div { border-bottom: 1px dashed #bdd4de; padding: 9px 0; }
 .promotion-box .done { color: #508079; }
 .contract-box,.story-goals>div { background: #f5f0d9; border: 1px solid #d4c799; border-radius: 2px; }
-.story-goals strong { color: #4f7b94; }.story-goals>div>span { color: #74836f; }
+.story-goals strong { color: #4f7b94; }.story-goals>div>span { color: #5c6a58; }
 .rank-track span { border-radius: 1px; background: #e1edf1; color: #7c909a; border: 1px solid #c5dce4; }
 .rank-track .done { background: #e8efdc; color: #72917a; }.rank-track .current { background: #5e97b4; color: #fff5c6; border-color: #5085a3; }
-.market-row { border-color: #bbd1da; }.market-row strong,.market-row b { color: #49728b; }.market-row small,.market-row .reserve-line { color: #718894; }
+.market-row { border-color: #bbd1da; }.market-row strong,.market-row b { color: #49728b; }.market-row small,.market-row .reserve-line { color: #586e79; }
 .market-row button { border-radius: 2px; }
 .resource-dot { border-radius: 2px; box-shadow: inset 0 0 0 1px #fff7; }
 .reserve-line input { background: #fffcf1; }
@@ -295,12 +295,28 @@ button:focus-visible { outline: 3px solid #dfb94e; outline-offset: 3px; }
 .facility-marker.fault{background:#fff0cb!important;border-color:#bd863b!important;color:#6f4c22!important;min-width:0;box-shadow:0 2px 8px #4b381633}.facility-marker.fault span{display:inline!important;font-size:12px}.facility-marker.fault i{background:#deae54}
 .delivery-status{display:flex;align-items:center;gap:7px;font-size:13px;padding:7px 0;color:#52788d}
 .rescue-chapter{margin-top:17px;padding:15px;border:1px solid #aac5cf;background:#fff8e9}.chapter-heading{display:flex;align-items:center;gap:8px;margin-bottom:11px}.chapter-heading span{margin-left:auto;font-size:13px}.rescue-chapter h3{margin-top:12px;font-size:18px}.rescue-chapter p{font-size:14px;line-height:1.7;margin:5px 0 12px}.rescue-actions{display:flex;flex-wrap:wrap;gap:8px}.rescue-chapter>small{display:block;margin-top:10px}
-.charter-panel{margin-top:18px;padding:14px;border:1px dashed #7ca2b8}.charter-panel p{font-size:14px;line-height:1.6;margin:7px 0 10px}.charter-panel>div{display:grid;grid-template-columns:1fr;gap:7px}.charter-panel button{display:flex;justify-content:space-between;gap:15px;padding:11px;height:auto;white-space:normal}.charter-panel small{font-size:12px;line-height:1.6}.promotion-trial{display:flex;flex-wrap:wrap;gap:7px}.promotion-trial small{width:100%;font-size:13px;color:#52738a}.market-low{color:#a96042;font-style:normal}.market-high{color:#408577;font-style:normal}.new-state-label text{font-size:10px;fill:#4c4432;paint-order:stroke;stroke:#fff1d3;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.charter-panel{margin-top:18px;padding:14px;border:1px dashed #7ca2b8}.charter-panel p{font-size:14px;line-height:1.6;margin:7px 0 10px}.charter-panel>div{display:grid;grid-template-columns:1fr;gap:7px}.charter-panel button{display:flex;justify-content:space-between;gap:15px;padding:11px;height:auto;white-space:normal}.charter-panel small{font-size:12px;line-height:1.6}.promotion-trial{display:flex;flex-wrap:wrap;gap:7px}.promotion-trial small{width:100%;font-size:13px;color:#52738a}.market-low{color:#a96042;font-style:normal}.market-high{color:#2f705f;font-style:normal}.new-state-label text{font-size:10px;fill:#4c4432;paint-order:stroke;stroke:#fff1d3;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
 @media(min-width:701px){.build-dock{width:860px;padding-bottom:9px}.build-items{min-height:121px}.build-item{height:116px;grid-template-rows:22px 66px 24px}.build-item img{height:67px;width:91px}.build-dock>.shop-awning{height:10px}.building-panel{bottom:211px;max-height:calc(100dvh - 419px)}.operations-card,.placement-hint,.tile-panel,.tutorial-card{bottom:211px}}
 @media(max-width:700px){.operations-card{left:55px;right:51px;bottom:206px;width:auto}.bottleneck{padding:8px}.bottleneck small{display:none}.quick-contract{padding:8px}.network-ok{padding:7px;font-size:12px}.health-alert{top:210px;right:12px;padding:7px;max-width:260px}.health-alert span{font-size:12px}.charter-panel button{flex-direction:column;gap:2px;align-items:flex-start}.facility-marker.fault span{max-width:85px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.operations-card:has(.bottleneck) .quick-contract{padding-top:6px}.rescue-actions>button{white-space:normal;height:auto;min-height:38px}}
 @media(max-height:540px) and (min-width:701px){.operations-card{bottom:153px;left:65px;width:260px}.health-alert{top:163px;right:20px}.building-panel{bottom:153px;max-height:calc(100dvh - 220px)}.build-item{height:80px;grid-template-rows:17px 39px 19px}.build-item img{height:41px}.build-items{min-height:89px}}
 
 /* Map-first play surface. The atlas keeps the supplied blue/cream palette. */
+.map-edges{position:absolute;z-index:18;left:18px;bottom:132px;color:#294a5c}
+.map-edges-toggle{display:flex;align-items:center;gap:6px;padding:7px 10px;border:2px solid #fffdf1;border-radius:8px;background:#fffce9f2;box-shadow:0 2px 0 #476b5166;font-size:13px;font-weight:700}
+.map-edges-card{width:280px;max-width:calc(100vw - 36px);margin-bottom:8px;padding:12px;background:#fffcef;border:2px solid #fffbe7;border-radius:12px;box-shadow:0 3px 10px #29433540}
+.map-edges-card header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.map-edges-card header button{padding:5px}
+.map-edges-card p{font-size:11px;margin:9px 0 0;color:#617771}
+.map-edge-list{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.map-edge-list>button,.map-edge-list>div{display:flex;gap:7px;align-items:center;min-width:0;padding:9px 6px;background:#eaf0df;border-radius:6px;text-align:left}
+.map-edge-list>button:hover{background:#dce8c9}
+.map-edge-list svg{flex-shrink:0;color:#497456}
+.map-edge-list strong,.map-edge-list small{display:block}
+.map-edge-list strong{font-size:12px;line-height:1.5}
+.map-edge-list small{font-size:10px;line-height:1.5;color:#557068}
+.realm-edges{margin:14px 0;color:#345869}.realm-edges>strong{display:block;font-size:13px;margin-bottom:7px}
+.tile-panel .tile-landscape{font-size:12px;line-height:1.5;color:#60766c;margin:6px 0 10px}
+@media(max-width:700px){.is-playing .map-edges{left:10px;bottom:117px}.map-edges-toggle{font-size:12px;padding:6px 8px}.map-edges-card{width:270px}}
 :root{--town-ink:#234359;--town-blue:#347db1;--town-edge:#205b82;--town-paper:#fffce9;--town-gold:#f4c55b}
 .is-playing .vignette{box-shadow:none}
 .is-playing .game-header{inset:16px 18px auto 18px;align-items:flex-start}
@@ -388,12 +404,16 @@ button:focus-visible { outline: 3px solid #dfb94e; outline-offset: 3px; }
 .facility-card .recipe b{margin-left:4px;font-weight:850}
 .facility-card .production-progress{height:7px!important;padding:0;border:0;background:#dfe8d8!important}
 .facility-card .production-progress>div{background:#66ad67!important}
-.facility-advice{display:flex;gap:6px;align-items:start;margin:6px 0;padding:7px 8px;background:#f7eac1;border-radius:6px;color:#8e6a37;font-size:13px;line-height:1.45}
+.facility-advice{display:flex;gap:6px;align-items:start;margin:6px 0;padding:7px 8px;background:#f7eac1;border-radius:6px;color:#7a5a2c;font-size:13px;line-height:1.45}
 .facility-advice svg{flex-shrink:0;margin-top:2px}
 .facility-quick-actions{display:flex;align-items:center;gap:6px;margin:5px 0 7px}
+.facility-staff{display:flex;align-items:center;gap:8px;padding:2px 8px;border-top:1px solid #aac9cb;background:#e5f0ed}
+.facility-staff .pixel-character{width:54px;height:54px;flex-shrink:0}
+.facility-staff span strong,.facility-staff span small{display:block}
+.facility-staff strong{font-size:13px}.facility-staff small{font-size:12px;color:#47707a}
 .facility-quick-actions button{height:32px!important;min-height:32px;font-size:13px;border-radius:7px!important}
 .facility-durability{margin-left:auto;font-size:12px;color:#718579}
-.facility-card [data-slot=button]{background:#3c88b4;color:#fff;border:1px solid #216087;box-shadow:0 2px 0 #c2d7d6;font-weight:700}
+.facility-card [data-slot=button]{background:#2f76a6;color:#fff;border:1px solid #216087;box-shadow:0 2px 0 #c2d7d6;font-weight:700}
 .facility-details{border-top:1px solid #cad9cf;margin:0 -13px;padding:0 13px}
 .facility-details summary{list-style:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:8px 1px;font-size:13px;font-weight:700;color:#507284;min-height:33px}
 .facility-details summary::-webkit-details-marker{display:none}
@@ -434,13 +454,13 @@ button:focus-visible { outline: 3px solid #dfb94e; outline-offset: 3px; }
 .is-playing .weather-warning,.is-playing .raid-panel{top:80px;left:50%;right:auto;transform:translateX(-50%);max-width:calc(100vw - 530px);border-radius:9px;font-size:14px}
 .is-playing .demo-badge{top:68px;left:178px;gap:5px;color:#244c41;font-size:12px;text-shadow:0 1px #ffffffb0}
 .is-playing .demo-badge button{font-size:12px;margin-left:5px}
-.is-playing .soil-legend{bottom:143px;left:18px;border-radius:8px;background:#fffbe9}
+.is-playing .soil-legend{top:auto;bottom:179px;left:18px;border-radius:8px;background:#fffbe9}
 .is-playing .pause-label{top:17%;font-size:14px;background:#285572de}
 .town-dialog{background:#f4f8ee!important;background-image:none!important;border:3px solid #d9eeef!important;border-radius:14px!important;box-shadow:0 4px 0 #2e5f83,0 18px 60px #14344766!important;padding:15px 17px!important;color:#355a6d}
 .town-dialog::before,.town-dialog::after,.town-dialog [data-slot=dialog-title]::after{display:none}
 .town-dialog [data-slot=dialog-title]{font-family:inherit;font-size:23px;letter-spacing:0;text-shadow:none;border-radius:8px;background:#397daa;box-shadow:none;min-height:52px;margin:0 0 10px;padding:8px 34px 8px 10px;color:#fffbe5}
 .town-dialog .title-seal{border:0;box-shadow:none;background:#fff4cd;color:#508aa8;width:32px;height:32px}
-.town-dialog [data-slot=button]{border-radius:7px!important;background:#5b9ebe!important;box-shadow:0 2px 0 #367c9b!important;color:white!important;border:1px solid #467e98!important}
+.town-dialog [data-slot=button]{border-radius:7px!important;background:#2f76a6!important;box-shadow:0 2px 0 #367c9b!important;color:white!important;border:1px solid #467e98!important}
 .town-dialog input,.town-dialog select{border-radius:6px;font-size:14px}
 .town-dialog .rank-track{display:none}
 .world-map-screen .realm-card{border-radius:13px;background:#f5f8ed;background-image:none;box-shadow:0 4px 0 #366380,0 12px 30px #183b5733}
@@ -470,15 +490,16 @@ button:focus-visible { outline: 3px solid #dfb94e; outline-offset: 3px; }
  .is-playing .town-actions{right:10px;bottom:14px;gap:9px}.is-playing .town-actions .market-action{width:49px;height:52px}.is-playing .town-actions .build-action{width:62px;height:65px}.town-actions button span{font-size:13px}
  .is-playing .camera-controls{left:10px;bottom:76px;gap:4px}.is-playing .camera-controls button{width:28px;height:29px}.is-playing .camera-controls svg{width:16px;height:16px}
  .is-playing .side-tools{left:10px;bottom:121px;gap:5px}.is-playing .side-tools button{height:31px;width:31px}.is-playing .side-tools button>span{left:37px;font-size:12px}
- .is-playing .build-dock{left:8px;right:8px;bottom:96px;width:auto;max-width:none;transform:none;padding:0 7px 7px;border-radius:11px;border-width:2px}.is-playing .dock-header{height:39px}.is-playing .dock-header [data-slot=tabs-trigger]{font-size:13px;padding:5px 10px}.is-playing .build-items{min-height:119px;gap:6px}.is-playing .build-item{min-width:93px;width:93px;height:111px;grid-template-rows:21px 60px 23px}.is-playing .build-item strong{font-size:13px}.is-playing .build-item img{height:61px;width:82px}.is-playing .build-item .item-price{font-size:13px;height:24px}
- .is-playing.catalog-open .camera-controls{bottom:76px}.is-playing.catalog-open .side-tools{bottom:271px}.is-playing.catalog-open .side-tools button:not([aria-label='영토 확장']):not([aria-label='철거 도구']){display:none}.is-playing.catalog-open .town-actions .market-action{display:flex}
+ /* The dock sits above the camera row (76px + 29px), so the rotate buttons stay in place and visible while building. */
+ .is-playing .build-dock{left:8px;right:8px;bottom:111px;width:auto;max-width:none;transform:none;padding:0 7px 7px;border-radius:11px;border-width:2px}.is-playing .dock-header{height:39px}.is-playing .dock-header [data-slot=tabs-trigger]{font-size:13px;padding:5px 10px}.is-playing .build-items{min-height:119px;gap:6px}.is-playing .build-item{min-width:93px;width:93px;height:111px;grid-template-rows:21px 60px 23px}.is-playing .build-item strong{font-size:13px}.is-playing .build-item img{height:61px;width:82px}.is-playing .build-item .item-price{font-size:13px;height:24px}
+ .is-playing.catalog-open .camera-controls{bottom:76px}.is-playing.catalog-open .side-tools{bottom:286px}.is-playing.catalog-open .side-tools button:not([aria-label='영토 확장']):not([aria-label='철거 도구']){display:none}.is-playing.catalog-open .town-actions .market-action{display:flex}
  .facility-card{bottom:117px;left:10px;right:10px;transform:none;width:auto;max-width:none;max-height:calc(100dvh - 273px);padding:7px 10px 0;border-width:2px}.facility-model{width:78px;height:77px}.facility-summary h2{font-size:18px}.facility-summary .recipe{font-size:13px;gap:3px}.facility-status{font-size:13px}.facility-details{margin-inline:-10px;padding-inline:10px}
  .is-playing .tile-panel{bottom:117px;left:50%;width:260px;max-width:calc(100vw - 40px)}
  .is-playing .placement-hint{bottom:119px;left:10px;right:10px;transform:none;width:auto;max-width:none;padding:9px 11px;gap:6px}.is-playing .placement-hint strong{font-size:14px}.is-playing .placement-hint>span{font-size:13px}.is-playing .placement-hint>.placement-effects{justify-content:flex-start}
  .is-playing .demo-badge{top:auto;bottom:224px;left:10px;font-size:12px;display:none}
  .is-playing .health-alert{top:242px;right:10px;left:auto;max-width:205px}.is-playing .health-alert span{display:none}
  .is-playing .weather-warning,.is-playing .raid-panel{top:auto;bottom:245px;left:50%;width:calc(100vw - 70px);max-width:none;font-size:13px}
- .is-playing .soil-legend{bottom:302px;left:10px}.is-playing .pause-label{top:40%;font-size:13px}
+ .is-playing .soil-legend{top:auto;bottom:166px;left:10px}.is-playing .pause-label{top:40%;font-size:13px}
  .town-dialog [data-slot=dialog-title]{font-size:20px;min-height:47px}.town-dialog{padding:11px!important;border-radius:11px!important}
 }
 @media(max-height:560px) and (min-width:701px){
@@ -560,6 +581,12 @@ button:focus-visible { outline: 3px solid #dfb94e; outline-offset: 3px; }
 .atlas-legend .legend-trade i.river { border-top-color: #0f4f8e; }
 .atlas-legend .legend-trade i.sea { border-top: 3px dashed #7fb4d3; }
 .atlas-legend .legend-trade i.minor { border-top: 2px dashed #8f6134; }
+.atlas-legend i.legend-ice { background: #f4fbff; border-color: #9fc3d8; }
+.atlas-legend i.legend-desert { background: #f1cf7c; border-color: #b8913e; }
+.atlas-legend i.legend-mountain { background: #b3a590; border-color: #6f604d; }
+.atlas-legend i.legend-forest { background: #8fb383; border-color: #4f7d45; }
+.atlas-legend i.legend-site { background: #fff8dd; border: 2px solid #9a8a5a; border-radius: 1px; }
+.world-atlas .site-cell { cursor: pointer; }
 .atlas-legend .legend-trade i.lake { width: 14px; height: 9px; border: 2px solid #e6f6f8; border-radius: 50%; background: #3f9fcf; box-shadow: 0 0 0 1px #7fb4d3; }
 .trade-route-card { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; align-items: center; margin: 0 0 10px; padding: 9px 11px; border-radius: 10px; background: #eef5fa; border: 1px solid #c4dbe8; color: #2f5670; }
 .trade-route-card strong { display: block; font-size: 14px; }
@@ -592,3 +619,46 @@ button:focus-visible { outline: 3px solid #dfb94e; outline-offset: 3px; }
 /* Locked upgrade and specialty buttons keep their reason readable instead of fading to 50% (H3). */
 .facility-card [data-slot=button]:disabled{opacity:1;background:#e3ebef;color:#5b7483;border-color:#c5d5de;box-shadow:none}
 .facility-card [data-slot=button]:disabled small{color:#8a5a2b;font-weight:700}
+
+.biome-summary{display:flex;flex-direction:column;gap:3px;padding:9px 0 12px;color:#345869}.biome-summary strong{font-size:15px}.biome-summary span{font-size:12px;color:#667969}.world-secondary a{align-self:center;font-size:13px;color:#4e7e98;text-decoration:underline}
+/* Next build once the first-session guide ends: one line that picks the build tool (ui-rules nextBuild). */
+.next-build{display:flex;align-items:center;gap:7px;width:100%;padding:8px 9px;text-align:left;background:#fff4d2;border-bottom:1px solid #ecd9a2;color:#6b5320}
+.next-build>svg{flex-shrink:0}.next-build>svg:first-child{color:#b27a1c}.next-build span{flex:1;min-width:0}
+.next-build strong,.next-build small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.next-build strong{font-size:13px}.next-build small{margin-top:2px;font-size:12px;opacity:.8}
+.next-build:hover{background:#ffedba}
+/* Product picker of multi-product facilities: output icon + name, then input -> output icons or the lock reason. */
+.recipe-picker{display:flex;gap:6px;padding:6px 0 8px;overflow-x:auto}
+.recipe-picker button{flex:1 0 104px;display:flex;flex-direction:column;gap:3px;padding:6px 7px;border:1px solid #c5d8e1;border-radius:7px;background:#f4f9fb;color:var(--town-ink);text-align:left}
+.recipe-picker button.current{border:2px solid var(--town-blue);background:#e2f0f8;padding:5px 6px}
+.recipe-picker button:disabled{background:#eceeec;color:#6c7a80;cursor:not-allowed}
+.recipe-picker button:not(:disabled):not(.current):hover{background:#fff}
+.recipe-picker button:focus-visible{outline:2px solid var(--town-edge);outline-offset:1px}
+.recipe-name{display:flex;align-items:center;gap:5px;min-width:0}.recipe-name strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.recipe-flow,.recipe-lock{display:flex;align-items:center;gap:4px;font-size:12px;flex-wrap:wrap}
+.recipe-flow span{display:inline-flex;align-items:center;gap:1px}
+.recipe-lock{color:#8a5a2b;font-weight:700}
+/* Export fleet: one icon per vehicle slot, filled while out; fuel vehicles carry a gold underline. */
+.fleet-line{display:flex;align-items:center;gap:7px;padding:6px 9px;font-size:12px;font-weight:700;color:#3f6b35;border-top:1px solid #d5e4cf}
+.fleet-line.fuel-short{color:#8a5a2b;background:#fff4d9}
+.fleet-icons{display:flex;gap:3px}
+.fleet-icons i{display:grid;place-items:center;width:21px;height:21px;border-radius:5px;background:#eef3ee;color:#9db2a5;border-bottom:2px solid transparent}
+.fleet-icons i.busy{background:#5f98b8;color:#fff}
+.fleet-icons i.fuel{border-bottom-color:#d7a445}
+.export-status{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap}
+.export-status .fleet-line{padding:0;border:0;background:none;color:inherit}
+.export-pending{margin-left:auto;font-size:12px}
+/* Phone: the stock column is placed with left and right 0, so its empty right part sat over the time controls, the rank
+   card and the operations card and took their taps. Shrink it to its buttons. */
+@media(max-width:700px){.is-playing .resource-strip{right:auto;width:max-content;max-width:none}}
+.fleet-line{flex-wrap:wrap;row-gap:3px}.fleet-line>span:last-child{white-space:nowrap}
+@media(max-width:700px){.operations-card .fleet-line{padding:5px 6px;gap:5px}.operations-card .fleet-icons i{width:19px;height:19px}.operations-card .fleet-unit{display:none}}
+/* Long facility names ("포장 도로 물류센터") were cut mid-letter by the tile; end them with an ellipsis (title has the full text). */
+.is-playing .build-item strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-inline:3px}
+/* The dialog touch-size rule (globals: .game-dialog button min-height 40px) stretched switches into 32x40 boxes; keep the
+   drawn pill and give it the 40px hit area with an invisible pad instead. */
+/* Market rows also force every button to 27-36px tall with !important, so the pill size has to win the same way. */
+.game-dialog [data-slot=switch]{min-height:0!important;height:1.15rem!important;min-width:2rem;padding:0!important;position:relative}
+.game-dialog [data-slot=switch]::after{content:'';position:absolute;inset:-11px -6px}
+/* Phone: the map-edge button sits at the same bottom-left spot as the facility card and the tile panel; it yields to them. */
+@media(max-width:700px){.is-playing.facility-open .map-edges,.is-playing:has(.tile-panel) .map-edges{display:none}}

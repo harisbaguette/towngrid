@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>타운그리드 · 네 방향 지형 테스트</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#edf0e5;color:#304c43;font:14px/1.45 system-ui,sans-serif}header{padding:10px 16px;display:flex;gap:9px;align-items:center;flex-wrap:wrap}h1{font-size:18px;margin:0 8px 0 0}button,select{font:inherit;padding:6px 9px;border:1px solid #adbaa4;background:#fffbed;border-radius:5px;color:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible{outline:3px solid #cfaa45}a{color:#336358}#map{height:calc(100vh - 185px);min-height:390px;position:relative}canvas{display:block;width:100%;height:100%;image-rendering:pixelated}#edges{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:9px 16px}#edges button{text-align:left;display:grid;gap:3px}#edges strong{font-size:14px}#edges span{font-size:12px;color:#637564}#status{margin:0;padding:5px 16px;min-height:30px}footer{padding:0 16px 8px;font-size:11px;color:#657768}@media(max-width:700px){header{padding:8px;gap:5px}h1{width:100%}#map{height:57vh}#edges{grid-template-columns:1fr 1fr;padding:7px}#status{font-size:12px}}</style></head>
+<body><header><h1>네 방향 지형 테스트</h1><label>지도 <select id="preset"><option value="mixed">산 · 바다 · 강 · 숲</option><option value="turned">바다 · 숲 · 산 · 강</option><option value="estern-0">에스테른 시작 지역</option><option value="rivente-0">리벤테 시작 지역</option><option value="kardum-4">북부 얼음 지대</option><option value="nubrik-0">누브리크 사막</option></select></label><button id="left">↶ 90°</button><button id="right">↷ 90°</button><button id="play">생산 시작</button><button id="center">전체 보기</button><a id="renderer" href="?renderer=canvas">CPU 표시</a><a href="/">게임으로</a></header><div id="map"></div><div id="edges"></div><p id="status">지형을 불러오고 있습니다.</p><footer>저장하지 않는 테스트 마을입니다. 시설을 누르면 실제 생산 상태와 재고가 보입니다. Q·E로 회전하고 휠로 확대합니다.</footer>
+<script type="module">
+import {Simulation,BUILDINGS,RESOURCES} from '/src/app/game/simulation.js';
+import {GameScene} from '/src/app/game/scene.js';
+import {loadAssets} from '/src/app/game/assets.js';
+import {layoutOf} from '/src/app/game/world-grid.js';
+import {mapEdges,tileLandscape} from '/src/app/game/map-edges.js';
+await Promise.all(['human','dwarf','titan'].map(loadAssets));
+const params=new URLSearchParams(location.search),status=document.querySelector('#status');
+const presets={mixed:{province:null,cell:[14,12],biome:'plain',edges:{n:'mountain',e:'coast',s:'river',w:'forest'}},turned:{province:null,cell:[14,12],biome:'plain',edges:{n:'coast',e:'forest',s:'mountain',w:'river'}}};
+const alternate=new URLSearchParams(params);if(params.get('renderer')==='canvas'){alternate.delete('renderer');document.querySelector('#renderer').textContent='WebGL 표시';}else alternate.set('renderer','canvas');document.querySelector('#renderer').href='?'+alternate;
+function fixture(){
+ const choice=document.querySelector('#preset').value,land=presets[choice]||layoutOf(choice),sim=new Simulation('river',null,{nation:'estern',land:structuredClone(land)});
+ sim.paused=true;sim.rank=32;sim.money=1e6;sim.debt=0;sim.nextEvent=1e9;
+ for(const id of Object.keys(RESOURCES))sim.stock[id]=150;
+ for(const t of sim.tiles)sim.owned.add(t.x+','+t.z);
+ for(const [type,x,z] of [['warehouse',11,12],['house',9,12],['house',11,14],['dwarfhouse',9,14]]){sim.build(type,x,z,true);sim.at(x,z).level=3;}
+ sim.syncWorkers();
+ const build=(type,predicate)=>{const tiles=sim.tiles.filter(predicate).sort((a,b)=>Math.hypot(a.x-11,a.z-12)-Math.hypot(b.x-11,b.z-12));const t=tiles.find(t=>sim.canBuild(type,t.x,t.z,true)===null);if(t)sim.build(type,t.x,t.z,true);};
+ build('quarry',t=>t.ground==='mountain');build('ironmine',t=>t.ground==='mountain');build('coalpit',t=>t.ground==='mountain');build('coppermine',t=>t.ground==='mountain');
+ build('lumber',t=>t.x<6||t.z<6);build('dock',t=>!t.water&&sim.tiles.some(w=>w.water==='coast'&&Math.max(Math.abs(t.x-w.x),Math.abs(t.z-w.z))<=3));
+ build('field',t=>!t.water&&sim.placementEffects('field',t.x,t.z).water);build('watermill',t=>!t.water&&sim.tiles.some(w=>w.water&&w.water!=='coast'&&Math.max(Math.abs(t.x-w.x),Math.abs(t.z-w.z))<=2));
+ build(land.biome==='ice'?'polarport':'coastport',t=>!!t.water);if(land.biome!=='ice')build('riverport',t=>t.water==='river');
+ if(land.biome==='desert')build('oilpump',t=>t.ground==='sand');
+ // Roads from each facility's land entry to the central warehouse use normal pathfinding.
+ const origin=sim.entries(sim.warehouse)[0];
+ for(const b of sim.buildings){const entry=sim.entries(b).find(e=>sim.path(origin,e));if(entry)for(const t of sim.path(origin,entry)){sim.roads.add(t.x+','+t.z);const tile=sim.tile(t.x,t.z);tile.nature=null;tile.remaining=0;}}
+ sim.revision++;return sim;
+}
+let selected=null;
+const game=new GameScene(document.querySelector('#map'),fixture(),{onClick:(x,z)=>{selected=game.sim.at(x,z)?.id??null;game.select(selected);const t=game.sim.tile(x,z);if(!selected)status.textContent=tileLandscape(game.sim,t).name+' · '+tileLandscape(game.sim,t).detail;},onUpdate:()=>{if(selected){const b=game.sim.buildings.find(b=>b.id===selected);if(b)status.textContent=BUILDINGS[b.type].name+' · '+b.status+' · 생산 '+Math.round(b.progress*100)+'% · 재고 '+b.out;}}},{forceSoftware:params.get('renderer')==='canvas'});
+function center(){game.setOverlay('');game.controls.target.set(11.5,0,11.5);game.camera.zoom=.64;game.camera.updateProjectionMatrix();game.setQuarterView(game.viewIndex);}
+function reset(){selected=null;game.setSimulation(fixture());center();document.querySelector('#play').textContent='생산 시작';document.querySelector('#edges').replaceChildren(...mapEdges(game.sim.layout).map(edge=>{const button=document.createElement('button');button.dataset.side=edge.side;const strong=document.createElement('strong'),span=document.createElement('span');strong.textContent=edge.direction+' · '+edge.name;span.textContent=edge.short;button.append(strong,span);button.onclick=()=>{game.focusEdge(edge.side);game.setOverlay(edge.overlay||'');status.textContent=edge.detail;};return button;}));status.textContent='산은 광물, 숲은 목재, 물가는 어업·항만·담수 시설로 이어집니다.';}
+document.querySelector('#preset').onchange=reset;document.querySelector('#left').onclick=()=>game.rotate(-1);document.querySelector('#right').onclick=()=>game.rotate(1);document.querySelector('#center').onclick=center;
+document.querySelector('#play').onclick=e=>{game.sim.paused=!game.sim.paused;e.target.textContent=game.sim.paused?'생산 시작':'일시정지';};
+addEventListener('keydown',e=>{if(/select|input/i.test(e.target.tagName))return;if(e.key.toLowerCase()==='q')game.rotate(-1);if(e.key.toLowerCase()==='e')game.rotate(1);});
+reset();window.edgePreview={game,reset,center};
+</script></body></html>

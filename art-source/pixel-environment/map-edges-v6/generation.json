@@ -1,0 +1,8 @@
+{
+  "date": "2026-09-28",
+  "generator": "image_gen",
+  "source": "mountain-source.png",
+  "initial": "mountain-initial.png",
+  "brief": "One column, four views of the same readable crisp pixel-art mountain ridge. Three pointed gray-blue rocky peaks, broad value clusters, ochre ore veins, no floor slab or trees. Revision removes the white background to transparent alpha.",
+  "packing": "node scripts/pack-pixel-environment.mjs --only=mountain"
+}

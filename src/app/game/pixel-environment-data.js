@@ -1,39 +1,48 @@
 // Building rows follow the four fixed camera views: SE, NE, NW, SW.
 // Foliage reuses its radial silhouette; water lies on the world ground plane.
+import { INDUSTRY_BUILDINGS } from './pixel-industry-data.js';
+import { EXPANSION_BUILDINGS } from './pixel-expansion-data.js';
+import { NEW_VEHICLE_SIZES } from './vehicle-art.js';
+import { RESOURCE_FRAMES } from './resource-art.js';
 export const ENVIRONMENT_CELL = 192;
 export const ENVIRONMENT_ASSETS = {
- sawmill: { building: true, sheet: '/assets/pixel-environment/sawmill.png', frames: 4, directions: 4, anchor: [.5, .735], size: 1.4 },
- warehouse: { building: true, sheet: '/assets/pixel-environment/warehouse.png', frames: 4, directions: 4, anchor: [.5, .75], size: 1.4 },
- house: { building: true, sheet: '/assets/pixel-environment/house.png', frames: 4, directions: 4, anchor: [.5, .75], size: 1.4 },
- well: { building: true, sheet: '/assets/pixel-environment/well.png', frames: 4, directions: 4, anchor: [.5, .72], size: 1.4 },
- lumber: { building: true, sheet: '/assets/pixel-environment/lumber.png', frames: 4, directions: 4, anchor: [.5, .72], size: 1.4 },
- field: { building: true, sheet: '/assets/pixel-environment/field.png', frames: 4, directions: 4, anchor: [.5, .665], size: 1.4 },
+ ...Object.fromEntries(Object.entries(NEW_VEHICLE_SIZES).map(([id,size])=>[id,{scenery:true,sheet:`/assets/pixel-environment/${id}.png`,frames:1,directions:4,anchor:[.5,181/192],size}])),
+ resourceGoods:{cutout:true,sheet:'/assets/pixel-environment/resourceGoods.png',frames:Object.keys(RESOURCE_FRAMES).length,anchor:[.5,.5],size:.4},
+ supportArt:{cutout:true,sheet:'/assets/pixel-environment/supportArt.png',frames:12,anchor:[.5,.5],size:.4},
+ biomeGround:{sheet:'/assets/pixel-environment/biomeGround.png',frames:8},
+ ...Object.fromEntries(Object.entries({snowPine:1.9,forestTree:1.8,cactus:.9,oilSeep:.9,snowMountain:3.4,volcanicMountain:3.4}).map(([id,size])=>[id,{scenery:true,sheet:`/assets/pixel-environment/${id}.png`,frames:1,directions:4,anchor:[.5,181/192],size}])) ,
+ mountain:{scenery:true,sheet:'/assets/pixel-environment/mountain.png',frames:1,directions:4,anchor:[.5,181/192],size:3.4},
+ ...Object.fromEntries([...INDUSTRY_BUILDINGS,...EXPANSION_BUILDINGS].map(id => [id, { building: true, sheet: `/assets/pixel-environment/${id}.png`, frames: 1, directions: 4, anchor: [.5, .69], size: 1.4 }])),
+ expansionGoods: {cutout:true,sheet:'/assets/pixel-environment/expansionGoods.png',frames:20,anchor:[.5,.5],size:.4},
+ cottonGrowth: {cutout:true,sheet:'/assets/pixel-environment/cottonGrowth.png',frames:4,anchor:[.5,.94],size:.4},
+ herbGrowth: {cutout:true,sheet:'/assets/pixel-environment/herbGrowth.png',frames:4,anchor:[.5,.94],size:.4},
+ ...Object.fromEntries(Object.entries({rock:.95,mossrock:.95,oreRock:1.05,cliff:1.6,pine:1.9,willow:1.9,palm:1.9,bush:.65,reeds:.52,ruin:1.8,lighthouse:2.1,exportGate:1.4,cargoTruck:.8,cargoTrain:1.25,fishingBoat:1.15}).map(([id,size])=>[id,{scenery:true,sheet:`/assets/pixel-environment/${id}.png`,frames:1,directions:4,anchor:[.5,181/192],size}])),
+ clouds:{scenery:true,sheet:'/assets/pixel-environment/clouds.png',frames:4,anchor:[.5,.5],size:3},
+ birds:{scenery:true,sheet:'/assets/pixel-environment/birds.png',frames:4,anchor:[.5,.5],size:.30},
+ ground:{sheet:'/assets/pixel-environment/ground.png',frames:8},
+ networks:{sheet:'/assets/pixel-environment/networks.png',frames:8},
+ infrastructureGround:{sheet:'/assets/pixel-environment/infrastructureGround.png',frames:8},
+ henPeck:{cutout:true,sheet:'/assets/pixel-environment/henPeck.png',frames:4,anchor:[.5,.85],size:.25},
+ ...Object.fromEntries(['creek','river','sea','lake'].map(id=>[id,{sheet:`/assets/pixel-environment/${id}.png`,frames:4}])),
+ industrialTools: { cutout: true, sheet: '/assets/pixel-environment/industrialTools.png', frames: 16, anchor: [.5, .5], size: .4 },
+ industrialGoods: { cutout: true, sheet: '/assets/pixel-environment/industrialGoods.png', frames: 16, anchor: [.5, .5], size: .4 },
+ sawmill: { building: true, sheet: '/assets/pixel-environment/sawmill.png', frames: 1, directions: 4, anchor: [.5, .69], size: 1.4 },
+ warehouse: { building: true, sheet: '/assets/pixel-environment/warehouse.png', frames: 1, directions: 4, anchor: [.5, .69], size: 1.4 },
+ house: { building: true, sheet: '/assets/pixel-environment/house.png', frames: 1, directions: 4, anchor: [.5, .75], size: 1.4 },
+ well: { building: true, sheet: '/assets/pixel-environment/well.png', frames: 1, directions: 4, anchor: [.5, .69], size: 1.4 },
+ lumber: { building: true, sheet: '/assets/pixel-environment/lumber.png', frames: 1, directions: 4, anchor: [.5, .69], size: 1.4 },
+ field: { building: true, sheet: '/assets/pixel-environment/field.png', frames: 1, directions: 4, anchor: [.5, .69], size: 1.4 },
+ productionParts: { cutout: true, sheet: '/assets/pixel-environment/productionParts.png', frames: 8, anchor: [.5, .5], size: .4 },
+ wheatGrowth: { cutout: true, sheet: '/assets/pixel-environment/wheatGrowth.png', frames: 4, anchor: [.5, .94], size: .4 },
  oak: { sheet: '/assets/pixel-environment/oak.png', frames: 7, anchor: [.5, .91], size: 1.68 },
  water: { sheet: '/assets/pixel-environment/water.png', frames: 4 },
 };
 export const PLANK_ICON = '/assets/pixel-environment/plank.png';
 export const PIXEL_BUILDINGS = Object.keys(ENVIRONMENT_ASSETS).filter(id => ENVIRONMENT_ASSETS[id].building);
 
-export function pixelBuildingFrame(type, building, time, sim) {
- const b = building || {};
- // Crop age is production progress, not a looping decorative animation. A
- // stopped or starved field keeps its actual growth stage until it can resume.
- if (type === 'field') return Math.min(3, Math.max(0, Math.floor((b.progress || 0) * 4)));
- if (b.enabled === false || b.health <= 0) return 0;
- if (type === 'house') {
-  const occupied = sim?.workers?.some(worker => worker.homeId === b.id);
-  return occupied ? [1, 2, 3, 2][Math.floor(Math.max(0, time) * 2) % 4] : 0;
- }
- if (type === 'warehouse') {
-  const handling = sim?.workers?.some(worker => worker.handling && worker.task &&
-   (worker.phase === 'source' ? worker.task.sourceId == null : worker.task.targetId == null) &&
-   Math.hypot(worker.x - b.x, worker.z - b.z) < 1.6);
-  return handling ? [1, 2, 3, 2][Math.floor(Math.max(0, time) * 4) % 4] : 0;
- }
- if (!b.working) return 0;
- const speed = type === 'well' || type === 'lumber' ? 2.5 : 5;
- return [1, 2, 3, 2][Math.floor(Math.max(0, b.animationTime ?? time) * speed) % 4];
-}
+// Architecture never cycles. Tools, growing plants and output are separate
+// layers; their state lives on the model's production/layers fields.
+export function pixelBuildingFrame() { return 0; }
 
 export function sawmillFrame(building, time) {
  return pixelBuildingFrame('sawmill', building, time);

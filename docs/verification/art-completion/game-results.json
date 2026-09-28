@@ -1,0 +1,77 @@
+{
+  "hud": 5,
+  "setup": {
+    "errors": [],
+    "kinds": [
+      "wagon",
+      "wagon",
+      "raft",
+      "truck",
+      "steamer"
+    ],
+    "well": 7,
+    "poses": [
+      {
+        "x": 10,
+        "z": 11,
+        "dx": -1,
+        "dz": 0
+      },
+      {
+        "x": 10,
+        "z": 11,
+        "dx": -1,
+        "dz": 0
+      },
+      {
+        "x": 10,
+        "z": 17,
+        "dx": -1,
+        "dz": 0
+      },
+      {
+        "x": 10,
+        "z": 11,
+        "dx": -1,
+        "dz": 0
+      },
+      {
+        "x": 10,
+        "z": 17,
+        "dx": -1,
+        "dz": 0
+      }
+    ]
+  },
+  "actual": [
+    {
+      "kind": "wagon",
+      "asset": "cargoWagon",
+      "loaded": true
+    },
+    {
+      "kind": "wagon",
+      "asset": "cargoWagon",
+      "loaded": true
+    },
+    {
+      "kind": "raft",
+      "asset": "cargoRaft",
+      "loaded": true
+    },
+    {
+      "kind": "truck",
+      "asset": "cargoTruckEmpty",
+      "loaded": true
+    },
+    {
+      "kind": "steamer",
+      "asset": "cargoSteamer",
+      "loaded": true
+    }
+  ],
+  "repaired": true,
+  "errors": [],
+  "failed": [],
+  "noSave": true
+}

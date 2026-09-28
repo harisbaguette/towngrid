@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/taron.png",
+  "portraitRegion": [
+    0,
+    0,
+    715,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        715,
+        0,
+        1112,
+        1024
+      ],
+      "bbox": [
+        699,
+        240,
+        1100,
+        914
+      ],
+      "scale": 0.14836795252225518,
+      "offset": [
+        34,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1112,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1124,
+        236,
+        1520,
+        909
+      ],
+      "scale": 0.1485884101040119,
+      "offset": [
+        34,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/grum.png",
+  "portraitRegion": [
+    0,
+    0,
+    680,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        680,
+        0,
+        1110,
+        1024
+      ],
+      "bbox": [
+        692,
+        241,
+        1092,
+        929
+      ],
+      "scale": 0.14534883720930233,
+      "offset": [
+        35,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1110,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1129,
+        252,
+        1523,
+        939
+      ],
+      "scale": 0.14556040756914118,
+      "offset": [
+        35,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

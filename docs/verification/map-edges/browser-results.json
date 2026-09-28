@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "checks": [
+    "six maps",
+    "four views",
+    "WebGL/CPU",
+    "mountain/forest/water production",
+    "side focus",
+    "actual game UI",
+    "mobile"
+  ],
+  "errors": [],
+  "failed": []
+}

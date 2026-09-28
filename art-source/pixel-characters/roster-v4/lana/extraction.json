@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/lana.png",
+  "portraitRegion": [
+    0,
+    0,
+    604,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        604,
+        0,
+        1068,
+        1024
+      ],
+      "bbox": [
+        587,
+        206,
+        1052,
+        877
+      ],
+      "scale": 0.14903129657228018,
+      "offset": [
+        29,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1068,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1085,
+        206,
+        1523,
+        913
+      ],
+      "scale": 0.14144271570014144,
+      "offset": [
+        33,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

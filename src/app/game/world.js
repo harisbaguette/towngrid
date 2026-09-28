@@ -1,3 +1,4 @@
+import {CAPITALS} from './world-map.js';
 export const BRAND={name:'타운그리드',latin:'TOWNGRID',world:'이르데아'};
 export const RACES={
  human:{name:'인간',color:'#467eab',roof:'#b95432',wall:'#f0dfba',trim:'#77573c',characters:['Worker_Male','Worker_Female','Chef_Female','Knight_Male'],style:'목조 골조 · 기와지붕'},
@@ -59,22 +60,20 @@ export const playableRace=race=>!!RACES[race]&&FACTIONS[factionOf(race)].playabl
 export const PROGRESSION_OFFSET=5;
 for(const [id,r]of Object.entries(RACES)){r.specialty=SPECIALTIES[id];if(!RESIDENT_NAMES[id])RESIDENT_NAMES[id]=({goblin:['피즈','루카','비트','니모'],dragon:['카엘','레나','바르','세린'],aquatic:['네리','마린','리오','세아'],fae:['피아','에일','미엘','루네'],titan:['타론','베라','오린','헤라'],spirit:['이슬','아린','루아','미르'],centaur:['카이','라나','테론','키라']})[id];}
 export const CONTINENTS=[{id:'irdea',name:'이르데아 대륙'}];
-export const ATLAS_REGIONS=[{id:'west',name:'서부 유역',view:'45 115 535 560'},{id:'north',name:'북부 산맥',view:'255 0 740 410'},{id:'east',name:'동부 평원',view:'780 100 505 545'},{id:'south',name:'남부 연안',view:'350 380 740 395'}];
-export const MAINLAND='M88 273L124 231 109 187 163 139 222 132 244 92 308 111 369 69 438 82 487 40 548 59 591 36 636 68 708 48 747 89 812 67 853 96 927 90 956 135 1024 148 1054 186 1132 202 1168 241 1221 257 1234 309 1202 340 1242 389 1208 429 1222 484 1174 513 1146 565 1082 588 1052 636 1001 645 974 692 908 679 855 720 794 704 742 744 682 724 630 754 574 724 524 737 483 700 413 708 394 674 323 682 308 629 240 613 215 567 159 548 149 505 109 482 122 437 79 407 98 363 61 327Z';
-export const INLAND_SEA='M606 227C632 211 684 220 701 248L748 266 770 305 753 343 784 369 773 410 793 448 772 491 731 516 707 553 665 541 649 505 603 490 617 446 587 414 603 377 578 341 602 309 586 269Z';
-export const GREAT_RIVERS=[{name:'은결강',path:'M270 138Q316 193 290 250T352 350Q386 394 448 400T599 421',label:[384,373]},{name:'하르덴강',path:'M615 61Q571 118 644 159T652 228',label:[552,156]},{name:'벨루강',path:'M767 327Q856 308 901 349T1071 369Q1161 377 1217 399',label:[1017,343]},{name:'루멘강',path:'M699 546Q721 595 677 627T688 731',label:[731,638]}];
+// The atlas is the world grid (world-map.js) drawn at 26px a square: 1300×806. One view per realm.
+export const ATLAS_REGIONS=[{id:'west',name:'발테론 서부',view:'0 60 660 700'},{id:'north',name:'카르제온 북동',view:'560 0 740 470'},{id:'south',name:'아스테라 남부',view:'480 420 820 386'}];
 const nationRows=[
  ['estern','에스테른 왕국','human','river','royal'],['silvaen','실바엔 수림왕국','elf','river','green'],['kardum','카르둠 산악왕국','dwarf','highland','industrial'],['nezar','네자르 마도왕국','demon','highland','energy'],['urkan','우르칸 부족연맹','orc','highland','frontier'],['lumea','루메아 연안왕국','beast','coast','trade'],['fizden','피즈덴 공업공화국','goblin','river','industrial'],['karyon','카리온 용인왕국','dragon','highland','energy'],['neria','네리아 해양연합','aquatic','coast','trade'],['miel','미엘 수정공국','fae','river','research'],
  ['rivente','리벤트 연방','human','coast','trade'],['arsel','아르셀 공업연방','elf','highland','industrial'],['broden','브로덴 철도연방','dwarf','river','frontier'],['vesra','베스라 연구공화국','demon','river','research'],['morgal','모르갈 노동공화국','orc','coast','industrial'],['tavira','타비라 자유도시연합','beast','river','trade'],['griv','그리브 상업연맹','goblin','coast','royal'],['serkan','세르칸 에너지공화국','dragon','highland','energy'],['pelara','펠라라 수로왕국','aquatic','river','green'],['elune','엘루네 기술공화국','fae','highland','research'],
  ['harren','하렌 농업공화국','human','river','green'],['neiren','네이렌 해양공화국','elf','coast','trade'],['torvik','토르비크 기업국','dwarf','highland','royal'],['zail','자일 상업도시국가','demon','coast','trade'],['orbel','오르벨 산업왕국','orc','river','frontier'],['savera','사베라 산악연방','beast','highland','green'],['nubrik','누브릭 기술국','goblin','highland','research'],['arvonn','아르본 항만연방','dragon','coast','frontier'],['thalia','탈리아 조류공화국','aquatic','coast','energy'],['sylune','실루네 자치왕국','fae','river','green']
 ];
 const policies={royal:{name:'국가 납품 헌장',effect:'판매 수익 +8% · 세금 12G',sale:1.08,tax:12},green:{name:'자원 순환 협약',effect:'목재 가공 +12% · 세금 9G',tax:9,production:{sawmill:1.12}},industrial:{name:'산업 투자 협약',effect:'부품·제련 작업 +12% · 세금 14G',tax:14,production:{workshop:1.12,smelter:1.12}},energy:{name:'에너지 이용 허가',effect:'발전·정유 작업 +15% · 세금 16G',tax:16,production:{generator:1.15,refinery:1.15,arcanepower:1.15}},frontier:{name:'지역 개발 특허',effect:'건설비 −8% · 세금 11G',build:.92,tax:11},trade:{name:'자유항 교역 협약',effect:'판매 수익 +5% · 세금 10G',sale:1.05,tax:10},research:{name:'기술 연구 협약',effect:'회로·의약품 작업 +12% · 세금 13G',tax:13,production:{electronics:1.12,laboratory:1.12}}};
-export const ATLAS_POINTS=[[389,315],[228,217],[467,151],[848,207],[942,439],[865,613],[1108,461],[1039,230],[1037,564],[422,475],[266,503],[512,267],[503,614],[849,388],[1105,316],[378,592],[1158,396],[738,133],[864,501],[495,387],[202,341],[575,665],[359,186],[997,335],[975,527],[939,172],[724,646],[566,549],[823,681],[324,418]];
-export const ATLAS_LAYOUTS=[ATLAS_POINTS];
+/** Capital of each nation on the atlas, in px: the middle of its capital square. */
+export const ATLAS_POINTS=nationRows.map(([id])=>CAPITALS[id].map(v=>(v+.5)*26));
 for(let i=0;i<nationRows.length;i++){
  const [id,name,race,region,policy]=nationRows[i],old=NATIONS[id]||{},c=Math.floor(i/10),p=policies[policy];
  const overlord=['발테론 제국','카르제온 연방','아스테라 패권국'][c],point=ATLAS_POINTS[i];
- NATIONS[id]={faction:factionOf(race),playable:playableRace(race),sovereign:['아우렐 독립왕국','네레이드 독립연방','솔름 독립공국'][c],capitalDomain:(old.capital||name.split(' ')[0])+' 수도직할령',manor:(old.fief||name.split(' ')[0])+' 개척장',dependency:'종속 공국',sale:1,production:{},...old,...p,id,name,race,region,continent:'irdea',overlord,policy:p.name,effect:p.effect,color:RACES[race].color,point,subregion:point[1]<240?'north':point[1]>550?'south':point[0]<600?'west':'east',fief:old.fief||name.split(' ')[0]+' 자치주',district:old.capital?old.capital+' 개발구':name.split(' ')[0]+' 산업구',capital:old.capital||name.split(' ')[0],lore:overlord+'의 통제를 받는 종속국. 지방 개발구의 빈 땅을 임차해 사업을 시작합니다.',population:{[race]:65,human:race==='human'?65:20,other:15}};
+ NATIONS[id]={faction:factionOf(race),playable:playableRace(race),sovereign:['아우렐 독립왕국','네레이드 독립연방','솔름 독립공국'][c],capitalDomain:(old.capital||name.split(' ')[0])+' 수도직할령',manor:(old.fief||name.split(' ')[0])+' 개척장',dependency:'종속 공국',sale:1,production:{},...old,...p,id,name,race,region,continent:'irdea',overlord,policy:p.name,effect:p.effect,color:RACES[race].color,point,fief:old.fief||name.split(' ')[0]+' 자치주',district:old.capital?old.capital+' 개발구':name.split(' ')[0]+' 산업구',capital:old.capital||name.split(' ')[0],lore:overlord+'의 통제를 받는 종속국. 지방 개발구의 빈 땅을 임차해 사업을 시작합니다.',population:{[race]:65,human:race==='human'?65:20,other:15}};
 }
 // Rank table from the 2026-09-28 balance patch: each rank asks for the output of the facility the previous rank opened.
 // The quarry is in no unlock list, so it is a starting facility. Length 33 is part of the save format.
@@ -83,8 +82,8 @@ export const RANKS=[
  ['등록 농노',35,[['produced:water',12,'물 생산'],['produced:grain',12,'밀 생산']],['sawmill']],
  ['개간 농노',60,[['produced:plank',12,'판재 생산'],['contracts',2,'영주 납품']],['mill','smokehouse']],
  ['계약 농노',100,[['produced:flour',12,'밀가루 생산'],['expansions',1,'개간지 확장']],['bakery','cottonfield']],
- ['준자유민',160,[['sold:bread',10,'빵 판매'],['debtFree',1,'몸값 채무 청산']],['herbgarden','clinic']],
- ['임차 사업주',250,[['family',1,'가족 구출'],['produced:herb',8,'약초 생산']],['weaver','depot']],
+ ['준자유민',160,[['sold:bread',10,'빵 판매'],['debtFree',1,'몸값 채무 청산']],['herbgarden','clinic','weaver']],
+ ['임차 사업주',250,[['family',1,'가족 구출'],['produced:herb',8,'약초 생산']],['depot']],
  ['등록 사업주',300,[['produced:cloth',8,'직물 생산'],['revenue',2400,'누적 판매 수입']],['henhouse','marketplace']],
  ['지역 공급자',350,[['produced:egg',20,'달걀 생산'],['contracts',4,'납품 계약']],['confectionery','reservoir']],
  ['제조 허가업자',400,[['produced:cake',10,'케이크 생산'],['contracts',6,'납품 계약']],['kiln','stable']],
@@ -109,7 +108,7 @@ export const RANKS=[
  ['독립 선언국',8800,[['recognition',2,'외교 지지국'],['support',70,'주민 지지'],['building:parliament',1,'의사당 건립']],['shipyard']],
  ['승인 독립국',10000,[['recognition',4,'외교 지지국'],['produced:airship',3,'비공정 건조'],['deliveries',30,'지역 간 운송']],['airdock']],
  ['지역 강국',12500,[['sites',5,'운영 거점'],['investment',4,'산업 투자'],['building:fortress',2,'방위 요새'],['revenue',700000,'교역 수입']],['blastfurnace']],
- ['다지역 연방',15000,[['territories',3,'자치권 확보 지역'],['support',75,'주민 지지'],['produced:car',80,'자동차 생산']],['assemblyline']],
+ ['다지역 연방',15000,[['territories',3,'자치권 확보 지역'],['support',75,'주민 지지'],['produced:car',70,'자동차 생산']],['assemblyline']],
  ['열강',18000,[['sites',6,'운영 거점'],['recognition',6,'외교 지지국'],['produced:airship',10,'비공정 건조']],['exchange']],
  ['패권국',21000,[['territories',5,'자치권 확보 지역'],['revenue',1000000,'교역 수입'],['defense',10,'방위대 편성'],['produced:car',120,'자동차 생산']],[]]
 ].map(([name,fee,requirements,unlocks],id)=>({id,name,fee,requirements,unlocks}));

@@ -15,13 +15,14 @@ const bare=fresh();assert.equal(bare.sell('wood',5).ok,false);assert.equal(bare.
 // Goods leave on a cart and are paid for only at the gate.
 const s=fresh();s.build('warehouse',10,12);const money=s.money,wood=s.stock.wood;
 const sale=s.sell('wood',5);assert.ok(sale.ok&&sale.revenue>0);assert.equal(s.stock.wood,wood-5);assert.equal(s.money,money,'no payment before the cart arrives');assert.equal(s.sold.wood,undefined);assert.equal(s.shipments.length,1);
-assert.deepEqual(s.shipments[0].route.at(-1),EXPORT_GATE,'the cart drives to the gate');
+assert.deepEqual(s.shipments[0].route.at(-1),EXPORT_GATE,'the first wagon drives to the gate');
 let paid=sale.revenue;for(let i=1;i<EXPORT_CARTS;i++){const r=s.sell('stone',1);assert.ok(r.ok);paid+=r.revenue;}assert.equal(s.sell('stone',1).ok,false,'only '+EXPORT_CARTS+' carts run at once');
 // A cart that is on the road survives saving and still pays out after loading.
 const loaded=new Simulation(s.region,decodeSave(encodeSave(s.save())));assert.equal(loaded.shipments.length,EXPORT_CARTS);
-run(s,8);assert.equal(s.money,money+paid,'every cart pays its loading price at the gate');assert.equal(s.sold.wood,5);
-run(loaded,8);assert.equal(loaded.sold.wood,5);assert.ok(loaded.money>money);
-run(s,12);assert.equal(s.shipments.length,0,'carts come back and free their slot');assert.ok(s.sell('stone',1).ok);
+// On the river map the third free vehicle is a raft that goes down the river to the map edge, so it takes longer.
+run(s,16);assert.equal(s.money,money+paid,'every vehicle pays its loading price at its terminal');assert.equal(s.sold.wood,5);
+run(loaded,16);assert.equal(loaded.sold.wood,5);assert.ok(loaded.money>money);
+run(s,16);assert.equal(s.shipments.length,0,'vehicles come back and free their slot');assert.ok(s.sell('stone',1).ok);
 
 // The export road cannot be demolished or built over.
 assert.equal(s.demolish(3,EXPORT_GATE.z).ok,false);assert.ok(s.roads.has('3,'+EXPORT_GATE.z));

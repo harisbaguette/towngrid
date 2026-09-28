@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/niki.png",
+  "portraitRegion": [
+    0,
+    0,
+    676,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        676,
+        0,
+        1080,
+        1024
+      ],
+      "bbox": [
+        694,
+        291,
+        1016,
+        918
+      ],
+      "scale": 0.1594896331738437,
+      "offset": [
+        38,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1080,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1144,
+        292,
+        1463,
+        918
+      ],
+      "scale": 0.1597444089456869,
+      "offset": [
+        38,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/elion.png",
+  "portraitRegion": [
+    0,
+    0,
+    678,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        678,
+        0,
+        1104,
+        1024
+      ],
+      "bbox": [
+        698,
+        223,
+        1059,
+        923
+      ],
+      "scale": 0.14285714285714285,
+      "offset": [
+        38,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1104,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1149,
+        228,
+        1491,
+        906
+      ],
+      "scale": 0.14749262536873156,
+      "offset": [
+        39,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

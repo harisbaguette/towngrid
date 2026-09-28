@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/hugo.png",
+  "portraitRegion": [
+    0,
+    0,
+    558,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        558,
+        0,
+        901,
+        627
+      ],
+      "bbox": [
+        565,
+        112,
+        877,
+        627
+      ],
+      "scale": 0.1941747572815534,
+      "offset": [
+        33,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        901,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        925,
+        106,
+        1231,
+        627
+      ],
+      "scale": 0.19193857965451055,
+      "offset": [
+        34,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

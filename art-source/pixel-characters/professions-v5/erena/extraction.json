@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/erena.png",
+  "portraitRegion": [
+    0,
+    0,
+    538,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        538,
+        0,
+        882,
+        627
+      ],
+      "bbox": [
+        540,
+        63,
+        845,
+        607
+      ],
+      "scale": 0.18382352941176472,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        882,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        919,
+        66,
+        1224,
+        602
+      ],
+      "scale": 0.1865671641791045,
+      "offset": [
+        35,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

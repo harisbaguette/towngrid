@@ -1,170 +1,81 @@
-/* Standalone art review. No game simulation, save data, or shared character registry. */
-(() => {
-  'use strict';
-  const manifest = window.MIRA_PREVIEW;
-  const find = id => document.getElementById(id);
-  const stage = find('stage');
-  const context = stage.getContext('2d');
-  const images = {};
-  const state = { action: 'walk', direction: 'SW', time: 0, frame: 0, paused: false, speed: 1, scale: 2, distance: 0, last: null, ready: false };
-  const directions = manifest.directions;
-  const directionNames = { SW: '왼쪽 앞', NW: '왼쪽 뒤', NE: '오른쪽 뒤', SE: '오른쪽 앞' };
-  const descriptions = {
-    walk: '4방향 × 8프레임 보행 시안 · 방향을 바꿔도 현재 걸음의 순서를 유지합니다.',
-    idle: '대기 · 작은 호흡과 눈 깜빡임을 확인하세요.',
-    rotation: '4방향 쿼터뷰 · 앞좌, 뒤좌, 뒤우, 앞우를 90도 간격으로 보기.',
-    work: '도구 작업 · 준비, 들어 올리기, 내려치기, 복귀.',
-    greet: '상호작용 · 손을 들어 인사하고 대기 자세로 돌아옵니다.',
-    cargo: '상호작용 · 무릎을 굽혀 상자를 들고 다시 내려놓습니다.',
-  };
-  const thumbnailButtons = [];
-  function sourceFrame(action, index, direction) { const clip = manifest.clips[action]; return (clip.facings?.[direction] || clip.frames)[index]; }
-  function drawSprite(ctx, action, index, x, baseline, height, direction = state.direction) {
-    const clip = manifest.clips[action];
-    const f = sourceFrame(action, index, direction);
-    const factor = height / clip.nominalHeight;
-    ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(images[clip.image], ...f.rect,
-      x + (f.rect[0] - f.anchor[0]) * factor,
-      baseline + (f.rect[1] - f.anchor[1]) * factor,
-      f.rect[2] * factor, f.rect[3] * factor);
+/* The preview reads the exact runtime atlas and clips. */
+(async () => {
+ 'use strict';
+ const $ = id => document.getElementById(id);
+ const canvas = $('stage'), ctx = canvas.getContext('2d');
+ const state = { action: 'walk', direction: 0, elapsed: 0, paused: false, speed: 1, scale: 2, last: null };
+ const base = '/assets/pixel-characters/mira/';
+ const load = src => new Promise((resolve,reject) => { const image = new Image(); image.onload=()=>resolve(image); image.onerror=reject; image.src=src; });
+ try {
+  const [meta, atlas] = await Promise.all([fetch(base+'frames.json').then(r=>r.json()), load(base+'sprites.png')]);
+  $('portrait').src=base+(meta.portraitAnimation?.file || 'portrait.png');
+  const colors = { SW: [-.70710678,.40824829], NW: [-.70710678,-.40824829], NE: [.70710678,-.40824829], SE: [.70710678,.40824829] };
+  const cell=meta.cell[0], baseline=meta.anchors[0][0][1]*cell;
+  const descriptions={walk:'좌우 발이 교대하는 12프레임 보행',carry:'같은 보행 주기로 상자 운반',idle:'동일한 체형을 유지하는 대기',rotation:'Q·E로 네 방향 전환',work:'도구를 들고 내리는 작업',greet:'팔을 들어 인사',cargo:'무릎을 굽혀 상자를 들고 내려놓기'};
+  function clip() {
+   if(state.action==='rotation')return {frames:[0,0,0,0],fps:2};
+   if(state.action==='cargo')return {frames:[...meta.clips.pickup.frames,...meta.clips.drop.frames],fps:10};
+   return meta.clips[state.action];
   }
-  function updateThumbnails() {
-    thumbnailButtons.forEach((button, index) => {
-      button.hidden = index >= manifest.clips[state.action].frames.length;
-      if (button.hidden) return;
-      const canvas = button.firstElementChild;
-      const ctx = canvas.getContext('2d');
-      ctx.fillStyle = manifest.background; ctx.fillRect(0, 0, canvas.width, canvas.height);
-      drawSprite(ctx, state.action, index, 45, 81, 72);
-      button.lastElementChild.textContent = state.action === 'rotation' ? directions[index] : String(index + 1).padStart(2, '0');
-      button.setAttribute('aria-label', state.action === 'rotation' ? `${directions[index]} 방향 보기` : `${index + 1}번째 프레임 보기`);
-    });
+  function index() {const c=clip();return Math.floor(state.elapsed*c.fps)%c.frames.length;}
+  function drawSprite(context,col,row,x,y,scale) {
+   context.imageSmoothingEnabled=false;
+   context.drawImage(atlas,col*cell,row*cell,cell,cell,x-cell/2*scale,y-baseline*scale,cell*scale,cell*scale);
   }
-  function updateSelection() {
-    thumbnailButtons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === state.frame)));
-    find('frame-label').textContent = state.action === 'rotation' ? `${directions[state.frame]} · ${state.frame + 1} / 4` : `${state.action === 'walk' ? state.direction + ' · ' : ''}${state.frame + 1} / 8 프레임`;
+  function thumbnails() {
+   $('frames').replaceChildren();
+   clip().frames.forEach((col,i)=>{
+    const b=document.createElement('button'), c=document.createElement('canvas'), label=document.createElement('span');
+    c.width=c.height=96;const context=c.getContext('2d');context.fillStyle='#eeeae0';context.fillRect(0,0,96,96);
+    drawSprite(context,col,state.action==='rotation'?i:state.direction,48,87,.72);
+    label.textContent=state.action==='rotation'?meta.directions[i]:String(i+1).padStart(2,'0');
+    b.setAttribute('aria-label',`${i+1}번째 프레임 보기`);b.append(c,label);
+    b.onclick=()=>{state.paused=true;state.elapsed=(i+.01)/clip().fps;update();};$('frames').append(b);
+   });
+  }
+  function update() {
+   document.querySelectorAll('[data-action]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===state.action)));
+   document.querySelectorAll('[data-direction]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.direction===meta.directions[state.direction])));
+   $('play').textContent=state.paused?'재생':'일시정지';$('play').setAttribute('aria-label',$('play').textContent);
+   $('action-description').textContent=descriptions[state.action];
   }
   function draw() {
-    if (!state.ready) return;
-    const width = stage.width, height = stage.height;
-    context.fillStyle = manifest.background; context.fillRect(0, 0, width, height);
-    const spriteHeight = Math.min(108 * state.scale, height - 72);
-    let baseline = Math.round(height * .83);
-    // Fractional screen positions are intentional: rounding translation to a tile or
-    // advancing position only when a sprite frame changes causes visible stepping.
-    const compare = state.action === 'walk' && find('view-all').checked;
-    const traveling = state.action === 'walk' && find('travel').checked && !compare;
-    let x = width / 2;
-    if (traveling) {
-      // Four quarter-view axes. Position advances every display frame, separately
-      // from sprite-pose changes; a direction switch keeps the pose phase.
-      const [vx, vy] = { SW: [-1,.5], NW: [-1,-.5], NE: [1,-.5], SE: [1,.5] }[state.direction];
-      const span = Math.min(width + spriteHeight * 1.5, height * 2 + spriteHeight);
-      const offset = ((state.distance + span / 2) % span) - span / 2;
-      x += vx * offset;
-      baseline = height / 2 + spriteHeight * .35 + vy * offset;
+   ctx.fillStyle='#eeeae0';ctx.fillRect(0,0,canvas.width,canvas.height);
+   const c=clip(), frame=index(), all=$('view-all').checked;
+   const row=state.action==='rotation'?frame:state.direction;
+   const rows=all?[0,1,2,3]:[row];
+   const scale=all?Math.min(state.scale,1.65):state.scale;
+   for(const [i,r] of rows.entries()){
+    let x=all?135+i*210:450, y=310;
+    if(!all && $('travel').checked && ['walk','carry'].includes(state.action)) {
+     const progress=(state.elapsed*c.fps/c.frames.length*c.strideLength % 2)-1, f=colors[meta.directions[r]];
+     x+=f[0]*progress*128/1.05*scale; y+=f[1]*progress*128/1.05*scale;
     }
-    if (compare) {
-      const columns = width < 560 ? 2 : 4, rows = 4 / columns;
-      const cellWidth = width / columns, cellHeight = height / rows;
-      const figureHeight = Math.min(spriteHeight, cellHeight - 38, cellWidth * 1.25);
-      directions.forEach((direction, i) => {
-        const cx = cellWidth * (i % columns + .5), floor = cellHeight * Math.floor(i / columns) + (cellHeight + figureHeight) / 2 - 12;
-        drawSprite(context, 'walk', state.frame, cx, floor, figureHeight, direction);
-        context.fillStyle = '#40574b'; context.font = '12px sans-serif'; context.textAlign = 'center';
-        context.fillText(`${direction} · ${directionNames[direction]}`, cx, floor + 19);
-        if (find('anchor').checked) { context.fillStyle = '#245d50'; context.fillRect(cx - 3, floor - 2, 6, 4); }
-      });
-    } else drawSprite(context, state.action, state.frame, x, baseline, spriteHeight);
-    if (find('anchor').checked && !compare) {
-      context.strokeStyle = '#719884'; context.lineWidth = 1;
-      context.beginPath();context.moveTo(0, baseline + .5);context.lineTo(width, baseline + .5);context.stroke();
-      context.fillStyle = '#245d50'; context.fillRect(x - 3, baseline - 2, 6, 4);
-    }
-    stage.dataset.action = state.action;
-    stage.dataset.frame = String(state.frame);
-    stage.dataset.positionX = x.toFixed(3);
-    stage.dataset.positionY = baseline.toFixed(3);
-    stage.dataset.direction = state.direction;
-    stage.dataset.comparison = String(compare);
-    stage.dataset.paused = String(state.paused);
+    ctx.strokeStyle='#c5cbbb';ctx.lineWidth=1;ctx.beginPath();
+    ctx.moveTo(x-64*scale,y);ctx.lineTo(x,y-37*scale);ctx.lineTo(x+64*scale,y);ctx.lineTo(x,y+37*scale);ctx.closePath();ctx.stroke();
+    ctx.fillStyle='#4b5b4526';ctx.beginPath();ctx.ellipse(x,y,13*scale,6*scale,0,0,Math.PI*2);ctx.fill();
+    drawSprite(ctx,c.frames[frame],r,x,y,scale);
+    if($('anchor').checked){ctx.strokeStyle='#b25945';ctx.beginPath();ctx.moveTo(x-8,y);ctx.lineTo(x+8,y);ctx.moveTo(x,y-8);ctx.lineTo(x,y+8);ctx.stroke();}
+    if(all){ctx.fillStyle='#516957';ctx.font='14px sans-serif';ctx.fillText(meta.directions[r],x-10,380);}
+   }
+   $('frame-label').textContent=`${meta.directions[row]} · ${frame+1} / ${c.frames.length} 프레임`;
+   [...$('frames').children].forEach((b,i)=>b.setAttribute('aria-pressed',String(i===frame)));
   }
-  function syncPlayback() {
-    find('play').textContent = state.paused ? '재생' : '일시정지';
-    find('play').setAttribute('aria-label', state.paused ? '재생' : '일시정지');
+  function setDirection(i){state.direction=(i+4)%4;thumbnails();update();}
+  document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>{state.action=b.dataset.action;state.elapsed=0;thumbnails();update();});
+  document.querySelectorAll('[data-direction]').forEach(b=>b.onclick=()=>setDirection(meta.directions.indexOf(b.dataset.direction)));
+  document.addEventListener('keydown',e=>{if(['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))return;if(e.key.toLowerCase()==='q')setDirection(state.direction-1);if(e.key.toLowerCase()==='e')setDirection(state.direction+1);});
+  $('play').onclick=()=>{state.paused=!state.paused;update();};
+  $('step').onclick=()=>{state.paused=true;state.elapsed=(index()+1+.01)/clip().fps;update();};
+  $('speed').onchange=e=>state.speed=Number(e.target.value);
+  $('scale').onchange=e=>state.scale=Number(e.target.value);
+  $('loading').hidden=true;thumbnails();update();
+  function loop(now){
+   const dt=state.last===null?0:Math.min(.1,(now-state.last)/1000);state.last=now;
+   if(!state.paused){const c=clip();const pace=c.strideLength?1.25/c.strideLength*c.frames.length/c.fps:1;state.elapsed+=dt*state.speed*pace;}
+   draw();requestAnimationFrame(loop);
   }
-  function selectAction(action) {
-    state.action = action; state.time = 0; state.frame = 0; state.distance = 0; state.last = null;
-    document.querySelectorAll('button[data-action]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.action === action)));
-    find('action-description').textContent = descriptions[action];
-    find('walk-directions').hidden = action !== 'walk';
-    find('travel').disabled = action !== 'walk' || find('view-all').checked;
-    find('frames').style.gridTemplateColumns = `repeat(${manifest.clips[action].frames.length},minmax(0,1fr))`;
-    updateThumbnails(); updateSelection(); draw();
-  }
-  function selectDirection(direction) {
-    state.direction = direction; state.distance = 0;
-    document.querySelectorAll('button[data-direction]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.direction === direction)));
-    updateThumbnails(); updateSelection(); draw();
-  }
-  for (let index = 0; index < 8; index++) {
-    const button = document.createElement('button');
-    button.type = 'button';
-    const canvas = document.createElement('canvas'); canvas.width = 96; canvas.height = 90; canvas.setAttribute('aria-hidden', 'true');
-    const label = document.createElement('span');
-    button.append(canvas, label);
-    button.addEventListener('click', () => {
-      state.paused = true; state.frame = index; state.time = index / manifest.clips[state.action].fps;
-      syncPlayback(); updateSelection(); draw();
-    });
-    find('frames').append(button); thumbnailButtons.push(button);
-  }
-  document.querySelectorAll('button[data-action]').forEach(button => button.addEventListener('click', () => selectAction(button.dataset.action)));
-  document.querySelectorAll('button[data-direction]').forEach(button => button.addEventListener('click', () => selectDirection(button.dataset.direction)));
-  document.addEventListener('keydown', event => {
-    if (!state.ready || state.action !== 'walk' || event.altKey || event.ctrlKey || event.metaKey || ['INPUT','SELECT','TEXTAREA'].includes(event.target.tagName)) return;
-    const key = event.key.toLowerCase(); if (key !== 'q' && key !== 'e') return;
-    event.preventDefault(); selectDirection(directions[(directions.indexOf(state.direction) + (key === 'e' ? 1 : 3)) % 4]);
-  });
-  find('view-all').addEventListener('change', () => { state.distance = 0; find('travel').disabled = find('view-all').checked; draw(); });
-  find('play').addEventListener('click', () => { state.paused = !state.paused; state.last = null; syncPlayback(); draw(); });
-  find('step').addEventListener('click', () => {
-    state.paused = true; state.frame = (state.frame + 1) % manifest.clips[state.action].frames.length; state.time = state.frame / manifest.clips[state.action].fps;
-    syncPlayback(); updateSelection(); draw();
-  });
-  find('speed').addEventListener('change', event => { state.speed = Number(event.target.value); });
-  find('scale').addEventListener('change', event => { state.scale = Number(event.target.value); draw(); });
-  find('travel').addEventListener('change', () => { state.distance = 0; draw(); });
-  find('anchor').addEventListener('change', draw);
-  function resize() { const bounds = stage.getBoundingClientRect(); stage.width = Math.max(1, Math.round(bounds.width)); stage.height = Math.max(1, Math.round(bounds.height)); draw(); }
-  new ResizeObserver(resize).observe(stage);
-  document.addEventListener('visibilitychange', () => { state.last = null; });
-  function animate(now) {
-    const elapsed = state.last === null ? 0 : Math.min(.05, (now - state.last) / 1000);
-    state.last = now;
-    if (state.ready && !state.paused && !document.hidden) {
-      state.time += elapsed * state.speed;
-      if (state.action === 'walk') state.distance += elapsed * state.speed * 72;
-      const next = Math.floor((state.time + 1e-9) * manifest.clips[state.action].fps) % manifest.clips[state.action].frames.length;
-      if (next !== state.frame) { state.frame = next; updateSelection(); }
-      draw();
-    }
-    requestAnimationFrame(animate);
-  }
-  const controls = [...document.querySelectorAll('button, select, input')];
-  controls.forEach(control => { control.disabled = true; });
-  Promise.all(Object.entries(manifest.images).map(([key, url]) => new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => { images[key] = img; resolve(); };
-    img.onerror = () => reject(new Error(`불러오지 못한 이미지: ${url}`));
-    img.src = url;
-  }))).then(() => {
-    const portrait = find('portrait').getContext('2d'); portrait.imageSmoothingEnabled = false;
-    portrait.drawImage(images.study, 0, 0, 384, 612, 0, 0, 384, 612);
-    state.ready = true; controls.forEach(control => { control.disabled = false; });
-    find('loading').hidden = true; resize(); selectAction('walk');
-    document.documentElement.dataset.previewReady = 'true';
-  }).catch(error => { find('loading').textContent = `${error.message}. 이 폴더의 PNG 파일과 함께 열어 주세요.`; });
-  requestAnimationFrame(animate);
+  requestAnimationFrame(loop);
+  window.miraPreview={state,meta};
+ } catch(error) {$('loading').textContent='이미지를 불러오지 못했습니다. 새로고침해 주세요.';console.error(error);}
 })();

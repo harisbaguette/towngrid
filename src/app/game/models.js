@@ -3,7 +3,8 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
 import { RESOURCES, BUILDINGS } from './simulation.js';
 import { asset, character, animateCharacter } from './assets.js';
 import { RACES } from './world.js';
-import { makePixelBuilding, makePixelTree } from './pixel-environment.js';
+import { makePixelBuilding, makePixelTree, makePixelProp, makePixelVehicle } from './pixel-environment.js';
+import { makePixelNetwork } from './pixel-terrain.js';
 let currentRace='human';
 const mats=new Map(),geos=new Map();
 export const mat=(color,extra={})=>{const key=color+JSON.stringify(extra);if(!mats.has(key)){const m=new THREE.MeshStandardMaterial({color,roughness:.83,metalness:0,...extra});m.userData.shared=true;mats.set(key,m);}return mats.get(key);};
@@ -188,6 +189,7 @@ function dock(g){
  return {animate:(t,b)=>{if(b.working)crank.rotation.x=t*1.2;net.rotation.x=Math.sin(t)*.035;}};
 }
 export function makeBuilding(type,race='human'){
+ if(BUILDINGS[type]?.tile)return makePixelNetwork(type);
  const pixel=makePixelBuilding(type,race);if(pixel)return pixel;
  currentRace=RACES[race]?race:'human';C.roof=RACES[currentRace].roof;C.cream=RACES[currentRace].wall;C.wood=RACES[currentRace].trim;
  const g=new THREE.Group();g.name=type;const kind=BUILDINGS[type]?.home?'house':type;
@@ -215,7 +217,7 @@ function addProductionProps(g,type){
 export function makeTree(kind=0,scale=1){
  return makePixelTree(kind,scale);
 }
-export function makeRock(scale=1){const imported=asset('town','rock-large',{width:.72*scale});if(imported){imported.name='rock';imported.traverse(m=>{if(m.isMesh){m.material=m.material.clone();m.material.map=null;m.material.vertexColors=false;m.material.color.set('#a9b3a3');m.userData.ownedMaterial=true;}});return imported;}const g=new THREE.Group();g.name='rock';mesh(g,geo('rock',()=>new THREE.DodecahedronGeometry(.38,1)),'#aab5a9',0,.21).scale.set(1,.78,1);g.scale.setScalar(scale);return g;}
+export function makeRock(scale=1,kind='rock'){return makePixelProp(kind,scale);}
 export function makeWorker(index=0,race='human',appearance){return character(index,race,appearance);}
 export function animateWorker(group,worker,time,camera){animateCharacter(group,worker,time,camera);}
 
@@ -301,5 +303,5 @@ function modern(g,type,race){
  return {animate:(t,b,sim)=>{const work=b.working&&b.health!==0&&b.enabled!==false,clock=b.animationTime??t;for(const a of moves){const n=a.node;if(a.kind==='flag')n.rotation.y=Math.sin(t*1.6)*.12;else if(a.kind==='steam'){n.visible=work;n.position.y=a.base.y+(clock*.2+a.index*.20)%.5;}else if(a.kind==='rotor'&&work)n.rotation.z=clock*2.3;else if(a.kind==='spin'&&work)n.rotation.z=clock*1.5;else if(a.kind==='swing'&&work)n.rotation.x=Math.sin(clock*1.8)*.28;else if(a.kind==='press'&&work)n.position.y=a.base.y+Math.sin(clock*4)*.06;else if(a.kind==='car'&&work)n.position.x=a.base.x+Math.sin(clock*.65)*.16;else if(a.kind==='cargo'&&work)n.position.x=a.base.x+Math.sin(clock*.7+(a.index||0))*.055;else if(a.kind==='magic'){n.rotation.y=t*(work?1.3:.25);n.position.y=a.base.y+Math.sin(t*1.7)*.025;}else if(a.kind==='pulse')n.scale.y=work?1+Math.sin(clock*2+(a.index||0))*.04:1;else if(a.kind==='heat')n.visible=work;else if(a.kind==='shine')n.rotation.z=Math.sin(t*.3)*.08;}}};
 }
 // The west-edge gate that export carts drive through. The road runs along x, so the arch spans z.
-export function makeExportGate(){const g=new THREE.Group();for(const z of [-.44,.44]){box(g,.11,.86,.11,'#7a5634',0,.43,z,.02);box(g,.17,.08,.17,'#5f6b70',0,.04,z,.02);}box(g,.15,.1,1.08,'#a8743f',0,.9,0,.02);box(g,.04,.26,.46,'#c8553d',.05,.7,0,.01);box(g,.05,.1,.3,'#f1dca4',.08,.72,0,.01);g.name='export-gate';return g;}
-export function makeFreightVehicle(mode='truck',item='steel'){const g=new THREE.Group();const vehicle=mode==='rail'?asset('trains','train-diesel-a',{width:.72}):asset('vehicles','delivery',{width:.64});if(vehicle)g.add(vehicle);if(mode==='rail'){const wagon=asset('trains',['coal','iron'].includes(item)?'train-carriage-coal':['oil','fuel','water'].includes(item)?'train-carriage-tank':['wood','plank'].includes(item)?'train-carriage-lumber':'train-carriage-container-blue',{width:.57});if(wagon){wagon.position.z=-.64;g.add(wagon);}}g.name='freight-'+mode;g.userData.vehicle=true;return g;}
+export function makeExportGate(){const g=makePixelProp('exportGate');g.name='export-gate';g.userData.oriented=true;g.rotation.y=Math.PI/2;return g;}
+export function makeFreightVehicle(mode='truck',item='steel'){const g=makePixelVehicle(mode,item);g.name='freight-'+mode;return g;}

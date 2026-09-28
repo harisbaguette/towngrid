@@ -51,7 +51,7 @@ export function HomeScreen(props: HomeProps) {
         <button className="screen-button" disabled={props.busy} onClick={props.onImport}>불러오기</button>
         <button className="screen-button" onClick={props.onSettings}>설정</button>
       </nav>
-      <div className="home-extras"><button disabled={props.busy} onClick={props.onStarter}>초반 마을 테스트</button><button disabled={props.busy} onClick={props.onDemo}>산업도시 둘러보기</button><button onClick={() => setGallery(true)}>마을의 하루</button></div>
+      <div className="home-extras"><a href="/art-preview.html">일러스트 테스트</a><a href="/biome-preview.html">지형 8종 테스트</a><button disabled={props.busy} onClick={props.onStarter}>초반 마을 테스트</button><button disabled={props.busy} onClick={props.onDemo}>산업도시 둘러보기</button><button onClick={() => setGallery(true)}>마을의 하루</button></div>
       <button className="home-to-title" onClick={props.onTitle}><ArrowLeft size={16} /> 대기 화면</button>
     </div>
     <button className="screen-sound" aria-label={props.muted ? '소리 켜기' : '소리 끄기'} onClick={props.onSound}>{props.muted ? <VolumeX /> : <Volume2 />}</button>

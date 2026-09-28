@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/ravik.png",
+  "portraitRegion": [
+    0,
+    0,
+    698,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        698,
+        0,
+        1126,
+        1024
+      ],
+      "bbox": [
+        723,
+        254,
+        1069,
+        957
+      ],
+      "scale": 0.1422475106685633,
+      "offset": [
+        39,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1126,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1184,
+        265,
+        1511,
+        948
+      ],
+      "scale": 0.14641288433382138,
+      "offset": [
+        40,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

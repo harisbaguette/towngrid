@@ -1,0 +1,139 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "renderer": "webgl",
+      "group": "newfarm",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "webgl",
+      "group": "newcraft",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "webgl",
+      "group": "newmaterials",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "webgl",
+      "group": "newadvanced",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "webgl",
+      "group": "newheavy",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "webgl",
+      "group": "newcivic",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "webgl",
+      "group": "newtransport",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "webgl",
+      "group": "landterminals",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "webgl",
+      "group": "smallports",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "webgl",
+      "group": "largeports",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "webgl",
+      "group": "airpower",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "canvas",
+      "group": "newfarm",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "canvas",
+      "group": "newcraft",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "canvas",
+      "group": "newmaterials",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "canvas",
+      "group": "newadvanced",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "canvas",
+      "group": "newheavy",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "canvas",
+      "group": "newcivic",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "canvas",
+      "group": "newtransport",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "canvas",
+      "group": "landterminals",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "canvas",
+      "group": "smallports",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "canvas",
+      "group": "largeports",
+      "states": 6,
+      "views": 4
+    },
+    {
+      "renderer": "canvas",
+      "group": "airpower",
+      "states": 6,
+      "views": 4
+    }
+  ],
+  "errors": [],
+  "failed": []
+}

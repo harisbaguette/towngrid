@@ -1,12 +1,14 @@
+import ResourceIcon from './ResourceIcon';
 'use client';
 import {useState} from 'react';
 import {Button} from '@/components/ui/button';
 import {Switch} from '@/components/ui/switch';
-import {Tabs,TabsList,TabsTrigger} from '@/components/ui/tabs';
+import {Tabs,TabsContent,TabsList,TabsTrigger} from '@/components/ui/tabs';
 import {Progress} from '@/components/ui/progress';
 import {RESOURCES,BUILDINGS} from './simulation';
-import {NATIONS,FACTIONS} from './world';
-import {permitted,tutorialStep} from './ui-rules';
+import {FACTIONS} from './world';
+import {contractState,fleetState,permitted,tutorialStep} from './ui-rules';
+import {FleetLine} from './Operations';
 import {ROUTE_KINDS} from './trade-routes';
 
 export function MarketPanel({sim:s,onAction,refresh}:any){
@@ -14,23 +16,27 @@ export function MarketPanel({sim:s,onAction,refresh}:any){
  const ids=Object.keys(RESOURCES),relevant=(id:string)=>permitted(s,id)||Math.floor(s.stock[id]||0)>0||!!s.autoSell[id],shown=ids.filter(id=>everything||relevant(id)),rest=ids.length-shown.length;
  // A sale ships at most one route-sized lot; imports keep the fixed 10-unit order.
  const lot=mode==='sell'?s.tradeConnection().capacity:10;
- return <div className="market-panel"><Tabs value={mode} onValueChange={setMode}><TabsList><TabsTrigger value="sell">판매</TabsTrigger><TabsTrigger value="buy">수입</TabsTrigger></TabsList></Tabs>
- <p className="market-note">{mode==='sell'?'판 물건은 수출 마차가 서쪽 관문까지 싣고 가서 이 지역이 닿은 무역로나 항구로 넘깁니다. 한 번에 보낼 수 있는 양과 값은 무역로·항구마다 다릅니다. 같은 품목을 계속 팔면 가격이 내려가고, 수요는 시간이 지나면 회복됩니다.':'생산 허가를 얻은 자원을 수입합니다. 수입품은 생산 실적으로 인정되지 않습니다.'}</p>
- {mode==='sell'&&(()=>{const t=s.tradeConnection(),options=s.tradeOptions(),bonus=Math.round((t.price-1)*100);return <div className="trade-route-card"><div><strong>{t.name}</strong><small>{(ROUTE_KINDS as any)[t.kind].name} · {t.scale==='port'?t.terrain:t.scale==='major'?'대형':'소형'}{t.name.startsWith(t.joins)?'':` → ${t.joins}`} · {(ROUTE_KINDS as any)[t.kind].note}</small></div><dl><div><dt>한 번에</dt><dd>{t.capacity}개</dd></div><div><dt>값</dt><dd>{bonus>0?'+':''}{bonus}%</dd></div></dl>{options.length>1&&<label>무역로<select aria-label="판매할 무역로" value={t.id} onChange={e=>onAction(s.chooseTradeRoute(e.target.value))}>{options.map((o:any)=><option key={o.id} value={o.id}>{o.name} · {o.capacity}개 · {Math.round((o.price-1)*100)>0?'+':''}{Math.round((o.price-1)*100)}%</option>)}</select></label>}</div>;})()}
- {mode==='sell'&&(()=>{const e=s.exportStatus();return <p className={'export-status'+(e.connected?'':' blocked')} role="status">{e.connected?`수출길 연결됨 · 마차 ${e.busy}/${e.carts}대 운행 중${e.inTransit?` · 도착 대기 ${e.inTransit}G`:''}`:e.error}</p>;})()}
+ return <div className="market-panel"><Tabs value={mode} onValueChange={setMode}><TabsList><TabsTrigger value="sell">판매</TabsTrigger><TabsTrigger value="buy">수입</TabsTrigger></TabsList><TabsContent value={mode}>
+ <p className="market-note">{mode==='sell'?'판 물건은 수출 터미널에 도착하면 값이 들어옵니다. 같은 품목을 계속 팔면 값이 내려갑니다.':'수입품은 생산 실적으로 인정되지 않습니다.'}</p>
+ {mode==='sell'&&(()=>{const t=s.tradeConnection(),options=s.tradeTerminals(),bonus=Math.round((t.price-1)*100);return <div className="trade-route-card"><div><strong>{t.name}</strong><small>{t.label} · {(ROUTE_KINDS as any)[t.kind].name} · {t.scale==='port'?t.terrain:t.scale==='major'?'대형':'소형'}{t.label.startsWith(t.joins)?'':` → ${t.joins}`}</small></div><dl><div><dt>한 번에</dt><dd>{t.capacity}개</dd></div><div><dt>값</dt><dd>{bonus>0?'+':''}{bonus}%</dd></div></dl>{options.length>1&&<label>터미널<select aria-label="수출 터미널" value={t.id} onChange={e=>onAction(s.chooseTradeRoute(e.target.value))}>{options.map((o:any)=><option key={o.id} value={o.id} disabled={!o.usable}>{o.name} · {o.usable?`${o.capacity}개 · ${Math.round((o.price-1)*100)>0?'+':''}${Math.round((o.price-1)*100)}%`:o.error}</option>)}</select></label>}</div>;})()}
+ {mode==='sell'&&(()=>{const e=s.exportStatus(),fleet=fleetState(s);return <div className={'export-status'+(e.connected?'':' blocked')} role="status">{e.connected?<>{fleet?<FleetLine fleet={fleet} detail/>:<span>운송 {e.busy}/{e.carts}대 운행</span>}{e.inTransit>0&&<span className="export-pending">도착 대기 {e.inTransit}G</span>}</>:e.error}</div>;})()}
  <div className="market-rows">{shown.map(id=>[id,(RESOURCES as any)[id]]).map(([id,r]:any)=>{const price=mode==='buy'?Math.ceil(r.price*1.85):s.saleQuote(id,1);return <div className="market-row" key={id}>
- <span className="resource-dot" style={{background:r.color}}/>
+ <ResourceIcon name={id} size={24}/>
  <div><strong>{r.name}</strong><small>1개 {price}G{mode==='sell'&&<em className={s.marketFactor(id)<.85?'market-low':'market-high'}> · 수요 {Math.round(s.marketFactor(id)*100)}%</em>}</small></div><b aria-label={r.name+' 재고'}>{Math.floor(s.stock[id])}</b>
  <Button variant="outline" size="sm" aria-label={r.name+' 1개 '+(mode==='buy'?'수입':'판매')} disabled={mode==='sell'?s.stock[id]<1:s.money<price||!permitted(s,id)} onClick={()=>onAction(mode==='buy'?s.buy(id,1):s.sell(id,1))}>1개</Button>
  <Button variant="outline" size="sm" aria-label={r.name+' '+lot+'개 '+(mode==='buy'?'수입':'판매')} disabled={mode==='sell'?s.stock[id]<1:s.money<price*lot||!permitted(s,id)} onClick={()=>onAction(mode==='buy'?s.buy(id,lot):s.sell(id,lot))}>{lot}개</Button>
  {mode==='sell'&&<label className="auto-switch"><Switch checked={!!s.autoSell[id]} onCheckedChange={v=>{s.autoSell[id]=v;refresh();}} aria-label={r.name+' 자동 판매'}/><span>자동</span></label>}
  {mode==='sell'&&s.autoSell[id]&&<div className="reserve-line"><label>최소 보관 <input aria-label={r.name+' 최소 보관'} type="number" min="0" max="999" value={s.reserves[id]||0} onChange={e=>{s.reserves[id]=Math.max(0,Math.min(999,Math.floor(+e.target.value)));refresh();}}/></label><span>현재 보호 {s.minimumStock(id)}개</span></div>}
- </div>;})}</div>{rest>0&&<button className="market-more" onClick={()=>setEverything(true)}>잠긴 품목 {rest}개 보기</button>}</div>;
+ </div>;})}</div>{rest>0&&<button className="market-more" onClick={()=>setEverything(true)}>잠긴 품목 {rest}개 보기</button>}</TabsContent></Tabs></div>;
 }
 
-export function Tutorial({sim:s,onTool,onGoals,onDismiss}:any){
+export function Tutorial({sim:s,onTool,onGoals,onDismiss,onAction}:any){
  const step=tutorialStep(s);if(!step)return null;const index=step.index,steps={length:step.total};
- return <aside className="tutorial-card panel"><button className="tutorial-dismiss" aria-label="안내 닫기" onClick={onDismiss}>×</button><small>{index+1} / {steps.length}</small><strong>{step.title}</strong><p>{step.text}</p><Button size="sm" onClick={()=>step.tool?onTool(step.tool):onGoals()}>{step.tool?(BUILDINGS as any)[step.tool].name+' 선택':'신분과 권한 열기'}</Button></aside>;
+ // The contract step sends the order from the guide itself; the same button state as the operations card.
+ const deal=step.action==='contract'?contractState(s):null;
+ return <aside className="tutorial-card panel"><button className="tutorial-dismiss" aria-label="안내 닫기" onClick={onDismiss}>×</button><small>{index+1} / {steps.length}</small><strong>{step.title}</strong><p>{step.text}</p>
+ {deal?<Button size="sm" disabled={!deal.ready} onClick={()=>onAction(s.fulfill())}>{deal.label==='납품'?(deal.ready?'납품 +'+deal.contract.reward+'G':(RESOURCES as Record<string,{name:string}>)[deal.contract.item].name+' '+deal.have+' / '+deal.contract.amount):deal.label}</Button>
+ :<Button size="sm" onClick={()=>step.tool?onTool(step.tool):onGoals()}>{step.tool?(BUILDINGS as any)[step.tool].name+' 선택':'신분과 권한 열기'}</Button>}</aside>;
 }
 
 export function RaidPanel({sim:s,onAction}:any){const r=s.raid;if(!r||r.finished)return null;return <aside className="raid-panel panel" role="status"><div><strong>{(FACTIONS as any)[r.faction].name} 습격</strong><span>{Math.max(0,Math.ceil(r.ends-s.time))}초 · 적 {s.attackers.filter((a:any)=>a.hp>0).length}명</span></div><Progress value={Math.max(0,100*(r.ends-s.time)/65)}/><Button size="sm" disabled={r.boosted} onClick={()=>onAction(s.mobilize())}>{r.boosted?'경계 강화 중':'경비 2명 · 80G + 밀 6'}</Button></aside>;}

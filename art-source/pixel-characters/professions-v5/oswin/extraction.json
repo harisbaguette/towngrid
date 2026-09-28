@@ -1,0 +1,52 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/oswin.png",
+  "portraitRegion": [
+    0,
+    0,
+    540,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        540,
+        0,
+        880,
+        627
+      ],
+      "bbox": [
+        535,
+        102,
+        841,
+        627
+      ],
+      "scale": 0.19047619047619047,
+      "offset": [
+        35,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        880,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        919,
+        102,
+        1226,
+        627
+      ],
+      "scale": 0.19047619047619047,
+      "offset": [
+        35,
+        15
+      ],
+      "mirror": true,
+      "mirrorAfterNormalization": true
+    }
+  ]
+}

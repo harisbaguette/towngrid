@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/kai.png",
+  "portraitRegion": [
+    0,
+    0,
+    612,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        612,
+        0,
+        1086,
+        1024
+      ],
+      "bbox": [
+        616,
+        250,
+        1068,
+        898
+      ],
+      "scale": 0.15432098765432098,
+      "offset": [
+        29,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1086,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1105,
+        253,
+        1513,
+        917
+      ],
+      "scale": 0.15060240963855423,
+      "offset": [
+        33,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

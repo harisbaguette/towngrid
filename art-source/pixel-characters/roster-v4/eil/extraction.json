@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/eil.png",
+  "portraitRegion": [
+    0,
+    0,
+    704,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        704,
+        0,
+        1104,
+        1024
+      ],
+      "bbox": [
+        718,
+        253,
+        1076,
+        911
+      ],
+      "scale": 0.1519756838905775,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1104,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1132,
+        249,
+        1506,
+        909
+      ],
+      "scale": 0.15151515151515152,
+      "offset": [
+        35,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

@@ -1,0 +1,988 @@
+{
+  "referenceImages": [
+    "C:/Users/ghd12/Desktop/TownGrid/public/assets/pixel-environment/warehouse-icon.png",
+    "C:/Users/ghd12/Desktop/TownGrid/public/assets/pixel-environment/bakery-icon.png",
+    "C:/Users/ghd12/Desktop/TownGrid/public/assets/pixel-environment/quarry-icon.png"
+  ],
+  "records": [
+    {
+      "id": "newfarm",
+      "types": [
+        "cottonfield",
+        "herbgarden",
+        "henhouse",
+        "smokehouse"
+      ],
+      "descriptions": [
+        "A square cotton farm BED of bare brown soil with four empty planting sockets and a simple small cotton-boll sign at the back. NO plants and NO harvested goods (plants will be animated separately). LOW flat square diamond garden footprint.",
+        "A square herb garden BED with four empty soil planting sockets, one simple leaf sign at the back. NO plants or harvested goods. LOW flat square diamond garden footprint.",
+        "A compact red-roof chicken coop with a single large chicken emblem, open empty nest window, one empty feed trough, two little fence posts fully INSIDE the same square tile. No loose eggs or chickens.",
+        "A squat brick smokehouse with dark blue roof, one prominent smoked-fish emblem, OPEN black furnace doorway, short chimney. No flames or smoke or harvested fish (separate animated layers)."
+      ],
+      "kind": "buildings",
+      "prompt": "Create a production-ready TRANSPARENT pixel-art sprite sheet matching the attached TownGrid building references. Crisp deliberately visible square pixel clusters, bold dark outline, large clear colour masses, restrained detail. Not smooth 3D, not vector, no anti-aliased painting. The building's function must be immediately readable at 64px.\n\nEXACT LAYOUT: 4 equally spaced columns by 4 equally spaced rows. Each ROW is one building. Four COLUMNS are four genuinely different 90-degree rotations of THE SAME building, viewed at fixed 35-degree elevation: col1 SE sees FRONT+RIGHT walls, col2 NE sees BACK+RIGHT, col3 NW sees BACK+LEFT, col4 SW sees FRONT+LEFT. Architectural parts and entrances must move consistently between facades; don't draw four front views. Roof stays the identical structure. All buildings occupy a true SQUARE 1x1 ground footprint, appearing as an isometric diamond. Match width and depth; not a long rectangle. Foundation diamond approx 2:1 screen aspect. Keep every accessory inside it. All four views share ground height and centre. Leave a generous transparent gutter around EVERY cell. Don't merge adjacent cells.\n\nThese are STATIC architecture, with movable equipment and produced goods added by game code later. Therefore no output goods, no smoke/fire/spark animation, no people, no labels, no numbers, no captions, no framing cards. Each cell contains ONLY the specified building and its small square foundation on fully transparent alpha. A little dark foundation edge, NO cast shadow beyond the tile.\n\nROW 1: A square cotton farm BED of bare brown soil with four empty planting sockets and a simple small cotton-boll sign at the back. NO plants and NO harvested goods (plants will be animated separately). LOW flat square diamond garden footprint.\nROW 2: A square herb garden BED with four empty soil planting sockets, one simple leaf sign at the back. NO plants or harvested goods. LOW flat square diamond garden footprint.\nROW 3: A compact red-roof chicken coop with a single large chicken emblem, open empty nest window, one empty feed trough, two little fence posts fully INSIDE the same square tile. No loose eggs or chickens.\nROW 4: A squat brick smokehouse with dark blue roof, one prominent smoked-fish emblem, OPEN black furnace doorway, short chimney. No flames or smoke or harvested fish (separate animated layers).",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-c0d9bafb-3258-44bb-bd55-05c6dcb56261.png",
+      "bounds": {
+        "rows": [
+          0,
+          319,
+          608,
+          912,
+          1285
+        ],
+        "columns": [
+          [
+            0,
+            306,
+            612,
+            918,
+            1224
+          ],
+          [
+            0,
+            306,
+            612,
+            918,
+            1224
+          ],
+          [
+            0,
+            306,
+            612,
+            918,
+            1224
+          ],
+          [
+            0,
+            306,
+            612,
+            918,
+            1224
+          ]
+        ]
+      }
+    },
+    {
+      "id": "newcraft",
+      "types": [
+        "weaver",
+        "confectionery",
+        "kiln",
+        "tailor"
+      ],
+      "descriptions": [
+        "An open wooden loom workshop: ONE prominent upright loom frame holding broad cream warp threads, blue cloth roll emblem on header, empty front output pad. No moving shuttle: it will be a separate sprite.",
+        "A small pink-roof confectionery with a large cake-slice emblem, front black oven mouth and a short chimney, empty front output pad. No cakes on the ground and no flame or smoke.",
+        "A squat round red-brick kiln with one tall chimney and a black furnace opening, large simple brick emblem, empty front output pad. No fire, smoke or loose bricks.",
+        "A compact tailoring workshop with teal roof and large blue shirt emblem, an open worktable with fixed sewing-machine base, no moving needle, empty front output pad. No completed clothes."
+      ],
+      "kind": "buildings",
+      "prompt": "Create a production-ready TRANSPARENT pixel-art sprite sheet matching the attached TownGrid building references. Crisp deliberately visible square pixel clusters, bold dark outline, large clear colour masses, restrained detail. Not smooth 3D, not vector, no anti-aliased painting. The building's function must be immediately readable at 64px.\n\nEXACT LAYOUT: 4 equally spaced columns by 4 equally spaced rows. Each ROW is one building. Four COLUMNS are four genuinely different 90-degree rotations of THE SAME building, viewed at fixed 35-degree elevation: col1 SE sees FRONT+RIGHT walls, col2 NE sees BACK+RIGHT, col3 NW sees BACK+LEFT, col4 SW sees FRONT+LEFT. Architectural parts and entrances must move consistently between facades; don't draw four front views. Roof stays the identical structure. All buildings occupy a true SQUARE 1x1 ground footprint, appearing as an isometric diamond. Match width and depth; not a long rectangle. Foundation diamond approx 2:1 screen aspect. Keep every accessory inside it. All four views share ground height and centre. Leave a generous transparent gutter around EVERY cell. Don't merge adjacent cells.\n\nThese are STATIC architecture, with movable equipment and produced goods added by game code later. Therefore no output goods, no smoke/fire/spark animation, no people, no labels, no numbers, no captions, no framing cards. Each cell contains ONLY the specified building and its small square foundation on fully transparent alpha. A little dark foundation edge, NO cast shadow beyond the tile.\n\nROW 1: An open wooden loom workshop: ONE prominent upright loom frame holding broad cream warp threads, blue cloth roll emblem on header, empty front output pad. No moving shuttle: it will be a separate sprite.\nROW 2: A small pink-roof confectionery with a large cake-slice emblem, front black oven mouth and a short chimney, empty front output pad. No cakes on the ground and no flame or smoke.\nROW 3: A squat round red-brick kiln with one tall chimney and a black furnace opening, large simple brick emblem, empty front output pad. No fire, smoke or loose bricks.\nROW 4: A compact tailoring workshop with teal roof and large blue shirt emblem, an open worktable with fixed sewing-machine base, no moving needle, empty front output pad. No completed clothes.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-e22da619-7463-4cb8-b6bb-1f02dbca783a.png",
+      "bounds": {
+        "rows": [
+          0,
+          312,
+          623,
+          936,
+          1278
+        ],
+        "columns": [
+          [
+            0,
+            307,
+            615,
+            922,
+            1230
+          ],
+          [
+            0,
+            307,
+            615,
+            922,
+            1230
+          ],
+          [
+            0,
+            307,
+            615,
+            921,
+            1230
+          ],
+          [
+            0,
+            307,
+            615,
+            922,
+            1230
+          ]
+        ]
+      }
+    },
+    {
+      "id": "newmaterials",
+      "types": [
+        "glassworks",
+        "coppermine",
+        "wiremill",
+        "cementworks"
+      ],
+      "descriptions": [
+        "A compact glassworks with amber furnace body, a prominent turquoise glass-bottle emblem, black furnace mouth and short chimney. Empty front pad. No fire, smoke or glass products.",
+        "A copper mine with thick square timber tunnel frame, grey rock with large copper-orange ore chunks at its sides, small bare winding axle above the entrance. Empty front pad, no output ore crates.",
+        "An open copper wire factory: teal square gantry, fixed upright spool support with bare circular shaft exposed, large copper coil emblem on header. EMPTY front output pad. No rotating reel yet and no finished coils.",
+        "A compact cement plant: squat cream silo and a large stationary mixing drum housing with exposed round shaft, broad grey concrete-block emblem, empty front pad. No concrete products or smoke."
+      ],
+      "kind": "buildings",
+      "prompt": "Create a production-ready TRANSPARENT pixel-art sprite sheet matching the attached TownGrid building references. Crisp deliberately visible square pixel clusters, bold dark outline, large clear colour masses, restrained detail. Not smooth 3D, not vector, no anti-aliased painting. The building's function must be immediately readable at 64px.\n\nEXACT LAYOUT: 4 equally spaced columns by 4 equally spaced rows. Each ROW is one building. Four COLUMNS are four genuinely different 90-degree rotations of THE SAME building, viewed at fixed 35-degree elevation: col1 SE sees FRONT+RIGHT walls, col2 NE sees BACK+RIGHT, col3 NW sees BACK+LEFT, col4 SW sees FRONT+LEFT. Architectural parts and entrances must move consistently between facades; don't draw four front views. Roof stays the identical structure. All buildings occupy a true SQUARE 1x1 ground footprint, appearing as an isometric diamond. Match width and depth; not a long rectangle. Foundation diamond approx 2:1 screen aspect. Keep every accessory inside it. All four views share ground height and centre. Leave a generous transparent gutter around EVERY cell. Don't merge adjacent cells.\n\nThese are STATIC architecture, with movable equipment and produced goods added by game code later. Therefore no output goods, no smoke/fire/spark animation, no people, no labels, no numbers, no captions, no framing cards. Each cell contains ONLY the specified building and its small square foundation on fully transparent alpha. A little dark foundation edge, NO cast shadow beyond the tile.\n\nROW 1: A compact glassworks with amber furnace body, a prominent turquoise glass-bottle emblem, black furnace mouth and short chimney. Empty front pad. No fire, smoke or glass products.\nROW 2: A copper mine with thick square timber tunnel frame, grey rock with large copper-orange ore chunks at its sides, small bare winding axle above the entrance. Empty front pad, no output ore crates.\nROW 3: An open copper wire factory: teal square gantry, fixed upright spool support with bare circular shaft exposed, large copper coil emblem on header. EMPTY front output pad. No rotating reel yet and no finished coils.\nROW 4: A compact cement plant: squat cream silo and a large stationary mixing drum housing with exposed round shaft, broad grey concrete-block emblem, empty front pad. No concrete products or smoke.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-b494cab5-f8c4-42c3-8b50-6977f7470797.png",
+      "bounds": {
+        "rows": [
+          0,
+          322,
+          643,
+          953,
+          1287
+        ],
+        "columns": [
+          [
+            0,
+            305,
+            611,
+            916,
+            1222
+          ],
+          [
+            0,
+            310,
+            611,
+            912,
+            1222
+          ],
+          [
+            0,
+            305,
+            611,
+            916,
+            1222
+          ],
+          [
+            0,
+            305,
+            611,
+            916,
+            1222
+          ]
+        ]
+      }
+    },
+    {
+      "id": "newadvanced",
+      "types": [
+        "cannery",
+        "lampworks",
+        "engineworks",
+        "mithrilforge"
+      ],
+      "descriptions": [
+        "A compact cannery with teal roof and broad can emblem, OPEN small conveyor mouth and fixed sealing press upper frame. Empty front output pad. No moving ram or tins.",
+        "An open magical lamp workshop, a simple teal square gantry with large golden lantern emblem, ONE empty socket on central workbench, empty front output pad. No finished lantern, no sparks.",
+        "A compact magic engine factory: orange-and-teal gantry, large engine emblem, OPEN assembly bay with bare robotic arm mounting socket on left interior upright, empty front output pad. No moving arm and no completed engine.",
+        "A squat mithril forge with dark teal furnace, a prominent pale silver ingot emblem set in violet trim, black furnace mouth and short chimney, empty front output pad. No fire, sparks, smoke, or completed ingots."
+      ],
+      "kind": "buildings",
+      "prompt": "Create a production-ready TRANSPARENT pixel-art sprite sheet matching the attached TownGrid building references. Crisp deliberately visible square pixel clusters, bold dark outline, large clear colour masses, restrained detail. Not smooth 3D, not vector, no anti-aliased painting. The building's function must be immediately readable at 64px.\n\nEXACT LAYOUT: 4 equally spaced columns by 4 equally spaced rows. Each ROW is one building. Four COLUMNS are four genuinely different 90-degree rotations of THE SAME building, viewed at fixed 35-degree elevation: col1 SE sees FRONT+RIGHT walls, col2 NE sees BACK+RIGHT, col3 NW sees BACK+LEFT, col4 SW sees FRONT+LEFT. Architectural parts and entrances must move consistently between facades; don't draw four front views. Roof stays the identical structure. All buildings occupy a true SQUARE 1x1 ground footprint, appearing as an isometric diamond. Match width and depth; not a long rectangle. Foundation diamond approx 2:1 screen aspect. Keep every accessory inside it. All four views share ground height and centre. Leave a generous transparent gutter around EVERY cell. Don't merge adjacent cells.\n\nThese are STATIC architecture, with movable equipment and produced goods added by game code later. Therefore no output goods, no smoke/fire/spark animation, no people, no labels, no numbers, no captions, no framing cards. Each cell contains ONLY the specified building and its small square foundation on fully transparent alpha. A little dark foundation edge, NO cast shadow beyond the tile.\n\nROW 1: A compact cannery with teal roof and broad can emblem, OPEN small conveyor mouth and fixed sealing press upper frame. Empty front output pad. No moving ram or tins.\nROW 2: An open magical lamp workshop, a simple teal square gantry with large golden lantern emblem, ONE empty socket on central workbench, empty front output pad. No finished lantern, no sparks.\nROW 3: A compact magic engine factory: orange-and-teal gantry, large engine emblem, OPEN assembly bay with bare robotic arm mounting socket on left interior upright, empty front output pad. No moving arm and no completed engine.\nROW 4: A squat mithril forge with dark teal furnace, a prominent pale silver ingot emblem set in violet trim, black furnace mouth and short chimney, empty front output pad. No fire, sparks, smoke, or completed ingots.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-d17920aa-f2f5-497c-8ab0-3835d53f6e29.png",
+      "bounds": {
+        "rows": [
+          0,
+          321,
+          636,
+          936,
+          1283
+        ],
+        "columns": [
+          [
+            0,
+            306,
+            613,
+            919,
+            1226
+          ],
+          [
+            0,
+            306,
+            613,
+            919,
+            1226
+          ],
+          [
+            0,
+            306,
+            613,
+            919,
+            1226
+          ],
+          [
+            0,
+            306,
+            613,
+            919,
+            1226
+          ]
+        ]
+      }
+    },
+    {
+      "id": "newheavy",
+      "types": [
+        "shipyard",
+        "blastfurnace",
+        "assemblyline",
+        "watermill"
+      ],
+      "descriptions": [
+        "A fantasy AIRSHIP assembly yard fitted in ONE SQUARE TILE: four short teal corner gantry uprights with a suspended hook mount, a small airship emblem on front gantry, an EMPTY central rectangular cradle. No airship, cargo or crane arm; central workpiece will be separate.",
+        "A compact blast furnace: ONE stout orange blast tower with black lower tap opening and a tall exhaust pipe at a rear corner, strong steel-ingot emblem, empty front output pad. No flame smoke or finished steel.",
+        "An automatic car assembly factory fitting a square tile: teal open gantry with car silhouette emblem, short empty assembly lane, two empty robot mounting sockets, empty front output pad. No robot arms and no cars.",
+        "A compact river watermill: cream stone hut and teal roof, on one square pad, an EMPTY bare horizontal axle on right side visible from the east and left from west, beside a tiny EMPTY water trough INSIDE same tile. No wheel, no water motion. A large waterwheel will be separate."
+      ],
+      "kind": "buildings",
+      "prompt": "Create a production-ready TRANSPARENT pixel-art sprite sheet matching the attached TownGrid building references. Crisp deliberately visible square pixel clusters, bold dark outline, large clear colour masses, restrained detail. Not smooth 3D, not vector, no anti-aliased painting. The building's function must be immediately readable at 64px.\n\nEXACT LAYOUT: 4 equally spaced columns by 4 equally spaced rows. Each ROW is one building. Four COLUMNS are four genuinely different 90-degree rotations of THE SAME building, viewed at fixed 35-degree elevation: col1 SE sees FRONT+RIGHT walls, col2 NE sees BACK+RIGHT, col3 NW sees BACK+LEFT, col4 SW sees FRONT+LEFT. Architectural parts and entrances must move consistently between facades; don't draw four front views. Roof stays the identical structure. All buildings occupy a true SQUARE 1x1 ground footprint, appearing as an isometric diamond. Match width and depth; not a long rectangle. Foundation diamond approx 2:1 screen aspect. Keep every accessory inside it. All four views share ground height and centre. Leave a generous transparent gutter around EVERY cell. Don't merge adjacent cells.\n\nThese are STATIC architecture, with movable equipment and produced goods added by game code later. Therefore no output goods, no smoke/fire/spark animation, no people, no labels, no numbers, no captions, no framing cards. Each cell contains ONLY the specified building and its small square foundation on fully transparent alpha. A little dark foundation edge, NO cast shadow beyond the tile.\n\nROW 1: A fantasy AIRSHIP assembly yard fitted in ONE SQUARE TILE: four short teal corner gantry uprights with a suspended hook mount, a small airship emblem on front gantry, an EMPTY central rectangular cradle. No airship, cargo or crane arm; central workpiece will be separate.\nROW 2: A compact blast furnace: ONE stout orange blast tower with black lower tap opening and a tall exhaust pipe at a rear corner, strong steel-ingot emblem, empty front output pad. No flame smoke or finished steel.\nROW 3: An automatic car assembly factory fitting a square tile: teal open gantry with car silhouette emblem, short empty assembly lane, two empty robot mounting sockets, empty front output pad. No robot arms and no cars.\nROW 4: A compact river watermill: cream stone hut and teal roof, on one square pad, an EMPTY bare horizontal axle on right side visible from the east and left from west, beside a tiny EMPTY water trough INSIDE same tile. No wheel, no water motion. A large waterwheel will be separate.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-fd216217-9967-4b19-95ea-eacb7d2ebbf1.png",
+      "bounds": {
+        "rows": [
+          0,
+          321,
+          642,
+          957,
+          1283
+        ],
+        "columns": [
+          [
+            0,
+            306,
+            613,
+            919,
+            1226
+          ],
+          [
+            0,
+            306,
+            613,
+            919,
+            1226
+          ],
+          [
+            0,
+            306,
+            613,
+            919,
+            1226
+          ],
+          [
+            0,
+            308,
+            613,
+            918,
+            1226
+          ]
+        ]
+      }
+    },
+    {
+      "id": "newcivic",
+      "types": [
+        "marketplace",
+        "wardpost",
+        "fortress",
+        "parliament"
+      ],
+      "descriptions": [
+        "A tiny square marketplace: two broad orange-and-cream striped awnings around one central wooden counter and large coin emblem. Simple neatly occupied stalls only, no loose output goods. Fit one square tile.",
+        "A small magical ward outpost: squat stone plinth with purple pitched canopy and shield emblem, ONE EMPTY central crystal socket clearly visible, no energy effects or crystal. Fit one square tile.",
+        "A compact square defence fortress: four short grey stone corner bastions, orange central keep roof and broad blue shield emblem over front gate, a small empty glowing-orb socket above gateway. No troops, smoke or magic glow. Fit one square tile.",
+        "A compact parliament building: cream stone square hall with blue dome, two modest columns beside main doorway, large plain banner emblem. No lettering or people. Fit one square tile."
+      ],
+      "kind": "buildings",
+      "prompt": "Create a production-ready TRANSPARENT pixel-art sprite sheet matching the attached TownGrid building references. Crisp deliberately visible square pixel clusters, bold dark outline, large clear colour masses, restrained detail. Not smooth 3D, not vector, no anti-aliased painting. The building's function must be immediately readable at 64px.\n\nEXACT LAYOUT: 4 equally spaced columns by 4 equally spaced rows. Each ROW is one building. Four COLUMNS are four genuinely different 90-degree rotations of THE SAME building, viewed at fixed 35-degree elevation: col1 SE sees FRONT+RIGHT walls, col2 NE sees BACK+RIGHT, col3 NW sees BACK+LEFT, col4 SW sees FRONT+LEFT. Architectural parts and entrances must move consistently between facades; don't draw four front views. Roof stays the identical structure. All buildings occupy a true SQUARE 1x1 ground footprint, appearing as an isometric diamond. Match width and depth; not a long rectangle. Foundation diamond approx 2:1 screen aspect. Keep every accessory inside it. All four views share ground height and centre. Leave a generous transparent gutter around EVERY cell. Don't merge adjacent cells.\n\nThese are STATIC architecture, with movable equipment and produced goods added by game code later. Therefore no output goods, no smoke/fire/spark animation, no people, no labels, no numbers, no captions, no framing cards. Each cell contains ONLY the specified building and its small square foundation on fully transparent alpha. A little dark foundation edge, NO cast shadow beyond the tile.\n\nROW 1: A tiny square marketplace: two broad orange-and-cream striped awnings around one central wooden counter and large coin emblem. Simple neatly occupied stalls only, no loose output goods. Fit one square tile.\nROW 2: A small magical ward outpost: squat stone plinth with purple pitched canopy and shield emblem, ONE EMPTY central crystal socket clearly visible, no energy effects or crystal. Fit one square tile.\nROW 3: A compact square defence fortress: four short grey stone corner bastions, orange central keep roof and broad blue shield emblem over front gate, a small empty glowing-orb socket above gateway. No troops, smoke or magic glow. Fit one square tile.\nROW 4: A compact parliament building: cream stone square hall with blue dome, two modest columns beside main doorway, large plain banner emblem. No lettering or people. Fit one square tile.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-922198ce-3a87-457b-aba0-ba29e90865b3.png",
+      "bounds": {
+        "rows": [
+          0,
+          322,
+          637,
+          952,
+          1269
+        ],
+        "columns": [
+          [
+            0,
+            310,
+            620,
+            930,
+            1240
+          ],
+          [
+            0,
+            310,
+            620,
+            930,
+            1240
+          ],
+          [
+            0,
+            310,
+            620,
+            929,
+            1240
+          ],
+          [
+            0,
+            310,
+            620,
+            930,
+            1240
+          ]
+        ]
+      }
+    },
+    {
+      "id": "newtransport",
+      "types": [
+        "airdock",
+        "exchange"
+      ],
+      "descriptions": [
+        "A compact AIRSHIP landing dock on ONE SQUARE TILE: square wood-and-steel landing platform with four low corner mooring bollards, one small rear teal roofed control booth bearing a large airship emblem. NO flying ship, no cargo, no people. Broad empty landing pad.",
+        "A compact continental trading exchange: square cream stone hall, golden-blue roof with large gold coin and balance emblem, broad arched front entrance. Fit one square tile. No loose products, flags with text, or people."
+      ],
+      "kind": "buildings",
+      "prompt": "Create a production-ready TRANSPARENT pixel-art sprite sheet matching the attached TownGrid building references. Crisp deliberately visible square pixel clusters, bold dark outline, large clear colour masses, restrained detail. Not smooth 3D, not vector, no anti-aliased painting. The building's function must be immediately readable at 64px.\n\nEXACT LAYOUT: 4 equally spaced columns by 2 equally spaced rows. Each ROW is one building. Four COLUMNS are four genuinely different 90-degree rotations of THE SAME building, viewed at fixed 35-degree elevation: col1 SE sees FRONT+RIGHT walls, col2 NE sees BACK+RIGHT, col3 NW sees BACK+LEFT, col4 SW sees FRONT+LEFT. Architectural parts and entrances must move consistently between facades; don't draw four front views. Roof stays the identical structure. All buildings occupy a true SQUARE 1x1 ground footprint, appearing as an isometric diamond. Match width and depth; not a long rectangle. Foundation diamond approx 2:1 screen aspect. Keep every accessory inside it. All four views share ground height and centre. Leave a generous transparent gutter around EVERY cell. Don't merge adjacent cells.\n\nThese are STATIC architecture, with movable equipment and produced goods added by game code later. Therefore no output goods, no smoke/fire/spark animation, no people, no labels, no numbers, no captions, no framing cards. Each cell contains ONLY the specified building and its small square foundation on fully transparent alpha. A little dark foundation edge, NO cast shadow beyond the tile.\n\nROW 1: A compact AIRSHIP landing dock on ONE SQUARE TILE: square wood-and-steel landing platform with four low corner mooring bollards, one small rear teal roofed control booth bearing a large airship emblem. NO flying ship, no cargo, no people. Broad empty landing pad.\nROW 2: A compact continental trading exchange: square cream stone hall, golden-blue roof with large gold coin and balance emblem, broad arched front entrance. Fit one square tile. No loose products, flags with text, or people.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-5caf3214-4b81-46ac-a3eb-80d19b8ad122.png",
+      "bounds": {
+        "rows": [
+          0,
+          416,
+          887
+        ],
+        "columns": [
+          [
+            0,
+            443,
+            887,
+            1330,
+            1774
+          ],
+          [
+            0,
+            443,
+            887,
+            1330,
+            1774
+          ]
+        ]
+      }
+    },
+    {
+      "id": "expansionGoods",
+      "kind": "parts",
+      "rows": 5,
+      "types": [],
+      "prompt": "Create a clean game production sprite atlas in the SAME crisp chunky pixel-art style as the TownGrid references. Large colour clusters, restrained detail, dark outline on objects, no smooth 3D, no vector gradients, no text/numbers/captions, no page border. Transparent item-icon atlas EXACT 4 columns by 5 rows, equally spaced cells with wide transparent gutters. Each isolated icon viewed from southeast at 35 degrees, no background tile, bold recognisable silhouettes, empty alpha everywhere around items. Not buildings. Reading left to right then top to bottom, EXACTLY these twenty icons:\nROW1: one cotton bale with large white cotton tufts; one bundled leafy medicinal herb; one wicker basket of 3 eggs; one smoked brown fish on a little tray.\nROW2: folded violet cloth; one slice of pink cake; stack of 3 red bricks; folded blue work overalls.\nROW3: two clear turquoise glass bottles; a crate of copper ore; one thick coiled copper wire; stack of 2 grey concrete blocks.\nROW4: three sealed metal food tins; one glowing golden magic lantern; one small brass engine with violet crystal; stack of 3 pale silver mithril ingots.\nROW5: one small orange and cream fantasy cargo AIRSHIP viewed quarter-angle (whole airship); one small loom shuttle with cream thread; one sewing machine needle mechanism (separate narrow vertical part); one wooden WATERWHEEL viewed FACE ON, symmetric eight spokes and paddles. No extra icons.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-5a1caa81-9338-400f-8347-326c01f420d3.png",
+      "bounds": {
+        "rows": [
+          0,
+          295,
+          561,
+          827,
+          1094,
+          1402
+        ],
+        "columns": [
+          [
+            0,
+            280,
+            561,
+            841,
+            1122
+          ],
+          [
+            0,
+            285,
+            561,
+            841,
+            1122
+          ],
+          [
+            0,
+            280,
+            561,
+            841,
+            1122
+          ],
+          [
+            0,
+            280,
+            561,
+            841,
+            1122
+          ],
+          [
+            0,
+            288,
+            561,
+            840,
+            1122
+          ]
+        ]
+      }
+    },
+    {
+      "id": "newCrops",
+      "kind": "parts",
+      "rows": 2,
+      "types": [],
+      "prompt": "Create a clean game production sprite atlas in the SAME crisp chunky pixel-art style as the TownGrid references. Large colour clusters, restrained detail, dark outline on objects, no smooth 3D, no vector gradients, no text/numbers/captions, no page border. TRANSPARENT sprite sheet EXACTLY four columns by two rows, generous gutters. Garden plant growth stages, all viewed southeast 35-degree angle, fixed same root and consistent plant identity. No soil tile, no pot, no captions. ROW1 SAME cotton plant over 4 stages: tiny two-leaf sprout, leafy short green plant, tall green plant with closed buds, mature broad cotton plant with three BIG white cotton bolls. ROW2 SAME medicinal herb over 4 stages: tiny sprout, two leaf pairs, dense broad green leaves, mature green leafy herb with one pale flower. Keep SAME roots baseline and SAME scale across stages, NOT scaling each growth stage to fill cell. Chunky sparse pixels, legible at 30px.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-45afc113-c3ac-4c10-9dbd-c61c8551e3ef.png",
+      "bounds": {
+        "rows": [
+          0,
+          454,
+          887
+        ],
+        "columns": [
+          [
+            0,
+            443,
+            887,
+            1330,
+            1774
+          ],
+          [
+            0,
+            443,
+            887,
+            1330,
+            1774
+          ]
+        ]
+      }
+    },
+    {
+      "id": "ground",
+      "kind": "surface",
+      "rows": 2,
+      "types": [],
+      "prompt": "Create a clean game production sprite atlas in the SAME crisp chunky pixel-art style as the TownGrid references. Large colour clusters, restrained detail, dark outline on objects, no smooth 3D, no vector gradients, no text/numbers/captions, no page border. EIGHT seamless FLAT TOP-DOWN terrain TEXTURES in an exact 4-column by 2-row rectangular grid of equally sized SQUARE tiles. All tiles fully OPAQUE, edge to edge, NO gutters, NO outlines, NO padding, NO perspective/diamond, NO shadows. Each individual square is a separately seamless repeatable texture; opposite edges must match. Make textures VERY QUIET and low contrast so buildings stay readable, big uniform colour masses with sparse short pixel details, no noisy stippling.\nROW1 left to right: warm spring grass (light olive green, tiny sparse darker grass strokes); deeper meadow grass (slightly darker olive green); dry highland grass (sage green); warm beige beach sand with sparse tiny pebbles.\nROW2: tilled brown soil with subtle broad furrows; grey gravel with broad small grey stones; warm tan packed dirt path surface with very sparse small pebbles; warm grey cobblestone street surface with regular LARGE square cobbles.\nRoad surfaces are FULL SQUARE texture swatches without grass borders or drawn road shapes. Flat RGB fills throughout each texture, no transparent parts, no labels.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-4b19cef3-5e83-4439-b151-cc18ae50723b.png",
+      "revisions": [
+        {
+          "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-08cb913f-20d1-4853-8dc2-6d7d0a12c530.png",
+          "prompt": "Edit this exact 4 columns by 2 rows square ground texture atlas. Preserve the same eight tiles and grid positions, entire image opaque, no gaps. These are quiet top-down seamless ground textures for a small pixel-art town game, NOT noisy illustrations. IMPORTANT: REDUCE DETAIL 90 PERCENT. Remove all dense tiny grass blades, black strokes, stippling and fine outlines. Row1 first 3 tiles should be broad flat muted grassy green fields, just 3-5 small low-contrast pixel grass tufts per tile, 90% empty flat green surface. Colors harmonious muted light olive green, pleasant not neon/yellow, just subtle slightly darker broad patches with no grid/cell outlines. Row1 tile4 sand should be calm beige with only a few subtle low contrast pixels. Row2 tile1 tilled soil broad brown furrows, tile2 gravel quiet gray, tile3 packed earth plain warm tan with sparse pebble pixels, tile4 cobblestone broad gray stones. Keep crisp intentional large square PIXELS and no soft airbrush gradients. Quiet enough that buildings dominate and surfaces recede. Keep cell edges perfectly seamless and unframed."
+        }
+      ]
+    },
+    {
+      "id": "waterways",
+      "kind": "surface",
+      "rows": 4,
+      "types": [],
+      "prompt": "Create a clean game production sprite atlas in the SAME crisp chunky pixel-art style as the TownGrid references. Large colour clusters, restrained detail, dark outline on objects, no smooth 3D, no vector gradients, no text/numbers/captions, no page border. SIXTEEN flat top-down WATER TEXTURE animation tiles in an EXACT 4-column by 4-row grid of equally sized square cells. OPAQUE edge-to-edge tiles, no gutters, no border, no perspective, no land/islands/boats. Each ROW is one seamless water type. Each COLUMN is its next gentle animation phase; same palette and base appearance. Each tile separately repeats seamlessly in BOTH axes; keep matching calm edge colours.\nROW1 shallow creek: muted green-turquoise, very sparse short flowing pale ripples and a few large soft submerged pebble shapes.\nROW2 river: calm medium turquoise with a FEW broad short horizontal aqua currents.\nROW3 open sea: deep muted blue, very sparse broad cyan wave strokes.\nROW4 lake/pond: calm muted blue-green, one or two short rounded ripples, no rings dominating the tile.\nLOW CONTRAST, only three or four flat pixel tones per row. No bright white foam and NO busy high-contrast caustic mesh. Deliberate crisp square pixels and wide calm water areas; visual background for a readable town-building game.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-508df138-9578-4b1c-b272-4fa77a603536.png"
+    },
+    {
+      "id": "networks",
+      "kind": "surface",
+      "rows": 2,
+      "types": [],
+      "prompt": "Create a clean game production sprite atlas in the SAME crisp chunky pixel-art style as the TownGrid references. Large colour clusters, restrained detail, dark outline on objects, no smooth 3D, no vector gradients, no text/numbers/captions, no page border. Transparent top-down game terrain overlay tiles, EXACT 4 columns by 2 rows of equally sized SQUARE cells. NO perspective. The path and rail ends reach the exact cell boundary at MIDPOINTS, every vertical track centred at 50% width, same width between tiles, no frame/gutters or captions. Transparent outside each element.\nROW1: 1) a STRAIGHT north-south railway track, dark steel twin rails on broad wooden ties, width 55% of tile, open north and south; 2) a quarter-circle railway curve joining NORTH and EAST edge midpoints with matching rail spacing; 3) a railway T junction north/east/west; 4) a railway cross junction north/east/south/west.\nROW2: 1) a quiet RIVERBANK strip across the horizontal centre, short pale sediment edge and sparse grey pebbles, rest fully transparent; 2) quiet sandy SEASHORE strip across centre, pale sand edge and sparse short white foam at lower edge, rest transparent; 3) quiet rocky CREEK bank strip across centre with tiny grass fringe and pebbles, rest transparent; 4) horizontal band of dark brown layered SOIL cliff cross-section with a grassy top edge (seen straight at the cross-section, not topdown) useful for the side of a terrain slab. NO other elements.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-1721375d-56f2-41a4-bd34-466bc08787d8.png",
+      "revisions": [
+        {
+          "prompt": "Redraw this game atlas precisely. Exact 4 columns by 2 rows. Transparent background, pixel art. In the TOP ROW the first three railway images are wrong: some have only one rail and all have gaps at tile boundaries. All FOUR top-row cells must contain TWO PARALLEL steel rails on wooden sleepers: column1 north-south straight; column2 curve joining NORTH and EAST; column3 T junction joining NORTH/EAST/WEST; column4 crossing NORTH/EAST/SOUTH/WEST. All tracks must connect at the EXACT cell-edge midpoint; railway ENDS TOUCH THE CELL EDGE, no padding or end caps. TWO continuous separated rails along every branch/curve, correct paired rail spacing equal across all cells, small readable dark sleepers. Full orthographic TOP DOWN, not perspective. For bottom row: column1 one narrow horizontal strip of grey riverbank pebbles/silt; column2 one narrow horizontal strip of beige beach sand with a LITTLE pale foam; column3 one narrow strip of rocky creek bank with green grass fringe; column4 one horizontal brown soil cliff cross section with green turf atop. NO WATER filling any bottom-row tile: only narrow boundary strips, transparent above and below. Strips extend horizontally ALL THE WAY to their cell's left and right edges to tile continuously. No text, no labels, no card border. Keep each cell an exact square. The shader supplies flat water separately.",
+          "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-031d8d82-1b9d-4c29-870c-1a49343dc2be.png"
+        }
+      ]
+    },
+    {
+      "id": "rocks",
+      "kind": "objects",
+      "types": [
+        "rock",
+        "mossrock",
+        "oreRock",
+        "cliff"
+      ],
+      "prompt": "Create a clean game production sprite atlas in the SAME crisp chunky pixel-art style as the TownGrid references. Large colour clusters, restrained detail, dark outline on objects, no smooth 3D, no vector gradients, no text/numbers/captions, no page border. TRANSPARENT RGBA background. EXACT grid: FOUR columns, 4 rows with generous empty transparent gutters between every cell. Each row is one object. Columns are the SAME object seen at SE (front+right), NE (back+right), NW (back+left), SW (front+left), 90-degree rotations at fixed 35-degree elevation. Keep ground centre, scale and proportions constant. Bottom faces sit on a square world tile, no big floating diamond slab and no long cast shadow. Distinct front and back, never four repeated fronts.\nROW 1: One compact cluster of three grey granite boulders with broad pixel facets, clean silhouette, no tiny gravel or moss. Clearly readable mineable rock.\nROW 2: A short grey boulder cluster with a few LARGE dark-green moss patches and one tiny fern, no microtexture.\nROW 3: A compact grey boulder with several large copper-orange and muted iron chunks visible, clearly ore-bearing stone.\nROW 4: One large broad stepped grey rock outcrop/cliff, blocky naturally broken ledges and a few large moss patches on top, width and depth equal; background rock landmark, not a pile of separate stones.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-cecc557b-2ce9-474b-bba4-813121cb6800.png",
+      "bounds": {
+        "rows": [
+          0,
+          322,
+          643,
+          948,
+          1287
+        ],
+        "columns": [
+          [
+            0,
+            305,
+            611,
+            916,
+            1222
+          ],
+          [
+            0,
+            305,
+            611,
+            916,
+            1222
+          ],
+          [
+            0,
+            305,
+            611,
+            916,
+            1222
+          ],
+          [
+            0,
+            305,
+            611,
+            916,
+            1222
+          ]
+        ]
+      },
+      "revisions": [
+        {
+          "prompt": "Edit this existing four-row four-column transparent pixel sprite sheet. Remove ONLY every brown/black diamond-shaped foundation slab underneath ALL sixteen rocks. Natural boulders must stand directly on transparent ground with no artificial tile, platform, plinth, shadow ellipse or paving. Preserve the exact rock shapes, moss, ore, cliff size and their four camera angles, their pixel artwork, layout, colours and scale. Do not alter anything else. Clean RGBA alpha around the natural silhouette.",
+          "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-6f280068-b028-44d3-b066-162dbfaf0292.png"
+        }
+      ]
+    },
+    {
+      "id": "foliage",
+      "kind": "objects",
+      "types": [
+        "pine",
+        "willow",
+        "palm",
+        "bush"
+      ],
+      "prompt": "Create a clean game production sprite atlas in the SAME crisp chunky pixel-art style as the TownGrid references. Large colour clusters, restrained detail, dark outline on objects, no smooth 3D, no vector gradients, no text/numbers/captions, no page border. TRANSPARENT RGBA background. EXACT grid: FOUR columns, 4 rows with generous empty transparent gutters between every cell. Each row is one object. Columns are the SAME object seen at SE (front+right), NE (back+right), NW (back+left), SW (front+left), 90-degree rotations at fixed 35-degree elevation. Keep ground centre, scale and proportions constant. Bottom faces sit on a square world tile, no big floating diamond slab and no long cast shadow. Distinct front and back, never four repeated fronts.\nROW 1: A compact evergreen pine tree, three wide tiers of chunky green needles, visible thick dark brown trunk, clear silhouette. No tiny needle details.\nROW 2: A single small willow tree, wide rounded green canopy with three broad drooping leaf clumps, thick brown trunk. No tiny leaf texture.\nROW 3: A single small coastal palm tree with thick tan trunk and five broad green fronds. No coconuts or extra plants.\nROW 4: A low broad green flowering shrub with two small cream flower clusters, simple round silhouette, no pot or soil.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-2e8d88b9-6aa7-445f-95d8-6c3a1c841744.png",
+      "bounds": {
+        "rows": [
+          0,
+          322,
+          632,
+          949,
+          1265
+        ],
+        "columns": [
+          [
+            0,
+            311,
+            622,
+            933,
+            1244
+          ],
+          [
+            0,
+            311,
+            622,
+            933,
+            1244
+          ],
+          [
+            0,
+            311,
+            622,
+            933,
+            1244
+          ],
+          [
+            0,
+            311,
+            622,
+            933,
+            1244
+          ]
+        ]
+      },
+      "revisions": [
+        {
+          "prompt": "Edit this existing four-row four-column transparent pixel sprite sheet. Remove ONLY every brown/black diamond-shaped foundation slab underneath ALL sixteen trees and bushes. Plants stand directly on transparent ground with visible natural roots/trunk ends, absolutely no artificial tile, platform, plinth or shadow ellipse. Keep identical trees, leaves, trunks, bushes, flowers, pixel art, layout, colours, four angles and scale. Clean RGBA alpha around each natural silhouette.",
+          "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-41c9fd59-aa21-4ed4-b112-d8a949272457.png"
+        }
+      ]
+    },
+    {
+      "id": "sceneryProps",
+      "kind": "objects",
+      "types": [
+        "reeds",
+        "ruin",
+        "lighthouse",
+        "exportGate"
+      ],
+      "prompt": "Create a clean game production sprite atlas in the SAME crisp chunky pixel-art style as the TownGrid references. Large colour clusters, restrained detail, dark outline on objects, no smooth 3D, no vector gradients, no text/numbers/captions, no page border. TRANSPARENT RGBA background. EXACT grid: FOUR columns, 4 rows with generous empty transparent gutters between every cell. Each row is one object. Columns are the SAME object seen at SE (front+right), NE (back+right), NW (back+left), SW (front+left), 90-degree rotations at fixed 35-degree elevation. Keep ground centre, scale and proportions constant. Bottom faces sit on a square world tile, no big floating diamond slab and no long cast shadow. Distinct front and back, never four repeated fronts.\nROW 1: A tiny group of creek reeds with three broad green leaves and two brown cattail heads, no water tile, no pot.\nROW 2: A compact abandoned stone watchpost ruin: two crumbled grey walls meeting a corner, one broken low tower stump, a little moss; no flags or people.\nROW 3: A small coastal lighthouse: short cream tower, dark teal conical roof, clear amber lantern window and modest stone base, no lighthouse beam or island.\nROW 4: A simple wooden trade-road gate: TWO sturdy wooden posts with one broad beam above, a small plain red hanging sign with a simple gold crate emblem. There must be a wide OPEN roadway between posts, no floor slab and no barrier across the road.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-9e433abe-9c29-4724-90a0-dc968dc4d1f0.png",
+      "bounds": {
+        "rows": [
+          0,
+          321,
+          622,
+          936,
+          1283
+        ],
+        "columns": [
+          [
+            0,
+            306,
+            613,
+            919,
+            1226
+          ],
+          [
+            0,
+            306,
+            613,
+            919,
+            1226
+          ],
+          [
+            0,
+            306,
+            613,
+            919,
+            1226
+          ],
+          [
+            0,
+            306,
+            613,
+            919,
+            1226
+          ]
+        ]
+      },
+      "revisions": [
+        {
+          "prompt": "Edit ONLY the FIRST ROW of this four-by-four transparent pixel sprite sheet: remove the artificial brown and black diamond foundation tiles under the four reed/cattail plants. Their stalks should root directly on transparent ground, no platform. Preserve all reed artwork, and preserve rows 2, 3 and 4 (ruin, lighthouse, wooden trade gate) entirely unchanged. Same layout, same scale, crisp pixel art.",
+          "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-ed690126-b875-48bb-a7c2-c64e7e2259ed.png"
+        }
+      ]
+    },
+    {
+      "id": "ambient",
+      "kind": "mixed",
+      "types": [
+        "clouds",
+        "birds",
+        "cargoTruck",
+        "cargoTrain",
+        "fishingBoat"
+      ],
+      "prompt": "Create a clean game production sprite atlas in the SAME crisp chunky pixel-art style as the TownGrid references. Large colour clusters, restrained detail, dark outline on objects, no smooth 3D, no vector gradients, no text/numbers/captions, no page border. Transparent sprite atlas exactly FOUR columns by FIVE rows, equal cells, wide transparent gutters. All illustrations clearly separated, no captions.\nROW1: four DIFFERENT small soft-white chunky pixel cloud silhouettes, no perspective, no outline, no sky rectangle.\nROW2: four successive WING FLAP animation poses of one tiny white seabird, side/top-quarter view, body identical and anchored, wings down, middle, up, middle. No sky.\nROW3: the SAME compact teal and cream cargo delivery truck, no text, a wooden cargo box on rear. Four quarter-views at 35-degree elevation: SE front+right, NE back+right, NW back+left, SW front+left. Generous alpha.\nROW4: the SAME compact teal freight locomotive with one small orange cargo wagon attached, four views SE, NE, NW, SW. Fit entire train inside each cell, no railway under it. Equal scale.\nROW5: the SAME small wooden fishing boat, teal cabin and orange life ring, four views SE, NE, NW, SW. No water background, wake, people or canvas sail. Flat bottom consistent waterline. Bold readable pixel clusters.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-4403b534-2ae9-4fd6-8bd4-e9722150ab45.png",
+      "bounds": {
+        "rows": [
+          0,
+          280,
+          561,
+          841,
+          1122,
+          1402
+        ],
+        "columns": [
+          [
+            0,
+            280,
+            561,
+            841,
+            1122
+          ],
+          [
+            0,
+            280,
+            561,
+            841,
+            1122
+          ],
+          [
+            0,
+            280,
+            561,
+            841,
+            1122
+          ],
+          [
+            0,
+            286,
+            561,
+            836,
+            1122
+          ],
+          [
+            0,
+            280,
+            561,
+            841,
+            1122
+          ]
+        ]
+      }
+    },
+    {
+      "id": "landterminals",
+      "types": [
+        "roadhub",
+        "pavedhub",
+        "snowmobile",
+        "railterminal"
+      ],
+      "descriptions": [
+        "small timber loading shelter with parcel pictogram and wooden handcart, warm orange roof",
+        "larger compact modern freight loading warehouse with teal roof and box pictogram and roller loading dock",
+        "small arctic red-roof dispatch cabin with one clearly visible parked yellow snowmobile, white snow patch inside foundation",
+        "steel-and-brick rail freight terminal with train pictogram, SHORT track and small loading gantry entirely inside its square base"
+      ],
+      "prompt": "TownGrid game sprite atlas, simple crisp PIXEL ART matching supplied warehouse style. NOT smooth vector/3D. Limited broad colors, restrained chunky pixels, large readable function silhouette, no excessive tiny props/textures. TRANSPARENT background. Each row is a different facility, exactly FOUR equal columns showing same facility at four 90 degree camera rotations: SE front-right, NE back-right, NW back-left, SW front-left. Same fixed elevated quarter-view angle. All facilities MUST fit on a genuine SQUARE 1x1 floor footprint projected as an isometric diamond, same center and size in all views. No parts overhanging floor. Identical silhouette height/scale in each row across views. Clear transparent gutters between every cell and row. Structure STATIC, no steam/no magic glow/no moving workers. Icons and signage pictograms only, no text. Layout 4 columns 4 rows. Row 1: small timber loading shelter with parcel pictogram and wooden handcart, warm orange roof. Row 2: larger compact modern freight loading warehouse with teal roof and box pictogram and roller loading dock. Row 3: small arctic red-roof dispatch cabin with one clearly visible parked yellow snowmobile, white snow patch inside foundation. Row 4: steel-and-brick rail freight terminal with train pictogram, SHORT track and small loading gantry entirely inside its square base.",
+      "kind": "buildings",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-01c6697e-b18d-429f-ba80-a09a12b79a70.png",
+      "bounds": {
+        "rows": [
+          0,
+          313,
+          627,
+          926,
+          1254
+        ],
+        "columns": [
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ]
+        ]
+      }
+    },
+    {
+      "id": "smallports",
+      "types": [
+        "ferrydock",
+        "canaldock",
+        "streamdock",
+        "polarferry"
+      ],
+      "descriptions": [
+        "simple wooden square floating pontoon ferry dock, two mooring posts, small wooden rowboat tied alongside INSIDE base",
+        "stone lock-style canal dock with turquoise striped shelter, compact metal mooring bollards",
+        "wooden river-stream dock with small green roof and canoe, reeds at one corner",
+        "arctic ferry pontoon with red tiny shelter, small rowboat and one snow patch"
+      ],
+      "prompt": "TownGrid game sprite atlas, simple crisp PIXEL ART matching supplied warehouse style. NOT smooth vector/3D. Limited broad colors, restrained chunky pixels, large readable function silhouette, no excessive tiny props/textures. TRANSPARENT background. Each row is a different facility, exactly FOUR equal columns showing same facility at four 90 degree camera rotations: SE front-right, NE back-right, NW back-left, SW front-left. Same fixed elevated quarter-view angle. All facilities MUST fit on a genuine SQUARE 1x1 floor footprint projected as an isometric diamond, same center and size in all views. No parts overhanging floor. Identical silhouette height/scale in each row across views. Clear transparent gutters between every cell and row. Structure STATIC, no steam/no magic glow/no moving workers. Icons and signage pictograms only, no text. Layout 4 columns 4 rows. Row 1: simple wooden square floating pontoon ferry dock, two mooring posts, small wooden rowboat tied alongside INSIDE base. Row 2: stone lock-style canal dock with turquoise striped shelter, compact metal mooring bollards. Row 3: wooden river-stream dock with small green roof and canoe, reeds at one corner. Row 4: arctic ferry pontoon with red tiny shelter, small rowboat and one snow patch.",
+      "kind": "buildings",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-622855c5-6612-445d-8645-58bab4ca0948.png",
+      "bounds": {
+        "rows": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ],
+        "columns": [
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ]
+        ]
+      }
+    },
+    {
+      "id": "largeports",
+      "types": [
+        "riverport",
+        "lakeport",
+        "coastport",
+        "polarport"
+      ],
+      "descriptions": [
+        "large-river freight wharf in one square, blue-roof warehouse and small yellow cargo crane",
+        "lake ferry port, green-roof square pavilion, pier railing, small white ferry inside base",
+        "ocean cargo port, teal-roof terminal with tall yellow loading crane and one container inside square base",
+        "arctic port, red-roof warehouse with small hoist, icy gray pier and one snowbank inside base"
+      ],
+      "prompt": "TownGrid game sprite atlas, simple crisp PIXEL ART matching supplied warehouse style. NOT smooth vector/3D. Limited broad colors, restrained chunky pixels, large readable function silhouette, no excessive tiny props/textures. TRANSPARENT background. Each row is a different facility, exactly FOUR equal columns showing same facility at four 90 degree camera rotations: SE front-right, NE back-right, NW back-left, SW front-left. Same fixed elevated quarter-view angle. All facilities MUST fit on a genuine SQUARE 1x1 floor footprint projected as an isometric diamond, same center and size in all views. No parts overhanging floor. Identical silhouette height/scale in each row across views. Clear transparent gutters between every cell and row. Structure STATIC, no steam/no magic glow/no moving workers. Icons and signage pictograms only, no text. Layout 4 columns 4 rows. Row 1: large-river freight wharf in one square, blue-roof warehouse and small yellow cargo crane. Row 2: lake ferry port, green-roof square pavilion, pier railing, small white ferry inside base. Row 3: ocean cargo port, teal-roof terminal with tall yellow loading crane and one container inside square base. Row 4: arctic port, red-roof warehouse with small hoist, icy gray pier and one snowbank inside base.",
+      "kind": "buildings",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-c96848fd-bdbb-486e-a653-f1de466a8878.png",
+      "bounds": {
+        "rows": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ],
+        "columns": [
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ]
+        ]
+      }
+    },
+    {
+      "id": "airpower",
+      "types": [
+        "airport",
+        "airterminal",
+        "substation"
+      ],
+      "descriptions": [
+        "compact square airfield, simple gray runway pad with white centerline, one small red-and-white propeller plane parked inside base, short control tower at back",
+        "modern compact passenger air terminal, teal roof glass entrance and airplane pictogram, baggage loading hatch",
+        "electrical substation, fenced square slab with 2 BIG readable teal transformer blocks, copper coils and yellow lightning pictogram, no tiny tangled wires"
+      ],
+      "prompt": "TownGrid game sprite atlas, simple crisp PIXEL ART matching supplied warehouse style. NOT smooth vector/3D. Limited broad colors, restrained chunky pixels, large readable function silhouette, no excessive tiny props/textures. TRANSPARENT background. Each row is a different facility, exactly FOUR equal columns showing same facility at four 90 degree camera rotations: SE front-right, NE back-right, NW back-left, SW front-left. Same fixed elevated quarter-view angle. All facilities MUST fit on a genuine SQUARE 1x1 floor footprint projected as an isometric diamond, same center and size in all views. No parts overhanging floor. Identical silhouette height/scale in each row across views. Clear transparent gutters between every cell and row. Structure STATIC, no steam/no magic glow/no moving workers. Icons and signage pictograms only, no text. Layout 4 columns 3 rows. Row 1: compact square airfield, simple gray runway pad with white centerline, one small red-and-white propeller plane parked inside base, short control tower at back. Row 2: modern compact passenger air terminal, teal roof glass entrance and airplane pictogram, baggage loading hatch. Row 3: electrical substation, fenced square slab with 2 BIG readable teal transformer blocks, copper coils and yellow lightning pictogram, no tiny tangled wires.",
+      "kind": "buildings",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-de3758a3-dc54-4fed-8592-a32c7514085d.png",
+      "bounds": {
+        "rows": [
+          0,
+          433,
+          836,
+          1254
+        ],
+        "columns": [
+          [
+            0,
+            317,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            320,
+            627,
+            933,
+            1254
+          ],
+          [
+            0,
+            317,
+            627,
+            936,
+            1254
+          ]
+        ]
+      }
+    },
+    {
+      "id": "infrastructureGround",
+      "kind": "surface",
+      "rows": 2,
+      "prompt": "Crisp top-down PIXEL ART texture atlas, exact 4 columns by 2 rows equal square cells, fills whole image, NO GAPS or margins, game tile surfaces viewed directly overhead. Row1: cell1 snowy white icy ground tile with subtle pale blue cracks; cell2 gray mountain rock ground with broad quiet shapes; cell3 soft golden desert sand; cell4 dark smooth asphalt with quiet pixel speckles, NO markings. All 4 ground textures seamless repeat and fully opaque. Row2: cell1 straight north-south STEEL PIPE, teal metallic tube centered on tile width, bolts at regular intervals, transparent outside pipe, touches north and south edges; cell2 PLUS SHAPED 4way teal pipe junction touches all four tile edges at their center, transparent outside pipe; cell3 straight north-south dark gray RUBBER CONVEYOR BELT with yellow side rails, regular transverse ribs, touches north-south tile edges, transparent outside belt; cell4 CROSS 4way conveyor transfer platform with yellow side rails touching ALL four center tile edges, dark square turning platform center, transparent outside. Consistent scale. Pixel art, NOT vector, NO perspective. Quiet texture suitable for TownGrid isometric projection.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-60cf0186-4320-4738-9b63-abc64ef37fea.png"
+    },
+    {
+      "id": "henPeck",
+      "kind": "animation",
+      "rows": 1,
+      "prompt": "Small functional sprite strip for a crisp pixel-art farm game. 4 columns ONE row, transparent background, equal cells with wide transparent gaps. Four sequential animation poses of ONE SAME small white hen with orange beak and red comb, seen in fixed SE elevated quarter view facing lower right. Frame 1 standing still, frame 2 lowering neck, frame 3 beak touching ground to peck, frame 4 head lifting. Feet and body remain at exactly same place and same scale, only head and neck articulate. Broad white pixel clusters and dark outline. Two visible orange feet. No shadows, no base/platform, no grain, no props, no background, no text, no photorealism. Very simple clean pixel art, few details, designed to display at 24 px tall. Four animation cells, not four rotations.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-2bf0ae66-5d29-48fa-bb5a-65f2768b21ef.png",
+      "bounds": {
+        "rows": [
+          0,
+          724
+        ],
+        "columns": [
+          [
+            0,
+            543,
+            1086,
+            1629,
+            2172
+          ]
+        ]
+      }
+    }
+  ]
+}

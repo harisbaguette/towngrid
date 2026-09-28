@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/vian.png",
+  "portraitRegion": [
+    0,
+    0,
+    545,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        545,
+        0,
+        900,
+        627
+      ],
+      "bbox": [
+        545,
+        33,
+        857,
+        604
+      ],
+      "scale": 0.17513134851138354,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        900,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        944,
+        26,
+        1241,
+        595
+      ],
+      "scale": 0.1757469244288225,
+      "offset": [
+        38,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

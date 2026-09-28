@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/nara.png",
+  "portraitRegion": [
+    0,
+    0,
+    540,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        540,
+        0,
+        893,
+        627
+      ],
+      "bbox": [
+        549,
+        54,
+        852,
+        614
+      ],
+      "scale": 0.17857142857142858,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        893,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        935,
+        55,
+        1231,
+        610
+      ],
+      "scale": 0.18018018018018017,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/garen.png",
+  "portraitRegion": [
+    0,
+    0,
+    557,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        557,
+        0,
+        891,
+        627
+      ],
+      "bbox": [
+        558,
+        82,
+        862,
+        621
+      ],
+      "scale": 0.18552875695732837,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        891,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        921,
+        87,
+        1237,
+        618
+      ],
+      "scale": 0.18832391713747645,
+      "offset": [
+        34,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

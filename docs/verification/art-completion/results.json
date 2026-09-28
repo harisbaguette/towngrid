@@ -1,0 +1,24 @@
+{
+  "results": [
+    {
+      "mode": "webgl",
+      "vehicles": 10,
+      "views": 4,
+      "buildings": 82,
+      "icons": 42,
+      "mobile": true,
+      "noSave": true
+    },
+    {
+      "mode": "canvas",
+      "vehicles": 10,
+      "views": 4,
+      "buildings": 82,
+      "icons": 42,
+      "mobile": true,
+      "noSave": true
+    }
+  ],
+  "errors": [],
+  "failed": []
+}

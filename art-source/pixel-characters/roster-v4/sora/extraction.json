@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/sora.png",
+  "portraitRegion": [
+    0,
+    0,
+    627,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        627,
+        0,
+        1100,
+        1024
+      ],
+      "bbox": [
+        649,
+        262,
+        1080,
+        889
+      ],
+      "scale": 0.1594896331738437,
+      "offset": [
+        29,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1100,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1121,
+        263,
+        1520,
+        885
+      ],
+      "scale": 0.1607717041800643,
+      "offset": [
+        32,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

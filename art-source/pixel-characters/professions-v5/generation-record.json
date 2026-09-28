@@ -1,0 +1,119 @@
+{
+  "generator": "image_gen",
+  "date": "2026-09-28",
+  "prompt": "Create an ORIGINAL pixel-art game character production sheet for TownGrid, matching the pixel clusters, dark outlines, limited warm/cool shading and SD four-head proportions of the attached style references. TRANSPARENT background, no glow, no ground, no shadow, no text. Square 1536x1536 canvas, EXACTLY TWO ROWS and THREE COLUMNS, six separate figures with generous empty gaps. Row 1 occupies y=30..735, row 2 y=800..1500; no content crosses y=768. In EACH row: left column x=20..500 is a large waist-up individual portrait, middle x=580..985 is a full-body SD sprite facing FRONT-LEFT/SW (face toward screen left, see front of chest), right x=1080..1490 is SAME SD sprite facing BACK-LEFT/NW (see back of torso and back of head, nose points screen left, NOT front-right). Exact same clothing, facial identity, head/body proportions between portrait and both views. Camera looks down 35 degrees for sprites. Sprites are neutral standing A-pose, arms down and 20 degrees away from body, BOTH HANDS EMPTY, both feet visible with small natural separation; no props occluding hands or legs. Each sprite should occupy around 520px in height with head roughly one quarter of body height, dwarf may be shorter/stouter. Distinct clear occupational silhouette, large pixel-color clusters, readable clothing at 100px body height. Crisp game pixels, not smooth illustration, not blurry, not tiny 16-bit stick figures. The sheet must show these TWO DIFFERENT CHARACTERS:\nTOP ROW: TOP_IDENTITY\nBOTTOM ROW: BOTTOM_IDENTITY\nDo not repeat or merge the two characters. No extra heads, no loose props, no labels. Each row has precisely portrait/front-left/back-left.",
+  "sources": [
+    {
+      "pair": 0,
+      "ids": [
+        "dorin",
+        "elvar"
+      ],
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-3243d2da-273e-46a1-bbda-fc7bf6da2183.png"
+    },
+    {
+      "pair": 2,
+      "ids": [
+        "serin",
+        "nara"
+      ],
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-a4281b77-9039-4ea0-bbb7-2f3f548439c0.png"
+    },
+    {
+      "pair": 4,
+      "ids": [
+        "lyra",
+        "borik"
+      ],
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-04b33d9c-395c-4840-8b77-9c8b4aefc227.png"
+    },
+    {
+      "pair": 6,
+      "ids": [
+        "oriel",
+        "garron"
+      ],
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-e5861fac-76a5-4872-8499-7306e7e4c455.png"
+    },
+    {
+      "pair": 8,
+      "ids": [
+        "maren",
+        "nalia"
+      ],
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-a63e26d8-b014-4955-aac3-dd8f9585462a.png"
+    },
+    {
+      "pair": 10,
+      "ids": [
+        "roa",
+        "cedric"
+      ],
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-047c53ea-d8c7-4b18-be9f-5d1002b20ba0.png"
+    },
+    {
+      "pair": 12,
+      "ids": [
+        "bel",
+        "vian"
+      ],
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-7b2de951-dd8f-41a5-89d5-48b8f2de16a3.png"
+    },
+    {
+      "pair": 14,
+      "ids": [
+        "oswin",
+        "erena"
+      ],
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-e56db148-7f45-4109-9897-dde8bd0ffe40.png"
+    },
+    {
+      "pair": 16,
+      "ids": [
+        "dax",
+        "norin"
+      ],
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-b12068b1-ac56-4fe2-b302-56b8931793c0.png"
+    },
+    {
+      "pair": 18,
+      "ids": [
+        "hugo",
+        "selia"
+      ],
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-53d27541-e19c-4481-a85a-c93978f4a5c9.png"
+    },
+    {
+      "pair": 20,
+      "ids": [
+        "otto",
+        "luth"
+      ],
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-258c8150-a423-4599-9159-37121a607bed.png"
+    },
+    {
+      "pair": 22,
+      "ids": [
+        "iris",
+        "aira"
+      ],
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-1a1810b6-ff9b-447d-9765-6a39719fb167.png"
+    },
+    {
+      "pair": 24,
+      "ids": [
+        "garen",
+        "aster"
+      ],
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-9c2e1258-14c5-45fa-92aa-07b473e17a1d.png"
+    },
+    {
+      "key": "specialist_single_26",
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-75902a27-3284-40de-a151-08cbb9ec8987.png"
+    },
+    {
+      "key": "specialist_tools",
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0ae-69fd-7031-ba8d-a334134c1de9\\exec-ddca70b5-b93d-441e-b7e2-17c8f42a530d.png"
+    }
+  ]
+}

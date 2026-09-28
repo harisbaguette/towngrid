@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/otto.png",
+  "portraitRegion": [
+    0,
+    0,
+    553,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        553,
+        0,
+        889,
+        627
+      ],
+      "bbox": [
+        547,
+        122,
+        869,
+        627
+      ],
+      "scale": 0.19801980198019803,
+      "offset": [
+        32,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        889,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        909,
+        121,
+        1231,
+        618
+      ],
+      "scale": 0.2012072434607646,
+      "offset": [
+        31,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

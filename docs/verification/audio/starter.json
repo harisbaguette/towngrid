@@ -1,0 +1,253 @@
+{
+ "mode": "starter",
+ "steps": [
+  {
+   "label": "home",
+   "state": "running",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [],
+   "musicDb": -32,
+   "musicPeakDb": -21.2,
+   "ambienceDb": null,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": -32.1,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "in-game",
+   "state": "running",
+   "paused": false,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [
+    "amb-river",
+    "forest-ambience"
+   ],
+   "musicDb": -29.1,
+   "musicPeakDb": -20.1,
+   "ambienceDb": -32.6,
+   "effectsDb": -43.4,
+   "effectsPeakDb": -35.2,
+   "outDb": -26.7,
+   "maxWorldVoices": 4,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "starter 4x production",
+   "state": "running",
+   "paused": false,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [
+    "amb-river",
+    "forest-ambience",
+    "amb-crickets"
+   ],
+   "musicDb": -28.5,
+   "musicPeakDb": -20,
+   "ambienceDb": -30.7,
+   "effectsDb": -41.2,
+   "effectsPeakDb": -32.6,
+   "outDb": -26.3,
+   "maxWorldVoices": 4,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   },
+   "worldPlays": 42,
+   "worldMaxPerSecond": 4,
+   "worldMaxVolume": 0.1431,
+   "worldTypes": [
+    "lumber",
+    "well",
+    "pickup",
+    "field",
+    "drop",
+    "sawmill"
+   ]
+  },
+  {
+   "label": "settings open (game paused)",
+   "state": "running",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [],
+   "musicDb": -27.5,
+   "musicPeakDb": -20.6,
+   "ambienceDb": -81.5,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": -27.9,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "music slider 0",
+   "state": "running",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [],
+   "musicDb": null,
+   "musicPeakDb": null,
+   "ambienceDb": null,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": null,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "music slider back 0.48",
+   "state": "running",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [],
+   "musicDb": -27.3,
+   "musicPeakDb": -23.5,
+   "ambienceDb": null,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": -26.8,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "ambience preview in settings",
+   "state": "running",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [],
+   "musicDb": -28.8,
+   "musicPeakDb": -24.3,
+   "ambienceDb": -34.9,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": -25.1,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "ambience slider 0.2",
+   "state": "running",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [],
+   "musicDb": -26.7,
+   "musicPeakDb": -23.3,
+   "ambienceDb": -66.1,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": -28.7,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.20041555166244507
+   }
+  },
+  {
+   "label": "settings closed (game resumes)",
+   "state": "running",
+   "paused": false,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [
+    "amb-river",
+    "forest-ambience",
+    "amb-crickets"
+   ],
+   "musicDb": -28.6,
+   "musicPeakDb": -19.5,
+   "ambienceDb": -33.1,
+   "effectsDb": -40.6,
+   "effectsPeakDb": -31.1,
+   "outDb": -27.5,
+   "maxWorldVoices": 4,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "tab hidden",
+   "state": "suspended",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [
+    "amb-river",
+    "forest-ambience",
+    "amb-crickets"
+   ],
+   "musicDb": null,
+   "musicPeakDb": null,
+   "ambienceDb": null,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": null,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "tab visible again",
+   "state": "running",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [],
+   "musicDb": -26.3,
+   "musicPeakDb": -22.9,
+   "ambienceDb": -72,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": -27.6,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  }
+ ],
+ "audioFail": [],
+ "errors": []
+}

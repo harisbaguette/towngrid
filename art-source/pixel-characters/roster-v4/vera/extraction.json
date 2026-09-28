@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/vera.png",
+  "portraitRegion": [
+    0,
+    0,
+    666,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        666,
+        0,
+        1070,
+        1024
+      ],
+      "bbox": [
+        665,
+        254,
+        1013,
+        929
+      ],
+      "scale": 0.14814814814814814,
+      "offset": [
+        38,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1070,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1128,
+        254,
+        1480,
+        922
+      ],
+      "scale": 0.1497005988023952,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

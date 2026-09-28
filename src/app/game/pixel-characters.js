@@ -1,7 +1,8 @@
 import * as THREE from 'three';
-import { pixelIdentity, pixelRoster, pixelDirection, pixelAction, pixelFrame, pixelAtlasFrame, PIXEL_HEIGHT, PIXEL_BASELINE } from './pixel-character-data.js';
+import { pixelIdentity, pixelRoster, pixelClip, pixelAtlasFrame, PIXEL_HEIGHT, PIXEL_BASELINE } from './pixel-character-data.js';
 import { pixelMetadata } from './pixel-character-meta.js';
 import { characterDistance } from './character-movement.js';
+import { characterPose } from './character-motion-state.js';
 
 const images = new Map(), loading = new Map(), textures = new Map();
 export async function loadPixelCharacters(race) {
@@ -60,21 +61,12 @@ export function animatePixelCharacter(group, worker, time, camera) {
  const u = group.userData;
  if (!u.pixel) return false;
  if (!u.image && images.has(u.identity.id)) { u.image = images.get(u.identity.id); u.texture.image = u.image; u.texture.needsUpdate = true; }
- const action = pixelAction(worker);
- if (action !== u.current) { u.current = action; u.actionTime = time; }
  const cameraAzimuth = camera ? Math.atan2(camera.matrixWorld.elements[8], camera.matrixWorld.elements[10]) : Math.PI / 4;
- const direction = pixelDirection(worker.dir || 0, cameraAzimuth);
  const distance = characterDistance(worker);
- let elapsed = worker.handling ? worker.handlingTime || 0 : time - u.actionTime;
- if (action === 'walk' || action === 'carry') {
-  // Actual travelled distance preserves gait through speed changes and turns.
-  // Multiplying total elapsed time by the latest speed made frames jump.
-  // Keep this phase when the scene rebuilds character models after construction.
-  u.gaitDistance = distance;
-  elapsed = u.gaitDistance / 1.25;
- }
  const metadata = pixelMetadata.get(u.identity.id);
- const frame = pixelFrame(action, elapsed, 1, metadata);
+ u.motionState ||= {};
+ const {action,direction,elapsed,frame}=characterPose(u.motionState,worker,time,cameraAzimuth,metadata,distance);
+ u.current=action;u.actionTime=u.motionState.actionAt;u.gaitDistance=distance;
  const atlas = pixelAtlasFrame(direction, frame, metadata);
  u.sprite.center.set(atlas.anchor[0], 1 - atlas.anchor[1]);
  if (frame !== u.frame || direction !== u.direction || atlas.rows !== u.atlas.rows || atlas.row !== u.atlas.row || atlas.columns !== u.atlas.columns) {
@@ -87,9 +79,10 @@ export function animatePixelCharacter(group, worker, time, camera) {
  group.rotation.set(0, 0, 0);
  u.sprite.position.y = u.flying ? .16 + Math.sin(time * 3 + (Number(worker.id) || 0)) * .025 : .035;
  const defeated = action === 'defeat';
- u.sprite.material.rotation = defeated ? -Math.PI / 2 : 0;
- u.sprite.material.opacity = defeated ? Math.max(0, 1 - elapsed / 2) : 1;
- u.sprite.position.y = defeated ? .08 : u.sprite.position.y;
+ const deathClip=pixelClip('defeat',metadata),deathDuration=metadata?.authoredDefeat?deathClip.frames.length/deathClip.fps:0;
+ u.sprite.material.rotation = defeated&&!metadata?.authoredDefeat ? -Math.PI / 2 : 0;
+ u.sprite.material.opacity = defeated ? Math.max(0,Math.min(1,1-(elapsed-deathDuration)/Math.max(.1,2-deathDuration))) : 1;
+ if(defeated)u.sprite.position.y=metadata?.authoredDefeat ? .035 : .08;
  u.lastTime = time;
  return true;
 }

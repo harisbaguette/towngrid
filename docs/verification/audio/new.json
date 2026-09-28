@@ -1,0 +1,228 @@
+{
+ "mode": "new",
+ "steps": [
+  {
+   "label": "home",
+   "state": "running",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [],
+   "musicDb": -31.6,
+   "musicPeakDb": -21.2,
+   "ambienceDb": null,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": -32.4,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "in-game",
+   "state": "running",
+   "paused": false,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [
+    "amb-river",
+    "forest-ambience"
+   ],
+   "musicDb": -29,
+   "musicPeakDb": -21.6,
+   "ambienceDb": -32.4,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": -26.2,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "settings open (game paused)",
+   "state": "running",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [],
+   "musicDb": -29.8,
+   "musicPeakDb": -19.5,
+   "ambienceDb": -71.8,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": -29.6,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "music slider 0",
+   "state": "running",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [],
+   "musicDb": null,
+   "musicPeakDb": null,
+   "ambienceDb": null,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": null,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "music slider back 0.48",
+   "state": "running",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [],
+   "musicDb": -28.4,
+   "musicPeakDb": -20.9,
+   "ambienceDb": null,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": -27,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "ambience preview in settings",
+   "state": "running",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [],
+   "musicDb": -29.5,
+   "musicPeakDb": -21.9,
+   "ambienceDb": -34.4,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": -28.1,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "ambience slider 0.2",
+   "state": "running",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [],
+   "musicDb": -26.4,
+   "musicPeakDb": -23.4,
+   "ambienceDb": -72,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": -25.4,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.2030700445175171
+   }
+  },
+  {
+   "label": "settings closed (game resumes)",
+   "state": "running",
+   "paused": false,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [
+    "amb-river",
+    "forest-ambience",
+    "amb-crickets"
+   ],
+   "musicDb": -26.2,
+   "musicPeakDb": -20.9,
+   "ambienceDb": -32.8,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": -24.6,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "tab hidden",
+   "state": "suspended",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [
+    "amb-river",
+    "forest-ambience",
+    "amb-crickets"
+   ],
+   "musicDb": null,
+   "musicPeakDb": null,
+   "ambienceDb": null,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": null,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  },
+  {
+   "label": "tab visible again",
+   "state": "running",
+   "paused": true,
+   "music": [
+    "calm-theme"
+   ],
+   "ambience": [],
+   "musicDb": -29.1,
+   "musicPeakDb": -21.8,
+   "ambienceDb": -71.1,
+   "effectsDb": null,
+   "effectsPeakDb": null,
+   "outDb": -29.5,
+   "maxWorldVoices": 0,
+   "gains": {
+    "music": 0.47999998927116394,
+    "ambience": 0.44999998807907104
+   }
+  }
+ ],
+ "backgroundDecode": {
+  "calm-theme": 117.2,
+  "music-town": 99.2,
+  "music-harp": 62.3,
+  "amb-river": 52,
+  "amb-coast": 44,
+  "amb-wind": 6,
+  "forest-ambience": 44.7,
+  "amb-crickets": 11.5
+ },
+ "audioFail": [],
+ "errors": []
+}

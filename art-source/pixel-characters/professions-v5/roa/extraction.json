@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/roa.png",
+  "portraitRegion": [
+    0,
+    0,
+    549,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        549,
+        0,
+        891,
+        627
+      ],
+      "bbox": [
+        556,
+        115,
+        846,
+        627
+      ],
+      "scale": 0.1953125,
+      "offset": [
+        35,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        891,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        936,
+        113,
+        1233,
+        627
+      ],
+      "scale": 0.19455252918287938,
+      "offset": [
+        35,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

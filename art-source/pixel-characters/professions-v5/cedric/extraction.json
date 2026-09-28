@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/cedric.png",
+  "portraitRegion": [
+    0,
+    0,
+    558,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        558,
+        0,
+        892,
+        627
+      ],
+      "bbox": [
+        559,
+        74,
+        850,
+        620
+      ],
+      "scale": 0.18315018315018314,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        892,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        935,
+        74,
+        1236,
+        608
+      ],
+      "scale": 0.18726591760299627,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

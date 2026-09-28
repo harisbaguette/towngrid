@@ -3,7 +3,7 @@
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 const root=fileURLToPath(new URL('../../',import.meta.url));
-const probes=['first-ten-minutes','export-chokepoint','hints-vs-rules','events-early','progression-and-docs','raid-gated-trial','stock-ledger','save-edges','debt-spiral','branch-site','sapling-timer'];
+const probes=['first-ten-minutes','export-chokepoint','hints-vs-rules','events-early','progression-and-docs','raid-gated-trial','stock-ledger','save-edges','debt-spiral','branch-site','sapling-timer','next-build'];
 const regression=process.argv.includes('--regression');let total=0,hit=0,failedRuns=0;
 for(const p of probes){const r=spawnSync(process.execPath,['tests/audit/'+p+'.mjs'],{cwd:root,encoding:'utf8'});
  // A non-zero exit is a defect report only when the probe printed a REPRODUCED line; anything else is a crash.

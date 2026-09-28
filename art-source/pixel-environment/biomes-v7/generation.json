@@ -1,0 +1,38 @@
+{
+  "date": "2026-09-28",
+  "tool": "image_gen",
+  "sources": {
+    "ground": "exec-6ee100d7-1eca-46e3-bf8b-9924e9550c00.png",
+    "props": "exec-75d68a00-3793-4f97-9392-1b18654e7671.png",
+    "landmarks": "exec-9fc311a5-a2fc-4a29-a8ea-174609540936.png"
+  },
+  "groundOrder": [
+    "snow",
+    "meadow",
+    "forest",
+    "basin",
+    "desert",
+    "coast",
+    "marsh",
+    "volcanic"
+  ],
+  "directions": [
+    "SE",
+    "NE",
+    "NW",
+    "SW"
+  ],
+  "revisions": [
+    {
+      "file": "ground-quiet-source.png",
+      "reference": "ground-source.png",
+      "reason": "Reduce repeating lines and fine-detail noise, keeping quiet biome-specific pixel colors."
+    }
+  ],
+  "brief": {
+    "style": "Readable quarter-view pixel art matching existing TownGrid environments; broad shapes and no text.",
+    "ground": "Opaque 4x2 top-down square textures: snow, meadow, forest soil, gray basin, desert sand, coast sand, marsh, volcanic ash. Final revision removes cracks and repetitive linework.",
+    "props": "Transparent 4x4 atlas, rows snow fir / broadleaf tree / cactus / natural oil seep; columns SE, NE, NW, SW.",
+    "landmarks": "Transparent 4x2 atlas, rows snowy mountain ridge / extinct volcanic ridge; columns SE, NE, NW, SW. No lava or eruption."
+  }
+}

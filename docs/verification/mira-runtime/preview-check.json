@@ -1,0 +1,11 @@
+{
+  "runtimeAtlas": true,
+  "actions": 7,
+  "directions": 4,
+  "ratio": {
+    "display": 2.143820224719101,
+    "source": 2.142857142857143
+  },
+  "mobileOverflow": false,
+  "errors": []
+}

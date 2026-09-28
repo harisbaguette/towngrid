@@ -11,7 +11,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { RESOURCES, BUILDINGS, Simulation } from '../src/app/game/simulation.js';
+import { RESOURCES, BUILDINGS, Simulation, CONTRACT_PREMIUM, CONTRACT_WAIT } from '../src/app/game/simulation.js';
 import { RANKS, unlockRank } from '../src/app/game/world.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -20,7 +20,7 @@ const flag = name => args.includes(name);
 const option = name => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : null; };
 
 // Thresholds shared with docs/BALANCE_PATCH_20260928.md.
-const LIMITS = { resources: 32, buildings: 60, premium: 1.15, marginRatio: 1.25, earlyGap: 2, earlyLastRank: 6, lateFromRank: 23 };
+const LIMITS = { resources: 32, buildings: 60, premium: 1.15, marginRatio: 1.25, earlyGap: 2, earlyLastRank: 6, lateFromRank: 23, recipeFacilities: 10, contractPremium: 1.35, contractWait: 60, earlyPeriod: 15, earlyPeriodRank: 6 };
 const SPECIAL = new Set(['power', 'irrigation', 'horse', 'ward', 'health', 'transit']);
 
 // ---------- patch preview (in-memory only; game files are never written) ----------
@@ -53,43 +53,62 @@ const price = r => RESOURCES[r]?.price ?? 0;
 const value = items => Object.entries(items || {}).reduce((n, [r, k]) => n + price(r) * k, 0);
 const name = id => BUILDINGS[id]?.name || RESOURCES[id]?.name || id;
 const round = (n, d = 1) => Number.isFinite(n) ? Math.round(n * 10 ** d) / 10 ** d : null;
-const producers = r => Object.keys(BUILDINGS).filter(id => BUILDINGS[id].output === r && BUILDINGS[id].period);
-const isProducer = id => { const d = BUILDINGS[id]; return !!(d.period && RESOURCES[d.output]); };
+// ---------- product lines ----------
+// Every facility product is a line [building, recipe] (simulation.js BUILDINGS[type].recipes). recipes[0] is rebuilt
+// from the definition so a patch preview that changes a facility's inputs or period stays exact. A line's rank is the
+// later of the facility's unlock and the recipe's own unlock.
+const recipesOf = id => { const d = BUILDINGS[id]; if (!d.period) return []; return [{ id: d.output, name: RESOURCES[d.output]?.name || d.name, inputs: d.inputs || {}, output: d.output, amount: d.amount, period: d.period }, ...(d.recipes || []).slice(1)]; };
+const lines = Object.keys(BUILDINGS).flatMap(id => recipesOf(id).map((r, i) => ({ id, r, alt: i > 0, key: i ? id + ':' + r.id : id, rank: Math.max(unlockRank(id), r.unlock || 0) })));
+const lineName = l => l.alt ? BUILDINGS[l.id].name + ' · ' + l.r.name : BUILDINGS[l.id].name;
+const producerLines = r => lines.filter(l => l.r.output === r && RESOURCES[r]);
+const producers = r => [...new Set(producerLines(r).map(l => l.id))];
+const firstProducerRank = r => Math.min(Infinity, ...producerLines(r).map(l => l.rank));
+const isProducer = id => recipesOf(id).some(r => RESOURCES[r.output]);
+const hasInputs = r => Object.keys(r.inputs || {}).length > 0;
 
-// Cheapest chain (tile-seconds per unit) for each resource, across all its producers.
+// Cheapest chain (tile-seconds per unit) for each resource, across all its product lines.
 const tileMemo = new Map();
 function tileSec(r, seen = new Set()) {
   if (tileMemo.has(r)) return tileMemo.get(r);
   if (seen.has(r)) return Infinity;
   seen.add(r);
   let best = Infinity;
-  for (const id of producers(r)) best = Math.min(best, chainSec(id, seen));
+  for (const l of producerLines(r)) best = Math.min(best, chainSec(l.r, seen));
   seen.delete(r);
   tileMemo.set(r, best);
   return best;
 }
-function chainSec(id, seen = new Set()) {
-  const d = BUILDINGS[id];
-  const inputs = Object.entries(d.inputs || {}).reduce((n, [r, k]) => n + k * tileSec(r, seen), 0);
-  return (d.period + inputs) / d.amount;
+function chainSec(r, seen = new Set()) {
+  const inputs = Object.entries(r.inputs || {}).reduce((n, [x, k]) => n + k * tileSec(x, seen), 0);
+  return (r.period + inputs) / r.amount;
 }
 const density = r => price(r) * 60 / tileSec(r);            // G per tile-minute, best chain
-const buildingDensity = id => price(BUILDINGS[id].output) * 60 / chainSec(id);
+const lineDensity = r => price(r.output) * 60 / chainSec(r);
+// Processing depth: raw lines are 0, a line is one more than its deepest input's shallowest producer.
+const depthMemo = new Map();
+function depthOf(res, seen = new Set()) {
+  if (depthMemo.has(res)) return depthMemo.get(res);
+  if (seen.has(res)) return 0;
+  seen.add(res);
+  const d = Math.min(Infinity, ...producerLines(res).map(l => lineDepth(l.r, seen)));
+  seen.delete(res); depthMemo.set(res, d); return d;
+}
+const lineDepth = (r, seen = new Set()) => hasInputs(r) ? 1 + Math.max(...Object.keys(r.inputs).map(x => depthOf(x, seen))) : 0;
 
 // ---------- 1. building economics ----------
-const economy = Object.keys(BUILDINGS).filter(isProducer).map(id => {
-  const d = BUILDINGS[id], perMin = 60 / d.period;
-  const out = price(d.output) * d.amount, inp = value(d.inputs);
+const economy = lines.filter(l => RESOURCES[l.r.output]).map(l => {
+  const d = BUILDINGS[l.id], r = l.r, perMin = 60 / r.period;
+  const out = price(r.output) * r.amount, inp = value(r.inputs);
   const net = (out - inp) * perMin, cost = d.cost + value(d.materials);
-  const inputDensity = Math.max(0, ...Object.keys(d.inputs || {}).map(density));
+  const inputDensity = Math.max(0, ...Object.keys(r.inputs || {}).map(density));
   return {
-    id, name: d.name, group: d.group, rank: unlockRank(id), period: d.period,
-    inputs: d.inputs || {}, output: d.output, amount: d.amount,
+    id: l.key, building: l.id, recipe: r.id, alt: l.alt, name: lineName(l), group: d.group, rank: l.rank, period: r.period, depth: lineDepth(r),
+    inputs: r.inputs || {}, output: r.output, amount: r.amount,
     outPerMin: round(out * perMin), inPerMin: round(inp * perMin), netPerMin: round(net),
     netPerSec: round(net / 60, 2), buildValue: cost, paybackMin: round(cost / net, 1),
-    tileValuePerMin: round(buildingDensity(id)),
-    premium: d.inputs ? round(buildingDensity(id) / inputDensity, 2) : null,
-    margin: d.inputs ? round(out / inp, 2) : null,
+    tileValuePerMin: round(lineDensity(r)),
+    premium: hasInputs(r) ? round(lineDensity(r) / inputDensity, 2) : null,
+    margin: hasInputs(r) ? round(out / inp, 2) : null,
   };
 }).sort((a, b) => a.rank - b.rank || a.id.localeCompare(b.id));
 
@@ -121,7 +140,7 @@ function scanCodeSinks() {
 }
 const codeSinks = scanCodeSinks();
 const sinks = Object.keys(RESOURCES).map(r => {
-  const inputs = Object.keys(BUILDINGS).filter(id => BUILDINGS[id].inputs?.[r]);
+  const inputs = [...new Set(lines.filter(l => l.r.inputs?.[r]).map(l => l.id))];
   const materials = Object.keys(BUILDINGS).filter(id => BUILDINGS[id].materials?.[r]);
   const code = [...(codeSinks[r] || [])];
   const made = producers(r);
@@ -148,14 +167,23 @@ for (const id of listed) if (!BUILDINGS[id]) problems.push('unlocks unknown buil
 for (const id of new Set(listed)) if (listed.filter(x => x === id).length > 1) problems.push(id + ' unlocked twice');
 for (const r of RANKS) for (const [key] of r.requirements) {
   const [kind, item] = key.split(':');
-  if (['produced', 'sold'].includes(kind) && !producers(item).some(id => unlockRank(id) < r.id)) problems.push(`${r.id} ${r.name}: ${key} has no producer unlocked before this rank`);
+  if (['produced', 'sold'].includes(kind) && !(firstProducerRank(item) < r.id)) problems.push(`${r.id} ${r.name}: ${key} has no producer unlocked before this rank`);
   if (kind === 'building' && !(unlockRank(item) < r.id)) problems.push(`${r.id} ${r.name}: ${key} is not unlocked before this rank`);
 }
 for (const id of Object.keys(BUILDINGS)) {
   const d = BUILDINGS[id], at = unlockRank(id);
-  for (const r of Object.keys({ ...(d.inputs || {}), ...(d.materials || {}) })) {
+  for (const r of Object.keys(d.materials || {})) {
     if (!RESOURCES[r] && !SPECIAL.has(r)) problems.push(`${id}: unknown resource ${r}`);
-    else if (RESOURCES[r] && !producers(r).some(p => unlockRank(p) <= at)) problems.push(`${id} (rank ${at}) needs ${r}, first producer unlocks later`);
+    else if (RESOURCES[r] && !(firstProducerRank(r) <= at)) problems.push(`${id} (rank ${at}) needs ${r}, first producer unlocks later`);
+  }
+}
+// Each product line needs its inputs made by then, and an alternative may not open before its facility.
+for (const l of lines) {
+  if ((l.r.unlock || 0) && l.r.unlock < unlockRank(l.id)) problems.push(`${lineName(l)}: recipe unlock ${l.r.unlock} is before its facility (${unlockRank(l.id)})`);
+  if (!RESOURCES[l.r.output] && !SPECIAL.has(l.r.output)) problems.push(`${lineName(l)}: unknown output ${l.r.output}`);
+  for (const r of Object.keys(l.r.inputs || {})) {
+    if (!RESOURCES[r] && !SPECIAL.has(r)) problems.push(`${lineName(l)}: unknown resource ${r}`);
+    else if (RESOURCES[r] && !(firstProducerRank(r) <= l.rank)) problems.push(`${lineName(l)} (rank ${l.rank}) needs ${r}, first producer unlocks later`);
   }
 }
 // A contract keeps asking for the same item until it is delivered, so every item in a pool
@@ -166,10 +194,19 @@ const contractPools = patch?.constants?.['simulation.contract.pools']?.next
 let poolStart = 0;
 for (const pool of contractPools) {
   const from = pool.from ?? poolStart;
-  for (const item of pool.items) if (!producers(item).some(id => unlockRank(id) <= from)) problems.push(`contract pool from rank ${from}: ${item} has no producer unlocked yet`);
+  for (const item of pool.items) if (!(firstProducerRank(item) <= from)) problems.push(`contract pool from rank ${from}: ${item} has no producer unlocked yet`);
   if (pool.rankBelow !== undefined) poolStart = pool.rankBelow;
 }
 const processing = economy.filter(e => e.premium !== null);
+// Alternative products: each must feed another chain (a different output) or change which chains it draws on (a
+// different input set), otherwise it is only a copy of the default line.
+const sameInputs = (a, b) => Object.keys(a || {}).sort().join() === Object.keys(b || {}).sort().join();
+const alternatives = lines.filter(l => l.alt).map(l => { const base = recipesOf(l.id)[0]; return { line: l, distinct: l.r.output !== base.output || !sameInputs(l.r.inputs, base.inputs) }; });
+const recipeFacilities = new Set(alternatives.map(a => a.line.id)).size;
+// Production time: early lines show results quickly, and the average period grows with processing depth.
+const earlySlow = economy.filter(e => e.rank <= LIMITS.earlyPeriodRank && e.period > LIMITS.earlyPeriod);
+const byDepth = Object.entries(economy.filter(e => !e.alt).reduce((m, e) => ((m[e.depth] ??= []).push(e.period), m), {})).map(([d, p]) => [+d, p.reduce((n, v) => n + v, 0) / p.length]).sort((a, b) => a[0] - b[0]);
+const depthRises = byDepth.every(([, p], i) => !i || p > byDepth[i - 1][1]);
 const checks = [
   { id: 'C1', name: `자원 ${LIMITS.resources}종 이상`, value: Object.keys(RESOURCES).length, pass: Object.keys(RESOURCES).length >= LIMITS.resources },
   { id: 'C2', name: `시설 ${LIMITS.buildings}종 이상`, value: Object.keys(BUILDINGS).length, pass: Object.keys(BUILDINGS).length >= LIMITS.buildings },
@@ -178,19 +215,22 @@ const checks = [
   { id: 'C5', name: `${LIMITS.lateFromRank}단계 이후 해금 존재`, value: RANKS.filter(r => r.id >= LIMITS.lateFromRank).reduce((n, r) => n + r.unlocks.length, 0) + '종', pass: RANKS.some(r => r.id >= LIMITS.lateFromRank && r.unlocks.length) },
   { id: 'C6', name: `가공 시설이 원료 사슬보다 타일당 분당 가치 ${LIMITS.premium}배 이상`, value: processing.filter(e => e.premium < LIMITS.premium).map(e => `${e.name} ${e.premium}`).join(', ') || '전부 충족', pass: processing.every(e => e.premium >= LIMITS.premium) },
   { id: 'C7', name: `가공 시설 산출가/투입가 ${LIMITS.marginRatio}배 이상`, value: processing.filter(e => e.margin < LIMITS.marginRatio).map(e => `${e.name} ${e.margin}`).join(', ') || '전부 충족', pass: processing.every(e => e.margin >= LIMITS.marginRatio) },
-  { id: 'C8', name: '해금 순서 모순 없음(요구 실적·투입·자재·계약)', value: problems.length ? problems.length + '건' : '없음', pass: !problems.length },
+  { id: 'C8', name: '해금 순서 모순 없음(요구 실적·투입·자재·계약·대안 제품)', value: problems.length ? problems.length + '건' : '없음', pass: !problems.length },
+  { id: 'C9', name: `대안 제품 시설 ${LIMITS.recipeFacilities}곳 이상 · 모든 대안이 다른 사슬을 공급하거나 다른 원료를 씀`, value: recipeFacilities + '곳 · ' + (alternatives.filter(a => !a.distinct).map(a => lineName(a.line)).join(', ') || '모두 구별됨'), pass: recipeFacilities >= LIMITS.recipeFacilities && alternatives.every(a => a.distinct) },
+  { id: 'C10', name: `계약 보상 목록가의 ${LIMITS.contractPremium}배 이하 · 다음 계약 대기 ${LIMITS.contractWait}초 이상`, value: '최대 ' + Math.max(...CONTRACT_PREMIUM) + '배 · ' + CONTRACT_WAIT + '초', pass: Math.max(...CONTRACT_PREMIUM) <= LIMITS.contractPremium && CONTRACT_WAIT >= LIMITS.contractWait },
+  { id: 'C11', name: `${LIMITS.earlyPeriodRank}단계까지 열리는 생산 주기 ${LIMITS.earlyPeriod}초 이하 · 가공 깊이별 평균 주기가 깊을수록 김`, value: (earlySlow.map(e => e.name + ' ' + e.period + 's').join(', ') || '초반 전부 충족') + ' · ' + byDepth.map(([d, p]) => d + '단 ' + round(p) + 's').join(' < '), pass: !earlySlow.length && depthRises },
 ];
 
 // ---------- output ----------
-const report = { source: patchFile ? 'patch:' + patchFile : 'code', counts: { resources: Object.keys(RESOURCES).length, buildings: Object.keys(BUILDINGS).length, producers: economy.length, ranks: RANKS.length }, startSet, economy, support, sinks, ladder, emptyRanks, unlockRanks, problems, checks };
+const report = { source: patchFile ? 'patch:' + patchFile : 'code', counts: { resources: Object.keys(RESOURCES).length, buildings: Object.keys(BUILDINGS).length, producers: economy.filter(e => !e.alt).length, alternatives: alternatives.length, recipeFacilities, ranks: RANKS.length }, startSet, economy, support, sinks, ladder, emptyRanks, unlockRanks, problems, checks };
 if (flag('--json')) { console.log(JSON.stringify(report, null, 1)); }
 else {
   const table = (rows, cols) => { console.log('| ' + cols.map(c => c[0]).join(' | ') + ' |'); console.log('|' + cols.map(() => '---').join('|') + '|'); for (const r of rows) console.log('| ' + cols.map(c => { const v = c[1](r); return v === null || v === undefined ? '—' : String(v); }).join(' | ') + ' |'); console.log(''); };
   const fmt = o => Object.entries(o).map(([r, n]) => name(r) + ' ' + n).join(' · ') || '—';
   console.log(`# 밸런스 보고서 (${report.source})\n`);
-  console.log(`자원 ${report.counts.resources}종 · 시설 ${report.counts.buildings}종(생산 ${report.counts.producers}) · 승급 ${report.counts.ranks}단계 · 시작 시설: ${startSet.map(name).join(', ')}\n`);
+  console.log(`자원 ${report.counts.resources}종 · 시설 ${report.counts.buildings}종(생산 ${report.counts.producers}, 대안 제품 ${report.counts.alternatives}개 · ${report.counts.recipeFacilities}곳) · 승급 ${report.counts.ranks}단계 · 시작 시설: ${startSet.map(name).join(', ')}\n`);
   console.log('## 1. 생산 시설 경제 (기준 속도·기준 가격)\n');
-  table(economy, [['단계', e => e.rank], ['시설', e => e.name], ['그룹', e => e.group], ['주기s', e => e.period], ['투입', e => fmt(e.inputs)], ['산출', e => name(e.output) + ' ' + e.amount], ['산출/분', e => e.outPerMin], ['원가/분', e => e.inPerMin], ['순이익/분', e => e.netPerMin], ['건설가치', e => e.buildValue], ['회수(분)', e => e.paybackMin], ['타일당/분', e => e.tileValuePerMin], ['가공우위', e => e.premium], ['산출/투입', e => e.margin]]);
+  table(economy, [['단계', e => e.rank], ['시설', e => e.name], ['그룹', e => e.group], ['깊이', e => e.depth], ['주기s', e => e.period], ['투입', e => fmt(e.inputs)], ['산출', e => name(e.output) + ' ' + e.amount], ['산출/분', e => e.outPerMin], ['원가/분', e => e.inPerMin], ['순이익/분', e => e.netPerMin], ['건설가치', e => e.buildValue], ['회수(분)', e => e.paybackMin], ['타일당/분', e => e.tileValuePerMin], ['가공우위', e => e.premium], ['산출/투입', e => e.margin]]);
   console.log('## 2. 지원·특수 시설\n');
   table(support, [['단계', e => e.rank], ['시설', e => e.name], ['그룹', e => e.group], ['효과', e => e.effect], ['투입', e => fmt(e.inputs)], ['건설가치', e => e.buildValue]]);
   console.log('## 3. 자원 소비처\n');

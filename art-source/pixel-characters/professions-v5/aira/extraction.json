@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/aira.png",
+  "portraitRegion": [
+    0,
+    0,
+    541,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        541,
+        0,
+        894,
+        627
+      ],
+      "bbox": [
+        557,
+        78,
+        855,
+        623
+      ],
+      "scale": 0.1834862385321101,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        894,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        934,
+        77,
+        1225,
+        610
+      ],
+      "scale": 0.18761726078799248,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

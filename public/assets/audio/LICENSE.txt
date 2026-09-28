@@ -19,3 +19,33 @@
 
 	Follow on Twitter for updates:
 	@KenneyNL
+
+------------------------------------------------------------
+Additional audio (added 2026-09-28) - all CC0 1.0 (public domain)
+http://creativecommons.org/publicdomain/zero/1.0/
+Per-file source URL, author, modifications, size and SHA-256: music-sources.json
+Rebuild recipe: scripts/build-audio-assets.py
+
+impactMining_000/003, impactWood_medium_001, impactPlank_medium_002,
+impactMetal_medium_001, impactMetal_heavy_002, impactPlate_light_001,
+impactGlass_light_001, impactBell_heavy_001, impactSoft_medium_002,
+impactTin_medium_000, footstep_grass_002, footstep_wood_001
+  Kenney - Impact Sounds 1.0 - https://kenney.nl/assets/impact-sounds
+saw-stroke, machine-chug, machine-press, machine-whirr, pump-stroke,
+water-pour, boil-bubble, cart-roll
+  rubberduck - 30 CC0 SFX loops - https://opengameart.org/content/30-cc0-sfx-loops
+switch-click
+  rubberduck - 100 CC0 SFX #2 - https://opengameart.org/content/100-cc0-sfx-2
+music-town
+  Alex McCulloch - Town 3 - https://opengameart.org/content/town-3
+music-harp
+  cynicmusic (The Cynic Project) - A New Town (RPG Theme) - https://opengameart.org/content/a-new-town-rpg-theme
+amb-river, (wash under amb-coast)
+  RandomMind - Sea and river wave sounds - https://opengameart.org/content/sea-and-river-wave-sounds
+amb-coast
+  jasinski / qubodup - Beach Ocean Waves - https://opengameart.org/content/beach-ocean-waves
+amb-wind
+  SketchMan3 - Wind Whoosh Loop - https://opengameart.org/content/wind-whoosh-loop
+amb-crickets
+  Wolfgang_ - Crickets Ambient Noise - loopable - https://opengameart.org/content/crickets-ambient-noise-loopable
+calm-theme (pebonius) and forest-ambience (TinyWorlds): see music-sources.json.

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>타운그리드 · 생산 시설 테스트</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#ecf0e7;color:#293f38;font:15px/1.5 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:28px 20px}h1{font-size:24px;margin:0}p{color:#637467;margin:8px 0 20px}a{color:#285c54}header{display:flex;justify-content:space-between;gap:20px}nav,fieldset{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:14px 0;border:0;padding:0}button,select{font:inherit;background:#fffdf4;color:#314b41;border:1px solid #afbead;border-radius:5px;padding:7px 12px;cursor:pointer}button[aria-pressed=true]{background:#315e4d;color:white}button:focus-visible,select:focus-visible{outline:3px solid #c0953f;outline-offset:2px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}article{border:1px solid #bac9b4;border-radius:8px;overflow:hidden;background:#fafbf4}h2{font-size:17px;margin:12px 16px}canvas{display:block;width:100%;aspect-ratio:1.3;image-rendering:pixelated;background:#dbe4c7}.status{display:flex;justify-content:space-between;gap:10px;padding:12px 16px;min-height:50px}.stock{background:#e0e6dd;border-radius:4px;padding:0 6px;font-weight:700}.stock.ready{background:#347557;color:white}progress{display:block;width:100%;height:5px;border:0;accent-color:#bc942f}footer{font-size:13px;margin-top:20px;color:#637467}@media(max-width:640px){.grid{grid-template-columns:repeat(2,1fr)}main{padding:18px 12px}h1{font-size:20px}header{align-items:start}button{padding:7px 9px}}
+</style></head><body><main>
+<header><h1>생산 시설 테스트</h1><a href="/">게임에서 확인 →</a></header>
+<fieldset><label>건물 묶음 <select id="group"><option value="starter">초반 마을</option><option value="food">채집·식품</option><option value="basic">동력·가공</option><option value="utilities">물·전력·증기</option><option value="mining">광업·제련</option><option value="materials">소재·전자</option><option value="advanced">자동차·의료</option><option value="network">마법·교통</option><option value="civic">공공·드워프 주택</option><option value="homes">종족별 주택</option></select></label></fieldset>
+<p>흰 선은 실제 1×1 타일입니다. 상태를 바꿔 본체·작업 부품·완성품을 비교해 보세요.</p>
+<nav aria-label="시설 상태"><button data-state="empty">재고 없음</button><button data-state="working" aria-pressed="true">생산 중</button><button data-state="ready">생산 완료</button><button data-state="working-ready">생산 중 + 재고 있음</button><button data-state="blocked">재료·자원 부족</button><button data-state="disabled">가동 중지</button></nav>
+<fieldset><label>시점 <select id="view"><option value="0">남동</option><option value="1">북동</option><option value="2">북서</option><option value="3">남서</option></select></label><button id="pause" aria-pressed="false">동작 멈추기</button><label>표시 크기 <select id="size"><option value="1">기본</option><option value="0.65">작게</option></select></label><a id="renderer" href="?renderer=canvas">CPU 표시 비교</a></fieldset>
+<div class="grid" id="grid"></div><footer>완료를 선택하면 생산 건물은 완성품을, 공급 시설은 남은 공급 시간을 표시합니다. 실제 생산과 운반은 홈의 ‘초반 마을 테스트’와 ‘산업도시 둘러보기’에서 확인할 수 있습니다.</footer>
+</main><script type="module">
+import * as THREE from '/node_modules/three/build/three.module.js';
+import {loadPixelEnvironment,makePixelBuilding} from '/src/app/game/pixel-environment.js';
+import {QUARTER_POLAR,quarterAzimuth} from '/src/app/game/quarter-camera.js';
+import {SoftwareRenderer} from '/src/app/game/software-renderer.js';
+import {BUILDINGS} from '/src/app/game/simulation.js';
+import {INDUSTRY_GROUPS} from '/src/app/game/pixel-industry-data.js';
+import {EXPANSION_GROUPS} from '/src/app/game/pixel-expansion-data.js';
+import {SERVICE_OUTPUTS} from '/src/app/game/production-visuals.js';
+await loadPixelEnvironment();
+let state='working',view=0,time=0,paused=false,last=performance.now(),scale=1;
+const params=new URLSearchParams(location.search),cpu=params.get('renderer')==='canvas';
+const groups={starter:['warehouse','house','well','lumber','sawmill','field'],...INDUSTRY_GROUPS,...EXPANSION_GROUPS};
+for(const [id,label] of Object.entries({newfarm:'신규 농장·식품',newcraft:'신규 직물·가공',newmaterials:'신규 기초 소재',newadvanced:'신규 정밀 가공',newheavy:'신규 중공업',newcivic:'신규 공공시설',newtransport:'신규 운송·금융'}))document.querySelector('#group').add(new Option(label,id));
+const environmentLink=document.createElement('a');environmentLink.href='/environment-preview.html';environmentLink.textContent='지형·도로·배경 테스트';document.querySelector('footer').append(' · ',environmentLink);
+const group=groups[params.get('group')]?params.get('group'):'starter';
+for(const [id,label] of Object.entries({landterminals:'육상 물류',smallports:'소형 나룻터',largeports:'항구',airpower:'항공·전력'}))document.querySelector('#group').add(new Option(label,id));
+document.querySelector('#group').value=group;
+document.querySelector('#group').onchange=e=>{params.set('group',e.target.value);location.search=params.toString();};
+const alternate=new URLSearchParams(params);if(cpu)alternate.delete('renderer');else alternate.set('renderer','canvas');
+document.querySelector('#renderer').href='?'+alternate;
+if(cpu)document.querySelector('#renderer').textContent='WebGL 표시 비교';
+if(group!=='starter')document.querySelector('#grid').style.gridTemplateColumns='repeat(2,minmax(0,1fr))';
+const items=groups[group].map(type=>{
+ const article=document.createElement('article');article.innerHTML=`<h2>${BUILDINGS[type].name}</h2><div class="picture"></div><div class="status"><span></span><b class="stock"></b></div><progress max="1" value="0"></progress>`;document.querySelector('#grid').append(article);
+ const renderer=cpu?new SoftwareRenderer({alpha:true}):new THREE.WebGLRenderer({alpha:true,antialias:false,preserveDrawingBuffer:true});renderer.setPixelRatio(1);renderer.setSize(320,246);if(!cpu)renderer.outputColorSpace=THREE.SRGBColorSpace;
+ article.querySelector('.picture').append(renderer.domElement);
+ const scene=new THREE.Scene(),model=makePixelBuilding(type,'human');scene.add(model);
+ const line=new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-.5,0,-.5),new THREE.Vector3(.5,0,-.5),new THREE.Vector3(.5,0,.5),new THREE.Vector3(-.5,0,.5)]),new THREE.LineBasicMaterial({color:'#ffffff'}));scene.add(line);
+ const camera=new THREE.OrthographicCamera(-1,1,.77,-.77,.1,30);
+ return {type,article,renderer,scene,model,camera};
+});
+function render(){
+ for(const item of items){
+  const {type,model,scene,camera,renderer,article}=item;
+  const working=state==='working'||state==='working-ready';
+  const ready=state==='ready'||state==='working-ready'||state==='disabled';
+  const def=BUILDINGS[type],service=SERVICE_OUTPUTS[def.output];
+  const inputs=Object.fromEntries(Object.entries(def.inputs||{}).map(([id,n])=>[id,n*3]));
+  const building={type,enabled:state!=='disabled',health:100,working,progress:working?time%8/8:0,out:ready&&!service?6:0,activeUntil:service&&ready?60:0,inputs:state==='blocked'?{}:inputs,animationTime:time};
+  const sim={time,power:state!=='blocked',stage:1,batteryCharge:ready?65:0,health:{nextCare:ready?60:0},effectiveInputs:()=>def.inputs||{},closestNatural:()=>state==='blocked'?null:{remaining:20}};
+  model.userData.animate(time,building,sim,view);model.scale.setScalar(scale);
+  camera.position.setFromSphericalCoords(5,QUARTER_POLAR,quarterAzimuth(view)).add(new THREE.Vector3(0,.32,0));camera.lookAt(0,.32,0);camera.updateMatrixWorld();renderer.render(scene,camera);
+  const p=model.userData.production;article.querySelector('.status span').textContent=p?p.label:type==='battery'?(ready?'충전됨':'방전됨'):type==='logistics'?(working?'운반 중':'대기'):type==='clinic'?(ready&&building.enabled?'돌봄 중':'대기'):'고정 본체';article.querySelector('.stock').textContent=p?p.outputName+' '+p.displayValue:'';article.querySelector('.stock').classList.toggle('ready',!!p?.ready);article.querySelector('progress').value=p?.displayProgress||0;
+ }
+}
+document.querySelectorAll('[data-state]').forEach(button=>button.onclick=()=>{state=button.dataset.state;document.querySelectorAll('[data-state]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));render();});
+document.querySelector('#view').onchange=e=>{view=+e.target.value;render();};
+document.querySelector('#size').onchange=e=>{scale=+e.target.value;render();};
+document.querySelector('#pause').onclick=e=>{paused=!paused;e.target.textContent=paused?'동작 재개':'동작 멈추기';e.target.setAttribute('aria-pressed',String(paused));};
+window.productionPreview={items,render,setTime:t=>{time=t;render();}};
+function loop(now){if(now-last>=1000/16){if(!paused&&(state==='working'||state==='working-ready'))time+=Math.min(.15,(now-last)/1000);last=now;render();}requestAnimationFrame(loop);}render();requestAnimationFrame(loop);
+</script></body></html>

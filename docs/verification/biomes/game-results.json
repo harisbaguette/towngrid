@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "scope": "game",
+  "checks": [
+    "home link",
+    "world map",
+    "new game",
+    "mobile"
+  ],
+  "production": {},
+  "errors": [],
+  "failed": []
+}

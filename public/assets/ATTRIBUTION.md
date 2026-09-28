@@ -39,7 +39,7 @@ License records are in `characters/LICENSE-*.txt`. The centaur still uses the pr
 Background music is **calm theme** by pebonius; ambient music is **Forest Ambience** by TinyWorlds. Both creator-posted CC0 sources are listed in `audio/music-sources.json`. Original audio remains unchanged; extra MP3/OGG counterparts are codec transcodes. Music crossfades at replay. Generated tones remain as loading fallbacks and action accents. No source user-interface artwork was redistributed; the supplied reference's palette, ribbons and cards were implemented as CSS components.
 
 ## World terrain illustration (2026-09-26)
-`world/irdea-terrain.webp`: generated for ERDYNTH with OpenAI image generation, informed by user-provided visual references. Decorative terrain under the exact interactive country geometry; no text or baked UI.
+`world/irdea-terrain.webp`: generated for ERDYNTH with OpenAI image generation, informed by user-provided visual references. Decorative terrain under the exact interactive country geometry; no text or baked UI. Not drawn since the 2026-09-28 grid map redesign; kept for the art archive.
 
 Rounded canopy geometry and rounded roof tile skins were authored in this project where a matching reusable source was unavailable. Existing licensed walls, framing, characters, machinery, vehicles, and authored movement clips remain in use.
 

@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/serin.png",
+  "portraitRegion": [
+    0,
+    0,
+    550,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        550,
+        0,
+        891,
+        627
+      ],
+      "bbox": [
+        553,
+        82,
+        854,
+        627
+      ],
+      "scale": 0.1834862385321101,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        891,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        928,
+        77,
+        1225,
+        627
+      ],
+      "scale": 0.18181818181818182,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

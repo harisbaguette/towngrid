@@ -21,7 +21,7 @@ passed('33-rank prerequisite graph has no future-industry deadlock');
  const c=new Campaign(),s=c.active;s.build('warehouse',10,12);s.build('house',9,14);s.build('field',12,12);
  s.rank=32;s.money=2000;s.stock.water=30;s.autoSell={water:true};s.reserves.water=7;
  c.routes.push({from:s.siteId,item:'water',enabled:true,amount:6});
- assert.equal(s.minimumStock('water'),13);s.salesTimer=8;s.tick(.01);assert.equal(s.shipments[0]?.amount,10,'auto-sale loads ten units onto an export cart');assert.ok(s.stock.water>=13,'remaining stock stays above its reserve after workers collect supplies');for(let i=0;i<60&&!s.sold.water;i++)s.tick(.25);assert.equal(s.sold.water,10,'payment arrives when the cart reaches the export gate');
+ assert.equal(s.minimumStock('water'),13);s.salesTimer=8;s.tick(.01);const lot=Math.min(30-13,s.tradeConnection().capacity);assert.equal(s.shipments[0]?.amount,lot,'auto-sale loads the surplus, up to one trade-route lot');assert.ok(s.stock.water>=13,'remaining stock stays above its reserve after workers collect supplies');for(let i=0;i<60&&!s.sold.water;i++)s.tick(.25);assert.equal(s.sold.water,lot,'payment arrives when the cart reaches the export gate');
  s.stock.water=13;s.salesTimer=8;s.tick(.01);assert.equal(s.stock.water,13);
  const b=s.buildings.find(v=>v.type==='field');b.health=63;s.money=1000;const cost=s.repairCost(b);assert.ok(s.repair(b.id).ok);assert.equal(b.health,100);assert.equal(s.money,1000-cost);
  s.setOperation(b.id,false,2);run(s,2);assert.equal(b.working,false);assert.equal(b.status,'가동 중지');assert.equal(b.priority,2);
@@ -30,7 +30,9 @@ passed('33-rank prerequisite graph has no future-industry deadlock');
 }
 {
  const s=fresh(),cash=s.money;assert.equal(s.buy('car',1).ok,false);assert.equal(s.money,cash);
- assert.equal(s.buy('wood',5).ok,true);assert.equal(s.money,cash-5*Math.ceil(RESOURCES.wood.price*1.85));assert.equal(s.stock.wood,55);assert.equal(s.produced.wood,undefined);
+ // Imports arrive on an export vehicle (second pass): paid at order, stocked when the vehicle is back at the warehouse.
+ assert.equal(s.buy('wood',5).ok,false,'an import needs a warehouse');s.build('warehouse',10,12);const paid=s.money,wood=s.stock.wood;
+ assert.equal(s.buy('wood',5).ok,true);assert.equal(s.money,paid-5*Math.ceil(RESOURCES.wood.price*1.85));assert.equal(s.stock.wood,wood);for(let i=0;i<400&&s.shipments.length;i++)s.tick(.25);assert.equal(s.stock.wood,wood+5);assert.equal(s.produced.wood,undefined);
  assert.equal(s.buy('wood',-1).ok,false);assert.equal(s.buy('wood',101).ok,false);assert.equal(s.buy('missing',1).ok,false);
  s.money=100;const debt=s.debt;assert.ok(s.recover().ok);assert.equal(s.money,500);assert.equal(s.debt,debt+520);s.money=-100;assert.equal(s.recover().ok,false);
  s.time+=400;assert.ok(s.recover().ok);assert.equal(s.money,500);
@@ -79,7 +81,7 @@ passed('33-rank prerequisite graph has no future-industry deadlock');
 }
 {
  const c=new Campaign({demo:true});c.treasury.rank=25;const state=c.spawnState('estern','시험 자유공국');
- const order=c.stateOrder(state),s=c.active;const before=s.stock[order.item],money=s.money;assert.ok(c.stateAction('trade',state.id).ok);assert.equal(s.stock[order.item],before-order.amount);assert.equal(s.money,money+order.reward);assert.equal(c.stateAction('trade',state.id).ok,false);
+ const order=c.stateOrder(state),s=c.active;const before=s.stock[order.item],money=s.money;assert.ok(c.stateAction('trade',state.id).ok);assert.equal(s.stock[order.item],before-order.amount);assert.equal(s.money,money,'paid when the vehicle arrives');for(let i=0;i<400&&s.shipments.some(v=>v.kind==='state'&&v.phase==='out');i++)c.tick(.25);assert.ok(s.money>=money+order.reward-s.wage);assert.equal(c.stateAction('trade',state.id).ok,false);
  assert.ok(c.stateAction('aid',state.id).ok);assert.ok(c.stateAction('aid',state.id).ok);assert.ok(c.stateAction('pact',state.id).ok);assert.ok(c.stateAction('recognition',state.id).ok);assert.equal(c.stateAction('pact',state.id).ok,false);
  const unstable=c.spawnState('silvaen','시험 연방');unstable.age=13;unstable.wealth=5000;unstable.unrest=100;c.worldDay();const child=c.newStates.find(v=>v.parent===unstable.id);assert.ok(child);assert.equal(child.rootNation,'silvaen');assert.equal(c.stateOrigin(child),unstable.name);
  const save=c.save();assert.deepEqual(new Campaign({saved:decodeSave(encodeSave(save))}).save(),save);

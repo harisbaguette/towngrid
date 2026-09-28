@@ -8,6 +8,8 @@ const out = new URL('../docs/verification/mira-runtime/', import.meta.url);
 await mkdir(out, { recursive: true });
 try {
  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } }), errors = [], failedAssets = [];
+ // Keep this test snapshot stable while other local work triggers HMR.
+ await page.routeWebSocket('**/*',()=>{});
  page.on('pageerror', e => errors.push(e.message));
  page.on('response', r => { if (r.status() >= 400 && r.url().includes('/pixel-characters/')) failedAssets.push(r.url()); });
  await page.goto(process.env.TOWNGRID_URL || 'http://localhost:5173');
@@ -32,7 +34,7 @@ try {
   const ctx = canvas.getContext('2d'); ctx.drawImage(image, 0, 0); const pixels = ctx.getImageData(0, 0, image.width, image.height).data;
   const alpha = (x, y) => pixels[(y * image.width + x) * 4 + 3];
   const cells = [];
-  for (let row = 0; row < 4; row++) for (let column = 0; column < 13; column++) {
+  for (let row = 0; row < 4; row++) for (let column = 0; column < 64; column++) {
    let opaque = 0, border = 0, minY = 128, maxY = 0;
    for (let y = 0; y < 128; y++) for (let x = 0; x < 128; x++) if (alpha(column * 128 + x, row * 128 + y)) {
     opaque++; minY = Math.min(minY, y); maxY = Math.max(maxY, y);
@@ -43,11 +45,26 @@ try {
   const s = window.miraScene;
   return { width: image.width, height: image.height, revision: data.revision, clips: data.clips, cells, residents: s.sim.workers.map(w => ({ id: w.id, appearance: w.appearance, columns: s.workerModels.get(w.id)?.userData.atlas.columns })) };
  });
- assert.equal(assets.width, 1664); assert.equal(assets.height, 512);
+ assert.equal(assets.width, 8192); assert.equal(assets.height, 512);
  assert.ok(assets.cells.every(c => c.opaque > 600 && c.opaque < 10000 && c.border === 0));
- assert.ok(assets.cells.filter(c => c.column < 9).every(c => c.maxY >= 111 && c.maxY <= 117), 'new poses share foot baseline');
- assert.ok(assets.residents.filter(w => w.appearance === 'mira').every(w => w.columns === 13));
- assert.ok(assets.residents.filter(w => w.appearance !== 'mira').every(w => w.columns === 8));
+ assert.ok(assets.cells.every(c => c.minY > 0 && c.maxY < 127), 'all actions stay inside their cells');
+ assert.ok(assets.residents.filter(w => w.appearance === 'mira').every(w => w.columns === 64));
+ assert.ok(assets.residents.filter(w => w.appearance !== 'mira').every(w => w.columns === 64));
+ const headCheck = await page.evaluate(async () => {
+  const meta=await fetch('/assets/pixel-characters/mira/frames.json').then(r=>r.json());
+  const img=new Image();img.src='/assets/pixel-characters/mira/sprites.png';await img.decode();
+  const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const ctx=c.getContext('2d');ctx.drawImage(img,0,0);
+  const checks=[];
+  for(let row=0;row<4;row++) {
+   const bytes=(col,bob)=>Array.from(ctx.getImageData(col*128+42,row*128+13+bob,44,30).data).join(',');
+   const reference=bytes(0,meta.rigAudit[row][0].coreOffset[1]);
+   for(const action of ['walk','carry']) for(const col of meta.clips[action].frames) {
+    const bob=meta.rigAudit[row][col].coreOffset[1];checks.push(bytes(col,bob)===reference);
+   }
+  }
+  return {samples:checks.length,identical:checks.every(Boolean)};
+ });
+ assert.deepEqual(headCheck,{samples:96,identical:true},'head pixels remain identical across walk and carry');
  const views = [];
  for (let view = 0; view < 4; view++) {
   await page.waitForTimeout(60);
@@ -62,8 +79,9 @@ try {
  const activity = await page.evaluate(async () => {
   const scene = window.miraScene, sim = scene.sim, start = sim.time, frames = new Set(), actions = new Set();
   const delivered = sim.logisticsStats.delivered;
-  sim.paused = false; sim.speed = 1;
-  while (sim.time - start < 16) {
+  sim.paused = false; sim.speed = 2;
+  const deadline = performance.now()+55000;
+  while (sim.time - start < 90 && performance.now() < deadline) {
    await new Promise(requestAnimationFrame);
    for (const w of sim.workers.filter(w => w.appearance === 'mira')) {
     const m = scene.workerModels.get(w.id); actions.add(m.userData.current);
@@ -71,19 +89,28 @@ try {
    }
   }
   sim.paused = true;
-  return { frames: [...frames].sort((a,b) => a-b), actions: [...actions], delivered: sim.logisticsStats.delivered - delivered };
+  return { seconds:sim.time-start, frames: [...frames].sort((a,b) => a-b), actions: [...actions], delivered: sim.logisticsStats.delivered - delivered };
  });
- assert.deepEqual(activity.frames, [1,2,3,4,5,6,7,8]);
+ assert.deepEqual(activity.frames, Array.from({length:12},(_,i)=>i+4));
  assert.ok(activity.actions.includes('carry')); assert.ok(activity.delivered > 0);
  await page.getByRole('button', { name: '주민', exact: true }).click();
  await page.locator('.resident-choice').filter({ hasText: /^미라/ }).first().click();
  const sprite = page.locator('.resident-preview');
  assert.equal(await sprite.getAttribute('data-character'), 'mira');
- assert.equal(await sprite.evaluate(e => e.style.backgroundSize), '1300% 400%');
+ assert.equal(await sprite.evaluate(e => e.style.backgroundSize), '6400% 400%');
+ await page.waitForFunction(()=>document.querySelector('.resident-illustration')?.naturalWidth>0);
  const portrait = await page.locator('.resident-illustration').evaluate(e => ({ width: e.naturalWidth, height: e.naturalHeight }));
- assert.deepEqual(portrait, { width: 384, height: 612 });
+ assert.deepEqual(portrait, { width: 220, height: 314 });
+ assert.ok((await page.locator('.resident-illustration').evaluate(e=>e.currentSrc)).endsWith('/portrait-idle.png'));
+ const stillA=await page.locator('.resident-illustration').screenshot();
+ await page.waitForTimeout(1400);
+ const stillB=await page.locator('.resident-illustration').screenshot();
+ assert.ok(!stillA.equals(stillB),'portrait pixels breathe without requiring a panel rerender');
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.waitForFunction(()=>document.querySelector('.resident-illustration')?.currentSrc.endsWith('/portrait.png'));
+ await page.emulateMedia({reducedMotion:'no-preference'});
  const uiClips = [];
- for (const [action, name] of [['idle','대기'],['walk','걷기'],['carry','운반'],['work','작업'],['attack','공격']]) {
+ for (const [action, name] of [['idle','대기'],['walk','걷기'],['carry','운반'],['work','작업'],['attack','공격'],['pickup','들기'],['drop','놓기'],['greet','인사'],['hurt','피격'],['defeat','쓰러짐'],['turn','회전']]) {
   await page.locator('.resident-actions').getByRole('button', { name, exact: true }).click();
   const keyframes = await sprite.evaluate(e => e.getAnimations()[0]?.effect.getKeyframes().map(k => k.backgroundPosition));
   assert.ok(keyframes?.length > 1, `${action}: metadata animation exists`);
@@ -92,16 +119,16 @@ try {
  await page.locator('.resident-actions').getByRole('button', { name: '걷기', exact: true }).click();
  for (const name of ['왼쪽 앞','왼쪽 뒤','오른쪽 뒤','오른쪽 앞']) {
   await page.locator('.resident-directions').getByRole('button', { name, exact: true }).click();
-  assert.equal(await sprite.evaluate(e => e.getAnimations()[0].effect.getKeyframes().length), 9);
+  assert.equal(await sprite.evaluate(e => e.getAnimations()[0].effect.getKeyframes().length), 13);
  }
  await page.screenshot({ path: fileURLToPath(new URL('resident-mira.png', out)) });
- await page.locator('.resident-choice').filter({ hasText: /^로웬/ }).first().click();
- assert.equal(await sprite.evaluate(e => e.style.backgroundSize), '800% 400%');
+ await page.locator('.resident-choice').filter({ hasText: /^닥스/ }).first().click();
+ assert.equal(await sprite.evaluate(e => e.style.backgroundSize), '6400% 400%');
  await page.locator('.resident-choice').filter({ hasText: /^미라/ }).first().click();
  await page.setViewportSize({ width: 390, height: 844 });
  await page.screenshot({ path: fileURLToPath(new URL('mobile-mira.png', out)), fullPage: true });
  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
  assert.deepEqual(errors, []); assert.deepEqual(failedAssets, []);
- await writeFile(new URL('browser-check.json', out), JSON.stringify({ assets, views, activity, portrait, uiClips, mobileOverflow: false, errors, failedAssets }, null, 2));
- console.log(JSON.stringify({ atlas: '1664x512 RGBA', newFrames: 36, legacyActionFrames: 16, views: 4, activity, portrait, uiClips: uiClips.length, errors, failedAssets }));
+ await writeFile(new URL('browser-check.json', out), JSON.stringify({ assets, headCheck, views, activity, portrait, uiClips, mobileOverflow: false, errors, failedAssets }, null, 2));
+ console.log(JSON.stringify({ atlas: '8192x512 RGBA', newFrames: 256, legacyActionFrames: 0, views: 4, activity, portrait, uiClips: uiClips.length, errors, failedAssets }));
 } finally { await browser.close(); }

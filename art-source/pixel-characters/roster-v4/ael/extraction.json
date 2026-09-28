@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/ael.png",
+  "portraitRegion": [
+    0,
+    0,
+    696,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        696,
+        0,
+        1091,
+        1024
+      ],
+      "bbox": [
+        711,
+        257,
+        1059,
+        924
+      ],
+      "scale": 0.14992503748125938,
+      "offset": [
+        38,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1091,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1123,
+        263,
+        1477,
+        928
+      ],
+      "scale": 0.15037593984962405,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

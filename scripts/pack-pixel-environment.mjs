@@ -13,9 +13,11 @@ const outputDir = path.join(root, 'public/assets/pixel-environment');
 await mkdir(sourceDir, { recursive: true });
 await mkdir(outputDir, { recursive: true });
 const spec = JSON.parse(await readFile(path.join(sourceDir, 'pack-manifest.json'), 'utf8'));
-if (process.argv[2]) await copyFile(path.resolve(process.argv[2]), path.join(sourceDir, spec.source));
+const args=process.argv.slice(2),only=args.find(a=>a.startsWith('--only='))?.slice(7).split(','),sourceFile=args.find(a=>!a.startsWith('--'));
+if (sourceFile) await copyFile(path.resolve(sourceFile), path.join(sourceDir, spec.source));
 const cell = spec.cellSize;
 for (const [id, asset] of Object.entries(spec.assets)) {
+  if(only&&!only.includes(id))continue;
   const source = path.join(sourceDir, asset.source || spec.source);
   const metadata = await sharp(source).metadata();
   const rects = asset.rects || Array.from({ length: asset.grid[0] * asset.grid[1] }, (_, index) => {
@@ -40,10 +42,11 @@ for (const [id, asset] of Object.entries(spec.assets)) {
   const scale = asset.opaqueTile ? 1 : Math.min(asset.fit[0] / Math.max(...bounds.map(b => b.width)), asset.fit[1] / Math.max(...bounds.map(b => b.height)));
   const layers = [];
   for (let i = 0; i < crops.length; i++) {
-    const width = asset.opaqueTile ? cell : Math.round(bounds[i].width * scale);
-    const height = asset.opaqueTile ? cell : Math.round(bounds[i].height * scale);
+    const frameScale = asset.independentScale ? Math.min(asset.fit[0] / bounds[i].width, asset.fit[1] / bounds[i].height) : scale;
+    const width = asset.opaqueTile ? cell : Math.round(bounds[i].width * frameScale);
+    const height = asset.opaqueTile ? cell : Math.round(bounds[i].height * frameScale);
     const input = await sharp(crops[i]).resize(width, height, { kernel: 'nearest' }).png().toBuffer();
-    layers.push({ input, left: (i % columns) * cell + Math.floor((cell - width) / 2), top: Math.floor(i / columns) * cell + (asset.opaqueTile ? 0 : asset.baseline - height) });
+    layers.push({ input, left: (i % columns) * cell + Math.floor((cell - width) / 2), top: Math.floor(i / columns) * cell + (asset.opaqueTile ? 0 : asset.centered ? Math.floor((cell - height) / 2) : asset.baseline - height) });
   }
   const atlas = await sharp({ create: { width: cell * columns, height: cell * rows, channels: 4, background: '#00000000' } }).composite(layers).png().toBuffer();
   await writeFile(path.join(outputDir, `${id}.png`), atlas);

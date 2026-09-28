@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/selia.png",
+  "portraitRegion": [
+    0,
+    0,
+    554,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        554,
+        0,
+        899,
+        627
+      ],
+      "bbox": [
+        569,
+        87,
+        862,
+        607
+      ],
+      "scale": 0.19230769230769232,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        899,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        936,
+        87,
+        1218,
+        605
+      ],
+      "scale": 0.19305019305019305,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

@@ -12,6 +12,15 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Build and local runtime output (same set `npm run lint` passes on the command line).
+    "dist/**",
+    ".sites-runtime/**",
+    ".wrangler/**",
+    ".vinext/**",
+    // Working copies other coding tools keep inside the repo (e.g. .kilo/worktrees); they are not this project's source.
+    ".kilo/**",
+    ".claude/**",
+    ".codex/**",
   ]),
   {
     files: ["src/components/ui/**/*.{ts,tsx}", "src/hooks/use-mobile.ts"],

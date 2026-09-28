@@ -34,7 +34,7 @@ try {
   game.camera.position.x+=dx;game.camera.position.z+=dz;game.controls.target.set(11,0,10.5);game.controls.update();
   for(const b of sim.buildings){
    if(b.type==='field')b.progress=.85;
-   const line=game.outline(1,'#ffffff');line.position.set(b.x,.04,b.z);line.material.depthTest=false;line.renderOrder=999;game.scene.add(line);
+   const line=game.outline(1,'#ffffff');line.position.set(b.x,-.10,b.z);line.material.depthTest=false;line.renderOrder=999;game.scene.add(line);
   }
   window.readabilityScene=game;
   return sim.buildings.map(b=>({type:b.type,size:b.size,x:b.x,z:b.z}));

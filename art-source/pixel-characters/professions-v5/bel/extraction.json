@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/bel.png",
+  "portraitRegion": [
+    0,
+    0,
+    533,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        533,
+        0,
+        894,
+        627
+      ],
+      "bbox": [
+        545,
+        61,
+        848,
+        627
+      ],
+      "scale": 0.17667844522968199,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        894,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        940,
+        62,
+        1236,
+        622
+      ],
+      "scale": 0.17857142857142858,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

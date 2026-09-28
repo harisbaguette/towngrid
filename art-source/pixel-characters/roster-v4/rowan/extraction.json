@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/rowan.png",
+  "portraitRegion": [
+    0,
+    0,
+    726,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        726,
+        0,
+        1129,
+        1024
+      ],
+      "bbox": [
+        723,
+        221,
+        1110,
+        929
+      ],
+      "scale": 0.14124293785310735,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1129,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1148,
+        218,
+        1507,
+        921
+      ],
+      "scale": 0.1422475106685633,
+      "offset": [
+        38,
+        15
+      ],
+      "mirror": true
+    }
+  ]
+}

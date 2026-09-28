@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/lien.png",
+  "portraitRegion": [
+    0,
+    0,
+    657,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        657,
+        0,
+        1089,
+        1024
+      ],
+      "bbox": [
+        696,
+        197,
+        1019,
+        930
+      ],
+      "scale": 0.1364256480218281,
+      "offset": [
+        42,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1089,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1160,
+        198,
+        1486,
+        934
+      ],
+      "scale": 0.1358695652173913,
+      "offset": [
+        42,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

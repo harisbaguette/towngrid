@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/dew.png",
+  "portraitRegion": [
+    0,
+    0,
+    656,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        656,
+        0,
+        1083,
+        1024
+      ],
+      "bbox": [
+        705,
+        280,
+        1006,
+        846
+      ],
+      "scale": 0.17667844522968199,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1083,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1160,
+        280,
+        1491,
+        863
+      ],
+      "scale": 0.17152658662092624,
+      "offset": [
+        35,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

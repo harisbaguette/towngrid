@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/iris.png",
+  "portraitRegion": [
+    0,
+    0,
+    541,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        541,
+        0,
+        895,
+        627
+      ],
+      "bbox": [
+        557,
+        92,
+        855,
+        627
+      ],
+      "scale": 0.18691588785046728,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        895,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        935,
+        90,
+        1226,
+        617
+      ],
+      "scale": 0.18975332068311196,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

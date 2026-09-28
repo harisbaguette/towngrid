@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/hana.png",
+  "portraitRegion": [
+    0,
+    0,
+    710,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        710,
+        0,
+        1074,
+        1024
+      ],
+      "bbox": [
+        736,
+        250,
+        1043,
+        960
+      ],
+      "scale": 0.14084507042253522,
+      "offset": [
+        42,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1074,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1105,
+        254,
+        1417,
+        951
+      ],
+      "scale": 0.14347202295552366,
+      "offset": [
+        41,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

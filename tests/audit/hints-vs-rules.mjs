@@ -23,7 +23,8 @@ const ui=['Game.tsx','Operations.tsx','QualityPanels.tsx'].map(n=>readFileSync(n
  const gate=itemGate(s,'plank',3);
  expectBug('H3-plank-gated-actions-offered-early',!up.ok&&!imp.ok&&!spec.ok&&!gate,{uiGate:gate,upgrade:up.error,importPlank:imp.error,specialize:spec.error,plankUnlock:RANKS[unlockRank('sawmill')].name+' (rank index '+unlockRank('sawmill')+')'});}
 // H4: stone cannot be imported until 등록 사업주 while wells (4) and houses (1) consume it; demolition refunds no materials.
-{const c=new Campaign(),s=home(c);const imp=s.buy('stone',5);s.build('warehouse',11,12);const stone0=s.stock.stone;s.build('well',13,12);s.demolish(13,12);
+// Second pass: imports arrive on an export vehicle, so the warehouse that receives them comes first.
+{const c=new Campaign(),s=home(c);s.build('warehouse',11,12);const imp=s.buy('stone',5);const stone0=s.stock.stone;s.build('well',13,12);s.demolish(13,12);
  expectBug('H4-stone-unimportable-and-not-refunded',!imp.ok&&s.stock.stone===stone0-4,{importStone:imp.error,stoneBefore:stone0,stoneAfterBuildAndDemolish:s.stock.stone,quarryUnlock:RANKS[unlockRank('quarry')].name});}
 // H5: 마탑 says facilities inside its ward take no raid damage and demon power disruption is blocked while the ward holds.
 // Damage to facilities outside the ward radius is expected; only damage inside it or a disruption counts as the defect.

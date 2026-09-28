@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/luth.png",
+  "portraitRegion": [
+    0,
+    0,
+    555,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        555,
+        0,
+        895,
+        627
+      ],
+      "bbox": [
+        547,
+        61,
+        861,
+        609
+      ],
+      "scale": 0.18248175182481752,
+      "offset": [
+        35,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        895,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        929,
+        64,
+        1227,
+        605
+      ],
+      "scale": 0.18484288354898337,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

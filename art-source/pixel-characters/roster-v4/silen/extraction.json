@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/silen.png",
+  "portraitRegion": [
+    0,
+    0,
+    667,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        667,
+        0,
+        1091,
+        1024
+      ],
+      "bbox": [
+        695,
+        228,
+        1046,
+        914
+      ],
+      "scale": 0.1457725947521866,
+      "offset": [
+        38,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1091,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1137,
+        233,
+        1502,
+        914
+      ],
+      "scale": 0.14684287812041116,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

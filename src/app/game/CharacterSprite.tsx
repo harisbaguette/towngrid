@@ -13,11 +13,13 @@ export default function CharacterSprite({ race, appearance, index = 0, action = 
  useEffect(() => {
   if (!element.current || !metadata?.clips) return;
   const clip = pixelClip(action, metadata), frames = clip.frames;
-  const pose = (frame: number, offset: number) => ({
+  const pose = (frame: number, offset: number) => {
+   const row=action==='turn'&&offset>=.5?(atlas.row+1)%atlas.rows:atlas.row;
+   return ({
    offset, easing: 'steps(1,end)',
-   backgroundPosition: `${frame / Math.max(1, atlas.columns - 1) * 100}% ${atlas.row / Math.max(1, atlas.rows - 1) * 100}%`,
-   transform: `translateX(${(.5 - (metadata.anchors?.[atlas.row]?.[frame]?.[0] ?? .5)) * 100}%)`,
-  });
+   backgroundPosition: `${frame / Math.max(1, atlas.columns - 1) * 100}% ${row / Math.max(1, atlas.rows - 1) * 100}%`,
+   transform: `translateX(${(.5 - (metadata.anchors?.[row]?.[frame]?.[0] ?? .5)) * 100}%)`,
+  });};
   const keyframes = frames.map((frame: number, index: number) => pose(frame, index / frames.length));
   keyframes.push(pose(clip.once ? frames[frames.length - 1] : frames[0], 1));
   const animation = element.current.animate(keyframes, { duration: frames.length / clip.fps * 1000, iterations: clip.once ? 1 : Infinity, fill: 'both' });

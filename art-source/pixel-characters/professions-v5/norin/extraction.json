@@ -1,0 +1,52 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/norin.png",
+  "portraitRegion": [
+    0,
+    0,
+    567,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        567,
+        0,
+        912,
+        627
+      ],
+      "bbox": [
+        582,
+        75,
+        883,
+        611
+      ],
+      "scale": 0.1865671641791045,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        912,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        941,
+        79,
+        1231,
+        607
+      ],
+      "scale": 0.1893939393939394,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": true,
+      "mirrorAfterNormalization": true
+    }
+  ]
+}

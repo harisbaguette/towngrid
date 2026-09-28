@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/terin.png",
+  "portraitRegion": [
+    0,
+    0,
+    718,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        718,
+        0,
+        1129,
+        1024
+      ],
+      "bbox": [
+        700,
+        183,
+        1114,
+        971
+      ],
+      "scale": 0.12690355329949238,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1129,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1144,
+        178,
+        1527,
+        958
+      ],
+      "scale": 0.1282051282051282,
+      "offset": [
+        39,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

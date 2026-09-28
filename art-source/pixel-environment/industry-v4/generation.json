@@ -1,0 +1,540 @@
+{
+  "referenceImages": [
+    "C:/Users/ghd12/Desktop/TownGrid/public/assets/pixel-environment/warehouse-icon.png",
+    "C:/Users/ghd12/Desktop/TownGrid/public/assets/pixel-environment/sawmill-icon.png",
+    "C:/Users/ghd12/Desktop/TownGrid/public/assets/pixel-environment/lumber-icon.png"
+  ],
+  "records": [
+    {
+      "id": "food",
+      "types": [
+        "quarry",
+        "mill",
+        "bakery",
+        "dock"
+      ],
+      "prompt": "Production-ready TRANSPARENT PNG pixel art game building BASE atlas. EXACTLY 4 equal columns and 4 equal rows. Every row is a different building, each column the SAME building rotated by exactly 90 degrees (SE, NE, NW, SW). Isolated cutouts on TRUE TRANSPARENT background, no labels or text. Match attached TownGrid reference: authentic crisp chunky 16-bit hand-pixelled art, dark teal outlines, honey wood, teal metal, broad 3-tone clusters; no smooth 3D, no vector gradients, no tiny clutter. Each building has a physical PERFECT SQUARE 1x1 world plan, orthographic isometric equal left/right axis lengths, shown on ONE square diamond ground pad. All body and props inside that one square; no long rectangles or extensions. Leave generous transparent gutters and identical cell sizes. Directions must retain SAME layout while rotating, not different architecture. This atlas is FIXED ARCHITECTURE ONLY: no moving parts described as omitted, no output goods, no smoke or fire. Keep all buildings compact, height less than 1.1 times pad width; large readable functional silhouette. Use as much of the cell width as possible but leave 12% margin. Keep every row perfectly within its equal horizontal band. ROW SPECIFICATIONS:\nRow 1: A STONE QUARRY: three big rough gray boulders at the back, simple short timber gantry with one empty hook mount, low open rectangular stone cutting block at center. NO pickaxe, NO hammer, NO cut stone products. Leave front-right of square pad clear for output.\nRow 2: A FLOUR WINDMILL: a small squat cream stone mill tower with a honey wood teal roof and a clearly exposed circular axle mounting point high above the roof in the center; NO windmill sails or rotor attached (separate animation layer), one grain hopper, empty output platform in front. Silhouette compact and broad, not tall.\nRow 3: A BAKERY: tiny square honey wood bakery with terracotta roof, a BIG unmistakable bread-shaped carved wooden sign on roof, and large DARK EMPTY brick oven mouth centered on the near-facing wall, one stubby chimney. NO flames, NO smoke, NO bread goods on pad. Keep wall detail simple.\nRow 4: A FISHING DOCK: compact square wooden pier on short posts entirely within the tile, one short simple hoist with a hanging point, a big fixed fish-shaped sign, one tiny teal roof at back. NO hanging net, NO boat, NO fish goods. Empty front half of pier for sorting fish.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-f70fcb6e-57af-42c8-9248-319179551825.png",
+      "bounds": {
+        "columns": [
+          [
+            0,
+            311,
+            622,
+            934,
+            1245
+          ],
+          [
+            0,
+            311,
+            622,
+            934,
+            1245
+          ],
+          [
+            0,
+            311,
+            622,
+            934,
+            1245
+          ],
+          [
+            0,
+            311,
+            622,
+            934,
+            1245
+          ]
+        ],
+        "rows": [
+          0,
+          316,
+          631,
+          947,
+          1263
+        ]
+      }
+    },
+    {
+      "id": "basic",
+      "types": [
+        "stable",
+        "generator",
+        "workshop",
+        "logistics"
+      ],
+      "prompt": "Production-ready TRANSPARENT PNG pixel art game building BASE atlas. EXACTLY 4 equal columns and 4 equal rows. Every row is a different building, each column the SAME building rotated by exactly 90 degrees (SE, NE, NW, SW). Isolated cutouts on TRUE TRANSPARENT background, no labels or text. Match attached TownGrid reference: authentic crisp chunky 16-bit hand-pixelled art, dark teal outlines, honey wood, teal metal, broad 3-tone clusters; no smooth 3D, no vector gradients, no tiny clutter. Each building has a physical PERFECT SQUARE 1x1 world plan, orthographic isometric equal left/right axis lengths, shown on ONE square diamond ground pad. All body and props inside that one square; no long rectangles or extensions. Leave generous transparent gutters and identical cell sizes. Directions must retain SAME layout while rotating, not different architecture. This atlas is FIXED ARCHITECTURE ONLY: no moving parts described as omitted, no output goods, no smoke or fire. Keep all buildings compact, height less than 1.1 times pad width; large readable functional silhouette. Use as much of the cell width as possible but leave 12% margin. Keep every row perfectly within its equal horizontal band. ROW SPECIFICATIONS:\nRow 1: A HORSE STABLE: compact square honey wood barn, wide OPEN stall entrance and red gable roof, a large golden HORSESHOE above the entrance, very small fixed brown horse head looking out of the stall. One feeding trough. NO loose hay bags, NO output piles.\nRow 2: A STEAM GENERATOR: short copper boiler with dark empty firebox mouth, thick charcoal chimney and one clearly empty circular flywheel axle mount on visible face, a large brass lightning emblem on tank. NO wheel, NO fire, NO steam. Leave front edge of pad empty.\nRow 3: A MECHANICAL PRESS WORKSHOP: compact square teal metal H-shaped gantry above low workbench, upright rails and empty gap for moving piston RAM; big dark gear emblem on side. NO piston ram, NO loose gears or materials, NO smoke. Open center for moving ram.\nRow 4: AN AUTOMATED LOGISTICS DEPOT: tiny square open-sided teal roof on four wood posts, a short dark empty roller conveyor crossing the middle of the pad, simple parcel-outline sign on roof. NO loose parcels, NO trucks, no output goods. Empty belt for separately animated package.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-50289df3-dee8-49b9-87a7-d46a21af715d.png",
+      "bounds": {
+        "columns": [
+          [
+            0,
+            327,
+            655,
+            982,
+            1310
+          ],
+          [
+            0,
+            327,
+            655,
+            982,
+            1310
+          ],
+          [
+            0,
+            327,
+            655,
+            982,
+            1310
+          ],
+          [
+            0,
+            327,
+            655,
+            982,
+            1310
+          ]
+        ],
+        "rows": [
+          0,
+          321,
+          600,
+          883,
+          1200
+        ]
+      }
+    },
+    {
+      "id": "utilities",
+      "types": [
+        "reservoir",
+        "depot",
+        "windturbine",
+        "steamworks"
+      ],
+      "prompt": "Production-ready TRANSPARENT PNG pixel art game building BASE atlas. EXACTLY 4 equal columns and 4 equal rows. Every row is a different building, each column the SAME building rotated by exactly 90 degrees (SE, NE, NW, SW). Isolated cutouts on TRUE TRANSPARENT background, no labels or text. Match attached TownGrid reference: authentic crisp chunky 16-bit hand-pixelled art, dark teal outlines, honey wood, teal metal, broad 3-tone clusters; no smooth 3D, no vector gradients, no tiny clutter. Each building has a physical PERFECT SQUARE 1x1 world plan, orthographic isometric equal left/right axis lengths, shown on ONE square diamond ground pad. All body and props inside that one square; no long rectangles or extensions. Leave generous transparent gutters and identical cell sizes. Directions must retain SAME layout while rotating, not different architecture. This atlas is FIXED ARCHITECTURE ONLY: no moving parts described as omitted, no output goods, no smoke or fire. Keep all buildings compact, height less than 1.1 times pad width; large readable functional silhouette. Use as much of the cell width as possible but leave 12% margin. Keep every row perfectly within its equal horizontal band. ROW SPECIFICATIONS:\nRow 1: A WATER RESERVOIR TOWER: squat round blue water tank on four chunky timber legs, large light blue water droplet emblem, one short outlet pipe ending above a small empty stone basin on pad. NO flowing water, NO moving valve wheel, no goods.\nRow 2: A MATERIAL STORAGE DEPOT: open square wooden shelter with flat teal roof and two wide low EMPTY shelving bays, strong honey wood uprights, large simple crate-outline sign. NO crates, NO barrels, NO goods. Square open storage platform.\nRow 3: A WIND TURBINE: compact single cream metal pylon with teal small generator housing and one clearly exposed round axle hub near top, NO BLADES OR ROTOR (will be added as moving layer). Chunky low proportions, within one square stone pad, no props.\nRow 4: A STEAM MACHINE WORKS: low open copper and teal workshop with fixed upright press guide rails and empty gap for a piston, one copper boiler at back and squat chimney. NO piston ram, NO steam, NO gears on ground. Clearly distinct from basic press by copper boiler.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-19273fc8-d2a6-4fbc-abf6-73ebff940253.png",
+      "bounds": {
+        "columns": [
+          [
+            0,
+            308,
+            616,
+            925,
+            1233
+          ],
+          [
+            0,
+            308,
+            616,
+            925,
+            1233
+          ],
+          [
+            0,
+            308,
+            616,
+            925,
+            1233
+          ],
+          [
+            0,
+            308,
+            616,
+            925,
+            1233
+          ]
+        ],
+        "rows": [
+          0,
+          329,
+          637,
+          932,
+          1275
+        ]
+      }
+    },
+    {
+      "id": "mining",
+      "types": [
+        "ironmine",
+        "coalpit",
+        "smelter",
+        "oilpump"
+      ],
+      "prompt": "Production-ready TRANSPARENT PNG pixel art game building BASE atlas. EXACTLY 4 equal columns and 4 equal rows. Every row is a different building, each column the SAME building rotated by exactly 90 degrees (SE, NE, NW, SW). Isolated cutouts on TRUE TRANSPARENT background, no labels or text. Match attached TownGrid reference: authentic crisp chunky 16-bit hand-pixelled art, dark teal outlines, honey wood, teal metal, broad 3-tone clusters; no smooth 3D, no vector gradients, no tiny clutter. Each building has a physical PERFECT SQUARE 1x1 world plan, orthographic isometric equal left/right axis lengths, shown on ONE square diamond ground pad. All body and props inside that one square; no long rectangles or extensions. Leave generous transparent gutters and identical cell sizes. Directions must retain SAME layout while rotating, not different architecture. This atlas is FIXED ARCHITECTURE ONLY: no moving parts described as omitted, no output goods, no smoke or fire. Keep all buildings compact, height less than 1.1 times pad width; large readable functional silhouette. Use as much of the cell width as possible but leave 12% margin. Keep every row perfectly within its equal horizontal band. ROW SPECIFICATIONS:\nRow 1: AN IRON MINE: short wood-framed gray stone mine entrance with large reddish iron ore vein embedded in left wall, a short fixed lifting gantry centered above portal, clearly visible empty circular winch mount. NO winch wheel, no ore cart, no loose output.\nRow 2: A COAL MINE: square low dark gray rock entrance with honey wood supports, black coal seam at side, one stout vertical lift guide frame centered above opening. NO hanging lift basket, NO loose output coal. Leave front pad clear.\nRow 3: A STEEL SMELTER: squat brick and teal iron furnace with broad dark EMPTY firebox mouth and a thick short silver chimney; a small fixed pouring channel at front, one copper input hopper. NO flames, NO glowing metal, NO smoke, NO steel bars.\nRow 4: AN OIL PUMP: recognizable squat teal A-frame pumpjack SUPPORT with central bearing high on frame and a vertical polished rod at front, one low dark tank behind. NO rocking horsehead or top beam, NO counterweight wheel (all separately animated). Keep empty central axle for beam. NO barrels.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-b4b06701-c6f9-4cad-a922-736f08e92a09.png",
+      "bounds": {
+        "columns": [
+          [
+            0,
+            305,
+            611,
+            916,
+            1222
+          ],
+          [
+            0,
+            305,
+            611,
+            916,
+            1222
+          ],
+          [
+            0,
+            307,
+            611,
+            916,
+            1222
+          ],
+          [
+            0,
+            305,
+            611,
+            916,
+            1222
+          ]
+        ],
+        "rows": [
+          0,
+          322,
+          643,
+          965,
+          1287
+        ]
+      }
+    },
+    {
+      "id": "materials",
+      "types": [
+        "refinery",
+        "chemical",
+        "manaextractor",
+        "electronics"
+      ],
+      "prompt": "Production-ready TRANSPARENT PNG pixel art game building BASE atlas. EXACTLY 4 equal columns and 4 equal rows. Every row is a different building, each column the SAME building rotated by exactly 90 degrees (SE, NE, NW, SW). Isolated cutouts on TRUE TRANSPARENT background, no labels or text. Match attached TownGrid reference: authentic crisp chunky 16-bit hand-pixelled art, dark teal outlines, honey wood, teal metal, broad 3-tone clusters; no smooth 3D, no vector gradients, no tiny clutter. Each building has a physical PERFECT SQUARE 1x1 world plan, orthographic isometric equal left/right axis lengths, shown on ONE square diamond ground pad. All body and props inside that one square; no long rectangles or extensions. Leave generous transparent gutters and identical cell sizes. Directions must retain SAME layout while rotating, not different architecture. This atlas is FIXED ARCHITECTURE ONLY: no moving parts described as omitted, no output goods, no smoke or fire. Keep all buildings compact, height less than 1.1 times pad width; large readable functional silhouette. Use as much of the cell width as possible but leave 12% margin. Keep every row perfectly within its equal horizontal band. ROW SPECIFICATIONS:\nRow 1: AN OIL REFINERY: two squat silver distillation towers of different heights, one horizontal copper pipe joining them and short visible outlet nozzle, a clear empty valve axle on near side. NO valve wheel, NO smoke, NO drums. Broad silhouette fitting one square pad.\nRow 2: A CHEMICAL PLANT: one broad pale teal reactor vessel with a large dark glass inspection window, one low cream hopper and two thick connected copper pipes. NO glowing liquid or bubbles in window, NO vent fan, NO goods. Simple 3 big forms only.\nRow 3: A MANA CRYSTAL EXTRACTOR: short gray stone circular extractor basin between TWO chunky teal mechanical prongs on a square pad, an empty crystal socket in the center, copper cables. NO crystals, NO floating orb, NO glow, no goods.\nRow 4: AN ELECTRONICS FACTORY: low cream and teal open assembly bench under a small teal scanner arch, a big green circuit symbol on back panel, empty round robot-arm pedestal at one side. NO robot arm, NO circuit board workpieces or output. Minimal broad forms.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-976ca410-d13f-45f1-903a-08bf12ce8a61.png",
+      "bounds": {
+        "columns": [
+          [
+            0,
+            329,
+            624,
+            932,
+            1243
+          ],
+          [
+            0,
+            331,
+            626,
+            932,
+            1243
+          ],
+          [
+            0,
+            331,
+            624,
+            924,
+            1243
+          ],
+          [
+            0,
+            327,
+            624,
+            932,
+            1243
+          ]
+        ],
+        "rows": [
+          0,
+          348,
+          649,
+          949,
+          1265
+        ]
+      }
+    },
+    {
+      "id": "advanced",
+      "types": [
+        "automotive",
+        "laboratory",
+        "hospital",
+        "arcanepower"
+      ],
+      "prompt": "Production-ready TRANSPARENT PNG pixel art game building BASE atlas. EXACTLY 4 equal columns and 4 equal rows. Every row is a different building, each column the SAME building rotated by exactly 90 degrees (SE, NE, NW, SW). Isolated cutouts on TRUE TRANSPARENT background, no labels or text. Match attached TownGrid reference: authentic crisp chunky 16-bit hand-pixelled art, dark teal outlines, honey wood, teal metal, broad 3-tone clusters; no smooth 3D, no vector gradients, no tiny clutter. Each building has a physical PERFECT SQUARE 1x1 world plan, orthographic isometric equal left/right axis lengths, shown on ONE square diamond ground pad. All body and props inside that one square; no long rectangles or extensions. Leave generous transparent gutters and identical cell sizes. Directions must retain SAME layout while rotating, not different architecture. This atlas is FIXED ARCHITECTURE ONLY: no moving parts described as omitted, no output goods, no smoke or fire. Keep all buildings compact, height less than 1.1 times pad width; large readable functional silhouette. Use as much of the cell width as possible but leave 12% margin. Keep every row perfectly within its equal horizontal band. ROW SPECIFICATIONS:\nRow 1: AN AUTOMOBILE ASSEMBLY FACTORY: small square open-front teal gantry assembly bay, thick overhead beam with large clear car silhouette emblem, short empty conveyor platform, one empty robot arm pedestal at rear-left. NO robot arm, NO car, NO goods.\nRow 2: A PHARMACEUTICAL LABORATORY: compact square pale cream and turquoise clean workshop with one big glass mixing vessel on its visible face, fixed copper stirrer support, a large pill capsule emblem above. NO moving stirrer, NO bubbles or glow, NO bottles on pad.\nRow 3: A HOSPITAL: square cream clinic building with clean teal hip roof, very large RED MEDICAL PLUS on roof, wide dark entrance, one small cyan window, simple long fixed bench at front. NO ambulance, NO patients, NO bottles, NO animated lights.\nRow 4: AN ARCANE POWER STATION: squat wide bronze and teal generator with TWO short ceramic insulator pillars bracketing an empty central orb mount above a low machine base, big lightning emblem on front. NO floating crystal, NO orb, NO electric arcs, no goods.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-74d9c22b-f2f0-4848-8876-9bb2821d79e1.png",
+      "bounds": {
+        "columns": [
+          [
+            0,
+            311,
+            623,
+            934,
+            1246
+          ],
+          [
+            0,
+            311,
+            623,
+            934,
+            1246
+          ],
+          [
+            0,
+            311,
+            623,
+            934,
+            1246
+          ],
+          [
+            0,
+            311,
+            623,
+            934,
+            1246
+          ]
+        ],
+        "rows": [
+          0,
+          333,
+          645,
+          946,
+          1262
+        ]
+      }
+    },
+    {
+      "id": "network",
+      "types": [
+        "magetower",
+        "leyrelay",
+        "battery",
+        "station"
+      ],
+      "prompt": "Production-ready TRANSPARENT PNG pixel art game building BASE atlas. EXACTLY 4 equal columns and 4 equal rows. Every row is a different building, each column the SAME building rotated by exactly 90 degrees (SE, NE, NW, SW). Isolated cutouts on TRUE TRANSPARENT background, no labels or text. Match attached TownGrid reference: authentic crisp chunky 16-bit hand-pixelled art, dark teal outlines, honey wood, teal metal, broad 3-tone clusters; no smooth 3D, no vector gradients, no tiny clutter. Each building has a physical PERFECT SQUARE 1x1 world plan, orthographic isometric equal left/right axis lengths, shown on ONE square diamond ground pad. All body and props inside that one square; no long rectangles or extensions. Leave generous transparent gutters and identical cell sizes. Directions must retain SAME layout while rotating, not different architecture. This atlas is FIXED ARCHITECTURE ONLY: no moving parts described as omitted, no output goods, no smoke or fire. Keep all buildings compact, height less than 1.1 times pad width; large readable functional silhouette. Use as much of the cell width as possible but leave 12% margin. Keep every row perfectly within its equal horizontal band. ROW SPECIFICATIONS:\nRow 1: A MAGE TOWER: compact square lavender stone tower with a broad pointed purple roof and small golden crescent finial, two simple cyan windows, a small empty crystal pedestal on front pad. NO floating crystals or glow. Tower kept squat enough to fit entire cell.\nRow 2: A MANA RELAY: two squat teal pylons holding a broad copper circular portal ring with EMPTY dark center, low square platform. NO energy orb, NO glow, NO arcs. A clear teleportation gate silhouette, no elaborate filigree.\nRow 3: A BATTERY STATION: three chunky teal battery cabinets joined on one square pad, clearly empty DARK vertical charge indicator slots facing outward, one big cream lightning emblem. NO lit gauges, no glow, no barrels.\nRow 4: A CARGO RAIL STATION: compact square terracotta-roof freight shed and short simple silver rails embedded across the front of the SAME square pad, one broad roof clock with no text, open unloading door. NO train, NO freight, no loose output.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-05e06133-d0fa-4185-b7ca-80ff2b48b8ab.png",
+      "bounds": {
+        "columns": [
+          [
+            0,
+            307,
+            615,
+            922,
+            1230
+          ],
+          [
+            0,
+            307,
+            615,
+            922,
+            1230
+          ],
+          [
+            0,
+            307,
+            615,
+            922,
+            1230
+          ],
+          [
+            0,
+            307,
+            615,
+            922,
+            1230
+          ]
+        ],
+        "rows": [
+          0,
+          325,
+          639,
+          947,
+          1278
+        ]
+      }
+    },
+    {
+      "id": "civic",
+      "types": [
+        "clinic",
+        "bank",
+        "barracks",
+        "dwarfhouse"
+      ],
+      "prompt": "Production-ready TRANSPARENT PNG pixel art game building BASE atlas. EXACTLY 4 equal columns and 4 equal rows. Every row is a different building, each column the SAME building rotated by exactly 90 degrees (SE, NE, NW, SW). Isolated cutouts on TRUE TRANSPARENT background, no labels or text. Match attached TownGrid reference: authentic crisp chunky 16-bit hand-pixelled art, dark teal outlines, honey wood, teal metal, broad 3-tone clusters; no smooth 3D, no vector gradients, no tiny clutter. Each building has a physical PERFECT SQUARE 1x1 world plan, orthographic isometric equal left/right axis lengths, shown on ONE square diamond ground pad. All body and props inside that one square; no long rectangles or extensions. Leave generous transparent gutters and identical cell sizes. Directions must retain SAME layout while rotating, not different architecture. This atlas is FIXED ARCHITECTURE ONLY: no moving parts described as omitted, no output goods, no smoke or fire. Keep all buildings compact, height less than 1.1 times pad width; large readable functional silhouette. Use as much of the cell width as possible but leave 12% margin. Keep every row perfectly within its equal horizontal band. ROW SPECIFICATIONS:\nRow 1: A SMALL CLINIC: tiny square honey wood cottage with CREAM roof and a very big RED MEDICAL PLUS above open front entrance, one window, short herb planter. Clearly a modest rural clinic, not hospital. NO lamps lit, no people, no goods.\nRow 2: AN INVESTMENT OFFICE: square cream stone office with low dark blue hip roof, two chunky short columns at entrance, one large gold coin emblem above doorway. NO text, NO loose coins or money, no animation parts.\nRow 3: A GUARD BARRACKS: square low gray stone guardhouse with terracotta roof, very large shield emblem and TWO crossed fixed spears over entrance, one red triangular flag. NO people, no weapons scattered on ground.\nRow 4: A DWARF HOME: squat square gray-stone dwelling with low dark teal roof, very wide short wooden arched door, thick stone corner blocks, large carved hammer emblem. Clearly domestic housing, not industrial shop. NO smoke, NO work tools or inventory.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-9ff1cfbe-aeb2-4fdc-83a4-b9d8eee7dd35.png",
+      "bounds": {
+        "columns": [
+          [
+            0,
+            307,
+            615,
+            922,
+            1230
+          ],
+          [
+            0,
+            308,
+            615,
+            922,
+            1230
+          ],
+          [
+            0,
+            307,
+            615,
+            922,
+            1230
+          ],
+          [
+            0,
+            309,
+            615,
+            921,
+            1230
+          ]
+        ],
+        "rows": [
+          0,
+          319,
+          637,
+          958,
+          1278
+        ]
+      }
+    },
+    {
+      "id": "homes",
+      "types": [
+        "titanhouse",
+        "spirithouse",
+        "centaurhouse"
+      ],
+      "prompt": "Production-ready TRANSPARENT PNG pixel art game building BASE atlas. EXACTLY 4 equal columns and 3 equal rows. Every row is a different building, each column the SAME building rotated by exactly 90 degrees (SE, NE, NW, SW). Isolated cutouts on TRUE TRANSPARENT background, no labels or text. Match attached TownGrid reference: authentic crisp chunky 16-bit hand-pixelled art, dark teal outlines, honey wood, teal metal, broad 3-tone clusters; no smooth 3D, no vector gradients, no tiny clutter. Each building has a physical PERFECT SQUARE 1x1 world plan, orthographic isometric equal left/right axis lengths, shown on ONE square diamond ground pad. All body and props inside that one square; no long rectangles or extensions. Leave generous transparent gutters and identical cell sizes. Directions must retain SAME layout while rotating, not different architecture. This atlas is FIXED ARCHITECTURE ONLY: no moving parts described as omitted, no output goods, no smoke or fire. Keep all buildings compact, height less than 1.1 times pad width; large readable functional silhouette. Use as much of the cell width as possible but leave 12% margin. Keep every row perfectly within its equal horizontal band. ROW SPECIFICATIONS:\nRow 1: A TITAN HOME: massive-looking low square stone dwelling with huge broad rectangular doorway, oversized stone lintel and thick pillars, flat terracotta slab roof. Single tiny teal window emphasizes large doorway. All fits same one square tile, no external props.\nRow 2: A SPIRIT HOME: simple squat square fantasy dwelling grown from two broad pale tree trunks, one enormous leaf-shaped emerald roof, large softly cyan solid window and purple round door. Pixel art with hard edges, no glow effects, no wispy particles, no character.\nRow 3: A CENTAUR HOME: square low wooden longhouse with a very broad tall arched double doorway, green gable roof, a small bow-and-leaf emblem above entrance and two wide windows. Domestic dwelling, not horse stable; NO horseshoe sign. No characters or inventory.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-e3c33158-84f3-44ff-badb-1800eb737b2a.png",
+      "bounds": {
+        "columns": [
+          [
+            0,
+            362,
+            724,
+            1086,
+            1448
+          ],
+          [
+            0,
+            362,
+            724,
+            1086,
+            1448
+          ],
+          [
+            0,
+            362,
+            724,
+            1086,
+            1448
+          ]
+        ],
+        "rows": [
+          0,
+          362,
+          717,
+          1086
+        ]
+      }
+    },
+    {
+      "id": "goods",
+      "types": [],
+      "prompt": "Create a production-ready transparent PNG atlas of EXACTLY SIXTEEN separate inventory sprites, a perfectly regular 4-column by 4-row grid. No text, labels, floor, shadows or scenery; every object isolated in own cell with broad transparent gutters. Authentic chunky hand-pixelled 16-bit art matching references: hard square pixel clusters, dark teal contours, broad few-color shading, NOT smooth vector or 3D. Isometric 3/4 viewpoint, function obvious at 24px. Row 1 left to right: (1) neat stack of THREE cut gray stone blocks, (2) pale cream flour sack with tied neck and small wheat emblem, (3) THREE golden bread loaves in small flat basket, (4) small shallow crate holding THREE blue silver fish. Row 2: (1) TWO steel gears stacked, (2) small open crate of reddish iron ore chunks, (3) small open crate of BLACK coal lumps, (4) THREE pale silver steel ingots stacked. Row 3: (1) BLACK oil barrel with dark droplet emblem, (2) bright YELLOW fuel drum with flame emblem, (3) white open sack full of cream polymer pellets, (4) THREE bright VIOLET mana crystals. Row 4: (1) stack of THREE green circuit boards with large gold traces, (2) ONE small complete RED passenger car viewed isometrically, wheels visible, no shadow, (3) THREE medicine bottles, white body turquoise caps and one red medical plus, (4) ONE closed honey brown wooden freight crate with broad diagonal straps. Each image fully inside its equal cell. Transparent background mandatory.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-423f6764-65dc-4a21-b7b0-f037e937323a.png",
+      "bounds": {
+        "columns": [
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            313,
+            628,
+            940,
+            1254
+          ]
+        ],
+        "rows": [
+          0,
+          351,
+          637,
+          940,
+          1254
+        ]
+      }
+    },
+    {
+      "id": "tools",
+      "types": [],
+      "prompt": "Create a transparent PNG game animation PARTS atlas of EXACTLY SIXTEEN isolated objects in a perfectly regular 4-column by 4-row grid. These are cutout PARTS that will be attached to buildings, NOT whole buildings. No labels, text, scenery, ground or shadow. Hard chunky hand-pixelled 16-bit pixel art matching reference: dark teal outline, warm honey wood and copper, teal steel, broad limited-color clusters. Broad transparent gutters; each isolated sprite fully within its equal cell. Row 1 left to right: (1) ONE diagonal silver pickaxe on a straight long honey wood handle, (2) ONE perfectly symmetric four-sail wooden WINDMILL ROTOR, four broad cream sails around a round hub, FRONT-FACING flat straight-on view, no tower, (3) ONE compact bright orange furnace flame, (4) ONE vertically oriented teal and silver mechanical press RAM, square steel head at bottom and short piston rod extending UP, no machine. Row 2: (1) ONE front-facing round brass FLYWHEEL with six thick spokes, (2) ONE oil-pumpjack rocking top BEAM with orange curved horsehead at its RIGHT END, isolated SIDE-VIEW horizontal beam and pivot in CENTER, no supports or rod, (3) ONE compact bent teal industrial ROBOT ARM with claw, 3/4 view, small round mounting pivot at BOTTOM, no platform, (4) ONE large faceted violet magical crystal. Row 3: (1) a short VERTICAL stream of clear CYAN water falling downward with tiny splash at bottom, (2) ONE compact triangular hanging fishing NET full of mesh pattern, gathered at TOP CENTER, no fish and no crane, (3) ONE small opaque soft-gray PIXEL puff of steam in three chunky clusters, no background glow, (4) ONE small bright cyan forked ELECTRIC SPARK, chunky pixel shape. Row 4: (1) ONE front-facing red four-spoke VALVE WHEEL, (2) ONE front-facing silver four-blade VENTILATION FAN rotor, (3) THREE small turquoise liquid bubbles of different sizes together, (4) ONE small rectangular GREEN INDICATOR LAMP with brass border, flat front view. Keep silhouettes unmistakable and ready to animate separately. Transparent background mandatory.",
+      "generatedFile": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0e0b8-bd9b-7d70-9b1f-f0979e17fb87\\exec-8611d2f0-3227-4595-9120-53fcda7b6bb3.png",
+      "bounds": {
+        "columns": [
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            313,
+            637,
+            956,
+            1254
+          ],
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ],
+          [
+            0,
+            313,
+            627,
+            940,
+            1254
+          ]
+        ],
+        "rows": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ]
+      }
+    }
+  ]
+}

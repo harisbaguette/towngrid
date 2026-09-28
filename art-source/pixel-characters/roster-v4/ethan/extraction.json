@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/ethan.png",
+  "portraitRegion": [
+    0,
+    0,
+    698,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        698,
+        0,
+        1091,
+        1024
+      ],
+      "bbox": [
+        685,
+        175,
+        1051,
+        895
+      ],
+      "scale": 0.1388888888888889,
+      "offset": [
+        38,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1091,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1131,
+        171,
+        1497,
+        893
+      ],
+      "scale": 0.13850415512465375,
+      "offset": [
+        38,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

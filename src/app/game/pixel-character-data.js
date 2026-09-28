@@ -23,7 +23,7 @@ export const PIXEL_CLIPS = {
  drop: { frames: [4, 7, 6, 0], fps: 7, once: true },
  defeat: { frames: [0], fps: 1, once: true },
 };
-export const PIXEL_HEIGHT = { human: 1.05, dwarf: .84, titan: 1.28, elf: 1.12, spirit: .9, centaur: 1.18, fae: .82, demon: 1.18, orc: 1.15, goblin: .8, beast: 1.08, dragon: 1.2, aquatic: 1.1 };
+export const PIXEL_HEIGHT = { human: 1.05, dwarf: .84, titan: 1.5, elf: 1.12, spirit: .9, centaur: 1.18, fae: .82, demon: 1.18, orc: 1.15, goblin: .8, beast: 1.08, dragon: 1.2, aquatic: 1.1 };
 export function pixelIdentity(race = 'human', index = 0, appearance) {
  const look = residentLook(race, index, appearance) || PIXEL_ENEMIES[race] || residentLook('human', index);
  return { ...look, race, portrait: `/assets/pixel-characters/${look.id}/portrait.png`, sheet: `/assets/pixel-characters/${look.id}/sprites.png` };

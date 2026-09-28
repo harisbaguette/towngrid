@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/nalia.png",
+  "portraitRegion": [
+    0,
+    0,
+    548,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        548,
+        0,
+        892,
+        627
+      ],
+      "bbox": [
+        552,
+        58,
+        841,
+        604
+      ],
+      "scale": 0.18315018315018314,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        892,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        944,
+        58,
+        1224,
+        606
+      ],
+      "scale": 0.18248175182481752,
+      "offset": [
+        38,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

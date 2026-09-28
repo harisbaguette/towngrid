@@ -47,6 +47,9 @@ def cut_object(image, labels, obj):
 
 
 def pack_character(spec, output):
+    if spec.get('runtimeRig'):
+        from roster_rig import pack_roster_rig
+        return pack_roster_rig(spec['runtimeRig'], output)
     if spec.get('runtimePrototype'):
         from mira_runtime import pack_mira_runtime
         return pack_mira_runtime(spec['runtimePrototype'], output)
@@ -204,7 +207,7 @@ if __name__ == '__main__':
     for spec in specs:
         summary = pack_character(spec, output)
         summaries.append(summary)
-        print(summary['id'], summary['frames'], 'frames', summary['sourceGrid'])
+        print(summary['id'], summary['frames'], 'frames', summary.get('sourceGrid',summary.get('animationMethod','rig')))
     # Incremental correction packs must retain the rest of the roster catalog.
     catalog = [json.loads(path.read_text()) for path in sorted(output.glob('*/frames.json'))]
     (output / 'catalog.json').write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + '\n')

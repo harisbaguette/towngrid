@@ -2,32 +2,64 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { ENVIRONMENT_ASSETS, ENVIRONMENT_CELL, PIXEL_BUILDINGS, pixelBuildingFrame, sawmillFrame, oakFrame, waterFrame } from '../src/app/game/pixel-environment-data.js';
 import { makePixelBuilding, makePixelSawmill, makePixelTree, makePixelWater } from '../src/app/game/pixel-environment.js';
+import { productionVisualState } from '../src/app/game/production-visuals.js';
 import { Simulation } from '../src/app/game/simulation.js';
 import { Campaign } from '../src/app/game/campaign.js';
 import { NATIONS } from '../src/app/game/world.js';
 import { decodeSave } from '../src/app/game/persistence.js';
 
-// Production status must govern the art, including repairs, pauses and shortages.
-for (const building of [{ working: false }, { working: true, enabled: false }, { working: true, health: 0 }]) {
- assert.equal(sawmillFrame(building, 12), 0);
+// Architecture remains fixed while moving parts and inventory change independently.
+const active = { working: true, enabled: true, health: 100, progress: .4, out: 0 };
+for (const type of PIXEL_BUILDINGS) for (const time of [0,.21,.41,2]) assert.equal(pixelBuildingFrame(type,active,time),0);
+assert.equal(sawmillFrame(active,4),0);
+for (const type of ['well','lumber','sawmill','field']) {
+ const model=makePixelBuilding(type,'human');
+ const b={...active,type,animationTime:.2};
+ model.userData.animate(.2,b);
+ const base=model.userData.texture.offset.toArray();
+ const pose=model.userData.layers.map(l=>[...l.position.toArray(),l.userData.sprite.material.rotation]);
+ model.userData.animate(.8,{...b,animationTime:.8});
+ assert.deepEqual(model.userData.texture.offset.toArray(),base,type+' fixed architecture');
+ if(type!=='field')assert.notDeepEqual(model.userData.layers.map(l=>[...l.position.toArray(),l.userData.sprite.material.rotation]),pose,type+' tool motion');
+ const outputs=()=>model.userData.layers.filter(l=>l.name.startsWith('output-')&&l.visible).length;
+ assert.equal(outputs(),0);
+ model.userData.animate(1,{...b,out:6});
+ assert.equal(model.userData.production.working,true);assert.equal(model.userData.production.ready,true);assert.equal(outputs(),2);
+ model.userData.animate(2,{...b,enabled:false,out:6});assert.equal(outputs(),2);assert.equal(model.userData.production.phase,'disabled');
+ model.userData.animate(3,{...b,working:false,out:0});assert.equal(outputs(),0);
+ // A paused simulation has unchanged animationTime even if wall-clock changes.
+ model.userData.animate(20,b);const frozen=model.userData.layers.map(l=>[...l.position.toArray(),l.userData.sprite.material.rotation]);
+ model.userData.animate(99,b);assert.deepEqual(model.userData.layers.map(l=>[...l.position.toArray(),l.userData.sprite.material.rotation]),frozen);
 }
-const active = { working: true, enabled: true, health: 100 };
-assert.deepEqual([0, .21, .41, .61].map(t => sawmillFrame(active, t)), [1, 2, 3, 2]);
-assert.equal(sawmillFrame({ ...active, animationTime: .21 }, 99), 2);
-for (const type of ['well', 'lumber']) {
- assert.deepEqual([0, .41, .81, 1.21].map(t => pixelBuildingFrame(type, active, t)), [1, 2, 3, 2]);
- for (const b of [{ working: false }, { ...active, enabled: false }, { ...active, health: 0 }]) assert.equal(pixelBuildingFrame(type, b, 2), 0);
- assert.equal(pixelBuildingFrame(type, { ...active, animationTime: .41 }, 99), 2);
+assert.equal(productionVisualState('warehouse',{}),null);
+assert.equal(productionVisualState('sawmill',{inputs:{},progress:.5}).missing,undefined);
+assert.equal(productionVisualState('sawmill',{inputs:{},progress:.5}).workpiece,true);
+assert.equal(productionVisualState('sawmill',{inputs:{},progress:0}).missing,'wood');
+assert.equal(productionVisualState('sawmill',{inputs:{},progress:0}).workpiece,false);
+assert.equal(productionVisualState('field',{type:'field',inputs:{},progress:0},{effectiveInputs:()=>({})}).missing,undefined);
+assert.equal(productionVisualState('lumber',{out:4},{closestNatural:()=>null}).phase,'blocked');
+assert.equal(productionVisualState('lumber',{out:4},{closestNatural:()=>null}).ready,true);
+assert.equal(productionVisualState('well',{out:0}).phase,'empty');
+assert.equal(productionVisualState('well',{out:3}).phase,'ready');
+assert.equal(productionVisualState('well',{out:3,health:0,working:true}).working,false);
+// Ghosts omit type and coordinates; state inspection still uses the requested
+// facility definition and never changes the building or its simulation.
+const ghostSim=new Simulation();
+assert.doesNotThrow(()=>makePixelBuilding('field','human').userData.animate(0,{working:false,inputs:{}},ghostSim,0));
+
+// Watch real production and carrier pickups, not just synthetic UI scenarios.
+const stockVillage=new Campaign({starter:true}).active;
+const sawOutput=new Set(),sawPickup=new Set();
+for(let tick=0;tick<1800;tick++){
+ const previous=new Map(stockVillage.buildings.map(b=>[b.id,b.out]));stockVillage.tick(.1);
+ for(const b of stockVillage.buildings){
+  const p=productionVisualState(b.type,b,stockVillage);if(!p)continue;
+  assert.equal(p.count,b.out);assert.equal(p.ready,b.out>0);
+  if(b.out>0)sawOutput.add(b.type);
+  if(b.out<previous.get(b.id))sawPickup.add(b.type);
+ }
 }
-assert.deepEqual([0, .26, .51, .76, 1].map(progress => pixelBuildingFrame('field', { progress, enabled: false }, 99)), [0, 1, 2, 3, 3]);
-assert.equal(pixelBuildingFrame('house', { id: 2 }, 1, { workers: [] }), 0);
-assert.equal(pixelBuildingFrame('house', { id: 2 }, 1, { workers: [{ homeId: 2 }] }), 3);
-const warehouse = { x: 10, z: 10 };
-const handler = { x: 10, z: 11, handling: 'drop', phase: 'destination', task: { sourceId: 3, targetId: null } };
-assert.equal(pixelBuildingFrame('warehouse', warehouse, .26, { workers: [handler] }), 2);
-assert.equal(pixelBuildingFrame('warehouse', warehouse, .26, { workers: [{ ...handler, handling: null }] }), 0);
-assert.equal(pixelBuildingFrame('warehouse', warehouse, .26, { workers: [{ ...handler, x: 20 }] }), 0);
-assert.equal(pixelBuildingFrame('warehouse', warehouse, .26, { workers: [{ ...handler, task: { sourceId: null, targetId: 3 } }] }), 0);
+for(const type of ['well','lumber','sawmill','field']){assert.ok(sawOutput.has(type),type+' produced');assert.ok(sawPickup.has(type),type+' collected');}
 assert.equal(oakFrame({ nature: 'sapling', growAt: 200 }, 50), 5);
 assert.equal(oakFrame({ nature: 'sapling', growAt: 200 }, 150), 6);
 assert.equal(oakFrame({ nature: null }, 20), 4);
@@ -38,7 +70,7 @@ assert.equal(waterFrame(1.4), 0);
 
 const mill = makePixelSawmill('human');
 mill.userData.animate(.21, active);
-assert.equal(mill.userData.frame, 2);
+assert.equal(mill.userData.frame, 0);
 mill.userData.animate(.41, { working: false });
 assert.equal(mill.userData.frame, 0);
 assert.equal(mill.children[0].isSprite, true);
@@ -65,7 +97,7 @@ for (const type of PIXEL_BUILDINGS) {
   assert.equal(model.userData.texture.offset.y, (3 - view) / 4, type);
  }
 }
-assert.equal(makePixelBuilding('bakery', 'human'), null);
+assert.equal(makePixelBuilding('nonexistent', 'human'), null);
 
 // Runtime dimensions must match UV addressing, not silently sample another cell.
 for (const [id, asset] of Object.entries(ENVIRONMENT_ASSETS)) {

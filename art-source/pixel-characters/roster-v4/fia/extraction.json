@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/fia.png",
+  "portraitRegion": [
+    0,
+    0,
+    646,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        646,
+        0,
+        1089,
+        1024
+      ],
+      "bbox": [
+        681,
+        252,
+        1027,
+        870
+      ],
+      "scale": 0.16181229773462782,
+      "offset": [
+        36,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1089,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1152,
+        256,
+        1509,
+        869
+      ],
+      "scale": 0.1631321370309951,
+      "offset": [
+        35,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

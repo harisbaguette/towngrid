@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/mist.png",
+  "portraitRegion": [
+    0,
+    0,
+    685,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        685,
+        0,
+        1101,
+        1024
+      ],
+      "bbox": [
+        692,
+        230,
+        1051,
+        890
+      ],
+      "scale": 0.15151515151515152,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1101,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1151,
+        229,
+        1489,
+        896
+      ],
+      "scale": 0.14992503748125938,
+      "offset": [
+        38,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "key": "bases",
+    "prompt": "Create a production-ready transparent PNG pixel-art game asset sheet, EXACTLY 4 equal columns by 4 equal rows (16 separate buildings), no text, no labels. Use attached images only as pixel-art/style reference. CRITICAL real hand-pixelled 16-bit sprite look, hard square pixel clusters, NO smooth 3D/vector look, sparse broad colors, dark teal outline, honey wood. This is a COMPONENT BASE sheet: all buildings STATIC, REMOVE all movable tools and all inventory/output props. Every object isolated on transparent background, identical scale. Each building sits on a perfectly SQUARE 1x1 world footprint, shown in orthographic isometric projection with equal left and right ground edge lengths; ground diamond width:height 1.732:1, NEVER a wide rectangular footprint. Fit each within its equal cell and clear generous transparent gutters. Row 1: compact SQUARE warehouse: square plan, PYRAMID HIP ROOF in blue teal with centered apex (four equal roof slopes, NOT elongated gable), two equally wide visible walls, simple large double doors, no crates, no chimney, minimal detail; four viewpoints rotating same building in exact 90 degree steps. Row 2: stone well: fixed gray stone circular well rim with turquoise water, two wooden posts and horizontal crossbar above, NO rope, NO bucket, NO crank, NO loose goods; four viewpoints rotating 90 degrees. Row 3: lumber station: a very low empty wooden storage rack and one large round chopping stump, NO logs, NO axe, NO products; four viewpoints rotating 90 degrees. Row 4: sawmill: compact sturdy low honey wood workbench with visible empty saw slot, simple teal base, NO blade, NO drive wheel, NO logs, NO planks, NO goods; four viewpoints rotating90 degrees. Columns are SE, NE, NW, SW views. All bases are immobile architecture to which separate animated pixel-art tools will be added. Square footprint mandatory in all cells. Single flat two-tone square stone/earth pad, all equal-sided diamonds, simple no scattered pebbles. Keep relative construction consistent across views.",
+    "referenced_image_paths": [
+      "C:/Users/ghd12/Desktop/TownGrid/public/assets/pixel-environment/warehouse-icon.png",
+      "C:/Users/ghd12/Desktop/TownGrid/public/assets/pixel-environment/well-icon.png",
+      "C:/Users/ghd12/Desktop/TownGrid/public/assets/pixel-environment/lumber-icon.png",
+      "C:/Users/ghd12/Desktop/TownGrid/public/assets/pixel-environment/sawmill-icon.png"
+    ]
+  },
+  {
+    "key": "parts",
+    "prompt": "Create a transparent PNG sprite atlas of EXACTLY 8 isolated pixel art inventory and moving machine parts, 4 equal columns and 2 equal rows, large clear transparent gutters, no labels no text no tile foundations. True hard-edge hand-pixelled 16-bit art, broad pixel clusters, dark teal contours, honey wood, matching the supplied game art. These must be separate free standing cutouts with transparent backgrounds, suitable for compositing onto buildings, each object centered entirely inside its cell. ROW1 left to right: (1) ONE open-top wooden water pail visibly FULL of bright CYAN BLUE water, no rope, 3/4 isometric perspective. (2) a small orderly pile of THREE short thick brown logs with large cream cut ends, isometric. (3) a neat bundle of THREE golden wooden planks, isometric, absolutely no saw/tool. (4) a gathered golden wheat sheaf tied at middle, isometric. ROW2 left to right: (1) ONE empty wooden bucket with curved metal handle, dark empty inside, no water and no rope. (2) ONE chopping axe as a separate tool, straight wooden handle vertical with steel head at top, handle tip at bottom, viewed diagonally, no stump. (3) ONE perfectly CIRCULAR silver circular saw blade, front face directly to viewer, strong large eight teeth, dark circular center hole, no bench no wood. (4) ONE low square patch of flat empty brown tilled soil in isometric view, real SQUARE footprint with equal sides and width:height 1.732:1. Uniform large readable forms; no smooth gradients, no tiny decorative speckles. Each sprite must be wholly separate from every other cell.",
+    "referenced_image_paths": [
+      "C:/Users/ghd12/Desktop/TownGrid/public/assets/pixel-environment/well-icon.png",
+      "C:/Users/ghd12/Desktop/TownGrid/public/assets/pixel-environment/lumber-icon.png",
+      "C:/Users/ghd12/Desktop/TownGrid/public/assets/pixel-environment/sawmill-icon.png",
+      "C:/Users/ghd12/Desktop/TownGrid/public/assets/pixel-environment/field-icon.png"
+    ]
+  }
+]

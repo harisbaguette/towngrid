@@ -1,4 +1,4 @@
-"""Pack the reviewed Mira sources for an in-game test; never synthesize poses."""
+"""Dispatch versioned Mira sources to the legacy slicer or texture-rig baker."""
 import argparse
 import json
 from pathlib import Path
@@ -27,6 +27,9 @@ def transparent_crop(image, rect, background):
 def pack_mira_runtime(spec_path, output):
     spec_path = Path(spec_path)
     spec = json.loads(spec_path.read_text(encoding='utf-8'))
+    if spec.get('rig'):
+        from mira_rig import pack_mira_rig
+        return pack_mira_rig(spec_path, output)
     source = spec_path.parent
     preview = json.loads((source / spec['previewManifest']).read_text(encoding='utf-8'))
     images = {key: Image.open(source / name).convert('RGBA') for key, name in preview['images'].items()}
@@ -101,4 +104,4 @@ if __name__ == '__main__':
     output = Path(args.output)
     catalog = [json.loads(path.read_text(encoding='utf-8')) for path in sorted(output.glob('*/frames.json'))]
     (output / 'catalog.json').write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print(f"Mira runtime: {result['frames']} cells, four facings, eight walking drawings; legacy actions retained.")
+    print(f"Mira runtime: {result['frames']} cells; {result['revision']}.")

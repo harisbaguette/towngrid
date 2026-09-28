@@ -1,16 +1,39 @@
 {
-  "version": 2,
+  "version": 5,
   "source": "pilot-atlas-source.png",
   "cellSize": 192,
   "pixelScale": 1,
-  "style": "Readable 16-bit pixel art: broad hand-pixelled clusters, dark teal outlines, honey wood, fewer small details; compact props within one square 1x1 tile",
+  "style": "Fixed pixel architecture, independent tool animation and inventory driven by production and hauling; square 1x1 footprints",
   "assets": {
     "warehouse": {
-      "source": "simplified-v2/warehouse-source.png",
-      "grid": [
-        4,
-        4
+      "source": "production-v3/bases-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          362,
+          304
+        ],
+        [
+          362,
+          0,
+          362,
+          304
+        ],
+        [
+          724,
+          0,
+          362,
+          304
+        ],
+        [
+          1086,
+          0,
+          362,
+          304
+        ]
       ],
+      "columns": 1,
       "directions": [
         "SE",
         "NE",
@@ -18,73 +41,27 @@
         "SW"
       ],
       "fit": [
-        176,
+        170,
         172
       ],
       "baseline": 181,
       "anchor": [
         0.5,
-        0.75
+        0.69
       ],
-      "states": {
-        "idle": [
-          0
-        ],
-        "handling": [
-          1,
-          2,
-          3,
-          2
-        ]
-      },
-      "rowBounds": [
-        [
-          0,
-          330
-        ],
-        [
-          330,
-          630
-        ],
-        [
-          630,
-          931
-        ],
-        [
-          931,
-          1254
-        ]
-      ],
+      "size": 1.4,
       "worldFootprint": [
         1,
         1
       ],
-      "size": 1.4
+      "states": {
+        "static": [
+          0
+        ]
+      }
     },
     "house": {
       "source": "simplified-v2/house-source.png",
-      "grid": [
-        4,
-        4
-      ],
-      "rowBounds": [
-        [
-          0,
-          375
-        ],
-        [
-          375,
-          695
-        ],
-        [
-          695,
-          992
-        ],
-        [
-          992,
-          1254
-        ]
-      ],
       "directions": [
         "SE",
         "NE",
@@ -101,28 +78,72 @@
         0.75
       ],
       "states": {
-        "empty": [
+        "static": [
           0
-        ],
-        "occupied": [
-          1,
-          2,
-          3,
-          2
         ]
       },
       "worldFootprint": [
         1,
         1
       ],
-      "size": 1.4
+      "size": 1.4,
+      "rects": [
+        [
+          0,
+          0,
+          313,
+          375
+        ],
+        [
+          0,
+          375,
+          313,
+          320
+        ],
+        [
+          0,
+          695,
+          313,
+          297
+        ],
+        [
+          0,
+          992,
+          313,
+          262
+        ]
+      ],
+      "columns": 1
     },
     "well": {
-      "source": "simplified-v2/well-source.png",
-      "grid": [
-        4,
-        4
+      "source": "production-v3/bases-source.png",
+      "rects": [
+        [
+          0,
+          304,
+          362,
+          270
+        ],
+        [
+          362,
+          304,
+          362,
+          270
+        ],
+        [
+          724,
+          304,
+          362,
+          270
+        ],
+        [
+          1086,
+          304,
+          362,
+          270
+        ]
       ],
+      "columns": 1,
       "directions": [
         "SE",
         "NE",
@@ -130,55 +151,54 @@
         "SW"
       ],
       "fit": [
-        176,
+        170,
         172
       ],
       "baseline": 181,
       "anchor": [
         0.5,
-        0.72
+        0.69
       ],
-      "states": {
-        "idle": [
-          0
-        ],
-        "working": [
-          1,
-          2,
-          3,
-          2
-        ]
-      },
-      "rowBounds": [
-        [
-          0,
-          330
-        ],
-        [
-          330,
-          640
-        ],
-        [
-          640,
-          931
-        ],
-        [
-          931,
-          1254
-        ]
-      ],
+      "size": 1.4,
       "worldFootprint": [
         1,
         1
       ],
-      "size": 1.4
+      "states": {
+        "static": [
+          0
+        ]
+      }
     },
     "lumber": {
-      "source": "simplified-v2/lumber-source.png",
-      "grid": [
-        4,
-        4
+      "source": "production-v3/bases-source.png",
+      "rects": [
+        [
+          0,
+          574,
+          362,
+          240
+        ],
+        [
+          362,
+          574,
+          362,
+          240
+        ],
+        [
+          724,
+          574,
+          362,
+          240
+        ],
+        [
+          1086,
+          574,
+          362,
+          240
+        ]
       ],
+      "columns": 1,
       "directions": [
         "SE",
         "NE",
@@ -186,111 +206,54 @@
         "SW"
       ],
       "fit": [
-        176,
+        170,
         172
       ],
       "baseline": 181,
       "anchor": [
         0.5,
-        0.72
+        0.69
       ],
-      "states": {
-        "idle": [
-          0
-        ],
-        "working": [
-          1,
-          2,
-          3,
-          2
-        ]
-      },
-      "rowBounds": [
-        [
-          0,
-          353
-        ],
-        [
-          353,
-          664
-        ],
-        [
-          664,
-          970
-        ],
-        [
-          970,
-          1254
-        ]
-      ],
+      "size": 1.4,
       "worldFootprint": [
         1,
         1
       ],
-      "size": 1.4
+      "states": {
+        "static": [
+          0
+        ]
+      }
     },
     "field": {
-      "source": "simplified-v2/field-source.png",
-      "grid": [
-        4,
-        4
-      ],
-      "rowBounds": [
+      "source": "production-v3/parts-source.png",
+      "rects": [
         [
-          0,
-          330
+          1236,
+          488,
+          413,
+          466
         ],
         [
-          330,
-          630
+          1236,
+          488,
+          413,
+          466
         ],
         [
-          630,
-          931
+          1236,
+          488,
+          413,
+          466
         ],
         [
-          931,
-          1254
+          1236,
+          488,
+          413,
+          466
         ]
       ],
-      "directions": [
-        "SE",
-        "NE",
-        "NW",
-        "SW"
-      ],
-      "fit": [
-        179,
-        158
-      ],
-      "baseline": 181,
-      "anchor": [
-        0.5,
-        0.665
-      ],
-      "iconFrame": 3,
-      "states": {
-        "planted": [
-          0
-        ],
-        "sprouts": [
-          1
-        ],
-        "growing": [
-          2
-        ],
-        "ripe": [
-          3
-        ]
-      },
-      "worldFootprint": [
-        1,
-        1
-      ],
-      "size": 1.4
-    },
-    "sawmill": {
-      "source": "simplified-v2/sawmill-source.png",
+      "columns": 1,
       "directions": [
         "SE",
         "NE",
@@ -299,51 +262,78 @@
       ],
       "fit": [
         176,
+        116
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "sawmill": {
+      "source": "production-v3/bases-source.png",
+      "rects": [
+        [
+          0,
+          814,
+          362,
+          272
+        ],
+        [
+          362,
+          814,
+          362,
+          272
+        ],
+        [
+          724,
+          814,
+          362,
+          272
+        ],
+        [
+          1086,
+          814,
+          362,
+          272
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        170,
         172
       ],
       "baseline": 181,
       "anchor": [
         0.5,
-        0.735
+        0.69
       ],
-      "states": {
-        "idle": [
-          0
-        ],
-        "working": [
-          1,
-          2,
-          3,
-          2
-        ]
-      },
-      "grid": [
-        4,
-        4
-      ],
-      "rowBounds": [
-        [
-          0,
-          330
-        ],
-        [
-          330,
-          630
-        ],
-        [
-          630,
-          931
-        ],
-        [
-          931,
-          1254
-        ]
-      ],
+      "size": 1.4,
       "worldFootprint": [
         1,
         1
       ],
-      "size": 1.4
+      "states": {
+        "static": [
+          0
+        ]
+      }
     },
     "oak": {
       "rects": [
@@ -478,6 +468,6945 @@
         0.5,
         0.5
       ]
+    },
+    "productionParts": {
+      "source": "production-v3/parts-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          412,
+          488
+        ],
+        [
+          412,
+          0,
+          412,
+          488
+        ],
+        [
+          824,
+          0,
+          412,
+          488
+        ],
+        [
+          1236,
+          0,
+          413,
+          488
+        ],
+        [
+          0,
+          488,
+          412,
+          466
+        ],
+        [
+          412,
+          488,
+          412,
+          466
+        ],
+        [
+          824,
+          488,
+          412,
+          466
+        ],
+        [
+          1236,
+          488,
+          413,
+          466
+        ]
+      ],
+      "columns": 8,
+      "fit": [
+        164,
+        164
+      ],
+      "centered": true,
+      "independentScale": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "states": {
+        "water": [
+          0
+        ],
+        "wood": [
+          1
+        ],
+        "plank": [
+          2
+        ],
+        "grain": [
+          3
+        ],
+        "emptyBucket": [
+          4
+        ],
+        "axe": [
+          5
+        ],
+        "blade": [
+          6
+        ],
+        "soil": [
+          7
+        ]
+      }
+    },
+    "wheatGrowth": {
+      "source": "production-v3/crops-source.png",
+      "grid": [
+        4,
+        1
+      ],
+      "fit": [
+        140,
+        172
+      ],
+      "baseline": 180,
+      "anchor": [
+        0.5,
+        0.94
+      ],
+      "states": {
+        "seedling": [
+          0
+        ],
+        "sprout": [
+          1
+        ],
+        "growing": [
+          2
+        ],
+        "ripe": [
+          3
+        ]
+      }
+    },
+    "quarry": {
+      "source": "industry-v4/food-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          311,
+          316
+        ],
+        [
+          311,
+          0,
+          311,
+          316
+        ],
+        [
+          622,
+          0,
+          312,
+          316
+        ],
+        [
+          934,
+          0,
+          311,
+          316
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "mill": {
+      "source": "industry-v4/food-source.png",
+      "rects": [
+        [
+          0,
+          316,
+          311,
+          315
+        ],
+        [
+          311,
+          316,
+          311,
+          315
+        ],
+        [
+          622,
+          316,
+          312,
+          315
+        ],
+        [
+          934,
+          316,
+          311,
+          315
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "bakery": {
+      "source": "industry-v4/food-source.png",
+      "rects": [
+        [
+          0,
+          631,
+          311,
+          316
+        ],
+        [
+          311,
+          631,
+          311,
+          316
+        ],
+        [
+          622,
+          631,
+          312,
+          316
+        ],
+        [
+          934,
+          631,
+          311,
+          316
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "dock": {
+      "source": "industry-v4/food-source.png",
+      "rects": [
+        [
+          0,
+          947,
+          311,
+          316
+        ],
+        [
+          311,
+          947,
+          311,
+          316
+        ],
+        [
+          622,
+          947,
+          312,
+          316
+        ],
+        [
+          934,
+          947,
+          311,
+          316
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "stable": {
+      "source": "industry-v4/basic-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          327,
+          321
+        ],
+        [
+          327,
+          0,
+          328,
+          321
+        ],
+        [
+          655,
+          0,
+          327,
+          321
+        ],
+        [
+          982,
+          0,
+          328,
+          321
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "generator": {
+      "source": "industry-v4/basic-source.png",
+      "rects": [
+        [
+          0,
+          321,
+          327,
+          279
+        ],
+        [
+          327,
+          321,
+          328,
+          279
+        ],
+        [
+          655,
+          321,
+          327,
+          279
+        ],
+        [
+          982,
+          321,
+          328,
+          279
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "workshop": {
+      "source": "industry-v4/basic-source.png",
+      "rects": [
+        [
+          0,
+          600,
+          327,
+          283
+        ],
+        [
+          327,
+          600,
+          328,
+          283
+        ],
+        [
+          655,
+          600,
+          327,
+          283
+        ],
+        [
+          982,
+          600,
+          328,
+          283
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "logistics": {
+      "source": "industry-v4/basic-source.png",
+      "rects": [
+        [
+          0,
+          883,
+          327,
+          317
+        ],
+        [
+          327,
+          883,
+          328,
+          317
+        ],
+        [
+          655,
+          883,
+          327,
+          317
+        ],
+        [
+          982,
+          883,
+          328,
+          317
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "reservoir": {
+      "source": "industry-v4/utilities-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          308,
+          329
+        ],
+        [
+          308,
+          0,
+          308,
+          329
+        ],
+        [
+          616,
+          0,
+          309,
+          329
+        ],
+        [
+          925,
+          0,
+          308,
+          329
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "depot": {
+      "source": "industry-v4/utilities-source.png",
+      "rects": [
+        [
+          0,
+          329,
+          308,
+          308
+        ],
+        [
+          308,
+          329,
+          308,
+          308
+        ],
+        [
+          616,
+          329,
+          309,
+          308
+        ],
+        [
+          925,
+          329,
+          308,
+          308
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "windturbine": {
+      "source": "industry-v4/utilities-source.png",
+      "rects": [
+        [
+          0,
+          637,
+          308,
+          295
+        ],
+        [
+          308,
+          637,
+          308,
+          295
+        ],
+        [
+          616,
+          637,
+          309,
+          295
+        ],
+        [
+          925,
+          637,
+          308,
+          295
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "steamworks": {
+      "source": "industry-v4/utilities-source.png",
+      "rects": [
+        [
+          0,
+          932,
+          308,
+          343
+        ],
+        [
+          308,
+          932,
+          308,
+          343
+        ],
+        [
+          616,
+          932,
+          309,
+          343
+        ],
+        [
+          925,
+          932,
+          308,
+          343
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "ironmine": {
+      "source": "industry-v4/mining-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          305,
+          322
+        ],
+        [
+          305,
+          0,
+          306,
+          322
+        ],
+        [
+          611,
+          0,
+          305,
+          322
+        ],
+        [
+          916,
+          0,
+          306,
+          322
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "coalpit": {
+      "source": "industry-v4/mining-source.png",
+      "rects": [
+        [
+          0,
+          322,
+          305,
+          321
+        ],
+        [
+          305,
+          322,
+          306,
+          321
+        ],
+        [
+          611,
+          322,
+          305,
+          321
+        ],
+        [
+          916,
+          322,
+          306,
+          321
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "smelter": {
+      "source": "industry-v4/mining-source.png",
+      "rects": [
+        [
+          0,
+          643,
+          307,
+          322
+        ],
+        [
+          307,
+          643,
+          304,
+          322
+        ],
+        [
+          611,
+          643,
+          305,
+          322
+        ],
+        [
+          916,
+          643,
+          306,
+          322
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "oilpump": {
+      "source": "industry-v4/mining-source.png",
+      "rects": [
+        [
+          0,
+          965,
+          305,
+          322
+        ],
+        [
+          305,
+          965,
+          306,
+          322
+        ],
+        [
+          611,
+          965,
+          305,
+          322
+        ],
+        [
+          916,
+          965,
+          306,
+          322
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "refinery": {
+      "source": "industry-v4/materials-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          329,
+          348
+        ],
+        [
+          329,
+          0,
+          295,
+          348
+        ],
+        [
+          624,
+          0,
+          308,
+          348
+        ],
+        [
+          932,
+          0,
+          311,
+          348
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "chemical": {
+      "source": "industry-v4/materials-source.png",
+      "rects": [
+        [
+          0,
+          348,
+          331,
+          301
+        ],
+        [
+          331,
+          348,
+          295,
+          301
+        ],
+        [
+          626,
+          348,
+          306,
+          301
+        ],
+        [
+          932,
+          348,
+          311,
+          301
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "manaextractor": {
+      "source": "industry-v4/materials-source.png",
+      "rects": [
+        [
+          0,
+          649,
+          331,
+          300
+        ],
+        [
+          331,
+          649,
+          293,
+          300
+        ],
+        [
+          624,
+          649,
+          300,
+          300
+        ],
+        [
+          924,
+          649,
+          319,
+          300
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "electronics": {
+      "source": "industry-v4/materials-source.png",
+      "rects": [
+        [
+          0,
+          949,
+          327,
+          316
+        ],
+        [
+          327,
+          949,
+          297,
+          316
+        ],
+        [
+          624,
+          949,
+          308,
+          316
+        ],
+        [
+          932,
+          949,
+          311,
+          316
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "automotive": {
+      "source": "industry-v4/advanced-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          311,
+          333
+        ],
+        [
+          311,
+          0,
+          312,
+          333
+        ],
+        [
+          623,
+          0,
+          311,
+          333
+        ],
+        [
+          934,
+          0,
+          312,
+          333
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "laboratory": {
+      "source": "industry-v4/advanced-source.png",
+      "rects": [
+        [
+          0,
+          333,
+          311,
+          312
+        ],
+        [
+          311,
+          333,
+          312,
+          312
+        ],
+        [
+          623,
+          333,
+          311,
+          312
+        ],
+        [
+          934,
+          333,
+          312,
+          312
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "hospital": {
+      "source": "industry-v4/advanced-source.png",
+      "rects": [
+        [
+          0,
+          645,
+          311,
+          301
+        ],
+        [
+          311,
+          645,
+          312,
+          301
+        ],
+        [
+          623,
+          645,
+          311,
+          301
+        ],
+        [
+          934,
+          645,
+          312,
+          301
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "arcanepower": {
+      "source": "industry-v4/advanced-source.png",
+      "rects": [
+        [
+          0,
+          946,
+          311,
+          316
+        ],
+        [
+          311,
+          946,
+          312,
+          316
+        ],
+        [
+          623,
+          946,
+          311,
+          316
+        ],
+        [
+          934,
+          946,
+          312,
+          316
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "magetower": {
+      "source": "industry-v4/network-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          307,
+          325
+        ],
+        [
+          307,
+          0,
+          308,
+          325
+        ],
+        [
+          615,
+          0,
+          307,
+          325
+        ],
+        [
+          922,
+          0,
+          308,
+          325
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "leyrelay": {
+      "source": "industry-v4/network-source.png",
+      "rects": [
+        [
+          0,
+          325,
+          307,
+          314
+        ],
+        [
+          307,
+          325,
+          308,
+          314
+        ],
+        [
+          615,
+          325,
+          307,
+          314
+        ],
+        [
+          922,
+          325,
+          308,
+          314
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "battery": {
+      "source": "industry-v4/network-source.png",
+      "rects": [
+        [
+          0,
+          639,
+          307,
+          308
+        ],
+        [
+          307,
+          639,
+          308,
+          308
+        ],
+        [
+          615,
+          639,
+          307,
+          308
+        ],
+        [
+          922,
+          639,
+          308,
+          308
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "station": {
+      "source": "industry-v4/network-source.png",
+      "rects": [
+        [
+          0,
+          947,
+          307,
+          331
+        ],
+        [
+          307,
+          947,
+          308,
+          331
+        ],
+        [
+          615,
+          947,
+          307,
+          331
+        ],
+        [
+          922,
+          947,
+          308,
+          331
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "clinic": {
+      "source": "industry-v4/civic-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          307,
+          319
+        ],
+        [
+          307,
+          0,
+          308,
+          319
+        ],
+        [
+          615,
+          0,
+          307,
+          319
+        ],
+        [
+          922,
+          0,
+          308,
+          319
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "bank": {
+      "source": "industry-v4/civic-source.png",
+      "rects": [
+        [
+          0,
+          319,
+          308,
+          318
+        ],
+        [
+          308,
+          319,
+          307,
+          318
+        ],
+        [
+          615,
+          319,
+          307,
+          318
+        ],
+        [
+          922,
+          319,
+          308,
+          318
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "barracks": {
+      "source": "industry-v4/civic-source.png",
+      "rects": [
+        [
+          0,
+          637,
+          307,
+          321
+        ],
+        [
+          307,
+          637,
+          308,
+          321
+        ],
+        [
+          615,
+          637,
+          307,
+          321
+        ],
+        [
+          922,
+          637,
+          308,
+          321
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "dwarfhouse": {
+      "source": "industry-v4/civic-source.png",
+      "rects": [
+        [
+          0,
+          958,
+          309,
+          320
+        ],
+        [
+          309,
+          958,
+          306,
+          320
+        ],
+        [
+          615,
+          958,
+          306,
+          320
+        ],
+        [
+          921,
+          958,
+          309,
+          320
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "titanhouse": {
+      "source": "industry-v4/homes-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          362,
+          362
+        ],
+        [
+          362,
+          0,
+          362,
+          362
+        ],
+        [
+          724,
+          0,
+          362,
+          362
+        ],
+        [
+          1086,
+          0,
+          362,
+          362
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "spirithouse": {
+      "source": "industry-v4/homes-source.png",
+      "rects": [
+        [
+          0,
+          362,
+          362,
+          355
+        ],
+        [
+          362,
+          362,
+          362,
+          355
+        ],
+        [
+          724,
+          362,
+          362,
+          355
+        ],
+        [
+          1086,
+          362,
+          362,
+          355
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "centaurhouse": {
+      "source": "industry-v4/homes-source.png",
+      "rects": [
+        [
+          0,
+          717,
+          362,
+          369
+        ],
+        [
+          362,
+          717,
+          362,
+          369
+        ],
+        [
+          724,
+          717,
+          362,
+          369
+        ],
+        [
+          1086,
+          717,
+          362,
+          369
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "industrialGoods": {
+      "source": "industry-v4/goods-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          313,
+          351
+        ],
+        [
+          313,
+          0,
+          314,
+          351
+        ],
+        [
+          627,
+          0,
+          313,
+          351
+        ],
+        [
+          940,
+          0,
+          314,
+          351
+        ],
+        [
+          0,
+          351,
+          313,
+          286
+        ],
+        [
+          313,
+          351,
+          314,
+          286
+        ],
+        [
+          627,
+          351,
+          313,
+          286
+        ],
+        [
+          940,
+          351,
+          314,
+          286
+        ],
+        [
+          0,
+          637,
+          313,
+          303
+        ],
+        [
+          313,
+          637,
+          314,
+          303
+        ],
+        [
+          627,
+          637,
+          313,
+          303
+        ],
+        [
+          940,
+          637,
+          314,
+          303
+        ],
+        [
+          0,
+          940,
+          313,
+          314
+        ],
+        [
+          313,
+          940,
+          315,
+          314
+        ],
+        [
+          628,
+          940,
+          312,
+          314
+        ],
+        [
+          940,
+          940,
+          314,
+          314
+        ]
+      ],
+      "columns": 16,
+      "fit": [
+        164,
+        164
+      ],
+      "centered": true,
+      "independentScale": true,
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    "industrialTools": {
+      "source": "industry-v4/tools-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          313,
+          313
+        ],
+        [
+          313,
+          0,
+          314,
+          313
+        ],
+        [
+          627,
+          0,
+          313,
+          313
+        ],
+        [
+          940,
+          0,
+          314,
+          313
+        ],
+        [
+          0,
+          313,
+          313,
+          314
+        ],
+        [
+          313,
+          313,
+          324,
+          314
+        ],
+        [
+          637,
+          313,
+          319,
+          314
+        ],
+        [
+          956,
+          313,
+          298,
+          314
+        ],
+        [
+          0,
+          627,
+          313,
+          313
+        ],
+        [
+          313,
+          627,
+          314,
+          313
+        ],
+        [
+          627,
+          627,
+          313,
+          313
+        ],
+        [
+          940,
+          627,
+          314,
+          313
+        ],
+        [
+          0,
+          940,
+          313,
+          314
+        ],
+        [
+          313,
+          940,
+          314,
+          314
+        ],
+        [
+          627,
+          940,
+          313,
+          314
+        ],
+        [
+          940,
+          940,
+          314,
+          314
+        ]
+      ],
+      "columns": 16,
+      "fit": [
+        164,
+        164
+      ],
+      "centered": true,
+      "independentScale": true,
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    "cottonfield": {
+      "source": "world-v5/newfarm-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          306,
+          319
+        ],
+        [
+          306,
+          0,
+          306,
+          319
+        ],
+        [
+          612,
+          0,
+          306,
+          319
+        ],
+        [
+          918,
+          0,
+          306,
+          319
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "herbgarden": {
+      "source": "world-v5/newfarm-source.png",
+      "rects": [
+        [
+          0,
+          319,
+          306,
+          289
+        ],
+        [
+          306,
+          319,
+          306,
+          289
+        ],
+        [
+          612,
+          319,
+          306,
+          289
+        ],
+        [
+          918,
+          319,
+          306,
+          289
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "henhouse": {
+      "source": "world-v5/newfarm-source.png",
+      "rects": [
+        [
+          0,
+          608,
+          306,
+          304
+        ],
+        [
+          306,
+          608,
+          306,
+          304
+        ],
+        [
+          612,
+          608,
+          306,
+          304
+        ],
+        [
+          918,
+          608,
+          306,
+          304
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "smokehouse": {
+      "source": "world-v5/newfarm-source.png",
+      "rects": [
+        [
+          0,
+          912,
+          306,
+          373
+        ],
+        [
+          306,
+          912,
+          306,
+          373
+        ],
+        [
+          612,
+          912,
+          306,
+          373
+        ],
+        [
+          918,
+          912,
+          306,
+          373
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "weaver": {
+      "source": "world-v5/newcraft-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          307,
+          312
+        ],
+        [
+          307,
+          0,
+          308,
+          312
+        ],
+        [
+          615,
+          0,
+          307,
+          312
+        ],
+        [
+          922,
+          0,
+          308,
+          312
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "confectionery": {
+      "source": "world-v5/newcraft-source.png",
+      "rects": [
+        [
+          0,
+          312,
+          307,
+          311
+        ],
+        [
+          307,
+          312,
+          308,
+          311
+        ],
+        [
+          615,
+          312,
+          307,
+          311
+        ],
+        [
+          922,
+          312,
+          308,
+          311
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "kiln": {
+      "source": "world-v5/newcraft-source.png",
+      "rects": [
+        [
+          0,
+          623,
+          307,
+          313
+        ],
+        [
+          307,
+          623,
+          308,
+          313
+        ],
+        [
+          615,
+          623,
+          306,
+          313
+        ],
+        [
+          921,
+          623,
+          309,
+          313
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "tailor": {
+      "source": "world-v5/newcraft-source.png",
+      "rects": [
+        [
+          0,
+          936,
+          307,
+          342
+        ],
+        [
+          307,
+          936,
+          308,
+          342
+        ],
+        [
+          615,
+          936,
+          307,
+          342
+        ],
+        [
+          922,
+          936,
+          308,
+          342
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "glassworks": {
+      "source": "world-v5/newmaterials-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          305,
+          322
+        ],
+        [
+          305,
+          0,
+          306,
+          322
+        ],
+        [
+          611,
+          0,
+          305,
+          322
+        ],
+        [
+          916,
+          0,
+          306,
+          322
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "coppermine": {
+      "source": "world-v5/newmaterials-source.png",
+      "rects": [
+        [
+          0,
+          322,
+          310,
+          321
+        ],
+        [
+          310,
+          322,
+          301,
+          321
+        ],
+        [
+          611,
+          322,
+          301,
+          321
+        ],
+        [
+          912,
+          322,
+          310,
+          321
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "wiremill": {
+      "source": "world-v5/newmaterials-source.png",
+      "rects": [
+        [
+          0,
+          643,
+          305,
+          310
+        ],
+        [
+          305,
+          643,
+          306,
+          310
+        ],
+        [
+          611,
+          643,
+          305,
+          310
+        ],
+        [
+          916,
+          643,
+          306,
+          310
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "cementworks": {
+      "source": "world-v5/newmaterials-source.png",
+      "rects": [
+        [
+          0,
+          953,
+          305,
+          334
+        ],
+        [
+          305,
+          953,
+          306,
+          334
+        ],
+        [
+          611,
+          953,
+          305,
+          334
+        ],
+        [
+          916,
+          953,
+          306,
+          334
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "cannery": {
+      "source": "world-v5/newadvanced-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          306,
+          321
+        ],
+        [
+          306,
+          0,
+          307,
+          321
+        ],
+        [
+          613,
+          0,
+          306,
+          321
+        ],
+        [
+          919,
+          0,
+          307,
+          321
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "lampworks": {
+      "source": "world-v5/newadvanced-source.png",
+      "rects": [
+        [
+          0,
+          321,
+          306,
+          315
+        ],
+        [
+          306,
+          321,
+          307,
+          315
+        ],
+        [
+          613,
+          321,
+          306,
+          315
+        ],
+        [
+          919,
+          321,
+          307,
+          315
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "engineworks": {
+      "source": "world-v5/newadvanced-source.png",
+      "rects": [
+        [
+          0,
+          636,
+          306,
+          300
+        ],
+        [
+          306,
+          636,
+          307,
+          300
+        ],
+        [
+          613,
+          636,
+          306,
+          300
+        ],
+        [
+          919,
+          636,
+          307,
+          300
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "mithrilforge": {
+      "source": "world-v5/newadvanced-source.png",
+      "rects": [
+        [
+          0,
+          936,
+          306,
+          347
+        ],
+        [
+          306,
+          936,
+          307,
+          347
+        ],
+        [
+          613,
+          936,
+          306,
+          347
+        ],
+        [
+          919,
+          936,
+          307,
+          347
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "shipyard": {
+      "source": "world-v5/newheavy-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          306,
+          321
+        ],
+        [
+          306,
+          0,
+          307,
+          321
+        ],
+        [
+          613,
+          0,
+          306,
+          321
+        ],
+        [
+          919,
+          0,
+          307,
+          321
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "blastfurnace": {
+      "source": "world-v5/newheavy-source.png",
+      "rects": [
+        [
+          0,
+          321,
+          306,
+          321
+        ],
+        [
+          306,
+          321,
+          307,
+          321
+        ],
+        [
+          613,
+          321,
+          306,
+          321
+        ],
+        [
+          919,
+          321,
+          307,
+          321
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "assemblyline": {
+      "source": "world-v5/newheavy-source.png",
+      "rects": [
+        [
+          0,
+          642,
+          306,
+          315
+        ],
+        [
+          306,
+          642,
+          307,
+          315
+        ],
+        [
+          613,
+          642,
+          306,
+          315
+        ],
+        [
+          919,
+          642,
+          307,
+          315
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "watermill": {
+      "source": "world-v5/newheavy-source.png",
+      "rects": [
+        [
+          0,
+          957,
+          308,
+          326
+        ],
+        [
+          308,
+          957,
+          305,
+          326
+        ],
+        [
+          613,
+          957,
+          305,
+          326
+        ],
+        [
+          918,
+          957,
+          308,
+          326
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "marketplace": {
+      "source": "world-v5/newcivic-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          310,
+          322
+        ],
+        [
+          310,
+          0,
+          310,
+          322
+        ],
+        [
+          620,
+          0,
+          310,
+          322
+        ],
+        [
+          930,
+          0,
+          310,
+          322
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "wardpost": {
+      "source": "world-v5/newcivic-source.png",
+      "rects": [
+        [
+          0,
+          322,
+          310,
+          315
+        ],
+        [
+          310,
+          322,
+          310,
+          315
+        ],
+        [
+          620,
+          322,
+          310,
+          315
+        ],
+        [
+          930,
+          322,
+          310,
+          315
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "fortress": {
+      "source": "world-v5/newcivic-source.png",
+      "rects": [
+        [
+          0,
+          637,
+          310,
+          315
+        ],
+        [
+          310,
+          637,
+          310,
+          315
+        ],
+        [
+          620,
+          637,
+          309,
+          315
+        ],
+        [
+          929,
+          637,
+          311,
+          315
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "parliament": {
+      "source": "world-v5/newcivic-source.png",
+      "rects": [
+        [
+          0,
+          952,
+          310,
+          317
+        ],
+        [
+          310,
+          952,
+          310,
+          317
+        ],
+        [
+          620,
+          952,
+          310,
+          317
+        ],
+        [
+          930,
+          952,
+          310,
+          317
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "airdock": {
+      "source": "world-v5/newtransport-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          443,
+          416
+        ],
+        [
+          443,
+          0,
+          444,
+          416
+        ],
+        [
+          887,
+          0,
+          443,
+          416
+        ],
+        [
+          1330,
+          0,
+          444,
+          416
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "exchange": {
+      "source": "world-v5/newtransport-source.png",
+      "rects": [
+        [
+          0,
+          416,
+          443,
+          471
+        ],
+        [
+          443,
+          416,
+          444,
+          471
+        ],
+        [
+          887,
+          416,
+          443,
+          471
+        ],
+        [
+          1330,
+          416,
+          444,
+          471
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "expansionGoods": {
+      "source": "world-v5/expansionGoods-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          280,
+          295
+        ],
+        [
+          280,
+          0,
+          281,
+          295
+        ],
+        [
+          561,
+          0,
+          280,
+          295
+        ],
+        [
+          841,
+          0,
+          281,
+          295
+        ],
+        [
+          0,
+          295,
+          285,
+          266
+        ],
+        [
+          285,
+          295,
+          276,
+          266
+        ],
+        [
+          561,
+          295,
+          280,
+          266
+        ],
+        [
+          841,
+          295,
+          281,
+          266
+        ],
+        [
+          0,
+          561,
+          280,
+          266
+        ],
+        [
+          280,
+          561,
+          281,
+          266
+        ],
+        [
+          561,
+          561,
+          280,
+          266
+        ],
+        [
+          841,
+          561,
+          281,
+          266
+        ],
+        [
+          0,
+          827,
+          280,
+          267
+        ],
+        [
+          280,
+          827,
+          281,
+          267
+        ],
+        [
+          561,
+          827,
+          280,
+          267
+        ],
+        [
+          841,
+          827,
+          281,
+          267
+        ],
+        [
+          0,
+          1094,
+          288,
+          308
+        ],
+        [
+          288,
+          1094,
+          273,
+          308
+        ],
+        [
+          561,
+          1094,
+          279,
+          308
+        ],
+        [
+          840,
+          1094,
+          282,
+          308
+        ]
+      ],
+      "columns": 20,
+      "fit": [
+        164,
+        164
+      ],
+      "centered": true,
+      "independentScale": true,
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    "cottonGrowth": {
+      "source": "world-v5/newCrops-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          443,
+          454
+        ],
+        [
+          443,
+          0,
+          444,
+          454
+        ],
+        [
+          887,
+          0,
+          443,
+          454
+        ],
+        [
+          1330,
+          0,
+          444,
+          454
+        ]
+      ],
+      "columns": 4,
+      "fit": [
+        160,
+        164
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.94
+      ]
+    },
+    "herbGrowth": {
+      "source": "world-v5/newCrops-source.png",
+      "rects": [
+        [
+          0,
+          454,
+          443,
+          433
+        ],
+        [
+          443,
+          454,
+          444,
+          433
+        ],
+        [
+          887,
+          454,
+          443,
+          433
+        ],
+        [
+          1330,
+          454,
+          444,
+          433
+        ]
+      ],
+      "columns": 4,
+      "fit": [
+        160,
+        164
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.94
+      ]
+    },
+    "ground": {
+      "source": "world-v5/ground-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          443,
+          443
+        ],
+        [
+          443,
+          0,
+          444,
+          443
+        ],
+        [
+          887,
+          0,
+          443,
+          443
+        ],
+        [
+          1330,
+          0,
+          444,
+          443
+        ],
+        [
+          0,
+          443,
+          443,
+          444
+        ],
+        [
+          443,
+          443,
+          444,
+          444
+        ],
+        [
+          887,
+          443,
+          443,
+          444
+        ],
+        [
+          1330,
+          443,
+          444,
+          444
+        ]
+      ],
+      "columns": 8,
+      "opaqueTile": true
+    },
+    "creek": {
+      "source": "world-v5/waterways-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          313,
+          313
+        ],
+        [
+          313,
+          0,
+          314,
+          313
+        ],
+        [
+          627,
+          0,
+          313,
+          313
+        ],
+        [
+          940,
+          0,
+          314,
+          313
+        ]
+      ],
+      "columns": 4,
+      "opaqueTile": true
+    },
+    "river": {
+      "source": "world-v5/waterways-source.png",
+      "rects": [
+        [
+          0,
+          313,
+          313,
+          314
+        ],
+        [
+          313,
+          313,
+          314,
+          314
+        ],
+        [
+          627,
+          313,
+          313,
+          314
+        ],
+        [
+          940,
+          313,
+          314,
+          314
+        ]
+      ],
+      "columns": 4,
+      "opaqueTile": true
+    },
+    "sea": {
+      "source": "world-v5/waterways-source.png",
+      "rects": [
+        [
+          0,
+          627,
+          313,
+          313
+        ],
+        [
+          313,
+          627,
+          314,
+          313
+        ],
+        [
+          627,
+          627,
+          313,
+          313
+        ],
+        [
+          940,
+          627,
+          314,
+          313
+        ]
+      ],
+      "columns": 4,
+      "opaqueTile": true
+    },
+    "lake": {
+      "source": "world-v5/waterways-source.png",
+      "rects": [
+        [
+          0,
+          940,
+          313,
+          314
+        ],
+        [
+          313,
+          940,
+          314,
+          314
+        ],
+        [
+          627,
+          940,
+          313,
+          314
+        ],
+        [
+          940,
+          940,
+          314,
+          314
+        ]
+      ],
+      "columns": 4,
+      "opaqueTile": true
+    },
+    "networks": {
+      "source": "world-v5/networks-source.png",
+      "rects": [
+        [
+          0,
+          15,
+          443,
+          420
+        ],
+        [
+          443,
+          15,
+          444,
+          420
+        ],
+        [
+          887,
+          15,
+          443,
+          420
+        ],
+        [
+          1330,
+          15,
+          444,
+          420
+        ],
+        [
+          0,
+          607,
+          443,
+          142
+        ],
+        [
+          443,
+          607,
+          444,
+          142
+        ],
+        [
+          887,
+          607,
+          443,
+          142
+        ],
+        [
+          1330,
+          607,
+          444,
+          142
+        ]
+      ],
+      "columns": 8,
+      "opaqueTile": true
+    },
+    "rock": {
+      "source": "world-v5/rocks-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          305,
+          322
+        ],
+        [
+          305,
+          0,
+          306,
+          322
+        ],
+        [
+          611,
+          0,
+          305,
+          322
+        ],
+        [
+          916,
+          0,
+          306,
+          322
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "mossrock": {
+      "source": "world-v5/rocks-source.png",
+      "rects": [
+        [
+          0,
+          322,
+          305,
+          321
+        ],
+        [
+          305,
+          322,
+          306,
+          321
+        ],
+        [
+          611,
+          322,
+          305,
+          321
+        ],
+        [
+          916,
+          322,
+          306,
+          321
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "oreRock": {
+      "source": "world-v5/rocks-source.png",
+      "rects": [
+        [
+          0,
+          643,
+          305,
+          305
+        ],
+        [
+          305,
+          643,
+          306,
+          305
+        ],
+        [
+          611,
+          643,
+          305,
+          305
+        ],
+        [
+          916,
+          643,
+          306,
+          305
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "cliff": {
+      "source": "world-v5/rocks-source.png",
+      "rects": [
+        [
+          0,
+          948,
+          305,
+          339
+        ],
+        [
+          305,
+          948,
+          306,
+          339
+        ],
+        [
+          611,
+          948,
+          305,
+          339
+        ],
+        [
+          916,
+          948,
+          306,
+          339
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "pine": {
+      "source": "world-v5/foliage-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          311,
+          322
+        ],
+        [
+          311,
+          0,
+          311,
+          322
+        ],
+        [
+          622,
+          0,
+          311,
+          322
+        ],
+        [
+          933,
+          0,
+          311,
+          322
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "willow": {
+      "source": "world-v5/foliage-source.png",
+      "rects": [
+        [
+          0,
+          322,
+          311,
+          310
+        ],
+        [
+          311,
+          322,
+          311,
+          310
+        ],
+        [
+          622,
+          322,
+          311,
+          310
+        ],
+        [
+          933,
+          322,
+          311,
+          310
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "palm": {
+      "source": "world-v5/foliage-source.png",
+      "rects": [
+        [
+          0,
+          632,
+          311,
+          317
+        ],
+        [
+          311,
+          632,
+          311,
+          317
+        ],
+        [
+          622,
+          632,
+          311,
+          317
+        ],
+        [
+          933,
+          632,
+          311,
+          317
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "bush": {
+      "source": "world-v5/foliage-source.png",
+      "rects": [
+        [
+          0,
+          949,
+          311,
+          316
+        ],
+        [
+          311,
+          949,
+          311,
+          316
+        ],
+        [
+          622,
+          949,
+          311,
+          316
+        ],
+        [
+          933,
+          949,
+          311,
+          316
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "reeds": {
+      "source": "world-v5/sceneryProps-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          306,
+          321
+        ],
+        [
+          306,
+          0,
+          307,
+          321
+        ],
+        [
+          613,
+          0,
+          306,
+          321
+        ],
+        [
+          919,
+          0,
+          307,
+          321
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "ruin": {
+      "source": "world-v5/sceneryProps-source.png",
+      "rects": [
+        [
+          0,
+          321,
+          306,
+          301
+        ],
+        [
+          306,
+          321,
+          307,
+          301
+        ],
+        [
+          613,
+          321,
+          306,
+          301
+        ],
+        [
+          919,
+          321,
+          307,
+          301
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "lighthouse": {
+      "source": "world-v5/sceneryProps-source.png",
+      "rects": [
+        [
+          0,
+          622,
+          306,
+          314
+        ],
+        [
+          306,
+          622,
+          307,
+          314
+        ],
+        [
+          613,
+          622,
+          306,
+          314
+        ],
+        [
+          919,
+          622,
+          307,
+          314
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "exportGate": {
+      "source": "world-v5/sceneryProps-source.png",
+      "rects": [
+        [
+          0,
+          936,
+          306,
+          347
+        ],
+        [
+          306,
+          936,
+          307,
+          347
+        ],
+        [
+          613,
+          936,
+          306,
+          347
+        ],
+        [
+          919,
+          936,
+          307,
+          347
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "clouds": {
+      "source": "world-v5/ambient-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          280,
+          280
+        ],
+        [
+          280,
+          0,
+          281,
+          280
+        ],
+        [
+          561,
+          0,
+          280,
+          280
+        ],
+        [
+          841,
+          0,
+          281,
+          280
+        ]
+      ],
+      "columns": 4,
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "centered": true,
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    "birds": {
+      "source": "world-v5/ambient-source.png",
+      "rects": [
+        [
+          0,
+          280,
+          280,
+          281
+        ],
+        [
+          280,
+          280,
+          281,
+          281
+        ],
+        [
+          561,
+          280,
+          280,
+          281
+        ],
+        [
+          841,
+          280,
+          281,
+          281
+        ]
+      ],
+      "columns": 4,
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "centered": true,
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    "cargoTruck": {
+      "source": "world-v5/ambient-source.png",
+      "rects": [
+        [
+          0,
+          561,
+          280,
+          280
+        ],
+        [
+          280,
+          561,
+          281,
+          280
+        ],
+        [
+          561,
+          561,
+          280,
+          280
+        ],
+        [
+          841,
+          561,
+          281,
+          280
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "cargoTrain": {
+      "source": "world-v5/ambient-source.png",
+      "rects": [
+        [
+          0,
+          841,
+          286,
+          281
+        ],
+        [
+          286,
+          841,
+          275,
+          281
+        ],
+        [
+          561,
+          841,
+          275,
+          281
+        ],
+        [
+          836,
+          841,
+          286,
+          281
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "fishingBoat": {
+      "source": "world-v5/ambient-source.png",
+      "rects": [
+        [
+          0,
+          1122,
+          280,
+          280
+        ],
+        [
+          280,
+          1122,
+          281,
+          280
+        ],
+        [
+          561,
+          1122,
+          280,
+          280
+        ],
+        [
+          841,
+          1122,
+          281,
+          280
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ]
+    },
+    "roadhub": {
+      "source": "world-v5/landterminals-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          313,
+          313
+        ],
+        [
+          313,
+          0,
+          314,
+          313
+        ],
+        [
+          627,
+          0,
+          313,
+          313
+        ],
+        [
+          940,
+          0,
+          314,
+          313
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "pavedhub": {
+      "source": "world-v5/landterminals-source.png",
+      "rects": [
+        [
+          0,
+          313,
+          313,
+          314
+        ],
+        [
+          313,
+          313,
+          314,
+          314
+        ],
+        [
+          627,
+          313,
+          313,
+          314
+        ],
+        [
+          940,
+          313,
+          314,
+          314
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "snowmobile": {
+      "source": "world-v5/landterminals-source.png",
+      "rects": [
+        [
+          0,
+          627,
+          313,
+          299
+        ],
+        [
+          313,
+          627,
+          314,
+          299
+        ],
+        [
+          627,
+          627,
+          313,
+          299
+        ],
+        [
+          940,
+          627,
+          314,
+          299
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "railterminal": {
+      "source": "world-v5/landterminals-source.png",
+      "rects": [
+        [
+          0,
+          926,
+          313,
+          328
+        ],
+        [
+          313,
+          926,
+          314,
+          328
+        ],
+        [
+          627,
+          926,
+          313,
+          328
+        ],
+        [
+          940,
+          926,
+          314,
+          328
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "ferrydock": {
+      "source": "world-v5/smallports-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          313,
+          313
+        ],
+        [
+          313,
+          0,
+          314,
+          313
+        ],
+        [
+          627,
+          0,
+          313,
+          313
+        ],
+        [
+          940,
+          0,
+          314,
+          313
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "canaldock": {
+      "source": "world-v5/smallports-source.png",
+      "rects": [
+        [
+          0,
+          313,
+          313,
+          314
+        ],
+        [
+          313,
+          313,
+          314,
+          314
+        ],
+        [
+          627,
+          313,
+          313,
+          314
+        ],
+        [
+          940,
+          313,
+          314,
+          314
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "streamdock": {
+      "source": "world-v5/smallports-source.png",
+      "rects": [
+        [
+          0,
+          627,
+          313,
+          313
+        ],
+        [
+          313,
+          627,
+          314,
+          313
+        ],
+        [
+          627,
+          627,
+          313,
+          313
+        ],
+        [
+          940,
+          627,
+          314,
+          313
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "polarferry": {
+      "source": "world-v5/smallports-source.png",
+      "rects": [
+        [
+          0,
+          940,
+          313,
+          314
+        ],
+        [
+          313,
+          940,
+          314,
+          314
+        ],
+        [
+          627,
+          940,
+          313,
+          314
+        ],
+        [
+          940,
+          940,
+          314,
+          314
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "riverport": {
+      "source": "world-v5/largeports-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          313,
+          313
+        ],
+        [
+          313,
+          0,
+          314,
+          313
+        ],
+        [
+          627,
+          0,
+          313,
+          313
+        ],
+        [
+          940,
+          0,
+          314,
+          313
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "lakeport": {
+      "source": "world-v5/largeports-source.png",
+      "rects": [
+        [
+          0,
+          313,
+          313,
+          314
+        ],
+        [
+          313,
+          313,
+          314,
+          314
+        ],
+        [
+          627,
+          313,
+          313,
+          314
+        ],
+        [
+          940,
+          313,
+          314,
+          314
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "coastport": {
+      "source": "world-v5/largeports-source.png",
+      "rects": [
+        [
+          0,
+          627,
+          313,
+          313
+        ],
+        [
+          313,
+          627,
+          314,
+          313
+        ],
+        [
+          627,
+          627,
+          313,
+          313
+        ],
+        [
+          940,
+          627,
+          314,
+          313
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "polarport": {
+      "source": "world-v5/largeports-source.png",
+      "rects": [
+        [
+          0,
+          940,
+          313,
+          314
+        ],
+        [
+          313,
+          940,
+          314,
+          314
+        ],
+        [
+          627,
+          940,
+          313,
+          314
+        ],
+        [
+          940,
+          940,
+          314,
+          314
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "airport": {
+      "source": "world-v5/airpower-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          317,
+          433
+        ],
+        [
+          317,
+          0,
+          310,
+          433
+        ],
+        [
+          627,
+          0,
+          313,
+          433
+        ],
+        [
+          940,
+          0,
+          314,
+          433
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "airterminal": {
+      "source": "world-v5/airpower-source.png",
+      "rects": [
+        [
+          0,
+          433,
+          320,
+          403
+        ],
+        [
+          320,
+          433,
+          307,
+          403
+        ],
+        [
+          627,
+          433,
+          306,
+          403
+        ],
+        [
+          933,
+          433,
+          321,
+          403
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "substation": {
+      "source": "world-v5/airpower-source.png",
+      "rects": [
+        [
+          0,
+          836,
+          317,
+          418
+        ],
+        [
+          317,
+          836,
+          310,
+          418
+        ],
+        [
+          627,
+          836,
+          309,
+          418
+        ],
+        [
+          936,
+          836,
+          318,
+          418
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        166,
+        165
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      }
+    },
+    "infrastructureGround": {
+      "source": "world-v5/infrastructureGround-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          443,
+          443
+        ],
+        [
+          443,
+          0,
+          444,
+          443
+        ],
+        [
+          887,
+          0,
+          443,
+          443
+        ],
+        [
+          1330,
+          0,
+          444,
+          443
+        ],
+        [
+          0,
+          443,
+          443,
+          444
+        ],
+        [
+          443,
+          443,
+          444,
+          444
+        ],
+        [
+          887,
+          443,
+          443,
+          444
+        ],
+        [
+          1330,
+          443,
+          444,
+          444
+        ]
+      ],
+      "columns": 8,
+      "opaqueTile": true
+    },
+    "henPeck": {
+      "source": "world-v5/henPeck-source.png",
+      "rects": [
+        [
+          32,
+          144,
+          472,
+          390
+        ],
+        [
+          575,
+          144,
+          472,
+          390
+        ],
+        [
+          1118,
+          144,
+          472,
+          390
+        ],
+        [
+          1661,
+          144,
+          472,
+          390
+        ]
+      ],
+      "columns": 4,
+      "opaqueTile": true,
+      "anchor": [
+        0.5,
+        0.85
+      ]
+    },
+    "mountain": {
+      "source": "map-edges-v6/mountain-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          1024,
+          384
+        ],
+        [
+          0,
+          384,
+          1024,
+          384
+        ],
+        [
+          0,
+          768,
+          1024,
+          384
+        ],
+        [
+          0,
+          1152,
+          1024,
+          384
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        150
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 3.4
+    },
+    "biomeGround": {
+      "source": "biomes-v7/ground-quiet-source.png",
+      "columns": 8,
+      "opaqueTile": true,
+      "rects": [
+        [
+          0,
+          0,
+          443,
+          443
+        ],
+        [
+          443,
+          0,
+          444,
+          443
+        ],
+        [
+          887,
+          0,
+          443,
+          443
+        ],
+        [
+          1330,
+          0,
+          444,
+          443
+        ],
+        [
+          0,
+          443,
+          443,
+          444
+        ],
+        [
+          443,
+          443,
+          444,
+          444
+        ],
+        [
+          887,
+          443,
+          443,
+          444
+        ],
+        [
+          1330,
+          443,
+          444,
+          444
+        ]
+      ]
+    },
+    "snowPine": {
+      "source": "biomes-v7/props-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          316,
+          311
+        ],
+        [
+          316,
+          0,
+          316,
+          311
+        ],
+        [
+          632,
+          0,
+          316,
+          311
+        ],
+        [
+          948,
+          0,
+          316,
+          311
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 1.9
+    },
+    "forestTree": {
+      "source": "biomes-v7/props-source.png",
+      "rects": [
+        [
+          0,
+          311,
+          316,
+          311
+        ],
+        [
+          316,
+          311,
+          316,
+          311
+        ],
+        [
+          632,
+          311,
+          316,
+          311
+        ],
+        [
+          948,
+          311,
+          316,
+          311
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 1.8
+    },
+    "cactus": {
+      "source": "biomes-v7/props-source.png",
+      "rects": [
+        [
+          0,
+          622,
+          316,
+          311
+        ],
+        [
+          316,
+          622,
+          316,
+          311
+        ],
+        [
+          632,
+          622,
+          316,
+          311
+        ],
+        [
+          948,
+          622,
+          316,
+          311
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 0.9
+    },
+    "oilSeep": {
+      "source": "biomes-v7/props-source.png",
+      "rects": [
+        [
+          0,
+          933,
+          316,
+          311
+        ],
+        [
+          316,
+          933,
+          316,
+          311
+        ],
+        [
+          632,
+          933,
+          316,
+          311
+        ],
+        [
+          948,
+          933,
+          316,
+          311
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 0.9
+    },
+    "snowMountain": {
+      "source": "biomes-v7/landmarks-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          443,
+          443
+        ],
+        [
+          443,
+          0,
+          444,
+          443
+        ],
+        [
+          887,
+          0,
+          443,
+          443
+        ],
+        [
+          1330,
+          0,
+          444,
+          443
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 3.4
+    },
+    "volcanicMountain": {
+      "source": "biomes-v7/landmarks-source.png",
+      "rects": [
+        [
+          0,
+          443,
+          443,
+          444
+        ],
+        [
+          443,
+          443,
+          444,
+          444
+        ],
+        [
+          887,
+          443,
+          443,
+          444
+        ],
+        [
+          1330,
+          443,
+          444,
+          444
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 3.4
+    },
+    "cargoWagon": {
+      "source": "completion-v8/land-corrected.png",
+      "rects": [
+        [
+          0,
+          0,
+          313,
+          330
+        ],
+        [
+          0,
+          330,
+          313,
+          285
+        ],
+        [
+          0,
+          615,
+          313,
+          291
+        ],
+        [
+          0,
+          906,
+          313,
+          348
+        ]
+      ],
+      "columns": 1,
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 1.18
+    },
+    "cargoSled": {
+      "source": "completion-v8/land-corrected.png",
+      "rects": [
+        [
+          313,
+          0,
+          314,
+          330
+        ],
+        [
+          313,
+          330,
+          314,
+          285
+        ],
+        [
+          313,
+          615,
+          314,
+          291
+        ],
+        [
+          313,
+          906,
+          314,
+          348
+        ]
+      ],
+      "columns": 1,
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 0.85
+    },
+    "cargoPlane": {
+      "source": "completion-v8/land-corrected.png",
+      "rects": [
+        [
+          627,
+          0,
+          313,
+          330
+        ],
+        [
+          627,
+          330,
+          313,
+          285
+        ],
+        [
+          627,
+          615,
+          313,
+          291
+        ],
+        [
+          627,
+          906,
+          313,
+          348
+        ]
+      ],
+      "columns": 1,
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 1.35
+    },
+    "cargoAirship": {
+      "source": "completion-v8/land-corrected.png",
+      "rects": [
+        [
+          940,
+          0,
+          314,
+          330
+        ],
+        [
+          940,
+          330,
+          314,
+          285
+        ],
+        [
+          940,
+          615,
+          314,
+          291
+        ],
+        [
+          940,
+          906,
+          314,
+          348
+        ]
+      ],
+      "columns": 1,
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 1.25
+    },
+    "cargoRaft": {
+      "source": "completion-v8/water-corrected.png",
+      "rects": [
+        [
+          0,
+          0,
+          313,
+          360
+        ],
+        [
+          0,
+          360,
+          313,
+          289
+        ],
+        [
+          0,
+          649,
+          313,
+          284
+        ],
+        [
+          0,
+          933,
+          313,
+          321
+        ]
+      ],
+      "columns": 1,
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 0.95
+    },
+    "cargoSteamer": {
+      "source": "completion-v8/steamer-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          724,
+          565
+        ],
+        [
+          0,
+          565,
+          724,
+          535
+        ],
+        [
+          0,
+          1100,
+          724,
+          550
+        ],
+        [
+          0,
+          1650,
+          724,
+          522
+        ]
+      ],
+      "columns": 1,
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 1.1
+    },
+    "cargoShip": {
+      "source": "completion-v8/water-corrected.png",
+      "rects": [
+        [
+          627,
+          0,
+          313,
+          360
+        ],
+        [
+          627,
+          360,
+          313,
+          289
+        ],
+        [
+          627,
+          649,
+          313,
+          284
+        ],
+        [
+          627,
+          933,
+          313,
+          321
+        ]
+      ],
+      "columns": 1,
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 1.4
+    },
+    "cargoFerry": {
+      "source": "completion-v8/water-corrected.png",
+      "rects": [
+        [
+          940,
+          0,
+          314,
+          360
+        ],
+        [
+          940,
+          360,
+          314,
+          289
+        ],
+        [
+          940,
+          649,
+          314,
+          284
+        ],
+        [
+          940,
+          933,
+          314,
+          321
+        ]
+      ],
+      "columns": 1,
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 1.05
+    },
+    "cargoTruckEmpty": {
+      "source": "completion-v8/freight-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          512,
+          400
+        ],
+        [
+          0,
+          400,
+          512,
+          360
+        ],
+        [
+          0,
+          760,
+          512,
+          360
+        ],
+        [
+          0,
+          1120,
+          512,
+          416
+        ]
+      ],
+      "columns": 1,
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 0.8
+    },
+    "cargoTrainEmpty": {
+      "source": "completion-v8/freight-source.png",
+      "rects": [
+        [
+          512,
+          0,
+          512,
+          400
+        ],
+        [
+          512,
+          400,
+          512,
+          360
+        ],
+        [
+          512,
+          760,
+          512,
+          360
+        ],
+        [
+          512,
+          1120,
+          512,
+          416
+        ]
+      ],
+      "columns": 1,
+      "fit": [
+        174,
+        170
+      ],
+      "baseline": 181,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "size": 1.25
+    },
+    "supportArt": {
+      "source": "completion-v8/support-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          313,
+          530
+        ],
+        [
+          313,
+          0,
+          314,
+          530
+        ],
+        [
+          627,
+          0,
+          313,
+          530
+        ],
+        [
+          940,
+          0,
+          314,
+          530
+        ],
+        [
+          0,
+          530,
+          313,
+          330
+        ],
+        [
+          313,
+          530,
+          314,
+          330
+        ],
+        [
+          627,
+          530,
+          313,
+          330
+        ],
+        [
+          940,
+          530,
+          314,
+          330
+        ],
+        [
+          0,
+          860,
+          313,
+          394
+        ],
+        [
+          313,
+          860,
+          314,
+          394
+        ],
+        [
+          627,
+          860,
+          313,
+          394
+        ],
+        [
+          940,
+          860,
+          314,
+          394
+        ]
+      ],
+      "columns": 12,
+      "fit": [
+        164,
+        164
+      ],
+      "centered": true,
+      "independentScale": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "states": {
+        "power": [
+          0
+        ],
+        "horse": [
+          1
+        ],
+        "irrigation": [
+          2
+        ],
+        "ward": [
+          3
+        ],
+        "transit": [
+          4
+        ],
+        "health": [
+          5
+        ],
+        "lightDamage": [
+          6
+        ],
+        "heavyDamage": [
+          7
+        ],
+        "rubble": [
+          8
+        ],
+        "repairNeeded": [
+          9
+        ],
+        "impact": [
+          10
+        ],
+        "repaired": [
+          11
+        ]
+      }
+    },
+    "resourceGoods": {
+      "source": "completion-v8/resourceGoods-source.png",
+      "grid": [
+        36,
+        1
+      ],
+      "columns": 36,
+      "opaqueTile": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "derivedFrom": {
+        "wood": [
+          "productionParts",
+          1
+        ],
+        "stone": [
+          "industrialGoods",
+          0
+        ],
+        "water": [
+          "productionParts",
+          0
+        ],
+        "grain": [
+          "productionParts",
+          3
+        ],
+        "plank": [
+          "productionParts",
+          2
+        ],
+        "flour": [
+          "industrialGoods",
+          1
+        ],
+        "bread": [
+          "industrialGoods",
+          2
+        ],
+        "fish": [
+          "industrialGoods",
+          3
+        ],
+        "gear": [
+          "industrialGoods",
+          4
+        ],
+        "iron": [
+          "industrialGoods",
+          5
+        ],
+        "coal": [
+          "industrialGoods",
+          6
+        ],
+        "steel": [
+          "industrialGoods",
+          7
+        ],
+        "oil": [
+          "industrialGoods",
+          8
+        ],
+        "fuel": [
+          "industrialGoods",
+          9
+        ],
+        "polymer": [
+          "industrialGoods",
+          10
+        ],
+        "mana": [
+          "industrialGoods",
+          11
+        ],
+        "circuit": [
+          "industrialGoods",
+          12
+        ],
+        "car": [
+          "industrialGoods",
+          13
+        ],
+        "medicine": [
+          "industrialGoods",
+          14
+        ],
+        "cotton": [
+          "expansionGoods",
+          0
+        ],
+        "herb": [
+          "expansionGoods",
+          1
+        ],
+        "egg": [
+          "expansionGoods",
+          2
+        ],
+        "smokedfish": [
+          "expansionGoods",
+          3
+        ],
+        "cloth": [
+          "expansionGoods",
+          4
+        ],
+        "cake": [
+          "expansionGoods",
+          5
+        ],
+        "brick": [
+          "expansionGoods",
+          6
+        ],
+        "workwear": [
+          "expansionGoods",
+          7
+        ],
+        "glass": [
+          "expansionGoods",
+          8
+        ],
+        "copper": [
+          "expansionGoods",
+          9
+        ],
+        "wire": [
+          "expansionGoods",
+          10
+        ],
+        "concrete": [
+          "expansionGoods",
+          11
+        ],
+        "canned": [
+          "expansionGoods",
+          12
+        ],
+        "lamp": [
+          "expansionGoods",
+          13
+        ],
+        "engine": [
+          "expansionGoods",
+          14
+        ],
+        "mithril": [
+          "expansionGoods",
+          15
+        ],
+        "airship": [
+          "expansionGoods",
+          16
+        ]
+      }
     }
   }
 }

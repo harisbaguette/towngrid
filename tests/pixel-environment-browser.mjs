@@ -19,7 +19,7 @@ try {
  await page.waitForFunction(() => document.querySelector('#sawmill').dataset.frame !== undefined);
  await screenshot('samples.png');
  await page.getByRole('button', { name: '생산 중', exact: true }).click();
- await page.waitForFunction(() => +document.querySelector('#sawmill').dataset.frame > 0);
+ await page.waitForFunction(() => document.querySelector('#sawmill').dataset.state === 'working');
  await page.getByRole('button', { name: '대기', exact: true }).click();
  await page.waitForFunction(() => document.querySelector('#sawmill').dataset.frame === '0');
  await page.getByRole('button', { name: '채집', exact: true }).click();
@@ -31,6 +31,7 @@ try {
  await screenshot('samples-mobile.png');
  await page.setViewportSize({ width: 1440, height: 1000 });
  await page.goto(origin, { waitUntil: 'domcontentloaded' });
+ await page.locator('canvas[role="application"]').waitFor({state:"attached",timeout:120000});
  await page.getByRole('button', { name: '화면을 눌러 시작', exact: true }).click();
  await page.getByRole('button', { name: '산업도시 둘러보기', exact: true }).click({ timeout: 120000 });
  await page.getByRole('button', { name: '오른쪽 90도 회전', exact: true }).waitFor();

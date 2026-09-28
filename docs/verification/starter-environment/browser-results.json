@@ -12,7 +12,7 @@
       "field"
     ],
     "sprites": true,
-    "time": 2.049999999999998
+    "time": 2.05
   },
   "views": [
     [
@@ -214,31 +214,31 @@
       },
       {
         "type": "house",
-        "frame": 1
+        "frame": 0
       },
       {
         "type": "house",
-        "frame": 1
+        "frame": 0
       },
       {
         "type": "house",
-        "frame": 1
+        "frame": 0
       },
       {
         "type": "lumber",
-        "frame": 1
+        "frame": 0
       },
       {
         "type": "sawmill",
-        "frame": 2
+        "frame": 0
       },
       {
         "type": "well",
-        "frame": 1
+        "frame": 0
       },
       {
         "type": "field",
-        "frame": 2
+        "frame": 0
       },
       {
         "type": "field",
@@ -252,7 +252,7 @@
       "wood": 36,
       "plank": 24
     },
-    "deliveries": 195
+    "deliveries": 191
   },
   "existingSavePreserved": true,
   "errors": [],

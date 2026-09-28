@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/roster-v4/neris.png",
+  "portraitRegion": [
+    0,
+    0,
+    694,
+    1024
+  ],
+  "views": [
+    {
+      "region": [
+        694,
+        0,
+        1091,
+        1024
+      ],
+      "bbox": [
+        702,
+        230,
+        1029,
+        911
+      ],
+      "scale": 0.14684287812041116,
+      "offset": [
+        40,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        1091,
+        0,
+        1536,
+        1024
+      ],
+      "bbox": [
+        1154,
+        234,
+        1495,
+        906
+      ],
+      "scale": 0.1488095238095238,
+      "offset": [
+        38,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}

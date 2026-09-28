@@ -2,17 +2,20 @@
   {
     "id": "silen",
     "source": "art-source/pixel-characters/silen-v1.png",
-    "cutoff": 564
+    "cutoff": 564,
+    "runtimeRig": "art-source/pixel-characters/roster-v4/silen/rig.json"
   },
   {
     "id": "hana",
     "source": "art-source/pixel-characters/hana-v1.png",
-    "cutoff": 500
+    "cutoff": 500,
+    "runtimeRig": "art-source/pixel-characters/roster-v4/hana/rig.json"
   },
   {
     "id": "rowan",
     "source": "art-source/pixel-characters/rowan-v1.png",
-    "cutoff": 628
+    "cutoff": 628,
+    "runtimeRig": "art-source/pixel-characters/roster-v4/rowan/rig.json"
   },
   {
     "id": "ethan",
@@ -29,17 +32,20 @@
           645
         ]
       }
-    ]
+    ],
+    "runtimeRig": "art-source/pixel-characters/roster-v4/ethan/rig.json"
   },
   {
     "id": "marna",
     "source": "art-source/pixel-characters/marna-v1.png",
-    "cutoff": 514
+    "cutoff": 514,
+    "runtimeRig": "art-source/pixel-characters/roster-v4/marna/rig.json"
   },
   {
     "id": "bron",
     "source": "art-source/pixel-characters/bron-v1.png",
-    "cutoff": 535
+    "cutoff": 535,
+    "runtimeRig": "art-source/pixel-characters/roster-v4/bron/rig.json"
   },
   {
     "id": "vera",
@@ -70,37 +76,45 @@
         "source": "art-source/pixel-characters/vera-windup-correction.png",
         "body_height": 336
       }
-    ]
+    ],
+    "runtimeRig": "art-source/pixel-characters/roster-v4/vera/rig.json"
   },
   {
     "id": "taron",
     "source": "art-source/pixel-characters/taron-v1.png",
-    "cutoff": 582
+    "cutoff": 582,
+    "runtimeRig": "art-source/pixel-characters/roster-v4/taron/rig.json"
   },
   {
     "id": "ael",
     "source": "art-source/pixel-characters/ael-v1.png",
-    "cutoff": 555
+    "cutoff": 555,
+    "runtimeRig": "art-source/pixel-characters/roster-v4/ael/rig.json"
   },
   {
     "id": "ravik",
-    "source": "art-source/pixel-characters/demon-ravik-original.png"
+    "source": "art-source/pixel-characters/demon-ravik-original.png",
+    "runtimeRig": "art-source/pixel-characters/roster-v4/ravik/rig.json"
   },
   {
     "id": "grum",
-    "source": "art-source/pixel-characters/orc-grum-original.png"
+    "source": "art-source/pixel-characters/orc-grum-original.png",
+    "runtimeRig": "art-source/pixel-characters/roster-v4/grum/rig.json"
   },
   {
     "id": "niki",
-    "source": "art-source/pixel-characters/goblin-niki-original.png"
+    "source": "art-source/pixel-characters/goblin-niki-original.png",
+    "runtimeRig": "art-source/pixel-characters/roster-v4/niki/rig.json"
   },
   {
     "id": "kael",
-    "source": "art-source/pixel-characters/dragon-kael-original.png"
+    "source": "art-source/pixel-characters/dragon-kael-original.png",
+    "runtimeRig": "art-source/pixel-characters/roster-v4/kael/rig.json"
   },
   {
     "id": "neris",
-    "source": "art-source/pixel-characters/aquatic-neris-original.png"
+    "source": "art-source/pixel-characters/aquatic-neris-original.png",
+    "runtimeRig": "art-source/pixel-characters/roster-v4/neris/rig.json"
   },
   {
     "id": "sora",
@@ -111,11 +125,12 @@
         "index": 5,
         "source": "art-source/pixel-characters/beast-sora-northeast-row.png"
       }
-    ]
+    ],
+    "runtimeRig": "art-source/pixel-characters/roster-v4/sora/rig.json"
   },
   {
     "id": "mira",
-    "runtimePrototype": "art-source/pixel-characters/prototypes/mira-v2/runtime-pack.json",
+    "runtimePrototype": "art-source/pixel-characters/prototypes/mira-v3/runtime-pack.json",
     "source": "art-source/pixel-characters/mira-v1.png",
     "cutoff": 552,
     "source_rows": 7,
@@ -238,7 +253,8 @@
         "source_rows": 2,
         "source_row": 1
       }
-    ]
+    ],
+    "runtimeRig": "art-source/pixel-characters/roster-v4/lien/rig.json"
   },
   {
     "id": "elion",
@@ -254,7 +270,8 @@
       5,
       7,
       8
-    ]
+    ],
+    "runtimeRig": "art-source/pixel-characters/roster-v4/elion/rig.json"
   },
   {
     "id": "dew",
@@ -284,7 +301,8 @@
         "source_rows": 2,
         "source_row": 1
       }
-    ]
+    ],
+    "runtimeRig": "art-source/pixel-characters/roster-v4/dew/rig.json"
   },
   {
     "id": "mist",
@@ -314,7 +332,8 @@
         "source_rows": 2,
         "source_row": 1
       }
-    ]
+    ],
+    "runtimeRig": "art-source/pixel-characters/roster-v4/mist/rig.json"
   },
   {
     "id": "lana",
@@ -347,7 +366,8 @@
         "source_rows": 2,
         "source_row": 1
       }
-    ]
+    ],
+    "runtimeRig": "art-source/pixel-characters/roster-v4/lana/rig.json"
   },
   {
     "id": "kai",
@@ -371,7 +391,8 @@
         "source_rows": 1,
         "source_row": 0
       }
-    ]
+    ],
+    "runtimeRig": "art-source/pixel-characters/roster-v4/kai/rig.json"
   },
   {
     "id": "fia",
@@ -401,7 +422,8 @@
         "source_rows": 2,
         "source_row": 1
       }
-    ]
+    ],
+    "runtimeRig": "art-source/pixel-characters/roster-v4/fia/rig.json"
   },
   {
     "id": "eil",
@@ -431,6 +453,142 @@
         "source_rows": 2,
         "source_row": 1
       }
-    ]
+    ],
+    "runtimeRig": "art-source/pixel-characters/roster-v4/eil/rig.json"
+  },
+  {
+    "id": "aira",
+    "source": "art-source/pixel-characters/professions-v5/aira.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/aira/rig.json"
+  },
+  {
+    "id": "aster",
+    "source": "art-source/pixel-characters/professions-v5/aster.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/aster/rig.json"
+  },
+  {
+    "id": "bel",
+    "source": "art-source/pixel-characters/professions-v5/bel.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/bel/rig.json"
+  },
+  {
+    "id": "borik",
+    "source": "art-source/pixel-characters/professions-v5/borik.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/borik/rig.json"
+  },
+  {
+    "id": "cedric",
+    "source": "art-source/pixel-characters/professions-v5/cedric.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/cedric/rig.json"
+  },
+  {
+    "id": "dax",
+    "source": "art-source/pixel-characters/professions-v5/dax.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/dax/rig.json"
+  },
+  {
+    "id": "dorin",
+    "source": "art-source/pixel-characters/professions-v5/dorin.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/dorin/rig.json"
+  },
+  {
+    "id": "elvar",
+    "source": "art-source/pixel-characters/professions-v5/elvar.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/elvar/rig.json"
+  },
+  {
+    "id": "erena",
+    "source": "art-source/pixel-characters/professions-v5/erena.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/erena/rig.json"
+  },
+  {
+    "id": "garen",
+    "source": "art-source/pixel-characters/professions-v5/garen.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/garen/rig.json"
+  },
+  {
+    "id": "garron",
+    "source": "art-source/pixel-characters/professions-v5/garron.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/garron/rig.json"
+  },
+  {
+    "id": "hugo",
+    "source": "art-source/pixel-characters/professions-v5/hugo.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/hugo/rig.json"
+  },
+  {
+    "id": "iris",
+    "source": "art-source/pixel-characters/professions-v5/iris.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/iris/rig.json"
+  },
+  {
+    "id": "luth",
+    "source": "art-source/pixel-characters/professions-v5/luth.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/luth/rig.json"
+  },
+  {
+    "id": "lyra",
+    "source": "art-source/pixel-characters/professions-v5/lyra.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/lyra/rig.json"
+  },
+  {
+    "id": "maren",
+    "source": "art-source/pixel-characters/professions-v5/maren.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/maren/rig.json"
+  },
+  {
+    "id": "nalia",
+    "source": "art-source/pixel-characters/professions-v5/nalia.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/nalia/rig.json"
+  },
+  {
+    "id": "nara",
+    "source": "art-source/pixel-characters/professions-v5/nara.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/nara/rig.json"
+  },
+  {
+    "id": "norin",
+    "source": "art-source/pixel-characters/professions-v5/norin.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/norin/rig.json"
+  },
+  {
+    "id": "oriel",
+    "source": "art-source/pixel-characters/professions-v5/oriel.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/oriel/rig.json"
+  },
+  {
+    "id": "oswin",
+    "source": "art-source/pixel-characters/professions-v5/oswin.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/oswin/rig.json"
+  },
+  {
+    "id": "otto",
+    "source": "art-source/pixel-characters/professions-v5/otto.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/otto/rig.json"
+  },
+  {
+    "id": "roa",
+    "source": "art-source/pixel-characters/professions-v5/roa.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/roa/rig.json"
+  },
+  {
+    "id": "selia",
+    "source": "art-source/pixel-characters/professions-v5/selia.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/selia/rig.json"
+  },
+  {
+    "id": "serin",
+    "source": "art-source/pixel-characters/professions-v5/serin.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/serin/rig.json"
+  },
+  {
+    "id": "terin",
+    "source": "art-source/pixel-characters/professions-v5/terin.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/terin/rig.json"
+  },
+  {
+    "id": "vian",
+    "source": "art-source/pixel-characters/professions-v5/vian.png",
+    "runtimeRig": "art-source/pixel-characters/professions-v5/vian/rig.json"
   }
 ]

@@ -27,13 +27,13 @@ export function assignJob(s,w){
   if(allowed)for(const [item,need] of Object.entries(s.effectiveInputs(b))){
    const pending=s.workers.reduce((n,p)=>n+(p.task?.targetId===b.id&&p.task.item===item?p.task.amount:0),0);
    const demand=need*2-(b.inputs[item]||0)-pending;if(demand<=0)continue;
-   const sources=s.buildings.filter(p=>p.id!==b.id&&p.health>0&&BUILDINGS[p.type].output===item&&p.out-reserved(s,item,p.id)>0&&canEnter(s,w.race,p));
+   const sources=s.buildings.filter(p=>p.id!==b.id&&p.health>0&&s.recipeOf(p).output===item&&p.out-reserved(s,item,p.id)>0&&canEnter(s,w.race,p));
    if(available(s,item)>0)sources.push(s.warehouse);
    for(const source of sources){const stock=source===s.warehouse?available(s,item):source.out-reserved(s,item,source.id);
     jobs.push({source,target:b,item,amount:Math.min(capacity,stock,demand),priority:(b.inputs[item]||0)<need?40:10,score:distance(w,source)+distance(source,b),age:b.age,kind:'supply'});
    }
   }
-  const item=BUILDINGS[b.type].output;
+  const item=s.recipeOf(b).output;
   if(allowed&&RESOURCES[item]){
    const output=b.out-reserved(s,item,b.id),incoming=s.workers.reduce((n,p)=>n+(p.task&&!p.task.targetId&&p.task.item===item?p.task.amount:0),0);
    const space=s.storageCapacity-s.stock[item]-incoming;
@@ -56,7 +56,7 @@ export function moveWorkers(s,dt){
   if(!target||target.health<=0){cancelTask(s,w);continue;}
   if(w.route.length&&!s.walkable(w.route[0].x,w.route[0].z)){const route=s.routeTo(w,target);if(route)w.route=route.path;else{cancelTask(s,w);continue;}}
   if(w.route.length){
-   const speed=1.25*(w.race==='centaur'?1.15:1)*(s.time<s.strikeUntil?.55:1)*(s.roads.has(`${Math.round(w.x)},${Math.round(w.z)}`)?1.7:1)*(s.horse?1.35:1)*(s.automatic?1.65:1)*(1-(s.health?.infection||0)*.005)*(s.money<0?.65:1);
+   const speed=1.25*(w.race==='centaur'?1.15:1)*(s.time<s.strikeUntil?.55:1)*(s.paved?.has(`${Math.round(w.x)},${Math.round(w.z)}`)?2.2:s.roads.has(`${Math.round(w.x)},${Math.round(w.z)}`)?1.7:1)*(s.horse?1.35:1)*(s.automatic?1.65:1)*(1-(s.health?.infection||0)*.005)*(s.money<0?.65:1);
    const step=advanceCharacterRoute(w,dt,speed,(x,z)=>s.walkable(x,z));
    w.stepDistance=(w.stepDistance||0)+step;
    if(w.stepDistance>=.42){w.stepDistance%=.42;s.sound('footstep',w.x,w.z);}

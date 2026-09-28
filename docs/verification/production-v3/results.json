@@ -1,0 +1,634 @@
+{
+  "passed": true,
+  "cases": {
+    "empty": [
+      {
+        "type": "warehouse",
+        "base": 0,
+        "outputs": 0
+      },
+      {
+        "type": "house",
+        "base": 0,
+        "outputs": 0
+      },
+      {
+        "type": "well",
+        "base": 0,
+        "production": {
+          "phase": "empty",
+          "label": "대기",
+          "working": false,
+          "count": 0,
+          "ready": false,
+          "progress": 0,
+          "output": "water",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "0",
+          "displayProgress": 0,
+          "outputName": "물",
+          "exhausted": false,
+          "workpiece": false,
+          "clock": 5
+        },
+        "outputs": 0
+      },
+      {
+        "type": "lumber",
+        "base": 0,
+        "production": {
+          "phase": "empty",
+          "label": "대기",
+          "working": false,
+          "count": 0,
+          "ready": false,
+          "progress": 0,
+          "output": "wood",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "0",
+          "displayProgress": 0,
+          "outputName": "목재",
+          "exhausted": false,
+          "workpiece": false,
+          "clock": 5
+        },
+        "outputs": 0
+      },
+      {
+        "type": "sawmill",
+        "base": 0,
+        "production": {
+          "phase": "empty",
+          "label": "대기",
+          "working": false,
+          "count": 0,
+          "ready": false,
+          "progress": 0,
+          "output": "plank",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "0",
+          "displayProgress": 0,
+          "outputName": "판재",
+          "exhausted": false,
+          "workpiece": true,
+          "clock": 5
+        },
+        "outputs": 0
+      },
+      {
+        "type": "field",
+        "base": 0,
+        "production": {
+          "phase": "empty",
+          "label": "대기",
+          "working": false,
+          "count": 0,
+          "ready": false,
+          "progress": 0,
+          "output": "grain",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "0",
+          "displayProgress": 0,
+          "outputName": "밀",
+          "exhausted": false,
+          "workpiece": true,
+          "clock": 5
+        },
+        "outputs": 0
+      }
+    ],
+    "working": [
+      {
+        "type": "warehouse",
+        "base": 0,
+        "outputs": 0
+      },
+      {
+        "type": "house",
+        "base": 0,
+        "outputs": 0
+      },
+      {
+        "type": "well",
+        "base": 0,
+        "production": {
+          "phase": "working",
+          "label": "생산 중",
+          "working": true,
+          "count": 0,
+          "ready": false,
+          "progress": 0.625,
+          "output": "water",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "0",
+          "displayProgress": 0.625,
+          "outputName": "물",
+          "exhausted": false,
+          "workpiece": true,
+          "clock": 5
+        },
+        "outputs": 0
+      },
+      {
+        "type": "lumber",
+        "base": 0,
+        "production": {
+          "phase": "working",
+          "label": "생산 중",
+          "working": true,
+          "count": 0,
+          "ready": false,
+          "progress": 0.625,
+          "output": "wood",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "0",
+          "displayProgress": 0.625,
+          "outputName": "목재",
+          "exhausted": false,
+          "workpiece": true,
+          "clock": 5
+        },
+        "outputs": 0
+      },
+      {
+        "type": "sawmill",
+        "base": 0,
+        "production": {
+          "phase": "working",
+          "label": "생산 중",
+          "working": true,
+          "count": 0,
+          "ready": false,
+          "progress": 0.625,
+          "output": "plank",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "0",
+          "displayProgress": 0.625,
+          "outputName": "판재",
+          "exhausted": false,
+          "workpiece": true,
+          "clock": 5
+        },
+        "outputs": 0
+      },
+      {
+        "type": "field",
+        "base": 0,
+        "production": {
+          "phase": "working",
+          "label": "생산 중",
+          "working": true,
+          "count": 0,
+          "ready": false,
+          "progress": 0.625,
+          "output": "grain",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "0",
+          "displayProgress": 0.625,
+          "outputName": "밀",
+          "exhausted": false,
+          "workpiece": true,
+          "clock": 5
+        },
+        "outputs": 0
+      }
+    ],
+    "ready": [
+      {
+        "type": "warehouse",
+        "base": 0,
+        "outputs": 0
+      },
+      {
+        "type": "house",
+        "base": 0,
+        "outputs": 0
+      },
+      {
+        "type": "well",
+        "base": 0,
+        "production": {
+          "phase": "ready",
+          "label": "완료",
+          "working": false,
+          "count": 6,
+          "ready": true,
+          "progress": 0,
+          "output": "water",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "6",
+          "displayProgress": 0,
+          "outputName": "물",
+          "exhausted": false,
+          "workpiece": false,
+          "clock": 5
+        },
+        "outputs": 2
+      },
+      {
+        "type": "lumber",
+        "base": 0,
+        "production": {
+          "phase": "ready",
+          "label": "완료",
+          "working": false,
+          "count": 6,
+          "ready": true,
+          "progress": 0,
+          "output": "wood",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "6",
+          "displayProgress": 0,
+          "outputName": "목재",
+          "exhausted": false,
+          "workpiece": false,
+          "clock": 5
+        },
+        "outputs": 2
+      },
+      {
+        "type": "sawmill",
+        "base": 0,
+        "production": {
+          "phase": "ready",
+          "label": "완료",
+          "working": false,
+          "count": 6,
+          "ready": true,
+          "progress": 0,
+          "output": "plank",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "6",
+          "displayProgress": 0,
+          "outputName": "판재",
+          "exhausted": false,
+          "workpiece": true,
+          "clock": 5
+        },
+        "outputs": 2
+      },
+      {
+        "type": "field",
+        "base": 0,
+        "production": {
+          "phase": "ready",
+          "label": "완료",
+          "working": false,
+          "count": 6,
+          "ready": true,
+          "progress": 0,
+          "output": "grain",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "6",
+          "displayProgress": 0,
+          "outputName": "밀",
+          "exhausted": false,
+          "workpiece": true,
+          "clock": 5
+        },
+        "outputs": 2
+      }
+    ],
+    "working-ready": [
+      {
+        "type": "warehouse",
+        "base": 0,
+        "outputs": 0
+      },
+      {
+        "type": "house",
+        "base": 0,
+        "outputs": 0
+      },
+      {
+        "type": "well",
+        "base": 0,
+        "production": {
+          "phase": "working",
+          "label": "생산 중",
+          "working": true,
+          "count": 6,
+          "ready": true,
+          "progress": 0.625,
+          "output": "water",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "6",
+          "displayProgress": 0.625,
+          "outputName": "물",
+          "exhausted": false,
+          "workpiece": true,
+          "clock": 5
+        },
+        "outputs": 2
+      },
+      {
+        "type": "lumber",
+        "base": 0,
+        "production": {
+          "phase": "working",
+          "label": "생산 중",
+          "working": true,
+          "count": 6,
+          "ready": true,
+          "progress": 0.625,
+          "output": "wood",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "6",
+          "displayProgress": 0.625,
+          "outputName": "목재",
+          "exhausted": false,
+          "workpiece": true,
+          "clock": 5
+        },
+        "outputs": 2
+      },
+      {
+        "type": "sawmill",
+        "base": 0,
+        "production": {
+          "phase": "working",
+          "label": "생산 중",
+          "working": true,
+          "count": 6,
+          "ready": true,
+          "progress": 0.625,
+          "output": "plank",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "6",
+          "displayProgress": 0.625,
+          "outputName": "판재",
+          "exhausted": false,
+          "workpiece": true,
+          "clock": 5
+        },
+        "outputs": 2
+      },
+      {
+        "type": "field",
+        "base": 0,
+        "production": {
+          "phase": "working",
+          "label": "생산 중",
+          "working": true,
+          "count": 6,
+          "ready": true,
+          "progress": 0.625,
+          "output": "grain",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "6",
+          "displayProgress": 0.625,
+          "outputName": "밀",
+          "exhausted": false,
+          "workpiece": true,
+          "clock": 5
+        },
+        "outputs": 2
+      }
+    ],
+    "blocked": [
+      {
+        "type": "warehouse",
+        "base": 0,
+        "outputs": 0
+      },
+      {
+        "type": "house",
+        "base": 0,
+        "outputs": 0
+      },
+      {
+        "type": "well",
+        "base": 0,
+        "production": {
+          "phase": "empty",
+          "label": "대기",
+          "working": false,
+          "count": 0,
+          "ready": false,
+          "progress": 0,
+          "output": "water",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "0",
+          "displayProgress": 0,
+          "outputName": "물",
+          "exhausted": false,
+          "workpiece": false,
+          "clock": 5
+        },
+        "outputs": 0
+      },
+      {
+        "type": "lumber",
+        "base": 0,
+        "production": {
+          "phase": "blocked",
+          "label": "자원 고갈",
+          "working": false,
+          "count": 0,
+          "ready": false,
+          "progress": 0,
+          "output": "wood",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "0",
+          "displayProgress": 0,
+          "outputName": "목재",
+          "exhausted": true,
+          "workpiece": false,
+          "clock": 5
+        },
+        "outputs": 0
+      },
+      {
+        "type": "sawmill",
+        "base": 0,
+        "production": {
+          "phase": "blocked",
+          "label": "재료 부족",
+          "working": false,
+          "count": 0,
+          "ready": false,
+          "progress": 0,
+          "output": "plank",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "0",
+          "displayProgress": 0,
+          "outputName": "판재",
+          "missing": "wood",
+          "exhausted": false,
+          "workpiece": false,
+          "clock": 5
+        },
+        "outputs": 0
+      },
+      {
+        "type": "field",
+        "base": 0,
+        "production": {
+          "phase": "blocked",
+          "label": "재료 부족",
+          "working": false,
+          "count": 0,
+          "ready": false,
+          "progress": 0,
+          "output": "grain",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "0",
+          "displayProgress": 0,
+          "outputName": "밀",
+          "missing": "water",
+          "exhausted": false,
+          "workpiece": false,
+          "clock": 5
+        },
+        "outputs": 0
+      }
+    ],
+    "disabled": [
+      {
+        "type": "warehouse",
+        "base": 0,
+        "outputs": 0
+      },
+      {
+        "type": "house",
+        "base": 0,
+        "outputs": 0
+      },
+      {
+        "type": "well",
+        "base": 0,
+        "production": {
+          "phase": "disabled",
+          "label": "중지",
+          "working": false,
+          "count": 6,
+          "ready": true,
+          "progress": 0,
+          "output": "water",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "6",
+          "displayProgress": 0,
+          "outputName": "물",
+          "exhausted": false,
+          "workpiece": false,
+          "clock": 5
+        },
+        "outputs": 2
+      },
+      {
+        "type": "lumber",
+        "base": 0,
+        "production": {
+          "phase": "disabled",
+          "label": "중지",
+          "working": false,
+          "count": 6,
+          "ready": true,
+          "progress": 0,
+          "output": "wood",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "6",
+          "displayProgress": 0,
+          "outputName": "목재",
+          "exhausted": false,
+          "workpiece": false,
+          "clock": 5
+        },
+        "outputs": 2
+      },
+      {
+        "type": "sawmill",
+        "base": 0,
+        "production": {
+          "phase": "disabled",
+          "label": "중지",
+          "working": false,
+          "count": 6,
+          "ready": true,
+          "progress": 0,
+          "output": "plank",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "6",
+          "displayProgress": 0,
+          "outputName": "판재",
+          "exhausted": false,
+          "workpiece": true,
+          "clock": 5
+        },
+        "outputs": 2
+      },
+      {
+        "type": "field",
+        "base": 0,
+        "production": {
+          "phase": "disabled",
+          "label": "중지",
+          "working": false,
+          "count": 6,
+          "ready": true,
+          "progress": 0,
+          "output": "grain",
+          "service": false,
+          "active": false,
+          "remaining": 0,
+          "displayValue": "6",
+          "displayProgress": 0,
+          "outputName": "밀",
+          "exhausted": false,
+          "workpiece": true,
+          "clock": 5
+        },
+        "outputs": 2
+      }
+    ]
+  },
+  "errors": [],
+  "failed": [],
+  "note": "State and rendering assertions; screenshots are for visual review."
+}

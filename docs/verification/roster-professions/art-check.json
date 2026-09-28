@@ -1,0 +1,352 @@
+[
+  {
+    "id": "aira",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "aster",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "bel",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "borik",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "cedric",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "dax",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "dorin",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "elvar",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "erena",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "garen",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "garron",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "hugo",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "iris",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "luth",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "lyra",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "maren",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "nalia",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "nara",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "norin",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "oriel",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "oswin",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "otto",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "roa",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "selia",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "serin",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "terin",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "vian",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "ael",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "bron",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "dew",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "spirit"
+  },
+  {
+    "id": "eil",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "elion",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "ethan",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "fia",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "grum",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "hana",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "kael",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "kai",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "centaur"
+  },
+  {
+    "id": "lana",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "centaur"
+  },
+  {
+    "id": "lien",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "marna",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "mist",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "spirit"
+  },
+  {
+    "id": "neris",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "niki",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "ravik",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "rowan",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "silen",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "sora",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "taron",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  },
+  {
+    "id": "vera",
+    "cells": 256,
+    "portraitFrames": 23,
+    "durationMs": 4000.0,
+    "locomotion": "biped"
+  }
+]

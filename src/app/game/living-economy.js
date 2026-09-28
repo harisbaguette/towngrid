@@ -1,6 +1,6 @@
 import {RESOURCES, BUILDINGS} from './simulation.js';
 import {NATIONS} from './world.js';
-import {tradeConnection} from './trade-routes.js';
+import {tradeConnection} from './trade-terminals.js';
 export function marketFactor(s,item,extra=0){
  const demand=1+Math.sin(Math.floor(s.day/3)*1.71+Object.keys(RESOURCES).indexOf(item)*.83)*.12;
  const pressure=(s.market.pressure[item]||0)+extra;
@@ -10,6 +10,7 @@ export function marketFactor(s,item,extra=0){
 }
 // The trade route a site sells through adds its own premium or middleman cut (trade-routes.js).
 export function saleQuote(s,item,amount=1){let total=0;for(let i=0;i<amount;i++)total+=RESOURCES[item].price*marketFactor(s,item,i);return Math.round(total*tradeConnection(s).price);}
+export const INFECTION_SPREAD=.0086;
 export function tickEconomy(s,dt){
  // M6: a running marketplace speeds price recovery (marketRecovery), multiplied with the trade charter.
  const market=Math.max(1,...s.buildings.filter(b=>b.health>0&&b.enabled!==false).map(b=>BUILDINGS[b.type].marketRecovery||1));
@@ -19,7 +20,9 @@ export function tickEconomy(s,dt){
  const hospital=s.buildings.some(b=>b.type==='hospital'&&b.health>0&&b.enabled!==false&&b.activeUntil>s.time);
  if(clinic&&s.stage<15&&s.time>=h.nextCare&&s.availableStock('herb')>=1&&s.availableStock('water')>=1){s.stock.herb--;s.stock.water--;h.infection=Math.max(0,h.infection-9);h.nextCare=s.time+16;s.sound('heal');}
  const sanitation=h.sanitationUntil>s.time,care=hospital||s.healthUntil>s.time;
- const growth=care?-.9:sanitation?(s.charter==='commons'?-.34:-.27):clinic&&s.stage<15?-.025:.075+(s.stage>=15?.045:0);
+ // Untreated infection spreads with the share already infected (docs/BALANCE_PATCH_20260928.md 12-6): an outbreak of 32
+ // reaches about 48 after one day and 65 after two, while a trace barely grows; the mana-borne disease spreads 1.5x.
+ const growth=care?-.9:sanitation?(s.charter==='commons'?-.34:-.27):clinic&&s.stage<15?-.025:INFECTION_SPREAD*h.infection*(1-h.infection/100)*(s.stage>=15?1.5:1);
  h.infection=Math.max(0,Math.min(100,h.infection+growth*dt));
  s.diseaseUntil=h.infection>0?s.time+80:0;
  if(!h.infection){h.recoveries++;s.notify('감염이 진정되었습니다. 의료 물자를 비축하세요.','success');s.sound('heal');}

@@ -1,0 +1,450 @@
+{
+ "stateOverrides": [
+  "rank=1 (first promotion)",
+  "rank=6, money 5000, wood/stone/plank 99",
+  "bakery built through sim.build at 12,10",
+  "rank=7",
+  "contract item stock = amount + 4",
+  "wood +60, fuel 0, three wood sales through sim.sell (every fuel-free vehicle out)"
+ ],
+ "errors": [],
+ "consoleErrors": [],
+ "failedRequests": [],
+ "stages": {
+  "firstSession": {
+   "buildings": [
+    "warehouse",
+    "house",
+    "well",
+    "field",
+    "lumber"
+   ],
+   "tutorialAtRank0": "첫 납품",
+   "nextBuildAtRank0": false,
+   "tutorialAfterPromotion": false,
+   "nextBuild": "제재소 짓기\n목재 → 판재",
+   "toolAfterClick": "sawmill",
+   "placementHint": "제재소 배치"
+  },
+  "productPicker": {
+   "locked": [
+    {
+     "text": "빵 2 1 1 5",
+     "disabled": false,
+     "pressed": "true"
+    },
+    {
+     "text": "케이크 지역 공급자 승급 후",
+     "disabled": true,
+     "pressed": "false"
+    }
+   ],
+   "unlocked": [
+    {
+     "text": "빵 2 1 1 5",
+     "disabled": false,
+     "pressed": "true"
+    },
+    {
+     "text": "케이크 2 2 1",
+     "disabled": false,
+     "pressed": "false"
+    }
+   ],
+   "afterSwitch": {
+    "recipe": "cake",
+    "recipeOf": "cake",
+    "inputs": {
+     "flour": 2,
+     "egg": 2
+    }
+   },
+   "cardRecipe": "0/2\n0/2\n케이크\n0",
+   "pressed": "케이크\n2\n2\n1"
+  },
+  "contract": {
+   "api": true,
+   "before": {
+    "label": "납품",
+    "disabled": false,
+    "status": {
+     "ready": true,
+     "wait": 0,
+     "inTransit": false
+    }
+   },
+   "shipped": {
+    "label": "운송 중",
+    "disabled": true,
+    "status": {
+     "ready": false,
+     "wait": 0,
+     "inTransit": true,
+     "error": "납품 마차가 영주에게 가는 중입니다"
+    }
+   },
+   "arrived": {
+    "label": "79초",
+    "disabled": true,
+    "status": {
+     "ready": false,
+     "wait": 79,
+     "inTransit": false,
+     "error": "다음 납품 주문까지 79초"
+    },
+    "contracts": 1
+   },
+   "dialog": "납품 계약\n케이크 6개 · 0/6\n78초"
+  },
+  "fleet": {
+   "exportStatus": {
+    "vehicles": [
+     {
+      "kind": "wagon",
+      "busy": true,
+      "name": "마차",
+      "fuel": false
+     },
+     {
+      "kind": "wagon",
+      "busy": false,
+      "name": "마차",
+      "fuel": false
+     },
+     {
+      "kind": "raft",
+      "busy": false,
+      "name": "뗏목",
+      "fuel": false
+     },
+     {
+      "kind": "truck",
+      "busy": false,
+      "name": "트럭",
+      "fuel": true
+     },
+     {
+      "kind": "steamer",
+      "busy": false,
+      "name": "증기선",
+      "fuel": true
+     }
+    ],
+    "fuelFree": 3,
+    "fuelPerTrip": 1
+   },
+   "opsLine": "운송\n1/5대 운행",
+   "opsLineOut": "운송\n연료 부족",
+   "marketLine": "운송\n연료 부족 · 트럭·증기선 대기\n도착 대기 20G"
+  },
+  "continuePaused": {
+   "after3s": {
+    "paused": true,
+    "advanced": 0
+   },
+   "pauseLabel": true
+  },
+  "phone": {
+   "closed": [
+    {
+     "label": "왼쪽 90도 회전",
+     "rect": [
+      10,
+      739,
+      28,
+      29
+     ],
+     "reachable": false,
+     "dockOverlapPx": 0,
+     "coveredBy": "game-toast"
+    },
+    {
+     "label": "오른쪽 90도 회전",
+     "rect": [
+      42,
+      739,
+      28,
+      29
+     ],
+     "reachable": false,
+     "dockOverlapPx": 0,
+     "coveredBy": "game-toast"
+    },
+    {
+     "label": "확대",
+     "rect": [
+      74,
+      739,
+      28,
+      29
+     ],
+     "reachable": false,
+     "dockOverlapPx": 0,
+     "coveredBy": "game-toast"
+    },
+    {
+     "label": "축소",
+     "rect": [
+      106,
+      739,
+      28,
+      29
+     ],
+     "reachable": false,
+     "dockOverlapPx": 0,
+     "coveredBy": "game-toast"
+    },
+    {
+     "label": "지도 중앙",
+     "rect": [
+      138,
+      739,
+      28,
+      29
+     ],
+     "reachable": false,
+     "dockOverlapPx": 0,
+     "coveredBy": "game-toast"
+    }
+   ],
+   "open": [
+    {
+     "label": "왼쪽 90도 회전",
+     "rect": [
+      10,
+      739,
+      28,
+      29
+     ],
+     "reachable": true,
+     "dockOverlapPx": 0,
+     "coveredBy": null
+    },
+    {
+     "label": "오른쪽 90도 회전",
+     "rect": [
+      42,
+      739,
+      28,
+      29
+     ],
+     "reachable": true,
+     "dockOverlapPx": 0,
+     "coveredBy": null
+    },
+    {
+     "label": "확대",
+     "rect": [
+      74,
+      739,
+      28,
+      29
+     ],
+     "reachable": true,
+     "dockOverlapPx": 0,
+     "coveredBy": null
+    },
+    {
+     "label": "축소",
+     "rect": [
+      106,
+      739,
+      28,
+      29
+     ],
+     "reachable": true,
+     "dockOverlapPx": 0,
+     "coveredBy": null
+    },
+    {
+     "label": "지도 중앙",
+     "rect": [
+      138,
+      739,
+      28,
+      29
+     ],
+     "reachable": true,
+     "dockOverlapPx": 0,
+     "coveredBy": null
+    }
+   ],
+   "rotated": true,
+   "dockStillOpen": true
+  },
+  "sweep1440x900": {
+   "hud": {
+    "covered": [
+     "우물 · 생산 중 · 물 2개 · 4% · 생산 중 <- facility-marker working production"
+    ],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-기초": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-주거": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-농축산": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-가공": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-중공업": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-동력·마법": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-첨단": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-운송": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-도시": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "facility": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "market": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "rank": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "residents": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "settings": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "world": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   }
+  },
+  "sweep390x844": {
+   "hud": {
+    "covered": [
+     "급수탑 · 공급 준비 · 관개 0초 · 31% · 생산 중 <- resource-strip",
+     "우물 · 생산 중 · 물 2개 · 4% · 생산 중 <- facility-marker working production",
+     "밀밭 · 생산 중 · 밀 0개 · 14% · 생산 중 <- resource-strip",
+     "밀밭 · 생산 중 · 밀 0개 · 32% · 생산 중 <- resource-strip",
+     "밀밭 · 생산 중 · 밀 0개 · 74% · 생산 중 <- resource-strip",
+     "제분소 · 생산 중 · 밀가루 0개 · 10% · 생산 중 <- quick-contract",
+     "빵집 · 생산 중 · 빵 0개 · 30% · 생산 중 <- quick-contract"
+    ],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-기초": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-주거": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-농축산": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-가공": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-중공업": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-동력·마법": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-첨단": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-운송": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "build-도시": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "facility": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "market": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "rank": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "residents": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "settings": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   },
+   "world": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": []
+   }
+  }
+ }
+}

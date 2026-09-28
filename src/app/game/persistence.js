@@ -1,7 +1,8 @@
 import {PROVINCES} from './territory.js';
 import {BUILDINGS,RESOURCES,N,homeCapacity} from './simulation.js';
 import {NATIONS,RANKS,RACES} from './world.js';
-import {MAX_EXPORT_CARTS} from './export-route.js';
+import {MAX_EXPORT_CARTS,VEHICLES} from './export-route.js';
+import {validLayout} from './world-grid.js';
 export const SAVE_KEY='first-land-v1';
 export const RECOVERY_KEY=SAVE_KEY+'-recovery';
 export const BACKUP_KEY=SAVE_KEY+'-backup';
@@ -24,21 +25,23 @@ function validateSimulation(s){
  if(s.health){numericFields(s.health,['infection'],0,100);numericFields(s.health,['sanitationUntil','nextCare','recoveries']);}
  if(s.market){if(!s.market.pressure)fail();resourceMap(s.market.pressure);}
  if(s.rescueQuest){if(!Number.isInteger(s.rescueQuest.step))fail();numericFields(s.rescueQuest,['step'],0,5);numericFields(s.rescueQuest,['remaining'],0,100);}
- if(s.logisticsStats)numericFields(s.logisticsStats,['direct','delivered']);
+ if(s.logisticsStats)numericFields(s.logisticsStats,['direct','delivered','fuel','fuelTrips']);
  if(s.race&&!ref(RACES,s.race))fail();
- if(!['river','coast','highland'].includes(s.region))fail();
- numericFields(s,['time','nextEvent','nextId','seed','raidCount','eventCount','contracts','expansions','totalRevenue','wardUntil','healthUntil','outageUntil','strikeUntil','sanctionUntil','batteryCharge','diseaseUntil']);
+ if(!['river','coast','highland'].includes(s.region)||s.land!==undefined&&!validLayout(s.land))fail();
+ numericFields(s,['time','nextEvent','nextId','seed','raidCount','eventCount','contracts','contractReadyAt','expansions','totalRevenue','wardUntil','healthUntil','outageUntil','strikeUntil','sanctionUntil','batteryCharge','diseaseUntil']);
  numericFields(s,['lastRecoveryDay'],-1e12);flags(s,['family','protected','emergencyUsed']);
  if(s.budget){if(typeof s.budget!=='object')fail();numericFields(s.budget,['day','income','expenses','lastIncome','lastExpenses']);}
  if(s.autoSell)for(const[k,v]of Object.entries(s.autoSell))if(!ref(RESOURCES,k)||typeof v!=='boolean')fail();
  if(s.pendingEvent&&(!events.includes(s.pendingEvent.type)||!number(s.pendingEvent.at)))fail();
  const ids=new Set(),occupied=new Set();
  for(const b of s.buildings){if(!ref(BUILDINGS,b.type)||!Number.isInteger(b.id)||ids.has(b.id)||!Number.isInteger(b.x)||!Number.isInteger(b.z)||b.x<0||b.x>=N||b.z<0||b.z>=N||!number(b.health,0,100)||!number(b.out)||!number(b.progress,0,1.01)||!b.inputs)fail();ids.add(b.id);const k=`${b.x},${b.z}`;if(occupied.has(k))fail();occupied.add(k);for(const[r,n]of Object.entries(b.inputs))if(!ref(RESOURCES,r)||!number(n))fail();}
+ // A chosen product must be one of the facility's recipes; the running batch lists real resources.
+ for(const b of s.buildings){if(b.recipe!==undefined&&!BUILDINGS[b.type].recipes?.some(r=>r.id===b.recipe))fail();if(b.batch!==undefined)resourceMap(b.batch);}
  for(const b of s.buildings){if(b.level!==undefined&&(!Number.isInteger(b.level)||b.level<1||b.level>3))fail();if(b.race&&!ref(RACES,b.race))fail();numericFields(b,['activeUntil','age','animationTime','cycles']);numericFields(b,['priority'],0,2);flags(b,['enabled','working','specialized','armorUsed']);}
  if(s.nextId!==undefined&&(!Number.isInteger(s.nextId)||[...ids].some(id=>id>=s.nextId)))fail();
- for(const key of ['roads','rails'])if(s[key]&&(!Array.isArray(s[key])||!s[key].every(point)))fail();
- if(s.shipments!==undefined&&(!Array.isArray(s.shipments)||s.shipments.length>MAX_EXPORT_CARTS))fail();for(const sh of s.shipments||[]){if(!sh||!Number.isInteger(sh.id)||!ref(RESOURCES,sh.item)||!Number.isInteger(sh.amount)||!number(sh.amount,1,1e6)||!number(sh.revenue)||!route(sh.route)||!sh.route.length||!number(sh.progress,0,sh.route.length-1)||!['out','back'].includes(sh.phase))fail();flags(sh,['auto']);}if(s.nextShipmentId!==undefined&&!Number.isInteger(s.nextShipmentId))fail();
- // An id the current map no longer has falls back to the best route (trade-routes.js).
+ for(const key of ['roads','rails','paved','pipes','conveyors'])if(s[key]&&(!Array.isArray(s[key])||!s[key].every(point)))fail();
+ if(s.shipments!==undefined&&(!Array.isArray(s.shipments)||s.shipments.length>MAX_EXPORT_CARTS))fail();for(const sh of s.shipments||[]){if(!sh||!Number.isInteger(sh.id)||!ref(RESOURCES,sh.item)||!Number.isInteger(sh.amount)||!number(sh.amount,1,1e6)||!number(sh.revenue)||!route(sh.route)||!sh.route.length||!number(sh.progress,0,sh.route.length-1)||!['out','back'].includes(sh.phase))fail();flags(sh,['auto']);if(sh.kind!==undefined&&!['contract','state','import'].includes(sh.kind)||sh.vehicle!==undefined&&!ref(VEHICLES,sh.vehicle)||sh.label!==undefined&&!label(sh.label,2000))fail();numericFields(sh,['cost']);}if(s.nextShipmentId!==undefined&&!Number.isInteger(s.nextShipmentId))fail();
+ // A terminal id ('gate' or 'b:<building>') the map no longer has falls back to the best terminal (trade-terminals.js).
  if(s.tradeRoute!==undefined&&s.tradeRoute!==null&&!label(s.tradeRoute,64))fail();
  if(s.workers&&(!Array.isArray(s.workers)||s.workers.length>Math.max(100,s.buildings.reduce((n,b)=>n+homeCapacity(b),0))))fail();if(s.nextWorkerId!==undefined&&!Number.isInteger(s.nextWorkerId))fail();
  const workerIds=new Set();for(const w of s.workers||[]){if(!w||!Number.isInteger(w.id)||workerIds.has(w.id)||!number(w.x,-1,N)||!number(w.z,-1,N)||!route(w.route))fail();workerIds.add(w.id);if(w.task?.sourceId&&!ids.has(w.task.sourceId))fail();if(w.task?.targetId&&!ids.has(w.task.targetId))fail();if(w.race&&!ref(RACES,w.race))fail();if(w.homeId!==undefined&&!ids.has(w.homeId))fail();numericFields(w,['dir','think'],-1e12);if(w.task&&(!ref(RESOURCES,w.task.item)||!number(w.task.amount)||!['pickup','supply'].includes(w.task.kind)||!ids.has(w.task.building)||(w.task.dest&&!route([w.task.dest]))))fail();}
@@ -59,7 +62,7 @@ export function validateSave(data){
  for(const key of ['newStates','factions','investments','recognition','history'])if(!Array.isArray(data[key]))fail();
  if(data.newStates.length>1000||data.factions.length>100||data.investments.length>10000||data.history.length>1000)fail();
  numericFields(data,['nextSite','nextRoute','nextState','deliveries','lastWorldDay']);
- flags(data.treasury,['family','emergencyUsed']);numericFields(data.treasury,['contracts','totalRevenue']);
+ flags(data.treasury,['family','emergencyUsed']);numericFields(data.treasury,['contracts','contractReadyAt','totalRevenue']);
  const stateIds=new Set();for(const state of data.newStates){if(!state||!label(state.id,100)||stateIds.has(state.id)||!label(state.name,2000)||!ref(NATIONS,state.rootNation||state.parent)||!number(state.wealth,-1e12)||!number(state.industry,1,12))fail();stateIds.add(state.id);numericFields(state,['age','day','trades','lastTradeDay']);numericFields(state,['unrest','relation'],0,105);flags(state,['pact']);}
  const factionIds=new Set();for(const f of data.factions){if(!f||!ref(NATIONS,f.id)||factionIds.has(f.id)||!number(f.wealth,-1e12)||!number(f.industry,1,12)||!number(f.unrest,-1e12)||!number(f.enterprise)||!number(f.age))fail();factionIds.add(f.id);}
  for(const i of data.investments)if(!i||!ref(NATIONS,i.nation)||!number(i.day))fail();

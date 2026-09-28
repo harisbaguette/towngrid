@@ -1,0 +1,51 @@
+{
+  "source": "art-source/pixel-characters/professions-v5/oriel.png",
+  "portraitRegion": [
+    0,
+    0,
+    572,
+    627
+  ],
+  "views": [
+    {
+      "region": [
+        572,
+        0,
+        901,
+        627
+      ],
+      "bbox": [
+        579,
+        76,
+        873,
+        627
+      ],
+      "scale": 0.18148820326678766,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    },
+    {
+      "region": [
+        901,
+        0,
+        1254,
+        627
+      ],
+      "bbox": [
+        930,
+        76,
+        1226,
+        625
+      ],
+      "scale": 0.18214936247723132,
+      "offset": [
+        37,
+        15
+      ],
+      "mirror": false
+    }
+  ]
+}
