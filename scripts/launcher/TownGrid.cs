@@ -1,4 +1,4 @@
-// 타운그리드 실행기: 개발 서버를 띄우고 게임을 전용 창으로 연다. 창을 닫으면 서버도 함께 끈다.
+// 타운그리드 실행기: 개발 서버를 띄우고 게임을 기본 브라우저에서 연다. 실행기 창을 닫으면 서버도 함께 끈다.
 // 빌드: npm run build:launcher (.NET Framework 4 csc, C# 5 문법만 사용)
 using System;
 using System.Diagnostics;
@@ -6,6 +6,8 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -36,9 +38,9 @@ static class Launcher
         {
             if (!firstInstance)
             {
-                // 이미 실행 중이면 같은 게임 창을 하나 더 띄우지 않고 기존 서버에 붙는다.
+                // 이미 실행 중이면 서버를 새로 켜지 않고 기존 서버의 게임만 브라우저에 연다.
                 string running = FindRunningGame(DefaultUrl);
-                if (running != null) OpenGameWindow(running);
+                if (running != null) Process.Start(running);
                 return;
             }
             File.WriteAllText(LogPath, "[" + DateTime.Now + "] TownGrid launcher\r\n", Encoding.UTF8);
@@ -70,6 +72,7 @@ static class Launcher
             }
 
             string url = FindRunningGame(DefaultUrl);
+            if (url == null) url = ReuseOrStopExistingServer();
             if (url == null)
             {
                 Status("게임 서버를 켜는 중…");
@@ -79,18 +82,10 @@ static class Launcher
                 if (!WaitForGame(url, 240)) { Fail("게임 화면이 제시간에 준비되지 않았습니다.", null); return; }
             }
 
-            Process browser = OpenGameWindow(url);
-            if (browser == null)
-            {
-                // 전용 창을 못 띄우면 기본 브라우저로 열고, 이 창을 닫을 때 서버를 끈다.
-                Process.Start(url);
-                Status("게임이 브라우저에서 열렸습니다. 이 창을 닫으면 게임 서버가 꺼집니다.");
-                splash.Invoke((Action)splash.ShowAsHost);
-                return;
-            }
-            splash.Invoke((Action)splash.Hide);
-            browser.WaitForExit();
-            splash.Invoke((Action)splash.Close);
+            // 브라우저 탭은 닫힘을 알 수 없으므로, 서버는 이 실행기 창을 닫을 때 끈다.
+            Process.Start(url);
+            Status("게임이 브라우저에서 열렸습니다. 이 창을 닫으면 게임 서버가 꺼집니다.");
+            splash.Invoke((Action)splash.ShowAsHost);
         }
         catch (Exception error)
         {
@@ -155,6 +150,52 @@ static class Launcher
         catch { }
     }
 
+    // 이 폴더에 다른 개발 서버(다른 창이나 작업 도구가 켠 것)가 이미 떠 있으면 새 서버는 켜지지 않는다.
+    // 첫 화면 준비를 기다려 보고, 끝내 화면을 못 내주면 멈춘 서버로 보고 끈 뒤 새로 켜게 한다.
+    static string ReuseOrStopExistingServer()
+    {
+        DevLock existing = ReadDevLock();
+        if (existing == null) return null;
+        string url = existing.appUrl.EndsWith("/") ? existing.appUrl : existing.appUrl + "/";
+        Status("이미 켜진 게임 서버를 확인하는 중…");
+        if (WaitForGame(url, 90)) return url;
+        Log("! 기존 서버(PID " + existing.pid + ")가 게임 화면을 내주지 못해 다시 켭니다.");
+        Status("멈춘 게임 서버를 다시 켜는 중…");
+        var kill = new ProcessStartInfo("taskkill", "/PID " + existing.pid + " /T /F") { UseShellExecute = false, CreateNoWindow = true };
+        using (var p = Process.Start(kill)) p.WaitForExit(10000);
+        for (int i = 0; i < 20 && IsAlive(existing.pid); i++) Thread.Sleep(250);
+        return null;
+    }
+
+    [DataContract]
+    class DevLock
+    {
+        [DataMember] public int pid = 0;
+        [DataMember] public string appUrl = null;
+    }
+
+    // vinext가 남기는 .vinext/dev/lock.json: 살아 있는 서버의 PID와 주소.
+    static DevLock ReadDevLock()
+    {
+        string path = Path.Combine(Root, @".vinext\dev\lock.json");
+        if (!File.Exists(path)) return null;
+        try
+        {
+            using (var stream = File.OpenRead(path))
+            {
+                var info = (DevLock)new DataContractJsonSerializer(typeof(DevLock)).ReadObject(stream);
+                return info != null && info.pid > 0 && !string.IsNullOrEmpty(info.appUrl) && IsAlive(info.pid) ? info : null;
+            }
+        }
+        catch (Exception error) { Log("lock.json 읽기 실패: " + error.Message); return null; }
+    }
+
+    static bool IsAlive(int pid)
+    {
+        try { using (var p = Process.GetProcessById(pid)) return !p.HasExited; }
+        catch { return false; }
+    }
+
     // 이미 켜진 타운그리드 서버가 있으면 그 주소를 쓴다.
     static string FindRunningGame(string url)
     {
@@ -187,34 +228,6 @@ static class Launcher
                 return response.StatusCode == HttpStatusCode.OK ? reader.ReadToEnd() : null;
         }
         catch { return null; }
-    }
-
-    // 전용 프로필의 앱 창으로 연다. 저장 데이터는 이 프로필에 남고, 창을 닫으면 프로세스가 끝난다.
-    static Process OpenGameWindow(string url)
-    {
-        string browser = FindBrowser();
-        if (browser == null) return null;
-        string profile = Path.Combine(DataDir, "browser");
-        string args = "--app=" + url + " --user-data-dir=\"" + profile + "\" --no-first-run --no-default-browser-check --disable-background-mode --start-maximized";
-        return Process.Start(new ProcessStartInfo(browser, args) { UseShellExecute = false });
-    }
-
-    static string FindBrowser()
-    {
-        string[] bases = {
-            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
-            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        };
-        string[] names = { @"Google\Chrome\Application\chrome.exe", @"Microsoft\Edge\Application\msedge.exe" };
-        foreach (string name in names)
-            foreach (string b in bases)
-            {
-                if (string.IsNullOrEmpty(b)) continue;
-                string path = Path.Combine(b, name);
-                if (File.Exists(path)) return path;
-            }
-        return null;
     }
 
     static string FindOnPath(string file)
@@ -382,11 +395,12 @@ class Splash : Form
 
     public void SetStatus(string text) { status.Text = text; }
 
-    // 기본 브라우저로 연 경우: 테두리 있는 창으로 바꿔 사용자가 직접 닫을 수 있게 한다.
+    // 게임을 연 뒤: 테두리 있는 창으로 바꿔 사용자가 직접 닫을 수 있게 한다.
     public void ShowAsHost()
     {
         FormBorderStyle = FormBorderStyle.FixedSingle;
         MaximizeBox = false;
+        ShowInTaskbar = true;
         bar.Visible = false;
         Show();
     }

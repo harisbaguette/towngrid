@@ -42,7 +42,7 @@ try {
   const result = spawnSync(csc, [
     '/nologo', '/target:winexe', '/optimize+', '/codepage:65001',
     `/win32icon:${icon}`, `/out:${join(root, 'TownGrid.exe')}`,
-    '/r:System.Windows.Forms.dll', '/r:System.Drawing.dll',
+    '/r:System.Windows.Forms.dll', '/r:System.Drawing.dll', '/r:System.Runtime.Serialization.dll',
     join(here, 'TownGrid.cs'),
   ], { stdio: 'inherit' });
   if (result.error) throw result.error;
