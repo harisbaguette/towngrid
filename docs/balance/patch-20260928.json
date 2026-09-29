@@ -3519,7 +3519,8 @@
       "water": 1
      },
      "output": "wool",
-     "amount": 2
+     "amount": 2,
+     "waterNeed": 3
     },
     "milkbarn": {
      "name": "젖소 우리",
@@ -3535,7 +3536,8 @@
       "water": 1
      },
      "output": "milk",
-     "amount": 2
+     "amount": 2,
+     "waterNeed": 4
     },
     "apiary": {
      "name": "양봉장",
@@ -3562,7 +3564,8 @@
       "water": 1
      },
      "output": "duckegg",
-     "amount": 2
+     "amount": 2,
+     "waterNeed": 2
     },
     "feedmill": {
      "name": "사료 공장",
@@ -4127,13 +4130,80 @@
    "amount": "비공정 1 · 목록가 1000G 이상 2 · 150G 이상 6 · 그 밖 12+min(계약 수×2,16)"
   },
   "rules": {
-   "solarShade": "태양광 패널 속도 = max(0.4, 1 − 그늘 단계 × 0.2)",
+   "solarShade": "태양광 패널 속도 = max(0.4, 1 − 그늘 단계 × 0.2). 그늘은 높은 건물과 산(새 규칙 지도) 중 큰 값",
    "sandpitGround": "모래 땅 위 모래 채굴장 ×1.25",
    "clayfield": "강·바다 두 칸 이내(nearWater 2)",
    "livestockPollution": "양 우리·젖소 우리·오리 집·양봉장은 양계장처럼 오염에 약함",
-   "saltfield": "관개 대상 아님(항상 물 1 운반)",
-   "terrain": "연못·목초지·야생 클로버: 생산 없음, 철거 시 건설비 40% 환급. 주변 효과는 다음 개편",
+   "saltfield": "물 요구량 3. 새 규칙 지도에서는 바닷물도 물로 쳐 요구량을 채우면 물 운반 생략, 소금기 단계마다 +20%. 옛 지도에서는 관개 대상 아님(항상 물 1 운반)",
+   "terrain": "연못·목초지·야생 클로버: 생산 없음, 철거 시 건설비 40% 환급. 효과는 terrainRules(14절)",
    "market": "대안 제품만으로 만드는 상품도 그 제품이 열리면 수입·시장에 표시"
+  },
+  "terrainRules": {
+   "doc": "docs/BALANCE_PATCH_20260928.md 14",
+   "code": "src/app/game/proximity.js placementEffects",
+   "gate": "land.ecology가 있는 지도(2026-09-28 이후 새 거점)는 규칙 5가지를 적용하고, 없는 지도는 예전 규칙을 유지한다. 지형 시설 3종의 효과는 모든 지도에 적용한다(옛 지도의 연못은 예전 이진 규칙의 담수로 친다).",
+   "numbers": {
+    "waterRing": [
+     2,
+     1
+    ],
+    "openWater": 3,
+    "clusterStep": 0.1,
+    "clusterMax": 5,
+    "mountainSteps": [
+     3,
+     2,
+     2,
+     1,
+     1
+    ],
+    "saltSteps": [
+     2,
+     1
+    ],
+    "saltCrop": 0.15,
+    "saltPan": 0.2,
+    "flood": 0.7,
+    "mines": [
+     "ironmine",
+     "coalpit",
+     "coppermine",
+     "sandpit"
+    ],
+    "herds": [
+     "sheeppen",
+     "milkbarn"
+    ],
+    "grazeStep": 0.1,
+    "grazeMax": 0.4,
+    "cloverReach": 2
+   },
+   "waterNeed": {
+    "field": 3,
+    "cottonfield": 4,
+    "herbgarden": 3,
+    "sugarfield": 8,
+    "saltfield": 3,
+    "vineyard": 5,
+    "cocoafarm": 6,
+    "berryfield": 4,
+    "mintfield": 3,
+    "pumpkinpatch": 5,
+    "oakfarm": 7,
+    "sheeppen": 3,
+    "milkbarn": 4,
+    "duckhouse": 2
+   },
+   "rules": {
+    "mountain": "산 타일에서 1~5칸: 그늘·바람막이 3,2,2,1,1단계. 건물 그늘과 큰 값을 쓴다. 작물 −10%/단계, 태양광 −20%/단계, 제분소·풍력 −20%/단계(최저 40%)",
+    "cluster": "같은 종류 생산 시설이 둘레 여덟 칸(대각선 포함)에 있으면 하나마다 생산 시간 −10%, 최대 −50%(다섯 개). 배치로 계산하며 가동 여부·내구도와 무관. 시간제 출력(전력·말·관개·의료·결계·운송)은 제외",
+    "salt": "바다 칸에서 1칸 2단계, 2칸 1단계. 관개 작물 −15%/단계(오염·그늘과 합쳐 최저 40%), 소금밭 +20%/단계",
+    "flood": "철광산·탄광·구리 광산·모래 채굴장이 물 칸(담수·바다·연못)과 맞닿으면(대각선 포함) ×0.7",
+    "water": "물 점수 = 두 칸 안 큰 물(강·호수·하천·운하·습지 웅덩이)이 있으면 기본 3 + 맞닿은 물 칸·연못 2 + 두 칸째 1. 물 요구량 이상이면 물 1 투입 생략. 가동 중 급수탑 두 칸 안은 관개 작물의 요구량을 모두 채운다. 소금밭은 바닷물도 센다",
+    "pond": "연못 = 담수 한 칸(맞닿은 칸 2·두 칸째 1). 작물·가축의 물 요구량, 광산 침수에 쓰인다",
+    "pasture": "양 우리·젖소 우리: 맞닿은 목초지 2점·두 칸째 1점, 점수마다 +10%, 최대 +40%",
+    "clover": "양봉장은 두 칸 안에 야생 클로버가 없으면 「야생 클로버 필요」로 멈춘다"
+   }
   }
  }
 }

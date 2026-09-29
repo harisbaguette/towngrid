@@ -29,7 +29,7 @@ export const BUILDINGS={
  warehouse:{name:'창고',group:'base',size:1,cost:80,materials:{wood:6},unique:true,description:'재고와 출하의 중심입니다. 주민은 가까운 생산 시설끼리 직접 운반할 수도 있습니다.'},
  road:{name:'흙길',group:'base',size:1,cost:4,description:'운반자가 길 위에서 70% 빠르게 이동합니다.'},
  well:{name:'우물',group:'base',size:1,cost:60,materials:{stone:4},period:6,output:'water',amount:2,description:'물통을 끌어올려 물을 공급합니다.'},
- field:{name:'밀밭',group:'farm',size:1,cost:45,period:12,inputs:{water:1},output:'grain',amount:3,irrigable:true,waterNeed:3,description:'물을 공급받아 밀을 재배합니다. 강이나 급수탑 옆이면 물 운반 없이 자랍니다.'},
+ field:{name:'밀밭',group:'farm',size:1,cost:45,period:12,inputs:{water:1},output:'grain',amount:3,irrigable:true,waterNeed:3,description:'물을 공급받아 밀을 재배합니다. 물 요구량 3 · 강이나 급수탑에서 두 칸 안이면 물 운반 없이 자랍니다.'},
  lumber:{name:'벌목장',group:'base',size:1,cost:90,materials:{wood:4},period:8,output:'wood',amount:3,natural:'tree',description:'네 칸 이내의 나무를 베어 목재를 얻습니다.'},
  quarry:{name:'채석장',group:'base',size:1,cost:100,materials:{wood:5},period:9,output:'stone',amount:2,natural:'rock',description:'네 칸 이내의 바위에서 석재를 캡니다.'},
  stable:{name:'말 축사',group:'farm',size:1,cost:160,materials:{wood:10},period:28,inputs:{grain:1,water:1},output:'horse',amount:1,unique:true,description:'먹이와 물을 공급하면 운반 속도가 35% 빨라집니다.'},
@@ -190,6 +190,7 @@ export class Simulation{
    if(!d.period){b.status=b.type==='logistics'?'자동 분류 중':b.type==='warehouse'?'운반 중':'정상 운영';b.working=b.type==='logistics'&&this.workers.some(w=>w.task);continue;}
    if(!this.entries(b).length){b.status='출입구 막힘';continue;}if(!this.entries(b).some(p=>this.reachable.has(K(p.x,p.z)))){b.status='창고 경로 막힘';continue;}
    const crew=crewFor(this,b.type);if(crew&&!this.workers.some(w=>crewOf(w.race)===crew)){b.status=RACES[crew].name+' 주민 필요';continue;}
+   const fx=this.placementEffects(b.type,b.x,b.z);if(fx.blocked){b.status=fx.blocked;continue;}
    const r=this.recipeOf(b);if(b.out>=10){b.status=this.stock[r.output]>=this.storageCapacity?'창고 가득 참':'운반 대기';continue;}
    // Timed effects restart one production period before they lapse, so a supplied facility never leaves a gap (audit H5).
    if((['horse','power','health','ward','transit','irrigation'].includes(d.output))&&b.activeUntil-this.time>d.period){b.status=({horse:'운반 지원 중',power:'전력 공급 중',health:'의료 지원 중',ward:'결계 유지 중',transit:'운송 가속 중',irrigation:'관개 공급 중'})[d.output];b.working=true;continue;}
@@ -199,7 +200,7 @@ export class Simulation{
    // The batch remembers what this cycle consumed, so a product switch can hand it back (setRecipe).
    if(b.progress===0){b.batch=this.effectiveInputs(b);for(const[k,n]of Object.entries(b.batch))b.inputs[k]-=n;}
    let mult=1+(b.level-1)*.3;
-   mult*=1-this.health.infection*.0025;if(this.charter==='industry'&&['craft','industry','advanced'].includes(d.group))mult*=1.08;mult*=this.tileMultiplier(b.type,b.x,b.z)*this.countryMultiplier(b.type)*this.specialtyMultiplier(b)*this.placementEffects(b.type,b.x,b.z).speed;
+   mult*=1-this.health.infection*.0025;if(this.charter==='industry'&&['craft','industry','advanced'].includes(d.group))mult*=1.08;mult*=this.tileMultiplier(b.type,b.x,b.z)*this.countryMultiplier(b.type)*this.specialtyMultiplier(b)*fx.speed;
    b.progress+=dt*mult/r.period;b.working=true;b.status='생산 중';
    if(b.progress>=1){
     b.progress=0;delete b.batch;b.cycles=(b.cycles||0)+1;if(b.specialized&&b.race==='elf'&&b.cycles%4===0&&Object.keys(r.inputs).length){const key=Object.keys(r.inputs)[0];b.inputs[key]=(b.inputs[key]||0)+1;}this.sound(b.type,b.x,b.z);if(d.output==='horse')b.activeUntil=this.time+65;else if(d.output==='power')b.activeUntil=this.time+60;else if(d.output==='ward'){b.activeUntil=this.time+65;this.wardUntil=this.time+65;}else if(d.output==='irrigation'){b.activeUntil=this.time+60;}else if(d.output==='transit'){b.activeUntil=this.time+65;}else if(d.output==='health'){b.activeUntil=this.time+65;this.healthUntil=this.time+65;}
@@ -302,7 +303,7 @@ export class Simulation{
   for(const[k,n]of Object.entries(b.inputs))if(!next.inputs[k]){this.stock[k]=(this.stock[k]||0)+n;delete b.inputs[k];}
   b.recipe=next.id;this.revision++;this.checkStorage();this.notify(BUILDINGS[b.type].name+' · '+next.name+' 생산으로 전환','success');return {ok:true};
  }
- effectiveInputs(b){const inputs={...(this.recipeOf(b).inputs||{})};if(BUILDINGS[b.type].irrigable&&this.placementEffects(b.type,b.x,b.z).water)delete inputs.water;return inputs;}
+ effectiveInputs(b){const inputs={...(this.recipeOf(b).inputs||{})};if(inputs.water&&this.placementEffects(b.type,b.x,b.z).water)delete inputs.water;return inputs;}
  tileMultiplier(type,x,z){const t=this.tile(x,z);if(!t)return 1;const v=BUILDINGS[type]?.irrigable?t.fertility:type==='well'?t.moisture:type==='oilpump'?(t.oil??t.ore):['quarry','ironmine','coalpit','coppermine'].includes(type)?t.ore:type==='manaextractor'?t.mana:null;return (v===null?1:.7+v*.008)*groundFactor(this,type,x,z,BUILDINGS[type]?.irrigable);}
  upgradeCost(b){return Math.round(b.level*(BUILDINGS[b.type].home?60:90)*(b.specialized&&b.race==='human'?.8:1));}
  eventName(type){return ({storm:'폭풍',illness:this.stage>=15?'마력성 감염병':'감염병',strike:'파업',raid:'외부 습격',manaStorm:'마력 폭풍',sanction:'무역 압박'})[type]||type;}

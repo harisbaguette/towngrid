@@ -6,14 +6,14 @@ export const MODERN_RESOURCES={
  copper:{name:'구리광석',color:'#c07a4a',price:19},wire:{name:'구리 전선',color:'#d9964f',price:90},concrete:{name:'콘크리트',color:'#b7b3aa',price:105},canned:{name:'통조림',color:'#9aa9b3',price:185},lamp:{name:'마력등',color:'#f4d97a',price:400,final:true},engine:{name:'마력 기관',color:'#8c7ad8',price:1800},mithril:{name:'미스릴 강',color:'#c9e3f2',price:1260},airship:{name:'비공정',color:'#e3b04b',price:12000,final:true}
 };
 export const MODERN_BUILDINGS={
- reservoir:{name:'급수탑',group:'farm',cost:180,materials:{wood:8,stone:6},period:12,inputs:{water:3},output:'irrigation',amount:1,description:'물 3개로 60초간 주변 두 칸의 밀밭에 관개합니다. 주민의 물 운반을 줄여줍니다.'},
+ reservoir:{name:'급수탑',group:'farm',cost:180,materials:{wood:8,stone:6},period:12,inputs:{water:3},output:'irrigation',amount:1,description:'물 3개로 60초간 주변 두 칸 작물의 물 요구량을 모두 채웁니다. 주민의 물 운반을 줄여줍니다.'},
  depot:{name:'자재 보관소',group:'base',cost:220,materials:{plank:6,stone:4},description:'각 자원의 보관 한도를 120개 늘립니다. 여러 곳 건설할 수 있습니다.'},
- windturbine:{name:'풍력 발전기',group:'energy',cost:330,materials:{plank:10,gear:2},period:24,output:'power',amount:1,description:'연료 없이 발전합니다. 주변 높은 건물이 바람을 가리면 느려집니다.'},
+ windturbine:{name:'풍력 발전기',group:'energy',cost:330,materials:{plank:10,gear:2},period:24,output:'power',amount:1,description:'연료 없이 발전합니다. 주변 높은 건물이나 산이 바람을 가리면 느려집니다.'},
  magetower:{name:'마탑',group:'energy',cost:700,materials:{brick:6,steel:4,glass:2,circuit:2},period:28,inputs:{mana:2,circuit:1},output:'ward',amount:1,wardRadius:4.5,description:'마력 결정과 회로로 반경 4.5칸에 결계를 칩니다. 결계 안의 시설은 습격 피해를 받지 않고 들어온 습격자는 약해집니다. 결계가 유지되는 동안 마족의 전력 교란도 막습니다.'},
  steamworks:{name:'증기 기계공장',group:'industry',cost:560,materials:{steel:8,gear:4},period:21,inputs:{steel:1,coal:1,water:1},output:'gear',amount:4,description:'강철·석탄·물을 사용해 증기기관으로 기계 부품을 대량 가공합니다.'},
  leyrelay:{name:'마력 중계소',group:'transport',cost:880,materials:{steel:8,circuit:4},period:25,inputs:{mana:1},output:'transit',amount:1,transitFactor:0.8,power:true,description:'양쪽 거점에서 가동하면 트럭과 철도의 운송 시간이 20% 짧아집니다.'},
- ironmine:{name:'철광산',group:'industry',cost:380,materials:{plank:8,gear:2},period:16,output:'iron',amount:4,description:'타일의 광물량에 따라 철광석을 채굴합니다.'},
- coalpit:{name:'탄광',group:'industry',cost:330,materials:{plank:6,gear:2},period:17,inputs:{water:1},output:'coal',amount:4,description:'물을 공급해 석탄을 채굴합니다. 타일 광물량이 작업 속도에 영향을 줍니다.'},
+ ironmine:{name:'철광산',group:'industry',cost:380,materials:{plank:8,gear:2},period:16,output:'iron',amount:4,description:'타일의 광물량에 따라 철광석을 채굴합니다. 물가에 붙이면 침수로 30% 느려집니다.'},
+ coalpit:{name:'탄광',group:'industry',cost:330,materials:{plank:6,gear:2},period:17,inputs:{water:1},output:'coal',amount:4,description:'물을 공급해 석탄을 채굴합니다. 타일 광물량이 작업 속도에 영향을 주고, 물가에 붙이면 침수로 30% 느려집니다.'},
  smelter:{name:'제철소',group:'industry',cost:900,materials:{stone:12,gear:4},period:23,inputs:{iron:3,coal:2},output:'steel',amount:3,power:true,description:'철광석과 석탄을 강철로 제련합니다.'},
  oilpump:{name:'유정',group:'energy',cost:420,materials:{gear:4,steel:4},period:19,output:'oil',amount:4,power:true,description:'타일의 원유 농도에 따라 원유를 추출합니다.'},
  refinery:{name:'정유소',group:'energy',cost:1000,materials:{steel:8,gear:4},period:22,inputs:{oil:3,water:1},output:'fuel',amount:4,power:true,description:'원유와 물을 받아 운송 연료를 생산합니다.'},
@@ -30,8 +30,8 @@ export const MODERN_BUILDINGS={
  bank:{name:'투자 사무소',group:'civic',cost:1800,materials:{concrete:6,glass:3,gear:3},unique:true,description:'세계 지도에서 산업 투자에 출자하면 일일 배당을 받습니다.'},
  barracks:{name:'경비대 본부',group:'civic',cost:1900,materials:{concrete:8,steel:6,gear:3},unique:true,description:'경비대를 편성해 습격을 방어하고 치안권·독립 조건을 준비합니다.'},
  // Balance patch 2026-09-28: 19 production and 7 support facilities. Placeholder models until pixel art (models.js modern()).
- cottonfield:{name:'목화밭',group:'farm',cost:55,materials:{wood:3},period:9,inputs:{water:1},output:'cotton',amount:2,irrigable:true,waterNeed:4,description:'물을 받아 목화를 기릅니다. 강이나 급수탑 옆이면 물 운반 없이 자랍니다.'},
- herbgarden:{name:'약초원',group:'farm',cost:70,materials:{wood:4},period:8,inputs:{water:1},output:'herb',amount:1,irrigable:true,waterNeed:3,description:'약초를 재배합니다. 진료소 치료와 결계 초소, 제약 공장에 쓰입니다.'},
+ cottonfield:{name:'목화밭',group:'farm',cost:55,materials:{wood:3},period:9,inputs:{water:1},output:'cotton',amount:2,irrigable:true,waterNeed:4,description:'물을 받아 목화를 기릅니다. 물 요구량 4 · 주변 물로 채우면 물 운반 없이 자랍니다.'},
+ herbgarden:{name:'약초원',group:'farm',cost:70,materials:{wood:4},period:8,inputs:{water:1},output:'herb',amount:1,irrigable:true,waterNeed:3,description:'약초를 재배합니다. 물 요구량 3 · 주변 물로 채우면 물 운반 없이 자랍니다. 진료소 치료와 결계 초소, 제약 공장에 쓰입니다.'},
  henhouse:{name:'양계장',group:'farm',cost:120,materials:{plank:4,stone:2},period:11,inputs:{grain:1,water:1},output:'egg',amount:2,description:'밀과 물을 먹여 달걀을 얻습니다. 오염에 약합니다.'},
  smokehouse:{name:'훈제장',group:'craft',cost:130,materials:{wood:6,stone:3},period:10,inputs:{fish:2,wood:1},output:'smokedfish',amount:2,description:'생선을 장작 연기로 훈제해 오래 두는 식품으로 만듭니다.'},
  weaver:{name:'방직소',group:'craft',cost:160,materials:{plank:4,stone:2},period:12,inputs:{cotton:3},output:'cloth',amount:2,description:'목화에서 실을 뽑아 직물을 짭니다.'},
@@ -39,7 +39,7 @@ export const MODERN_BUILDINGS={
  kiln:{name:'벽돌 가마',group:'craft',cost:200,materials:{stone:8,wood:4},period:12,inputs:{stone:2,wood:1},output:'brick',amount:3,description:'석재를 구워 벽돌을 만듭니다. 3단계 개선과 중급 시설 건설에 쓰입니다. 연기가 한 칸 퍼집니다.'},
  tailor:{name:'봉제소',group:'craft',cost:320,materials:{plank:6,brick:4},period:16,inputs:{cloth:3},output:'workwear',amount:2,description:'직물로 작업복을 짓습니다. 경비대 편성에도 쓰입니다.'},
  glassworks:{name:'유리 공방',group:'craft',cost:340,materials:{brick:6,plank:4},period:14,inputs:{stone:2,wood:2},output:'glass',amount:2,description:'석재를 장작 불로 녹여 유리를 만듭니다. 연기가 두 칸 퍼집니다.'},
- coppermine:{name:'구리 광산',group:'industry',cost:400,materials:{brick:6,gear:2},period:18,output:'copper',amount:3,description:'타일 광물량에 따라 구리광석을 캡니다.'},
+ coppermine:{name:'구리 광산',group:'industry',cost:400,materials:{brick:6,gear:2},period:18,output:'copper',amount:3,description:'타일 광물량에 따라 구리광석을 캡니다. 물가에 붙이면 침수로 30% 느려집니다.'},
  wiremill:{name:'전선 공장',group:'industry',cost:1100,materials:{brick:6,steel:4,gear:2},period:20,inputs:{copper:2,coal:1},output:'wire',amount:3,power:true,road:true,description:'구리를 녹여 전선을 뽑습니다. 회로와 마력 기관에 쓰입니다.'},
  cementworks:{name:'시멘트 공장',group:'industry',cost:1200,materials:{brick:8,steel:4},period:24,inputs:{stone:3,coal:1,water:1},output:'concrete',amount:3,power:true,road:true,description:'석재와 석탄으로 콘크리트를 만듭니다. 후반 시설의 건설 자재입니다.'},
  cannery:{name:'통조림 공장',group:'industry',cost:1500,materials:{steel:6,glass:2,gear:2},period:22,inputs:{smokedfish:2,steel:1},output:'canned',amount:4,power:true,road:true,description:'훈제 생선을 강철 캔에 담습니다. 방위 요새와 경비대 편성의 보급품입니다.'},
@@ -59,8 +59,8 @@ export const MODERN_BUILDINGS={
 };
 
 // Expansion 2026-09-29 (docs/EXPANSION_20260929.md, balance: docs/BALANCE_PATCH_20260928.md 13). Optional chains:
-// no promotion requirement asks for them. waterNeed is the crop's water demand for the tiered water rule; terrain marks a
-// facility that reshapes its tile (pond, pasture, clover) and has no production of its own.
+// no promotion requirement asks for them. waterNeed is the water demand read by the tiered water rule (proximity.js);
+// terrain marks a facility that reshapes its tile (pond, pasture, clover) and has no production of its own.
 export const EXPANSION_RESOURCES={
  sugarcane:{name:'사탕수수',color:'#9cc25a',price:11},salt:{name:'소금',color:'#e6ecf1',price:14},grapered:{name:'붉은 포도',color:'#7d2c55',price:16},grapewhite:{name:'흰 포도',color:'#c9d967',price:17},cocoa:{name:'카카오',color:'#86533a',price:18},strawberry:{name:'딸기',color:'#e0434f',price:14},mint:{name:'박하',color:'#56cfa2',price:11},pumpkin:{name:'호박',color:'#e8842c',price:17},oakwood:{name:'참나무 원목',color:'#80603f',price:22},
  sugar:{name:'설탕',color:'#fbf6ea',price:34},winered:{name:'적포도주',color:'#9e2342',price:125,final:true},winewhite:{name:'백포도주',color:'#e8d98a',price:130,final:true},barrel:{name:'오크통',color:'#9a6a3a',price:85},chocolate:{name:'초콜릿',color:'#5b3423',price:80,final:true},jam:{name:'딸기잼',color:'#c7283f',price:72,final:true},candy:{name:'박하 사탕',color:'#9fe8cf',price:40,final:true},pie:{name:'호박 파이',color:'#d7913f',price:90,final:true},lantern:{name:'호박등',color:'#f2a93b',price:240,final:true},
@@ -68,30 +68,30 @@ export const EXPANSION_RESOURCES={
  clay:{name:'점토',color:'#b9785a',price:8},sand:{name:'모래',color:'#e2c98f',price:9},limestone:{name:'석회암',color:'#d8d3bf',price:16},chromium:{name:'크롬',color:'#8fa3b8',price:30},bluesteel:{name:'청강',color:'#4f7fb8',price:640,final:true},
  woodbox:{name:'나무 상자',color:'#b88a52',price:30},clothbox:{name:'천 상자',color:'#a88fc9',price:230},foodparcel:{name:'식량 소포',color:'#c79a5b',price:660,final:true},giftparcel:{name:'선물 소포',color:'#d9546c',price:1500,final:true}
 };
-const WATERED='강이나 급수탑에서 두 칸 안이면 물 운반 없이 자랍니다.';
+const WATERED=n=>'물 요구량 '+n+' · 주변 물로 채우면 물 운반 없이 자랍니다.';
 export const EXPANSION_BUILDINGS={
- sugarfield:{name:'사탕수수밭',group:'farm',cost:60,materials:{wood:3},period:14,inputs:{water:1},output:'sugarcane',amount:3,irrigable:true,waterNeed:8,description:'물 1개로 사탕수수 3개를 기릅니다. '+WATERED+' 제분소에서 설탕으로 만듭니다.'},
- saltfield:{name:'소금밭',group:'farm',cost:55,materials:{wood:2,stone:2},period:12,inputs:{water:1},output:'salt',amount:2,waterNeed:3,description:'물 1개를 말려 소금 2개를 얻습니다. 증발시킬 물이 필요해 강 옆이어도 물을 날라 와야 합니다. 훈제장 소금 절임과 빵집 버터에 쓰입니다.'},
- vineyard:{name:'포도밭',group:'farm',cost:90,materials:{wood:4,plank:2},period:14,inputs:{water:1},output:'grapered',amount:2,irrigable:true,waterNeed:5,description:'물 1개로 붉은 포도 2개를 기릅니다. 흰 포도로 바꿔 기를 수 있습니다. '+WATERED+' 포도는 와이너리에서 포도주가 됩니다.'},
- cocoafarm:{name:'카카오 농장',group:'farm',cost:140,materials:{plank:4,brick:2},period:15,inputs:{water:1},output:'cocoa',amount:2,irrigable:true,waterNeed:6,description:'물 1개로 카카오 2개를 기릅니다. '+WATERED+' 초콜릿 공방의 원료입니다.'},
- berryfield:{name:'딸기밭',group:'farm',cost:65,materials:{wood:3},period:12,inputs:{water:1},output:'strawberry',amount:2,irrigable:true,waterNeed:4,description:'물 1개로 딸기 2개를 기릅니다. '+WATERED+' 빵집에서 딸기잼을 만듭니다.'},
- mintfield:{name:'박하밭',group:'farm',cost:70,materials:{wood:3,plank:1},period:10,inputs:{water:1},output:'mint',amount:2,irrigable:true,waterNeed:3,description:'물 1개로 박하 2개를 기릅니다. '+WATERED+' 제과점에서 박하 사탕을 만듭니다.'},
- pumpkinpatch:{name:'호박밭',group:'farm',cost:70,materials:{wood:4},period:15,inputs:{water:1},output:'pumpkin',amount:2,irrigable:true,waterNeed:5,description:'물 1개로 호박 2개를 기릅니다. '+WATERED+' 빵집의 호박 파이와 벽돌 가마의 호박등에 쓰입니다.'},
- oakfarm:{name:'참나무 농장',group:'farm',cost:110,materials:{wood:6,plank:2},period:20,inputs:{water:1},output:'oakwood',amount:2,irrigable:true,waterNeed:7,description:'물 1개로 참나무 원목 2개를 키웁니다. '+WATERED+' 제재소에서 오크통과 나무 상자를 만듭니다. 주변 나무를 베지 않습니다.'},
+ sugarfield:{name:'사탕수수밭',group:'farm',cost:60,materials:{wood:3},period:14,inputs:{water:1},output:'sugarcane',amount:3,irrigable:true,waterNeed:8,description:'물 1개로 사탕수수 3개를 기릅니다. '+WATERED(8)+' 제분소에서 설탕으로 만듭니다.'},
+ saltfield:{name:'소금밭',group:'farm',cost:55,materials:{wood:2,stone:2},period:12,inputs:{water:1},output:'salt',amount:2,waterNeed:3,description:'물 1개를 말려 소금 2개를 얻습니다. 물 요구량 3 · 바닷물도 쓰며 주변 물로 채우면 물을 나르지 않습니다. 바다 가까이에서는 소금기로 빨라집니다. 훈제장 소금 절임과 빵집 버터에 쓰입니다.'},
+ vineyard:{name:'포도밭',group:'farm',cost:90,materials:{wood:4,plank:2},period:14,inputs:{water:1},output:'grapered',amount:2,irrigable:true,waterNeed:5,description:'물 1개로 붉은 포도 2개를 기릅니다. 흰 포도로 바꿔 기를 수 있습니다. '+WATERED(5)+' 포도는 와이너리에서 포도주가 됩니다.'},
+ cocoafarm:{name:'카카오 농장',group:'farm',cost:140,materials:{plank:4,brick:2},period:15,inputs:{water:1},output:'cocoa',amount:2,irrigable:true,waterNeed:6,description:'물 1개로 카카오 2개를 기릅니다. '+WATERED(6)+' 초콜릿 공방의 원료입니다.'},
+ berryfield:{name:'딸기밭',group:'farm',cost:65,materials:{wood:3},period:12,inputs:{water:1},output:'strawberry',amount:2,irrigable:true,waterNeed:4,description:'물 1개로 딸기 2개를 기릅니다. '+WATERED(4)+' 빵집에서 딸기잼을 만듭니다.'},
+ mintfield:{name:'박하밭',group:'farm',cost:70,materials:{wood:3,plank:1},period:10,inputs:{water:1},output:'mint',amount:2,irrigable:true,waterNeed:3,description:'물 1개로 박하 2개를 기릅니다. '+WATERED(3)+' 제과점에서 박하 사탕을 만듭니다.'},
+ pumpkinpatch:{name:'호박밭',group:'farm',cost:70,materials:{wood:4},period:15,inputs:{water:1},output:'pumpkin',amount:2,irrigable:true,waterNeed:5,description:'물 1개로 호박 2개를 기릅니다. '+WATERED(5)+' 빵집의 호박 파이와 벽돌 가마의 호박등에 쓰입니다.'},
+ oakfarm:{name:'참나무 농장',group:'farm',cost:110,materials:{wood:6,plank:2},period:20,inputs:{water:1},output:'oakwood',amount:2,irrigable:true,waterNeed:7,description:'물 1개로 참나무 원목 2개를 키웁니다. '+WATERED(7)+' 제재소에서 오크통과 나무 상자를 만듭니다. 주변 나무를 베지 않습니다.'},
  winery:{name:'와이너리',group:'craft',cost:420,materials:{plank:8,brick:4,glass:2},period:28,inputs:{grapered:3,barrel:1},output:'winered',amount:2,description:'붉은 포도 3개와 오크통 1개로 적포도주 2병을 담급니다. 흰 포도를 넣는 백포도주로 바꿀 수 있습니다.'},
  chocolatier:{name:'초콜릿 공방',group:'craft',cost:480,materials:{plank:6,brick:4,glass:2},period:24,inputs:{cocoa:2,sugar:1},output:'chocolate',amount:2,description:'카카오 2개와 설탕 1개로 초콜릿 2개를 만듭니다.'},
- sheeppen:{name:'양 우리',group:'farm',cost:130,materials:{wood:6,plank:2},period:18,inputs:{feed:1,water:1},output:'wool',amount:2,description:'사료 1개와 물 1개를 먹여 양모 2개를 깎습니다. 오염에 약합니다. 양모는 방직소에서 털실이 됩니다.'},
- milkbarn:{name:'젖소 우리',group:'farm',cost:170,materials:{plank:6,stone:4},period:18,inputs:{feed:1,water:1},output:'milk',amount:2,description:'사료 1개와 물 1개를 먹여 우유 2개를 짭니다. 오염에 약합니다. 빵집에서 버터를 만듭니다.'},
- apiary:{name:'양봉장',group:'farm',cost:120,materials:{plank:4},period:10,output:'honey',amount:1,description:'원료 없이 꿀 1개를 모읍니다. 밀랍을 모으도록 바꿀 수 있습니다. 오염에 약합니다.'},
- duckhouse:{name:'오리 집',group:'farm',cost:140,materials:{plank:4,stone:2},period:17,inputs:{feed:1,water:1},output:'duckegg',amount:2,description:'사료 1개와 물 1개를 먹여 오리알 2개를 얻습니다. 오염에 약합니다. 빵집의 호박 파이에 쓰입니다.'},
+ sheeppen:{name:'양 우리',group:'farm',cost:130,materials:{wood:6,plank:2},period:18,inputs:{feed:1,water:1},output:'wool',amount:2,waterNeed:3,description:'사료 1개와 물 1개를 먹여 양모 2개를 깎습니다. 물 요구량 3을 주변 물로 채우면 물을 나르지 않고, 목초지 옆에서 빨라집니다. 오염에 약합니다. 양모는 방직소에서 털실이 됩니다.'},
+ milkbarn:{name:'젖소 우리',group:'farm',cost:170,materials:{plank:6,stone:4},period:18,inputs:{feed:1,water:1},output:'milk',amount:2,waterNeed:4,description:'사료 1개와 물 1개를 먹여 우유 2개를 짭니다. 물 요구량 4를 주변 물로 채우면 물을 나르지 않고, 목초지 옆에서 빨라집니다. 오염에 약합니다. 빵집에서 버터를 만듭니다.'},
+ apiary:{name:'양봉장',group:'farm',cost:120,materials:{plank:4},period:10,output:'honey',amount:1,description:'두 칸 안에 야생 클로버가 있어야 원료 없이 꿀 1개를 모읍니다. 밀랍을 모으도록 바꿀 수 있습니다. 오염에 약합니다.'},
+ duckhouse:{name:'오리 집',group:'farm',cost:140,materials:{plank:4,stone:2},period:17,inputs:{feed:1,water:1},output:'duckegg',amount:2,waterNeed:2,description:'사료 1개와 물 1개를 먹여 오리알 2개를 얻습니다. 물 요구량 2를 연못이나 강으로 채우면 물을 나르지 않습니다. 오염에 약합니다. 빵집의 호박 파이에 쓰입니다.'},
  feedmill:{name:'사료 공장',group:'farm',cost:150,materials:{wood:6,stone:4},period:10,inputs:{grain:2},output:'feed',amount:3,description:'밀 2개를 빻아 사료 3개를 만듭니다. 양 우리·젖소 우리·오리 집이 먹습니다.'},
- sandpit:{name:'모래 채굴장',group:'base',cost:130,materials:{wood:4,plank:2},period:10,output:'sand',amount:2,description:'모래 2개를 퍼 올립니다. 사막·해안의 모래 땅 위에서는 25% 빠릅니다. 유리 공방의 모래 유리에 쓰입니다.'},
+ sandpit:{name:'모래 채굴장',group:'base',cost:130,materials:{wood:4,plank:2},period:10,output:'sand',amount:2,description:'모래 2개를 퍼 올립니다. 사막·해안의 모래 땅 위에서는 25% 빠르고, 물가에 붙이면 침수로 30% 느려집니다. 유리 공방의 모래 유리에 쓰입니다.'},
  clayfield:{name:'점토밭',group:'base',cost:90,materials:{wood:4},period:10,output:'clay',amount:2,nearWater:2,description:'강이나 바다에서 두 칸 이내에 지으면 점토 2개를 캡니다. 벽돌 가마가 석재 대신 점토로 벽돌을 굽습니다.'},
  packshop:{name:'포장 공방',group:'craft',cost:900,materials:{plank:10,brick:6,glass:2},period:24,inputs:{woodbox:1,honey:2,jam:1,bread:2},output:'foodparcel',amount:1,description:'나무 상자에 꿀 2·딸기잼 1·빵 2를 담아 식량 소포 1개를 꾸립니다. 천 상자에 케이크·적포도주·호박 파이를 담는 선물 소포로 바꿀 수 있습니다.'},
- solarpanel:{name:'태양광 패널',group:'energy',cost:1600,materials:{steel:4,glass:6,wire:4},period:30,output:'power',amount:1,description:'연료 없이 햇빛으로 전력을 만듭니다. 높은 건물의 그늘이 지면 한 단계마다 20% 느려집니다(최저 40%).'},
- pond:{name:'연못',group:'farm',cost:60,materials:{stone:2},terrain:'pond',description:'빈 땅 한 칸을 파서 담수 연못으로 바꿉니다. 원료와 운영이 필요 없는 지형 시설입니다. 철거하면 메워서 빈 땅으로 돌아가고 건설비의 40%를 돌려받습니다. 주변 작물에 주는 물 효과는 아직 없습니다.'},
- pasture:{name:'목초지',group:'farm',cost:40,materials:{wood:2},terrain:'pasture',description:'빈 땅 한 칸에 풀을 심어 목초지로 바꿉니다. 원료와 운영이 필요 없는 지형 시설입니다. 철거하면 빈 땅으로 돌아가고 건설비의 40%를 돌려받습니다. 가축에 주는 효과는 아직 없습니다.'},
- clover:{name:'야생 클로버',group:'farm',cost:25,materials:{wood:1},terrain:'clover',description:'빈 땅 한 칸에 야생 클로버를 퍼뜨립니다. 원료와 운영이 필요 없는 지형 시설입니다. 철거하면 빈 땅으로 돌아가고 건설비의 40%를 돌려받습니다. 양봉장에 주는 효과는 아직 없습니다.'}
+ solarpanel:{name:'태양광 패널',group:'energy',cost:1600,materials:{steel:4,glass:6,wire:4},period:30,output:'power',amount:1,description:'연료 없이 햇빛으로 전력을 만듭니다. 높은 건물이나 산의 그늘이 지면 한 단계마다 20% 느려집니다(최저 40%).'},
+ pond:{name:'연못',group:'farm',cost:60,materials:{stone:2},terrain:'pond',description:'빈 땅 한 칸을 파서 담수 연못으로 바꿉니다. 맞닿은 칸에 물 2, 두 칸째에 물 1을 주어 작물과 가축의 물 요구량을 채웁니다. 광산 옆에 두면 광산이 침수됩니다. 철거하면 메워서 빈 땅으로 돌아가고 건설비의 40%를 돌려받습니다.'},
+ pasture:{name:'목초지',group:'farm',cost:40,materials:{wood:2},terrain:'pasture',description:'빈 땅 한 칸에 풀을 심어 목초지로 바꿉니다. 맞닿은 양 우리·젖소 우리는 20%, 두 칸째는 10% 빨라집니다(합계 최대 40%). 철거하면 빈 땅으로 돌아가고 건설비의 40%를 돌려받습니다.'},
+ clover:{name:'야생 클로버',group:'farm',cost:25,materials:{wood:1},terrain:'clover',description:'빈 땅 한 칸에 야생 클로버를 퍼뜨립니다. 두 칸 안의 양봉장은 클로버가 있어야 가동합니다. 철거하면 빈 땅으로 돌아가고 건설비의 40%를 돌려받습니다.'}
 };
 Object.assign(MODERN_RESOURCES,EXPANSION_RESOURCES);Object.assign(MODERN_BUILDINGS,EXPANSION_BUILDINGS);
 // Unlock rank of each new facility: farms early to mid, the costly packing and power late (balance doc 13-3).

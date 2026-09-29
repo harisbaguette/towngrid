@@ -4,10 +4,10 @@ import {SIDES,SIDE_NAMES,TERRAIN_NAMES,waterAt,groundOf,forestAt,edgePoint} from
 
 // These descriptions mirror the local production/placement rules, not the nation's policy.
 export const EDGE_USES={
- mountain:{short:'석재 · 철 · 석탄 · 구리',detail:'산 타일은 광물량이 높고 채석장·광산 생산이 25% 빨라집니다. 광물 컨베이어를 이용할 수 있습니다.',overlay:'ore'},
+ mountain:{short:'석재 · 철 · 석탄 · 구리',detail:'산 타일은 광물량이 높고 채석장·광산 생산이 25% 빨라집니다. 산 다섯 칸 안은 그늘과 바람막이가 져 밭·태양광·풍차가 느려집니다. 광물 컨베이어를 이용할 수 있습니다.',overlay:'ore'},
  forest:{short:'목재 · 벌목',detail:'이쪽에는 나무가 밀집합니다. 땅을 확보하고 나무 네 칸 안에 벌목장을 지으세요.'},
- coast:{short:'어업 · 바다 연안항',detail:'물가 세 칸 안에서 어업을 하고, 바닷물 위에 연안항을 짓습니다. 바닷물은 밭을 관개하지 않습니다.'},
- river:{short:'담수 · 어업 · 강 항구',detail:'담수 두 칸 안의 밭은 물 운반 없이 자랍니다. 물레방아·어항과 강 항구를 이용할 수 있습니다.',overlay:'moisture'},
+ coast:{short:'어업 · 바다 연안항',detail:'물가 세 칸 안에서 어업을 하고, 바닷물 위에 연안항을 짓습니다. 바닷물은 밭을 관개하지 않고, 바다 두 칸 안은 소금기로 밭이 느려지고 소금밭이 빨라집니다.'},
+ river:{short:'담수 · 어업 · 강 항구',detail:'담수 두 칸 안의 밀밭은 물 운반 없이 자랍니다. 물을 많이 먹는 작물은 물가에 붙이세요. 물레방아·어항과 강 항구를 이용할 수 있습니다.',overlay:'moisture'},
  lake:{short:'담수 · 어업 · 호수 항',detail:'물가에서 농업·어업·물레방아를 운영하고 호수 위에 호수 항을 짓습니다.',overlay:'moisture'},
  canal:{short:'담수 · 운하 선착장',detail:'물가의 농업·어업을 지원하며 운하 위에 운하 선착장을 지을 수 있습니다.',overlay:'moisture'},
  stream:{short:'담수 · 하천 선착장',detail:'물가의 농업·어업을 지원하며 하천 위에 하천 선착장을 지을 수 있습니다.',overlay:'moisture'},

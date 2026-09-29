@@ -26,9 +26,11 @@ function place(s,type){
  for(const t of tiles){if(!s.routeTo(s.entries(w)[0],{x:t.x,z:t.z,size:1}))continue;if(s.build(type,t.x,t.z,true).ok)return s.at(t.x,t.z);}
  throw new Error('no tile for '+type);
 }
-/** Power, a road and the crew race for facilities that need them: a steam plant, a dirt road beside it, the crew's house. */
+/** Power, a road and the crew race for facilities that need them: a steam plant, a dirt road beside it, the crew's house,
+ *  and wild clover beside an apiary (tests/expansion-rules.mjs covers the clover rule itself). */
 function support(s,b){const d=BUILDINGS[b.type],crew=crewFor(s,b.type),house=crew&&Object.keys(BUILDINGS).find(t=>BUILDINGS[t].resident===crew);
  if(house&&!s.buildings.some(v=>v.type===house))place(s,house);
+ if(b.type==='apiary')for(const [dx,dz] of [[1,1],[-1,1],[1,-1],[-1,-1],[2,0],[-2,0],[0,2],[0,-2]])if(s.canBuild('clover',b.x+dx,b.z+dz,true)===null&&s.build('clover',b.x+dx,b.z+dz,true).ok)break;
  if(d.power&&!s.buildings.some(v=>v.type==='generator'))place(s,'generator');
  if(d.road)for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]){const x=b.x+dx,z=b.z+dz;if(s.canBuild('road',x,z,true)===null&&s.build('road',x,z,true).ok)break;}
 }
