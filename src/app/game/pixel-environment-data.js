@@ -2,6 +2,8 @@
 // Foliage reuses its radial silhouette; water lies on the world ground plane.
 import { INDUSTRY_BUILDINGS } from './pixel-industry-data.js';
 import { EXPANSION_BUILDINGS } from './pixel-expansion-data.js';
+import { FARM_BUILDINGS } from './pixel-farm-data.js';
+import { FARM_CROP_ATLASES, FARM_GOODS_ORDER, FARM_PART_FRAMES } from './pixel-farm-sockets.js';
 import { NEW_VEHICLE_SIZES } from './vehicle-art.js';
 import { RESOURCE_FRAMES } from './resource-art.js';
 export const ENVIRONMENT_CELL = 192;
@@ -12,10 +14,13 @@ export const ENVIRONMENT_ASSETS = {
  biomeGround:{sheet:'/assets/pixel-environment/biomeGround.png',frames:8},
  ...Object.fromEntries(Object.entries({snowPine:1.9,forestTree:1.8,cactus:.9,oilSeep:.9,snowMountain:3.4,volcanicMountain:3.4}).map(([id,size])=>[id,{scenery:true,sheet:`/assets/pixel-environment/${id}.png`,frames:1,directions:4,anchor:[.5,181/192],size}])) ,
  mountain:{scenery:true,sheet:'/assets/pixel-environment/mountain.png',frames:1,directions:4,anchor:[.5,181/192],size:3.4},
- ...Object.fromEntries([...INDUSTRY_BUILDINGS,...EXPANSION_BUILDINGS].map(id => [id, { building: true, sheet: `/assets/pixel-environment/${id}.png`, frames: 1, directions: 4, anchor: [.5, .69], size: 1.4 }])),
+ ...Object.fromEntries([...INDUSTRY_BUILDINGS,...EXPANSION_BUILDINGS,...FARM_BUILDINGS].map(id => [id, { building: true, sheet: `/assets/pixel-environment/${id}.png`, frames: 1, directions: 4, anchor: [.5, .69], size: 1.4 }])),
  expansionGoods: {cutout:true,sheet:'/assets/pixel-environment/expansionGoods.png',frames:20,anchor:[.5,.5],size:.4},
  cottonGrowth: {cutout:true,sheet:'/assets/pixel-environment/cottonGrowth.png',frames:4,anchor:[.5,.94],size:.4},
  herbGrowth: {cutout:true,sheet:'/assets/pixel-environment/herbGrowth.png',frames:4,anchor:[.5,.94],size:.4},
+ ...Object.fromEntries(FARM_CROP_ATLASES.map(id=>[id,{cutout:true,sheet:`/assets/pixel-environment/${id}.png`,frames:4,anchor:[.5,.94],size:.4}])),
+ farmGoods:{cutout:true,sheet:'/assets/pixel-environment/farmGoods.png',frames:FARM_GOODS_ORDER.length,anchor:[.5,.5],size:.4},
+ farmParts:{cutout:true,sheet:'/assets/pixel-environment/farmParts.png',frames:Object.keys(FARM_PART_FRAMES).length,anchor:[.5,.5],size:.4},
  ...Object.fromEntries(Object.entries({rock:.95,mossrock:.95,oreRock:1.05,cliff:1.6,pine:1.9,willow:1.9,palm:1.9,bush:.65,reeds:.52,ruin:1.8,lighthouse:2.1,exportGate:1.4,cargoTruck:.8,cargoTrain:1.25,fishingBoat:1.15}).map(([id,size])=>[id,{scenery:true,sheet:`/assets/pixel-environment/${id}.png`,frames:1,directions:4,anchor:[.5,181/192],size}])),
  clouds:{scenery:true,sheet:'/assets/pixel-environment/clouds.png',frames:4,anchor:[.5,.5],size:3},
  birds:{scenery:true,sheet:'/assets/pixel-environment/birds.png',frames:4,anchor:[.5,.5],size:.30},

@@ -24,6 +24,7 @@ const suites = [
   'tests/pixel-industry.mjs',
   'tests/pixel-world.mjs',
   'tests/art-completion.mjs',
+  'tests/farm-art.mjs',
   'tests/quarter-camera.mjs',
   'tests/screen-art.mjs',
   'scripts/check-pixel-characters.mjs',

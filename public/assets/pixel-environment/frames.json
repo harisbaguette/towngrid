@@ -7252,10 +7252,10 @@
     "resourceGoods": {
       "source": "completion-v8/resourceGoods-source.png",
       "grid": [
-        36,
+        71,
         1
       ],
-      "columns": 36,
+      "columns": 71,
       "opaqueTile": true,
       "anchor": [
         0.5,
@@ -7405,8 +7405,1918 @@
         "airship": [
           "expansionGoods",
           16
+        ],
+        "sugarcane": [
+          "farmGoods",
+          0
+        ],
+        "salt": [
+          "farmGoods",
+          1
+        ],
+        "grapered": [
+          "farmGoods",
+          2
+        ],
+        "grapewhite": [
+          "farmGoods",
+          3
+        ],
+        "cocoa": [
+          "farmGoods",
+          4
+        ],
+        "strawberry": [
+          "farmGoods",
+          5
+        ],
+        "mint": [
+          "farmGoods",
+          6
+        ],
+        "pumpkin": [
+          "farmGoods",
+          7
+        ],
+        "oakwood": [
+          "farmGoods",
+          8
+        ],
+        "sugar": [
+          "farmGoods",
+          9
+        ],
+        "winered": [
+          "farmGoods",
+          10
+        ],
+        "winewhite": [
+          "farmGoods",
+          11
+        ],
+        "barrel": [
+          "farmGoods",
+          12
+        ],
+        "chocolate": [
+          "farmGoods",
+          13
+        ],
+        "jam": [
+          "farmGoods",
+          14
+        ],
+        "candy": [
+          "farmGoods",
+          15
+        ],
+        "pie": [
+          "farmGoods",
+          16
+        ],
+        "lantern": [
+          "farmGoods",
+          17
+        ],
+        "wool": [
+          "farmGoods",
+          18
+        ],
+        "yarn": [
+          "farmGoods",
+          19
+        ],
+        "milk": [
+          "farmGoods",
+          20
+        ],
+        "butter": [
+          "farmGoods",
+          21
+        ],
+        "honey": [
+          "farmGoods",
+          22
+        ],
+        "wax": [
+          "farmGoods",
+          23
+        ],
+        "feed": [
+          "farmGoods",
+          24
+        ],
+        "duckegg": [
+          "farmGoods",
+          25
+        ],
+        "clay": [
+          "farmGoods",
+          26
+        ],
+        "sand": [
+          "farmGoods",
+          27
+        ],
+        "limestone": [
+          "farmGoods",
+          28
+        ],
+        "chromium": [
+          "farmGoods",
+          29
+        ],
+        "bluesteel": [
+          "farmGoods",
+          30
+        ],
+        "woodbox": [
+          "farmGoods",
+          31
+        ],
+        "clothbox": [
+          "farmGoods",
+          32
+        ],
+        "foodparcel": [
+          "farmGoods",
+          33
+        ],
+        "giftparcel": [
+          "farmGoods",
+          34
         ]
       }
+    },
+    "sugarfield": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          192,
+          192
+        ],
+        [
+          192,
+          0,
+          192,
+          192
+        ],
+        [
+          384,
+          0,
+          192,
+          192
+        ],
+        [
+          576,
+          0,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "saltfield": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          192,
+          192,
+          192
+        ],
+        [
+          192,
+          192,
+          192,
+          192
+        ],
+        [
+          384,
+          192,
+          192,
+          192
+        ],
+        [
+          576,
+          192,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "vineyard": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          384,
+          192,
+          192
+        ],
+        [
+          192,
+          384,
+          192,
+          192
+        ],
+        [
+          384,
+          384,
+          192,
+          192
+        ],
+        [
+          576,
+          384,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "cocoafarm": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          576,
+          192,
+          192
+        ],
+        [
+          192,
+          576,
+          192,
+          192
+        ],
+        [
+          384,
+          576,
+          192,
+          192
+        ],
+        [
+          576,
+          576,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "berryfield": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          768,
+          192,
+          192
+        ],
+        [
+          192,
+          768,
+          192,
+          192
+        ],
+        [
+          384,
+          768,
+          192,
+          192
+        ],
+        [
+          576,
+          768,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "mintfield": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          960,
+          192,
+          192
+        ],
+        [
+          192,
+          960,
+          192,
+          192
+        ],
+        [
+          384,
+          960,
+          192,
+          192
+        ],
+        [
+          576,
+          960,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "pumpkinpatch": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          1152,
+          192,
+          192
+        ],
+        [
+          192,
+          1152,
+          192,
+          192
+        ],
+        [
+          384,
+          1152,
+          192,
+          192
+        ],
+        [
+          576,
+          1152,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "oakfarm": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          1344,
+          192,
+          192
+        ],
+        [
+          192,
+          1344,
+          192,
+          192
+        ],
+        [
+          384,
+          1344,
+          192,
+          192
+        ],
+        [
+          576,
+          1344,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "winery": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          1536,
+          192,
+          192
+        ],
+        [
+          192,
+          1536,
+          192,
+          192
+        ],
+        [
+          384,
+          1536,
+          192,
+          192
+        ],
+        [
+          576,
+          1536,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "chocolatier": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          1728,
+          192,
+          192
+        ],
+        [
+          192,
+          1728,
+          192,
+          192
+        ],
+        [
+          384,
+          1728,
+          192,
+          192
+        ],
+        [
+          576,
+          1728,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "sheeppen": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          1920,
+          192,
+          192
+        ],
+        [
+          192,
+          1920,
+          192,
+          192
+        ],
+        [
+          384,
+          1920,
+          192,
+          192
+        ],
+        [
+          576,
+          1920,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "milkbarn": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          2112,
+          192,
+          192
+        ],
+        [
+          192,
+          2112,
+          192,
+          192
+        ],
+        [
+          384,
+          2112,
+          192,
+          192
+        ],
+        [
+          576,
+          2112,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "apiary": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          2304,
+          192,
+          192
+        ],
+        [
+          192,
+          2304,
+          192,
+          192
+        ],
+        [
+          384,
+          2304,
+          192,
+          192
+        ],
+        [
+          576,
+          2304,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "duckhouse": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          2496,
+          192,
+          192
+        ],
+        [
+          192,
+          2496,
+          192,
+          192
+        ],
+        [
+          384,
+          2496,
+          192,
+          192
+        ],
+        [
+          576,
+          2496,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "feedmill": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          2688,
+          192,
+          192
+        ],
+        [
+          192,
+          2688,
+          192,
+          192
+        ],
+        [
+          384,
+          2688,
+          192,
+          192
+        ],
+        [
+          576,
+          2688,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "sandpit": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          2880,
+          192,
+          192
+        ],
+        [
+          192,
+          2880,
+          192,
+          192
+        ],
+        [
+          384,
+          2880,
+          192,
+          192
+        ],
+        [
+          576,
+          2880,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "clayfield": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          3072,
+          192,
+          192
+        ],
+        [
+          192,
+          3072,
+          192,
+          192
+        ],
+        [
+          384,
+          3072,
+          192,
+          192
+        ],
+        [
+          576,
+          3072,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "packshop": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          3264,
+          192,
+          192
+        ],
+        [
+          192,
+          3264,
+          192,
+          192
+        ],
+        [
+          384,
+          3264,
+          192,
+          192
+        ],
+        [
+          576,
+          3264,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "solarpanel": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          3456,
+          192,
+          192
+        ],
+        [
+          192,
+          3456,
+          192,
+          192
+        ],
+        [
+          384,
+          3456,
+          192,
+          192
+        ],
+        [
+          576,
+          3456,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "pond": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          3648,
+          192,
+          192
+        ],
+        [
+          192,
+          3648,
+          192,
+          192
+        ],
+        [
+          384,
+          3648,
+          192,
+          192
+        ],
+        [
+          576,
+          3648,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "pasture": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          3840,
+          192,
+          192
+        ],
+        [
+          192,
+          3840,
+          192,
+          192
+        ],
+        [
+          384,
+          3840,
+          192,
+          192
+        ],
+        [
+          576,
+          3840,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "clover": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          4032,
+          192,
+          192
+        ],
+        [
+          192,
+          4032,
+          192,
+          192
+        ],
+        [
+          384,
+          4032,
+          192,
+          192
+        ],
+        [
+          576,
+          4032,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "sugarGrowth": {
+      "source": "farm-v9/crops-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          192,
+          192
+        ],
+        [
+          192,
+          0,
+          192,
+          192
+        ],
+        [
+          384,
+          0,
+          192,
+          192
+        ],
+        [
+          576,
+          0,
+          192,
+          192
+        ]
+      ],
+      "columns": 4,
+      "opaqueTile": true,
+      "anchor": [
+        0.5,
+        0.94
+      ],
+      "generator": "farm-v9/build.py"
+    },
+    "saltGrowth": {
+      "source": "farm-v9/crops-source.png",
+      "rects": [
+        [
+          0,
+          192,
+          192,
+          192
+        ],
+        [
+          192,
+          192,
+          192,
+          192
+        ],
+        [
+          384,
+          192,
+          192,
+          192
+        ],
+        [
+          576,
+          192,
+          192,
+          192
+        ]
+      ],
+      "columns": 4,
+      "opaqueTile": true,
+      "anchor": [
+        0.5,
+        0.94
+      ],
+      "generator": "farm-v9/build.py"
+    },
+    "grapeRedGrowth": {
+      "source": "farm-v9/crops-source.png",
+      "rects": [
+        [
+          0,
+          384,
+          192,
+          192
+        ],
+        [
+          192,
+          384,
+          192,
+          192
+        ],
+        [
+          384,
+          384,
+          192,
+          192
+        ],
+        [
+          576,
+          384,
+          192,
+          192
+        ]
+      ],
+      "columns": 4,
+      "opaqueTile": true,
+      "anchor": [
+        0.5,
+        0.94
+      ],
+      "generator": "farm-v9/build.py"
+    },
+    "grapeWhiteGrowth": {
+      "source": "farm-v9/crops-source.png",
+      "rects": [
+        [
+          0,
+          576,
+          192,
+          192
+        ],
+        [
+          192,
+          576,
+          192,
+          192
+        ],
+        [
+          384,
+          576,
+          192,
+          192
+        ],
+        [
+          576,
+          576,
+          192,
+          192
+        ]
+      ],
+      "columns": 4,
+      "opaqueTile": true,
+      "anchor": [
+        0.5,
+        0.94
+      ],
+      "generator": "farm-v9/build.py"
+    },
+    "cocoaGrowth": {
+      "source": "farm-v9/crops-source.png",
+      "rects": [
+        [
+          0,
+          768,
+          192,
+          192
+        ],
+        [
+          192,
+          768,
+          192,
+          192
+        ],
+        [
+          384,
+          768,
+          192,
+          192
+        ],
+        [
+          576,
+          768,
+          192,
+          192
+        ]
+      ],
+      "columns": 4,
+      "opaqueTile": true,
+      "anchor": [
+        0.5,
+        0.94
+      ],
+      "generator": "farm-v9/build.py"
+    },
+    "strawberryGrowth": {
+      "source": "farm-v9/crops-source.png",
+      "rects": [
+        [
+          0,
+          960,
+          192,
+          192
+        ],
+        [
+          192,
+          960,
+          192,
+          192
+        ],
+        [
+          384,
+          960,
+          192,
+          192
+        ],
+        [
+          576,
+          960,
+          192,
+          192
+        ]
+      ],
+      "columns": 4,
+      "opaqueTile": true,
+      "anchor": [
+        0.5,
+        0.94
+      ],
+      "generator": "farm-v9/build.py"
+    },
+    "mintGrowth": {
+      "source": "farm-v9/crops-source.png",
+      "rects": [
+        [
+          0,
+          1152,
+          192,
+          192
+        ],
+        [
+          192,
+          1152,
+          192,
+          192
+        ],
+        [
+          384,
+          1152,
+          192,
+          192
+        ],
+        [
+          576,
+          1152,
+          192,
+          192
+        ]
+      ],
+      "columns": 4,
+      "opaqueTile": true,
+      "anchor": [
+        0.5,
+        0.94
+      ],
+      "generator": "farm-v9/build.py"
+    },
+    "pumpkinGrowth": {
+      "source": "farm-v9/crops-source.png",
+      "rects": [
+        [
+          0,
+          1344,
+          192,
+          192
+        ],
+        [
+          192,
+          1344,
+          192,
+          192
+        ],
+        [
+          384,
+          1344,
+          192,
+          192
+        ],
+        [
+          576,
+          1344,
+          192,
+          192
+        ]
+      ],
+      "columns": 4,
+      "opaqueTile": true,
+      "anchor": [
+        0.5,
+        0.94
+      ],
+      "generator": "farm-v9/build.py"
+    },
+    "oakGrowth": {
+      "source": "farm-v9/crops-source.png",
+      "rects": [
+        [
+          0,
+          1536,
+          192,
+          192
+        ],
+        [
+          192,
+          1536,
+          192,
+          192
+        ],
+        [
+          384,
+          1536,
+          192,
+          192
+        ],
+        [
+          576,
+          1536,
+          192,
+          192
+        ]
+      ],
+      "columns": 4,
+      "opaqueTile": true,
+      "anchor": [
+        0.5,
+        0.94
+      ],
+      "generator": "farm-v9/build.py"
+    },
+    "farmGoods": {
+      "source": "farm-v9/goods-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          192,
+          192
+        ],
+        [
+          192,
+          0,
+          192,
+          192
+        ],
+        [
+          384,
+          0,
+          192,
+          192
+        ],
+        [
+          576,
+          0,
+          192,
+          192
+        ],
+        [
+          768,
+          0,
+          192,
+          192
+        ],
+        [
+          960,
+          0,
+          192,
+          192
+        ],
+        [
+          1152,
+          0,
+          192,
+          192
+        ],
+        [
+          1344,
+          0,
+          192,
+          192
+        ],
+        [
+          1536,
+          0,
+          192,
+          192
+        ],
+        [
+          1728,
+          0,
+          192,
+          192
+        ],
+        [
+          1920,
+          0,
+          192,
+          192
+        ],
+        [
+          2112,
+          0,
+          192,
+          192
+        ],
+        [
+          2304,
+          0,
+          192,
+          192
+        ],
+        [
+          2496,
+          0,
+          192,
+          192
+        ],
+        [
+          2688,
+          0,
+          192,
+          192
+        ],
+        [
+          2880,
+          0,
+          192,
+          192
+        ],
+        [
+          3072,
+          0,
+          192,
+          192
+        ],
+        [
+          3264,
+          0,
+          192,
+          192
+        ],
+        [
+          3456,
+          0,
+          192,
+          192
+        ],
+        [
+          3648,
+          0,
+          192,
+          192
+        ],
+        [
+          3840,
+          0,
+          192,
+          192
+        ],
+        [
+          4032,
+          0,
+          192,
+          192
+        ],
+        [
+          4224,
+          0,
+          192,
+          192
+        ],
+        [
+          4416,
+          0,
+          192,
+          192
+        ],
+        [
+          4608,
+          0,
+          192,
+          192
+        ],
+        [
+          4800,
+          0,
+          192,
+          192
+        ],
+        [
+          4992,
+          0,
+          192,
+          192
+        ],
+        [
+          5184,
+          0,
+          192,
+          192
+        ],
+        [
+          5376,
+          0,
+          192,
+          192
+        ],
+        [
+          5568,
+          0,
+          192,
+          192
+        ],
+        [
+          5760,
+          0,
+          192,
+          192
+        ],
+        [
+          5952,
+          0,
+          192,
+          192
+        ],
+        [
+          6144,
+          0,
+          192,
+          192
+        ],
+        [
+          6336,
+          0,
+          192,
+          192
+        ],
+        [
+          6528,
+          0,
+          192,
+          192
+        ]
+      ],
+      "columns": 35,
+      "opaqueTile": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "order": [
+        "sugarcane",
+        "salt",
+        "grapered",
+        "grapewhite",
+        "cocoa",
+        "strawberry",
+        "mint",
+        "pumpkin",
+        "oakwood",
+        "sugar",
+        "winered",
+        "winewhite",
+        "barrel",
+        "chocolate",
+        "jam",
+        "candy",
+        "pie",
+        "lantern",
+        "wool",
+        "yarn",
+        "milk",
+        "butter",
+        "honey",
+        "wax",
+        "feed",
+        "duckegg",
+        "clay",
+        "sand",
+        "limestone",
+        "chromium",
+        "bluesteel",
+        "woodbox",
+        "clothbox",
+        "foodparcel",
+        "giftparcel"
+      ],
+      "generator": "farm-v9/build.py"
+    },
+    "farmParts": {
+      "source": "farm-v9/parts-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "opaqueTile": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "order": [
+        "bees"
+      ],
+      "generator": "farm-v9/build.py"
     }
   }
 }

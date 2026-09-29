@@ -21,7 +21,7 @@
 
 | 자산 | 실행용 구성 | 동작 |
 | --- | --- | --- |
-| 건물 82종 | 각 192×768, 1열×4방향 | 본체 고정. 행 SE → NE → NW → SW |
+| 건물 104종 | 각 192×768, 1열×4방향 | 본체 고정. 행 SE → NE → NW → SW |
 | expansionGoods | 3840×192, 20칸 | 신규 상품 17종과 직조·재봉·물레방아 부품 |
 | cottonGrowth · herbGrowth · henPeck | 각 768×192, 4칸 | 목화·약초 성장, 닭 모이 쪼기 |
 | creek · river · sea · lake | 각 768×192, 4칸 | 지역에 맞는 수면, 게임 시간에 따른 3fps |
@@ -66,7 +66,7 @@
 - `cargoWagon`, `cargoRaft`, `cargoSteamer`, `cargoShip`, `cargoFerry`, `cargoSled`, `cargoPlane`, `cargoAirship`: 새 운송 그림 8종, 각 192×768(네 방향).
 - `cargoTruckEmpty`, `cargoTrainEmpty`: 기존 운송체의 빈 적재함 그림. 실제 출고·귀환에 따라 상품을 별도 레이어로 올린다.
 - `supportArt`: 전력·말·관개·결계·운송·의료 6종, 경미/심한 균열·잔해·수리 표지·충격·수리 반짝임 6종. 2304×192.
-- `resourceGoods`: 기존 상품 원화 36종을 같은 순서로 모은 6912×192 아틀라스. UI의 `resources/*.png` 42종은 상품 36종과 지원 6종을 추출한 96px 아이콘이다.
+- `resourceGoods`: 상품 71종을 `resource-art.js` 순서로 모은 13632×192 아틀라스. 앞 36칸은 기존 원화, 뒤 35칸은 `farmGoods`에서 가져온다. UI의 `resources/*.png` 77종은 상품 71종과 지원 6종을 추출한 96px 아이콘이다.
 
 추출 좌표와 방향 행은 `pack-manifest.json`, 원본 배치 등록은 `scripts/register-completion-art.mjs`에 있다. `land-corrected.png`는 비행기 후면, `water-corrected.png`는 화물선·나룻배 방향을 보정했다. 증기선은 `steamer-source.png`가 최종본이다. 이전 생성본도 비교용 원본으로 보존한다.
 
@@ -81,3 +81,24 @@ node scripts/pack-resource-icons.mjs
 `--only`는 기존 건물의 부품 합성 아이콘을 덮어쓰지 않도록 보완 자산만 패킹한다. 상품 변경 시 `resource-art.js`를 먼저 갱신한다. `/art-preview.html`에서 네 방향, 빈 적재함/적재, 손상 단계와 82개 건물을 확인할 수 있다.
 
 계류 항공기 부품을 바꾸면 `scripts/render-pixel-environment-icons.mjs <playwright> <chrome> --only=airterminal,airdock,shipyard`로 해당 건물의 합성 아이콘도 갱신한다.
+
+
+## 2026-09-29 확장 · farm-v9
+
+`docs/EXPANSION_20260929.md`의 시설 22종·상품 35종 그림이다. 이미지 생성 도구 없이 **스크립트로 그린 픽셀 그림**이며 이미지 모델 원화가 아니다.
+
+- `farm-v9/pixel_kit.py`: 작은 입체 칸 모형을 게임과 같은 쿼터뷰(행 SE → NE → NW → SW)로 투영하는 그리기 도구와 음영·외곽선 처리, 작물·상품용 2D 음영 그리기.
+- `farm-v9/buildings.py`: 시설 22종 모형. 바닥은 기존 밭 받침과 같은 1×1 정방형이며 정면은 남동·남서 시점에 보인다. 동물·오크통·벌통·패널 등 대표 설비는 본체에 들어 있다.
+- `farm-v9/sprites.py`: 작물 성장 4단계 9줄(포도는 붉은/흰 두 줄), 상품 35종, 벌 떼 부품.
+- `farm-v9/build.py`: 원본 시트(`buildings-source.png`·`crops-source.png`·`goods-source.png`·`parts-source.png`), 패킹 명세 항목, 생성 기록(`generation.json`)과 부품 위치표 `src/app/game/pixel-farm-sockets.js`를 다시 만든다. 부품 위치가 시점에서 건물 뒤에 가려지면 그 시점은 `null`이 되어 그리지 않는다.
+
+재생성:
+
+```powershell
+python art-source/pixel-environment/farm-v9/build.py
+node scripts/pack-pixel-environment.mjs --only=sugarfield,saltfield,vineyard,cocoafarm,berryfield,mintfield,pumpkinpatch,oakfarm,winery,chocolatier,sheeppen,milkbarn,apiary,duckhouse,feedmill,sandpit,clayfield,packshop,solarpanel,pond,pasture,clover,sugarGrowth,saltGrowth,grapeRedGrowth,grapeWhiteGrowth,cocoaGrowth,strawberryGrowth,mintGrowth,pumpkinGrowth,oakGrowth,farmGoods,farmParts
+node scripts/pack-resource-icons.mjs
+node scripts/render-pixel-environment-icons.mjs <playwright> <chrome> --only=<시설 22종>
+```
+
+`build.py`의 첫 명령은 `--only=` 목록을 출력한다. 패킹 명세의 이 항목은 `opaqueTile`로 자르기·확대 없이 192px 칸을 그대로 옮긴다. 상태 연결은 `pixel-farm-data.js`에 있다. 밭 8종은 빈 밭 본체 위에 실제 진행률로 작물 4단계를 올리고, 포도밭은 현재 제품(붉은/흰 포도)에 맞는 줄을 쓴다. 비교 화면은 `/production-preview.html?group=farmcrops`부터 `farmterrain`까지 여섯 묶음이다. 품질 한계와 다시 그릴 후보는 `docs/PIXEL_ART_AUDIT.md`에 있다.

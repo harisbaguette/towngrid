@@ -58,4 +58,4 @@ for(const [type,def] of Object.entries(BUILDINGS).filter(([,d])=>!d.tile)){
  }
 }
 assert.deepEqual(new Simulation('river',sim.save()).save().stock,sim.save().stock,'illustrations do not change saved inventory');
-console.log(`Art coverage passed: 82 buildings, 10 vehicles × 4 headings × 4 views, 42 UI icons, ${recipes} recipes, damage/repair and shipment loading.`);
+console.log(`Art coverage passed: ${Object.keys(BUILDINGS).filter(id=>!BUILDINGS[id].tile).length} buildings, ${Object.keys(VEHICLE_ART).length} vehicles × 4 headings × 4 views, ${Object.keys(RESOURCE_ICONS).length} UI icons, ${recipes} recipes, damage/repair and shipment loading.`);

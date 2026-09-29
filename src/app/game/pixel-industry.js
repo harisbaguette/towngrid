@@ -1,10 +1,11 @@
 import { BUILDINGS } from './simulation.js';
 import { INDUSTRY_PROFILES } from './pixel-industry-data.js';
 import { EXPANSION_PROFILES } from './pixel-expansion-data.js';
+import { FARM_PROFILES } from './pixel-farm-data.js';
 import { RESOURCE_FRAMES } from './resource-art.js';
 
 export function attachIndustryAnimation(type, {part, position, setFrame, rope, screenPoint}) {
- const profile = INDUSTRY_PROFILES[type] || EXPANSION_PROFILES[type];
+ const profile = INDUSTRY_PROFILES[type] || EXPANSION_PROFILES[type] || FARM_PROFILES[type];
  if (!profile) return null;
  const layers = profile.parts.map((spec,index) => {
   const layer = part(spec.name + '-' + index, spec.frame, spec.size, spec.atlas || 'industrialTools');
@@ -12,10 +13,15 @@ export function attachIndustryAnimation(type, {part, position, setFrame, rope, s
   if (spec.motion === 'arm') layer.userData.sprite.center.set(.5,.12);
   return {layer,spec,line:spec.tether?rope():null};
  });
- const products = BUILDINGS[type].recipes || [BUILDINGS[type]];
+ // Art can be registered before the facility's rules; it then has no stock layer.
+ const def = BUILDINGS[type];
+ const products = def ? def.recipes || [def] : [];
  const hasStock = products.some(r=>RESOURCE_FRAMES[r.output]!==undefined);
  const stock = !hasStock ? [] : Array.from({length:profile.maxPiles || 3},(_,i)=>part('output-'+i,0,profile.outputSize||.24,'resourceGoods'));
- const crops=profile.crop?Array.from({length:4},(_,i)=>part('crop-'+i,0,.38,profile.crop)):[];
+ // A crop may depend on the product being grown (vineyard: red or white grapes).
+ const cropAtlases=!profile.crop?[]:typeof profile.crop==='string'?[profile.crop]:[...new Set(Object.values(profile.crop))];
+ const crops=cropAtlases.flatMap(atlas=>Array.from({length:4},(_,i)=>{const layer=part('crop-'+i,0,profile.cropSize||.38,atlas);layer.userData.cropAtlas=atlas;layer.userData.slot=i;return layer;}));
+ const cropPos=profile.cropPos||[[96,108],[73,125],[119,125],[96,143]];
  return (time,b,sim,view,state) => {
   const enabled = b.enabled !== false && !(b.health <= 0);
   const work = enabled && (state ? state.working || state.active : b.working);
@@ -61,9 +67,10 @@ export function attachIndustryAnimation(type, {part, position, setFrame, rope, s
    const point=(profile.outputPos||[[76,153],[96,163],[117,153]])[i];
    position(pile,...point);
   }
-  for(const [i,crop] of crops.entries()){
-   crop.visible=!!state&&(state.progress>0||state.working);
-   position(crop,...[[96,108],[73,125],[119,125],[96,143]][i]);
+  const growing=typeof profile.crop==='string'?profile.crop:profile.crop?.[state?.output]??cropAtlases[0];
+  for(const crop of crops){
+   crop.visible=crop.userData.cropAtlas===growing&&!!state&&(state.progress>0||state.working);
+   position(crop,...cropPos[crop.userData.slot]);
    setFrame(crop,Math.min(3,Math.floor((state?.progress||0)*4)));
   }
  };
