@@ -49,6 +49,7 @@
 - 의존성은 pnpm 11.25.0 + `pnpm-lock.yaml` 고정. 사용자 지시나 구체적인 필요 없이 프레임워크/의존성을 업그레이드하지 않는다.
 - 변경 후 영향에 맞게 `npm run typecheck`, `npm test`, `npm run build`를 실행한다. 캐릭터 변경은 방향·행동·카메라 회전·투명 배경·발 위치·주민 패널을 실제 화면에서도 확인한다.
 - 밸런스(가격·시설·승급 조건)를 바꾸면 `node scripts/balance-report.mjs --strict`와 `node tests/full-campaign.mjs`(봇 합격 기준 A1~A5)를 함께 돌리고, `docs/BALANCE_PATCH_20260928.md`와 `docs/balance/patch-20260928.json`을 코드와 같은 값으로 고친다. 신규 시설의 픽셀 원화와 부품 좌표는 `world-v5/`와 `pixel-expansion-data.js`에 있다.
+- 2026-09-29 확장 사슬로 **자원 71종·시설 109종**(새 자원 35·새 시설 22)이다. 정본 id 표는 `docs/EXPANSION_20260929.md`, 값은 `industry.js`의 `EXPANSION_RESOURCES`·`EXPANSION_BUILDINGS`·`EXPANSION_RECIPES`·`EXPANSION_RANKS`와 `BALANCE_PATCH_20260928.md` 13절이다. 승급 조건에 넣지 않은 선택 사슬이고, 확장 계약 품목은 그 상품을 만들도록 설정된 시설이 있을 때만 주문된다. 연못·목초지·야생 클로버(`terrain`)와 작물 `waterNeed`는 아직 효과 없이 데이터만 있다. `node tests/expansion-chains.mjs`로 확인한다.
 - 게임 저장 형식/기존 키를 임의 변경하지 않는다. 세이브 회귀를 확인하고 호환성이 필요한 경우 명시적으로 마이그레이션한다.
 - 최초 ZIP에는 `.git` 이력이 없다. 새 Git 저장소는 사용자가 로컬에서 만들 수 있다. 인증 정보, `.env`, `node_modules`, 빌드 캐시를 커밋하지 않는다.
 - 기존 호스팅 설정은 프레임워크에 필요해 보존했다. 로컬 개발에 기존 호스팅 계정/토큰은 필요 없다. 배포 요청 전에는 로컬 변경과 검증까지만 수행한다.

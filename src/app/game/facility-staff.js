@@ -42,11 +42,16 @@ export const FACILITY_PROFESSIONS={
  bank:'merchant',marketplace:'merchant',parliament:'administrator',exchange:'merchant',barracks:'guard',fortress:'guard',
  roadhub:'carrier',pavedhub:'carrier',snowmobile:'carrier',ferrydock:'sailor',canaldock:'sailor',streamdock:'sailor',
  riverport:'sailor',lakeport:'sailor',coastport:'sailor',polarferry:'sailor',polarport:'sailor',railterminal:'rail',airport:'aviator',airterminal:'aviator',substation:'engineer',
+ // Expansion 2026-09-29. Pond, pasture and clover are ground, not workplaces, so they have no staff.
+ sugarfield:'farmer',saltfield:'farmer',vineyard:'farmer',cocoafarm:'farmer',berryfield:'farmer',mintfield:'farmer',pumpkinpatch:'farmer',oakfarm:'lumber',
+ winery:'baker',chocolatier:'baker',sheeppen:'rancher',milkbarn:'rancher',apiary:'rancher',duckhouse:'rancher',feedmill:'farmer',
+ sandpit:'miner',clayfield:'miner',packshop:'carrier',solarpanel:'engineer',
 };
 const TITLES={bakery:'제빵사',confectionery:'제과사',mill:'제분사',smokehouse:'훈제사',cannery:'식품 가공사',
  lumber:'벌목꾼',sawmill:'목공',quarry:'채석공',ironmine:'광부',coalpit:'광부',coppermine:'광부',
  smelter:'제철공',mithrilforge:'제련공',blastfurnace:'제철공',weaver:'직조공',tailor:'봉제공',
- dock:'어부',clinic:'치료사',hospital:'의료진',laboratory:'연구원'};
+ dock:'어부',clinic:'치료사',hospital:'의료진',laboratory:'연구원',
+ winery:'양조사',chocolatier:'초콜릿 장인',apiary:'양봉가',feedmill:'사료공',sandpit:'채굴공',clayfield:'채굴공',packshop:'포장공'};
 
 export function facilityStaff(sim,building){
  const key=FACILITY_PROFESSIONS[building?.type],job=PROFESSIONS[key];

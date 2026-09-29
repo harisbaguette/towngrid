@@ -13,7 +13,7 @@ const oldTask=custom.task,oldRoute=custom.route;assignResidentAppearance(custom,
 assert.equal(custom.appearance,'mira');assert.equal(custom.name,'사용자 이름');assert.equal(custom.task,oldTask);assert.equal(custom.route,oldRoute);assert.equal(custom.homeId,5);
 const generated={id:2,race:'human',appearance:'rowan',name:'로웬 2'};assignResidentAppearance(generated,['human']);assert.equal(generated.name,'미라 2');
 assert.equal(Object.keys(PROFESSIONS).length,19);
-assert.equal(Object.keys(FACILITY_PROFESSIONS).length,77);
+assert.equal(Object.keys(FACILITY_PROFESSIONS).length,96);
 for(const identity of SPECIALIST_LOOKS)assert.ok(Object.values(PROFESSIONS).some(job=>job.human[1]===identity.id||job.elf[1]===identity.id),identity.id+' is used');
 for(const faction of ['human','elf'])assert.equal(new Set(Object.values(PROFESSIONS).map(job=>job[faction][1])).size,19,'different jobs use distinct identities');
 for(const race of ['human','elf']){
@@ -25,7 +25,7 @@ for(const race of ['human','elf']){
  for(const [type,def]of Object.entries(BUILDINGS)){
   const b={id:45,type,x:10,z:12,health:100,enabled:true,working:true,progress:.4,inputs:{},out:0,status:'생산 중'};
   const staff=facilityStaff(sim,b);
-  if(def.home||['road','rail','pavedroad','pipe','conveyor'].includes(type)){assert.equal(staff,null,type);continue;}
+  if(def.home||def.terrain||['road','rail','pavedroad','pipe','conveyor'].includes(type)){assert.equal(staff,null,type);continue;}
   assert.ok(staff&&FACILITY_PROFESSIONS[type],type+' has a profession');
   assert.equal(factionOf(staff.race),factionOf(race));
   assert.ok(RESIDENT_LOOKS[staff.race].some(v=>v.id===staff.appearance));

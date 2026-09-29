@@ -15,8 +15,9 @@ export function placementEffects(sim,type,x,z){
  if(crop)for(let dz=-2;dz<=2;dz++)for(let dx=-2;dx<=2;dx++){const t=sim.tile(x+dx,z+dz);if(t?.terrain==='water'&&t.water!=='coast')water=1;}
  pollution=Math.min(6,pollution);shade=Math.min(3,shade);windBlock=Math.min(3,windBlock);
  const road=[[1,0],[-1,0],[0,1],[0,-1]].some(([dx,dz])=>sim.roads.has((x+dx)+','+(z+dz)));
- const sensitive=crop||['stable','dock','henhouse'].includes(type),wind=['mill','windturbine'].includes(type);
- const speed=(sensitive?Math.max(.4,1-pollution*.1-(crop?shade*.1:0)):1)*(wind?Math.max(.4,1-windBlock*.2):1);
+ const sensitive=crop||['stable','dock','henhouse','sheeppen','milkbarn','duckhouse','apiary'].includes(type),wind=['mill','windturbine'].includes(type);
+ // A solar panel loses 20% per shade step (docs/BALANCE_PATCH_20260928.md 13-2).
+ const speed=(sensitive?Math.max(.4,1-pollution*.1-(crop?shade*.1:0)):1)*(wind?Math.max(.4,1-windBlock*.2):1)*(type==='solarpanel'?Math.max(.4,1-shade*.2):1);
  return {water,pollution,shade,windBlock,road,speed,sources};
 }
 // Advice names only facilities the player can build now (audit H1/V1/H2). Without a simulation it falls back to
@@ -38,7 +39,7 @@ export function productionDiagnosis(sim,b,definitions,resources){
  const delivering=sim.workers.filter(w=>w.task?.targetId===b.id&&w.task.item===item);
  if(delivering.length)return {...fallback,text:resources[item].name+'을 주민 '+delivering.length+'명이 운반 중입니다.'};
  const producer=sim.buildings.find(p=>(sim.recipeOf?.(p)||definitions[p.type]).output===item&&p.health>0&&p.enabled!==false);
- if(!producer){const types=Object.keys(definitions).filter(k=>definitions[k].output===item).sort((a,c)=>unlockRank(a)-unlockRank(c)),type=types.find(k=>unlockRank(k)<=sim.rank);if(!type)return {text:resources[item].name+' 공급 시설이 아직 잠겨 있습니다. 창고 재고나 수입으로 공급하세요.',label:'시장 확인',focus:null,tool:null};return {text:resources[item].name+' 공급 시설이 없습니다.',label:definitions[type].name+' 선택',focus:null,tool:type};}
+ if(!producer){const types=Object.keys(definitions).filter(k=>(definitions[k].recipes||[definitions[k]]).some(r=>r.output===item)).sort((a,c)=>unlockRank(a)-unlockRank(c)),type=types.find(k=>unlockRank(k)<=sim.rank);if(!type)return {text:resources[item].name+' 공급 시설이 아직 잠겨 있습니다. 창고 재고나 수입으로 공급하세요.',label:'시장 확인',focus:null,tool:null};return {text:resources[item].name+' 공급 시설이 없습니다.',label:definitions[type].name+' 선택',focus:null,tool:type};}
  if(producer.out===0&&sim.availableStock(item)===0)return {text:definitions[producer.type].name+'의 '+producer.status,label:definitions[producer.type].name+' 확인',focus:producer.id,tool:null};
  return {...fallback,text:resources[item].name+' '+need+'개가 필요합니다. 공급 시설까지 통로를 확인하세요.'};
 }

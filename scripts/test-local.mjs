@@ -18,6 +18,7 @@ const suites = [
   'tests/campaign.mjs',
   'tests/balance-20260928.mjs',
   'tests/second-pass-20260928.mjs',
+  'tests/expansion-chains.mjs',
   'tests/release.mjs',
   'tests/pixel-environment.mjs',
   'tests/pixel-industry.mjs',

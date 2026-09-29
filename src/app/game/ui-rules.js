@@ -56,14 +56,15 @@ export function tutorialStep(s){
  const index=steps.findIndex(v=>!v.done);return index<0?null:{...steps[index],index,total:steps.length};
 }
 
-/** Import and production are both possible once any producer of the item is unlocked (economy.js purchase). */
-export const permitted=(s,item)=>Object.entries(BUILDINGS).some(([type,d])=>d.output===item&&unlockRank(type)<=s.rank);
+/** First rank at which some facility may make the item, alternative products included (Infinity when none does). */
+const firstMakerRank=item=>Math.min(Infinity,...Object.keys(BUILDINGS).flatMap(k=>productsOf(BUILDINGS[k]).filter(r=>r.output===item).map(r=>Math.max(unlockRank(k),r.unlock||0))));
+/** Import and production are both possible once any product line of the item is unlocked (economy.js purchase). */
+export const permitted=(s,item)=>firstMakerRank(item)<=s.rank;
 /** Why an item cannot be gathered at this rank ("지역 공급자 승급 후"), or '' when it is in stock or obtainable. */
 export function itemGate(s,item,need){
  if(!RESOURCES[item]||s.stock[item]>=need)return '';
- const producers=Object.keys(BUILDINGS).filter(k=>BUILDINGS[k].output===item);
- if(!producers.length||producers.some(k=>unlockRank(k)<=s.rank))return '';
- return RANKS[Math.min(...producers.map(k=>unlockRank(k)))]?.name+' 승급 후';
+ const rank=firstMakerRank(item);
+ return rank===Infinity||rank<=s.rank?'':RANKS[rank]?.name+' 승급 후';
 }
 
 // Top resource strip per rank band (balance patch 8-1). Undefined items are skipped and the band is topped up from earlier bands.

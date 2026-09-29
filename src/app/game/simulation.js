@@ -29,7 +29,7 @@ export const BUILDINGS={
  warehouse:{name:'창고',group:'base',size:1,cost:80,materials:{wood:6},unique:true,description:'재고와 출하의 중심입니다. 주민은 가까운 생산 시설끼리 직접 운반할 수도 있습니다.'},
  road:{name:'흙길',group:'base',size:1,cost:4,description:'운반자가 길 위에서 70% 빠르게 이동합니다.'},
  well:{name:'우물',group:'base',size:1,cost:60,materials:{stone:4},period:6,output:'water',amount:2,description:'물통을 끌어올려 물을 공급합니다.'},
- field:{name:'밀밭',group:'farm',size:1,cost:45,period:12,inputs:{water:1},output:'grain',amount:3,irrigable:true,description:'물을 공급받아 밀을 재배합니다. 강이나 급수탑 옆이면 물 운반 없이 자랍니다.'},
+ field:{name:'밀밭',group:'farm',size:1,cost:45,period:12,inputs:{water:1},output:'grain',amount:3,irrigable:true,waterNeed:3,description:'물을 공급받아 밀을 재배합니다. 강이나 급수탑 옆이면 물 운반 없이 자랍니다.'},
  lumber:{name:'벌목장',group:'base',size:1,cost:90,materials:{wood:4},period:8,output:'wood',amount:3,natural:'tree',description:'네 칸 이내의 나무를 베어 목재를 얻습니다.'},
  quarry:{name:'채석장',group:'base',size:1,cost:100,materials:{wood:5},period:9,output:'stone',amount:2,natural:'rock',description:'네 칸 이내의 바위에서 석재를 캡니다.'},
  stable:{name:'말 축사',group:'farm',size:1,cost:160,materials:{wood:10},period:28,inputs:{grain:1,water:1},output:'horse',amount:1,unique:true,description:'먹이와 물을 공급하면 운반 속도가 35% 빨라집니다.'},
@@ -61,8 +61,10 @@ export const stormDamage=day=>day<=4?30:day<=12?60:80;
 /** The first random event of a new map (warned 20 seconds ahead); an early storm is the light one (stormDamage). */
 export const FIRST_EVENT=170;
 // Lord's contracts by rank: every item already has a producer unlocked at the first rank of its band,
-// because a contract keeps asking for the same item until it is delivered.
-const CONTRACT_POOLS=[[3,['grain','wood']],[5,['plank','flour']],[7,['bread','smokedfish','plank']],[9,['cloth','cake','bread']],[11,['brick','workwear','cake']],[14,['glass','gear','workwear']],[17,['steel','glass','brick']],[20,['wire','concrete','fuel']],[24,['circuit','car','medicine','canned']],[28,['lamp','engine','car']],[Infinity,['mithril','airship','engine']]];
+// because a contract keeps asking for the same item until it is delivered. The third list holds goods of the optional
+// 2026-09-29 chains: the lord orders one only while a facility of the campaign is set to make it, so no one is forced
+// into a chain they did not build (docs/BALANCE_PATCH_20260928.md 13-4).
+export const CONTRACT_POOLS=[[3,['grain','wood'],['salt','sugarcane']],[5,['plank','flour'],['sugar','strawberry','pumpkin']],[7,['bread','smokedfish','plank'],['jam','feed','wool']],[9,['cloth','cake','bread'],['yarn','butter','duckegg']],[11,['brick','workwear','cake'],['pie','honey','wax','candy']],[14,['glass','gear','workwear'],['barrel','woodbox','lantern','winered']],[17,['steel','glass','brick'],['winewhite','chocolate','sand']],[20,['wire','concrete','fuel'],['limestone','clothbox','foodparcel']],[24,['circuit','car','medicine','canned'],['foodparcel','chromium','giftparcel']],[28,['lamp','engine','car'],['giftparcel','bluesteel']],[Infinity,['mithril','airship','engine'],['giftparcel','bluesteel']]];
 // A house holds one resident per upgrade level (1-3); other buildings hold none.
 export const homeCapacity=b=>BUILDINGS[b?.type]?.home?Math.max(1,b.level||1):0;
 export const noise=(x,z)=>{let a=Math.sin(x*127.1+z*311.7+37)*43758.5453;return a-Math.floor(a);};
@@ -311,7 +313,7 @@ export class Simulation{
  chooseCharter(id){return chooseCharter(this,id);}
  promotion(){const next=RANKS[this.rank+1];if(!next)return null;const requirements=next.requirements.map(([key,target,name])=>({key,target,name,current:this.rankValue(key),done:this.rankValue(key)>=target}));const trial=nextTrial(this);return {...next,trial,requirements,ready:requirements.every(r=>r.done)&&(!trial||trial.done)&&this.money>=next.fee};}
  promote(){const n=this.promotion();if(!n||!n.ready)return {ok:false,error:'승급 조건과 수수료를 확인하세요'};this.money-=n.fee;this.rank++;this.challenge={};this.campaign?.onPromotion();this.revision++;this.sound('promotion');this.notify(n.name+' 승급','success');return {ok:true};}
- contract(){const pool=CONTRACT_POOLS.find(([below])=>this.rank<below)[1],item=pool[this.contracts%pool.length],price=RESOURCES[item].price;const amount=item==='airship'?1:['car','engine','mithril'].includes(item)?2:price>=150?6:12+Math.min(this.contracts*2,16);return {item,amount,reward:Math.round(amount*RESOURCES[item].price*CONTRACT_PREMIUM[this.rank>=2?1:0])};}
+ contract(){const [,base,extra]=CONTRACT_POOLS.find(([below])=>this.rank<below),sims=this.campaign?.sites?.map(v=>v.sim).filter(Boolean),made=new Set((sims?.length?sims:[this]).flatMap(s=>(s.buildings||[]).map(b=>s.recipeOf(b)?.output))),pool=[...base,...extra.filter(item=>made.has(item))],item=pool[this.contracts%pool.length],price=RESOURCES[item].price;const amount=item==='airship'?1:price>=1000?2:price>=150?6:12+Math.min(this.contracts*2,16);return {item,amount,reward:Math.round(amount*RESOURCES[item].price*CONTRACT_PREMIUM[this.rank>=2?1:0])};}
  /** True while the lord's order is on the road from any site (contracts are shared by the whole campaign). */
  contractSent(){const sims=this.campaign?.sites?.map(v=>v.sim).filter(Boolean);return (sims?.length?sims:[this]).some(s=>s.shipments.some(sh=>sh.kind==='contract'&&sh.phase==='out'));}
  /** Whether the lord's order can be sent now: ready, seconds until the next order, or the order already on the road. */
