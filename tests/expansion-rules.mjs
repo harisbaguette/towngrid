@@ -9,7 +9,7 @@ import {Campaign} from '../src/app/game/campaign.js';
 import {PROVINCES} from '../src/app/game/territory.js';
 import {layoutOf,legacyLayout} from '../src/app/game/world-grid.js';
 import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
-import {EMISSIONS,HEIGHTS,MINES,HERDS,WATER_RING,OPEN_WATER,CLUSTER_STEP,CLUSTER_MAX,terrainRules,effectNotes,productionDiagnosis,operationHint} from '../src/app/game/proximity.js';
+import {EMISSIONS,HEIGHTS,MINES,HERDS,WATER_RING,OPEN_WATER,CLUSTER_STEP,CLUSTER_MAX,EXTRACTORS,EXTRACT_MAX,clusterMax,terrainRules,effectNotes,productionDiagnosis,operationHint} from '../src/app/game/proximity.js';
 import {blockHint} from '../src/app/game/ui-rules.js';
 
 const run=(s,t)=>{for(let i=0;i<t*4;i++)s.tick(.25);};
@@ -66,16 +66,27 @@ const ok=[];
  const pa=a.progress,pb=b.progress;run(s,2);assert.ok((a.progress-pa)<(b.progress-pb)*.5,'three shade steps slow the panel to 40%');ok.push('mountain shade 3,2,2,1,1');}
 
 // 2. Same-kind facilities on the eight tiles around (corners count) cut the production time by 10% each, at most by 30%
-//    (the cap was 50% until C12 of 2026-09-30: a clustered raw field then out-earned its processing plant).
+//    (the cap was 50% until C12 of 2026-09-30: a clustered raw field then out-earned its processing plant). Extraction
+//    sites (wells, lumber camps, quarries, pits, mines, pumps) stop at 10%: with 30% a full cluster of them let charcoal
+//    steel, planks and steel gears fall under 1.15 times their inputs per tile (balance-report C13).
 {const s=site(s=>!!s.layout.ecology);const ring=[[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1]];
  const c=quiet(s,t=>[[0,0],[2,0],...ring].every(([dx,dz])=>dryAt(s,s.tile(t.x+dx,t.z+dz))));
- s.build('well',c.x,c.z,true);assert.equal(s.placementEffects('well',c.x,c.z).cluster,0);
- const speeds=[];for(const [dx,dz] of ring.slice(0,6)){s.build('well',c.x+dx,c.z+dz,true);speeds.push(+s.placementEffects('well',c.x,c.z).speed.toFixed(4));}
+ s.build('field',c.x,c.z,true);assert.equal(s.placementEffects('field',c.x,c.z).cluster,0);
+ const speeds=[];for(const [dx,dz] of ring.slice(0,6)){s.build('field',c.x+dx,c.z+dz,true);speeds.push(+s.placementEffects('field',c.x,c.z).speed.toFixed(4));}
  assert.deepEqual(speeds,[1,2,3,3,3,3].map(n=>+(1/(1-n*CLUSTER_STEP)).toFixed(4)),'time 90%, 80%, 70%, then capped');assert.equal(CLUSTER_MAX,3);assert.ok(Math.abs(CLUSTER_STEP*CLUSTER_MAX-.3)<1e-9,'at most 30% of the time');
- assert.equal(s.placementEffects('well',c.x+2,c.z).cluster,2,'the next tile sees a side and a corner');assert.equal(s.placementEffects('quarry',c.x+2,c.z).cluster,0,'another kind does not count');
+ assert.equal(s.placementEffects('field',c.x+2,c.z).cluster,2,'the next tile sees a side and a corner');assert.equal(s.placementEffects('quarry',c.x+2,c.z).cluster,0,'another kind does not count');
  // Placement, not state: a stopped or broken neighbour still counts, and a reload gives the same numbers.
- s.setOperation(s.at(c.x+1,c.z).id,false);s.at(c.x-1,c.z).health=0;/* damage set directly */assert.equal(s.placementEffects('well',c.x,c.z).cluster,CLUSTER_MAX);
- const back=reload(s);assert.deepEqual(back.placementEffects('well',c.x,c.z),s.placementEffects('well',c.x,c.z));
+ s.setOperation(s.at(c.x+1,c.z).id,false);s.at(c.x-1,c.z).health=0;/* damage set directly */assert.equal(s.placementEffects('field',c.x,c.z).cluster,CLUSTER_MAX);
+ const back=reload(s);assert.deepEqual(back.placementEffects('field',c.x,c.z),s.placementEffects('field',c.x,c.z));
+ // Extraction sites: the list is every raw producer (nothing but water in) outside the farm group, and each stops at one
+ // neighbour. Real wells: three around a well give 10%, the same as one.
+ const raw=Object.entries(BUILDINGS).filter(([,d])=>d.period&&RESOURCES[d.output]&&d.group!=='farm'&&Object.keys(d.inputs||{}).every(k=>k==='water')).map(([k])=>k);
+ assert.deepEqual([...EXTRACTORS].sort(),raw.sort(),'extractors are the raw producers outside the farm group');assert.equal(EXTRACT_MAX,1);
+ assert.ok(EXTRACTORS.every(t=>clusterMax(t)===1)&&['field','sugarfield','apiary','dock','sawmill','smelter','bakery'].every(t=>clusterMax(t)===CLUSTER_MAX));
+ const v=quiet(s,t=>[[0,0],...ring].every(([dx,dz])=>dryAt(s,s.tile(t.x+dx,t.z+dz))));s.build('well',v.x,v.z,true);
+ const wells=[];for(const [dx,dz] of ring.slice(0,3)){s.build('well',v.x+dx,v.z+dz,true);const e=s.placementEffects('well',v.x,v.z);wells.push([e.cluster,+e.speed.toFixed(4)]);}
+ assert.deepEqual(wells,[[1,+(1/.9).toFixed(4)],[1,+(1/.9).toFixed(4)],[1,+(1/.9).toFixed(4)]],'a well cluster stops at 10%');
+ assert.deepEqual(effectNotes('well',s.placementEffects('well',v.x,v.z)).map(n=>n.text),['같은 시설 1 · 시간 -10%']);
  // Timed-effect plants (power, horses) gain nothing: a faster cycle would only burn more fuel.
  const g=quiet(s,t=>dryAt(s,s.tile(t.x+1,t.z)));s.build('generator',g.x,g.z,true);s.build('generator',g.x+1,g.z,true);assert.equal(s.placementEffects('generator',g.x,g.z).cluster,0);
  assert.equal(new Simulation('river').placementEffects('well',12,12).cluster,0,'off on an old map');
@@ -85,7 +96,7 @@ const ok=[];
  /** Progress made in one real tick while the field is mid-cycle (water loaded directly). */
  const rate=()=>{f.inputs={water:5};for(let i=0;i<400&&!(f.working&&f.progress>0&&f.progress<.8);i++)w.tick(.25);const p=f.progress;w.tick(.25);return f.progress-p;};
  const alone=rate();for(const [dx,dz] of ring.slice(0,5))w.build('field',m.x+dx,m.z+dz,true);const ratio=rate()/alone;assert.ok(alone>0&&Math.abs(ratio-1/.7)<1e-6,'1/0.7 speed with five neighbours (ratio '+ratio.toFixed(3)+', '+f.status+')');
- ok.push('same-kind cluster 10%/neighbour incl. corners, max 30%');}
+ ok.push('same-kind cluster 10%/neighbour incl. corners, max 30%, extraction sites max 10%');}
 
 // 3. Salt near the sea: irrigated crops slow 15% a step, a salt pan speeds 20% a step; two steps from the shore.
 {const s=site(s=>s.tiles.some(isSea));const got=[];
@@ -185,7 +196,7 @@ assert.ok(BUILDINGS.apiary.description.includes('야생 클로버'));assert.ok(!
 
 // 10. The balance record carries the same numbers as the code.
 {const rules=JSON.parse(fs.readFileSync(new URL('../docs/balance/patch-20260928.json',import.meta.url),'utf8')).expansion20260929.terrainRules;
- assert.deepEqual(rules.numbers,{waterRing:WATER_RING.slice(1),openWater:OPEN_WATER,clusterStep:CLUSTER_STEP,clusterMax:CLUSTER_MAX,mountainSteps:[3,2,2,1,1],saltSteps:[2,1],saltCrop:.15,saltPan:.2,flood:.7,mines:MINES,herds:HERDS,grazeStep:.1,grazeMax:.4,cloverReach:2});
+ assert.deepEqual(rules.numbers,{waterRing:WATER_RING.slice(1),openWater:OPEN_WATER,clusterStep:CLUSTER_STEP,clusterMax:CLUSTER_MAX,extractMax:EXTRACT_MAX,extractors:EXTRACTORS,mountainSteps:[3,2,2,1,1],saltSteps:[2,1],saltCrop:.15,saltPan:.2,flood:.7,mines:MINES,herds:HERDS,grazeStep:.1,grazeMax:.4,cloverReach:2});
  assert.deepEqual(rules.waterNeed,Object.fromEntries(Object.entries(BUILDINGS).filter(([,d])=>d.waterNeed).map(([k,d])=>[k,d.waterNeed])));ok.push('balance record');}
 
 /** The speed a facility runs at, read from real ticks: progress over one step while it is mid-cycle, times its period. */

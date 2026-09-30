@@ -16,6 +16,12 @@ export const WATER_RING=[0,2,1],OPEN_WATER=3;
  *  (three neighbours). At the first cap of 50% a clustered raw field out-earned the processing plant it feeds per tile
  *  (balance-report C12, docs/BALANCE_PATCH_20260928.md 17-3). */
 export const CLUSTER_STEP=.1,CLUSTER_MAX=3;
+/** Extraction sites (every raw producer outside the farm group: wells, lumber camps, quarries, pits, mines, pumps) share
+ *  the trees, rock, ore or ground water around them, so a cluster of them gains at most 10% (one neighbour). With the
+ *  30% cap a full cluster of lumber camps and iron mines let charcoal steel, planks and steel gears fall under 1.15 times
+ *  their inputs per tile (balance-report C13; at 20% charcoal steel still sat at 1.09, docs/BALANCE_PATCH_20260928.md 18). */
+export const EXTRACTORS=['well','lumber','quarry','sandpit','clayfield','ironmine','coalpit','coppermine','shallowmine','oilpump','manaextractor'],EXTRACT_MAX=1;
+export const clusterMax=type=>EXTRACTORS.includes(type)?EXTRACT_MAX:CLUSTER_MAX;
 /** Mountain shade and wind shelter by distance 1..5 (steps 3,2,2,1,1); salt by distance to the sea 1..2. */
 const MOUNTAIN=[0,3,2,2,1,1],SALT=[0,2,1];
 export function placementEffects(sim,type,x,z){
@@ -44,7 +50,7 @@ export function placementEffects(sim,type,x,z){
   if(need)water=reservoir||waterScore>=need?1:0;
  }else if(crop){water=reservoir||ponds>0?1:0;for(let dz=-2;dz<=2&&!water;dz++)for(let dx=-2;dx<=2;dx++){const t=sim.tile(x+dx,z+dz);if(t?.terrain==='water'&&t.water!=='coast')water=1;}}
  pollution=Math.min(6,pollution);shade=Math.min(3,shade);windBlock=Math.min(3,windBlock);
- const salt=modern?SALT[coast]||0:0;flooded=modern&&MINES.includes(type)&&flooded;cluster=modern&&d?.period&&RESOURCES[d.output]?Math.min(CLUSTER_MAX,cluster):0;
+ const salt=modern?SALT[coast]||0:0;flooded=modern&&MINES.includes(type)&&flooded;cluster=modern&&d?.period&&RESOURCES[d.output]?Math.min(clusterMax(type),cluster):0;
  const road=[[1,0],[-1,0],[0,1],[0,-1]].some(([dx,dz])=>sim.roads.has((x+dx)+','+(z+dz)));
  const sensitive=crop||['stable','dock','henhouse','sheeppen','milkbarn','duckhouse','apiary'].includes(type),wind=['mill','windturbine','windpump'].includes(type);
  // A solar panel loses 20% per shade step (docs/BALANCE_PATCH_20260928.md 13-2). Salt slows an irrigated crop 15% a
