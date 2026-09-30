@@ -7252,10 +7252,10 @@
     "resourceGoods": {
       "source": "completion-v8/resourceGoods-source.png",
       "grid": [
-        71,
+        80,
         1
       ],
-      "columns": 71,
+      "columns": 80,
       "opaqueTile": true,
       "anchor": [
         0.5,
@@ -7545,6 +7545,42 @@
         "giftparcel": [
           "farmGoods",
           34
+        ],
+        "dough": [
+          "farmGoods2",
+          0
+        ],
+        "baguette": [
+          "farmGoods2",
+          1
+        ],
+        "batter": [
+          "farmGoods2",
+          2
+        ],
+        "fancycake": [
+          "farmGoods2",
+          3
+        ],
+        "decorcake": [
+          "farmGoods2",
+          4
+        ],
+        "winebottle": [
+          "farmGoods2",
+          5
+        ],
+        "sangria": [
+          "farmGoods2",
+          6
+        ],
+        "honeycomb": [
+          "farmGoods2",
+          7
+        ],
+        "jetfuel": [
+          "farmGoods2",
+          8
         ]
       }
     },
@@ -9305,16 +9341,206 @@
           0,
           192,
           192
+        ],
+        [
+          192,
+          0,
+          192,
+          192
         ]
       ],
-      "columns": 1,
+      "columns": 2,
       "opaqueTile": true,
       "anchor": [
         0.5,
         0.5
       ],
       "order": [
-        "bees"
+        "bees",
+        "rotor"
+      ],
+      "generator": "farm-v9/build.py"
+    },
+    "shallowmine": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          4224,
+          192,
+          192
+        ],
+        [
+          192,
+          4224,
+          192,
+          192
+        ],
+        [
+          384,
+          4224,
+          192,
+          192
+        ],
+        [
+          576,
+          4224,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "windpump": {
+      "source": "farm-v9/buildings-source.png",
+      "rects": [
+        [
+          0,
+          4416,
+          192,
+          192
+        ],
+        [
+          192,
+          4416,
+          192,
+          192
+        ],
+        [
+          384,
+          4416,
+          192,
+          192
+        ],
+        [
+          576,
+          4416,
+          192,
+          192
+        ]
+      ],
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "opaqueTile": true,
+      "baseline": 181,
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "size": 1.4,
+      "worldFootprint": [
+        1,
+        1
+      ],
+      "states": {
+        "static": [
+          0
+        ]
+      },
+      "generator": "farm-v9/build.py"
+    },
+    "farmGoods2": {
+      "source": "farm-v9/goods2-source.png",
+      "rects": [
+        [
+          0,
+          0,
+          192,
+          192
+        ],
+        [
+          192,
+          0,
+          192,
+          192
+        ],
+        [
+          384,
+          0,
+          192,
+          192
+        ],
+        [
+          576,
+          0,
+          192,
+          192
+        ],
+        [
+          768,
+          0,
+          192,
+          192
+        ],
+        [
+          960,
+          0,
+          192,
+          192
+        ],
+        [
+          1152,
+          0,
+          192,
+          192
+        ],
+        [
+          1344,
+          0,
+          192,
+          192
+        ],
+        [
+          1536,
+          0,
+          192,
+          192
+        ]
+      ],
+      "columns": 9,
+      "opaqueTile": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "order": [
+        "dough",
+        "baguette",
+        "batter",
+        "fancycake",
+        "decorcake",
+        "winebottle",
+        "sangria",
+        "honeycomb",
+        "jetfuel"
       ],
       "generator": "farm-v9/build.py"
     }

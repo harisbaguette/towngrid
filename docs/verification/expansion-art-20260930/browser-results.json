@@ -1,0 +1,2261 @@
+{
+  "passed": true,
+  "buildings": 106,
+  "damaged": 24,
+  "results": [
+    {
+      "renderer": "webgl",
+      "group": "farmcrops",
+      "view": 0,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "saltfield",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "vineyard",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "cocoafarm",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmcrops",
+      "view": 1,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "saltfield",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "vineyard",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "cocoafarm",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmcrops",
+      "view": 2,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "saltfield",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "vineyard",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "cocoafarm",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmcrops",
+      "view": 3,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "saltfield",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "vineyard",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "cocoafarm",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmfruits",
+      "view": 0,
+      "rows": [
+        {
+          "type": "berryfield",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "mintfield",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "pumpkinpatch",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "oakfarm",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmfruits",
+      "view": 1,
+      "rows": [
+        {
+          "type": "berryfield",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "mintfield",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "pumpkinpatch",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "oakfarm",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmfruits",
+      "view": 2,
+      "rows": [
+        {
+          "type": "berryfield",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "mintfield",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "pumpkinpatch",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "oakfarm",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmfruits",
+      "view": 3,
+      "rows": [
+        {
+          "type": "berryfield",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "mintfield",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "pumpkinpatch",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "oakfarm",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "ranch",
+      "view": 0,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "milkbarn",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "apiary",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "duckhouse",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "ranch",
+      "view": 1,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "milkbarn",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "apiary",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "duckhouse",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "ranch",
+      "view": 2,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "milkbarn",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "apiary",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "duckhouse",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "ranch",
+      "view": 3,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "milkbarn",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "apiary",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "duckhouse",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmworks",
+      "view": 0,
+      "rows": [
+        {
+          "type": "feedmill",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "winery",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "chocolatier",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "packshop",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmworks",
+      "view": 1,
+      "rows": [
+        {
+          "type": "feedmill",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "winery",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "chocolatier",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "packshop",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmworks",
+      "view": 2,
+      "rows": [
+        {
+          "type": "feedmill",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "winery",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "chocolatier",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "packshop",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmworks",
+      "view": 3,
+      "rows": [
+        {
+          "type": "feedmill",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "winery",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "chocolatier",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "packshop",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmland",
+      "view": 0,
+      "rows": [
+        {
+          "type": "sandpit",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "clayfield",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "solarpanel",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmland",
+      "view": 1,
+      "rows": [
+        {
+          "type": "sandpit",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "clayfield",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "solarpanel",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmland",
+      "view": 2,
+      "rows": [
+        {
+          "type": "sandpit",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "clayfield",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "solarpanel",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmland",
+      "view": 3,
+      "rows": [
+        {
+          "type": "sandpit",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "clayfield",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "solarpanel",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmterrain",
+      "view": 0,
+      "rows": [
+        {
+          "type": "pond",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "pasture",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "clover",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmterrain",
+      "view": 1,
+      "rows": [
+        {
+          "type": "pond",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "pasture",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "clover",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmterrain",
+      "view": 2,
+      "rows": [
+        {
+          "type": "pond",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "pasture",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "clover",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmterrain",
+      "view": 3,
+      "rows": [
+        {
+          "type": "pond",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "pasture",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "clover",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmsupport",
+      "view": 0,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "windpump",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmsupport",
+      "view": 1,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "windpump",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmsupport",
+      "view": 2,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "windpump",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmsupport",
+      "view": 3,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "windpump",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmcrops",
+      "view": 0,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "saltfield",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "vineyard",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "cocoafarm",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmcrops",
+      "view": 1,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "saltfield",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "vineyard",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "cocoafarm",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmcrops",
+      "view": 2,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "saltfield",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "vineyard",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "cocoafarm",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmcrops",
+      "view": 3,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "saltfield",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "vineyard",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "cocoafarm",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmfruits",
+      "view": 0,
+      "rows": [
+        {
+          "type": "berryfield",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "mintfield",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "pumpkinpatch",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "oakfarm",
+          "direction": 0,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmfruits",
+      "view": 1,
+      "rows": [
+        {
+          "type": "berryfield",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "mintfield",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "pumpkinpatch",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "oakfarm",
+          "direction": 1,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmfruits",
+      "view": 2,
+      "rows": [
+        {
+          "type": "berryfield",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "mintfield",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "pumpkinpatch",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "oakfarm",
+          "direction": 2,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmfruits",
+      "view": 3,
+      "rows": [
+        {
+          "type": "berryfield",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "mintfield",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "pumpkinpatch",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "oakfarm",
+          "direction": 3,
+          "image": true,
+          "crops": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "ranch",
+      "view": 0,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "milkbarn",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "apiary",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "duckhouse",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "ranch",
+      "view": 1,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "milkbarn",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "apiary",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "duckhouse",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "ranch",
+      "view": 2,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "milkbarn",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "apiary",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "duckhouse",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "ranch",
+      "view": 3,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "milkbarn",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "apiary",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "duckhouse",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmworks",
+      "view": 0,
+      "rows": [
+        {
+          "type": "feedmill",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "winery",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "chocolatier",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "packshop",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmworks",
+      "view": 1,
+      "rows": [
+        {
+          "type": "feedmill",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "winery",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "chocolatier",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "packshop",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmworks",
+      "view": 2,
+      "rows": [
+        {
+          "type": "feedmill",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "winery",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "chocolatier",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "packshop",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmworks",
+      "view": 3,
+      "rows": [
+        {
+          "type": "feedmill",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "winery",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "chocolatier",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "packshop",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmland",
+      "view": 0,
+      "rows": [
+        {
+          "type": "sandpit",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "clayfield",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "solarpanel",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmland",
+      "view": 1,
+      "rows": [
+        {
+          "type": "sandpit",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "clayfield",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "solarpanel",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmland",
+      "view": 2,
+      "rows": [
+        {
+          "type": "sandpit",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "clayfield",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "solarpanel",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmland",
+      "view": 3,
+      "rows": [
+        {
+          "type": "sandpit",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "clayfield",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "solarpanel",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmterrain",
+      "view": 0,
+      "rows": [
+        {
+          "type": "pond",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "pasture",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "clover",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmterrain",
+      "view": 1,
+      "rows": [
+        {
+          "type": "pond",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "pasture",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "clover",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmterrain",
+      "view": 2,
+      "rows": [
+        {
+          "type": "pond",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "pasture",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "clover",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmterrain",
+      "view": 3,
+      "rows": [
+        {
+          "type": "pond",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "pasture",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        },
+        {
+          "type": "clover",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmsupport",
+      "view": 0,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "windpump",
+          "direction": 0,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmsupport",
+      "view": 1,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "windpump",
+          "direction": 1,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmsupport",
+      "view": 2,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "windpump",
+          "direction": 2,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmsupport",
+      "view": 3,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 2,
+          "phase": "working"
+        },
+        {
+          "type": "windpump",
+          "direction": 3,
+          "image": true,
+          "crops": [],
+          "outputs": 0,
+          "phase": "supplying"
+        }
+      ]
+    },
+    {
+      "buildings": 106,
+      "damaged": 24
+    }
+  ],
+  "errors": [],
+  "failed": []
+}

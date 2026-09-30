@@ -649,28 +649,46 @@ def g_sand():
 
 
 def g_limestone():
+    """2026-09-30 redraw: two warm cream cut blocks and a rough chunk with a
+    spiral shell fossil and pores, distinct from the grey stone cubes."""
     def b(v):
-        rough = speckle(P['stone'], tone(P['stone'], .9), 7, .3)
-        v.put(v.box(1, 19, 2, 14, 0, 9), rough)
-        v.cut(v.box(15, 20, 2, 6, 6, 9) | v.box(1, 4, 11, 14, 7, 9))
-        v.put(v.box(4, 12, 3, 13, 9, 13) & ~v.box(9, 12, 3, 6, 11, 13), rough)
-        ring = (np.abs(np.hypot(v.I - 8, v.K - 5) - 2.5) < .6) & (v.J > 13)
-        v.put(ring & v.box(0, 20, 13, 14, 0, 9), tone(P['stone'], .7))
-    return vox_icon(b, .84, 20, 16)
-
+        cream = hexc('#eadcb4')
+        rough = speckle(cream, tone(cream, .86), 7, .22)
+        v.put(v.box(1, 13, 1, 9, 0, 7), rough)
+        v.put(v.box(1, 13, 10, 18, 0, 7), rough)
+        v.put(v.box(3, 12, 3, 16, 7, 13) & ~(v.box(9, 12, 3, 7, 10, 13)), speckle(tone(cream, 1.05), tone(cream, .88), 9, .25))
+        v.put(v.box(14, 22, 5, 14, 0, 6) & ~v.box(19, 22, 5, 8, 3, 6), speckle(tone(cream, .95), tone(cream, .8), 11, .3))
+        # spiral fossil on the +j face of the top block
+        face = (v.J > 15) & (v.J < 16) & (v.I > 3) & (v.I < 12) & (v.K > 7) & (v.K < 13)
+        r = np.hypot(v.I - 7.5, v.K - 10)
+        ang = np.arctan2(v.K - 10, v.I - 7.5)
+        spiral = (np.abs(((r - ang * .45) % 1.4) - .7) < .28) & (r < 2.8)
+        v.put(face & spiral, hexc('#a98f5f'))
+        v.put(face & (r < .7), hexc('#a98f5f'))
+        # pores on the +i face of the chunk
+        pores = (v.I > 21) & (v.I < 22) & ((((v.J * 2).astype(int) * 3 + (v.K * 2).astype(int) * 5) % 11) == 0)
+        v.put(pores & v.box(14, 22, 5, 14, 0, 6), tone(cream, .7))
+    return vox_icon(b, .86, 24, 16)
 
 def g_chromium():
+    """2026-09-30 redraw: mirror-bright chrome nuggets (sky band, white glint,
+    dark ground reflection) on a green-black chromite lump, so it no longer
+    reads as a plain dark rock with spikes."""
     s = Sprite()
-    s.poly([(4, 36), (10, 24), (22, 20), (38, 22), (45, 34), (36, 44), (12, 44)], P['dark'])
-    s.poly([(38, 22), (45, 34), (36, 44), (30, 44), (36, 30)], tone(P['dark'], .75))
-    for pts in (((12, 28), (17, 8), (22, 28)), ((20, 30), (27, 12), (32, 31)), ((30, 31), (37, 17), (41, 32)), ((8, 34), (11, 22), (15, 34))):
+    rock = hexc('#3b4a44')
+    s.poly([(3, 38), (8, 29), (19, 26), (33, 27), (44, 33), (41, 43), (26, 46), (9, 45)], rock)
+    s.poly([(33, 27), (44, 33), (41, 43), (30, 45), (33, 35)], tone(rock, .72))
+    for x, y in ((10, 40), (16, 43), (37, 40), (22, 44)):
+        s.pixel(x, y, hexc('#5f7a6b'))
+    for cx, cy, rx, ry in ((16, 25, 9, 10), (31, 21, 10, 12), (25, 34, 8, 7)):
         s.layer()
-        s.poly(list(pts), P['chrome'])
-        (x0, y0), (x1, y1), (x2, y2) = pts
-        s.poly([(x1, y1), (x2, y2), ((x0 + x2) / 2 + 1, y2)], tone(P['chrome'], .72))
-        s.line(x0 + 1, y0 - 1, x1, y1 + 1, tone(P['chrome'], 1.45), 1)
+        s.poly([(cx - rx, cy + ry * .3), (cx - rx * .5, cy - ry), (cx + rx * .6, cy - ry * .9), (cx + rx, cy + ry * .2), (cx + rx * .4, cy + ry), (cx - rx * .6, cy + ry * .9)], hexc('#8a939e'))
+        s.poly([(cx - rx * .9, cy + ry * .1), (cx - rx * .45, cy - ry * .9), (cx + rx * .55, cy - ry * .8), (cx + rx * .85, cy - ry * .05)], hexc('#c6ccd3'))
+        s.poly([(cx - rx * .85, cy + ry * .12), (cx + rx * .9, cy + ry * .02), (cx + rx * .95, cy + ry * .22), (cx - rx * .8, cy + ry * .34)], hexc('#ffffff'))
+        s.poly([(cx - rx * .7, cy + ry * .5), (cx + rx * .95, cy + ry * .3), (cx + rx * .4, cy + ry), (cx - rx * .6, cy + ry * .9)], hexc('#3a414c'))
+        s.poly([(cx + rx * .1, cy + ry * .6), (cx + rx * .7, cy + ry * .45), (cx + rx * .45, cy + ry * .8)], hexc('#9b7a52'))
+        s.line(cx - rx * .3, cy - ry * .6, cx - rx * .05, cy - ry * .75, P['white'], 1)
     return s.image()
-
 
 def g_bluesteel():
     def b(v):
@@ -737,6 +755,220 @@ GOODS = {
 }
 
 
+# ----------------------------------------------------------------- 2026-09-30 goods (section 6)
+def g_dough():
+    """Risen dough ball in a wooden bowl with a dusting of flour."""
+    s = Sprite()
+    s.line(4, 16, 40, 8, P['plank'], 3)
+    s.ellipse(4, 16, 2, 2, P['bark2'])
+    s.ellipse(40, 8, 2, 2, P['bark2'])
+    s.layer()
+    s.ellipse(24, 32, 19, 12, P['wood'])
+    s.rect(5, 26, 43, 32, P['wood'], (.2, .25))
+    s.layer()
+    s.ellipse(24, 26, 18, 5, tone(P['wood'], .62), shade=False)
+    s.layer()
+    s.ellipse(24, 22, 14, 10, hexc('#f3e2bd'))
+    s.line(17, 20, 25, 23, tone(hexc('#f3e2bd'), .82), 1)
+    for x, y in ((14, 18), (29, 16), (22, 14), (33, 22), (8, 25)):
+        s.pixel(x, y, P['white'])
+    s.layer()
+    s.rect(9, 36, 39, 38, tone(P['wood'], .78))
+    return s.image()
+
+
+def g_baguette():
+    """Two long crossed loaves with diagonal slashes and a paper sleeve."""
+    s = Sprite()
+    crust = hexc('#d7963e')
+    for (x0, y0, x1, y1) in ((6, 40, 40, 6), (9, 10, 43, 40)):
+        s.layer()
+        s.line(x0, y0, x1, y1, crust, 9)
+        d = 1 if y1 > y0 else -1
+        s.line(x0 + 1, y0 - 2, x1 - 1, y1 - 2, tone(crust, 1.18), 3)
+        for t in (.22, .4, .58, .76):
+            x, y = x0 + (x1 - x0) * t, y0 + (y1 - y0) * t
+            s.line(x - 2, y - 2 * d, x + 2, y + 1 * d, hexc('#f3d9a0'), 1.2)
+    s.layer()
+    s.poly([(13, 30), (26, 20), (32, 30), (19, 40)], P['label'])
+    s.poly([(26, 20), (32, 30), (30, 31), (25, 23)], tone(P['label'], .8))
+    s.line(16, 33, 28, 24, P['red'], 1)
+    return s.image()
+
+
+def g_batter():
+    """Blue mixing bowl of pale cake batter with a whisk and a drip."""
+    s = Sprite()
+    s.line(33, 4, 26, 22, P['steel'], 2)
+    for dx in (-3, 0, 3):
+        s.ellipse(25 + dx * .6, 24, 2.6, 5, P['metal'], shade=False)
+    s.layer()
+    bowl = hexc('#7fb2e6')
+    s.ellipse(24, 32, 20, 12, bowl)
+    s.rect(4, 26, 44, 32, bowl, (.2, .25))
+    s.layer()
+    s.ellipse(24, 26, 19, 5, hexc('#f4e3a8'), shade=False)
+    for a in np.linspace(0, 5.5, 14):
+        s.pixel(24 + np.cos(a) * a * 2.4, 26 + np.sin(a) * a * .7, tone(hexc('#f4e3a8'), .8))
+    s.layer()
+    s.ellipse(6, 32, 2, 3.5, hexc('#f4e3a8'), spec=False)
+    s.rect(9, 37, 39, 39, tone(bowl, .7))
+    return s.image()
+
+
+def g_fancycake():
+    """Whole chocolate layer cake with cream rosettes and strawberries."""
+    def b(v):
+        cake = speckle(P['choco'], tone(P['choco'], 1.18), 3, .15)
+        v.put(v.cyl(10, 10, 9, 0, 1), P['white'])
+        v.put(v.cyl(10, 10, 8, 1, 5), cake)
+        v.put(v.cyl(10, 10, 8, 5, 6), hexc('#f6e7cf'))
+        v.put(v.cyl(10, 10, 8, 6, 10), cake)
+        v.put(v.cyl(10, 10, 8.2, 9, 10.5), P['choco2'])
+        for a in np.linspace(0, 2 * np.pi, 9)[:-1]:
+            ci, cj = 10 + np.cos(a) * 6, 10 + np.sin(a) * 6
+            v.put(v.ball(ci, cj, 11, 1.4, 1.4, 1.2), hexc('#fbf4e6'))
+        for ci, cj in ((8, 11), (12, 9), (10, 13.5)):
+            v.put(v.ball(ci, cj, 12.2, 1.6, 1.6, 1.9), P['red'])
+            v.put(v.box(ci - .4, ci + .4, cj - .4, cj + .4, 13.5, 14.5), P['leaf'])
+    return vox_icon(b, .98, 20, 16)
+
+
+def g_decorcake():
+    """Tall two-tier white cake with pink piping and mint-candy decorations."""
+    s = Sprite()
+    s.ellipse(24, 43, 19, 3.5, P['metal'], spec=False)
+    s.layer()
+    s.rect(8, 28, 40, 42, P['white'], (.25, .3))
+    s.ellipse(24, 28, 16, 3.5, tone(P['white'], 1.05), shade=False)
+    s.layer()
+    s.rect(14, 14, 34, 28, hexc('#f7d7df'), (.25, .3))
+    s.ellipse(24, 14, 10, 2.8, tone(hexc('#f7d7df'), 1.08), shade=False)
+    s.layer()
+    for x in range(9, 40, 3):
+        s.ellipse(x, 30, 1.5, 1.2, P['pink'], spec=False)
+        s.ellipse(x, 41, 1.5, 1.2, P['pink'], spec=False)
+    for x in range(15, 34, 3):
+        s.ellipse(x, 16, 1.3, 1.1, P['white'], spec=False)
+    for x, y in ((13, 36), (24, 36), (35, 36), (19, 22), (29, 22)):
+        s.layer()
+        s.ellipse(x, y, 3, 3, P['white'])
+        s.line(x - 2.2, y - 1, x + 2.2, y + 1, P['mint'], 1.2)
+        s.line(x - 1, y + 2.2, x + 1, y - 2.2, P['mint'], 1.2)
+    s.layer()
+    s.line(24, 12, 24, 5, P['gold'], 1)
+    s.ellipse(24, 4, 2.6, 2.6, P['gold'])
+    return s.image()
+
+
+def g_winebottle():
+    """Three empty dark-green wine bottles standing in a small wooden carrier
+    (no label: the product is the glass, not the wine)."""
+    s = Sprite()
+    glass = hexc('#2f6b3f')
+    for x in (13, 24, 35):
+        s.layer()
+        s.rect(x - 4.5, 17, x + 4.5, 42, glass, (.28, .3))
+        s.ellipse(x, 17, 4.5, 3, glass, spec=False)
+        s.rect(x - 1.6, 5, x + 1.6, 16, glass, (.3, .3))
+        s.rect(x - 2, 3, x + 2, 7, hexc('#c9a36a'), (.3, .3))
+        s.line(x - 2.8, 20, x - 2.8, 34, tone(glass, 1.7), 1)
+    s.layer()
+    s.rect(5, 30, 43, 45, P['plank'], (.2, .3))
+    s.line(5, 37, 43, 37, tone(P['plank'], .75), 1)
+    s.rect(4, 29, 44, 31, P['wood'])
+    return s.image()
+
+
+def g_sangria():
+    """Glass pitcher of red sangria with fruit pieces, ice and an orange slice."""
+    s = Sprite()
+    s.rect(9, 12, 35, 44, P['glass'], (.2, .2))
+    s.ellipse(22, 44, 13, 2.2, P['glass'], shade=False)
+    s.poly([(9, 12), (4, 9), (10, 16)], P['glass'])
+    s.layer()
+    wine = hexc('#b3263a')
+    s.rect(11, 18, 33, 43, wine, (.2, .35))
+    s.ellipse(22, 18, 11, 2.2, tone(wine, 1.25), shade=False)
+    s.layer()
+    for x, y, c in ((15, 24, P['orange']), (27, 29, P['red']), (19, 35, P['yellow']), (29, 38, P['orange'])):
+        s.ellipse(x, y, 2.4, 2, c)
+    for x, y in ((24, 20), (16, 30)):
+        s.rect(x - 1.8, y - 1.8, x + 1.8, y + 1.8, hexc('#e8f6fb'))
+    s.layer()
+    s.ellipse(37, 20, 5, 5, P['orange'])
+    s.ellipse(37, 20, 3.6, 3.6, hexc('#f6c35b'), shade=False)
+    for a in range(4):
+        s.line(37, 20, 37 + np.cos(a * .8) * 3.4, 20 + np.sin(a * .8) * 3.4, P['orange'], 1)
+    s.line(35, 16, 40, 30, P['glass'], 2)
+    s.line(33, 24, 44, 24, tone(P['glass'], .8), 2)
+    return s.image()
+
+
+def g_honeycomb():
+    """A hive frame of capped honeycomb with an open, dripping corner:
+    rectangular frame and hex cells, unlike the rolled wax sheet."""
+    s = Sprite()
+    s.rect(3, 8, 45, 12, P['wood'], (.2, .25))
+    s.rect(5, 12, 9, 42, P['wood'], (.3, .3))
+    s.rect(39, 12, 43, 42, P['wood'], (.3, .3))
+    s.rect(5, 40, 43, 43, P['wood'], (.2, .25))
+    s.layer()
+    s.rect(9, 12, 39, 40, P['amber'])
+    capped = hexc('#f2cc6b')
+    for row in range(7):
+        for col in range(8):
+            cx = 11.5 + col * 3.8 + (row % 2) * 1.9
+            cy = 14.5 + row * 3.6
+            if cx > 38:
+                continue
+            open_cell = cx + cy > 58
+            c = hexc('#c7771e') if open_cell else capped
+            s.poly([(cx - 1.7, cy), (cx - .85, cy - 1.5), (cx + .85, cy - 1.5), (cx + 1.7, cy), (cx + .85, cy + 1.5), (cx - .85, cy + 1.5)], c)
+            if not open_cell:
+                s.pixel(cx - .5, cy - .6, tone(capped, 1.3))
+    s.layer()
+    for x, h in ((30, 6), (35, 9), (24, 4)):
+        s.rect(x - 1, 40, x + 1, 40 + h, P['amber'])
+        s.ellipse(x, 40 + h, 1.6, 1.6, P['amber'])
+    return s.image()
+
+
+def g_jetfuel():
+    """Blue aviation jerrycan with a white wing emblem and spout, unlike the
+    yellow fuel drum and black oil drum."""
+    s = Sprite()
+    can = hexc('#2f6fb8')
+    s.poly([(10, 14), (34, 14), (40, 20), (40, 45), (10, 45)], can)
+    s.poly([(34, 14), (40, 20), (40, 45), (34, 45)], tone(can, .72))
+    s.rect(9, 14, 11, 45, tone(can, 1.2))
+    s.layer()
+    s.rect(14, 6, 26, 10, P['steel'], (.3, .3))
+    s.rect(14, 9, 17, 15, P['steel'])
+    s.rect(23, 9, 26, 15, P['steel'])
+    s.poly([(30, 11), (36, 4), (39, 6), (34, 13)], P['metal'])
+    s.rect(36, 2, 41, 5, P['red'])
+    s.layer()
+    s.line(13, 24, 31, 24, tone(can, .7), 1)
+    s.line(13, 40, 31, 40, tone(can, .7), 1)
+    # white aircraft silhouette: fuselage, swept wings, tail fin
+    s.rect(12, 30.5, 32, 33.5, P['white'])
+    s.ellipse(32, 32, 2.4, 1.5, P['white'], spec=False)
+    s.poly([(19, 31), (24, 23), (27, 23), (25, 31)], P['white'])
+    s.poly([(19, 33), (24, 41), (27, 41), (25, 33)], P['white'])
+    s.poly([(12, 31), (11, 26), (14, 26), (16, 31)], P['white'])
+    return s.image()
+
+
+# Section 6 goods (2026-09-30) are a separate atlas (farmGoods2) appended after
+# the 71 existing goods; the farmGoods atlas keeps its 35 slots.
+GOODS2 = {
+    'dough': g_dough, 'baguette': g_baguette, 'batter': g_batter, 'fancycake': g_fancycake,
+    'decorcake': g_decorcake, 'winebottle': g_winebottle, 'sangria': g_sangria,
+    'honeycomb': g_honeycomb, 'jetfuel': g_jetfuel,
+}
+
+
 # ----------------------------------------------------------------- work parts
 def p_bees():
     s = Sprite()
@@ -751,4 +983,26 @@ def p_bees():
     return s.image()
 
 
-PARTS = {'bees': p_bees}
+
+def p_rotor():
+    """Wind-pump wheel seen face-on: sixteen sheet-metal blades between an
+    inner and outer ring, red tips. The runtime spins it and projects it onto
+    its vertical plane, so it is drawn as a flat disc."""
+    s = Sprite()
+    blade, tip = hexc('#d8dde3'), P['red']
+    for n in range(16):
+        a = n * np.pi / 8
+        s.layer()
+        pts = [(24 + np.cos(a + da) * r, 24 + np.sin(a + da) * r) for r, da in ((6, -.1), (21, -.13), (21, .13), (6, .1))]
+        s.poly(pts, blade if n % 2 else tone(blade, .86))
+        s.line(24 + np.cos(a) * 19, 24 + np.sin(a) * 19, 24 + np.cos(a) * 21.5, 24 + np.sin(a) * 21.5, tip, 2.2)
+    s.layer()
+    d = np.hypot(s.X - 24, s.Y - 24)
+    s._paint((d > 13.3) & (d < 14.6), P['steel'])
+    s.layer()
+    s.ellipse(24, 24, 4.5, 4.5, P['dark'])
+    s.ellipse(24, 24, 2, 2, P['metal'], spec=False)
+    return s.image()
+
+
+PARTS = {'bees': p_bees, 'rotor': p_rotor}

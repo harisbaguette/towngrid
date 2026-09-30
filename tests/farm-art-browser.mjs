@@ -1,14 +1,14 @@
-// Browser capture of the 22 expansion facilities (docs/EXPANSION_20260929.md)
-// and their 35 goods. Usage:
+// Browser capture of the 24 expansion facilities (docs/EXPANSION_20260929.md,
+// sections 2 and 6) and their 44 goods. Usage:
 //   node tests/farm-art-browser.mjs <playwright/index.mjs> <chrome.exe>
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {FARM_GROUPS,FARM_BUILDINGS} from '../src/app/game/pixel-farm-data.js';
-import {FARM_GOODS_ORDER} from '../src/app/game/pixel-farm-sockets.js';
+import {FARM_GOODS_ORDER,FARM_GOODS2_ORDER} from '../src/app/game/pixel-farm-sockets.js';
 const {chromium}=await import(pathToFileURL(process.argv[2]).href);
 const browser=await chromium.launch({headless:true,executablePath:process.argv[3],args:['--enable-unsafe-swiftshader']});
-const origin=process.env.TOWNGRID_URL||'http://localhost:5173',out=new URL('../docs/verification/expansion-art-20260929/',import.meta.url);
+const origin=process.env.TOWNGRID_URL||'http://localhost:5173',out=new URL('../docs/verification/expansion-art-20260930/',import.meta.url);
 await mkdir(out,{recursive:true});
 const errors=[],failed=[],results=[];
 const shot=(page,name,options={})=>page.screenshot({path:fileURLToPath(new URL(name+'.png',out)),...options});
@@ -36,11 +36,11 @@ try{
    await shot(page,`${group}-webgl-early`,{fullPage:true});
   }
  }
- // UI icons: the 35 new goods next to existing ones, as the game shows them.
+ // UI icons: the 44 expansion goods next to existing ones, as the game shows them.
  await page.goto(origin+'/art-preview.html');await page.waitForFunction(()=>window.artPreview,{},{timeout:60000});
  await page.locator('#category').selectOption('resources');await page.waitForFunction(()=>[...document.images].every(i=>i.complete&&i.naturalWidth>0));
  const icons=await page.evaluate(()=>[...document.querySelectorAll('#cards img')].map(i=>i.getAttribute('src')));
- for(const id of FARM_GOODS_ORDER)assert.ok(icons.includes('/assets/pixel-environment/resources/'+id+'.png'),id);
+ for(const id of [...FARM_GOODS_ORDER,...FARM_GOODS2_ORDER])assert.ok(icons.includes('/assets/pixel-environment/resources/'+id+'.png'),id);
  await shot(page,'resources-ui',{fullPage:true});
  // Every facility in the game list, including damage layers at 25% health.
  await page.locator('#category').selectOption('buildings');
@@ -52,5 +52,5 @@ const damaged=await page.evaluate(ids=>window.artPreview.entries.filter(e=>ids.i
  results.push({buildings:count,damaged:damaged.length});
  assert.equal(damaged.length,FARM_BUILDINGS.length,'damage layer on every new facility');assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);
  await writeFile(new URL('browser-results.json',out),JSON.stringify({passed:true,buildings:count,damaged:damaged.length,results,errors,failed},null,2)+'\n');
- console.log(`Expansion art: 22 facilities × 4 views (WebGL/CPU), ${FARM_GOODS_ORDER.length} UI icons, ${count} buildings in the art list, ${damaged.length}/${FARM_BUILDINGS.length} new facilities with damage layers.`);
+ console.log(`Expansion art: ${FARM_BUILDINGS.length} facilities × 4 views (WebGL/CPU), ${FARM_GOODS_ORDER.length+FARM_GOODS2_ORDER.length} UI icons, ${count} buildings in the art list, ${damaged.length}/${FARM_BUILDINGS.length} new facilities with damage layers.`);
 }finally{await browser.close();}

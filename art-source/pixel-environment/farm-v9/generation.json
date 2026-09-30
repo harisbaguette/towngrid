@@ -33,7 +33,9 @@
     "solarpanel",
     "pond",
     "pasture",
-    "clover"
+    "clover",
+    "shallowmine",
+    "windpump"
   ],
   "goods": [
     "sugarcane",
@@ -72,6 +74,17 @@
     "foodparcel",
     "giftparcel"
   ],
+  "goods2": [
+    "dough",
+    "baguette",
+    "batter",
+    "fancycake",
+    "decorcake",
+    "winebottle",
+    "sangria",
+    "honeycomb",
+    "jetfuel"
+  ],
   "crops": [
     "sugarGrowth",
     "saltGrowth",
@@ -84,7 +97,8 @@
     "oakGrowth"
   ],
   "parts": [
-    "bees"
+    "bees",
+    "rotor"
   ],
   "sockets": {
     "sugarfield": {},
@@ -98,20 +112,20 @@
     "winery": {
       "press": [
         [
-          139,
-          74
+          51,
+          88
         ],
         [
-          89,
-          96
+          96,
+          61
         ],
         [
-          53,
-          66
+          141,
+          88
         ],
         [
-          103,
-          44
+          96,
+          116
         ]
       ]
     },
@@ -284,7 +298,47 @@
     },
     "pond": {},
     "pasture": {},
-    "clover": {}
+    "clover": {},
+    "shallowmine": {
+      "pulley": [
+        [
+          95,
+          53
+        ],
+        [
+          113,
+          63
+        ],
+        [
+          97,
+          74
+        ],
+        [
+          79,
+          64
+        ]
+      ]
+    },
+    "windpump": {
+      "rotor": [
+        [
+          84,
+          42
+        ],
+        [
+          93,
+          32
+        ],
+        [
+          108,
+          38
+        ],
+        [
+          99,
+          47
+        ]
+      ]
+    }
   },
   "cropPositions": [
     [

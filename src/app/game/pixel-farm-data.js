@@ -11,12 +11,14 @@ export const FARM_GROUPS = {
  farmworks: ['feedmill','winery','chocolatier','packshop'],
  farmland: ['sandpit','clayfield','solarpanel'],
  farmterrain: ['pond','pasture','clover'],
+ // Section 6 (2026-09-30): shallow mine and wind pump.
+ farmsupport: ['shallowmine','windpump'],
 };
 export const FARM_BUILDINGS = Object.values(FARM_GROUPS).flat();
 
 const at = (id, socket) => FARM_SOCKETS[id][socket];
 const tool = (name, size, pos, motion = 'still', show = 'always', extra = {}) => ({ name, frame: INDUSTRIAL_TOOLS[name], size, pos, motion, show, ...extra });
-const farmPart = (name, size, pos, motion, show) => ({ name, frame: FARM_PART_FRAMES[name], size, pos, motion, show, atlas: 'farmParts' });
+const farmPart = (name, size, pos, motion, show, extra = {}) => ({ name, frame: FARM_PART_FRAMES[name], size, pos, motion, show, atlas: 'farmParts', ...extra });
 const field = (crop, extra = {}) => ({ parts: [], crop, cropPos: FARM_CROP_POSITIONS, outputSize: .24, ...extra });
 
 export const FARM_PROFILES = {
@@ -44,4 +46,8 @@ export const FARM_PROFILES = {
  pond: { parts: [] },
  pasture: { parts: [] },
  clover: { parts: [] },
+ // The winch pulley turns over the shaft while ore is hoisted; the wind wheel
+ // turns in its own vertical plane whenever the pump supplies water.
+ shallowmine: { parts: [tool('wheel', .2, at('shallowmine','pulley'), 'spin', 'always', { axis: 'x' })], outputSize: .26 },
+ windpump: { parts: [farmPart('rotor', .36, at('windpump','rotor'), 'spin', 'always', { axis: 'z' })] },
 };

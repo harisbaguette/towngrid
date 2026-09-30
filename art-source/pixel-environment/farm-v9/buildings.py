@@ -62,20 +62,24 @@ def plots(v, color, rim=None, k1=7, size=4.5):
             v.put(r & (v.K > k1 - 1), rim)
 
 
-def board(v, i0, j, k0, pattern, pal, legs=True, frame_color=None):
-    """Icon sign: one voxel thick along j, so every quarter view shows it."""
+def board(v, i0, j, k0, pattern, pal, legs=True, frame_color=None, scale=2):
+    """Icon sign: one voxel thick along j, so every quarter view shows it.
+    Each pattern pixel is scale x scale voxels (2 since 2026-09-30: the 1-voxel
+    signs were too small to read at game zoom)."""
     rows, cols = len(pattern), len(pattern[0])
     fc = C['wood2'] if frame_color is None else frame_color
+    w, h = cols * scale + 2, rows * scale + 2
     if legs:
-        post(v, i0 + 1, j, 5, k0 + 1)
-        post(v, i0 + cols, j, 5, k0 + 1)
-    v.put(v.box(i0, i0 + cols + 2, j, j + 1, k0, k0 + rows + 2), fc)
+        post(v, i0 + 1, j, 4, k0 + 1)
+        post(v, i0 + w - 2, j, 4, k0 + 1)
+    v.put(v.box(i0, i0 + w, j, j + 1, k0, k0 + h), fc)
     for r, line in enumerate(pattern):
         for c, ch in enumerate(line):
-            if ch != '.':
-                v.put(v.box(i0 + 1 + c, i0 + 2 + c, j, j + 1, k0 + rows - r, k0 + rows - r + 1), pal[ch])
-            else:
-                v.put(v.box(i0 + 1 + c, i0 + 2 + c, j, j + 1, k0 + rows - r, k0 + rows - r + 1), C['plank'])
+            col = pal[ch] if ch != '.' else C['plank']
+            k = k0 + 1 + (rows - 1 - r) * scale
+            v.put(v.box(i0 + 1 + c * scale, i0 + 1 + (c + 1) * scale, j, j + 1, k, k + scale), col)
+    # a darker cap so the board reads as a raised plank, not a floating tile
+    v.put(v.box(i0 - .5, i0 + w + .5, j - .3, j + 1.3, k0 + h - 1, k0 + h), tone(fc, .8))
 
 
 def barrel_i(v, cj, ck, i0, i1, r=3.2):
@@ -131,20 +135,40 @@ def duck(v, ci, cj, k0, s=1.0):
     v.put(v.box(ci - 1, ci + 1, cj - 3.2 * s, cj - 2.2 * s, k0 + 2 * s, k0 + 3 * s), tone(C['white'], .9))
 
 
-def hive(v, ci, cj, k0, layers=3):
-    cols = [C['white'], C['gold'], C['cream'], C['gold']]
-    k = k0
-    v.put(v.box(ci - 3.5, ci + 3.5, cj - 3.5, cj + 3.5, k, k + 1), C['wood2'])
+HIVE_COLORS = [hexc('#f2d36b'), hexc('#f4f0e4'), hexc('#8fc3e0'), hexc('#a9dcb8')]
+
+
+def hive(v, ci, cj, k0, layers=3, colors=None):
+    """Box hive (2026-09-30 redraw): stacked supers under a flat lid on two
+    bricks, not a little gabled house. Hand-hold slots and an entrance slot
+    with a landing board face +j and +i so the front views read as a hive."""
+    colors = HIVE_COLORS if colors is None else colors
+    for dj in (-2.5, 2):
+        v.put(v.box(ci - 3.4, ci + 3.4, cj + dj - .5, cj + dj + .8, k0, k0 + 2), C['stone2'])
+    k = k0 + 2
+    v.put(v.box(ci - 3.3, ci + 3.3, cj - 3.3, cj + 4.6, k, k + 1), C['wood2'])
     k += 1
     for n in range(layers):
-        v.put(v.box(ci - 3, ci + 3, cj - 3, cj + 3, k, k + 3), cols[n % 4])
-        v.put(v.box(ci - 3.2, ci + 3.2, cj - 3.2, cj + 3.2, k + 2, k + 3), tone(cols[n % 4], .86))
-        k += 3
-    v.put(v.box(ci - 3.8, ci + 3.8, cj - 3.8, cj + 3.8, k, k + 1), C['slate'])
-    v.put(v.gable_i(ci - 3.8, ci + 3.8, cj - 3.8, cj + 3.8, k, 1.6), C['slate'])
-    # entrance slot on the two camera-facing sides
-    v.put(v.box(ci - 1.5, ci + 1.5, cj + 2.5, cj + 3.2, k0 + 1, k0 + 2), C['black'])
-    v.put(v.box(ci + 2.5, ci + 3.2, cj - 1.5, cj + 1.5, k0 + 1, k0 + 2), C['black'])
+        col = colors[n % len(colors)]
+        v.put(v.box(ci - 3, ci + 3, cj - 3, cj + 3, k, k + 3.5), col)
+        v.put(v.box(ci - 3.1, ci + 3.1, cj - 3.1, cj + 3.1, k, k + 1) & ((v.K < k + 1)), tone(col, .82))
+        v.put(v.box(ci - 1.2, ci + 1.2, cj + 2.8, cj + 3.3, k + 1.6, k + 2.6), tone(col, .62))
+        v.put(v.box(ci + 2.8, ci + 3.3, cj - 1.2, cj + 1.2, k + 1.6, k + 2.6), tone(col, .62))
+        k += 3.5
+    v.put(v.box(ci - 3.7, ci + 3.7, cj - 3.7, cj + 3.7, k, k + .8), C['steel'])
+    v.put(v.box(ci - 3.5, ci + 3.5, cj - 3.5, cj + 3.5, k + .5, k + 1.5), C['white'])
+    v.put(v.box(ci - 2, ci + 2, cj + 2.8, cj + 3.3, k0 + 3, k0 + 3.9), C['black'])
+
+
+def skep(v, ci, cj, k0):
+    """Coiled straw skep on a stump: the one shape everyone reads as 'bees'."""
+    v.put(v.cyl(ci, cj, 3.2, k0 - 1, k0 + 3), C['bark'])
+    v.put(v.cyl(ci, cj, 2.6, k0 + 2, k0 + 3), C['ring'])
+    dome = v.ball(ci, cj, k0 + 3, 4.9, 4.9, 6.4) & (v.K > k0 + 3)
+    v.put(dome, stripes(C['straw'], 'k', 2, .66))
+    v.put(v.box(ci - .6, ci + .6, cj - .6, cj + .6, k0 + 9, k0 + 10.2), C['straw2'])
+    v.put(v.box(ci - 1.2, ci + 1.2, cj + 3.2, cj + 4.6, k0 + 3, k0 + 5), C['black'])
+    v.put(v.box(ci + 3.2, ci + 4.6, cj - 1.2, cj + 1.2, k0 + 3, k0 + 5), C['black'])
 
 
 def flowers(v, seed, count, colors, area=(3, 37), k=5, avoid=None):
@@ -195,7 +219,7 @@ def sugarfield():
     # irrigation channels between the plots: sugarcane is the thirstiest crop
     v.put((v.box(19, 21, 8, 32, 4, 7) | v.box(8, 32, 19, 21, 4, 7)), C['water'])
     v.put((v.box(19, 21, 8, 32, 6, 7) | v.box(8, 32, 19, 21, 6, 7)) & ((((v.I + v.J) * 1.0).astype(int) % 6) == 0), C['water2'])
-    board(v, 2, 3, 10, *ICON['cane'])
+    board(v, 2, 3, 6, *ICON['cane'])
     # tied bundle of cut cane at the front corner
     for di, dj in ((0, 0), (1.5, .5), (.5, 1.6), (-1, 1)):
         v.put(v.box(34 + di, 35 + di, 34 + dj, 35 + dj, 5, 17), stripes(C['straw'], 'k', 3, .7))
@@ -219,7 +243,7 @@ def saltfield():
     v.put(v.box(33, 34, 3, 4, 7, 13), C['wood2'])
     v.put(v.box(31, 36, 15, 16, 10, 13), C['wood'])
     v.put(v.box(19.5, 20.5, 2, 38, 5, 7) | v.box(2, 38, 19.5, 20.5, 5, 7), C['stone'])
-    board(v, 2, 3, 9, *ICON['salt'])
+    board(v, 2, 3, 6, *ICON['salt'])
     v.put(v.box(34, 38, 34, 38, 5, 8), C['sack'])
     v.put(v.box(34.5, 37.5, 34.5, 37.5, 8, 9), C['salt'])
     return v
@@ -235,7 +259,7 @@ def vineyard():
             v.put(v.box(i, i + 1, cj - .5, cj + .5, 21, 22), C['bark'])
         for k in (13, 18):
             v.put(v.box(8, 32, cj - .1, cj + .3, k, k + .6), C['steel'])
-    board(v, 2, 3, 10, *ICON['grape'])
+    board(v, 2, 3, 6, *ICON['grape'])
     # harvest basket of grapes
     v.put(v.cyl(35, 35, 2.8, 5, 9), stripes(C['straw2'], 'k', 2, .8))
     v.put(v.ball(35, 35, 9, 2.4, 2.4, 1.6), C['purple'])
@@ -253,7 +277,7 @@ def cocoafarm():
             post(v, i, j, 5, 11)
     v.put(v.box(2.5, 15.5, 2.5, 12.5, 11, 12), C['plank'])
     v.put(v.box(3.5, 14.5, 3.5, 11.5, 12, 13), speckle(C['choco'], tone(C['choco'], 1.4), 5, .35))
-    board(v, 24, 2, 10, *ICON['cocoa'])
+    board(v, 24, 2, 6, *ICON['cocoa'])
     # basket of ripe pods at the front
     v.put(v.cyl(34.5, 34.5, 3, 5, 9), stripes(C['straw2'], 'k', 2, .8))
     for a, b, k, col in ((33.5, 34, 10, 'orange'), (35.5, 35, 10, 'yellow'), (34.5, 36, 11, 'orange')):
@@ -270,7 +294,7 @@ def berryfield():
         v.put(m, speckle(C['straw'], C['straw2'], int(ci + cj), .35))
         hoop = (np.abs(np.hypot(v.I - ci, v.K - 7) - 4) < .5) & (np.abs(v.J - cj) < .5) & (v.K > 7)
         v.put(hoop, C['metal'])
-    board(v, 2, 3, 10, *ICON['berry'])
+    board(v, 2, 3, 6, *ICON['berry'])
     # crate of picked berries
     v.put(v.box(32, 37, 33, 37, 5, 9), stripes(C['plank'], 'k', 2, .8))
     v.put(v.box(32.5, 36.5, 33.5, 36.5, 9, 10), speckle(C['red'], tone(C['red'], 1.3), 9, .35))
@@ -284,7 +308,7 @@ def mintfield():
     v.put(v.box(7, 33, 7, 33, 4, 7), speckle(C['stone'], C['stone2'], 16, .4))
     plots(v, C['soil'], None)
     corner_posts(v, 6, 32, 9)
-    board(v, 2, 3, 10, *ICON['mint'])
+    board(v, 2, 3, 6, *ICON['mint'])
     # metal watering can at the front
     v.put(v.cyl(35, 34.5, 2.2, 5, 10), C['teal'])
     v.put(v.box(35, 36, 36, 39, 7, 8), C['teal'])
@@ -309,7 +333,7 @@ def pumpkinpatch():
     v.put(v.ball(4.5, 4.5, 22.5, 2.2), C['sack'])
     v.put(v.box(1.5, 7.5, 1.5, 7.5, 24, 25), C['straw2'])
     v.put(v.box(3, 6, 3, 6, 25, 27), C['straw'])
-    board(v, 24, 2, 10, *ICON['pumpkin'])
+    board(v, 24, 2, 6, *ICON['pumpkin'])
     # harvested pumpkins at the front
     for a, b, r in ((34.5, 34, 2.6), (31.5, 36, 2.0), (36, 30.5, 1.9)):
         v.put(v.ball(a, b, 5 + r * .8, r, r, r * .8) & (np.abs(((np.arctan2(v.J - b, v.I - a) * 3 / np.pi) % 1) - .5) < .45), C['orange'])
@@ -334,7 +358,7 @@ def oakfarm():
     v.put(v.cyl(34, 34, 2.0, 8, 9), C['ring'])
     v.put(v.box(33.5, 34.5, 33.5, 34.5, 9, 15), C['wood2'])
     v.put(v.box(33, 35, 33, 34.5, 13, 15), C['metal'])
-    board(v, 3, 2, 10, *ICON['acorn'])
+    board(v, 3, 2, 6, *ICON['acorn'])
     return v
 
 
@@ -393,21 +417,24 @@ def milkbarn():
 
 
 def apiary():
+    """2026-09-30 redraw: three pastel box hives and a straw skep instead of
+    four gabled 'houses'; flower beds between them and a honey bench."""
     v = model()
     slab(v, seed=23)
     v.put(v.box(2, 38, 2, 38, 4, 5.5), speckle(C['grass'], C['grass2'], 23, .35))
-    flowers(v, 230, 70, [C['white'], C['lilac'], C['pink']], (3, 37), 5, avoid=lambda i, j: any(abs(i - a) < 5 and abs(j - b) < 5 for a, b in PLOTS))
-    for n, (ci, cj) in enumerate(PLOTS):
-        hive(v, ci, cj, 5, 3 if n % 3 else 4)
-    # bench with honey jars at the front
-    v.put(v.box(31, 38, 33, 36, 9, 10), C['wood'])
+    flowers(v, 230, 90, [C['white'], C['lilac'], C['pink'], C['yellow']], (3, 37), 5,
+            avoid=lambda i, j: any(abs(i - a) < 5 and abs(j - b) < 5.5 for a, b in PLOTS) or (i > 29 and j > 30))
+    for n, (ci, cj) in enumerate(PLOTS[:3]):
+        hive(v, ci, cj, 5, (3, 2, 3)[n], [HIVE_COLORS[(n + m) % 4] for m in range(3)])
+    skep(v, 25.5, 25.5, 5)
+    # bench with honey jars at the front corner
+    v.put(v.box(31, 38, 33, 36.5, 9, 10), C['wood'])
     post(v, 31, 33, 5, 9)
-    post(v, 37, 35, 5, 9)
-    for a in (32, 34.5):
-        v.put(v.cyl(a + .8, 34.5, 1.2, 10, 13), C['gold'])
-        v.put(v.cyl(a + .8, 34.5, 1.3, 13, 14), C['red'])
+    post(v, 37, 35.5, 5, 9)
+    for a in (32, 34.8):
+        v.put(v.cyl(a + .8, 34.7, 1.3, 10, 13.5), C['gold'])
+        v.put(v.cyl(a + .8, 34.7, 1.4, 13.5, 14.5), C['red'])
     return v
-
 
 def duckhouse():
     v = model()
@@ -435,22 +462,26 @@ def duckhouse():
 
 
 def feedmill():
+    """Silo lowered 2026-09-30 so its roof stays inside the 192px cell (the
+    old cone was cut off at the top of the icon)."""
     v = model()
     slab(v, C['stone'], 25)
     # corrugated silo with a cone roof
-    v.put(v.cyl(10, 10, 6.5, 5, 30), lambda I, J, K: np.where(((np.floor(np.arctan2(J - 10, I - 10) * 6) % 2) == 0)[..., None], C['silo'], tone(C['silo'], .88)))
-    for k in (11, 18, 25):
+    v.put(v.cyl(10, 10, 6.5, 5, 24), lambda I, J, K: np.where(((np.floor(np.arctan2(J - 10, I - 10) * 6) % 2) == 0)[..., None], C['silo'], tone(C['silo'], .88)))
+    for k in (10, 15, 20):
         v.put(v.cyl(10, 10, 6.9, k, k + 1), C['steel'])
-    v.put(v.cone(10, 10, 7.2, 30, 38), C['red'])
+    v.put(v.cyl(10, 10, 7.0, 23, 24.5), C['steel'])
+    v.put(v.cone(10, 10, 7.4, 24, 31), stripes(C['red'], 'k', 2, .85))
+    v.put(v.box(9.2, 10.8, 9.2, 10.8, 30, 32), C['steel'])
     # mill house with green roof
-    v.put(v.box(18, 34, 16, 32, 5, 18), stripes(C['cream'], 'k', 3, .9))
-    v.put(v.gable_i(17, 35, 15, 33, 18, 1.0), stripes(C['feedgreen'], 'k', 2, .85))
+    v.put(v.box(18, 34, 16, 32, 5, 17), stripes(C['cream'], 'k', 3, .9))
+    v.put(v.gable_i(17, 35, 15, 33, 17, 1.0), stripes(C['feedgreen'], 'k', 2, .85))
     v.put(v.box(23, 29, 31.6, 32.4, 5, 13), C['wood2'])
     v.put(v.box(33.6, 34.4, 21, 27, 9, 14), C['black'])
     # chute from the silo into the house
-    for t in range(10):
+    for t in range(9):
         a = 14 + t * .9
-        k = 26 - t * .8
+        k = 21 - t * .6
         v.put(v.box(a, a + 1.6, a, a + 1.6, k, k + 1.6), C['steel'])
     # feed sacks at the front
     for a, b, k in ((8, 33, 5), (11.5, 33, 5), (9.7, 33, 8)):
@@ -458,31 +489,38 @@ def feedmill():
         v.put(v.box(a - .1, a + 3.3, b + 1.4, b + 2.6, k + .5, k + 2.4), C['feedgreen'])
     return v
 
-
 # ----------------------------------------------------------------- crafts
 def winery():
+    """2026-09-30 re-layout: cellar house in one corner, barrel stack and grape
+    press in the two side corners and a low yard between them, so neither the
+    barrels nor the press sit straight behind the house in any quarter view."""
     v = model()
     slab(v, seed=31)
-    v.put(v.box(3, 23, 3, 21, 5, 18), bricks(C['cream'], tone(C['stone'], .9), 2, 5))
-    v.put(v.gable_i(2, 24, 2, 22, 18, 1.1), stripes(C['roof'], 'k', 2, .82))
-    # arched cellar door
-    arch = v.box(9, 17, 20.5, 21.5, 5, 14) & ((v.K < 12) | (((v.I - 13) / 4) ** 2 + ((v.K - 12) / 2.5) ** 2 <= 1))
+    v.put(v.box(3, 19, 3, 19, 5, 15), bricks(C['cream'], tone(C['stone'], .9), 2, 5))
+    v.put(v.gable_i(2, 20, 2, 20, 15, 1.1), stripes(C['roof'], 'k', 2, .82))
+    # arched cellar door (+j) and a round window (+i)
+    arch = v.box(7, 15, 18.5, 19.5, 5, 12) & ((v.K < 10) | (((v.I - 11) / 4) ** 2 + ((v.K - 10) / 2.5) ** 2 <= 1))
     v.put(arch, C['choco2'])
-    v.put(v.box(12.5, 13.5, 20.5, 21.6, 5, 13), C['wood2'])
-    # oak barrel pyramid in the yard
-    barrel_i(v, 26, 8, 24, 33, 3.1)
-    barrel_i(v, 32.5, 8, 24, 33, 3.1)
-    barrel_i(v, 29.2, 13.6, 24, 33, 3.1)
-    # grape press: slatted vat, screw and crossbar
-    v.put(v.cyl(31, 12, 4.4, 5, 12), stripes(C['wood'], 'i', 2, .82))
-    v.put(v.cyl(31, 12, 4.6, 6, 7) | v.cyl(31, 12, 4.6, 10, 11), C['steel'])
-    v.put(v.cyl(31, 12, 3.6, 11, 12), C['purple'])
-    for a in (26.5, 35):
-        post(v, a, 11.5, 5, 22, C['wood2'])
-    v.put(v.box(26.5, 36, 11.5, 12.5, 21, 23), C['wood2'])
-    v.put(v.box(30.5, 31.5, 11.5, 12.5, 12, 21), C['steel'])
+    v.put(v.box(10.5, 11.5, 18.5, 19.6, 5, 11), C['wood2'])
+    v.put((((v.J - 11) / 2.2) ** 2 + ((v.K - 10.5) / 2.2) ** 2 <= 1) & (v.I > 18.4) & (v.I < 19.4), C['purple'])
+    # oak barrel stack in the +i/-j corner, end rings toward +i
+    barrel_i(v, 5.5, 8, 23, 33, 3.2)
+    barrel_i(v, 12.3, 8, 23, 33, 3.2)
+    barrel_i(v, 8.9, 13.8, 23, 33, 3.2)
+    v.put(v.box(22.5, 33.5, 1.8, 16.2, 4, 5), C['wood2'])
+    barrel_up(v, 35.5, 5, 5, 8, 2.4, C['purple'])
+    # grape press in the -i/+j corner: slatted vat, frame, crossbar
+    v.put(v.cyl(10, 30, 4.6, 5, 12), stripes(C['wood'], 'i', 2, .82))
+    v.put(v.cyl(10, 30, 4.8, 6, 7) | v.cyl(10, 30, 4.8, 10, 11), C['steel'])
+    v.put(v.cyl(10, 30, 3.8, 11, 12), C['purple'])
+    for a in (4, 15):
+        post(v, a, 29.5, 5, 21, C['wood2'])
+    v.put(v.box(4, 16, 29.5, 30.5, 20, 22), C['wood2'])
+    # crates of grapes in the open front yard
+    for a, b, k in ((26, 26, 5), (31.5, 29, 5), (28.5, 27.5, 9)):
+        v.put(v.box(a, a + 5, b, b + 4, k, k + 4), stripes(C['plank'], 'k', 2, .8))
+        v.put(v.box(a + .5, a + 4.5, b + .5, b + 3.5, k + 3.6, k + 4.4), speckle(C['purple'], tone(C['purple'], 1.35), int(a * 3 + b), .4))
     return v
-
 
 def chocolatier():
     v = model()
@@ -624,22 +662,41 @@ def pond():
 
 
 def pasture():
+    """2026-09-30 redraw: mown stripes and a few dense tall-grass clumps instead
+    of evenly scattered noise, a stone water trough and a round hay bale."""
     v = model()
     ground(v, C['grass3'], C['grass'], 53)
-    v.put(v.box(1, 39, 1, 39, 2, 3), checker(C['grass3'], tone(C['grass3'], .92), 5))
-    tufts(v, 54, 55, avoid=lambda i, j: i > 28 and j > 28)
-    flowers(v, 55, 18, [C['white'], C['yellow']], (3, 37), 3)
+    stripe = lambda I, J, K: np.where(((np.floor((J - 1) / 4) % 2) == 0)[..., None], tone(C['grass3'], 1.04), tone(C['grass3'], .9))
+    v.put(v.box(1, 39, 1, 39, 2, 3), stripe)
+    rng = np.random.default_rng(54)
+    for ci, cj in ((13, 15), (24, 25), (11, 29), (28, 13)):
+        for _ in range(16):
+            r, a = rng.uniform(0, 3.4), rng.uniform(0, 2 * np.pi)
+            i, j = int(ci + np.cos(a) * r), int(cj + np.sin(a) * r)
+            h = int(rng.integers(3, 6))
+            v.put(v.box(i, i + 1, j, j + 1, 3, 3 + h), C['grass2'])
+            v.put(v.box(i, i + 1, j, j + 1, 2 + h, 3 + h), C['grass3'] if rng.random() < .6 else C['straw'])
+        for _ in range(3):
+            a = rng.uniform(0, 2 * np.pi)
+            i, j = int(ci + np.cos(a) * 4.5), int(cj + np.sin(a) * 4.5)
+            v.put(v.box(i, i + 1, j, j + 1, 3, 4), C['leaf'])
+            v.put(v.box(i, i + 1, j, j + 1, 4, 5), C['white'] if rng.random() < .5 else C['yellow'])
     # split-rail fence on the back two edges
     for a in range(2, 38, 6):
         post(v, a, 2, 3, 10)
         post(v, 2, a, 3, 10)
+    post(v, 37, 2, 3, 10)
+    post(v, 2, 37, 3, 10)
     for k in (6, 9):
         v.put(v.box(2, 38, 2, 3, k - 1, k) | v.box(2, 3, 2, 38, k - 1, k), C['wood'])
-    # round hay bale
-    v.put(v.cyl_i(33, 7, 4, 29, 36), stripes(C['hay'], 'j', 2, .84))
-    v.put(v.cyl_i(33, 7, 3, 35, 36), tone(C['hay'], 1.1))
+    # stone water trough on the right, round hay bale on the left
+    v.put(v.box(29, 37, 22, 26, 3, 7), speckle(C['stone'], C['stone2'], 55, .35))
+    v.put(v.box(30, 36, 23, 25, 5, 6.6), C['water'])
+    v.put(v.box(31, 32, 23, 25, 6, 6.6), C['water2'])
+    v.put(v.cyl_j(8, 7, 4, 29, 36), stripes(C['hay'], 'i', 2, .84))
+    v.put(v.cyl_j(8, 7, 3, 35, 36), tone(C['hay'], 1.12))
+    v.put(v.cyl_j(8, 7, 4.2, 31.5, 32.5), C['straw2'])
     return v
-
 
 def clover():
     v = model()
@@ -658,6 +715,105 @@ def clover():
     return v
 
 
+# ----------------------------------------------------------------- 2026-09-30 (section 6)
+def shallowmine():
+    """Shallow mine: no rock mound (that is the mountain iron mine). A square
+    shaft dug into flat ground, timber collar and headframe with a winch
+    pulley (the spinning part), a rail track and an ore cart."""
+    v = model()
+    slab(v, C['dirt2'], 61)
+    v.put(v.box(2, 38, 2, 38, 4, 5), speckle(C['dirt2'], C['mud'], 62, .28))
+    # shaft
+    v.cut(v.box(11, 21, 12, 22, 1, 6))
+    v.put(v.box(11, 21, 12, 22, 0, 1), C['black'])
+    walls = v.box(10, 22, 11, 23, 1, 5) & ~v.box(11, 21, 12, 22, 0, 6)
+    v.put(walls, stripes(C['wood2'], 'k', 2, .75))
+    collar = v.box(9.5, 22.5, 10.5, 23.5, 5, 7) & ~v.box(11, 21, 12, 22, 0, 9)
+    v.put(collar, stripes(C['wood'], 'i', 3, .8))
+    v.put(v.box(12, 13, 20.5, 21.5, 1, 7) | v.box(12, 13, 20, 22, 2, 2.6) | v.box(12, 13, 20, 22, 4, 4.6), C['plank'])
+    # headframe: two A-legs along j carrying the pulley beam over the shaft
+    for i0 in (10.5, 20.5):
+        for k in range(7, 25):
+            s = (k - 7) * .28
+            v.put(v.box(i0, i0 + 1.2, 11 + s, 12.4 + s, k, k + 1), C['wood2'])
+            v.put(v.box(i0, i0 + 1.2, 20.6 - s, 22 - s, k, k + 1), C['wood2'])
+        v.put(v.box(i0, i0 + 1.2, 13, 20, 13, 14), C['wood'])
+    v.put(v.box(10, 22.2, 15.8, 17.4, 24, 26), C['wood'])
+    v.put(v.box(15.4, 16.4, 16, 17, 8, 24), C['black'])
+    v.put(v.box(14.6, 17.2, 15.6, 17.6, 9, 11.5), C['steel'])
+    # rails from the shaft to the front-right edge, with sleepers
+    for j0 in (26, 29.2):
+        v.put(v.box(12, 38, j0, j0 + .8, 5, 6), C['steel'])
+    for a in range(13, 38, 3):
+        v.put(v.box(a, a + 1.2, 25.2, 30.8, 4.6, 5.4), C['wood2'])
+    # ore cart on the rails, loaded with iron (red) and copper (orange) ore
+    v.put(v.box(24, 32, 25.4, 30.6, 7, 12) & ~v.box(25, 31, 26.4, 29.6, 9, 13), stripes(C['steel'], 'k', 2, .82))
+    v.put(v.box(23.8, 32.2, 25.2, 30.8, 11, 12), tone(C['steel'], 1.15))
+    ore = lambda I, J, K: np.where(((np.floor(I * 1.3) + np.floor(J * 1.7) + np.floor(K)) % 3 == 0)[..., None], C['copper'], hexc('#8a3b2a'))
+    v.put(v.ball(28, 28, 12, 3.6, 2.8, 2.2) & (v.K > 11), ore)
+    for a in (25.5, 30.5):
+        v.put(v.cyl_j(a, 6.8, 1.6, 25, 31), C['black'])
+        v.put(v.cyl_j(a, 6.8, .7, 24.8, 31.2), C['metal'])
+    # ore heap in the +i/-j corner and a spoil heap on the left
+    v.put(v.cone(31, 8, 6, 5, 12), ore)
+    v.put(v.cone(7, 32, 5, 5, 10), speckle(C['dirt2'], C['mud'], 63, .4))
+    return v
+
+
+def windpump():
+    """Wind pump: a tapering lattice tower with the multi-blade wind wheel as
+    a separate spinning part at the top, a tail vane, a pump rod down the
+    middle, and a round cistern feeding an irrigation channel at the edge."""
+    v = model()
+    slab(v, seed=64)
+    v.put(v.box(2, 38, 2, 38, 4, 5), speckle(C['grass2'], C['grass'], 64, .4))
+    cx, cy, top = 18, 18, 32
+    for k in range(5, top):
+        w = 6.2 - (k - 5) * (4.2 / (top - 5))
+        for si in (-1, 1):
+            for sj in (-1, 1):
+                a, b = cx + si * w, cy + sj * w
+                v.put(v.box(a - .6, a + .6, b - .6, b + .6, k, k + 1), C['steel'])
+    for k in range(9, top, 7):
+        w = 6.2 - (k - 5) * (4.2 / (top - 5))
+        ring = v.box(cx - w - .5, cx + w + .5, cy - w - .5, cy + w + .5, k, k + .8) & ~v.box(cx - w + .5, cx + w - .5, cy - w + .5, cy + w - .5, 0, 99)
+        v.put(ring, C['metal'])
+        # one diagonal brace per face and segment (alternating), not a mesh
+        for t in np.linspace(0, 1, 9):
+            kk = k + t * 7
+            if kk >= top:
+                break
+            ww = 6.2 - (kk - 5) * (4.2 / (top - 5))
+            s = 1 if (k // 7) % 2 else -1
+            off = (2 * t - 1) * ww * s
+            for (a, b) in ((cx + off, cy + ww), (cx - off, cy - ww), (cx + ww, cy - off), (cx - ww, cy + off)):
+                v.put(v.box(a - .4, a + .4, b - .4, b + .4, kk, kk + .8), C['steel'])
+    # platform, gear head and pump rod
+    v.put(v.box(cx - 3, cx + 3, cy - 3, cy + 3, top, top + 1), C['wood'])
+    v.put(v.box(cx - 1.5, cx + 1.5, cy - 1.2, cy + 3, top + 1, top + 4), C['red'])
+    v.put(v.box(cx - .5, cx + .5, cy - .5, cy + .5, 5, top), C['wood2'])
+    # tail vane toward -j
+    v.put(v.box(cx - .4, cx + .4, cy - 7, cy - 1, top + 2, top + 3), C['steel'])
+    v.put(v.box(cx - .5, cx + .5, cy - 11, cy - 6, top - 1, top + 4.5), stripes(C['white'], 'k', 3, .82))
+    v.put(v.box(cx - .6, cx + .6, cy - 11, cy - 9, top, top + 3.5), C['red'])
+    # hub stub toward +j; the wheel itself is the 'rotor' part
+    v.put(v.box(cx - .8, cx + .8, cy + 3, cy + 5, top + 1.5, top + 3.5), C['black'])
+    # outlet pipe to a round cistern at the front-right
+    v.put(v.box(cx - .5, cx + .8, cy, 30, 6, 7.2), C['steel'])
+    v.put(v.box(cx - .5, 26, 29.5, 30.7, 6, 7.2), C['steel'])
+    v.put(v.box(25, 26.2, 29.5, 30.7, 7, 14), C['steel'])
+    v.put(v.box(25, 29, 29.5, 30.7, 13, 14.2), C['steel'])
+    v.put(v.cyl(31, 31, 5, 5, 13), stripes(C['plank'], 'i', 2, .82))
+    v.put(v.cyl(31, 31, 5.3, 6, 7) | v.cyl(31, 31, 5.3, 10.5, 11.5), C['steel'])
+    v.put(v.cyl(31, 31, 4.1, 12, 13), C['water'])
+    v.put(v.cyl(31, 31, 4.1, 12, 13) & ((((v.I + v.J) * 1.0).astype(int) % 4) == 0), C['water2'])
+    # irrigation channel from the cistern to the left edge
+    v.put(v.box(3, 27, 33, 35.5, 4, 5.2), C['stone2'])
+    v.put(v.box(3, 27, 33.6, 34.9, 4.6, 5.3), C['water'])
+    v.put(v.box(33, 38, 30, 32, 4, 5.2), C['stone2'])
+    return v
+
+
 BUILDERS = {
     'sugarfield': sugarfield, 'saltfield': saltfield, 'vineyard': vineyard, 'cocoafarm': cocoafarm,
     'berryfield': berryfield, 'mintfield': mintfield, 'pumpkinpatch': pumpkinpatch, 'oakfarm': oakfarm,
@@ -665,4 +821,5 @@ BUILDERS = {
     'sheeppen': sheeppen, 'milkbarn': milkbarn, 'apiary': apiary, 'duckhouse': duckhouse, 'feedmill': feedmill,
     'sandpit': sandpit, 'clayfield': clayfield, 'packshop': packshop, 'solarpanel': solarpanel,
     'pond': pond, 'pasture': pasture, 'clover': clover,
+    'shallowmine': shallowmine, 'windpump': windpump,
 }

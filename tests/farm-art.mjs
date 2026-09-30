@@ -1,4 +1,5 @@
-// Art for the 2026-09-29 expansion: 22 facilities, 9 crop strips, 35 goods.
+// Art for the 2026-09-29 expansion (22 facilities, 9 crop strips, 35 goods) and
+// its section 6 follow-up of 2026-09-30 (shallow mine, wind pump, 9 goods).
 // Checks the packed pixels (size, binary transparency, footprint, four views)
 // and that the runtime models read the real facility state.
 import assert from 'node:assert/strict';
@@ -7,7 +8,7 @@ import {fileURLToPath} from 'node:url';
 import {BUILDINGS,RESOURCES} from '../src/app/game/simulation.js';
 import {ENVIRONMENT_ASSETS,PIXEL_BUILDINGS} from '../src/app/game/pixel-environment-data.js';
 import {FARM_BUILDINGS,FARM_PROFILES} from '../src/app/game/pixel-farm-data.js';
-import {FARM_GOODS_ORDER,FARM_CROP_ATLASES,FARM_SOCKETS} from '../src/app/game/pixel-farm-sockets.js';
+import {FARM_GOODS_ORDER,FARM_GOODS2_ORDER,FARM_CROP_ATLASES,FARM_SOCKETS,FARM_PART_FRAMES} from '../src/app/game/pixel-farm-sockets.js';
 import {RESOURCE_SOURCES,RESOURCE_FRAMES,RESOURCE_ICONS} from '../src/app/game/resource-art.js';
 import {makePixelBuilding} from '../src/app/game/pixel-environment.js';
 import {productionVisualState} from '../src/app/game/production-visuals.js';
@@ -29,7 +30,8 @@ function cell({data,w},cx,cy){
 
 // Every facility in the rules has art, and every new one is among them.
 const facilities=Object.keys(BUILDINGS).filter(id=>!BUILDINGS[id].tile);
-assert.equal(FARM_BUILDINGS.length,22);
+assert.equal(FARM_BUILDINGS.length,24);
+assert.deepEqual(FARM_BUILDINGS.slice(-2),['shallowmine','windpump']);
 assert.deepEqual([...PIXEL_BUILDINGS].sort(),[...facilities].sort(),'no facility without a picture');
 for(const id of FARM_BUILDINGS)assert.ok(BUILDINGS[id]&&ENVIRONMENT_ASSETS[id]?.building&&FARM_PROFILES[id],id);
 
@@ -69,7 +71,7 @@ for(const [i,id] of FARM_GOODS_ORDER.entries()){
 }
 for(const id of Object.keys(RESOURCES))assert.ok(RESOURCE_ICONS[id],id+' icon');
 const goods=await pixels(ENVIRONMENT_ASSETS.farmGoods.sheet),atlas=await pixels(ENVIRONMENT_ASSETS.resourceGoods.sheet);
-assert.deepEqual([goods.w,atlas.w],[35*192,71*192]);
+assert.deepEqual([goods.w,atlas.w],[35*192,80*192]);
 for(const [i,id] of FARM_GOODS_ORDER.entries()){
  const c=cell(goods,i,0);assert.equal(c.partial,0,id);assert.ok(c.count>2500,id+' drawn');
  assert.ok(c.minX>0&&c.minY>0&&c.maxX<191&&c.maxY<191,id+' transparent border');
@@ -81,6 +83,34 @@ for(const [i,id] of FARM_GOODS_ORDER.entries()){
  }
  const ui=await sharp(file(RESOURCE_ICONS[id])).metadata();assert.deepEqual([ui.width,ui.height],[96,96],id);
 }
+
+// Section 6 goods: their own atlas, appended after all 71 earlier goods.
+const SECTION6=['dough','baguette','batter','fancycake','decorcake','winebottle','sangria','honeycomb','jetfuel'];
+assert.deepEqual(FARM_GOODS2_ORDER,SECTION6);
+assert.deepEqual(Object.keys(RESOURCE_SOURCES).slice(36,71),FARM_GOODS_ORDER,'earlier goods keep their frames');
+const goods2=await pixels(ENVIRONMENT_ASSETS.farmGoods2.sheet);assert.equal(goods2.w,9*192);
+for(const [i,id] of FARM_GOODS2_ORDER.entries()){
+ assert.ok(RESOURCES[id],id+' is a game resource');assert.equal(RESOURCE_FRAMES[id],71+i);assert.deepEqual(RESOURCE_SOURCES[id],['farmGoods2',i]);
+ const c=cell(goods2,i,0);assert.equal(c.partial,0,id);assert.ok(c.count>2500,id+' drawn');
+ assert.ok(c.minX>0&&c.minY>0&&c.maxX<191&&c.maxY<191,id+' transparent border');
+ assert.ok(Math.abs((c.minX+c.maxX)/2-96)<=14&&Math.abs((c.minY+c.maxY)/2-96)<=14,id+' centred');
+ for(let y=0;y<192;y+=7)for(let x=0;x<192;x+=5){
+  const a=((y*goods2.w)+i*192+x)*4,b=((y*atlas.w)+(71+i)*192+x)*4;
+  assert.deepEqual([...goods2.data.subarray(a,a+4)],[...atlas.data.subarray(b,b+4)],id+' stockpile frame');
+ }
+ const ui=await sharp(file(RESOURCE_ICONS[id])).metadata();assert.deepEqual([ui.width,ui.height],[96,96],id);
+}
+// Nine distinct pictures (no copied placeholder frame).
+const hash2=new Set(FARM_GOODS2_ORDER.map((_,i)=>{const rows=[];for(let y=0;y<192;y++){const o=(y*goods2.w+i*192)*4;rows.push(goods2.data.subarray(o,o+192*4).toString('base64'));}return rows.join('');}));
+assert.equal(hash2.size,9,'nine different section 6 goods');
+// New facilities: own working parts; the wind wheel is never fully hidden.
+assert.equal(FARM_PART_FRAMES.rotor,1);
+assert.ok(FARM_SOCKETS.windpump.rotor.every(Boolean),'wind wheel visible in every view');
+assert.ok(FARM_SOCKETS.shallowmine.pulley.some(Boolean),'mine pulley visible');
+assert.equal(FARM_PROFILES.windpump.parts[0].atlas,'farmParts');assert.equal(FARM_PROFILES.windpump.parts[0].motion,'spin');
+assert.equal(FARM_PROFILES.shallowmine.parts[0].motion,'spin');
+// The shallow mine is not the mountain iron mine redrawn: different body pixels.
+{const a=await pixels('/assets/pixel-environment/shallowmine.png'),b=await pixels('/assets/pixel-environment/ironmine.png');assert.notDeepEqual(a.data.subarray(0,192*192*4),b.data.subarray(0,192*192*4));}
 
 // Runtime: fields grow the recipe's crop, output piles show the real product,
 // hidden sockets stay hidden, damage layers apply, rendering never mutates state.
@@ -113,4 +143,4 @@ for(const id of FARM_BUILDINGS){
  assert.ok(!model.userData.layers.some(l=>l.name==='damage-cracks'&&l.visible),id+' repaired');
  for(const [n,spec] of profile.parts.entries())assert.ok(model.userData.layers.some(l=>l.name===spec.name+'-'+n),id+' '+spec.name);
 }
-console.log(`Expansion art: ${FARM_BUILDINGS.length}/22 facilities × 4 views, ${FARM_CROP_ATLASES.length} crop strips, ${FARM_GOODS_ORDER.length}/35 goods appended after 36, ${PIXEL_BUILDINGS.length} facilities with art.`);
+console.log(`Expansion art: ${FARM_BUILDINGS.length}/24 facilities × 4 views, ${FARM_CROP_ATLASES.length} crop strips, ${FARM_GOODS_ORDER.length}/35 goods after 36 and ${FARM_GOODS2_ORDER.length}/9 after 71, ${PIXEL_BUILDINGS.length} facilities with art.`);
