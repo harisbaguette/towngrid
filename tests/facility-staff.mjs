@@ -13,7 +13,7 @@ const oldTask=custom.task,oldRoute=custom.route;assignResidentAppearance(custom,
 assert.equal(custom.appearance,'mira');assert.equal(custom.name,'사용자 이름');assert.equal(custom.task,oldTask);assert.equal(custom.route,oldRoute);assert.equal(custom.homeId,5);
 const generated={id:2,race:'human',appearance:'rowan',name:'로웬 2'};assignResidentAppearance(generated,['human']);assert.equal(generated.name,'미라 2');
 assert.equal(Object.keys(PROFESSIONS).length,19);
-assert.equal(Object.keys(FACILITY_PROFESSIONS).length,96);
+assert.equal(Object.keys(FACILITY_PROFESSIONS).length,98);
 for(const identity of SPECIALIST_LOOKS)assert.ok(Object.values(PROFESSIONS).some(job=>job.human[1]===identity.id||job.elf[1]===identity.id),identity.id+' is used');
 for(const faction of ['human','elf'])assert.equal(new Set(Object.values(PROFESSIONS).map(job=>job[faction][1])).size,19,'different jobs use distinct identities');
 for(const race of ['human','elf']){

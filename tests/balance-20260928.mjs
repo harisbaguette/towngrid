@@ -11,9 +11,9 @@ import {startRaid} from '../src/app/game/encounters.js';
 import {FILES} from '../src/app/game/audio.js';
 // Terminals and networks came after the patch; they join the rank lists without changing the patched ones.
 import {INFRA_BUILDINGS} from '../src/app/game/infrastructure.js';
-// So did the 2026-09-29 expansion chains (tests/expansion-chains.mjs checks those).
-import {EXPANSION_RESOURCES,EXPANSION_BUILDINGS} from '../src/app/game/industry.js';
-const later=t=>INFRA_BUILDINGS[t]||EXPANSION_BUILDINGS[t];
+// So did the 2026-09-29 and 2026-09-30 expansion chains (tests/expansion-chains.mjs checks those).
+import {EXPANSION_RESOURCES,EXPANSION_BUILDINGS,EXPANSION2_RESOURCES,EXPANSION2_BUILDINGS} from '../src/app/game/industry.js';
+const later=t=>INFRA_BUILDINGS[t]||EXPANSION_BUILDINGS[t]||EXPANSION2_BUILDINGS[t];
 const run=(s,t)=>{for(let i=0;i<t*4;i++)s.tick(.25);};
 const town=(region='river')=>{const s=new Simulation(region);s.nextEvent=1e9;s.autoSell={};s.money=1e6;s.debt=0;for(const r of Object.keys(RESOURCES))s.stock[r]=50;s.build('warehouse',11,12);s.build('house',11,14);return s;};
 const patch=JSON.parse(fs.readFileSync(new URL('../docs/balance/patch-20260928.json',import.meta.url),'utf8'));
@@ -25,7 +25,7 @@ for(const [id,d] of Object.entries(patch.buildings.add))for(const [k,v] of Objec
 for(const [id,d] of Object.entries(patch.buildings.change))for(const [k,v] of Object.entries(d))assert.deepEqual(BUILDINGS[id][k],v,id+'.'+k);
 assert.equal(RANKS.length,33);patch.ranks.table.forEach((r,i)=>{assert.equal(RANKS[i].name,r.name);assert.equal(RANKS[i].fee,r.fee);assert.deepEqual(RANKS[i].unlocks.filter(t=>!later(t)),r.unlocks);assert.deepEqual(RANKS[i].requirements,r.requirements,'rank '+i);});
 assert.equal(unlockRank('quarry'),0,'the quarry is a starting facility');
-assert.equal(Object.keys(RESOURCES).filter(r=>!EXPANSION_RESOURCES[r]).length,36);assert.equal(Object.keys(BUILDINGS).filter(t=>!later(t)).length,69);
+assert.equal(Object.keys(RESOURCES).filter(r=>!EXPANSION_RESOURCES[r]&&!EXPANSION2_RESOURCES[r]).length,36);assert.equal(Object.keys(BUILDINGS).filter(t=>!later(t)).length,69);
 
 // M1 water mill makes power with no fuel; M2 its water reach is 2 tiles and the message names it.
 {const s=town();s.rank=10;const far=s.canBuild('watermill',11,9);assert.equal(far,'강이나 바다에서 2칸 이내에 놓으세요');const t=s.tiles.find(t=>s.ownedAt(t.x,t.z)&&t.x===15&&!s.at(t.x,t.z)&&s.canBuild('watermill',t.x,t.z)===null);assert.ok(t,'a riverside tile takes a water mill');s.build('watermill',t.x,t.z);run(s,40);assert.equal(s.power,true);}

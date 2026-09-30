@@ -3152,7 +3152,7 @@
     "sugarcane": {
      "name": "사탕수수",
      "color": "#9cc25a",
-     "price": 11
+     "price": 10
     },
     "salt": {
      "name": "소금",
@@ -3192,7 +3192,7 @@
     "oakwood": {
      "name": "참나무 원목",
      "color": "#80603f",
-     "price": 22
+     "price": 19
     },
     "sugar": {
      "name": "설탕",
@@ -3231,40 +3231,40 @@
     "candy": {
      "name": "박하 사탕",
      "color": "#9fe8cf",
-     "price": 40,
+     "price": 50,
      "final": true
     },
     "pie": {
      "name": "호박 파이",
      "color": "#d7913f",
-     "price": 90,
+     "price": 110,
      "final": true
     },
     "lantern": {
      "name": "호박등",
      "color": "#f2a93b",
-     "price": 240,
+     "price": 280,
      "final": true
     },
     "wool": {
      "name": "양모",
      "color": "#f1ece0",
-     "price": 38
+     "price": 46
     },
     "yarn": {
      "name": "털실",
      "color": "#c98bb7",
-     "price": 66
+     "price": 78
     },
     "milk": {
      "name": "우유",
      "color": "#f6f8fb",
-     "price": 37
+     "price": 46
     },
     "butter": {
      "name": "버터",
      "color": "#f4dc75",
-     "price": 98,
+     "price": 120,
      "final": true
     },
     "honey": {
@@ -3280,12 +3280,12 @@
     "feed": {
      "name": "사료",
      "color": "#a9a15a",
-     "price": 15
+     "price": 17
     },
     "duckegg": {
      "name": "오리알",
      "color": "#bcd9d3",
-     "price": 36
+     "price": 44
     },
     "clay": {
      "name": "점토",
@@ -4017,7 +4017,8 @@
      [
       "jam",
       "feed",
-      "wool"
+      "wool",
+      "baguette"
      ]
     ],
     [
@@ -4058,7 +4059,8 @@
       "barrel",
       "woodbox",
       "lantern",
-      "winered"
+      "winered",
+      "honeycomb"
      ]
     ],
     [
@@ -4071,7 +4073,8 @@
      [
       "winewhite",
       "chocolate",
-      "sand"
+      "sand",
+      "sangria"
      ]
     ],
     [
@@ -4084,7 +4087,8 @@
      [
       "limestone",
       "clothbox",
-      "foodparcel"
+      "foodparcel",
+      "fancycake"
      ]
     ],
     [
@@ -4098,7 +4102,8 @@
      [
       "foodparcel",
       "chromium",
-      "giftparcel"
+      "giftparcel",
+      "decorcake"
      ]
     ],
     [
@@ -4110,7 +4115,8 @@
      ],
      [
       "giftparcel",
-      "bluesteel"
+      "bluesteel",
+      "jetfuel"
      ]
     ],
     [
@@ -4122,7 +4128,8 @@
      ],
      [
       "giftparcel",
-      "bluesteel"
+      "bluesteel",
+      "jetfuel"
      ]
     ]
    ],
@@ -4149,7 +4156,7 @@
     ],
     "openWater": 3,
     "clusterStep": 0.1,
-    "clusterMax": 5,
+    "clusterMax": 3,
     "mountainSteps": [
      3,
      2,
@@ -4168,7 +4175,8 @@
      "ironmine",
      "coalpit",
      "coppermine",
-     "sandpit"
+     "sandpit",
+     "shallowmine"
     ],
     "herds": [
      "sheeppen",
@@ -4195,15 +4203,367 @@
     "duckhouse": 2
    },
    "rules": {
-    "mountain": "산 타일에서 1~5칸: 그늘·바람막이 3,2,2,1,1단계. 건물 그늘과 큰 값을 쓴다. 작물 −10%/단계, 태양광 −20%/단계, 제분소·풍력 −20%/단계(최저 40%)",
-    "cluster": "같은 종류 생산 시설이 둘레 여덟 칸(대각선 포함)에 있으면 하나마다 생산 시간 −10%, 최대 −50%(다섯 개). 배치로 계산하며 가동 여부·내구도와 무관. 시간제 출력(전력·말·관개·의료·결계·운송)은 제외",
+    "mountain": "산 타일에서 1~5칸: 그늘·바람막이 3,2,2,1,1단계. 건물 그늘과 큰 값을 쓴다. 작물 −10%/단계, 태양광 −20%/단계, 제분소·풍력 발전기·풍력 양수기 −20%/단계(최저 40%)",
+    "cluster": "같은 종류 생산 시설이 둘레 여덟 칸(대각선 포함)에 있으면 하나마다 생산 시간 −10%, 최대 −30%(세 개). 처음 −50%(다섯 개)였으나 C12(원료 밭을 모아 지어도 가공 우위 1.15배)를 지키려고 2026-09-30에 낮췄다(17절). 배치로 계산하며 가동 여부·내구도와 무관. 시간제 출력(전력·말·관개·의료·결계·운송)은 제외",
     "salt": "바다 칸에서 1칸 2단계, 2칸 1단계. 관개 작물 −15%/단계(오염·그늘과 합쳐 최저 40%), 소금밭 +20%/단계",
-    "flood": "철광산·탄광·구리 광산·모래 채굴장이 물 칸(담수·바다·연못)과 맞닿으면(대각선 포함) ×0.7",
-    "water": "물 점수 = 두 칸 안 큰 물(강·호수·하천·운하·습지 웅덩이)이 있으면 기본 3 + 맞닿은 물 칸·연못 2 + 두 칸째 1. 물 요구량 이상이면 물 1 투입 생략. 가동 중 급수탑 두 칸 안은 관개 작물의 요구량을 모두 채운다. 소금밭은 바닷물도 센다",
+    "flood": "철광산·탄광·구리 광산·모래 채굴장·얕은 광산이 물 칸(담수·바다·연못)과 맞닿으면(대각선 포함) ×0.7",
+    "water": "물 점수 = 두 칸 안 큰 물(강·호수·하천·운하·습지 웅덩이)이 있으면 기본 3 + 맞닿은 물 칸·연못 2 + 두 칸째 1. 물 요구량 이상이면 물 1 투입 생략. 가동 중인 급수탑·풍력 양수기 두 칸 안은 관개 작물의 요구량을 모두 채운다. 소금밭은 바닷물도 센다",
     "pond": "연못 = 담수 한 칸(맞닿은 칸 2·두 칸째 1). 작물·가축의 물 요구량, 광산 침수에 쓰인다",
     "pasture": "양 우리·젖소 우리: 맞닿은 목초지 2점·두 칸째 1점, 점수마다 +10%, 최대 +40%",
     "clover": "양봉장은 두 칸 안에 야생 클로버가 없으면 「야생 클로버 필요」로 멈춘다"
    }
+  }
+ },
+ "expansion20260930": {
+  "date": "2026-09-30",
+  "doc": "docs/BALANCE_PATCH_20260928.md 17절",
+  "spec": "docs/EXPANSION_20260929.md 6절",
+  "counts": {
+   "resources": {
+    "before": 71,
+    "after": 80
+   },
+   "buildings": {
+    "before": 109,
+    "after": 111
+   }
+  },
+  "optional": "승급 조건은 새 자원·시설을 요구하지 않는다. 빵·케이크·와인·연료 사슬의 재료와 값은 그대로다.",
+  "resources": {
+   "add": {
+    "dough": {
+     "name": "빵 반죽",
+     "color": "#e9d3a6",
+     "price": 34
+    },
+    "baguette": {
+     "name": "바게트",
+     "color": "#c98a3f",
+     "price": 78,
+     "final": true
+    },
+    "batter": {
+     "name": "케이크 반죽",
+     "color": "#f3e2b8",
+     "price": 90
+    },
+    "fancycake": {
+     "name": "고급 케이크",
+     "color": "#e86f8f",
+     "price": 360,
+     "final": true
+    },
+    "decorcake": {
+     "name": "장식 케이크",
+     "color": "#8fd8c0",
+     "price": 465,
+     "final": true
+    },
+    "winebottle": {
+     "name": "와인병",
+     "color": "#3f7a5a",
+     "price": 40
+    },
+    "sangria": {
+     "name": "상그리아",
+     "color": "#c23a4a",
+     "price": 180,
+     "final": true
+    },
+    "honeycomb": {
+     "name": "벌집",
+     "color": "#f0b429",
+     "price": 40
+    },
+    "jetfuel": {
+     "name": "항공유",
+     "color": "#7fb6d9",
+     "price": 160
+    }
+   },
+   "change": {
+    "sugarcane": {
+     "price": 10
+    },
+    "oakwood": {
+     "price": 19
+    },
+    "candy": {
+     "price": 50
+    },
+    "pie": {
+     "price": 110
+    },
+    "lantern": {
+     "price": 280
+    },
+    "wool": {
+     "price": 46
+    },
+    "yarn": {
+     "price": 78
+    },
+    "milk": {
+     "price": 46
+    },
+    "butter": {
+     "price": 120
+    },
+    "feed": {
+     "price": 17
+    },
+    "duckegg": {
+     "price": 44
+    }
+   },
+   "priceBefore": {
+    "sugarcane": 11,
+    "oakwood": 22,
+    "candy": 40,
+    "pie": 90,
+    "lantern": 240,
+    "wool": 38,
+    "yarn": 66,
+    "milk": 37,
+    "butter": 98,
+    "feed": 15,
+    "duckegg": 36
+   }
+  },
+  "buildings": {
+   "add": {
+    "shallowmine": {
+     "name": "얕은 광산",
+     "group": "industry",
+     "cost": 220,
+     "materials": {
+      "wood": 6,
+      "plank": 4
+     },
+     "period": 16,
+     "output": "iron",
+     "amount": 2,
+     "description": "산이나 광맥이 없어도 어디서나 땅을 얕게 파 철광석 2개를 캡니다. 철광산의 절반 속도이며 타일 광물량과 산 지면의 영향을 받지 않습니다. 구리광석을 캐도록 바꿀 수 있고, 물가에 붙이면 침수로 30% 느려집니다."
+    },
+    "windpump": {
+     "name": "풍력 양수기",
+     "group": "farm",
+     "cost": 240,
+     "materials": {
+      "plank": 6,
+      "stone": 4
+     },
+     "period": 40,
+     "output": "irrigation",
+     "amount": 1,
+     "description": "바람으로 물을 길어 올려 60초간 주변 두 칸 작물의 물 요구량을 모두 채웁니다. 급수탑과 달리 물과 전력이 필요 없습니다. 주변 높은 건물이나 산이 바람을 가리면 느려져 물이 끊기는 때가 생깁니다."
+    }
+   }
+  },
+  "unlocks": {
+   "windpump": 10,
+   "shallowmine": 12
+  },
+  "recipes": {
+   "bakery": [
+    {
+     "id": "dough",
+     "name": "빵 반죽",
+     "inputs": {
+      "flour": 2,
+      "water": 1
+     },
+     "output": "dough",
+     "amount": 3,
+     "period": 10,
+     "unlock": 5
+    },
+    {
+     "id": "baguette",
+     "name": "바게트",
+     "inputs": {
+      "dough": 2,
+      "wood": 1
+     },
+     "output": "baguette",
+     "amount": 2,
+     "period": 14,
+     "unlock": 5
+    },
+    {
+     "id": "batter",
+     "name": "케이크 반죽",
+     "inputs": {
+      "flour": 2,
+      "egg": 1,
+      "sugar": 1
+     },
+     "output": "batter",
+     "amount": 2,
+     "period": 12,
+     "unlock": 16
+    }
+   ],
+   "chocolatier": [
+    {
+     "id": "fancycake",
+     "name": "고급 케이크",
+     "inputs": {
+      "batter": 1,
+      "chocolate": 1,
+      "strawberry": 2
+     },
+     "output": "fancycake",
+     "amount": 1,
+     "period": 20,
+     "unlock": 16
+    },
+    {
+     "id": "decorcake",
+     "name": "장식 케이크",
+     "inputs": {
+      "batter": 1,
+      "chocolate": 1,
+      "candy": 2
+     },
+     "output": "decorcake",
+     "amount": 1,
+     "period": 22,
+     "unlock": 18
+    }
+   ],
+   "glassworks": [
+    {
+     "id": "winebottle",
+     "name": "와인병",
+     "inputs": {
+      "sand": 3
+     },
+     "output": "winebottle",
+     "amount": 2,
+     "period": 12,
+     "unlock": 14
+    }
+   ],
+   "winery": [
+    {
+     "id": "sangria",
+     "name": "상그리아",
+     "inputs": {
+      "winered": 1,
+      "strawberry": 2,
+      "winebottle": 1
+     },
+     "output": "sangria",
+     "amount": 2,
+     "period": 18,
+     "unlock": 15
+    }
+   ],
+   "apiary": [
+    {
+     "id": "honeycomb",
+     "name": "벌집",
+     "inputs": {},
+     "output": "honeycomb",
+     "amount": 1,
+     "period": 16,
+     "unlock": 11
+    }
+   ],
+   "confectionery": [
+    {
+     "id": "honeycandy",
+     "name": "벌집 박하 사탕",
+     "inputs": {
+      "mint": 2,
+      "honeycomb": 1
+     },
+     "output": "candy",
+     "amount": 3,
+     "period": 14,
+     "unlock": 11
+    }
+   ],
+   "refinery": [
+    {
+     "id": "jetfuel",
+     "name": "항공유",
+     "inputs": {
+      "oil": 3,
+      "water": 1
+     },
+     "output": "jetfuel",
+     "amount": 2,
+     "period": 24,
+     "unlock": 26
+    }
+   ],
+   "shipyard": [
+    {
+     "id": "jetairship",
+     "name": "항공유 비공정",
+     "inputs": {
+      "engine": 2,
+      "mithril": 2,
+      "cloth": 4,
+      "jetfuel": 2
+     },
+     "output": "airship",
+     "amount": 1,
+     "period": 48,
+     "unlock": 27
+    }
+   ],
+   "shallowmine": [
+    {
+     "id": "copper",
+     "name": "얕은 구리 광맥",
+     "inputs": {},
+     "output": "copper",
+     "amount": 2,
+     "period": 24,
+     "unlock": 12
+    }
+   ]
+  },
+  "consumers": {
+   "dough": "bakery:baguette",
+   "batter": "chocolatier:fancycake · chocolatier:decorcake",
+   "winebottle": "winery:sangria",
+   "honeycomb": "confectionery:honeycandy(박하 2 + 벌집 1 → 박하 사탕 3)",
+   "jetfuel": "shipyard:jetairship(연료 2 대신 항공유 2, 주기 60→48초)"
+  },
+  "contract": {
+   "added": {
+    "7": [
+     "baguette"
+    ],
+    "14": [
+     "honeycomb"
+    ],
+    "17": [
+     "sangria"
+    ],
+    "20": [
+     "fancycake"
+    ],
+    "24": [
+     "decorcake"
+    ],
+    "28": [
+     "jetfuel"
+    ],
+    "last": [
+     "jetfuel"
+    ]
+   }
+  },
+  "rules": {
+   "shallowmine": "어디에나 짓는다. 철광석 2개/16초(철광산 4개의 절반). 타일 광물량·산 지면 보정 없음(×1). 구리 대안 2개/24초. 광산 침수 ×0.7 적용",
+   "windpump": "원료·전력 없이 주기 40초마다 관개 60초. 두 칸 안 관개 작물의 물 요구량을 모두 채운다(급수탑과 같은 범위). 바람막이 단계마다 −20%(최저 40%): 2단계부터 주기가 60초를 넘어 물이 끊기는 때가 생긴다",
+   "clusterCap": "CLUSTER_MAX 5 → 3(최대 −30%)",
+   "C12": "농장 분류의 원료 시설(물 외 원료 없음) 주기에 (1 − 0.1 × CLUSTER_MAX)를 곱하고 나머지 시설은 기준 속도로 두었을 때, 모든 가공 줄의 타일당 분당 가치가 가장 비싼 원료의 1.15배 이상"
   }
  }
 }

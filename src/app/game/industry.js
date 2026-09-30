@@ -62,9 +62,9 @@ export const MODERN_BUILDINGS={
 // no promotion requirement asks for them. waterNeed is the water demand read by the tiered water rule (proximity.js);
 // terrain marks a facility that reshapes its tile (pond, pasture, clover) and has no production of its own.
 export const EXPANSION_RESOURCES={
- sugarcane:{name:'사탕수수',color:'#9cc25a',price:11},salt:{name:'소금',color:'#e6ecf1',price:14},grapered:{name:'붉은 포도',color:'#7d2c55',price:16},grapewhite:{name:'흰 포도',color:'#c9d967',price:17},cocoa:{name:'카카오',color:'#86533a',price:18},strawberry:{name:'딸기',color:'#e0434f',price:14},mint:{name:'박하',color:'#56cfa2',price:11},pumpkin:{name:'호박',color:'#e8842c',price:17},oakwood:{name:'참나무 원목',color:'#80603f',price:22},
- sugar:{name:'설탕',color:'#fbf6ea',price:34},winered:{name:'적포도주',color:'#9e2342',price:125,final:true},winewhite:{name:'백포도주',color:'#e8d98a',price:130,final:true},barrel:{name:'오크통',color:'#9a6a3a',price:85},chocolate:{name:'초콜릿',color:'#5b3423',price:80,final:true},jam:{name:'딸기잼',color:'#c7283f',price:72,final:true},candy:{name:'박하 사탕',color:'#9fe8cf',price:40,final:true},pie:{name:'호박 파이',color:'#d7913f',price:90,final:true},lantern:{name:'호박등',color:'#f2a93b',price:240,final:true},
- wool:{name:'양모',color:'#f1ece0',price:38},yarn:{name:'털실',color:'#c98bb7',price:66},milk:{name:'우유',color:'#f6f8fb',price:37},butter:{name:'버터',color:'#f4dc75',price:98,final:true},honey:{name:'꿀',color:'#e9aa1f',price:24},wax:{name:'밀랍',color:'#e8cf8a',price:30},feed:{name:'사료',color:'#a9a15a',price:15},duckegg:{name:'오리알',color:'#bcd9d3',price:36},
+ sugarcane:{name:'사탕수수',color:'#9cc25a',price:10},salt:{name:'소금',color:'#e6ecf1',price:14},grapered:{name:'붉은 포도',color:'#7d2c55',price:16},grapewhite:{name:'흰 포도',color:'#c9d967',price:17},cocoa:{name:'카카오',color:'#86533a',price:18},strawberry:{name:'딸기',color:'#e0434f',price:14},mint:{name:'박하',color:'#56cfa2',price:11},pumpkin:{name:'호박',color:'#e8842c',price:17},oakwood:{name:'참나무 원목',color:'#80603f',price:19},
+ sugar:{name:'설탕',color:'#fbf6ea',price:34},winered:{name:'적포도주',color:'#9e2342',price:125,final:true},winewhite:{name:'백포도주',color:'#e8d98a',price:130,final:true},barrel:{name:'오크통',color:'#9a6a3a',price:85},chocolate:{name:'초콜릿',color:'#5b3423',price:80,final:true},jam:{name:'딸기잼',color:'#c7283f',price:72,final:true},candy:{name:'박하 사탕',color:'#9fe8cf',price:50,final:true},pie:{name:'호박 파이',color:'#d7913f',price:110,final:true},lantern:{name:'호박등',color:'#f2a93b',price:280,final:true},
+ wool:{name:'양모',color:'#f1ece0',price:46},yarn:{name:'털실',color:'#c98bb7',price:78},milk:{name:'우유',color:'#f6f8fb',price:46},butter:{name:'버터',color:'#f4dc75',price:120,final:true},honey:{name:'꿀',color:'#e9aa1f',price:24},wax:{name:'밀랍',color:'#e8cf8a',price:30},feed:{name:'사료',color:'#a9a15a',price:17},duckegg:{name:'오리알',color:'#bcd9d3',price:44},
  clay:{name:'점토',color:'#b9785a',price:8},sand:{name:'모래',color:'#e2c98f',price:9},limestone:{name:'석회암',color:'#d8d3bf',price:16},chromium:{name:'크롬',color:'#8fa3b8',price:30},bluesteel:{name:'청강',color:'#4f7fb8',price:640,final:true},
  woodbox:{name:'나무 상자',color:'#b88a52',price:30},clothbox:{name:'천 상자',color:'#a88fc9',price:230},foodparcel:{name:'식량 소포',color:'#c79a5b',price:660,final:true},giftparcel:{name:'선물 소포',color:'#d9546c',price:1500,final:true}
 };
@@ -97,6 +97,21 @@ Object.assign(MODERN_RESOURCES,EXPANSION_RESOURCES);Object.assign(MODERN_BUILDIN
 // Unlock rank of each new facility: farms early to mid, the costly packing and power late (balance doc 13-3).
 export const EXPANSION_RANKS={saltfield:2,sugarfield:3,berryfield:4,pumpkinpatch:5,pond:5,feedmill:6,pasture:6,sheeppen:7,milkbarn:7,duckhouse:8,clayfield:8,apiary:9,clover:9,mintfield:10,oakfarm:11,vineyard:12,winery:13,sandpit:14,cocoafarm:15,chocolatier:16,packshop:19,solarpanel:23};
 for(const [type,rank] of Object.entries(EXPANSION_RANKS))RANKS[rank].unlocks.push(type);
+
+// Second expansion 2026-09-30 (docs/EXPANSION_20260929.md 6, balance: docs/BALANCE_PATCH_20260928.md 17). The goods ride
+// on alternative products of existing facilities; the old bread, cake, wine and fuel lines keep their inputs and prices.
+export const EXPANSION2_RESOURCES={
+ dough:{name:'빵 반죽',color:'#e9d3a6',price:34},baguette:{name:'바게트',color:'#c98a3f',price:78,final:true},batter:{name:'케이크 반죽',color:'#f3e2b8',price:90},
+ fancycake:{name:'고급 케이크',color:'#e86f8f',price:360,final:true},decorcake:{name:'장식 케이크',color:'#8fd8c0',price:465,final:true},
+ winebottle:{name:'와인병',color:'#3f7a5a',price:40},sangria:{name:'상그리아',color:'#c23a4a',price:180,final:true},honeycomb:{name:'벌집',color:'#f0b429',price:40},jetfuel:{name:'항공유',color:'#7fb6d9',price:160}
+};
+export const EXPANSION2_BUILDINGS={
+ shallowmine:{name:'얕은 광산',group:'industry',cost:220,materials:{wood:6,plank:4},period:16,output:'iron',amount:2,description:'산이나 광맥이 없어도 어디서나 땅을 얕게 파 철광석 2개를 캡니다. 철광산의 절반 속도이며 타일 광물량과 산 지면의 영향을 받지 않습니다. 구리광석을 캐도록 바꿀 수 있고, 물가에 붙이면 침수로 30% 느려집니다.'},
+ windpump:{name:'풍력 양수기',group:'farm',cost:240,materials:{plank:6,stone:4},period:40,output:'irrigation',amount:1,description:'바람으로 물을 길어 올려 60초간 주변 두 칸 작물의 물 요구량을 모두 채웁니다. 급수탑과 달리 물과 전력이 필요 없습니다. 주변 높은 건물이나 산이 바람을 가리면 느려져 물이 끊기는 때가 생깁니다.'}
+};
+Object.assign(MODERN_RESOURCES,EXPANSION2_RESOURCES);Object.assign(MODERN_BUILDINGS,EXPANSION2_BUILDINGS);
+export const EXPANSION2_RANKS={windpump:10,shallowmine:12};
+for(const [type,rank] of Object.entries(EXPANSION2_RANKS))RANKS[rank].unlocks.push(type);
 
 for(const id of ['logistics','smelter','refinery','chemical','electronics','automotive','laboratory','hospital','station'])if(MODERN_BUILDINGS[id])MODERN_BUILDINGS[id].road=true;
 // Second balance pass 2026-09-28 (docs/BALANCE_PATCH_20260928.md 12-5): a facility may switch between products.
@@ -137,3 +152,17 @@ export const EXPANSION_RECIPES={
  smelter:[{id:'bluesteel',name:'청강',inputs:{steel:2,chromium:1},output:'bluesteel',amount:1,period:26,unlock:24}]
 };
 for(const [type,list] of Object.entries(EXPANSION_RECIPES))ALT_RECIPES[type]=[...(ALT_RECIPES[type]||[]),...list];
+// Second expansion: every new intermediate has a consumer here (dough -> baguette, batter -> the two chocolate cakes,
+// winebottle -> sangria, honeycomb -> honey mint candy, jetfuel -> the airship line).
+export const EXPANSION2_RECIPES={
+ bakery:[{id:'dough',name:'빵 반죽',inputs:{flour:2,water:1},output:'dough',amount:3,period:10,unlock:5},{id:'baguette',name:'바게트',inputs:{dough:2,wood:1},output:'baguette',amount:2,period:14,unlock:5},{id:'batter',name:'케이크 반죽',inputs:{flour:2,egg:1,sugar:1},output:'batter',amount:2,period:12,unlock:16}],
+ chocolatier:[{id:'fancycake',name:'고급 케이크',inputs:{batter:1,chocolate:1,strawberry:2},output:'fancycake',amount:1,period:20,unlock:16},{id:'decorcake',name:'장식 케이크',inputs:{batter:1,chocolate:1,candy:2},output:'decorcake',amount:1,period:22,unlock:18}],
+ glassworks:[{id:'winebottle',name:'와인병',inputs:{sand:3},output:'winebottle',amount:2,period:12,unlock:14}],
+ winery:[{id:'sangria',name:'상그리아',inputs:{winered:1,strawberry:2,winebottle:1},output:'sangria',amount:2,period:18,unlock:15}],
+ apiary:[{id:'honeycomb',name:'벌집',inputs:{},output:'honeycomb',amount:1,period:16,unlock:11}],
+ confectionery:[{id:'honeycandy',name:'벌집 박하 사탕',inputs:{mint:2,honeycomb:1},output:'candy',amount:3,period:14,unlock:11}],
+ refinery:[{id:'jetfuel',name:'항공유',inputs:{oil:3,water:1},output:'jetfuel',amount:2,period:24,unlock:26}],
+ shipyard:[{id:'jetairship',name:'항공유 비공정',inputs:{engine:2,mithril:2,cloth:4,jetfuel:2},output:'airship',amount:1,period:48,unlock:27}],
+ shallowmine:[{id:'copper',name:'얕은 구리 광맥',inputs:{},output:'copper',amount:2,period:24,unlock:12}]
+};
+for(const [type,list] of Object.entries(EXPANSION2_RECIPES))ALT_RECIPES[type]=[...(ALT_RECIPES[type]||[]),...list];

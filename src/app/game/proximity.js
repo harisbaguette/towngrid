@@ -8,13 +8,14 @@ export const HEIGHTS={warehouse:2,house:1,dwarfhouse:1,titanhouse:1,spirithouse:
 // land.ecology (every site made since 2026-09-28) plays them; an older map keeps the old rules, as it keeps its
 // old ground. The terrain facilities (pond, pasture, clover) work on every map.
 export const terrainRules=sim=>!!sim.layout?.ecology;
-export const MINES=['ironmine','coalpit','coppermine','sandpit'],HERDS=['sheeppen','milkbarn'];
+export const MINES=['ironmine','coalpit','coppermine','sandpit','shallowmine'],HERDS=['sheeppen','milkbarn'];
 /** Water within two tiles: a touching tile gives 2, the next ring 1. Open water (river, lake, marsh pool) within
  *  two tiles also gives a base of 3, so a wheat field (need 3) is watered exactly where the old rule watered it. */
 export const WATER_RING=[0,2,1],OPEN_WATER=3;
-/** Each same-kind facility on the eight tiles around (corners included) cuts the production time by 10%, at most by
- *  half (five neighbours), so the cap is reachable while one side stays open as the entrance. */
-export const CLUSTER_STEP=.1,CLUSTER_MAX=5;
+/** Each same-kind facility on the eight tiles around (corners included) cuts the production time by 10%, at most by 30%
+ *  (three neighbours). At the first cap of 50% a clustered raw field out-earned the processing plant it feeds per tile
+ *  (balance-report C12, docs/BALANCE_PATCH_20260928.md 17-3). */
+export const CLUSTER_STEP=.1,CLUSTER_MAX=3;
 /** Mountain shade and wind shelter by distance 1..5 (steps 3,2,2,1,1); salt by distance to the sea 1..2. */
 const MOUNTAIN=[0,3,2,2,1,1],SALT=[0,2,1];
 export function placementEffects(sim,type,x,z){
@@ -24,7 +25,8 @@ export function placementEffects(sim,type,x,z){
   const dirty=EMISSIONS[b.type]||0,height=HEIGHTS[b.type]||0;
   if(b.health>0&&b.enabled!==false&&dirty&&distance<=dirty){pollution+=dirty+1-distance;sources.push({type:b.type,kind:'pollution',distance});}
   if(height&&distance<=height){shade=Math.max(shade,height+1-distance);windBlock=Math.max(windBlock,height+1-distance);}
-  if(crop&&b.type==='reservoir'&&b.health>0&&b.enabled!==false&&b.activeUntil>sim.time&&distance<=2)reservoir=true;
+  // A water tower and a wind pump both water the crops within two tiles while their supply window runs.
+  if(crop&&BUILDINGS[b.type]?.output==='irrigation'&&b.health>0&&b.enabled!==false&&b.activeUntil>sim.time&&distance<=2)reservoir=true;
   if(distance<=2){
    if(b.type==='pond'){ponds++;waterScore+=WATER_RING[distance];if(distance===1)flooded=true;}
    else if(b.type==='pasture')graze+=WATER_RING[distance];
@@ -44,7 +46,7 @@ export function placementEffects(sim,type,x,z){
  pollution=Math.min(6,pollution);shade=Math.min(3,shade);windBlock=Math.min(3,windBlock);
  const salt=modern?SALT[coast]||0:0;flooded=modern&&MINES.includes(type)&&flooded;cluster=modern&&d?.period&&RESOURCES[d.output]?Math.min(CLUSTER_MAX,cluster):0;
  const road=[[1,0],[-1,0],[0,1],[0,-1]].some(([dx,dz])=>sim.roads.has((x+dx)+','+(z+dz)));
- const sensitive=crop||['stable','dock','henhouse','sheeppen','milkbarn','duckhouse','apiary'].includes(type),wind=['mill','windturbine'].includes(type);
+ const sensitive=crop||['stable','dock','henhouse','sheeppen','milkbarn','duckhouse','apiary'].includes(type),wind=['mill','windturbine','windpump'].includes(type);
  // A solar panel loses 20% per shade step (docs/BALANCE_PATCH_20260928.md 13-2). Salt slows an irrigated crop 15% a
  // step and speeds a salt pan 20% a step; a flooded mine runs at 70%; pasture feeds a herd 10% a point up to 40%.
  const speed=(sensitive?Math.max(.4,1-pollution*.1-(crop?shade*.1+salt*.15:0)):1)*(wind?Math.max(.4,1-windBlock*.2):1)*(type==='solarpanel'?Math.max(.4,1-shade*.2):1)

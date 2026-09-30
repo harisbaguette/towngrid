@@ -13,6 +13,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { RESOURCES, BUILDINGS, Simulation, CONTRACT_PREMIUM, CONTRACT_WAIT } from '../src/app/game/simulation.js';
 import { RANKS, unlockRank } from '../src/app/game/world.js';
+import { CLUSTER_STEP, CLUSTER_MAX } from '../src/app/game/proximity.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const args = process.argv.slice(2);
@@ -207,6 +208,25 @@ const recipeFacilities = new Set(alternatives.map(a => a.line.id)).size;
 const earlySlow = economy.filter(e => e.rank <= LIMITS.earlyPeriodRank && e.period > LIMITS.earlyPeriod);
 const byDepth = Object.entries(economy.filter(e => !e.alt).reduce((m, e) => ((m[e.depth] ??= []).push(e.period), m), {})).map(([d, p]) => [+d, p.reduce((n, v) => n + v, 0) / p.length]).sort((a, b) => a[0] - b[0]);
 const depthRises = byDepth.every(([, p], i) => !i || p > byDepth[i - 1][1]);
+// C12: raw fields (a farm facility that draws nothing but water) built in a full same-kind cluster run at the capped time
+// cut (proximity.js CLUSTER_STEP x CLUSTER_MAX); every other line, the processing plant included, runs at base speed. Each
+// processing line must still out-earn its best input per tile-minute by LIMITS.premium.
+const clusterCut = 1 - CLUSTER_STEP * CLUSTER_MAX;
+const fieldRecipes = new Set(lines.filter(l => BUILDINGS[l.id].group === 'farm' && Object.keys(l.r.inputs || {}).every(k => k === 'water')).map(l => l.r));
+const clusterMemo = new Map();
+function clusterTileSec(res, seen = new Set()) {
+  if (clusterMemo.has(res)) return clusterMemo.get(res);
+  if (seen.has(res)) return Infinity;
+  seen.add(res);
+  const best = Math.min(Infinity, ...producerLines(res).map(l => clusterChainSec(l.r, seen)));
+  seen.delete(res); clusterMemo.set(res, best); return best;
+}
+function clusterChainSec(r, seen = new Set()) {
+  const inputs = Object.entries(r.inputs || {}).reduce((n, [x, k]) => n + k * clusterTileSec(x, seen), 0);
+  return ((fieldRecipes.has(r) ? clusterCut : 1) * r.period + inputs) / r.amount;
+}
+const clustered = lines.filter(l => RESOURCES[l.r.output] && hasInputs(l.r) && !fieldRecipes.has(l.r)).map(l => ({ line: l,
+  premium: round(price(l.r.output) * 60 / clusterChainSec(l.r) / Math.max(...Object.keys(l.r.inputs).map(x => price(x) * 60 / clusterTileSec(x))), 2) }));
 const checks = [
   { id: 'C1', name: `자원 ${LIMITS.resources}종 이상`, value: Object.keys(RESOURCES).length, pass: Object.keys(RESOURCES).length >= LIMITS.resources },
   { id: 'C2', name: `시설 ${LIMITS.buildings}종 이상`, value: Object.keys(BUILDINGS).length, pass: Object.keys(BUILDINGS).length >= LIMITS.buildings },
@@ -219,6 +239,7 @@ const checks = [
   { id: 'C9', name: `대안 제품 시설 ${LIMITS.recipeFacilities}곳 이상 · 모든 대안이 다른 사슬을 공급하거나 다른 원료를 씀`, value: recipeFacilities + '곳 · ' + (alternatives.filter(a => !a.distinct).map(a => lineName(a.line)).join(', ') || '모두 구별됨'), pass: recipeFacilities >= LIMITS.recipeFacilities && alternatives.every(a => a.distinct) },
   { id: 'C10', name: `계약 보상 목록가의 ${LIMITS.contractPremium}배 이하 · 다음 계약 대기 ${LIMITS.contractWait}초 이상`, value: '최대 ' + Math.max(...CONTRACT_PREMIUM) + '배 · ' + CONTRACT_WAIT + '초', pass: Math.max(...CONTRACT_PREMIUM) <= LIMITS.contractPremium && CONTRACT_WAIT >= LIMITS.contractWait },
   { id: 'C11', name: `${LIMITS.earlyPeriodRank}단계까지 열리는 생산 주기 ${LIMITS.earlyPeriod}초 이하 · 가공 깊이별 평균 주기가 깊을수록 김`, value: (earlySlow.map(e => e.name + ' ' + e.period + 's').join(', ') || '초반 전부 충족') + ' · ' + byDepth.map(([d, p]) => d + '단 ' + round(p) + 's').join(' < '), pass: !earlySlow.length && depthRises },
+  { id: 'C12', name: `원료 밭을 같은 시설 모으기 최대(시간 -${round(CLUSTER_STEP * CLUSTER_MAX * 100, 0)}%)로 지어도 가공 시설이 타일당 분당 가치 ${LIMITS.premium}배 이상`, value: clustered.filter(c => c.premium < LIMITS.premium).map(c => lineName(c.line) + ' ' + c.premium).join(', ') || '전부 충족 · 최저 ' + Math.min(...clustered.map(c => c.premium)), pass: clustered.every(c => c.premium >= LIMITS.premium) },
 ];
 
 // ---------- output ----------

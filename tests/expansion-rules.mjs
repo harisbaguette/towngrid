@@ -1,5 +1,6 @@
 // Regression checks for the five terrain rules and the three terrain facilities of 2026-09-29
-// (docs/EXPANSION_20260929.md 3, docs/BALANCE_PATCH_20260928.md 14). Headless; real ticks where production is claimed.
+// (docs/EXPANSION_20260929.md 3, docs/BALANCE_PATCH_20260928.md 14), and the shallow mine and wind pump of 2026-09-30
+// (the same spec 6, balance doc 17). Headless; real ticks where production is claimed.
 // Land ownership, stock and ranks are set directly so each case can be placed where the rule acts; comments say so.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -64,26 +65,27 @@ const ok=[];
  s.build('solarpanel',foot.x,foot.z,true);s.build('solarpanel',open.x,open.z,true);const a=s.at(foot.x,foot.z),b=s.at(open.x,open.z);run(s,1);
  const pa=a.progress,pb=b.progress;run(s,2);assert.ok((a.progress-pa)<(b.progress-pb)*.5,'three shade steps slow the panel to 40%');ok.push('mountain shade 3,2,2,1,1');}
 
-// 2. Same-kind facilities on the eight tiles around (corners count) cut the production time by 10% each, at most by half.
+// 2. Same-kind facilities on the eight tiles around (corners count) cut the production time by 10% each, at most by 30%
+//    (the cap was 50% until C12 of 2026-09-30: a clustered raw field then out-earned its processing plant).
 {const s=site(s=>!!s.layout.ecology);const ring=[[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1]];
  const c=quiet(s,t=>[[0,0],[2,0],...ring].every(([dx,dz])=>dryAt(s,s.tile(t.x+dx,t.z+dz))));
  s.build('well',c.x,c.z,true);assert.equal(s.placementEffects('well',c.x,c.z).cluster,0);
  const speeds=[];for(const [dx,dz] of ring.slice(0,6)){s.build('well',c.x+dx,c.z+dz,true);speeds.push(+s.placementEffects('well',c.x,c.z).speed.toFixed(4));}
- assert.deepEqual(speeds,[1,2,3,4,5,5].map(n=>+(1/(1-n*CLUSTER_STEP)).toFixed(4)),'time 90%, 80%, 70%, 60%, 50%, then capped');assert.equal(CLUSTER_STEP*CLUSTER_MAX,.5,'at most half the time');
+ assert.deepEqual(speeds,[1,2,3,3,3,3].map(n=>+(1/(1-n*CLUSTER_STEP)).toFixed(4)),'time 90%, 80%, 70%, then capped');assert.equal(CLUSTER_MAX,3);assert.ok(Math.abs(CLUSTER_STEP*CLUSTER_MAX-.3)<1e-9,'at most 30% of the time');
  assert.equal(s.placementEffects('well',c.x+2,c.z).cluster,2,'the next tile sees a side and a corner');assert.equal(s.placementEffects('quarry',c.x+2,c.z).cluster,0,'another kind does not count');
  // Placement, not state: a stopped or broken neighbour still counts, and a reload gives the same numbers.
- s.setOperation(s.at(c.x+1,c.z).id,false);s.at(c.x-1,c.z).health=0;/* damage set directly */assert.equal(s.placementEffects('well',c.x,c.z).cluster,5);
+ s.setOperation(s.at(c.x+1,c.z).id,false);s.at(c.x-1,c.z).health=0;/* damage set directly */assert.equal(s.placementEffects('well',c.x,c.z).cluster,CLUSTER_MAX);
  const back=reload(s);assert.deepEqual(back.placementEffects('well',c.x,c.z),s.placementEffects('well',c.x,c.z));
  // Timed-effect plants (power, horses) gain nothing: a faster cycle would only burn more fuel.
  const g=quiet(s,t=>dryAt(s,s.tile(t.x+1,t.z)));s.build('generator',g.x,g.z,true);s.build('generator',g.x+1,g.z,true);assert.equal(s.placementEffects('generator',g.x,g.z).cluster,0);
  assert.equal(new Simulation('river').placementEffects('well',12,12).cluster,0,'off on an old map');
- // Ticks: a wheat field with five wheat neighbours (one side left open as its entrance) grows twice as fast as alone.
+ // Ticks: a wheat field with five wheat neighbours (one side left open as its entrance) grows 1/0.7 times as fast as alone.
  const w=site(s=>!!s.layout.ecology),m=quiet(w,t=>[[0,0],...ring].every(([dx,dz])=>dryAt(w,w.tile(t.x+dx,t.z+dz))));
  w.build('field',m.x,m.z,true);const f=w.at(m.x,m.z);
  /** Progress made in one real tick while the field is mid-cycle (water loaded directly). */
  const rate=()=>{f.inputs={water:5};for(let i=0;i<400&&!(f.working&&f.progress>0&&f.progress<.8);i++)w.tick(.25);const p=f.progress;w.tick(.25);return f.progress-p;};
- const alone=rate();for(const [dx,dz] of ring.slice(0,5))w.build('field',m.x+dx,m.z+dz,true);const ratio=rate()/alone;assert.ok(alone>0&&Math.abs(ratio-2)<1e-6,'double speed with five neighbours (ratio '+ratio.toFixed(3)+', '+f.status+')');
- ok.push('same-kind cluster 10%/neighbour incl. corners, max 50%');}
+ const alone=rate();for(const [dx,dz] of ring.slice(0,5))w.build('field',m.x+dx,m.z+dz,true);const ratio=rate()/alone;assert.ok(alone>0&&Math.abs(ratio-1/.7)<1e-6,'1/0.7 speed with five neighbours (ratio '+ratio.toFixed(3)+', '+f.status+')');
+ ok.push('same-kind cluster 10%/neighbour incl. corners, max 30%');}
 
 // 3. Salt near the sea: irrigated crops slow 15% a step, a salt pan speeds 20% a step; two steps from the shore.
 {const s=site(s=>s.tiles.some(isSea));const got=[];
@@ -186,4 +188,37 @@ assert.ok(BUILDINGS.apiary.description.includes('야생 클로버'));assert.ok(!
  assert.deepEqual(rules.numbers,{waterRing:WATER_RING.slice(1),openWater:OPEN_WATER,clusterStep:CLUSTER_STEP,clusterMax:CLUSTER_MAX,mountainSteps:[3,2,2,1,1],saltSteps:[2,1],saltCrop:.15,saltPan:.2,flood:.7,mines:MINES,herds:HERDS,grazeStep:.1,grazeMax:.4,cloverReach:2});
  assert.deepEqual(rules.waterNeed,Object.fromEntries(Object.entries(BUILDINGS).filter(([,d])=>d.waterNeed).map(([k,d])=>[k,d.waterNeed])));ok.push('balance record');}
 
-console.log('PASS expansion rules 5/5 and terrain facilities 3/3: '+ok.join('; '));
+/** The speed a facility runs at, read from real ticks: progress over one step while it is mid-cycle, times its period. */
+const speedOf=(s,b)=>{const period=s.recipeOf?s.recipeOf(b).period:BUILDINGS[b.type].period;for(let i=0;i<800&&!(b.working&&b.progress>0&&b.progress<.8);i++)s.tick(.25);const p=b.progress;s.tick(.25);return (b.progress-p)/.25*period;};
+// 11. Shallow mine: builds anywhere, half the iron mine's output, no ore or mountain bonus, floods like a mine (ticks).
+{const s=site(s=>s.tiles.some(isMountain)&&s.tiles.some(isWater));
+ assert.deepEqual([BUILDINGS.shallowmine.amount*2,BUILDINGS.shallowmine.period],[BUILDINGS.ironmine.amount,BUILDINGS.ironmine.period],'half the iron mine');assert.ok(MINES.includes('shallowmine'));
+ const hill=s.tiles.find(t=>dryAt(s,t)&&isMountain(t)),flat=quiet(s);assert.equal(s.canBuild('shallowmine',flat.x,flat.z,true),null,'no mountain or ore needed');
+ assert.deepEqual([s.tileMultiplier('shallowmine',hill.x,hill.z),s.tileMultiplier('shallowmine',flat.x,flat.z)],[1,1],'ore and mountain ground do not count');assert.ok(s.tileMultiplier('ironmine',hill.x,hill.z)>1.2,'the iron mine does gain on the mountain');
+ s.build('shallowmine',flat.x,flat.z,true);const m=s.at(flat.x,flat.z),sp=speedOf(s,m),iron=s.produced.iron||0,cycles=m.cycles;run(s,Math.ceil(32/sp)+1);
+ assert.ok(m.cycles-cycles>=2&&m.cycles-cycles<=3,'about two cycles of 16 s');assert.equal((s.produced.iron||0)-iron,2*(m.cycles-cycles),'2 iron a cycle');
+ assert.ok(s.setRecipe(m.id,'copper').ok);const copper=s.produced.copper||0;run(s,Math.ceil(24/sp)+1);assert.equal((s.produced.copper||0)-copper,2,'copper 2 in 24 s');
+ const wet=s.tiles.find(t=>dryAt(s,t)&&nearest(s,t,isWater)===1&&s.buildings.every(b=>cheb(b,t)>1));assert.equal(s.placementEffects('shallowmine',wet.x,wet.z).speed,.7,'floods at 70%');
+ ok.push('shallow mine: half speed anywhere, flat tile factor, floods');}
+// 12. Wind pump: no inputs or power; while its 60 s window runs it meets every water demand of the crops within two tiles
+//     (the water tower's reach); wind shelter slows it and, from two steps, leaves gaps. Ticks throughout.
+{const s=site(s=>!!s.layout.ecology);const q=quiet(s,t=>[[0,0],[2,0],[3,0]].every(([dx,dz])=>dryAt(s,s.tile(t.x+dx,t.z+dz))));
+ assert.deepEqual([BUILDINGS.windpump.inputs,BUILDINGS.windpump.power,BUILDINGS.windpump.output],[undefined,undefined,'irrigation']);
+ s.build('sugarfield',q.x,q.z,true);const cane=s.at(q.x,q.z);assert.deepEqual(s.effectiveInputs(cane),{water:1},'dry sugarcane hauls water');
+ s.build('windpump',q.x+3,q.z,true);const far=s.at(q.x+3,q.z);s.stock.water=0;/* stock set directly */run(s,45);assert.equal(far.status,'관개 공급 중');assert.equal(s.placementEffects('sugarfield',q.x,q.z).water,0,'three tiles is too far');
+ s.demolish(q.x+3,q.z);s.build('windpump',q.x+2,q.z,true);const pump=s.at(q.x+2,q.z);run(s,45);
+ assert.ok(pump.activeUntil>s.time,'the pump runs on no water or power ('+pump.status+')');assert.equal(s.stock.water,0,'it hauls no water');assert.deepEqual(s.effectiveInputs(cane),{},'sugarcane (need 8) is watered two tiles away');
+ const cane0=s.produced.sugarcane||0;run(s,40);assert.ok((s.produced.sugarcane||0)>cane0,'sugarcane grows with no water stock');
+ const samples=()=>{let on=0,n=0;for(let i=0;i<300;i++){run(s,1);n++;on+=s.placementEffects('sugarfield',q.x,q.z).water;}return on/n;};
+ assert.equal(samples(),1,'open wind: no gap');
+ assert.ok(s.setOperation(pump.id,false).ok);assert.equal(s.placementEffects('sugarfield',q.x,q.z).water,0,'a stopped pump stops watering');assert.ok(s.setOperation(pump.id,true).ok);
+ // A tall refinery beside it blocks three wind steps: 40% speed, a 100 s cycle for a 60 s window.
+ for(const [dx,dz] of [[1,1],[1,-1],[0,1],[0,-1]])if(s.canBuild('refinery',pump.x+dx,pump.z+dz,true)===null){s.build('refinery',pump.x+dx,pump.z+dz,true);break;}
+ const e=s.placementEffects('windpump',pump.x,pump.z);assert.deepEqual([e.windBlock,e.speed],[3,.4]);const cycle=BUILDINGS.windpump.period/speedOf(s,pump),share=samples();
+ assert.ok(cycle>60&&share>.3&&share<.75,'sheltered: a '+cycle.toFixed(0)+' s cycle waters '+share.toFixed(2)+' of the time');
+ // Old maps: the pump waters crops the same way (the old binary rule counts it like the water tower).
+ const old=new Simulation('river');for(const t of old.tiles)old.owned.add(t.x+','+t.z);/* land owned directly */const o=old.tiles.find(t=>t.terrain!=='water'&&nearest(old,t,isWater)>4&&t.x>3&&t.z>3&&t.x<20&&dryAt(old,old.tile(t.x+2,t.z)));
+ old.build('windpump',o.x+2,o.z,true);old.at(o.x+2,o.z).activeUntil=old.time+60;/* supply window set directly */assert.equal(old.placementEffects('sugarfield',o.x,o.z).water,1);
+ ok.push('wind pump: waters crops within 2 without inputs, gaps when sheltered, '+(share*100).toFixed(0)+'% under 3 steps');}
+
+console.log('PASS expansion rules 5/5, terrain facilities 3/3, shallow mine and wind pump: '+ok.join('; '));
