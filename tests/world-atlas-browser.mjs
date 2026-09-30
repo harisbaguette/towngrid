@@ -64,7 +64,8 @@ try{
  await noOverlap();await shot('04-expansion-offer');
  await page.getByRole('button',{name:'이 땅에 거점 세우기',exact:true}).click();
  await page.waitForFunction(()=>document.querySelector('.expansion-offer')?.dataset.status==='owned');
- const saved=decodeSave(await page.evaluate(()=>localStorage.getItem('first-land-v1')));
+ // Button actions write one merged save 0.8 s after the last click.
+ let saved;for(let i=0;i<50;i++){saved=decodeSave(await page.evaluate(()=>localStorage.getItem('first-land-v1')));if(saved.sites.length===2)break;await page.waitForTimeout(100);}
  assert.equal(saved.sites.length,2);assert.equal(saved.sites[1].provinceId,'estern-3');assert.equal(saved.sites[1].simulation.seed,quote.seed);assert.equal(saved.treasury.money,10000-quote.cost);
  assert.equal(await page.locator('.atlas-site[data-province="estern-3"]').getAttribute('data-status'),'owned');
  await shot('05-owned-settlement');

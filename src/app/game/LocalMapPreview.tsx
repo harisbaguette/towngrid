@@ -34,7 +34,8 @@ export default function LocalMapPreview({provinceId,seed=0,simulation,title}:any
  const average=(key:string)=>Math.round(initial.reduce((n:number,t:any)=>n+(t[key]||0),0)/Math.max(1,initial.length));
  return <section className="local-map-preview" aria-label="실제 거점 지형 미리보기" data-province={provinceId} data-seed={seed}>
   <header><strong>{title||(simulation?'현재 거점':'시작할 땅')}</strong><span>24 × 24</span></header>
-  <div className="local-preview-body"><div className="local-preview-map"><span className="preview-north">북 · {(TERRAIN_NAMES as any)[sim.layout.edges.n]}</span><canvas ref={canvas} width={192} height={192} role="img" aria-label="실제 생성 규칙으로 그린 거점 지도. 밝은 테두리는 확보한 땅입니다."/><span className="preview-south">남 · {(TERRAIN_NAMES as any)[sim.layout.edges.s]}</span></div><div className="local-preview-info"><span>서 · {(TERRAIN_NAMES as any)[sim.layout.edges.w]}</span><span>동 · {(TERRAIN_NAMES as any)[sim.layout.edges.e]}</span><b>확보한 땅 {sim.owned.size}칸</b><span>평균 비옥도 {average('fertility')}%</span><span>평균 광물량 {average('ore')}%</span></div></div>
+  <div className="local-preview-map"><canvas ref={canvas} width={192} height={192} role="img" aria-label="실제 생성 규칙으로 그린 거점 지도. 밝은 테두리는 확보한 땅입니다."/>{[['n','북'],['e','동'],['s','남'],['w','서']].map(([side,name])=><span key={side} className={'preview-edge '+side}>{name} · {(TERRAIN_NAMES as any)[sim.layout.edges[side]]}</span>)}</div>
+  <div className="local-preview-info"><span>확보한 땅<b>{sim.owned.size}칸</b></span><span>평균 비옥도<b>{average('fertility')}%</b></span><span>평균 광물량<b>{average('ore')}%</b></span></div>
   <div className="local-preview-layers" role="group" aria-label="미리보기 자원">{[['terrain','지형'],['fertility','비옥도'],['ore','광물'],['oil','원유']].map(([id,label])=><button key={id} onClick={()=>setLayer(id)} aria-pressed={layer===id}>{label}</button>)}</div>
  </section>;
 }

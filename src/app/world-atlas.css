@@ -1,33 +1,56 @@
-.atlas-v2 .world-atlas text { stroke:none; text-shadow:none; letter-spacing:0; font-family:inherit; }
-.atlas-v2 .atlas-viewport { background:#688767; }
-.atlas-v2 .atlas-breadcrumb>span { white-space:nowrap; font-size:11px; color:#d5ddc2; }
-.atlas-v2 .atlas-legend { gap:10px; padding:5px 12px; flex-wrap:wrap; }
+.atlas-v2 .world-atlas text { letter-spacing:0; font-family:inherit; text-shadow:none; }
+/* The map fills the whole card; controls float on it like a game HUD. */
+.atlas-v2 { position:relative; }
+.atlas-v2 .atlas-viewport { background:#2f4a3f; background-image:radial-gradient(#3d5c4d 1px,transparent 1px); background-size:14px 14px; }
+.atlas-v2 .atlas-toolbar { position:absolute; z-index:4; top:12px; left:12px; right:12px; padding:0; border:0; background:none; pointer-events:none; }
+.atlas-v2 .atlas-toolbar>* { pointer-events:auto; }
+.atlas-v2 .atlas-breadcrumb { padding:3px 12px; min-height:36px; border-radius:18px; background:#223b30e6; color:var(--ui-paper); box-shadow:0 2px 6px #0f1f1840; }
+.atlas-v2 .atlas-breadcrumb button { font-size:13px; }
+.atlas-v2 .atlas-breadcrumb button:last-of-type { font-weight:750; }
+.atlas-v2 .atlas-breadcrumb>span { white-space:nowrap; font-size:12px; color:#d5ddc2; }
+.atlas-v2 .atlas-layer { min-height:36px; padding:4px 13px; border:0; border-radius:18px; background:#223b30e6; font-size:12px; box-shadow:0 2px 6px #0f1f1840; }
+.atlas-v2 .atlas-layer.active { background:var(--ui-gold); color:var(--ui-ink); }
+.atlas-v2 .atlas-zoom { right:12px; bottom:12px; border:0; border-radius:8px; box-shadow:0 2px 6px #0f1f1840; }
+.atlas-v2 .atlas-zoom button { width:38px; height:38px; min-height:38px!important; }
+.atlas-v2 .atlas-dock { position:absolute; z-index:4; left:12px; bottom:12px; width:min(380px,calc(100% - 80px)); border-radius:8px; overflow:hidden; background:var(--ui-paper); box-shadow:0 3px 10px #0f1f184d; }
+.atlas-v2 .atlas-bottom { padding:10px 12px; border:0; }
+.atlas-v2 .atlas-cell-readout strong { font-size:15px; }
+.atlas-v2 .atlas-cell-readout span { line-height:1.5; font-size:12px; }
+.atlas-v2 .atlas-inspect { padding:6px 10px; border-radius:4px; background:var(--ui-sage); font-size:12px; }
+.atlas-v2 .atlas-legend { gap:12px; padding:6px 12px; border-top:1px solid var(--ui-rule); flex-wrap:wrap; font-size:11px; }
 .atlas-v2 .atlas-legend>span { white-space:nowrap; gap:4px; }
-.atlas-v2 .atlas-legend img { width:23px; height:23px; object-fit:contain; image-rendering:pixelated; }
-.atlas-v2 .atlas-cell-readout span { line-height:1.5; }
-.atlas-v2 .atlas-minimap { position:absolute; left:14px; bottom:54px; width:118px; height:75px; overflow:hidden; border:2px solid #e4d39c; background:#375e52; border-radius:3px; box-shadow:0 2px 5px #183e3933; padding:0; }
+.atlas-v2 .atlas-legend img { width:22px; height:22px; object-fit:contain; image-rendering:pixelated; }
+.atlas-v2 .atlas-legend em { margin-left:auto; font-style:normal; white-space:nowrap; }
+.atlas-v2 .atlas-minimap { position:absolute; z-index:3; left:auto; right:12px; top:60px; bottom:auto; width:140px; height:88px; overflow:hidden; border:2px solid #e4d39c; background:#375e52; border-radius:4px; box-shadow:0 2px 6px #0f1f1840; padding:0; }
 .atlas-v2 .atlas-minimap svg { display:block; width:100%; height:100%; }
-.atlas-v2 .atlas-screen-labels { paint-order:normal; }
+/* Place names sit on the land like a printed map; only site names keep a plate. */
+.atlas-v2 .atlas-screen-label text { paint-order:stroke; stroke-linejoin:round; fill:#2c493b; font-weight:650; }
+.atlas-v2 .atlas-screen-label.nation text { fill:#fbf4dc; stroke:#1f3a2d; font-weight:700; opacity:.92; }
+.atlas-v2 .atlas-screen-label.nation.chosen text { fill:#ffe08a; stroke:#1b3226; font-weight:850; opacity:1; }
+.atlas-v2 .atlas-screen-label.water text { fill:#e3f3f4; stroke:#1d4d5c; font-weight:650; font-style:italic; }
 .atlas-v2 .atlas-selection { filter:drop-shadow(0 1px 1px #274333); }
-.local-map-preview { border:1px solid var(--ui-rule); border-radius:4px; padding:9px; background:#eeebd8; margin:12px 0; }
-.local-map-preview header { display:flex; align-items:center; justify-content:space-between; gap:8px; color:var(--ui-ink); margin-bottom:7px; }
-.local-map-preview header strong { font-size:12px; }
-.local-map-preview header span { font-size:10px; color:var(--ui-muted); }
-.local-preview-body { display:grid; grid-template-columns:minmax(108px,136px) minmax(0,1fr); align-items:center; gap:10px; }
-.local-preview-map { min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px; }
-.local-preview-map canvas { width:100%; height:auto; aspect-ratio:1; display:block; border:1px solid #687957; image-rendering:pixelated; border-radius:2px; }
-.local-preview-map>span { font-size:9px; color:var(--ui-muted); }
-.local-preview-info { display:flex; flex-direction:column; gap:6px; min-width:0; font-size:10px; color:var(--ui-muted); }
-.local-preview-info b { font-size:10px; color:var(--ui-forest); margin:5px 0; }
+.local-map-preview { border:1px solid var(--ui-rule); border-radius:6px; padding:10px; background:#eeebd8; margin:12px 0; }
+.local-map-preview header { display:flex; align-items:center; justify-content:space-between; gap:8px; color:var(--ui-ink); margin-bottom:8px; }
+.local-map-preview header strong { font-size:13px; }
+.local-map-preview header span { font-size:11px; color:var(--ui-muted); }
+.local-preview-map { position:relative; width:100%; max-width:300px; margin:0 auto; }
+.local-preview-map canvas { width:100%; height:auto; aspect-ratio:1; display:block; border:1px solid #687957; image-rendering:pixelated; border-radius:3px; }
+.preview-edge { position:absolute; padding:2px 6px; border-radius:9px; background:#1f3a2dd9; color:#f6efd7; font-size:10px; line-height:1.4; white-space:nowrap; pointer-events:none; }
+.preview-edge.n { top:5px; left:50%; transform:translateX(-50%); }
+.preview-edge.s { bottom:5px; left:50%; transform:translateX(-50%); }
+.preview-edge.w { left:5px; top:50%; transform:translateY(-50%); }
+.preview-edge.e { right:5px; top:50%; transform:translateY(-50%); }
+.local-preview-info { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; margin-top:8px; }
+.local-preview-info span { display:flex; flex-direction:column; gap:2px; padding:5px 7px; border-radius:4px; background:#faf6e6; color:var(--ui-muted); font-size:10px; }
+.local-preview-info b { font-size:14px; color:var(--ui-forest); font-variant-numeric:tabular-nums; }
 .local-preview-layers { display:flex; gap:4px; margin-top:7px; }
-.local-preview-layers button { flex:1; min-height:28px; border:1px solid #c6c4a9; border-radius:3px; color:var(--ui-muted); font-size:10px; background:#faf6e6; }
+.local-preview-layers button { flex:1; min-height:30px; border:1px solid #c6c4a9; border-radius:4px; color:var(--ui-muted); font-size:11px; background:#faf6e6; }
 .local-preview-layers button[aria-pressed=true] { color:#f7efd9; background:var(--ui-forest); border-color:var(--ui-forest); }
 .world-map-screen .realm-place h2 { font-size:21px; }
 .world-map-screen .realm-place { padding-top:12px; }
 .world-map-screen .realm-policy { margin-bottom:13px; }
 .world-map-screen .alliance-residents img { height:83px; }
 .campaign-world-layout { grid-template-columns:minmax(0,1fr) 290px; }
-.campaign-site-panel .local-preview-body { grid-template-columns:110px minmax(0,1fr); gap:8px; }
 .campaign-province-picker { display:flex; flex-direction:column; gap:7px; margin-top:12px; color:var(--ui-muted); font-size:11px; }
 .campaign-province-picker select { width:100%; min-height:38px; padding:6px; }
 .expansion-offer { margin:14px 0; padding:12px; border:1px solid var(--ui-rule); border-radius:4px; background:#eeebd8; }
@@ -43,15 +66,27 @@
 .expansion-offer>button { width:100%; min-height:39px; font-size:12px; }
 .expansion-offer .offer-help { margin-bottom:0; font-size:10px; }
 .campaign-site-list-title { font-size:12px; margin:17px 0 9px; color:var(--ui-ink); }
-@media(max-width:1100px) { .campaign-world-layout { grid-template-columns:minmax(0,1fr) 250px; }.campaign-site-panel .local-preview-body { grid-template-columns:100px minmax(0,1fr); } }
+@media(max-width:1100px) { .campaign-world-layout { grid-template-columns:minmax(0,1fr) 250px; } }
 @media(max-width:700px) {
+ .atlas-v2 .atlas-toolbar { top:8px; left:8px; right:8px; }
+ .atlas-v2 .atlas-breadcrumb { min-height:32px; padding:2px 10px; }.atlas-v2 .atlas-breadcrumb button { font-size:11px; }
  .atlas-v2 .atlas-breadcrumb>span,.atlas-v2 .atlas-breadcrumb>svg:last-of-type { display:none; }
- .atlas-v2 .atlas-legend { gap:7px; padding:5px 9px; font-size:9px; }
+ .atlas-v2 .atlas-layer { min-height:32px; padding:4px 9px; }
+ /* On phones the readout sits under the map so it never hides the small map. */
+ .atlas-v2 .atlas-dock { position:static; width:auto; border-radius:0; box-shadow:none; border-top:1px solid var(--ui-outline); }
+ /* The whole continent fits the width; the bands above and below hold the controls. */
+ .world-map-screen .atlas-v2 .atlas-viewport { flex:none; height:calc((100vw - 26px) * 806 / 1300 + 92px); }
+ .atlas-v2 .atlas-zoom { right:8px; bottom:8px; flex-direction:row; }.atlas-v2 .atlas-zoom button { width:36px; height:34px; min-height:34px!important; border-bottom:0; border-right:1px solid var(--ui-rule); }
+ .atlas-v2 .atlas-legend { gap:7px; padding:5px 9px; font-size:10px; }
  .atlas-v2 .atlas-legend img { width:20px; height:20px; }
- .atlas-v2 .atlas-region-select { flex:1; text-align:right; }.atlas-v2 .atlas-region-select select { max-width:90px; font-size:10px; }
- .atlas-v2 .atlas-minimap { width:84px; height:54px; }
- .atlas-v2 .atlas-cell-readout span { font-size:10px; }.atlas-v2 .atlas-bottom { padding:10px; }
+ .atlas-v2 .atlas-minimap { top:48px; right:8px; width:84px; height:54px; }
+ .atlas-v2 .atlas-cell-readout strong { font-size:13px; }.atlas-v2 .atlas-cell-readout span { font-size:11px; }.atlas-v2 .atlas-bottom { padding:10px; }
  .world-map-screen .alliance-residents img { height:100px; }
- .campaign-world-layout { display:flex; flex-direction:column; }.campaign-world-layout .atlas-shell { width:100%; height:390px; }
- .campaign-site-panel { width:100%; max-height:none; overflow:visible; }.campaign-site-panel .local-preview-body { grid-template-columns:136px minmax(0,1fr); }
+ .campaign-world-layout { display:flex; flex-direction:column; }.campaign-world-layout .atlas-shell { width:100%; height:470px; }
+ .campaign-site-panel { width:100%; max-height:none; overflow:visible; }
+}
+/* Short landscape screens: the readout moves under the map so the map stays visible. */
+@media (max-height:600px) and (min-width:701px) {
+ .world-map-screen .atlas-v2 .atlas-dock { position:static; width:auto; border-radius:0; box-shadow:none; border-top:1px solid var(--ui-outline); }
+ .world-map-screen .atlas-v2 .atlas-legend { display:none; }
 }
