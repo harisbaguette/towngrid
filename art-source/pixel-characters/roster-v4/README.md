@@ -33,6 +33,8 @@
 python scripts/roster_specs.py
 python scripts/pack-pixel-characters.py art-source/pixel-characters/pack-manifest.json
 python scripts/verify-roster-art.py
+python tests/character-skinning.py
+python tests/character-finish.py
 npm run check:characters
 ```
 
@@ -44,4 +46,6 @@ npm run check:characters
 
 이족 보행은 고정 길이의 3D 다리 관절을 쿼터뷰로 투영한다. 켄타로스는 네 발의 접지 시점, 정령은 부유와 꼬리 흐름을 별도로 계산한다. 얼굴은 같은 픽셀을 보존하며 큰 일러스트는 4초 APNG 호흡 루프다. 동작 줄이기 설정에서는 정지 일러스트를 보여준다.
 
-반대편 두 방향은 좌우 반전이다. 관절로 원화를 움직이는 방식이므로 일부 외곽선·겹침·꼬리 연결에는 수작업 정리가 남아 있다. `profession_motion.py`가 직업별 손동작을, `character_actions.py`가 별도 공격·피격·쓰러짐·발 회전을 만든다. 회전은 발을 디딘 뒤 다음 쿼터뷰 그림으로 전환한다. 자동 검사는 잘림·발 접지·얼굴 픽셀 보존을 확인하며, 최종 아트 승인을 대신하지 않는다.
+반대편 두 방향은 좌우 반전이다. `rig_skinning.py`의 `continuous-joints-1`이 팔꿈치·무릎·발목의 연결을 함께 변형한다. 2026-09-29에 관절 겹침·틈과 이슬·카이의 손 조각, 소라의 꼬리와 피아의 날개 분리를 보완했다. 원본 PNG·초상화·보폭·발 기준점은 유지했다. 비교 화면과 검증은 `docs/verification/character-finish-20260929/`에 있다.
+
+`profession_motion.py`가 직업별 손동작을, `character_actions.py`가 별도 공격·피격·쓰러짐·발 회전을 만든다. 회전은 발을 디딘 뒤 다음 쿼터뷰 그림으로 전환한다. 전 프레임을 손으로 다시 그린 작화는 아니며 자동 검사는 잘림·발 접지·얼굴 픽셀 보존을 확인한다.

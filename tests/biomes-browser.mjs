@@ -35,9 +35,9 @@ try{
  console.log('Checking normal game UI');
  await page.goto(origin);await page.locator('canvas[role="application"]').waitFor({state:'attached',timeout:120000});await page.getByRole('button',{name:'화면을 눌러 시작',exact:true}).click();
  assert.ok(await page.getByRole('link',{name:'지형 8종 테스트',exact:true}).isVisible());await page.getByRole('button',{name:'새 게임',exact:true}).click();
- await page.locator('#realm').selectOption('elune');assert.match(await page.locator('.realm-edges .biome-summary').textContent(),/화산 고원/);await shot('world-map-volcanic');
+ await page.locator('#realm').selectOption('elune');assert.equal(await page.locator('#start-province').inputValue(),'elune-5');assert.match(await page.locator('.realm-sheet .biome-summary').textContent(),/비옥한 평야/);await shot('world-map-start');
  await page.getByRole('button',{name:'이 땅에서 시작',exact:true}).click();await page.getByRole('button',{name:'일시정지',exact:true}).waitFor({timeout:120000});await page.getByRole('button',{name:'일시정지',exact:true}).click();
- await page.keyboard.press('Escape');await page.getByRole('button',{name:'주변 지형',exact:true}).click();assert.match(await page.locator('.map-edges .biome-summary').textContent(),/화산 고원/);await shot('game-volcanic');
+ await page.keyboard.press('Escape');await page.getByRole('button',{name:'주변 지형',exact:true}).click();assert.match(await page.locator('.map-edges .biome-summary').textContent(),/비옥한 평야/);await shot('game-start');
  await page.setViewportSize({width:390,height:844});await page.waitForTimeout(350);await shot('game-mobile');assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  }
  assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);await writeFile(new URL(previewOnly?'preview-results.json':gameOnly?'game-results.json':'browser-results.json',out),JSON.stringify({passed:true,scope:previewOnly?'preview':gameOnly?'game':'all',checks:[...(!gameOnly?['eight actual province biomes','four camera views','WebGL/CPU','actual production per biome','oil overlay','no preview save writes']:[]),...(!previewOnly?['home link','world map','new game']:[]),'mobile'],production,errors,failed},null,2));

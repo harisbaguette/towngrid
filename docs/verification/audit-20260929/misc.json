@@ -1,0 +1,406 @@
+{
+ "overrides": [
+  "money=10 to try an unaffordable build",
+  "money=1200 restored",
+  "stock wood/grain/water +60 to sell, deliver and promote at once",
+  "nextEvent = now + 2 (storm or other event comes at once, chosen by the game)"
+ ],
+ "pageScroll": {
+  "initial": {
+   "winScrollY": 0,
+   "docScrollable": 0,
+   "shellScrollTop": 0,
+   "shellScrollable": 0,
+   "bodyOverflow": "hidden",
+   "beyondBottom": []
+  },
+  "wheel .tutorial-card": {
+   "winScrollY": 0,
+   "docScrollable": 0,
+   "shellScrollTop": 0,
+   "shellScrollable": 0,
+   "bodyOverflow": "hidden",
+   "beyondBottom": []
+  },
+  "wheel .resource-strip": {
+   "winScrollY": 0,
+   "docScrollable": 0,
+   "shellScrollTop": 0,
+   "shellScrollable": 0,
+   "bodyOverflow": "hidden",
+   "beyondBottom": []
+  },
+  "wheel .town-actions": {
+   "winScrollY": 0,
+   "docScrollable": 0,
+   "shellScrollTop": 0,
+   "shellScrollable": 0,
+   "bodyOverflow": "hidden",
+   "beyondBottom": []
+  },
+  "wheel .camera-controls": {
+   "winScrollY": 0,
+   "docScrollable": 0,
+   "shellScrollTop": 0,
+   "shellScrollable": 0,
+   "bodyOverflow": "hidden",
+   "beyondBottom": []
+  },
+  "key ArrowDown": {
+   "winScrollY": 0,
+   "docScrollable": 0,
+   "shellScrollTop": 0,
+   "shellScrollable": 0,
+   "bodyOverflow": "hidden",
+   "beyondBottom": []
+  },
+  "key PageDown": {
+   "winScrollY": 0,
+   "docScrollable": 0,
+   "shellScrollTop": 0,
+   "shellScrollable": 0,
+   "bodyOverflow": "hidden",
+   "beyondBottom": []
+  },
+  "key End": {
+   "winScrollY": 0,
+   "docScrollable": 0,
+   "shellScrollTop": 0,
+   "shellScrollable": 0,
+   "bodyOverflow": "hidden",
+   "beyondBottom": []
+  },
+  "afterBuildOpen": {
+   "winScrollY": 0,
+   "docScrollable": 0,
+   "shellScrollTop": 0,
+   "shellScrollable": 0,
+   "bodyOverflow": "hidden",
+   "beyondBottom": []
+  }
+ },
+ "dialogExit": {
+  "before": "신분과 권한",
+  "frames": [
+   {
+    "title": "조작법",
+    "bodyChars": 18,
+    "opacity": 1
+   },
+   {
+    "title": "조작법",
+    "bodyChars": 18,
+    "opacity": 0.78
+   },
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null
+  ]
+ },
+ "hover": {
+  "markers": [
+   ""
+  ],
+  "cursor": "auto",
+  "hoverLine": true
+ },
+ "sound": {
+  "before": {
+   "ctx": "running",
+   "muted": false,
+   "volumes": {
+    "master": 0.82,
+    "music": 0.48,
+    "effects": 0.85,
+    "ambience": 0.45
+   },
+   "masterGain": null
+  },
+  "afterToggle": {
+   "label": "소리 끄기",
+   "state": {
+    "ctx": "running",
+    "muted": true,
+    "volumes": {
+     "master": 0.82,
+     "music": 0.48,
+     "effects": 0.85,
+     "ambience": 0.45
+    },
+    "masterGain": null
+   }
+  },
+  "afterToggleBack": {
+   "ctx": "running",
+   "muted": false,
+   "volumes": {
+    "master": 0.82,
+    "music": 0.48,
+    "effects": 0.85,
+    "ambience": 0.45
+   },
+   "masterGain": null
+  },
+  "afterMasterLow": {
+   "ctx": "running",
+   "muted": false,
+   "volumes": {
+    "master": 0.06,
+    "music": 0.48,
+    "effects": 0.85,
+    "ambience": 0.45
+   },
+   "masterGain": null
+  },
+  "statusLine": "소리 켜짐 · 51/51개 준비됨",
+  "afterReset": {
+   "ctx": "running",
+   "muted": false,
+   "volumes": {
+    "master": 0.82,
+    "music": 0.48,
+    "effects": 0.85,
+    "ambience": 0.45
+   },
+   "masterGain": null
+  }
+ },
+ "rapidClicks": {
+  "newErrors": [],
+  "dock": false,
+  "dialog": false,
+  "view": 0
+ },
+ "buildFeedback": {
+  "house": {
+   "audio": [
+    "play:build",
+    "play:build"
+   ],
+   "toasts": [],
+   "moneyDelta": -60,
+   "cardOpened": false,
+   "status": "정상 운영"
+  },
+  "invalid": {
+   "audio": [
+    "play:invalid"
+   ],
+   "toasts": [
+    "error:먼저 이 구역을 확보하세요"
+   ],
+   "hint": "우물 배치\n먼저 이 구역을 확보하세요"
+  },
+  "unaffordable": [
+   {
+    "name": "창고",
+    "disabled": true,
+    "cls": "build-item unaffordable built"
+   },
+   {
+    "name": "흙길",
+    "disabled": false,
+    "cls": "build-item "
+   },
+   {
+    "name": "우물",
+    "disabled": false,
+    "cls": "build-item unaffordable "
+   },
+   {
+    "name": "벌목장",
+    "disabled": false,
+    "cls": "build-item unaffordable "
+   },
+   {
+    "name": "채석장",
+    "disabled": false,
+    "cls": "build-item unaffordable "
+   },
+   {
+    "name": "자재 보관소",
+    "disabled": true,
+    "cls": "build-item unaffordable "
+   }
+  ],
+  "unaffordableHint": "우물 배치\n60G · 1타일 · 석재 4",
+  "unaffordableClick": {
+   "audio": [
+    "interact:click",
+    "play:click",
+    "play:click",
+    "play:invalid"
+   ],
+   "toasts": [
+    "error:자금이 부족합니다"
+   ]
+  }
+ },
+ "saleContractPromotion": {
+  "sale": {
+   "button": "목재 자동 판매",
+   "audio": [
+    "interact:click",
+    "play:click"
+   ],
+   "toasts": [],
+   "moneyImmediate": 0,
+   "dialogStillOpen": true,
+   "arrival": {
+    "toasts": [],
+    "audio": [
+     "interact:click",
+     "play:click",
+     "interact:click",
+     "play:click"
+    ],
+    "moneyDelta": 0
+   }
+  },
+  "contract": {
+   "audio": [
+    "interact:click",
+    "play:click",
+    "success:",
+    "tone:392",
+    "tone:493.88",
+    "tone:587.33",
+    "tone:783.99",
+    "play:dispatch",
+    "tone:95"
+   ],
+   "toasts": [
+    "success:밀 12개 납품 출발 · 도착 시 +130G"
+   ],
+   "label": "운송 중"
+  },
+  "promotionReadyUi": {
+   "chip": false,
+   "tutorial": "×\n3 / 7\n물을 공급하세요\n\n창고 주변에 우물을 지으세요.\n\n우물 선택",
+   "gauge": "100"
+  },
+  "promoteEnabled": true,
+  "promotion": {
+   "rankFrom": 0,
+   "rankTo": 1,
+   "audio": [
+    "interact:click",
+    "play:click",
+    "success:",
+    "tone:392",
+    "tone:493.88",
+    "tone:587.33",
+    "tone:783.99",
+    "play:promotion",
+    "success:",
+    "tone:392",
+    "tone:493.88",
+    "tone:587.33",
+    "tone:783.99"
+   ],
+   "toasts": [
+    "success:등록 농노 승급"
+   ],
+   "dialogAfter": "신분과 권한 승급 조건과 납품, 채무를 관리합니다. 2 / 33 · 등록 농노 개간 농노 주민이 자원 18개 운반 0 / 18 첫 납품 보너스가 10% 늘어납니다. ○ 판재 생산 0 / 12 ○ 영주 납품 0 / 2 승급 · 60G 납품 계약 밀 12개 · 56/12 운송 중 남은 빚 1,000G 200G 상환 집으로 오는 길 1 / 5 소식을 찾다 영주 ",
+   "hud": {
+    "tutorial": null,
+    "operations": "제재소 짓기\n목재 → 판재\n목재 납품\n72 / 14 · 151G\n56초\n운송\n1/5대 운행\n개간 농노\n판재 생산 0/12"
+   }
+  }
+ },
+ "storm": {
+  "type": "storm",
+  "speed": 4,
+  "toast": [
+   "등록 농노 승급",
+   "영주 납품 완료 · 밀 12개 · +130G · 다음 주문은 하루 뒤",
+   "폭풍 예고 · 20초 뒤 발생합니다."
+  ],
+  "hud": "폭풍 · 79초\n보강 · 70G + 목재 4",
+  "realSecondsUntilEvent": 19.2,
+  "after": {
+   "audio": [
+    "play:sell",
+    "play:sell",
+    "play:sell",
+    "play:sell",
+    "play:sell",
+    "play:sell",
+    "play:sell",
+    "play:storm",
+    "tone:48"
+   ],
+   "toasts": [
+    "plain:2일째 · 유지비·세금 27G 지출",
+    "plain:비바람이 지나갔습니다. 시설 피해가 없습니다."
+   ],
+   "broken": [],
+   "shake": null
+  }
+ },
+ "raid": {
+  "attackers": 3,
+  "raidPanel": "마족 습격\n64초 · 적 3명\n경비 2명 · 80G + 밀 6",
+  "toasts": [
+   "warning:마족 접근 · 경비대는 주둔지 주변에서 적을 막습니다."
+  ],
+  "audio": [
+   "interact:click",
+   "play:click",
+   "play:generator",
+   "play:automotive",
+   "play:sawmill",
+   "play:generator",
+   "play:automotive",
+   "play:logistics",
+   "play:refinery",
+   "play:generator",
+   "play:automotive",
+   "play:leyrelay",
+   "play:oilpump",
+   "play:generator",
+   "play:automotive",
+   "play:logistics",
+   "play:raid",
+   "play:raid",
+   "play:generator",
+   "play:automotive",
+   "play:sell",
+   "play:sell",
+   "play:sell",
+   "play:workshop",
+   "play:generator",
+   "play:automotive"
+  ],
+  "attackersOnScreen": [
+   {
+    "x": 969,
+    "y": 189,
+    "inView": true
+   },
+   {
+    "x": 992,
+    "y": 159,
+    "inView": true
+   },
+   {
+    "x": 960,
+    "y": 141,
+    "inView": true
+   }
+  ]
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

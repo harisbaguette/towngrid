@@ -1,0 +1,67 @@
+
+  vinext build  (Vite 8.0.13)
+
+[1/5] analyze client references...
+[2Ktransforming...✓ 230 modules transformed.
+rendering chunks...
+✓ built in 14.39s
+[2/5] analyze server references...
+[2Ktransforming...✓ 282 modules transformed.
+rendering chunks...
+✓ built in 1.61s
+[3/5] build rsc environment...
+[2Ktransforming...✓ 227 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 10.22s
+[4/5] build client environment...
+[2Ktransforming...✓ 2079 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 3.06s
+[5/5] build ssr environment...
+[2Ktransforming...✓ 288 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 924ms
+[0m
+  Route (app)
+  ─ ? /
+
+  ? Unknown
+
+  ? Some routes could not be classified. vinext currently uses static analysis
+    and cannot detect dynamic API usage (headers(), cookies(), etc.) at build time.
+    Automatic classification will be improved in a future release.
+
+  Build complete. Run `vinext start` to start the production server.
+
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - rsc:scan-strip (22%)
+  - rsc:rsc-css-export-transform (20%)
+  - rsc:use-client (20%)
+  - rsc:virtual-client-package (10%)
+  - vinext:og-inline-fetch-assets (7%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - vinext:css-data-url (21%)
+  - rsc:virtual-client-package (19%)
+  - vinext:og-inline-fetch-assets (16%)
+  - rsc:use-client (15%)
+  - vinext:optimize-imports (7%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - vinext:middleware-server-only (14%)
+  - alias (14%)
+  - vinext:css-data-url (13%)
+  - rsc:virtual-client-package (12%)
+  - vinext:og-inline-fetch-assets (10%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+

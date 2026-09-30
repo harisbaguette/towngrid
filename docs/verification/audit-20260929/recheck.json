@@ -1,0 +1,279 @@
+{
+ "at": "2026-09-29T13:02:32.314Z",
+ "overrides": [
+  "health.infection=35, rank=1 (operations card shown with the infection alert)",
+  "844x390: warehouse placed through sim.build (tap placement failed)"
+ ],
+ "K01-galleryEsc": {
+  "stillInGallery": false
+ },
+ "K02-worldAtlas": {
+  "atlas": [
+   121,
+   234,
+   1320,
+   717
+  ],
+  "atlasInView": true,
+  "oversizedIcons": 0,
+  "clickOnMapChangesNation": true
+ },
+ "K03-newGame": {
+  "error": "locator.click: Timeout 30000ms exceeded."
+ },
+ "K04-blankMarker": {
+  "error": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'controls')"
+ },
+ "K05-dialogExit": {
+  "error": "locator.click: Timeout 30000ms exceeded."
+ },
+ "K06-mapEdgesEsc": {
+  "error": "locator.click: Timeout 30000ms exceeded."
+ },
+ "K07-markerLag": {
+  "error": "locator.click: Timeout 30000ms exceeded."
+ },
+ "K08-healthOverlap": {
+  "error": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'sim')"
+ },
+ "K09-stormNumbers": {
+  "error": "locator.click: Timeout 30000ms exceeded."
+ },
+ "K11-place-1366x768": {
+  "point": [
+   683,
+   384
+  ],
+  "onCanvasBefore": true,
+  "built": [
+   "warehouse"
+  ]
+ },
+ "K10-help-1366x768": {
+  "helpButtonVisible": true,
+  "anyHelpRoute": [
+   "도움말"
+  ]
+ },
+ "K12-layout-1366x768": {
+  "dockCoveredByGuide": [],
+  "dockLayout": {
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  "tilePanel": {
+   "box": [
+    533,
+    325,
+    300,
+    344
+   ],
+   "topCut": false,
+   "bottomCut": false,
+   "scrollable": false
+  },
+  "tileUnderHeader": [],
+  "mapEdgesOver": {
+   "camera": [],
+   "time": [],
+   "actions": []
+  },
+  "tinyTargets": []
+ },
+ "K11-place-1024x768": {
+  "point": [
+   512,
+   384
+  ],
+  "onCanvasBefore": true,
+  "built": [
+   "warehouse"
+  ]
+ },
+ "K10-help-1024x768": {
+  "helpButtonVisible": false,
+  "anyHelpRoute": [],
+  "settingsHasHelp": 0
+ },
+ "K12-layout-1024x768": {
+  "dockCoveredByGuide": [],
+  "dockLayout": {
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  "tilePanel": {
+   "box": [
+    362,
+    325,
+    300,
+    344
+   ],
+   "topCut": false,
+   "bottomCut": false,
+   "scrollable": false
+  },
+  "tileUnderHeader": [],
+  "mapEdgesOver": {
+   "camera": [],
+   "time": [],
+   "actions": []
+  },
+  "tinyTargets": []
+ },
+ "K11-place-390x844": {
+  "point": [
+   195,
+   422
+  ],
+  "onCanvasBefore": true,
+  "afterFirstTapTop": "canvas",
+  "built": [
+   "warehouse"
+  ]
+ },
+ "K10-help-390x844": {
+  "helpButtonVisible": false,
+  "anyHelpRoute": [],
+  "settingsHasHelp": 0
+ },
+ "K12-layout-390x844": {
+  "dockCoveredByGuide": [],
+  "dockLayout": {
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  "tilePanel": {
+   "box": [
+    50,
+    364,
+    290,
+    336
+   ],
+   "topCut": false,
+   "bottomCut": false,
+   "scrollable": false
+  },
+  "tileUnderHeader": [],
+  "mapEdgesOver": {
+   "camera": [],
+   "time": [],
+   "actions": []
+  },
+  "tinyTargets": [
+   "Close toast 20x20"
+  ]
+ },
+ "K11-place-844x390": {
+  "point": [
+   422,
+   195
+  ],
+  "onCanvasBefore": true,
+  "afterFirstTapTop": "placement-hint ",
+  "built": []
+ },
+ "K10-help-844x390": {
+  "helpButtonVisible": false,
+  "anyHelpRoute": [],
+  "settingsHasHelp": 0
+ },
+ "K12-layout-844x390": {
+  "dockCoveredByGuide": [],
+  "dockLayout": {
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  "tilePanel": {
+   "box": [
+    272,
+    -40,
+    300,
+    344
+   ],
+   "topCut": true,
+   "bottomCut": false,
+   "scrollable": false
+  },
+  "tileUnderHeader": [
+   {
+    "w": 300,
+    "h": 52,
+    "onTop": ".resource-strip",
+    "a": [
+     244,
+     6,
+     432,
+     52
+    ],
+    "b": [
+     272,
+     -40,
+     300,
+     344
+    ]
+   }
+  ],
+  "mapEdgesOver": {
+   "camera": [],
+   "time": [
+    {
+     "w": 192,
+     "h": 36,
+     "onTop": ".map-edges-card",
+     "a": [
+      14,
+      63,
+      288,
+      258
+     ],
+     "b": [
+      14,
+      77,
+      192,
+      36
+     ]
+    }
+   ],
+   "actions": [
+    {
+     "w": 62,
+     "h": 5,
+     "onTop": ".town-actions",
+     "a": [
+      14,
+      63,
+      288,
+      258
+     ],
+     "b": [
+      241,
+      316,
+      363,
+      62
+     ]
+    }
+   ]
+  },
+  "tinyTargets": [
+   "Close toast 20x20"
+  ]
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

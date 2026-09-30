@@ -1,0 +1,145 @@
+
+> towngrid@0.1.0 test
+> node scripts/test-local.mjs
+
+
+[tests/simulation.mjs]
+{
+  "result": "PASS",
+  "breadSold": 80,
+  "money": 1564,
+  "grainProduced": 201,
+  "workers": 5,
+  "industryParts": 8,
+  "checked": [
+    "food chain and hauling",
+    "profits after wages",
+    "save/load with cargo",
+    "land expansion",
+    "storm and repair",
+    "debt and family",
+    "water proximity rules",
+    "powered industry",
+    "pause"
+  ]
+}
+
+[tests/export-route.mjs]
+{"result":"PASS","checked":["export road on every region","no warehouse no export","paid on arrival","cart limit","save/load in transit","carts return","road protected","blocked route","old save upgrade","tampered route rejected","starter and showcase villages"]}
+
+[tests/trade-routes.mjs]
+{"result":"PASS","checked":["port sizes by water","a land route in every province","10 route kinds on the map","estuary and upper river ports","no province inside a lake","gate lot by land route","auto lot min(10,cap)","unknown terminal rejected","vanished terminal falls back","tampered choice rejected","old save loads","campaign sites use their province"]}
+
+[tests/trade-terminals.mjs]
+{"result":"PASS","checked":["user lot sizes","gate lot 10","ports on water only","port kind by tile water","river port ships 100","road hub needs joined road","paved hub needs paving","choice save/load/fallback","broken terminal skipped","rail terminal and its price","airport and air terminal","ice snowmobile and polar ports","desert sand","mountain side and conveyor","pipe moves water","power reach and substation","showcase powered","old saves"]}
+
+[tests/world-grid.mjs]
+{"result":"PASS","checked":["one site square per province","sides are neighbour squares","trade water = side water","every terrain on some side","capitals play like their nation","sea under a fifth","all ecologies playable","ferry routes","start land and road dry","port on its own water","layout saved","bad layout rejected","mountain side ground and conveyors","old saves keep region water","bare map legacy","campaign sites on their square"]}
+
+[tests/atlas-geometry.mjs]
+{"tiles":1550,"terrainPaths":10,"reductionPercent":99.4,"countries":30,"provinces":180}
+
+[tests/map-edges.mjs]
+Map edges: four rotated layouts, mountain yield/resources, forest density, sea/freshwater ports/irrigation, matching scenery and save compatibility PASS.
+
+[tests/biomes.mjs]
+Biomes PASS: eight playable profiles, actual resource advantages, oil/oasis, marsh water, matching scenery, deterministic generation and old/new saves.
+
+[tests/residents.mjs]
+RESIDENTS PASS
+
+[tests/facility-staff.mjs]
+Facility staff: fixed housing identities, both factions, all workplaces, state synchronization and save preservation PASS
+
+[tests/character-movement.mjs]
+{
+  "result": "CHARACTER MOVEMENT PASS",
+  "comparisons": [
+    {
+      "fps": 20,
+      "oldDistance": 22.237,
+      "distance": 23.7,
+      "oldLossPercent": 6.173
+    },
+    {
+      "fps": 30,
+      "oldDistance": 23.079,
+      "distance": 23.7,
+      "oldLossPercent": 2.62
+    },
+    {
+      "fps": 60,
+      "oldDistance": 23.079,
+      "distance": 23.7,
+      "oldLossPercent": 2.62
+    },
+    {
+      "fps": 144,
+      "oldDistance": 23.608958,
+      "distance": 23.7,
+      "oldLossPercent": 0.384
+    }
+  ],
+  "cornerTraversal": true,
+  "blockedNodes": true,
+  "logistics": true,
+  "speedChangeWithoutPhaseJump": true
+}
+
+[tests/character-motion.mjs]
+Character motion: 51 rigs × 4 views, moving cargo, handling, planted pivots, damage, CPU defeat and fading shadows PASS
+
+[tests/campaign.mjs]
+PASS: 1-tile facilities; seven playable subtypes share modern industries; enemies locked; delayed freight and in-flight save/load; regional inventory conservation; automatic residents; specialties; emerging states; earned status.
+
+[tests/balance-20260928.mjs]
+PASS balance patch 2026-09-28: data, M1~M11, constants, contracts, storm, raid trial, advice, sapling, old saves
+
+[tests/second-pass-20260928.mjs]
+PASS second pass 2026-09-28: products, contract and import transport, vehicles and fuel, state trade, disease, storm, old saves
+
+[tests/release.mjs]
+PASS rotating recovery preserves independent new-game backup and rejects corrupt replacement
+PASS nested save validation and 75-day world growth with bounded successor names
+PASS audio: 87 facilities mapped; 24 working facilities -> 36 sounds in 10 s, max 4/s, max gain 0.057, 4 concurrent, 9 samples
+PASS audio fallback, volume sanitation, voice cap, background playlist/beds, pause/mute, reusable noise and full node cleanup
+RELEASE REGRESSIONS PASS
+
+[tests/pixel-environment.mjs]
+Pixel environment: six building states / four views / harvest / growth / PNG layout / starter production and saves in all playable nations passed.
+
+[tests/pixel-industry.mjs]
+35 industry buildings: four views, fixed architecture, inventory, service expiry/power/disable, paused tools, battery and sparse ghosts passed.
+
+[tests/pixel-world.mjs]
+World art: 82 facilities, 41 new profiles; atlas coverage, stock/pause/services, terrain/save/roads, and 16 network topologies passed.
+
+[tests/art-completion.mjs]
+Art coverage passed: 82 buildings, 10 vehicles × 4 headings × 4 views, 42 UI icons, 63 recipes, damage/repair and shipment loading.
+
+[tests/quarter-camera.mjs]
+Quarter camera: four views, fixed pitch, orbit lock, return to origin, target and zoom preservation passed.
+
+[tests/screen-art.mjs]
+npm.cmd : node:internal/fs/promises:639
+At line:2 char:1
++ npm.cmd test *> docs/verification/character-finish-20260929/regressio ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (node:internal/fs/promises:639:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open 'C:\Users\ghd12\Desktop\TownGrid\public\assets\screens\daily-v3\dawn-bak
+ery.webp'
+    at async open (node:internal/fs/promises:639:25)
+    at async readFile (node:internal/fs/promises:1243:14)
+    at async file:///C:/Users/ghd12/Desktop/TownGrid/tests/screen-art.mjs:24:71 {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\ghd12\\Desktop\\TownGrid\\public\\assets\\screens\\daily-v3\\dawn-bakery.webp'
+}
+
+Node.js v22.18.0

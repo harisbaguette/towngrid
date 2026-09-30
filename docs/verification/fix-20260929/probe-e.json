@@ -1,0 +1,61 @@
+{
+ "overrides": [
+  "fixture rank8; sanctionUntil set 100 game s ahead; a harvest event pending; events otherwise silenced"
+ ],
+ "1366x768": {
+  "cards": [
+   {
+    "cls": "sanction-warning",
+    "text": "무역 압박 · 100초 시장 판매 수익 −25% 통상 협상 · 150G"
+   },
+   {
+    "cls": "weather-warning good-news",
+    "text": "풍년 · 60초"
+   },
+   {
+    "cls": "operations-card panel",
+    "text": "채석장 · 자원 고갈 네 칸 안의 내 땅에 바위가 없습니다(경계 밖 바위는 못 씀). 바위가 남은 곳으로 옮기거나 옆 구역을 "
+   }
+  ],
+  "negotiated": {
+   "sanctionCardLeft": 0,
+   "paid": 150
+  },
+  "catalogOpen": {
+   "dockTop": 469,
+   "stackBottom": 461,
+   "clear": true
+  }
+ },
+ "390x844": {
+  "cards": [
+   {
+    "cls": "sanction-warning",
+    "text": "무역 압박 · 100초 시장 판매 수익 −25% 통상 협상 · 150G"
+   },
+   {
+    "cls": "weather-warning good-news",
+    "text": "풍년 · 60초"
+   },
+   {
+    "cls": "operations-card panel",
+    "text": "채석장 · 자원 고갈 네 칸 안의 내 땅에 바위가 없습니다(경계 밖 바위는 못 씀). 바위가 남은 곳으로 옮기거나 옆 구역을 "
+   }
+  ],
+  "negotiated": {
+   "sanctionCardLeft": 0,
+   "paid": 150
+  },
+  "catalogOpen": {
+   "dockTop": 526,
+   "stackBottom": 518,
+   "clear": true
+  }
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

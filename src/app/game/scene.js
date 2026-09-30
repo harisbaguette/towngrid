@@ -1,3 +1,4 @@
+import { advanceGame } from './game-time.js';
 import {RESIDENT_LOOKS} from './resident-roster.js';
 import {pixelIdentity} from './pixel-character-data.js';
 import {RACES,FACTIONS,factionOf} from './world.js';
@@ -6,12 +7,13 @@ import { makeScenery } from './scenery.js';
 import { createRenderer } from './software-renderer.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { N, BUILDINGS, noise } from './simulation.js';
-import { makeBuilding, makeTree, makeRock, makeWorker, animateWorker, makeFreightVehicle, makeExportGate, mat, box } from './models.js';
+import { makeBuildingSafe as makeBuilding, makeTree, makeRock, makeWorker, animateWorker, makeFreightVehicle, makeExportGate } from './models.js';
 import { EXPORT_GATE, shipmentPose } from './export-route.js';
 import { shipmentVehicle, shipmentLoaded, PORT_VEHICLES } from './vehicle-art.js';
 import {biomeTree,biomeDecoration} from './biome-terrain.js';
 import {biomeOf} from './biome-data.js';
-import { makePixelProp } from './pixel-environment.js';
+import { makePixelProp,makeNetworkCargo } from './pixel-environment.js';
+import {logisticsVisualEvents,transferPose} from './logistics-visual-events.js';
 import { makeMapTerrain, CARDINALS } from './pixel-terrain.js';
 import { configureQuarterControls, applyQuarterView, settleQuarterControls, QUARTER_VIEWS } from './quarter-camera.js';
 import { facilityRoster } from './facility-staff.js';
@@ -19,6 +21,13 @@ import { tradeProvince } from './trade-routes.js';
 import { edgePoint } from './world-grid.js';
 
 function release(root){if(!root)return;root.traverse(n=>{if(n.geometry&&!n.geometry.userData.shared)n.geometry.dispose();if(n.material&&(!n.geometry?.userData.shared||n.userData.ownedMaterial))for(const m of(Array.isArray(n.material)?n.material:[n.material]))if(m&&!m.userData.shared)m.dispose();if(n.userData.pixel||n.userData.pixelEnvironment||n.userData.pixelWater||n.userData.pixelSurface)n.userData.texture.dispose();if(n.isSkinnedMesh)n.skeleton.dispose();if(n.isInstancedMesh)n.dispose();if(n.userData.mixer){n.userData.mixer.stopAllAction();n.userData.mixer.uncacheRoot(n.userData.root);}});}
+// Trees and rocks outside the owned land cannot be harvested yet (J4): they are drawn washed out (half-way to a light
+// grey of their own brightness), so the usable resources inside the border read at a glance. WebGL only.
+function fadeUnowned(obj){
+ const m=obj.userData.sprite?.material;if(!m)return;obj.userData.unowned=true;
+ m.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <colorspace_fragment>','#include <colorspace_fragment>\n gl_FragColor.rgb=mix(gl_FragColor.rgb,vec3(dot(gl_FragColor.rgb,vec3(.299,.587,.114)))*.8+.22,.55);');};
+ m.customProgramCacheKey=()=>'pixel-unowned';m.needsUpdate=true;
+}
 export class GameScene{
  constructor(container,sim,callbacks={},renderOptions={}){
   this.container=container;this.sim=sim;this.callbacks=callbacks;this.models=new Map();this.workerModels=new Map();this.nature=[];this.mode=null;this.selection=null;this.hover=null;this.lastRevision=-1;this.alive=true;
@@ -59,6 +68,15 @@ export class GameScene{
   try{localStorage.setItem('orvetharn-quality',this.quality);}catch{}
  }
  resize(){this.lastPaint=null;const w=this.container.clientWidth,h=this.container.clientHeight;if(!w||!h)return;this.renderer.setSize(w,h,false);const span=w<700?7.1:6.8;this.camera.left=-span*w/h;this.camera.right=span*w/h;this.camera.top=span;this.camera.bottom=-span;this.camera.updateProjectionMatrix();}
+ // Facility markers: React (onMarkers, 0.4 s) decides which exist and what they say; their screen position follows the
+ // camera every frame here (B11), so a drag, zoom or 90-degree turn never leaves them behind.
+ markerPoint(b,w,h){const v=this.markerVector||(this.markerVector=new THREE.Vector3());v.set(b.x,({well:1.02,lumber:.72,sawmill:.72,field:.64})[b.type]||1.38,b.z).project(this.camera);return {x:(v.x+1)*w/2,y:(1-v.y)*h/2};}
+ placeMarkers(){
+  const w=this.container.clientWidth,h=this.container.clientHeight,byId=new Map(this.sim.buildings.map(b=>[b.id,b]));
+  for(const el of this.markerLayer.children){const b=byId.get(Number(el.dataset.buildingId));if(!b){el.style.visibility='hidden';continue;}
+   const p=this.markerPoint(b,w,h),t='translate('+p.x.toFixed(1)+'px,'+p.y.toFixed(1)+'px) translate(-50%,-100%)',hide=p.x<=60||p.x>=w-60||p.y<=70||p.y>=h-90?'hidden':'';
+   if(el.tgTransform!==t){el.tgTransform=t;el.style.transform=t;}if(el.tgHidden!==hide){el.tgHidden=hide;el.style.visibility=hide;}if(!el.dataset.placed)el.dataset.placed='1';}
+ }
  setSimulation(sim){this.sim=sim;this.selection=null;this.callbacks.onMarkers?.([]);this.setMode(null);this.lastRevision=-1;this.rebuild();this.resetCamera();}
  resetCamera(){const land=[...this.sim.owned].map(k=>k.split(',').map(Number));const xs=land.map(p=>p[0]),zs=land.map(p=>p[1]);const x=(Math.min(...xs)+Math.max(...xs))/2,z=(Math.min(...zs)+Math.max(...zs))/2;settleQuarterControls(this.controls);this.controls.target.set(x,0,z);this.camera.zoom=this.sim.buildings.length>20?.82:1;this.camera.updateProjectionMatrix();this.setQuarterView(0);}
  setQuarterView(view){this.viewIndex=applyQuarterView(this.camera,this.controls,view);this.renderer.cache?.clear();this.renderer.poseCache?.clear();this.renderer.domElement.dataset.cameraView=QUARTER_VIEWS[this.viewIndex];this.renderer.domElement.dataset.cameraQuarter=String(this.viewIndex);this.renderer.domElement.dataset.cameraAzimuth=String(this.controls.getAzimuthalAngle());this.renderer.domElement.dataset.cameraPolar=String(this.controls.getPolarAngle());for(const m of this.models.values())m.userData.animate?.(this.sim.time,m.userData.building,this.sim,this.viewIndex);this.hover=null;this.confirmTile=null;this.hoverLine.visible=false;if(this.ghost){this.ghost.visible=false;this.ghost.userData.animate?.(this.sim.time,{working:false,progress:0,inputs:{}},this.sim,this.viewIndex);}for(const p of [...this.nature,...(this.decorations||[])])p.userData.animate?.(this.sim.time,p.userData.tile,false,this.viewIndex);this.scenery?.animate(this.sim.time,this.viewIndex);this.callbacks.onViewChange?.(QUARTER_VIEWS[this.viewIndex]);}
@@ -106,6 +124,7 @@ export class GameScene{
   for(const [key,s]of this.stumps)if(s.until<=this.sim.time||this.sim.tile(s.x,s.z)?.nature||this.sim.at(s.x,s.z)||this.sim.roads.has(key))this.stumps.delete(key);
   this.renderer.cache?.clear();release(this.world);this.scene.remove(this.world);this.world=new THREE.Group();this.scene.add(this.world);this.models.clear();this.workerModels.clear();this.enemyModels=new Map();this.nature=[];this.dockBoats=[];const sceneryKey=this.sim.region+':'+this.sim.race+':'+tradeProvince(this.sim)+':'+JSON.stringify(this.sim.layout);if(this.sceneryKey!==sceneryKey){if(this.scenery){release(this.scenery.group);this.scene.remove(this.scenery.group);}this.scenery=makeScenery(this.sim.region,this.sim.race,this.sim);this.scene.add(this.scenery.group);this.sceneryKey=sceneryKey;}
   const sim=this.sim;
+  this.networkCargo=new Map();
   this.terrain=makeMapTerrain(sim,this.overlay);this.world.add(this.terrain);this.water=this.terrain.userData.water;
   this.decorations=[];
   for(const t of sim.tiles){
@@ -114,6 +133,7 @@ export class GameScene{
    if(t.nature&&!sim.at(t.x,t.z)&&!sim.roads.has(key)){
     const tree=biomeTree(sim.layout,t),scale=.73+noise(t.x,t.z)*.20;
     const obj=['tree','sapling'].includes(t.nature)?(tree?makePixelProp(tree,scale*(t.nature==='sapling'?.35:1)):makeTree(Math.floor(noise(t.z,t.x)*6),scale)):makeRock(.9+noise(t.x,t.z)*.25,t.ore>70?'oreRock':t.moisture>70?'mossrock':'rock');
+    if(!sim.ownedAt(t.x,t.z))fadeUnowned(obj);
     obj.position.set(t.x,.015,t.z);obj.userData.tile=t;obj.userData.wasMature=t.nature==='tree';obj.userData.animate?.(sim.time,t,false,this.viewIndex);this.world.add(obj);this.nature.push(obj);
    }else if(!sim.at(t.x,t.z)&&!sim.roads.has(key)&&!sim.pipes?.has(key)&&!sim.conveyors?.has(key)&&!sim.rails?.has(key)){
     const waterEdge=CARDINALS.find(([dx,dz])=>sim.tile(t.x+dx,t.z+dz)?.terrain==='water');
@@ -138,7 +158,7 @@ export class GameScene{
   this.freight=[];for(const route of sim.campaign?.routes||[]){if(route.from!==sim.siteId&&route.to!==sim.siteId)continue;const m=makeFreightVehicle(route.mode,route.item);this.world.add(m);this.freight.push({m,route});}const gate=makeExportGate();gate.position.set(EXPORT_GATE.x,.01,EXPORT_GATE.z);this.world.add(gate);this.decorations.push(gate);this.exportCarts=new Map();this.drawExpansions();const tileSelection=this.tileSelection;this.select(this.selection);if(tileSelection&&!this.selection)this.selectTile(tileSelection.x,tileSelection.z);this.lastRevision=sim.revision;
  }
  loop(now){
-  if(!this.alive)return;if(this.contextLost||this.active===false){this.last=now;this.frame=requestAnimationFrame(this.loop);return;}if(now-this.last<1000/this.maxFps-1){this.frame=requestAnimationFrame(this.loop);return;}const dt=Math.min((now-this.last)/1000,.5);this.last=now;let remaining=dt;while(remaining>0){const step=Math.min(.05,remaining);if(this.sim.campaign)this.sim.campaign.tick(step);else this.sim.tick(step);remaining-=step;}
+  if(!this.alive)return;if(this.contextLost||this.active===false){this.last=now;this.frame=requestAnimationFrame(this.loop);return;}if(now-this.last<1000/this.maxFps-1){this.frame=requestAnimationFrame(this.loop);return;}const dt=Math.min((now-this.last)/1000,.5);this.last=now;advanceGame(this.sim,dt);
   if(this.lastRevision!==this.sim.revision)this.rebuild();
   this.controls.update();this.camera.updateMatrixWorld();
   for(const [id,m]of this.models){const b=this.sim.buildings.find(v=>v.id===id);if(b){m.userData.animate?.(this.sim.time,b,this.sim,this.viewIndex);m.rotation.z=0;}}
@@ -153,8 +173,12 @@ export class GameScene{
   const harvesting=new Set(this.sim.buildings.filter(b=>b.working&&BUILDINGS[b.type]?.natural==='tree').map(b=>this.sim.closestNatural(b,'tree')));
   for(const n of this.nature){if(n.userData.stumpUntil)n.visible=this.sim.time<n.userData.stumpUntil;else n.userData.animate?.(this.sim.time,n.userData.tile,harvesting.has(n.userData.tile),this.viewIndex);}
   this.terrain?.userData.animate(this.sim.time);
-  for(const enemy of [...(this.sim.attackers||[]),...(this.sim.guards||[])]){let m=this.enemyModels.get(enemy.id);if(!m){m=makeWorker(Number(enemy.id)||0,enemy.race,enemy.appearance);const bar=new THREE.Group();const bg=new THREE.Mesh(new THREE.PlaneGeometry(.5,.065),new THREE.MeshBasicMaterial({color:'#382f35',side:THREE.DoubleSide}));const hp=new THREE.Mesh(new THREE.PlaneGeometry(.46,.035),new THREE.MeshBasicMaterial({color:enemy.guard?'#59baa3':'#eb826c',side:THREE.DoubleSide}));bar.add(bg,hp);bar.position.y=1.45;hp.position.z=.002;bar.userData.fill=hp;m.add(bar);m.userData.hpBar=bar;m.userData.worker=true;if(enemy.guard&&!m.userData.pixel){const shield=new THREE.Mesh(new THREE.SphereGeometry(.16,20,14),mat('#679eac',{metalness:.3,roughness:.4}));shield.scale.set(1,1.12,.24);shield.position.set(-.16,.47,.17);m.add(shield);box(m,.022,.50,.026,'#8f7552',.16,.49,.08,.006);const spear=new THREE.Mesh(new THREE.ConeGeometry(.045,.12,8),mat('#cad5d4',{metalness:.5}));spear.position.set(.16,.79,.08);m.add(spear);}this.enemyModels.set(enemy.id,m);this.world.add(m);}animateWorker(m,enemy,this.sim.time,this.camera);if(m.userData.hpBar){m.userData.hpBar.visible=enemy.hp>0;m.userData.hpBar.quaternion.copy(m.quaternion).invert().multiply(this.camera.quaternion);m.userData.hpBar.userData.fill.scale.x=Math.max(.01,(enemy.hp??1)/(enemy.maxHp??1));}}for(const[id,m]of this.enemyModels){if(![...this.sim.attackers,...(this.sim.guards||[])].some(e=>e.id===id)){this.world.remove(m);release(m);this.enemyModels.delete(id);}}
-  this.uiAccum+=dt;this.frameSamples=(this.frameSamples||0)+1;this.frameElapsed=(this.frameElapsed||0)+dt;if(this.uiAccum>.4){this.uiAccum=0;this.renderer.domElement.dataset.fps=String(Math.round(this.frameSamples/this.frameElapsed));this.renderer.domElement.dataset.renderer=this.renderer.isSoftware?'canvas':'webgl';this.renderer.domElement.dataset.geometries=String(this.renderer.info?.memory.geometries||(this.renderer.cache?.size||0)+(this.renderer.poseCache?.size||0));this.renderer.domElement.dataset.textures=String(this.renderer.info?.memory.textures||0);this.renderer.domElement.dataset.models=String(this.models.size+this.workerModels.size+this.enemyModels.size);this.renderer.domElement.dataset.gameTime=String(Math.round(this.sim.time*10)/10);this.renderer.domElement.dataset.characterStyle='pixel';this.renderer.domElement.dataset.characterFrames=[...this.workerModels.values()].map(m=>m.userData.direction+':'+m.userData.frame).join(',');this.frameSamples=0;this.frameElapsed=0;this.callbacks.onUpdate?.(this.sim);const w=this.container.clientWidth,h=this.container.clientHeight;this.callbacks.onMarkers?.(this.sim.buildings.filter(b=>!this.mode).map(b=>{const markerHeight=({well:1.02,lumber:.72,sawmill:.72,field:.64})[b.type]||1.38;const v=new THREE.Vector3(b.x,markerHeight,b.z).project(this.camera);return {id:b.id,type:b.type,status:b.status,working:b.working,x:(v.x+1)*w/2,y:(1-v.y)*h/2};}).filter(m=>m.x>60&&m.x<w-60&&m.y>70&&m.y<h-90));}
+  const transfers=logisticsVisualEvents(this.sim).filter(e=>e.path),visibleTransfers=new Set(transfers.map(e=>e.id));
+  for(const event of transfers){let m=this.networkCargo.get(event.id);if(!m){m=makeNetworkCargo(event.item,event.kind);this.networkCargo.set(event.id,m);this.world.add(m);}const pose=transferPose(event,this.sim.time);m.position.set(pose.x,event.kind==='pipe'?.09:.15,pose.z);}
+  for(const [id,m]of this.networkCargo)if(!visibleTransfers.has(id)){this.world.remove(m);release(m);this.networkCargo.delete(id);}
+  for(const enemy of [...(this.sim.attackers||[]),...(this.sim.guards||[])]){let m=this.enemyModels.get(enemy.id);if(!m){m=makeWorker(Number(enemy.id)||0,enemy.race,enemy.appearance);const bar=new THREE.Group();const bg=new THREE.Mesh(new THREE.PlaneGeometry(.5,.065),new THREE.MeshBasicMaterial({color:'#382f35',side:THREE.DoubleSide}));const hp=new THREE.Mesh(new THREE.PlaneGeometry(.46,.035),new THREE.MeshBasicMaterial({color:enemy.guard?'#59baa3':'#eb826c',side:THREE.DoubleSide}));bar.add(bg,hp);bar.position.y=1.45;hp.position.z=.002;bar.userData.fill=hp;m.add(bar);m.userData.hpBar=bar;m.userData.worker=true;this.enemyModels.set(enemy.id,m);this.world.add(m);}animateWorker(m,enemy,this.sim.time,this.camera);if(m.userData.hpBar){m.userData.hpBar.visible=enemy.hp>0;m.userData.hpBar.quaternion.copy(m.quaternion).invert().multiply(this.camera.quaternion);m.userData.hpBar.userData.fill.scale.x=Math.max(.01,(enemy.hp??1)/(enemy.maxHp??1));}}for(const[id,m]of this.enemyModels){if(![...this.sim.attackers,...(this.sim.guards||[])].some(e=>e.id===id)){this.world.remove(m);release(m);this.enemyModels.delete(id);}}
+  this.uiAccum+=dt;this.frameSamples=(this.frameSamples||0)+1;this.frameElapsed=(this.frameElapsed||0)+dt;if(this.uiAccum>.4){this.uiAccum=0;this.renderer.domElement.dataset.fps=String(Math.round(this.frameSamples/this.frameElapsed));this.renderer.domElement.dataset.renderer=this.renderer.isSoftware?'canvas':'webgl';this.renderer.domElement.dataset.geometries=String(this.renderer.info?.memory.geometries||(this.renderer.cache?.size||0)+(this.renderer.poseCache?.size||0));this.renderer.domElement.dataset.textures=String(this.renderer.info?.memory.textures||0);this.renderer.domElement.dataset.models=String(this.models.size+this.workerModels.size+this.enemyModels.size);this.renderer.domElement.dataset.gameTime=String(Math.round(this.sim.time*10)/10);this.renderer.domElement.dataset.characterStyle='pixel';this.renderer.domElement.dataset.characterFrames=[...this.workerModels.values()].map(m=>m.userData.direction+':'+m.userData.frame).join(',');this.frameSamples=0;this.frameElapsed=0;this.callbacks.onUpdate?.(this.sim);const w=this.container.clientWidth,h=this.container.clientHeight;this.callbacks.onMarkers?.(this.sim.buildings.filter(b=>!this.mode).map(b=>{const p=this.markerPoint(b,w,h);return {id:b.id,type:b.type,status:b.status,working:b.working,x:p.x,y:p.y};}).filter(m=>m.x>-200&&m.x<w+200&&m.y>-200&&m.y<h+200));}
+  if(this.markerLayer)this.placeMarkers();
   for(const sh of this.sim.shipments||[]){
    const p=shipmentPose(sh),kind=shipmentVehicle(sh,this.sim,p);let m=this.exportCarts?.get(sh.id);
    if(m&&m.userData.vehicleKind!==kind){this.world.remove(m);release(m);this.exportCarts.delete(sh.id);m=null;}
@@ -165,20 +189,57 @@ export class GameScene{
   for(const[id,m]of this.exportCarts||[])if(!this.sim.shipments?.some(sh=>sh.id===id)){this.world.remove(m);release(m);this.exportCarts.delete(id);}
   for(const {m,route} of this.freight||[]){const station=this.sim.buildings.find(b=>b.type==='station')||this.sim.warehouse;m.visible=!!route.cargo&&!!station;if(station){const p=1-route.remaining/route.duration;m.position.set(station.x-2+p*5,.08,station.z+1);m.rotation.y=Math.PI/2;m.userData.animate?.(this.sim.time,null,false,this.viewIndex);}}const paintKey=this.sim.time+':'+this.sim.revision+':'+this.camera.matrixWorld.elements.join(',')+':'+this.camera.zoom+':'+this.mode+':'+this.selection+':'+this.hover?.x+','+this.hover?.z+':'+this.container.clientWidth+':'+this.container.clientHeight;if(!this.sim.paused||paintKey!==this.lastPaint){this.renderer.render(this.scene,this.camera);this.lastPaint=paintKey;}this.frame=requestAnimationFrame(this.loop);
  }
- icons(race=this.sim.race){if(this.iconCache?.has(race))return this.iconCache.get(race);if(!this.iconCache)this.iconCache=new Map();
-  const r=createRenderer({alpha:true,antialias:true,preserveDrawingBuffer:true});r.setSize(150,130);r.setPixelRatio(1);r.outputColorSpace=THREE.SRGBColorSpace;r.toneMapping=THREE.ACESFilmicToneMapping;r.toneMappingExposure=1.37;
-  const s=new THREE.Scene();s.add(new THREE.HemisphereLight('#ffffff','#b1be8d',2.6));const l=new THREE.DirectionalLight('#ffe8c9',3);l.position.set(-3,8,5);s.add(l);
-  const c=new THREE.OrthographicCamera(-.78,.78,.70,-.70,.1,30);c.position.set(4,4.42,4);c.lookAt(0,.42,0);const result={};
-  for(const type of Object.keys(BUILDINGS)){const model=makeBuilding(type,BUILDINGS[type].resident||race);
-   model.userData.animate?.(1,{working:true,progress:.8,inputs:{grain:3},animationTime:1},null);s.add(model);r.render(s,c);result[type]=r.domElement.toDataURL('image/png');s.remove(model);release(model);
+ // Building art does not depend on the race (only resident portraits do), so each building icon is drawn once per
+ // scene and shared by every race's icon object. Icons are drawn a few per idle period (placed types first) and
+ // encoded off the main path with toBlob, so the catalog never freezes startup; the returned object fills in place
+ // and the next UI update shows the new icons (callbacks.onIcons fires once the catalog is complete).
+ icons(race=this.sim.race){
+  if(!this.iconCache){const cache=new Map();cache.clear=()=>{Map.prototype.clear.call(cache);this.iconGeneration=(this.iconGeneration||0)+1;this.buildingIcons=new Map();this.iconPending=new Set();};this.iconCache=cache;}
+  if(!this.buildingIcons){this.buildingIcons=new Map();this.iconPending=new Set();this.iconGeneration=0;}
+  let result=this.iconCache.get(race);
+  if(!result){
+   result={};
+   for(const id of FACTIONS[factionOf(race)].members)for(const look of RESIDENT_LOOKS[id]||[{id:'default'}]){
+    result['resident-'+id+'-'+look.id]=pixelIdentity(id,0,look.id).portrait;
+    if(!result['resident-'+id])result['resident-'+id]=result['resident-'+id+'-'+look.id];
+   }
+   this.iconCache.set(race,result);
   }
-  for(const id of FACTIONS[factionOf(race)].members)for(const look of RESIDENT_LOOKS[id]||[{id:'default'}]){
-   result['resident-'+id+'-'+look.id]=pixelIdentity(id,0,look.id).portrait;
-   if(!result['resident-'+id])result['resident-'+id]=result['resident-'+id+'-'+look.id];
-  }this.iconCache.set(race,result);r.dispose();r.forceContextLoss?.();return result;
+  for(const [type,url] of this.buildingIcons)result[type]=url;
+  this.drawIcons();return result;
  }
+ iconQueue(){const placed=new Set(this.sim.buildings.map(b=>b.type)),left=Object.keys(BUILDINGS).filter(t=>!this.buildingIcons.has(t)&&!this.iconPending.has(t));return [...left.filter(t=>placed.has(t)),...left.filter(t=>!placed.has(t))];}
+ drawIcons(){
+  if(this.iconTask||!this.alive)return;
+  const queue=this.iconQueue();if(!queue.length)return;
+  // While the town is on screen, a 6 ms slice (at least one icon, ~20 ms on a slow CPU) every 80 ms: bounded cost and the
+  // catalog still completes in seconds. On the title/home/world screens the scene is inactive, so idle periods do it.
+  const playing=this.active!==false,generation=this.iconGeneration,run=deadline=>{
+   this.iconTask=null;if(!this.alive)return;const start=performance.now();
+   for(const type of queue){if(generation!==this.iconGeneration)break;if(this.buildingIcons.has(type)||this.iconPending.has(type))continue;this.drawIcon(type,generation);if(performance.now()-start>6||deadline.timeRemaining()<4)break;}
+   this.drawIcons();
+  };
+  this.iconTask=!playing&&typeof requestIdleCallback==='function'?{idle:requestIdleCallback(run,{timeout:300})}:{timer:setTimeout(()=>run({timeRemaining:()=>8}),playing?80:16)};
+ }
+ drawIcon(type,generation){
+  if(!this.iconRenderer){const renderer=createRenderer({alpha:true,antialias:true,preserveDrawingBuffer:true});renderer.setSize(150,130);renderer.setPixelRatio(1);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.37;
+   const scene=new THREE.Scene();scene.add(new THREE.HemisphereLight('#ffffff','#b1be8d',2.6));const light=new THREE.DirectionalLight('#ffe8c9',3);light.position.set(-3,8,5);scene.add(light);
+   const camera=new THREE.OrthographicCamera(-.78,.78,.70,-.70,.1,30);camera.position.set(4,4.42,4);camera.lookAt(0,.42,0);this.iconRenderer={renderer,scene,camera};}
+  const {renderer,scene,camera}=this.iconRenderer,model=makeBuilding(type,BUILDINGS[type].resident||this.sim.race);
+  model.userData.animate?.(1,{working:true,progress:.8,inputs:{grain:3},animationTime:1},null);scene.add(model);renderer.render(scene,camera);scene.remove(model);release(model);
+  this.iconPending.add(type);
+  const done=url=>{
+   this.iconPending.delete(type);if(generation!==this.iconGeneration||!this.alive)return;
+   if(url){this.buildingIcons.set(type,url);for(const result of this.iconCache.values())result[type]=url;}
+   if(!this.iconPending.size&&!this.iconQueue().length){this.disposeIconRenderer();this.callbacks.onIcons?.();}
+  };
+  // toBlob copies the pixels now and encodes the PNG asynchronously; the next icon may reuse the canvas at once.
+  const canvas=renderer.domElement;if(canvas.toBlob)canvas.toBlob(blob=>done(blob&&URL.createObjectURL(blob)),'image/png');else done(canvas.toDataURL('image/png'));
+ }
+ disposeIconRenderer(){const r=this.iconRenderer;if(!r)return;this.iconRenderer=null;r.renderer.dispose();r.renderer.forceContextLoss?.();}
  dispose(){
   this.alive=false;cancelAnimationFrame(this.frame);this.resizeObserver.disconnect();this.controls.dispose();
+  if(this.iconTask?.idle)cancelIdleCallback(this.iconTask.idle);if(this.iconTask?.timer)clearTimeout(this.iconTask.timer);this.iconTask=null;this.disposeIconRenderer();
   const c=this.renderer.domElement;c.removeEventListener('webglcontextlost',this.onLost);c.removeEventListener('webglcontextrestored',this.onRestored);c.removeEventListener('pointerdown',this.onDown);c.removeEventListener('pointermove',this.onMove);c.removeEventListener('pointerup',this.onUp);c.removeEventListener('pointerleave',this.onLeave);c.removeEventListener('pointercancel',this.onCancel);c.removeEventListener('contextmenu',this.onContext);
   release(this.world);release(this.scenery?.group);release(this.ghost);release(this.selectionLine);release(this.hoverLine);release(this.expansionLines);this.renderer.dispose();c.remove();
  }

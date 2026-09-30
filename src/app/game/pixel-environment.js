@@ -5,6 +5,10 @@ import { productionVisualState } from './production-visuals.js';
 import { attachIndustryAnimation } from './pixel-industry.js';
 import { RESOURCE_FRAMES } from './resource-art.js';
 import { VEHICLE_ART } from './vehicle-art.js';
+import {attachBuildingCondition} from './pixel-building-condition.js';
+import {CRANE_RIGS,vehicleMotion} from './pixel-motion-data.js';
+import {logisticsVisualEvents} from './logistics-visual-events.js';
+import {attachFarmAnimals} from './pixel-farm-motion.js';
 
 const images = new Map(), pending = new Map(), alphaMasks = new Map(), baseTextures = new Map();
 export async function loadPixelEnvironment() {
@@ -65,7 +69,7 @@ function setFrame(object, frame, direction = 0) {
  u.direction = ((direction % rows) + rows) % rows;
  u.texture.repeat.x = (u.flipX ? -1 : 1) / spec.frames;
  u.texture.offset.set((frame + (u.flipX ? 1 : 0)) / spec.frames, (rows - 1 - u.direction) / rows);
- if (spec.building) {
+ if (spec.building || spec.structure) {
   // Keep the drawn footprint centred on its tile while lifting the billboard
   // out of the opaque ground. Moving along the view ray preserves its screen
   // position; a vertical-only lift would make the building appear to float.
@@ -112,7 +116,9 @@ export function makePixelSawmill(race) {
 
 export function makePixelBuilding(type, race) {
  if (!ENVIRONMENT_ASSETS[type]?.building) return null;
- const group = createSprite(type);
+ const bodyAtlas=CRANE_RIGS[type]?type+'Body':type;
+ const group = createSprite(bodyAtlas);
+ group.name=type;group.userData.buildingType=type;
  group.userData.race = race;
  const u = group.userData;
  u.layers = [];
@@ -159,10 +165,15 @@ export function makePixelBuilding(type, race) {
   group.add(line);(u.ropes ||= []).push(line);return line;
  };
  const industryAnimation = attachIndustryAnimation(type, {part, position, setFrame, rope, screenPoint});
+ const farmAnimation = attachFarmAnimals(type, {part, position, setFrame});
+ const hoist=CRANE_RIGS[type]?part('crane-hoist',0,1.4,type+'Hoist'):null;
+ const hoistRope=hoist?rope():null;
+ const hoistGoods=hoist?part('crane-cargo',0,.14,'resourceGoods'):null;
  const cracks=part('damage-cracks',6,.38,'supportArt');
  const rubble=part('damage-rubble',8,.49,'supportArt');
  const repair=part('repair-needed',9,.26,'supportArt');
  const impact=part('condition-effect',10,.35,'supportArt');
+ const condition=attachBuildingCondition(type,group,{part,position,setFrame,atlas:bodyAtlas});
  u.animate = (time, building = {}, sim, view = 0) => {
   setFrame(group, pixelBuildingFrame(), view);
   const azimuth = quarterAzimuth(u.direction);
@@ -172,15 +183,35 @@ export function makePixelBuilding(type, race) {
   if(u.conditionHealth!==undefined&&health!==u.conditionHealth){
    u.conditionEffectUntil=clockTime+.8;u.conditionRepair=health>u.conditionHealth;
   }
-  u.conditionHealth=health;
+  u.previousConditionHealth=u.conditionHealth;u.conditionHealth=health;
   cracks.visible=health<100;setFrame(cracks,health<=50?7:6);position(cracks,96,115);
   rubble.visible=health<=0;position(rubble,94,156);
   repair.visible=health<=0;position(repair,136,135);
   impact.visible=clockTime<(u.conditionEffectUntil??0);setFrame(impact,u.conditionRepair?11:10);position(impact,92,95);
-  if (!stateType && !industryAnimation) return;
+  if(hoist){
+   const event=building.previewTransfer||logisticsVisualEvents(sim).find(e=>e.kind==='terminal'&&e.terminal===building.id);
+   const p=event?Math.max(0,Math.min(1,(clockTime-event.start)/(event.until-event.start))):0;
+   const active=!!event&&health>0&&building.enabled!==false;
+   const [,top,,,ax,ay,cx,cy]=CRANE_RIGS[type][u.direction];
+   const occluded=type==='polarport'&&u.direction===2;
+   const lift=active&&!occluded?Math.sin(p*Math.PI)*Math.min(16,Math.max(0,top-ay-2)):0,dx=active&&!occluded?Math.sin(p*Math.PI*2)*3:0;
+   setFrame(hoist,0,u.direction);hoist.visible=health>0;
+   position(hoist,96+dx,192*.69-lift);
+   hoistGoods.visible=active&&!occluded&&RESOURCE_FRAMES[event.item]!==undefined;
+   if(hoistGoods.visible){setFrame(hoistGoods,RESOURCE_FRAMES[event.item]);position(hoistGoods,cx+dx,cy-lift);}
+   hoistRope.visible=health>0&&!occluded;
+   const points=hoistRope.geometry.attributes.position;
+   for(const [i,p] of [screenPoint(ax,ay),screenPoint(ax+dx,top-lift+3)].entries())points.setXYZ(i,p.x,p.y,p.z);
+   points.needsUpdate=true;hoistRope.geometry.computeBoundingSphere();u.handlingCargo=active;
+  }
+  if (!stateType && !industryAnimation) {condition(clockTime,building,u.direction);return;}
   const state = productionVisualState(type, building, sim);u.production = state;
   if (industryAnimation) industryAnimation(time, building, sim, u.direction, state);
-  if (!stateType) return;
+  if (!stateType) {
+   condition(clockTime,building,u.direction);
+   if (farmAnimation) farmAnimation(time, building, sim, u.direction, state);
+   return;
+  }
   const clock = building.animationTime ?? time;
   // Discrete pixel poses, only on the tool, driven by simulation time. Pausing
   // the game therefore freezes exactly the displayed pose.
@@ -217,6 +248,7 @@ export function makePixelBuilding(type, race) {
     : [68 + i * 24, 151];
    position(pile, ...xy);
   }
+  condition(clockTime,building,u.direction);
  };
  u.animate(0, {});
  return group;
@@ -245,12 +277,19 @@ export function makePixelProp(id, scale = 1, variant = 0) {
 // painted into every return trip. Local offsets cancel world heading so the
 // same screen-space anchor works in the WebGL and CPU renderers.
 export function makePixelVehicle(mode='truck',item='steel') {
- const id=VEHICLE_ART[mode]||VEHICLE_ART.wagon,group=makePixelProp(id),u=group.userData;
+ const id=VEHICLE_ART[mode]||VEHICLE_ART.wagon,group=makePixelProp(id+'Motion'),u=group.userData;
  u.vehicle=true;u.vehicleKind=mode;u.cargoItem=item;u.loaded=true;
  const cargo=createSprite('resourceGoods');cargo.name='vehicle-cargo';
  cargo.userData.sprite.scale.set(.24,.24,1);cargo.userData.sprite.material.depthWrite=false;cargo.userData.sprite.renderOrder=1;
  group.add(cargo);u.layers=[cargo];u.cargo=cargo;
  const animate=u.animate,normal=new THREE.Vector3(),right=new THREE.Vector3(),up=new THREE.Vector3(),axis=new THREE.Vector3(0,1,0);
+ const waterVehicle=['raft','steamer','ship','ferry'].includes(mode);
+ const wakes=waterVehicle?Array.from({length:2},(_,i)=>{
+  const geometry=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-.2,0,.08),new THREE.Vector3(0,0,.18),new THREE.Vector3(.2,0,.08)]);
+  const line=new THREE.Line(geometry,new THREE.LineBasicMaterial({color:'#b6e8df',transparent:true,opacity:.65}));
+  line.userData.wake=i;group.add(line);return line;
+ }):[];
+ u.wakes=wakes;
  const pads={
   cargoWagon:[[124,105],[121,133],[71,133],[68,105]],
   cargoTruckEmpty:[[120,98],[111,135],[81,135],[72,98]],
@@ -263,6 +302,12 @@ export function makePixelVehicle(mode='truck',item='steel') {
  };
  u.animate=(time,tile,working,view=0)=>{
   animate(time,tile,working,view);
+  const frame=u.previewMotion?Math.floor(time*8)%8:vehicleMotion(u,time,group.position);
+  setFrame(group,frame,u.direction);
+  for(const [i,wake]of wakes.entries()){
+   wake.visible=!!(u.motionMoving||u.previewMotion);const phase=(time*1.7+i*.5)%1;
+   wake.position.set(0,-.018,-.30-phase*.22);wake.scale.setScalar(.75+phase*.55);wake.material.opacity=(1-phase)*.62;
+  }
   cargo.visible=!!u.loaded&&RESOURCE_FRAMES[u.cargoItem]!==undefined&&!!pads[id];
   if(!cargo.visible)return;
   setFrame(cargo,RESOURCE_FRAMES[u.cargoItem]);
@@ -272,6 +317,12 @@ export function makePixelVehicle(mode='truck',item='steel') {
    .addScaledVector(up,(spec.anchor[1]-y/192)*spec.size).addScaledVector(normal,.012).applyAxisAngle(axis,-group.rotation.y);
  };
  u.animate(0,null,false,0);return group;
+}
+
+export function makeNetworkCargo(item,kind){
+ const group=createSprite('resourceGoods'),u=group.userData;
+ u.sprite.scale.setScalar(kind==='pipe'?.12:.22);u.sprite.material.depthWrite=false;
+ setFrame(group,RESOURCE_FRAMES[item]??0);u.networkCargo=true;u.item=item;return group;
 }
 
 export function makePixelWater(count, width = 1.005, height = 1.005) {

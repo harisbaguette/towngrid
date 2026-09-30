@@ -4,7 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 const { chromium } = await import(process.argv[2] ? pathToFileURL(process.argv[2]).href : 'playwright');
 const browser = await chromium.launch({ headless: true, ...(process.argv[3] ? { executablePath: process.argv[3] } : {}) });
-const out = new URL('../docs/verification/mira-runtime/', import.meta.url);
+const out = new URL(process.env.TOWNGRID_PROOF_DIR || '../docs/verification/mira-runtime/', import.meta.url);
 await mkdir(out, { recursive: true });
 try {
  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } }), errors = [], failedAssets = [];
@@ -79,20 +79,34 @@ try {
  const activity = await page.evaluate(async () => {
   const scene = window.miraScene, sim = scene.sim, start = sim.time, frames = new Set(), actions = new Set();
   const delivered = sim.logisticsStats.delivered;
+  const mismatches=[],counts={moving:0,handling:0,holding:0,corners:0},headings=new Map();
   sim.paused = false; sim.speed = 2;
   const deadline = performance.now()+55000;
   while (sim.time - start < 90 && performance.now() < deadline) {
    await new Promise(requestAnimationFrame);
-   for (const w of sim.workers.filter(w => w.appearance === 'mira')) {
-    const m = scene.workerModels.get(w.id); actions.add(m.userData.current);
-    if (m.userData.current === 'walk') frames.add(m.userData.frame);
+   for (const w of sim.workers) {
+    const m = scene.workerModels.get(w.id),action=m.userData.current;
+    if(w.appearance==='mira'){
+     actions.add(action);
+     if(action==='walk')frames.add(m.userData.frame);
+    }
+    let expected;
+    if(w.handling){counts.handling++;expected=w.handling;}
+    else if(w.walking){
+     counts.moving++;expected=w.task?.carried||w.phase==='destination'?'carry':'walk';
+     if(headings.has(w.id)&&headings.get(w.id)!==w.dir)counts.corners++;
+    }else if(w.task?.carried){counts.holding++;expected='carry';}
+    headings.set(w.id,w.dir);
+    if(expected&&action!==expected&&mismatches.length<20)mismatches.push({id:w.id,time:sim.time,expected,action});
    }
   }
   sim.paused = true;
-  return { seconds:sim.time-start, frames: [...frames].sort((a,b) => a-b), actions: [...actions], delivered: sim.logisticsStats.delivered - delivered };
+  return { seconds:sim.time-start, frames: [...frames].sort((a,b) => a-b), actions: [...actions], delivered: sim.logisticsStats.delivered - delivered,counts,mismatches };
  });
  assert.deepEqual(activity.frames, Array.from({length:12},(_,i)=>i+4));
  assert.ok(activity.actions.includes('carry')); assert.ok(activity.delivered > 0);
+ assert.ok(activity.counts.corners>0&&activity.counts.handling>0&&activity.counts.holding>0);
+ assert.deepEqual(activity.mismatches,[],'real logistics keeps moving cargo, handling and waiting poses');
  await page.getByRole('button', { name: '주민', exact: true }).click();
  await page.locator('.resident-choice').filter({ hasText: /^미라/ }).first().click();
  const sprite = page.locator('.resident-preview');

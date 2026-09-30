@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {Simulation,createShowcase} from '../src/app/game/simulation.js';
+import {Simulation,createShowcase,unpackTiles} from '../src/app/game/simulation.js';
 import {createStarterShowcase} from '../src/app/game/starter-demo.js';
 import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
 import {EXPORT_GATE,EXPORT_TILES,EXPORT_CARTS} from '../src/app/game/export-route.js';
@@ -37,7 +37,8 @@ blocked.stock.wood=200;blocked.autoSell={wood:true};const n0=blocked.notices.len
 blocked.demolish(8,EXPORT_GATE.z);assert.equal(blocked.exportStatus().connected,true);
 
 // Older saves without the road get it back, clearing any tree on it.
-const old=fresh().save();old.roads=old.roads.filter(k=>!EXPORT_TILES.some(p=>k===p.x+','+p.z));delete old.shipments;delete old.nextShipmentId;old.tiles[EXPORT_GATE.z*24+2]={nature:'tree',remaining:90};
+// A save from before packed tiles (tileState) holds one object per tile; this old-format save also plants a tree on the road.
+const old=fresh().save();old.tiles=unpackTiles(old.tileState);delete old.tileState;old.roads=old.roads.filter(k=>!EXPORT_TILES.some(p=>k===p.x+','+p.z));delete old.shipments;delete old.nextShipmentId;old.tiles[EXPORT_GATE.z*24+2]={nature:'tree',remaining:90};
 const upgraded=new Simulation('river',decodeSave(encodeSave(old)));assert.ok(EXPORT_TILES.every(p=>upgraded.roads.has(p.x+','+p.z)));assert.equal(upgraded.tile(2,EXPORT_GATE.z).nature,null);assert.deepEqual(upgraded.shipments,[]);
 
 // A tampered cart route is rejected like any other broken save.

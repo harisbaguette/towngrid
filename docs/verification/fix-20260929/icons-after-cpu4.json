@@ -1,0 +1,42 @@
+{
+ "types": 109,
+ "syncMs": 0.2,
+ "completeMs": 12280,
+ "blob": 109,
+ "secondRaceSyncMs": 0.2,
+ "longTasksWhileDrawing": [
+  56,
+  55,
+  67,
+  55,
+  70,
+  60,
+  57,
+  61
+ ],
+ "framesWhileDrawing": {
+  "n": 615,
+  "p50": 16.7,
+  "p95": 33.4,
+  "max": 100
+ },
+ "home": {
+  "titleVisibleMs": 426,
+  "homeReadyMs": 3336,
+  "titleClicks": 2
+ },
+ "startLongTasks": [
+  1936,
+  222,
+  192,
+  111,
+  110,
+  93
+ ],
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

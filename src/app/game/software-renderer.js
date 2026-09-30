@@ -139,9 +139,11 @@ export class SoftwareRenderer {
   const x=Math.round(center.x-size*u.sprite.center.x),y=Math.round(center.y-size*(1-u.sprite.center.y)-lift);
   ctx.save();ctx.imageSmoothingEnabled=false;ctx.globalAlpha=u.sprite.material.opacity;
   ctx.fillStyle='#183d3d35';ctx.beginPath();ctx.ellipse(center.x,center.y+1,size*.18,size*.065,0,0,Math.PI*2);ctx.fill();
-  if(u.current==='defeat'){
-   ctx.translate(center.x,center.y);ctx.rotate(Math.PI/2);
-   ctx.drawImage(image,u.frame*cellWidth,u.atlas.row*cellHeight,cellWidth,cellHeight,-size*.5,-size*.9,size,size);
+  if(u.sprite.material.rotation){
+   // Authored defeat frames already contain the fallen body. Only rotate
+   // legacy sprites, around the same anchor and with the WebGL rotation sign.
+   ctx.translate(center.x,center.y-lift);ctx.rotate(-u.sprite.material.rotation);
+   ctx.drawImage(image,u.frame*cellWidth,u.atlas.row*cellHeight,cellWidth,cellHeight,-size*u.sprite.center.x,-size*(1-u.sprite.center.y),size,size);
   }else ctx.drawImage(image,u.frame*cellWidth,u.atlas.row*cellHeight,cellWidth,cellHeight,x,y,size,size);
   ctx.restore();
   const bar=u.hpBar;if(bar?.visible){const width=Math.max(16,size*.48),top=y+size*.05;ctx.fillStyle='#302c35';ctx.fillRect(center.x-width/2,top,width,5);ctx.fillStyle=bar.userData.fill.material.color.getStyle(THREE.SRGBColorSpace);ctx.fillRect(center.x-width/2+1,top+1,(width-2)*bar.userData.fill.scale.x,3);}
@@ -156,17 +158,19 @@ export class SoftwareRenderer {
   const scale=root.getWorldScale(new THREE.Vector3()),ctx=this.ctx;
   const width=sprite.scale.x*scale.x*this.pixelsPerWorldUnit,height=sprite.scale.y*scale.y*this.pixelsPerWorldUnit;
   const cell=image.height*(u.texture.repeat.y),x=center.x-width*sprite.center.x,y=center.y-height*(1-sprite.center.y);
-  ctx.save();ctx.imageSmoothingEnabled=false;ctx.globalAlpha=sprite.material.opacity;
+  if(sprite.visible){ctx.save();ctx.imageSmoothingEnabled=false;ctx.globalAlpha=sprite.material.opacity;
   if(u.clipLowerHalf){ctx.beginPath();ctx.rect(x,y,width,height*(1-sprite.center.y));ctx.clip();}
-  if(sprite.material.rotation || u.flipX){
-   ctx.translate(center.x,center.y);ctx.rotate(-sprite.material.rotation);if(u.flipX)ctx.scale(-1,1);
+  if(sprite.material.rotation || u.flipX || u.projection){
+   ctx.translate(center.x,center.y);if(u.projection){const [a,b,c,d]=u.projection;ctx.transform(a,-b,-c,d,0,0);}ctx.rotate(-sprite.material.rotation);if(u.flipX)ctx.scale(-1,1);
+   if(u.crop){const [l,t,r,b]=u.crop;ctx.beginPath();ctx.rect((l-sprite.center.x)*width,(t-1+sprite.center.y)*height,(r-l)*width,(b-t)*height);ctx.clip();}
    ctx.drawImage(image,u.frame*cell,u.direction*cell,cell,cell,-width*sprite.center.x,-height*(1-sprite.center.y),width,height);
-  }else ctx.drawImage(image,u.frame*cell,u.direction*cell,cell,cell,Math.round(x),Math.round(y),Math.round(width),Math.round(height));ctx.restore();
+  }else {if(u.crop){const [l,t,r,b]=u.crop;ctx.beginPath();ctx.rect(x+l*width,y+t*height,(r-l)*width,(b-t)*height);ctx.clip();}ctx.drawImage(image,u.frame*cell,u.direction*cell,cell,cell,Math.round(x),Math.round(y),Math.round(width),Math.round(height));}ctx.restore();}
   for(const rope of [...(u.rope?[u.rope]:[]),...(u.ropes||[])])if(rope.visible){
    const points=rope.geometry.attributes.position;
    const a=projectPoint(root.localToWorld(new THREE.Vector3().fromBufferAttribute(points,0))),b=projectPoint(root.localToWorld(new THREE.Vector3().fromBufferAttribute(points,1)));
    ctx.save();ctx.strokeStyle='#705137';ctx.globalAlpha=sprite.material.opacity;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.restore();
   }
+  for(const wake of u.wakes||[])if(wake.visible)this.line(wake);
   if(u.layers)for(const layer of u.layers)if(layer.visible&&!layer.userData.behind)this.drawPixelEnvironment(layer,projectPoint(layer.getWorldPosition(new THREE.Vector3())));
  }
  render(scene,camera){

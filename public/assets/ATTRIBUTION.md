@@ -1,5 +1,7 @@
 # Asset credits
 
+`pixel-environment/solarpanel`, `chocolatier`, `packshop`, `sheeppen`, `milkbarn`, `duckhouse`, `farmSheep`, `farmCow`, `farmDuck`, `farmBee`, and the wool/wax resource cutouts use OpenAI image generation with this project's pixel artwork as references. Sources and packing instructions are in `art-source/pixel-environment/farm-v11/`. Animal poses are generated sprite frames; travel paths and animation playback are code-driven.
+
 All third-party assets included here are CC0 (public domain dedication).
 
 - Kenney, **Fantasy Town Kit** (2.0): https://kenney.nl/assets/fantasy-town-kit . Original GLB modules, trees, rocks, carts, banners, lanterns and windmill parts. Source archive includes `town/LICENSE.txt`. Architecture is assembled from these modules; race palettes and layouts are project modifications.
@@ -41,11 +43,29 @@ Background music is **calm theme** by pebonius; ambient music is **Forest Ambien
 ## World terrain illustration (2026-09-26)
 `world/irdea-terrain.webp`: generated for ERDYNTH with OpenAI image generation, informed by user-provided visual references. Decorative terrain under the exact interactive country geometry; no text or baked UI. Not drawn since the 2026-09-28 grid map redesign; kept for the art archive.
 
-Rounded canopy geometry and rounded roof tile skins were authored in this project where a matching reusable source was unavailable. Existing licensed walls, framing, characters, machinery, vehicles, and authored movement clips remain in use.
+Rounded canopy geometry and rounded roof tile skins were authored in this project where a matching reusable source was unavailable. These legacy geometry assets are archived; the current game uses pixel artwork and no longer loads GLB models.
 
 
 ## Original residents and rounded props — 2026-09-26
 
 `erdynth/Resident_*.glb` (18 appearances), `Tugboat.glb`, `PatrolBoat.glb`, `Lighthouse.glb`, `Pickaxe.glb`, `Axe.glb`, `Hammer.glb`, `Lantern.glb` and `Bucket.glb` are original project-authored geometry and materials. Editable source: `scripts/build-erdynth-assets.mjs`. The supplied images guided shape, colour and proportions; the image files are not redistributed. Each resident includes original articulated Idle, Walk, Walk_Carry and Work clips. The centaurs now have a standalone original quadruped body and gait. No KayKit mesh, texture or animation is used in the shipped residents.
 
-The earlier playable character/centaur/titan entries above are historical. Their source files remain for save-independent legacy and enemy assets, but all playable residents now use `erdynth/Resident_*.glb`. Existing external architecture, vehicles, creatures and sounds remain separately credited above. `erdynth/manifest.json` lists the exact original asset inventory and mesh sizes.
+The character/centaur/titan and original GLB entries above are historical. Their source files remain as an archive; current residents and enemies use `pixel-characters/`. External archived architecture, vehicles and creatures, and the sounds still used by the game, remain separately credited above. `erdynth/manifest.json` lists the original archived inventory and mesh sizes.
+
+
+## TownGrid completion artwork (2026-09-28)
+
+`pixel-environment/cargoWagon`, `cargoRaft`, `cargoSteamer`, `cargoShip`, `cargoFerry`, `cargoSled`, `cargoPlane`, `cargoAirship`, `cargoTruckEmpty`, `cargoTrainEmpty` and `supportArt`: created with OpenAI image generation for this project. Four-view sources and extraction coordinates are preserved under `art-source/pixel-environment/completion-v8/` and `pack-manifest.json`. `resourceGoods` and `resources/*.png` reuse the project’s authored resource cutouts and the new service icons; `src/app/game/resource-art.js` records each source.
+
+The `*Motion`, `*Body` and `*Hoist` atlases added on 2026-09-29 reuse those vehicle pixels and the existing port illustrations. They are scripted component animation/extraction, not new generated or hand-drawn frame sequences. Editable coordinates and the baker are `art-source/pixel-environment/motion-v10/rig.json` and `scripts/pack-environment-motion.mjs`.
+
+
+## TownGrid pixel screen refresh (2026-09-29)
+
+`screens/pixel-v2/*.webp`: nine illustrations created with OpenAI image generation using the project’s prior screen concepts as references. Source PNGs, prompts and reference paths are preserved in `art-source/screen-concepts/2026-09-29/pixel-refresh/manifest.json`. The approved brand artwork is reused separately. Earlier screen images remain archived and are not in the runtime screen deck.
+
+`screens/daily-v3/*.webp`: eighteen additional daily scenes and four screen-transition illustrations created with OpenAI image generation. Daily scenes reference the existing TownGrid character portraits and pixel screen artwork; character IDs, reference paths, prompts and original PNGs are preserved in `art-source/screen-concepts/2026-09-29/daily-expansion/manifest.json`. Files ending in `-thumb.webp` are reduced gallery previews of the same artwork.
+
+## TownGrid world atlas (2026-09-29)
+
+`world-atlas/*.png`: sixteen pixel terrain and settlement sprites created with OpenAI image generation for TownGrid. Original sheets and packing metadata are preserved under `art-source/world-atlas/`. `world-atlas/terrain.webp` combines those sprites with project-authored ground, shore and river rendering based on the actual world grid. Rebuild with `node scripts/pack-world-atlas.mjs`.

@@ -1,3 +1,4 @@
+import {remainingSeconds} from './game-time.js';
 import { BUILDINGS, RESOURCES } from './simulation.js';
 
 export const SERVICE_OUTPUTS = {
@@ -40,7 +41,7 @@ export function productionVisualState(type, building = {}, sim) {
   : active ? service.label : working ? service ? '공급 준비' : '생산 중'
   : outage ? '공급 중단' : powerBlocked ? '전력 부족' : missing ? '재료 부족' : exhausted ? '자원 고갈' : count ? '완료' : building.status || '대기';
  return { phase, label, working, count, ready: service ? active : count > 0, progress, output: made.output,
-  service: !!service, active, remaining, displayValue: service ? Math.ceil(remaining) + '초' : String(count),
+  service: !!service, active, remaining, displayValue: service ? remainingSeconds(remaining, sim) + '초' : String(count),
   displayProgress: active ? Math.min(1, remaining / service.duration) : progress,
   outputName: service?.name || RESOURCES[made.output]?.name || made.output, missing, exhausted,
   workpiece: progress > 0 || working || Object.entries(inputs).some(([id, amount]) => (building.inputs?.[id] || 0) >= amount),

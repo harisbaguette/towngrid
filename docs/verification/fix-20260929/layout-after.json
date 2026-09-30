@@ -1,0 +1,529 @@
+{
+ "label": "after",
+ "sizes": {
+  "1920x1080": {
+   "home": {
+    "folded": false,
+    "summary": "체험·점검",
+    "items": [
+     "산업도시 둘러보기",
+     "초반 마을 테스트",
+     "마을의 하루",
+     "일러스트 테스트",
+     "지형 8종 테스트"
+    ],
+    "visibleWhileFolded": 5,
+    "visibleWhenOpen": 5
+   },
+   "world": {
+    "box": [
+     1483,
+     970,
+     298,
+     45
+    ],
+    "inViewport": true,
+    "hittable": true,
+    "afterScroll": {
+     "inViewport": true,
+     "hittable": true,
+     "coversEnd": false
+    }
+   },
+   "place": {
+    "candidates": 64,
+    "hint": [
+     831,
+     926,
+     1089,
+     980
+    ],
+    "target": {
+     "x": 8,
+     "z": 8,
+     "px": 960.0000000000002,
+     "py": 952.9999999999998,
+     "underHint": true,
+     "panned": true
+    },
+    "elementAtTarget": "canvas",
+    "afterFirst": {
+     "top": "canvas"
+    },
+    "built": [
+     "warehouse@8,8"
+    ]
+   },
+   "nature": {
+    "outside": 123,
+    "outsideFaded": 123,
+    "inside": 10,
+    "insideFaded": 0
+   },
+   "tilePanel": {
+    "box": [
+     810,
+     673,
+     300,
+     308
+    ],
+    "topCut": false,
+    "bottomCut": false,
+    "scrollable": false
+   },
+   "tileUnderHeader": 0,
+   "mapEdges": {
+    "time": 0,
+    "actions": 0,
+    "camera": 0,
+    "card": {
+     "box": [
+      20,
+      746,
+      288,
+      258
+     ],
+     "cut": false
+    }
+   },
+   "hoverMarker": [
+    {
+     "text": "창고",
+     "spanShown": true,
+     "size": [
+      29,
+      27
+     ]
+    }
+   ]
+  },
+  "1366x768": {
+   "home": {
+    "folded": false,
+    "summary": "체험·점검",
+    "items": [
+     "산업도시 둘러보기",
+     "초반 마을 테스트",
+     "마을의 하루",
+     "일러스트 테스트",
+     "지형 8종 테스트"
+    ],
+    "visibleWhileFolded": 5,
+    "visibleWhenOpen": 5
+   },
+   "world": {
+    "box": [
+     1017,
+     658,
+     298,
+     45
+    ],
+    "inViewport": true,
+    "hittable": true,
+    "afterScroll": {
+     "inViewport": true,
+     "hittable": true,
+     "coversEnd": false
+    }
+   },
+   "place": {
+    "candidates": 64,
+    "hint": [
+     554,
+     614,
+     812,
+     668
+    ],
+    "target": {
+     "x": 8,
+     "z": 8,
+     "px": 683.0000000000001,
+     "py": 640.9999999999999,
+     "underHint": true,
+     "panned": true
+    },
+    "elementAtTarget": "canvas",
+    "afterFirst": {
+     "top": "canvas"
+    },
+    "built": [
+     "warehouse@8,8"
+    ]
+   },
+   "nature": {
+    "outside": 123,
+    "outsideFaded": 123,
+    "inside": 10,
+    "insideFaded": 0
+   },
+   "tilePanel": {
+    "box": [
+     533,
+     361,
+     300,
+     308
+    ],
+    "topCut": false,
+    "bottomCut": false,
+    "scrollable": false
+   },
+   "tileUnderHeader": 0,
+   "mapEdges": {
+    "time": 0,
+    "actions": 0,
+    "camera": 0,
+    "card": {
+     "box": [
+      20,
+      434,
+      288,
+      258
+     ],
+     "cut": false
+    }
+   },
+   "hoverMarker": [
+    {
+     "text": "창고",
+     "spanShown": true,
+     "size": [
+      29,
+      27
+     ]
+    }
+   ]
+  },
+  "1024x768": {
+   "home": {
+    "folded": false,
+    "summary": "체험·점검",
+    "items": [
+     "산업도시 둘러보기",
+     "초반 마을 테스트",
+     "마을의 하루",
+     "일러스트 테스트",
+     "지형 8종 테스트"
+    ],
+    "visibleWhileFolded": 5,
+    "visibleWhenOpen": 5
+   },
+   "world": {
+    "box": [
+     715,
+     664,
+     274,
+     45
+    ],
+    "inViewport": true,
+    "hittable": true,
+    "afterScroll": {
+     "inViewport": true,
+     "hittable": true,
+     "coversEnd": false
+    }
+   },
+   "place": {
+    "candidates": 64,
+    "hint": [
+     383,
+     614,
+     641,
+     668
+    ],
+    "target": {
+     "x": 8,
+     "z": 8,
+     "px": 512.0000000000002,
+     "py": 640.9999999999999,
+     "underHint": true,
+     "panned": true
+    },
+    "elementAtTarget": "canvas",
+    "afterFirst": {
+     "top": "canvas"
+    },
+    "built": [
+     "warehouse@8,8"
+    ]
+   },
+   "nature": {
+    "outside": 123,
+    "outsideFaded": 123,
+    "inside": 10,
+    "insideFaded": 0
+   },
+   "tilePanel": {
+    "box": [
+     362,
+     361,
+     300,
+     308
+    ],
+    "topCut": false,
+    "bottomCut": false,
+    "scrollable": false
+   },
+   "tileUnderHeader": 0,
+   "mapEdges": {
+    "time": 0,
+    "actions": 0,
+    "camera": 0,
+    "card": {
+     "box": [
+      14,
+      434,
+      288,
+      258
+     ],
+     "cut": false
+    }
+   },
+   "hoverMarker": [
+    {
+     "text": "창고",
+     "spanShown": true,
+     "size": [
+      29,
+      27
+     ]
+    }
+   ]
+  },
+  "390x844": {
+   "home": {
+    "folded": false,
+    "summary": "체험·점검",
+    "items": [
+     "산업도시 둘러보기",
+     "초반 마을 테스트",
+     "마을의 하루",
+     "일러스트 테스트",
+     "지형 8종 테스트"
+    ],
+    "visibleWhileFolded": 5,
+    "visibleWhenOpen": 5
+   },
+   "world": {
+    "box": [
+     29,
+     761,
+     332,
+     45
+    ],
+    "inViewport": true,
+    "hittable": true,
+    "afterScroll": {
+     "inViewport": true,
+     "hittable": true,
+     "coversEnd": false
+    }
+   },
+   "place": {
+    "candidates": 64,
+    "hint": [
+     10,
+     659,
+     380,
+     700
+    ],
+    "target": {
+     "x": 8,
+     "z": 8,
+     "px": 195.00000000000034,
+     "py": 679.2499999999999,
+     "underHint": true,
+     "panned": true
+    },
+    "elementAtTarget": "canvas",
+    "afterFirst": {
+     "top": "canvas",
+     "hint": [
+      10,
+      627,
+      370,
+      74
+     ]
+    },
+    "built": [
+     "warehouse@8,8"
+    ]
+   },
+   "nature": {
+    "outside": 123,
+    "outsideFaded": 123,
+    "inside": 10,
+    "insideFaded": 0
+   },
+   "tilePanel": {
+    "box": [
+     50,
+     397,
+     290,
+     303
+    ],
+    "topCut": false,
+    "bottomCut": false,
+    "scrollable": false
+   },
+   "tileUnderHeader": 0,
+   "mapEdges": {
+    "time": 0,
+    "actions": 0,
+    "camera": 0,
+    "card": {
+     "box": [
+      10,
+      459,
+      270,
+      258
+     ],
+     "cut": false
+    }
+   }
+  },
+  "844x390": {
+   "home": {
+    "folded": false,
+    "summary": "체험·점검",
+    "items": [
+     "산업도시 둘러보기",
+     "초반 마을 테스트",
+     "마을의 하루",
+     "일러스트 테스트",
+     "지형 8종 테스트"
+    ],
+    "visibleWhileFolded": 5,
+    "visibleWhenOpen": 5
+   },
+   "world": {
+    "box": [
+     535,
+     317,
+     274,
+     45
+    ],
+    "inViewport": true,
+    "hittable": true,
+    "afterScroll": {
+     "inViewport": true,
+     "hittable": true,
+     "coversEnd": false
+    }
+   },
+   "place": {
+    "candidates": 64,
+    "hint": [
+     293,
+     249,
+     551,
+     303
+    ],
+    "target": {
+     "x": 13,
+     "z": 15,
+     "px": 381.44534637312444,
+     "py": 253.53560047092168,
+     "underHint": true
+    },
+    "elementAtTarget": "canvas",
+    "afterFirst": {
+     "top": "canvas",
+     "hint": [
+      206,
+      184,
+      431,
+      119
+     ]
+    },
+    "built": [
+     "warehouse@13,15"
+    ]
+   },
+   "nature": {
+    "outside": 123,
+    "outsideFaded": 123,
+    "inside": 11,
+    "insideFaded": 0
+   },
+   "tilePanel": {
+    "box": [
+     272,
+     90,
+     300,
+     213
+    ],
+    "topCut": false,
+    "bottomCut": false,
+    "scrollable": true
+   },
+   "tileUnderHeader": 0,
+   "mapEdges": {
+    "time": 0,
+    "actions": 0,
+    "camera": 0,
+    "card": {
+     "box": [
+      14,
+      119,
+      288,
+      194
+     ],
+     "cut": false
+    }
+   }
+  }
+ },
+ "showcase": {
+  "1366x768": {
+   "markers": 0,
+   "overlappingPairs": 0,
+   "meanWidth": 0,
+   "icons": {
+    "drawn": 111,
+    "pending": 0,
+    "total": 136
+   },
+   "longTasksShowcase": [
+    715
+   ],
+   "longTasksAll": [
+    715,
+    54
+   ],
+   "dockImages": {
+    "count": 13,
+    "empty": 0,
+    "broken": 0
+   }
+  },
+  "844x390": {
+   "markers": 0,
+   "overlappingPairs": 0,
+   "meanWidth": 0,
+   "icons": {
+    "drawn": 111,
+    "pending": 0,
+    "total": 136
+   },
+   "longTasksShowcase": [
+    587
+   ],
+   "longTasksAll": [
+    587,
+    65,
+    57
+   ],
+   "dockImages": {
+    "count": 13,
+    "empty": 0,
+    "broken": 0
+   }
+  }
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

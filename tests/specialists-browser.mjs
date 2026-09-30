@@ -4,7 +4,7 @@ import {mkdir,writeFile} from 'node:fs/promises';
 import {pathToFileURL,fileURLToPath} from 'node:url';
 const {chromium}=await import(pathToFileURL(process.argv[2]).href);
 const browser=await chromium.launch({headless:true,executablePath:process.argv[3],args:['--enable-unsafe-swiftshader']});
-const origin=process.env.TOWNGRID_URL||'http://localhost:5173',out=new URL('../docs/verification/roster-professions/',import.meta.url);
+const origin=process.env.TOWNGRID_URL||'http://localhost:5173',out=new URL(process.env.TOWNGRID_PROOF_DIR||'../docs/verification/roster-professions/',import.meta.url);
 await mkdir(out,{recursive:true});
 const errors=[],failed=[],report={};
 try{

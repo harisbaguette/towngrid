@@ -6,7 +6,7 @@ export const MODERN_RESOURCES={
  copper:{name:'구리광석',color:'#c07a4a',price:19},wire:{name:'구리 전선',color:'#d9964f',price:90},concrete:{name:'콘크리트',color:'#b7b3aa',price:105},canned:{name:'통조림',color:'#9aa9b3',price:185},lamp:{name:'마력등',color:'#f4d97a',price:400,final:true},engine:{name:'마력 기관',color:'#8c7ad8',price:1800},mithril:{name:'미스릴 강',color:'#c9e3f2',price:1260},airship:{name:'비공정',color:'#e3b04b',price:12000,final:true}
 };
 export const MODERN_BUILDINGS={
- reservoir:{name:'급수탑',group:'farm',cost:180,materials:{wood:8,stone:6},period:12,inputs:{water:3},output:'irrigation',amount:1,description:'물 3개로 60초간 주변 두 칸 작물의 물 요구량을 모두 채웁니다. 주민의 물 운반을 줄여줍니다.'},
+ reservoir:{name:'급수탑',group:'farm',cost:180,materials:{wood:8,stone:6},period:12,inputs:{water:3},output:'irrigation',amount:1,description:'물 3개로 주변 두 칸 작물의 물 요구량을 모두 채웁니다. 주민의 물 운반을 줄여줍니다.'},
  depot:{name:'자재 보관소',group:'base',cost:220,materials:{plank:6,stone:4},description:'각 자원의 보관 한도를 120개 늘립니다. 여러 곳 건설할 수 있습니다.'},
  windturbine:{name:'풍력 발전기',group:'energy',cost:330,materials:{plank:10,gear:2},period:24,output:'power',amount:1,description:'연료 없이 발전합니다. 주변 높은 건물이나 산이 바람을 가리면 느려집니다.'},
  magetower:{name:'마탑',group:'energy',cost:700,materials:{brick:6,steel:4,glass:2,circuit:2},period:28,inputs:{mana:2,circuit:1},output:'ward',amount:1,wardRadius:4.5,description:'마력 결정과 회로로 반경 4.5칸에 결계를 칩니다. 결계 안의 시설은 습격 피해를 받지 않고 들어온 습격자는 약해집니다. 결계가 유지되는 동안 마족의 전력 교란도 막습니다.'},
@@ -22,7 +22,7 @@ export const MODERN_BUILDINGS={
  electronics:{name:'전자 공장',group:'advanced',cost:1600,materials:{steel:6,glass:4,gear:4},period:26,inputs:{wire:2,mana:1},output:'circuit',amount:2,power:true,description:'구리 전선과 마력 결정으로 전자·마력 제어 회로를 조립합니다.'},
  automotive:{name:'자동차 공장',group:'advanced',cost:3000,materials:{steel:12,gear:8,circuit:4},period:34,inputs:{steel:2,gear:2,circuit:1,polymer:2,glass:1},output:'car',amount:1,power:true,description:'강철·기계 부품·회로·합성 소재·유리를 공급해 자동차를 조립합니다. 모든 종족이 운영합니다.'},
  laboratory:{name:'제약 공장',group:'advanced',cost:2000,materials:{steel:4,glass:4,circuit:3},period:30,inputs:{water:1,herb:2,polymer:1,glass:1},output:'medicine',amount:3,power:true,description:'물·약초·합성 소재·유리로 의약품을 제조합니다.'},
- hospital:{name:'종합 병원',group:'civic',cost:1800,materials:{concrete:6,glass:4,circuit:3},period:30,inputs:{medicine:1,water:2},output:'health',amount:1,power:true,unique:true,description:'의약품을 공급하면 마력성 질병을 예방하고 주민 지지를 높입니다.'},
+ hospital:{name:'종합 병원',group:'civic',cost:1800,materials:{concrete:6,glass:4,circuit:3},period:30,inputs:{medicine:1,water:2},output:'health',amount:1,power:true,unique:true,description:'의약품과 물을 공급받는 동안 감염을 빠르게 치료하고, 감염 중에도 거점 불만이 오르지 않게 막습니다. 질병 발생 자체는 막지 못합니다.'},
  arcanepower:{name:'마력 발전소',group:'energy',cost:1900,materials:{steel:8,wire:4,circuit:3},period:18,inputs:{mana:1,water:1},output:'power',amount:1,description:'마력 결정으로 전력을 공급합니다. 모든 종족이 같은 발전 기술을 연구합니다.'},
  battery:{name:'축전 시설',group:'energy',cost:1400,materials:{steel:6,wire:6,circuit:3},unique:true,description:'정상 전력을 저장해 마력 폭풍 중에도 전력 공급을 유지합니다.'},
  station:{name:'화물역',group:'transport',cost:1400,materials:{steel:8,concrete:6,gear:4},power:true,unique:true,description:'역 옆에 선로가 연결되면 거점 간 철도 화물 노선을 운영할 수 있습니다.'},
@@ -54,7 +54,7 @@ export const MODERN_BUILDINGS={
  wardpost:{name:'결계 초소',group:'civic',cost:450,materials:{brick:6,plank:4},period:30,inputs:{herb:2},output:'ward',amount:1,wardRadius:3,description:'약초를 태워 반경 3칸에 결계를 칩니다. 결계 안의 시설은 습격 피해를 받지 않고 들어온 습격자는 약해집니다. 결계가 유지되는 동안 마족의 전력 교란도 막습니다.'},
  fortress:{name:'방위 요새',group:'civic',cost:2500,materials:{concrete:10,steel:6},period:30,inputs:{canned:1,concrete:1},output:'ward',amount:1,wardRadius:5.5,description:'통조림과 콘크리트를 받으면 반경 5.5칸에 방어선을 칩니다. 방어선 안의 시설은 습격 피해를 받지 않고 들어온 습격자는 약해집니다. 방어선이 유지되는 동안 마족의 전력 교란도 막습니다.'},
  parliament:{name:'의사당',group:'civic',cost:6000,materials:{concrete:12,glass:6,lamp:4},unique:true,unrestRelief:2,description:'모든 거점의 불만이 매일 2씩 더 내려갑니다. 독립 선언의 조건입니다.'},
- airdock:{name:'비공정 선착장',group:'transport',cost:5000,materials:{concrete:8,steel:6,engine:2},period:30,inputs:{fuel:2},output:'transit',amount:1,transitFactor:0.6,unique:true,power:true,description:'양쪽 거점에 운송 가속 시설이 가동하면 트럭·철도 운송 시간이 40% 짧아집니다.'},
+ airdock:{name:'비공정 선착장',group:'transport',cost:5000,materials:{concrete:8,steel:6,engine:2},period:30,inputs:{fuel:2},output:'transit',amount:1,transitFactor:0.6,unique:true,power:true,description:'양쪽 거점에 운송 가속 시설이 가동하면 트럭·철도 운송 시간이 40% 짧아집니다. 가동하는 동안 신생국 교역품을 비공정으로 실어 대금이 20% 오릅니다.'},
  exchange:{name:'대륙 거래소',group:'civic',cost:8000,materials:{concrete:10,glass:6,mithril:2},unique:true,exportCarts:2,description:'연료로 움직이는 트럭·증기선이 2대 늘어 동시에 최대 7대가 운송합니다.'}
 };
 
@@ -118,15 +118,15 @@ for(const id of ['logistics','smelter','refinery','chemical','electronics','auto
 // simulation.js builds BUILDINGS[type].recipes = [its own inputs/output (the default), ...these]. Each
 // alternative feeds another chain or trades volume for value; `unlock` is the rank that permits it.
 export const ALT_RECIPES={
- quarry:[{id:'copper',name:'구리 광맥',inputs:{},output:'copper',amount:2,period:14,unlock:14}],
- bakery:[{id:'cake',name:'케이크',inputs:{flour:2,egg:2},output:'cake',amount:1,period:14,unlock:7}],
- kiln:[{id:'glass',name:'가마 유리',inputs:{stone:3,wood:2},output:'glass',amount:2,period:20,unlock:9}],
+ quarry:[{id:'copper',name:'구리 광맥 선광',inputs:{water:1},output:'copper',amount:3,period:16,unlock:14}],
+ bakery:[{id:'cake',name:'달걀 적은 케이크',inputs:{flour:3,egg:1},output:'cake',amount:2,period:18,unlock:7}],
+ kiln:[{id:'glass',name:'가마 유리',inputs:{stone:3,wood:1},output:'glass',amount:2,period:20,unlock:9}],
  glassworks:[{id:'coalglass',name:'석탄 유리',inputs:{stone:2,coal:1},output:'glass',amount:3,period:20,unlock:13}],
  workshop:[{id:'steelgear',name:'강철 부품',inputs:{steel:1,plank:1},output:'gear',amount:3,period:15,unlock:14}],
  ironmine:[{id:'copper',name:'구리 광맥',inputs:{},output:'copper',amount:3,period:18,unlock:14}],
  smelter:[{id:'charcoalsteel',name:'목탄 제련',inputs:{iron:3,wood:4},output:'steel',amount:2,period:26,unlock:14}],
- steamworks:[{id:'wire',name:'구리 전선',inputs:{copper:2,coal:1,water:1},output:'wire',amount:3,period:22,unlock:16}],
- refinery:[{id:'polymer',name:'합성 소재',inputs:{oil:3,water:1},output:'polymer',amount:2,period:24,unlock:16}],
+ steamworks:[{id:'wire',name:'증기 인발 전선',inputs:{copper:2,coal:1,water:1},output:'wire',amount:4,period:30,unlock:16}],
+ refinery:[{id:'polymer',name:'무수 합성 소재',inputs:{oil:3},output:'polymer',amount:3,period:26,unlock:16}],
  chemical:[{id:'coalfuel',name:'석탄 액화',inputs:{coal:3,water:2},output:'fuel',amount:3,period:24,unlock:16}],
  cementworks:[{id:'brick',name:'대량 벽돌',inputs:{stone:3,coal:1},output:'brick',amount:5,period:20,unlock:17}],
  laboratory:[{id:'herbal',name:'약초 제제',inputs:{herb:3,water:1,glass:1},output:'medicine',amount:2,period:26,unlock:20}]

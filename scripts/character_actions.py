@@ -1,13 +1,14 @@
 """Append joint-authored combat and foot-pivot poses without replacing locomotion.
 
-The approved first 48 columns remain byte-identical. Each new pose moves the
-original head/torso and limbs independently; defeat is not a rotated idle card.
+Preserve the first 48 columns supplied by the shared locomotion rig. Each new
+pose moves the original head/torso and limbs; defeat is not a rotated idle card.
 """
 import math
 from pathlib import Path
 import numpy as np
 from PIL import Image,ImageOps
-from mira_rig import clean,bone,move,joint
+from mira_rig import clean,joint
+from rig_skinning import limb_layers
 
 COUNTS={'attack':6,'hurt':2,'defeat':4,'turn':4}
 
@@ -52,9 +53,11 @@ def render_action(rig,action,phase,spec,weapon=None):
         elif action=='turn':
             amount=[0,1,1,0][round(phase*3)]
             if i%2:end=c+[2*amount,-3*amount]
-        knee=joint(root,end,[np.linalg.norm(b-a),np.linalg.norm(c-b)],f if i%2 else -f)
-        leg_layers.append([bone(limb['upper'],a,b,root,knee),bone(limb['lower'],b,c,knee,end),move(limb['foot'],end-c)])
-        audit.append({'ankle':end.tolist(),'contact':bool(np.linalg.norm(end-c)<.01)})
+        bend=np.array([0.,-1.]) if action=='defeat' and kind=='biped' else f if i%2 else -f
+        knee=joint(root,end,[np.linalg.norm(b-a),np.linalg.norm(c-b)],bend)
+        leg_layers.append(limb_layers(limb,root,knee,end))
+        audit.append({'ankle':end.tolist(),'contact':bool(np.linalg.norm(end-c)<.01),
+                      'hip':root.tolist(),'knee':knee.tolist()})
     for i,limb in enumerate(arms):
         a,b,c=map(np.array,limb['joints']);root=point(a);lengths=[np.linalg.norm(b-a),np.linalg.norm(c-b)]
         end=point(c+[3 if c[0]<a[0] else -3,0])
@@ -72,9 +75,11 @@ def render_action(rig,action,phase,spec,weapon=None):
         reach=np.linalg.norm(end-root)
         if reach>sum(lengths)*.98:end=root+(end-root)/reach*sum(lengths)*.98
         elbow=joint(root,end,lengths,-f)
-        arm_layers.append([bone(limb['upper'],a,b,root,elbow),bone(limb['lower'],b,c,elbow,end),end])
+        arm_layers.append([*limb_layers(limb,root,elbow,end),end])
     for extra in rig.get('extras',[]):
-        output.alpha_composite(transform_image(extra['image'],pivot,angle*.35 if action=='defeat' else angle,offset*.35 if action=='defeat' else offset))
+        attachment=extra['pivot'];world_attachment=point(attachment+extra.get('offset',np.zeros(2)))
+        fold=-90*amount if action=='defeat' and kind=='biped' and extra['kind']=='tail' else 0
+        output.alpha_composite(transform_image(extra['image'],attachment,angle+fold,world_attachment-attachment))
     if 'tail' in rig:output.alpha_composite(transform_image(rig['tail'],pivot,angle,offset))
     for img in arm_layers[0][:2]:output.alpha_composite(img)
     for limb in leg_layers:
@@ -104,10 +109,11 @@ def append_actions(atlas,meta,rigs,spec):
                 tile,audit=render_action(rig,action,i/(count-1),spec,weapon)
                 if row in [2,3]:
                     tile=ImageOps.mirror(tile)
-                    for foot in audit['feet']:foot['ankle'][0]=128-foot['ankle'][0]
+                    for foot in audit['feet']:
+                        for key in ['ankle','hip','knee']:foot[key][0]=128-foot[key][0]
                 result.alpha_composite(tile,(col*128,row*128))
                 meta['rigAudit'][row].append(audit)
                 meta['anchors'][row].append(meta['anchors'][row][0][:])
-    meta.update({'frames':256,'actionRevision':'combat-pivot-1','authoredDefeat':True,'turnMidpoint':2,
+    meta.update({'frames':256,'actionRevision':'combat-pivot-2','authoredDefeat':True,'turnMidpoint':2,
                  'limitations':['Opposite views mirrored','Joint-based original textures; not individually redrawn cels','Quarter turn uses foot pivot then switches the authored view']})
     return result,meta

@@ -1,0 +1,1623 @@
+{
+  "atlas": {
+    "nodes": 166,
+    "terrainNodes": 36,
+    "view": "0 0 1300 806"
+  },
+  "1440x900": [
+    {
+      "label": "주민",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1233,
+        27,
+        58,
+        38
+      ]
+    },
+    {
+      "label": "소리 끄기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1296,
+        27,
+        38,
+        38
+      ]
+    },
+    {
+      "label": "도움말",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1339,
+        27,
+        38,
+        38
+      ]
+    },
+    {
+      "label": "게임 설정",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1382,
+        27,
+        38,
+        38
+      ]
+    },
+    {
+      "label": "재개",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        88.375,
+        88.5,
+        27,
+        27
+      ]
+    },
+    {
+      "label": "1×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        118.375,
+        88.5,
+        27,
+        27
+      ]
+    },
+    {
+      "label": "2×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        148.375,
+        88.5,
+        27,
+        27
+      ]
+    },
+    {
+      "label": "4×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        178.375,
+        88.5,
+        27,
+        27
+      ]
+    },
+    {
+      "label": "등록 농노 · 승급 조건",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1176,
+        92,
+        244,
+        60
+      ]
+    },
+    {
+      "label": "세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        20,
+        20,
+        254,
+        52
+      ]
+    },
+    {
+      "label": "주변 지형",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        20,
+        834,
+        95.25,
+        42
+      ]
+    },
+    {
+      "label": "왼쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1248,
+        839,
+        31,
+        32
+      ]
+    },
+    {
+      "label": "오른쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1282,
+        839,
+        31,
+        32
+      ]
+    },
+    {
+      "label": "확대",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1316,
+        839,
+        31,
+        32
+      ]
+    },
+    {
+      "label": "축소",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1350,
+        839,
+        31,
+        32
+      ]
+    },
+    {
+      "label": "지도 중앙",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1384,
+        839,
+        31,
+        32
+      ]
+    },
+    {
+      "label": "시장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        505.5,
+        825,
+        98,
+        48
+      ]
+    },
+    {
+      "label": "건설 목록 열기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        608.5,
+        825,
+        120,
+        48
+      ]
+    },
+    {
+      "label": "영토 확장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        733.5,
+        825,
+        98,
+        48
+      ]
+    },
+    {
+      "label": "거점·세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        836.5,
+        825,
+        98,
+        48
+      ]
+    }
+  ],
+  "1440x900-build": [
+    {
+      "label": "왼쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1248,
+        839,
+        31,
+        32
+      ]
+    },
+    {
+      "label": "오른쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1282,
+        839,
+        31,
+        32
+      ]
+    },
+    {
+      "label": "확대",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1316,
+        839,
+        31,
+        32
+      ]
+    },
+    {
+      "label": "축소",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1350,
+        839,
+        31,
+        32
+      ]
+    },
+    {
+      "label": "지도 중앙",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        1384,
+        839,
+        31,
+        32
+      ]
+    },
+    {
+      "label": "시장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        505.5,
+        825,
+        98,
+        48
+      ]
+    },
+    {
+      "label": "건설 목록 닫기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        608.5,
+        825,
+        120,
+        48
+      ]
+    },
+    {
+      "label": "영토 확장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        733.5,
+        825,
+        98,
+        48
+      ]
+    },
+    {
+      "label": "거점·세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        836.5,
+        825,
+        98,
+        48
+      ]
+    }
+  ],
+  "1024x768": [
+    {
+      "label": "주민",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        866,
+        21,
+        58,
+        38
+      ]
+    },
+    {
+      "label": "소리 끄기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        929,
+        21,
+        38,
+        38
+      ]
+    },
+    {
+      "label": "도움말",
+      "visible": false,
+      "reachable": false,
+      "rect": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "게임 설정",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        972,
+        21,
+        38,
+        38
+      ]
+    },
+    {
+      "label": "재개",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        82.375,
+        82.5,
+        27,
+        27
+      ]
+    },
+    {
+      "label": "1×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        112.375,
+        82.5,
+        27,
+        27
+      ]
+    },
+    {
+      "label": "2×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        142.375,
+        82.5,
+        27,
+        27
+      ]
+    },
+    {
+      "label": "4×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        172.375,
+        82.5,
+        27,
+        27
+      ]
+    },
+    {
+      "label": "등록 농노 · 승급 조건",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        794,
+        92,
+        216,
+        60
+      ]
+    },
+    {
+      "label": "세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        14,
+        14,
+        215,
+        52
+      ]
+    },
+    {
+      "label": "주변 지형",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        14,
+        702,
+        95.25,
+        42
+      ]
+    },
+    {
+      "label": "왼쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        865,
+        707,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "오른쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        893,
+        707,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "확대",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        921,
+        707,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "축소",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        949,
+        707,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "지도 중앙",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        977,
+        707,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "시장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        337.5,
+        693,
+        77,
+        48
+      ]
+    },
+    {
+      "label": "건설 목록 열기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        418.5,
+        693,
+        106,
+        48
+      ]
+    },
+    {
+      "label": "영토 확장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        528.5,
+        693,
+        77,
+        48
+      ]
+    },
+    {
+      "label": "거점·세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        609.5,
+        693,
+        77,
+        48
+      ]
+    }
+  ],
+  "1024x768-build": [
+    {
+      "label": "왼쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        847,
+        707,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "오른쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        878,
+        707,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "확대",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        909,
+        707,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "축소",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        940,
+        707,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "지도 중앙",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        971,
+        707,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "시장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        337.5,
+        693,
+        77,
+        48
+      ]
+    },
+    {
+      "label": "건설 목록 닫기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        418.5,
+        693,
+        106,
+        48
+      ]
+    },
+    {
+      "label": "영토 확장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        528.5,
+        693,
+        77,
+        48
+      ]
+    },
+    {
+      "label": "거점·세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        609.5,
+        693,
+        77,
+        48
+      ]
+    }
+  ],
+  "390x844": [
+    {
+      "label": "주민",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        251,
+        14,
+        49,
+        36
+      ]
+    },
+    {
+      "label": "소리 끄기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        305,
+        14,
+        35,
+        36
+      ]
+    },
+    {
+      "label": "도움말",
+      "visible": false,
+      "reachable": false,
+      "rect": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "게임 설정",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        345,
+        14,
+        35,
+        36
+      ]
+    },
+    {
+      "label": "재개",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        71.921875,
+        121,
+        26,
+        28
+      ]
+    },
+    {
+      "label": "1×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        111.6875,
+        121,
+        26,
+        28
+      ]
+    },
+    {
+      "label": "2×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        151.4375,
+        121,
+        26,
+        28
+      ]
+    },
+    {
+      "label": "4×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        191.1875,
+        121,
+        26,
+        28
+      ]
+    },
+    {
+      "label": "등록 농노 · 승급 조건",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        235,
+        120,
+        145,
+        31
+      ]
+    },
+    {
+      "label": "세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        10,
+        10,
+        239,
+        45
+      ]
+    },
+    {
+      "label": "주변 지형",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        10,
+        727,
+        82.5625,
+        36
+      ]
+    },
+    {
+      "label": "왼쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        227,
+        730,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "오른쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        257,
+        730,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "확대",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        287,
+        730,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "축소",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        317,
+        730,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "지도 중앙",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        347,
+        730,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "시장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        16,
+        780,
+        85.75,
+        46
+      ]
+    },
+    {
+      "label": "건설 목록 열기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        106.75,
+        780,
+        85.75,
+        46
+      ]
+    },
+    {
+      "label": "영토 확장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        197.5,
+        780,
+        85.75,
+        46
+      ]
+    },
+    {
+      "label": "거점·세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        288.25,
+        780,
+        85.75,
+        46
+      ]
+    }
+  ],
+  "390x844-build": [
+    {
+      "label": "왼쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        227,
+        730,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "오른쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        257,
+        730,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "확대",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        287,
+        730,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "축소",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        317,
+        730,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "지도 중앙",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        347,
+        730,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "시장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        16,
+        780,
+        85.75,
+        46
+      ]
+    },
+    {
+      "label": "건설 목록 닫기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        106.75,
+        780,
+        85.75,
+        46
+      ]
+    },
+    {
+      "label": "영토 확장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        197.5,
+        780,
+        85.75,
+        46
+      ]
+    },
+    {
+      "label": "거점·세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        288.25,
+        780,
+        85.75,
+        46
+      ]
+    }
+  ],
+  "360x740": [
+    {
+      "label": "주민",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        221,
+        14,
+        49,
+        36
+      ]
+    },
+    {
+      "label": "소리 끄기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        275,
+        14,
+        35,
+        36
+      ]
+    },
+    {
+      "label": "도움말",
+      "visible": false,
+      "reachable": false,
+      "rect": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "게임 설정",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        315,
+        14,
+        35,
+        36
+      ]
+    },
+    {
+      "label": "재개",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        59.171875,
+        121,
+        26,
+        28
+      ]
+    },
+    {
+      "label": "1×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        86.171875,
+        121,
+        26,
+        28
+      ]
+    },
+    {
+      "label": "2×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        113.171875,
+        121,
+        26,
+        28
+      ]
+    },
+    {
+      "label": "4×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        140.171875,
+        121,
+        26,
+        28
+      ]
+    },
+    {
+      "label": "등록 농노 · 승급 조건",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        205,
+        120,
+        145,
+        31
+      ]
+    },
+    {
+      "label": "세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        10,
+        10,
+        209,
+        45
+      ]
+    },
+    {
+      "label": "주변 지형",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        10,
+        623,
+        82.5625,
+        36
+      ]
+    },
+    {
+      "label": "왼쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        197,
+        626,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "오른쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        227,
+        626,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "확대",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        257,
+        626,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "축소",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        287,
+        626,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "지도 중앙",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        317,
+        626,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "시장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        16,
+        676,
+        78.25,
+        46
+      ]
+    },
+    {
+      "label": "건설 목록 열기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        99.25,
+        676,
+        78.25,
+        46
+      ]
+    },
+    {
+      "label": "영토 확장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        182.5,
+        676,
+        78.25,
+        46
+      ]
+    },
+    {
+      "label": "거점·세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        265.75,
+        676,
+        78.25,
+        46
+      ]
+    }
+  ],
+  "360x740-build": [
+    {
+      "label": "왼쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        197,
+        626,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "오른쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        227,
+        626,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "확대",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        257,
+        626,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "축소",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        287,
+        626,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "지도 중앙",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        317,
+        626,
+        30,
+        30
+      ]
+    },
+    {
+      "label": "시장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        16,
+        676,
+        78.25,
+        46
+      ]
+    },
+    {
+      "label": "건설 목록 닫기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        99.25,
+        676,
+        78.25,
+        46
+      ]
+    },
+    {
+      "label": "영토 확장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        182.5,
+        676,
+        78.25,
+        46
+      ]
+    },
+    {
+      "label": "거점·세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        265.75,
+        676,
+        78.25,
+        46
+      ]
+    }
+  ],
+  "844x390": [
+    {
+      "label": "주민",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        686,
+        13,
+        58,
+        38
+      ]
+    },
+    {
+      "label": "소리 끄기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        749,
+        13,
+        38,
+        38
+      ]
+    },
+    {
+      "label": "도움말",
+      "visible": false,
+      "reachable": false,
+      "rect": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "게임 설정",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        792,
+        13,
+        38,
+        38
+      ]
+    },
+    {
+      "label": "재개",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        82.375,
+        81.5,
+        27,
+        27
+      ]
+    },
+    {
+      "label": "1×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        112.375,
+        81.5,
+        27,
+        27
+      ]
+    },
+    {
+      "label": "2×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        142.375,
+        81.5,
+        27,
+        27
+      ]
+    },
+    {
+      "label": "4×",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        172.375,
+        81.5,
+        27,
+        27
+      ]
+    },
+    {
+      "label": "등록 농노 · 승급 조건",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        614,
+        78,
+        216,
+        60
+      ]
+    },
+    {
+      "label": "세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        14,
+        12,
+        215,
+        52
+      ]
+    },
+    {
+      "label": "주변 지형",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        14,
+        331,
+        95.25,
+        42
+      ]
+    },
+    {
+      "label": "왼쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        685,
+        336,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "오른쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        713,
+        336,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "확대",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        741,
+        336,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "축소",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        769,
+        336,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "지도 중앙",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        797,
+        336,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "시장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        247.5,
+        323,
+        77,
+        48
+      ]
+    },
+    {
+      "label": "건설 목록 열기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        328.5,
+        323,
+        106,
+        48
+      ]
+    },
+    {
+      "label": "영토 확장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        438.5,
+        323,
+        77,
+        48
+      ]
+    },
+    {
+      "label": "거점·세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        519.5,
+        323,
+        77,
+        48
+      ]
+    }
+  ],
+  "844x390-build": [
+    {
+      "label": "왼쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        667,
+        329,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "오른쪽 90도 회전",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        698,
+        329,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "확대",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        729,
+        329,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "축소",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        760,
+        329,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "지도 중앙",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        791,
+        329,
+        28,
+        32
+      ]
+    },
+    {
+      "label": "시장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        247.5,
+        323,
+        77,
+        48
+      ]
+    },
+    {
+      "label": "건설 목록 닫기",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        328.5,
+        323,
+        106,
+        48
+      ]
+    },
+    {
+      "label": "영토 확장",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        438.5,
+        323,
+        77,
+        48
+      ]
+    },
+    {
+      "label": "거점·세계 지도",
+      "visible": true,
+      "reachable": true,
+      "rect": [
+        519.5,
+        323,
+        77,
+        48
+      ]
+    }
+  ],
+  "errors": []
+}

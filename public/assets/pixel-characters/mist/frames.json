@@ -1264,6 +1264,7 @@
     }
   },
   "animationMethod": "authored-texture-joint-rig",
+  "rigFinish": "continuous-joints-1",
   "locomotion": "spirit",
   "worldHeight": 0.9,
   "gait": {
@@ -3664,7 +3665,7 @@
     "Joint-based original textures; not individually redrawn cels",
     "Quarter turn uses foot pivot then switches the authored view"
   ],
-  "actionRevision": "combat-pivot-1",
+  "actionRevision": "combat-pivot-2",
   "authoredDefeat": true,
   "turnMidpoint": 2
 }

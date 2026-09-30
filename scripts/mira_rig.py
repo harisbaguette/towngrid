@@ -10,6 +10,7 @@ from pathlib import Path
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageOps
+from rig_skinning import limb_layers, SKINNING_REVISION
 
 
 def clean(image):
@@ -34,20 +35,6 @@ def cut_part(image, polygon, origin, scale, cell, baseline):
 def move(image, offset):
     return image.transform(image.size, Image.Transform.AFFINE,
                            (1, 0, -round(offset[0]), 0, 1, -round(offset[1])), Image.Resampling.NEAREST)
-
-
-def bone(image, a, b, c, d):
-    before, after = b-a, d-c
-    length = np.linalg.norm(before)
-    along = before/length
-    across = np.array([-along[1], along[0]])
-    target = after/max(np.linalg.norm(after), .001)
-    # Longitudinal projection may change, transverse limb width never scales.
-    matrix = np.outer(after/length, along) + np.outer(np.array([-target[1], target[0]]), across)
-    inverse = np.linalg.inv(matrix)
-    offset = a-inverse@c
-    return image.transform(image.size, Image.Transform.AFFINE,
-                           (*inverse[0], offset[0], *inverse[1], offset[1]), Image.Resampling.NEAREST)
 
 
 def joint(root, end, lengths, bend):
@@ -155,7 +142,7 @@ def render(rig, action, phase, spec, crate, wrench):
     for index, limb in enumerate(rig['legs']):
         a, b, c = limb['joints']
         (root,knee,end),foot = leg_pose(rig,index,phase,moving,offset,spec)
-        leg_layers.append((bone(limb['upper'], a,b,root,knee), bone(limb['lower'], b,c,knee,end), move(limb['foot'],end-c)))
+        leg_layers.append(limb_layers(limb,root,knee,end))
         audit.append(foot)
     crate_center = np.array([64., spec['baseline']-47.])+f*13+(offset if not handling else 0)
     if handling:
@@ -182,7 +169,7 @@ def render(rig, action, phase, spec, crate, wrench):
             end = end*(1-raise_amount)+(root+[7*math.sin(phase*math.pi*6), -16])*raise_amount
         lengths = [np.linalg.norm(b-a), np.linalg.norm(c-b)]
         elbow = joint(root,end,lengths,-f)
-        arm_layers.append((bone(limb['upper'], a,b,root,elbow), bone(limb['lower'], b,c,elbow,end),end))
+        arm_layers.append((*limb_layers(limb,root,elbow,end),end))
     # Far limbs, legs, torso, carried object, then near arm: consistent occlusion.
     for img in arm_layers[0][:2]: layer.alpha_composite(img)
     for pair in leg_layers:
@@ -253,7 +240,7 @@ def pack_mira_rig(spec_path, output):
                 'columns':columns,'frames':len(columns)*4,'portrait':'portrait.png','atlas':'sprites.png',
                 'sourceGrid':[2,1],'bodyPixels':100,'anchors':[[[.5,spec['baseline']/cell] for _ in columns] for _ in range(4)],
                 'portraitAnimation':portrait_animation,
-                'clips':clips,'animationMethod':'authored-texture-joint-rig','mirroredDirections':{'SE':'SW','NE':'NW'},
+                'clips':clips,'animationMethod':'authored-texture-joint-rig','rigFinish':SKINNING_REVISION,'mirroredDirections':{'SE':'SW','NE':'NW'},
                 'gait':spec['gait'],'rigAudit':audits,'limitations':['Mirrored opposite views','Attack shares tool-work motion','No dedicated injury/death artwork']}
     from character_actions import append_actions
     atlas,metadata=append_actions(atlas,metadata,rigs,{**spec,'kind':'biped'})

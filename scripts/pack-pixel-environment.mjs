@@ -1,4 +1,4 @@
-// Atlas extraction only: artwork is generated, not procedurally drawn.
+// Extract approved sheets and copy pre-baked animation atlases.
 // sharp is already provided by the pinned Wrangler -> Miniflare dependency.
 import { createRequire } from 'node:module';
 import { readFile, mkdir, writeFile, copyFile } from 'node:fs/promises';
@@ -19,6 +19,7 @@ const cell = spec.cellSize;
 for (const [id, asset] of Object.entries(spec.assets)) {
   if(only&&!only.includes(id))continue;
   const source = path.join(sourceDir, asset.source || spec.source);
+  if(asset.prepacked){await copyFile(source,path.join(outputDir,`${id}.png`));console.log(`${id}: packed motion atlas`);continue;}
   const metadata = await sharp(source).metadata();
   const rects = asset.rects || Array.from({ length: asset.grid[0] * asset.grid[1] }, (_, index) => {
     const x = index % asset.grid[0], y = Math.floor(index / asset.grid[0]);
@@ -50,7 +51,8 @@ for (const [id, asset] of Object.entries(spec.assets)) {
   }
   const atlas = await sharp({ create: { width: cell * columns, height: cell * rows, channels: 4, background: '#00000000' } }).composite(layers).png().toBuffer();
   await writeFile(path.join(outputDir, `${id}.png`), atlas);
-  if (asset.directions) await sharp(atlas).extract({ left: (asset.iconFrame || 0) * cell, top: 0, width: cell, height: cell }).png().toFile(path.join(outputDir, `${id}-icon.png`));
+  if(asset.iconSource)await copyFile(path.join(sourceDir,asset.iconSource),path.join(outputDir,`${id}-icon.png`));
+  else if (asset.directions) await sharp(atlas).extract({ left: (asset.iconFrame || 0) * cell, top: 0, width: cell, height: cell }).png().toFile(path.join(outputDir, `${id}-icon.png`));
   console.log(`${id}: ${crops.length} cells, ${cell * columns} x ${cell * rows}`);
 }
 await writeFile(path.join(outputDir, 'frames.json'), JSON.stringify(spec, null, 2) + '\n');

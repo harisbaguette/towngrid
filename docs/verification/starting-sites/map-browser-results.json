@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "scope": "isolated WorldMap and Campaign creation; game scene excluded",
+  "default": "estern-5",
+  "selected": "estern-2",
+  "land": {
+    "province": "estern-2",
+    "cell": [
+      16,
+      13
+    ],
+    "biome": "plain",
+    "edges": {
+      "n": "plain",
+      "e": "plain",
+      "s": "coast",
+      "w": "plain"
+    },
+    "ecology": "coast"
+  },
+  "checked": [
+    "30 country choices",
+    "five noncapital regions per playable country",
+    "capital and six water/mountain types disabled",
+    "map and dropdown sync",
+    "mobile start",
+    "saved location and terrain"
+  ],
+  "errors": []
+}

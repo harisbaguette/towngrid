@@ -106,7 +106,9 @@ def build(identity,data):
           'strideLength':round(stride,5),'gait':{'stance':.55,'pelvisHeight':pelvis,'hipHalfWidth':width,'footHalfWidth':width*.68,'thigh':length*.51,'shin':length*.49,'footLift':3.0},'views':views}
     if kind=='spirit':
         spec['strideLength']=.5;spec['baseline']=115
-        for view in views:view['tailStart']=80 if identity=='dew' else 84
+        for view in views:
+            view['tailStart']=80 if identity=='dew' else 84
+            view['tailBounds']=[44,80] if identity=='dew' else [44,84]
     if kind=='centaur':
         spec['strideLength']=.48;spec['gait'].update({'stance':.68,'footLift':2.5})
         for view in views:
@@ -118,10 +120,13 @@ def build(identity,data):
         views[0]['extras']=[{'kind':'wing','pivot':[51,43],'polygon':[[40,22],[47,26],[52,41],[49,44]]},{'kind':'wing','pivot':[74,47],'polygon':[[73,42],[85,32],[94,29],[92,40],[79,48]]}]
         views[1]['extras']=[{'kind':'wing','pivot':[52,45],'polygon':[[36,31],[42,32],[51,41],[53,47],[46,46]]},{'kind':'wing','pivot':[76,45],'polygon':[[75,42],[86,30],[92,25],[92,37],[81,47]]}]
     if identity=='sora':
-        views[0]['fixedPixels']=[[[69,59],[85,61],[87,84],[78,89],[73,79]]]
-        views[1]['fixedPixels']=[[[63,65],[81,72],[83,89],[72,91],[62,78]]]
-        views[0]['extras']=[{'kind':'tail','pivot':[82,78],'polygon':[[82,65],[95,70],[111,85],[103,102],[83,98],[80,82]]}]
-        views[1]['extras']=[{'kind':'tail','pivot':[77,81],'polygon':[[78,72],[92,78],[100,82],[100,103],[86,108],[77,94]]}]
+        # The root was left on the core while the tip moved independently.
+        # Keep the full tail together and tuck the occluded front-view root
+        # behind the hip, so raising the hand cannot expose a floating tail.
+        views[0]['extras']=[{'kind':'tail','pivot':[72,65],'offset':[-6,4],
+          'polygon':[[69,57],[85,58],[99,68],[111,85],[103,102],[83,98],[73,84],[69,73]]}]
+        views[1]['extras']=[{'kind':'tail','pivot':[66,73],
+          'polygon':[[63,65],[81,72],[92,78],[100,82],[100,103],[86,108],[77,94],[63,84],[62,78]]}]
     if identity=='kael':
         views[0]['fixedPixels']=[[[71,75],[75,73],[82,84],[82,93],[72,94],[70,86]]]
         views[1]['fixedPixels']=[[[63,70],[69,69],[74,80],[79,86],[78,97],[66,92],[62,82]]]
@@ -139,6 +144,12 @@ def build(identity,data):
         spec['hairColor']=True
         views[0]['fixedPixels']=[[[76,40],[83,46],[87,54],[90,65],[84,67],[79,61],[75,52]]]
         views[1]['fixedPixels']=[[[74,40],[80,43],[87,58],[86,72],[79,77],[75,63]]]
+    if identity=='kai':
+        views[1]['fixedPixels']=[[[44,59],[49,59],[50,74],[44,75]]]
+    if identity=='dew':
+        # Authored hair wisps stay with the head, not the carrying hand.
+        views[0]['fixedPixels']=[[[82,53],[94,53],[94,74],[85,74],[84,63]]]
+        views[1]['fixedPixels']=[[[83,48],[94,48],[94,67],[84,67]]]
     (ROOT/identity/'rig.json').write_text(json.dumps(spec,indent=2)+'\n',encoding='utf-8')
     return spec
 

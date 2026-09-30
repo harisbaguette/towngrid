@@ -1,0 +1,4 @@
+{
+  "requests": 84,
+  "note": "Network request listener observed 84 legacy GLB requests before cleanup. Early resource timing entries were evicted; transferred bytes and startup speed were not measured."
+}

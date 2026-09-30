@@ -29,7 +29,7 @@ for(const type of INDUSTRY_BUILDINGS){
  if(supply){
   const live={...b,activeUntil:65,progress:0,working:false};
   const state=productionVisualState(type,live,context);
-  assert.equal(state.phase,'supplying');assert.equal(state.count,0);assert.equal(state.displayValue,'45초');
+  assert.equal(state.phase,'supplying');assert.equal(state.count,0);assert.equal(state.displayValue,'90초');
   assert.equal(productionVisualState(type,live,{...context,time:66}).active,false);
   assert.equal(productionVisualState(type,{...live,enabled:false},context).active,false);
   assert.equal(productionVisualState(type,{...live,health:0},context).active,false);

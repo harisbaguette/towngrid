@@ -1,13 +1,17 @@
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath,pathToFileURL} from 'node:url';
+import {BUILDINGS} from '../src/app/game/simulation.js';
+import {RESOURCE_ICONS} from '../src/app/game/resource-art.js';
+const buildingCount=Object.values(BUILDINGS).filter(b=>!b.tile).length,iconCount=Object.keys(RESOURCE_ICONS).length;
 const {chromium}=await import(pathToFileURL(process.argv[2]).href);
 const browser=await chromium.launch({headless:true,executablePath:process.argv[3],args:['--enable-unsafe-swiftshader']});
-const folder=new URL('../docs/verification/art-completion/',import.meta.url);await mkdir(folder,{recursive:true});
+const folder=new URL('../docs/verification/environment-motion-20260929/coverage/',import.meta.url);await mkdir(folder,{recursive:true});
 const origin=process.env.TOWNGRID_URL||'http://localhost:5173',results=[],errors=[],failed=[];
 try{
  for(const mode of ['webgl','canvas']){
   const page=await browser.newPage({viewport:{width:1280,height:960}});
+  await page.routeWebSocket('**/*',()=>{});
   page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.url().includes('/assets/pixel-environment/')&&r.status()>=400)failed.push(r.url());});
   await page.goto(origin+'/art-preview.html'+(mode==='canvas'?'?renderer=canvas':''));await page.waitForFunction(()=>window.artPreview,{},{timeout:60000});
   assert.equal(await page.locator('.card').count(),10);assert.equal(await page.evaluate(()=>!!window.artPreview.renderer.isSoftware),mode==='canvas');
@@ -26,16 +30,16 @@ try{
    await page.screenshot({path:fileURLToPath(new URL(`damage-${mode}-${health}.png`,folder)),fullPage:true});
   }
   await page.locator('#repair').click();assert.ok(await page.evaluate(()=>window.artPreview.entries.every(e=>!e.model.userData.layers.find(l=>l.name==='repair-needed').visible)));
-  await page.locator('#category').selectOption('buildings');assert.equal(await page.locator('.card').count(),82);
+  await page.locator('#category').selectOption('buildings');assert.equal(await page.locator('.card').count(),buildingCount);
   await page.screenshot({path:fileURLToPath(new URL(`buildings-${mode}.png`,folder)),fullPage:true});
-  await page.locator('#category').selectOption('resources');assert.equal(await page.locator('.card img').count(),42);
+  await page.locator('#category').selectOption('resources');assert.equal(await page.locator('.card img').count(),iconCount);
   await page.waitForFunction(()=>[...document.querySelectorAll('.card img')].every(i=>i.complete&&i.naturalWidth>0));
   await page.screenshot({path:fileURLToPath(new URL(`resources-${mode}.png`,folder)),fullPage:true});
   await page.setViewportSize({width:390,height:844});await page.locator('#category').selectOption('vehicles');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await page.screenshot({path:fileURLToPath(new URL(`mobile-${mode}.png`,folder)),fullPage:true});
   assert.equal(await page.evaluate(()=>localStorage.length),0,'preview must not save');
-  results.push({mode,vehicles:10,views:4,buildings:82,icons:42,mobile:true,noSave:true});await page.close();
+  results.push({mode,vehicles:10,views:4,buildings:buildingCount,icons:iconCount,mobile:true,noSave:true});await page.close();
  }
  assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);
  await writeFile(new URL('results.json',folder),JSON.stringify({results,errors,failed},null,2));console.log(JSON.stringify(results));

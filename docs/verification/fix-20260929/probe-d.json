@@ -1,0 +1,99 @@
+{
+ "overrides": [
+  "fixture rank8; raid started, storm pending (80 game s), infection 35 for the stack check"
+ ],
+ "1920x1080": {
+  "B16": {
+   "toasts": 0,
+   "overHint": false
+  },
+  "J12": {
+   "stack": [
+    "raid-panel",
+    "weather-warning",
+    "health-alert",
+    "operations-card"
+   ],
+   "overlaps": [],
+   "sanitizeReachable": true,
+   "raidReachable": true,
+   "stormReachable": true
+  },
+  "J8": {
+   "dialogOpen": 1,
+   "overflowX": false
+  }
+ },
+ "1366x768": {
+  "B16": {
+   "toasts": 0,
+   "overHint": false
+  },
+  "J12": {
+   "stack": [
+    "raid-panel",
+    "weather-warning",
+    "health-alert",
+    "operations-card"
+   ],
+   "overlaps": [],
+   "sanitizeReachable": true,
+   "raidReachable": true,
+   "stormReachable": true
+  },
+  "J8": {
+   "dialogOpen": 1,
+   "overflowX": false
+  }
+ },
+ "390x844": {
+  "B16": {
+   "toasts": 0,
+   "overHint": false
+  },
+  "J12": {
+   "stack": [
+    "raid-panel",
+    "weather-warning",
+    "health-alert",
+    "operations-card"
+   ],
+   "overlaps": [],
+   "sanitizeReachable": true,
+   "raidReachable": true,
+   "stormReachable": true
+  },
+  "J8": {
+   "dialogOpen": 1,
+   "overflowX": false
+  }
+ },
+ "844x390": {
+  "B16": {
+   "toasts": 0,
+   "overHint": false
+  },
+  "J12": {
+   "stack": [
+    "raid-panel",
+    "weather-warning",
+    "health-alert",
+    "operations-card"
+   ],
+   "overlaps": [],
+   "sanitizeReachable": true,
+   "raidReachable": true,
+   "stormReachable": true
+  },
+  "J8": {
+   "dialogOpen": 1,
+   "overflowX": false
+  }
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

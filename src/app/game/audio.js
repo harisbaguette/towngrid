@@ -181,12 +181,14 @@ export class GameAudio{
    volume=Math.min(volume,WORLD_LIMITS.gain);this.worldStarts.push(now);
   }else if(now-(this.last[key]??-10)<.13)return false;
   this.last[key]=now;
+  // A promotion has its own fanfare (B5); it no longer shares the coin sample of a sale.
+  if(type==='promotion'){this.fanfare();return true;}
   let name=FILES[type];if(profile){const files=profile.files.filter(f=>this.buffers[f]);if(files.length){const i=(this.variant[profileId]=((this.variant[profileId]??-1)+1+Math.floor(Math.random()*Math.max(1,files.length-1)))%files.length);name=files[i];}}
   const buffer=this.buffers[name];
   if(buffer){const src=this.context.createBufferSource(),g=this.context.createGain(),p=this.context.createStereoPanner(),[lo,hi]=profile?.rate||[.94,1.06];src.buffer=buffer;src.playbackRate.value=lo+Math.random()*(hi-lo);g.gain.value=Math.min(world?WORLD_LIMITS.gain:1,volume*(profile?.gain??1));p.pan.value=Math.max(-1,Math.min(1,pan));src.connect(g);g.connect(p);p.connect(this.effectsGain);if(!this.track(src,[g,p],'effects',{world})){p.disconnect();return false;}src.start();}
   else if(!world)this.tone(type==='invalid'?110:520,.09,'triangle',.08);
   if(world)return true;
-  if(type==='storm'){this.noise(2,.45,280);this.tone(48,1.8,'sine',.2);}if(type==='illness')this.tone(196,.5,'sine',.16);if(type==='dispatch')this.tone(95,.55,'sawtooth',.04);if(type==='delivery')this.tone(660,.15,'sine',.07);if(type==='manaStorm'){this.noise(1.4,.2,1500);this.tone(82,.8,'sine',.08);}if(['promotion','victory'].includes(type))this.success();if(type==='defend')this.tone(220,.4,'triangle',.09);if(type==='impact')this.noise(.25,.08,400);
+  if(type==='storm'){this.noise(2,.45,280);this.tone(48,1.8,'sine',.2);}if(type==='illness')this.tone(196,.5,'sine',.16);if(type==='dispatch')this.tone(95,.55,'sawtooth',.04);if(type==='delivery')this.tone(660,.15,'sine',.07);if(type==='manaStorm'){this.noise(1.4,.2,1500);this.tone(82,.8,'sine',.08);}if(type==='victory')this.success();if(type==='defend')this.tone(220,.4,'triangle',.09);if(type==='impact')this.noise(.25,.08,400);
   return true;
  }
  interact(type='click'){const ready=this.start();if(this.context?.state==='running')this.play(type,{volume:type==='hover'?.10:.48});else ready?.then(ok=>{if(ok)this.play(type,{volume:.48});});}
@@ -211,7 +213,10 @@ export class GameAudio{
    if(this.last[key]!==phase){this.last[key]=phase;this.play(b.type,{pan:pan(b.x),volume:.11*fall(b.x,b.z,9),world:true});}
   }
  }
- click(){this.play('click');}build(){this.play('build');}success(){for(const[i,f]of [392,493.88,587.33,783.99].entries())this.tone(f,.42,'triangle',.16,i*.11);}
+ click(){this.play('click');}build(){this.play('build');}
+ // Rank-up: rising brass-like arpeggio and a held chord, longer and lower-rooted than the 4-note success jingle.
+ fanfare(){for(const[i,f]of [261.63,329.63,392,523.25].entries()){this.tone(f,.32,'sawtooth',.045,i*.12);this.tone(f,.36,'triangle',.13,i*.12);}for(const f of [523.25,659.25,783.99])this.tone(f,1.1,'triangle',.09,.5);this.tone(130.81,1.3,'sine',.14,.5);}
+ success(){for(const[i,f]of [392,493.88,587.33,783.99].entries())this.tone(f,.42,'triangle',.16,i*.11);}
  suspend(){this.stopVoices(['effects']);this.context?.suspend().catch(()=>{});}
  setMuted(v){this.muted=!!v;if(this.muted){this.stopVoices();this.beds={};}this.applyVolumes();this.saveSettings();if(!this.muted)this.tick();}
  dispose(){this.disposed=true;clearInterval(this.timer);if(this.onVisible)document.removeEventListener('visibilitychange',this.onVisible);this.abort?.abort();this.stopVoices();for(const n of CHANNELS){this[n+'Gain']?.disconnect();this.meters?.[n]?.disconnect();}this.gain?.disconnect();this.compressor?.disconnect();this.analyser?.disconnect();this.context?.close().catch(()=>{});this.buffers={};this.beds={};this.noiseBuffer=null;}

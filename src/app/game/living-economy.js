@@ -1,4 +1,5 @@
-import {RESOURCES, BUILDINGS} from './simulation.js';
+import {remainingSeconds} from './game-time.js';
+import {RESOURCES, BUILDINGS, MERCHANT_PRICE} from './simulation.js';
 import {NATIONS} from './world.js';
 import {tradeConnection} from './trade-terminals.js';
 export function marketFactor(s,item,extra=0){
@@ -6,7 +7,7 @@ export function marketFactor(s,item,extra=0){
  const pressure=(s.market.pressure[item]||0)+extra;
  const policy=NATIONS[s.nation].sale*(item==='fish'?(NATIONS[s.nation].fishSale||1):1);
  const border=s.campaign?.tradeConditions?.(s.siteId)?.market??1;
- return Math.max(.5,Math.min(1.3,demand-pressure*.009))*policy*border*(s.sanctionUntil>s.time?.75:1);
+ return Math.max(.5,Math.min(1.3,demand-pressure*.009))*policy*border*(s.sanctionUntil>s.time?.75:1)*(s.merchantUntil>s.time?MERCHANT_PRICE:1);
 }
 // The trade route a site sells through adds its own premium or middleman cut (trade-routes.js).
 export function saleQuote(s,item,amount=1){let total=0;for(let i=0;i<amount;i++)total+=RESOURCES[item].price*marketFactor(s,item,i);return Math.round(total*tradeConnection(s).price);}
@@ -25,10 +26,10 @@ export function tickEconomy(s,dt){
  const growth=care?-.9:sanitation?(s.charter==='commons'?-.34:-.27):clinic&&s.stage<15?-.025:INFECTION_SPREAD*h.infection*(1-h.infection/100)*(s.stage>=15?1.5:1);
  h.infection=Math.max(0,Math.min(100,h.infection+growth*dt));
  s.diseaseUntil=h.infection>0?s.time+80:0;
- if(!h.infection){h.recoveries++;s.notify('감염이 진정되었습니다. 의료 물자를 비축하세요.','success');s.sound('heal');}
+ if(!h.infection){h.recoveries=(h.recoveries||0)+1;s.notify('감염이 진정되었습니다. 의료 물자를 비축하세요.','success');s.sound('heal');}
 }
 export function sanitation(s){
- if(s.money<35||s.availableStock('water')<8||s.availableStock('wood')<3)return {ok:false,error:'방역: 35G · 물 8 · 목재 3개'};
+ const short=s.moneyShort?.(35,'방역 ');if(short)return {ok:false,error:short};if(s.availableStock('water')<8||s.availableStock('wood')<3)return {ok:false,error:'방역: 35G · 물 8 · 목재 3개'};
  s.money-=35;s.stock.water-=8;s.stock.wood-=3;s.health.sanitationUntil=s.time+65;s.health.infection=Math.max(0,s.health.infection-12);s.sound('heal');return {ok:true};
 }
 
@@ -39,7 +40,7 @@ export function rescueInfo(s){
   {title:'통행 협상',text:'채무를 절반 이하로 줄이고 통행 문서를 구합니다.',label:'통행 문서 · 125G',ready:s.debt<=500&&s.money>=125},
   {title:'귀환 수레',text:'가족을 태울 수레와 여정을 버틸 식량을 준비합니다.',label:'수레 준비 · 목재 12 · 밀 12',ready:s.availableStock('wood')>=12&&s.availableStock('grain')>=12},
   {title:'검문소 우회',text:'검문소 비용을 내거나 식량을 더 싣고 긴 강변 길로 돌아갑니다.',label:'검문소 통과 · 160G',ready:s.money>=160},
-  {title:'집으로 오는 길',text:q.remaining>0?'가족이 귀환 중입니다. 마을의 식량과 안전을 지키세요.':'가족이 머물 주택과 밀 8개를 준비하세요.',label:q.remaining>0?Math.ceil(q.remaining)+'초 뒤 도착':'가족 맞이하기 · 밀 8',ready:q.remaining<=0&&s.buildings.some(b=>BUILDINGS[b.type].home&&b.health>0)&&s.availableStock('grain')>=8},
+  {title:'집으로 오는 길',text:q.remaining>0?'가족이 귀환 중입니다. 마을의 식량과 안전을 지키세요.':'가족이 머물 주택과 밀 8개를 준비하세요.',label:q.remaining>0?remainingSeconds(q.remaining,s)+'초 뒤 도착':'가족 맞이하기 · 밀 8',ready:q.remaining<=0&&s.buildings.some(b=>BUILDINGS[b.type].home&&b.health>0)&&s.availableStock('grain')>=8},
   {title:'다시 함께',text:'가족이 마을에 정착했습니다. 하루 채무 이자가 20% 줄어듭니다.',label:'합류 완료',ready:false}
  ];return {...steps[Math.min(q.step,5)],step:q.step};
 }

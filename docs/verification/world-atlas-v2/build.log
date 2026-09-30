@@ -1,0 +1,60 @@
+
+  vinext build  (Vite 8.0.13)
+
+[1/5] analyze client references...
+[2Ktransforming...✓ 231 modules transformed.
+rendering chunks...
+✓ built in 12.33s
+[2/5] analyze server references...
+[2Ktransforming...✓ 302 modules transformed.
+rendering chunks...
+✓ built in 1.36s
+[3/5] build rsc environment...
+[2Ktransforming...✓ 228 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 10.20s
+[4/5] build client environment...
+[2Ktransforming...✓ 2092 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 2.85s
+[5/5] build ssr environment...
+[2Ktransforming...✓ 308 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 883ms
+[0m
+  Route (app)
+  ┌ ? /              
+  └ ? /screen-preview
+
+  ? Unknown
+
+  ? Some routes could not be classified. vinext currently uses static analysis
+    and cannot detect dynamic API usage (headers(), cookies(), etc.) at build time.
+    Automatic classification will be improved in a future release.
+
+  Build complete. Run `vinext start` to start the production server.
+
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - rsc:scan-strip (30%)
+  - rsc:rsc-css-export-transform (17%)
+  - rsc:scan-strip (14%)
+  - vinext:typeof-window-scan (13%)
+  - rsc:virtual-client-package (6%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - vinext:og-inline-fetch-assets (30%)
+  - rsc:use-client (18%)
+  - vinext:optimize-imports (12%)
+  - rsc:virtual-client-package (9%)
+  - vinext:image-imports (6%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

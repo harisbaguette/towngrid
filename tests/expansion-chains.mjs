@@ -91,8 +91,9 @@ for(const {type,r} of chainLines){
  const before=Object.fromEntries(Object.keys(need).map(k=>[k,total(k)])),made=s.produced[r.output]||0;
  assert.ok(until(s,()=>(s.produced[r.output]||0)>made),type+':'+r.id+' produces '+r.output+' (status '+b.status+')');
  assert.equal((s.produced[r.output]||0)-made,r.amount*b.cycles,type+':'+r.id+' makes its amount per cycle');
- // Inputs the support plant also burns (water, wood) are left out of the ledger.
- for(const [k,n] of Object.entries(need))if(!s.buildings.some(v=>v!==b&&s.recipeOf(v).inputs?.[k]))assert.equal(before[k]-total(k),n*(b.cycles+(b.progress>0?1:0)),type+':'+r.id+' consumes '+k);
+ // Inputs the support plant also burns (water, wood) are left out of the ledger. total() counts the running batch, so
+ // only finished cycles are consumed (a cycle can start in the same step the last one ended: the step's remainder carries).
+ for(const [k,n] of Object.entries(need))if(!s.buildings.some(v=>v!==b&&s.recipeOf(v).inputs?.[k]))assert.equal(before[k]-total(k),n*b.cycles,type+':'+r.id+' consumes '+k);
  checked++;
 }
 assert.equal(checked,chainLines.length);

@@ -1,0 +1,330 @@
+{
+  "generated": "2026-09-29",
+  "images": [
+    {
+      "id": "dawn-bakery",
+      "title": "리엔의 새벽 빵집",
+      "kind": "daily",
+      "characters": [
+        "lien"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/dawn-bakery.png",
+      "output": "public/assets/screens/daily-v3/dawn-bakery.webp",
+      "references": [
+        "public/assets/pixel-characters/lien/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. Lien is the adult female ELF baker: long purple braid, pointed ears, white chef hat and coat/apron, burgundy neckerchief. She uses a wooden paddle to slide round bread into a brick oven. Warm orange oven, pale blue dawn through a village window. Only her recognizable face, no anonymous co-lead."
+    },
+    {
+      "id": "orchard-harvest",
+      "title": "에단의 수확",
+      "kind": "daily",
+      "characters": [
+        "ethan"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/orchard-harvest.png",
+      "output": "public/assets/screens/daily-v3/orchard-harvest.webp",
+      "references": [
+        "public/assets/pixel-characters/ethan/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. Ethan is the adult HUMAN male farmer: tousled brown hair, straw hat, ochre scarf, navy shirt and ochre overalls. He picks a ripe red apple and fills a wooden crate in a sunny fertile orchard. Broad tree foliage shapes, orderly wheat field beyond."
+    },
+    {
+      "id": "dairy-morning",
+      "title": "로아의 목장",
+      "kind": "daily",
+      "characters": [
+        "roa"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/dairy-morning.png",
+      "output": "public/assets/screens/daily-v3/dairy-morning.webp",
+      "references": [
+        "public/assets/pixel-characters/roa/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. Roa is the adult HUMAN female rancher: auburn ponytail, brown cowboy hat, green plaid shirt and tan vest. She sets a full metal milk churn onto a small cart beside a calm cream-and-brown dairy cow, fenced pasture and barn at morning. Correct practical grip and cow anatomy."
+    },
+    {
+      "id": "textile-looms",
+      "title": "나라의 직조소",
+      "kind": "daily",
+      "characters": [
+        "nara"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/textile-looms.png",
+      "output": "public/assets/screens/daily-v3/textile-looms.webp",
+      "references": [
+        "public/assets/pixel-characters/nara/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. Nara is the adult HUMAN female textile worker: dark purple hair bun, purple blouse, cream apron, yellow measuring tape about neck and thread belt. She guides a wooden shuttle through a simple handloom weaving a broad teal cloth. Two large thread reels and a finished folded cloth, readable geometry."
+    },
+    {
+      "id": "glass-furnace",
+      "title": "보리크와 오리엘의 유리 공방",
+      "kind": "daily",
+      "characters": [
+        "borik",
+        "oriel"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/glass-furnace.png",
+      "output": "public/assets/screens/daily-v3/glass-furnace.webp",
+      "references": [
+        "public/assets/pixel-characters/borik/portrait.png",
+        "public/assets/pixel-characters/oriel/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. Two distinct adults work together: BORIK the short broad DWARF with ginger hair and thick ginger braided beard, goggles on forehead, cream shirt, dark teal overalls and orange heat gloves; ORIEL the taller slender ELF male with pale mint hair and blue round goggles over eyes, cream shirt, teal apron and brown gloves. Borik turns one long blowpipe holding a glowing glass bubble over a furnace, Oriel checks a cooled blue glass bottle on the workbench. Orange furnace, cool cyan finished glass, clean simple silhouettes. Preserve their different heights and faces."
+    },
+    {
+      "id": "stone-quarry",
+      "title": "도린과 엘바르의 채석장",
+      "kind": "daily",
+      "characters": [
+        "dorin",
+        "elvar"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/stone-quarry.png",
+      "output": "public/assets/screens/daily-v3/stone-quarry.webp",
+      "references": [
+        "public/assets/pixel-characters/dorin/portrait.png",
+        "public/assets/pixel-characters/elvar/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. Two different adult miners at a mountain stone quarry: DORIN a short broad DWARF male with brown beard in two braids, yellow mining helmet/light, cream shirt, dark overalls, heavy gloves; ELVAR a taller slender ELF male with short brown hair, pointed ears, yellow mining helmet, green overalls with orange reflective stripes. Dorin carefully wedges a large pale stone block; Elvar stacks smaller dressed blocks beside a mine cart. Cool mountain slope and simple pale rock planes, not a cave combat scene."
+    },
+    {
+      "id": "mountain-mine",
+      "title": "타론의 광산 운반",
+      "kind": "daily",
+      "characters": [
+        "taron"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/mountain-mine.png",
+      "output": "public/assets/screens/daily-v3/mountain-mine.webp",
+      "references": [
+        "public/assets/pixel-characters/taron/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "One newly composed full-bleed 16:9 landscape PIXEL ART illustration for TownGrid town production/logistics game. Match reference pixel art, NOT smooth anime, 3D, painterly illustration, photograph or vector. Crisp angular pixel clusters and controlled broad color ramps, consistent pixel scale like 480x270 art enlarged nearest-neighbour; clear silhouettes, simplified props, no visual clutter. Use teal/ochre/forest/cyan core palette with scene-specific colors. Focus on recognizable everyday work and adult residents, practical hand-tool/material contact, correct anatomy. Compose key faces and task around x=55-70%, y=30-60%, keep LEFT 30% calm low-detail shadow/architecture for a menu and BOTTOM 20% subdued for loading text. The picture must stand alone as a rich evocative game illustration. No logo, letters, text, UI, border or montage. Reference scene establishes STYLE only; create this different scene, don't repeat the reference building layout or person. TARON from character reference: adult male titan, very muscular tall gray stone skin with broad angular pale markings, short spiky dark hair, navy sleeveless undershirt and ochre utility overalls. He lifts a heavy ore crate onto a mine cart, a smaller adult dwarf beside him establishes huge scale. Open snowy mineral basin behind mine entrance. Strong but friendly work scene, no combat, hands touch crate."
+    },
+    {
+      "id": "desert-oil",
+      "title": "테린의 사막 유정",
+      "kind": "daily",
+      "characters": [
+        "terin"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/desert-oil.png",
+      "output": "public/assets/screens/daily-v3/desert-oil.webp",
+      "references": [
+        "public/assets/pixel-characters/terin/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. TERIN adult male ELF engineer, short brown hair and pointed ears, goggles on head, rolled-sleeve blue work coveralls and wrench belt, adjusts a valve with a wrench beside a small pumpjack in a golden desert. A green oasis and teal water tank far away, one pipeline, readable broad forms, no text on gauges."
+    },
+    {
+      "id": "oasis-market",
+      "title": "비안의 오아시스 장터",
+      "kind": "daily",
+      "characters": [
+        "vian"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/oasis-market.png",
+      "output": "public/assets/screens/daily-v3/oasis-market.webp",
+      "references": [
+        "public/assets/pixel-characters/vian/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. VIAN adult male ELF merchant with swept blond hair, green eyes and pointed ears, green vest over cream shirt, burgundy tie and leather belt. He weighs a basket of dates on a simple balance at an oasis market stall; blue ledger closed nearby with no letters. Palm shade, turquoise water, ochre canvas awning, just a few large crates."
+    },
+    {
+      "id": "wetland-ferry",
+      "title": "셀리아의 갈대숲 나루터",
+      "kind": "daily",
+      "characters": [
+        "selia"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/wetland-ferry.png",
+      "output": "public/assets/screens/daily-v3/wetland-ferry.webp",
+      "references": [
+        "public/assets/pixel-characters/selia/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. SELIA adult female ELF sailor with short light blue hair, pointed ears, white captain cap with gold anchor, navy jacket and white scarf, rope belt. She securely ties a ferry rope around a quay bollard beside a small flat-bottom cargo boat in reed wetlands. Calm reflective freshwater, simple pier and reeds, green dusk light."
+    },
+    {
+      "id": "volcano-forge",
+      "title": "세린의 고원 대장간",
+      "kind": "daily",
+      "characters": [
+        "serin"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/volcano-forge.png",
+      "output": "public/assets/screens/daily-v3/volcano-forge.webp",
+      "references": [
+        "public/assets/pixel-characters/serin/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. SERIN adult female ELF smith with short tousled auburn hair and pointed ears, cream rolled-sleeve shirt, charcoal brown heavy apron, dark gloves and tongs belt. She grips glowing steel with tongs on an anvil, raised hammer in the other hand. A compact open-sided forge on a volcanic plateau, muted basalt and distant reddish mountain, controlled orange sparks, no active disaster."
+    },
+    {
+      "id": "winter-delivery",
+      "title": "닥스의 설원 배송",
+      "kind": "daily",
+      "characters": [
+        "dax"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/winter-delivery.png",
+      "output": "public/assets/screens/daily-v3/winter-delivery.webp",
+      "references": [
+        "public/assets/pixel-characters/dax/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. DAX adult HUMAN male carrier: short brown hair and light stubble, navy cap and navy shirt, orange-and-white reflective work vest, gloves and utility belt. He grips a crate with both hands, unloading a snow-dusted small cargo truck outside a warmly lit warehouse in a snowy settlement. Amber window and blue snow, readable cargo not many tiny props. His familiar vest remains visible over warm navy sleeves."
+    },
+    {
+      "id": "coast-fishing",
+      "title": "날리아의 어선",
+      "kind": "daily",
+      "characters": [
+        "nalia"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/coast-fishing.png",
+      "output": "public/assets/screens/daily-v3/coast-fishing.webp",
+      "references": [
+        "public/assets/pixel-characters/nalia/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. NALIA adult female ELF fisher: long teal-blue side braid, pointed ears, yellow fishing hat, navy-white striped shirt, dark teal overalls and float belt. She lifts a net containing a few silver fish from a small fishing boat at a sheltered coral-colored bay pier. Calm sea, wooden boats, warm sunrise; clear practical net and hand contact."
+    },
+    {
+      "id": "clinic-morning",
+      "title": "베라의 진료소",
+      "kind": "daily",
+      "characters": [
+        "vera"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/clinic-morning.png",
+      "output": "public/assets/screens/daily-v3/clinic-morning.webp",
+      "references": [
+        "public/assets/pixel-characters/vera/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "One newly composed full-bleed 16:9 landscape PIXEL ART illustration for TownGrid town production/logistics game. Match reference pixel art, NOT smooth anime, 3D, painterly illustration, photograph or vector. Crisp angular pixel clusters and controlled broad color ramps, consistent pixel scale like 480x270 art enlarged nearest-neighbour; clear silhouettes, simplified props, no visual clutter. Use teal/ochre/forest/cyan core palette with scene-specific colors. Focus on recognizable everyday work and adult residents, practical hand-tool/material contact, correct anatomy. Compose key faces and task around x=55-70%, y=30-60%, keep LEFT 30% calm low-detail shadow/architecture for a menu and BOTTOM 20% subdued for loading text. The picture must stand alone as a rich evocative game illustration. No logo, letters, text, UI, border or montage. Reference scene establishes STYLE only; create this different scene, don't repeat the reference building layout or person. VERA from character reference: adult human female medic, long silver-white low ponytail, gray eyes, cream coat with small green cross patch over charcoal high-neck work clothes and leather medical belt. She gently bandages a fully clothed adult worker's forearm at a neat village clinic bench. Green medicine cabinet, clean folded cloth and two bottles, morning garden window, compassionate non-graphic care."
+    },
+    {
+      "id": "crystal-lab",
+      "title": "세드릭의 마력 연구실",
+      "kind": "daily",
+      "characters": [
+        "cedric"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/crystal-lab.png",
+      "output": "public/assets/screens/daily-v3/crystal-lab.webp",
+      "references": [
+        "public/assets/pixel-characters/cedric/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. CEDRIC adult HUMAN male mage: dark blue hair, wide navy mage hat with gold bands, navy and gold work mage coat with leather straps and cyan crystal badge. He aligns a large cyan crystal inside a simple copper power apparatus at a workshop bench. One luminous rune-free crystal, brass coils, large shelves, twilight window. Magitech industrial laboratory not fantasy combat."
+    },
+    {
+      "id": "airship-dock",
+      "title": "아이리스의 비공정",
+      "kind": "daily",
+      "characters": [
+        "iris"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/airship-dock.png",
+      "output": "public/assets/screens/daily-v3/airship-dock.webp",
+      "references": [
+        "public/assets/pixel-characters/iris/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. IRIS adult HUMAN female aviator: short brown hair, brown leather aviator cap and goggles, shearling brown flight jacket, long white scarf and flying gloves. She checks one cargo tie-down and metal cleat at a moored small magitech airship dock; rounded teal-and-ochre airship hull prominent behind. Clear pier, cargo crates, pale morning sky. Scarf does not hide her face."
+    },
+    {
+      "id": "evening-market",
+      "title": "벨의 저녁 시장",
+      "kind": "daily",
+      "characters": [
+        "bel"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/evening-market.png",
+      "output": "public/assets/screens/daily-v3/evening-market.webp",
+      "references": [
+        "public/assets/pixel-characters/bel/portrait.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. BEL adult HUMAN female merchant: short brown bob, cream blouse, burgundy vest with gold buttons, utility belt and green ledger. She hands a parcel across her village market counter at evening. Warm lamps, two baskets of produce, quiet street and tiled roofs beyond. Her face recognizable and task clear, customer seen only as an arm from frame edge."
+    },
+    {
+      "id": "riverside-rest",
+      "title": "카이와 피아의 강가 휴식",
+      "kind": "daily",
+      "characters": [
+        "kai",
+        "fia"
+      ],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/riverside-rest.png",
+      "output": "public/assets/screens/daily-v3/riverside-rest.webp",
+      "references": [
+        "public/assets/pixel-characters/kai/portrait.png",
+        "public/assets/pixel-characters/fia/portrait.png",
+        "art-source/pixel-characters/roster-v4/kai/SW.png",
+        "public/assets/screens/pixel-v2/marna-workshop.webp"
+      ],
+      "prompt": "Create one original full-bleed 16:9 PIXEL ART illustration for TownGrid. Character portrait reference(s) show the EXACT EXISTING CAST: preserve face, hair, species, gender, colors, clothing and distinctive accessories faithfully, while repainting the character in the supplied pixel scene style. Last reference is PIXEL STYLE ONLY; DO NOT copy its dwarf woman or workshop layout. Crisp large square pixel clusters like a 480x270 illustration enlarged nearest neighbor, restrained broad color ramps and very clear silhouette/action. No smooth anime rendering, no 3D, no painterly strokes, no vector. Main character(s) and readable hand/task at center-right x=50–75%, y=30–65%; left 28% quiet low-detail shadow architecture/landscape for menu, bottom 18% subdued. Rich teal/ochre/forest/cyan palette adjusted to biome. Correct adult anatomy and tool contact. No text, letters, logos, captions, panels or UI. Two distinct existing adult characters share bread at a low riverside picnic table. KAI is an adult male CENTAUR, black tousled hair, cream open-collar shirt, teal vest and brown leather harness, muscular human upper body joining a dark brown HORSE body with FOUR horse legs, never two human legs. Follows full-body reference. FIA is a tiny adult female FAE with short pink bob and pointed ears, golden butterfly wings, cream blouse and ochre work apron, seated on the table about one third his torso height, holding a berry. Friendly conversation in willow shade beside calm river after work. Frame the full centaur body unobscured enough to read, no duplicated limbs. Simplify background strongly."
+    },
+    {
+      "id": "map-table",
+      "title": "새로운 땅을 향해",
+      "kind": "transition",
+      "characters": [],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/map-table.png",
+      "output": "public/assets/screens/daily-v3/map-table.webp",
+      "references": [
+        "public/assets/screens/pixel-v2/home-background.webp"
+      ],
+      "prompt": "One newly composed full-bleed 16:9 landscape PIXEL ART illustration for TownGrid town production/logistics game. Match reference pixel art, NOT smooth anime, 3D, painterly illustration, photograph or vector. Crisp angular pixel clusters and controlled broad color ramps, consistent pixel scale like 480x270 art enlarged nearest-neighbour; clear silhouettes, simplified props, no visual clutter. Use teal/ochre/forest/cyan core palette with scene-specific colors. Focus on recognizable everyday work and adult residents, practical hand-tool/material contact, correct anatomy. Compose key faces and task around x=55-70%, y=30-60%, keep LEFT 30% calm low-detail shadow/architecture for a menu and BOTTOM 20% subdued for loading text. The picture must stand alone as a rich evocative game illustration. No logo, letters, text, UI, border or montage. Reference scene establishes STYLE only; create this different scene, don't repeat the reference building layout or person. An inviting close angled overhead view of an explorer's sturdy wooden table by a window: a large parchment grid map with ONE connected fictional continent and a modest inland sea, thick stepped pixel coast shapes, four chunky miniature markers for forest, mountain, wheat and port, brass compass and a rolled map. NO LABELS OR LETTERS. An adult gloved hand places a wooden marker on a square. Background window reveals sunrise farmland. Calm center and bottom for transition text, no busy route scribbles."
+    },
+    {
+      "id": "village-arrival",
+      "title": "마을로 들어가는 길",
+      "kind": "transition",
+      "characters": [],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/village-arrival.png",
+      "output": "public/assets/screens/daily-v3/village-arrival.webp",
+      "references": [
+        "public/assets/screens/pixel-v2/home-background.webp"
+      ],
+      "prompt": "One newly composed full-bleed 16:9 landscape PIXEL ART illustration for TownGrid town production/logistics game. Match reference pixel art, NOT smooth anime, 3D, painterly illustration, photograph or vector. Crisp angular pixel clusters and controlled broad color ramps, consistent pixel scale like 480x270 art enlarged nearest-neighbour; clear silhouettes, simplified props, no visual clutter. Use teal/ochre/forest/cyan core palette with scene-specific colors. Focus on recognizable everyday work and adult residents, practical hand-tool/material contact, correct anatomy. Compose key faces and task around x=55-70%, y=30-60%, keep LEFT 30% calm low-detail shadow/architecture for a menu and BOTTOM 20% subdued for loading text. The picture must stand alone as a rich evocative game illustration. No logo, letters, text, UI, border or montage. Reference scene establishes STYLE only; create this different scene, don't repeat the reference building layout or person. An adult human woman and stocky dwarf walk a small loaded wooden cart toward a welcoming timber village gate at golden morning. Single square cobble road leads into tidy quarter-view town, visible well, grain field and lumber shed; adult workers waving from afar. Foreground lower quarter quiet shadowed road, background farmland and teal roofs. Strong readable silhouettes, slight overhead quarter view, intimate warm start-of-adventure feeling, no written gate sign."
+    },
+    {
+      "id": "river-crossing",
+      "title": "다음 거점으로",
+      "kind": "transition",
+      "characters": [],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/river-crossing.png",
+      "output": "public/assets/screens/daily-v3/river-crossing.webp",
+      "references": [
+        "public/assets/screens/pixel-v2/home-background.webp"
+      ],
+      "prompt": "One newly composed full-bleed 16:9 landscape PIXEL ART illustration for TownGrid town production/logistics game. Match reference pixel art, NOT smooth anime, 3D, painterly illustration, photograph or vector. Crisp angular pixel clusters and controlled broad color ramps, consistent pixel scale like 480x270 art enlarged nearest-neighbour; clear silhouettes, simplified props, no visual clutter. Use teal/ochre/forest/cyan core palette with scene-specific colors. Focus on recognizable everyday work and adult residents, practical hand-tool/material contact, correct anatomy. Compose key faces and task around x=55-70%, y=30-60%, keep LEFT 30% calm low-detail shadow/architecture for a menu and BOTTOM 20% subdued for loading text. The picture must stand alone as a rich evocative game illustration. No logo, letters, text, UI, border or montage. Reference scene establishes STYLE only; create this different scene, don't repeat the reference building layout or person. A modest cargo ferry with crates and two small adult crew calmly crosses a wide freshwater river between a wooded farming settlement and snow-tipped mineral hills. Small quay on each bank, a bridge distant, land encloses all water. View diagonally above deck, broad blue-teal river leaves quiet lower quarter for transition text. Travel and connection, early sunlight and soft pixel-cloud atmosphere, no vast ocean."
+    },
+    {
+      "id": "records-room",
+      "title": "마을의 기록",
+      "kind": "transition",
+      "characters": [],
+      "source": "art-source/screen-concepts/2026-09-29/daily-expansion/records-room.png",
+      "output": "public/assets/screens/daily-v3/records-room.webp",
+      "references": [
+        "public/assets/screens/pixel-v2/home-background.webp"
+      ],
+      "prompt": "One newly composed full-bleed 16:9 landscape PIXEL ART illustration for TownGrid town production/logistics game. Match reference pixel art, NOT smooth anime, 3D, painterly illustration, photograph or vector. Crisp angular pixel clusters and controlled broad color ramps, consistent pixel scale like 480x270 art enlarged nearest-neighbour; clear silhouettes, simplified props, no visual clutter. Use teal/ochre/forest/cyan core palette with scene-specific colors. Focus on recognizable everyday work and adult residents, practical hand-tool/material contact, correct anatomy. Compose key faces and task around x=55-70%, y=30-60%, keep LEFT 30% calm low-detail shadow/architecture for a menu and BOTTOM 20% subdued for loading text. The picture must stand alone as a rich evocative game illustration. No logo, letters, text, UI, border or montage. Reference scene establishes STYLE only; create this different scene, don't repeat the reference building layout or person. A cozy town record keeper's desk at evening: an adult worker's hands open a thick leather ledger with ABSTRACT UNREADABLE MARKS only, a few square resource tokens representing grain, timber and iron, a brass lantern, one rolled grid map. Through window a tiny softly lit teal-roof town and rail bridge. Warm amber pool of light on broad quiet desktop central-right, deep teal left and lower shadows, no readable words, no UI or modern computer."
+    }
+  ]
+}

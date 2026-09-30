@@ -1,20 +1,46 @@
 {
   "result": "PASS",
   "checked": [
-    "title keyboard entry, no-save continue disabled, home/settings/world navigation, six illustration gallery",
+    "title keyboard entry, no-save continue disabled, stable random home, home/settings/world navigation, 24 daily + 4 transition gallery, filters/thumbnails/arrows",
     "actual save import, long-load artwork advances, immediate completion, playable demo, saved game preserved",
-    "390px mobile, short landscape, reduced motion"
+    "390px mobile, short landscape, reduced motion",
+    "normal motion context-specific transitions, keyboard skip, default home probability branch",
+    "no legacy GLB requests throughout home, save import and playable demo"
   ],
   "errors": [],
   "failed": [],
-  "first": "silen",
-  "second": "marna",
+  "legacyRequests": [],
+  "first": "records-room",
+  "second": "hana",
+  "transitionsSeen": [
+    "village-arrival",
+    "map-table",
+    "village-arrival"
+  ],
   "gallery": [
+    "리엔의 새벽 빵집",
+    "에단의 수확",
+    "로아의 목장",
+    "나라의 직조소",
+    "보리크와 오리엘의 유리 공방",
+    "도린과 엘바르의 채석장",
+    "타론의 광산 운반",
+    "테린의 사막 유정",
+    "비안의 오아시스 장터",
+    "셀리아의 갈대숲 나루터",
+    "세린의 고원 대장간",
+    "닥스의 설원 배송",
+    "날리아의 어선",
+    "베라의 진료소",
+    "세드릭의 마력 연구실",
+    "아이리스의 비공정",
+    "벨의 저녁 시장",
+    "카이와 피아의 강가 휴식",
     "미라의 정비소",
-    "마르나의 공방",
-    "실렌의 온실",
-    "로웬의 철도 정비",
-    "하나의 배송 준비",
-    "브론의 목공소"
+    "마르나의 광산 공방",
+    "실렌의 관개 온실",
+    "로웬의 설원 철도",
+    "하나의 항구 배송",
+    "브론의 숲속 목공소"
   ]
 }

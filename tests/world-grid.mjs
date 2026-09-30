@@ -67,7 +67,7 @@ const seaSite=PROVINCES.find(p=>NATIONS[p.nation].playable&&Object.values(layout
 assert.equal(new Simulation('highland').layout.legacy,'highland');
 
 // Campaign sites are built on their own province's square, and keep it through a save.
-{const c=new Campaign({nation:'estern'});assert.equal(c.active.provinceId,'estern-0');assert.deepEqual(c.active.layout,layoutOf('estern-0'));
+{const c=new Campaign({nation:'estern'});assert.equal(c.active.provinceId,'estern-5');assert.deepEqual(c.active.layout,layoutOf('estern-5'));
  c.addDemoBranch();const branch=c.sites.find(v=>v.id==='site-2');assert.equal(branch.sim.provinceId,branch.provinceId);}
 
 console.log(JSON.stringify({result:'PASS',checked:['one site square per province','sides are neighbour squares','trade water = side water','every terrain on some side','capitals play like their nation','sea under a fifth','all ecologies playable','ferry routes','start land and road dry','port on its own water','layout saved','bad layout rejected','mountain side ground and conveyors','old saves keep region water','bare map legacy','campaign sites on their square']}));

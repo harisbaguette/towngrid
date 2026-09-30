@@ -1,0 +1,253 @@
+{
+ "label": "before",
+ "sizes": {
+  "1920x1080": {
+   "home": {
+    "folded": false,
+    "items": [
+     "일러스트 테스트",
+     "지형 8종 테스트",
+     "초반 마을 테스트",
+     "산업도시 둘러보기",
+     "마을의 하루"
+    ],
+    "visibleWhileFolded": 5,
+    "visibleWhenOpen": 5
+   },
+   "world": {
+    "box": [
+     1483,
+     970,
+     298,
+     45
+    ],
+    "inViewport": true,
+    "hittable": true,
+    "afterScroll": {
+     "inViewport": true,
+     "hittable": true,
+     "coversEnd": false
+    }
+   },
+   "error": "TypeError: Cannot read properties of undefined (reading 'px')"
+  },
+  "1366x768": {
+   "home": {
+    "folded": false,
+    "items": [
+     "일러스트 테스트",
+     "지형 8종 테스트",
+     "초반 마을 테스트",
+     "산업도시 둘러보기",
+     "마을의 하루"
+    ],
+    "visibleWhileFolded": 5,
+    "visibleWhenOpen": 5
+   },
+   "world": {
+    "box": [
+     1017,
+     658,
+     298,
+     45
+    ],
+    "inViewport": true,
+    "hittable": true,
+    "afterScroll": {
+     "inViewport": true,
+     "hittable": true,
+     "coversEnd": false
+    }
+   },
+   "error": "TypeError: Cannot read properties of undefined (reading 'px')"
+  },
+  "1024x768": {
+   "home": {
+    "folded": false,
+    "items": [
+     "일러스트 테스트",
+     "지형 8종 테스트",
+     "초반 마을 테스트",
+     "산업도시 둘러보기",
+     "마을의 하루"
+    ],
+    "visibleWhileFolded": 5,
+    "visibleWhenOpen": 5
+   },
+   "world": {
+    "box": [
+     715,
+     664,
+     274,
+     45
+    ],
+    "inViewport": true,
+    "hittable": true,
+    "afterScroll": {
+     "inViewport": true,
+     "hittable": true,
+     "coversEnd": false
+    }
+   },
+   "error": "TypeError: Cannot read properties of undefined (reading 'px')"
+  },
+  "390x844": {
+   "home": {
+    "folded": false,
+    "items": [
+     "일러스트 테스트",
+     "지형 8종 테스트",
+     "초반 마을 테스트",
+     "산업도시 둘러보기",
+     "마을의 하루"
+    ],
+    "visibleWhileFolded": 5,
+    "visibleWhenOpen": 5
+   },
+   "world": {
+    "box": [
+     29,
+     1603,
+     332,
+     45
+    ],
+    "inViewport": false,
+    "hittable": false,
+    "afterScroll": {
+     "inViewport": true,
+     "hittable": true,
+     "coversEnd": false
+    }
+   },
+   "error": "TypeError: Cannot read properties of undefined (reading 'px')"
+  },
+  "844x390": {
+   "home": {
+    "folded": false,
+    "items": [
+     "일러스트 테스트",
+     "지형 8종 테스트",
+     "초반 마을 테스트",
+     "산업도시 둘러보기",
+     "마을의 하루"
+    ],
+    "visibleWhileFolded": 5,
+    "visibleWhenOpen": 5
+   },
+   "world": {
+    "box": [
+     535,
+     1146,
+     274,
+     45
+    ],
+    "inViewport": false,
+    "hittable": false,
+    "afterScroll": {
+     "inViewport": true,
+     "hittable": true,
+     "coversEnd": false
+    }
+   },
+   "place": {
+    "hint": [
+     293,
+     249,
+     551,
+     303
+    ],
+    "target": {
+     "x": 13,
+     "z": 15,
+     "px": 381.44534637312444,
+     "py": 253.53560047092168,
+     "underHint": true
+    },
+    "elementAtTarget": "placement-hint ",
+    "afterFirst": {
+     "top": "placement-hint ",
+     "hint": [
+      293,
+      249,
+      257,
+      54
+     ]
+    },
+    "built": []
+   },
+   "nature": {
+    "outside": 123,
+    "outsideTinted": 123,
+    "inside": 10,
+    "insideTinted": 0
+   },
+   "tilePanel": null,
+   "tileUnderHeader": null
+  }
+ },
+ "showcase": {
+  "1366x768": {
+   "markers": 4,
+   "overlappingPairs": 0,
+   "meanWidth": 114,
+   "icons": {
+    "drawn": 109,
+    "pending": 0,
+    "total": 134
+   },
+   "longTasksShowcase": [
+    700
+   ],
+   "longTasksAll": [
+    700,
+    53
+   ],
+   "dockImages": {
+    "count": 13,
+    "empty": 0,
+    "broken": 0
+   }
+  },
+  "844x390": {
+   "markers": 4,
+   "overlappingPairs": 0,
+   "meanWidth": 114,
+   "icons": {
+    "drawn": 109,
+    "pending": 0,
+    "total": 134
+   },
+   "longTasksShowcase": [
+    515
+   ],
+   "longTasksAll": [
+    515,
+    61,
+    53
+   ],
+   "dockImages": {
+    "count": 13,
+    "empty": 0,
+    "broken": 0
+   }
+  }
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [
+   "1920x1080: ReferenceError: clusterMarkers is not defined\n    at Game (http://localhost:5173/src/app/game/Game.tsx?t=1790688554252:1227:10)\n    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=87409409:12868:12)\n    at renderWithHooks (http://localhost:5173",
+   "1920x1080: The above error occurred in a React component:\n\n    at Game (http://localhost:5173/src/app/game/Game.tsx?t=1790688554252:96:16)\n    at AwaitAppRenderDependencies [Server] (<anonymous>)\n    at PageInvoker [Server] (<anonymous>)\n    at BfcacheSlotBoundary (http://localhost:5173/node_modules/.pnpm/vine",
+   "1366x768: ReferenceError: clusterMarkers is not defined\n    at Game (http://localhost:5173/src/app/game/Game.tsx?t=1790688554252:1227:10)\n    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=87409409:12868:12)\n    at renderWithHooks (http://localhost:5173",
+   "1366x768: The above error occurred in a React component:\n\n    at Game (http://localhost:5173/src/app/game/Game.tsx?t=1790688554252:96:16)\n    at AwaitAppRenderDependencies [Server] (<anonymous>)\n    at PageInvoker [Server] (<anonymous>)\n    at BfcacheSlotBoundary (http://localhost:5173/node_modules/.pnpm/vine",
+   "1024x768: ReferenceError: clusterMarkers is not defined\n    at Game (http://localhost:5173/src/app/game/Game.tsx?t=1790688571628:1228:10)\n    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=87409409:12868:12)\n    at renderWithHooks (http://localhost:5173",
+   "1024x768: The above error occurred in a React component:\n\n    at Game (http://localhost:5173/src/app/game/Game.tsx?t=1790688571628:97:16)\n    at AwaitAppRenderDependencies [Server] (<anonymous>)\n    at PageInvoker [Server] (<anonymous>)\n    at BfcacheSlotBoundary (http://localhost:5173/node_modules/.pnpm/vine",
+   "390x844: ReferenceError: clusterMarkers is not defined\n    at Game (http://localhost:5173/src/app/game/Game.tsx?t=1790688571628:1228:10)\n    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=87409409:12868:12)\n    at renderWithHooks (http://localhost:5173",
+   "390x844: The above error occurred in a React component:\n\n    at Game (http://localhost:5173/src/app/game/Game.tsx?t=1790688571628:97:16)\n    at AwaitAppRenderDependencies [Server] (<anonymous>)\n    at PageInvoker [Server] (<anonymous>)\n    at BfcacheSlotBoundary (http://localhost:5173/node_modules/.pnpm/vine"
+  ],
+  "consoleWarnings": [],
+  "failedRequests": [],
+  "overrides": [
+   "844x390: warehouse via sim.build"
+  ]
+ }
+}

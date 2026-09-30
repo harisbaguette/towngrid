@@ -1,0 +1,38 @@
+{
+ "buildingTypes": 87,
+ "iconsHumanMs": 548,
+ "iconsElfMs": 533,
+ "rebuildMs": 11,
+ "setSimulationMs": 8,
+ "throttle": 1,
+ "R": {
+  "errors": [],
+  "consoleErrors": [
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "consoleWarnings": [],
+  "failedRequests": [
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/records-room.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/village-arrival.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/river-crossing.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/map-table.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/village-arrival.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/map-table.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/village-arrival.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/records-room.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/river-crossing.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/winter-delivery.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/village-arrival.webp"
+  ]
+ }
+}

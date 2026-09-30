@@ -594,7 +594,7 @@
     "transitFactor": 0.6,
     "unique": true,
     "power": true,
-    "description": "양쪽 거점에 운송 가속 시설이 가동하면 트럭·철도 운송 시간이 40% 짧아집니다."
+    "description": "양쪽 거점에 운송 가속 시설이 가동하면 트럭·철도 운송 시간이 40% 짧아집니다. 가동하는 동안 신생국 교역품을 비공정으로 실어 대금이 20% 오릅니다."
    },
    "exchange": {
     "name": "대륙 거래소",
@@ -910,7 +910,7 @@
      ],
      [
       "revenue",
-      2400,
+      8000,
       "누적 판매 수입"
      ]
     ],
@@ -931,7 +931,7 @@
      ],
      [
       "contracts",
-      4,
+      6,
       "납품 계약"
      ]
     ],
@@ -952,7 +952,7 @@
      ],
      [
       "contracts",
-      6,
+      8,
       "납품 계약"
      ]
     ],
@@ -973,7 +973,7 @@
      ],
      [
       "revenue",
-      6000,
+      16000,
       "교역 수입"
      ]
     ],
@@ -999,7 +999,7 @@
      ],
      [
       "contracts",
-      8,
+      10,
       "납품 계약"
      ]
     ],
@@ -1015,14 +1015,9 @@
     "fee": 700,
     "requirements": [
      [
-      "expansions",
-      2,
-      "부지 확장"
-     ],
-     [
-      "produced:plank",
-      120,
-      "판재 생산"
+      "workers",
+      28,
+      "주민"
      ]
     ],
     "unlocks": [
@@ -1054,7 +1049,7 @@
    },
    {
     "name": "법인 대표",
-    "fee": 1000,
+    "fee": 1200,
     "requirements": [
      [
       "automatic",
@@ -1063,7 +1058,7 @@
      ],
      [
       "revenue",
-      20000,
+      47000,
       "교역 수입"
      ]
     ],
@@ -1077,7 +1072,7 @@
    },
    {
     "name": "중공업 사업자",
-    "fee": 1200,
+    "fee": 1500,
     "requirements": [
      [
       "produced:iron",
@@ -1090,9 +1085,9 @@
       "석탄 생산"
      ],
      [
-      "expansions",
-      3,
-      "부지 확장"
+      "workers",
+      40,
+      "주민"
      ]
     ],
     "unlocks": [
@@ -1104,7 +1099,7 @@
    },
    {
     "name": "에너지 사업자",
-    "fee": 1450,
+    "fee": 2200,
     "requirements": [
      [
       "produced:steel",
@@ -1126,7 +1121,7 @@
    },
    {
     "name": "산업단지 운영자",
-    "fee": 1700,
+    "fee": 2800,
     "requirements": [
      [
       "produced:fuel",
@@ -1153,7 +1148,7 @@
    },
    {
     "name": "정밀 제조업자",
-    "fee": 2000,
+    "fee": 3400,
     "requirements": [
      [
       "produced:polymer",
@@ -1180,7 +1175,7 @@
    },
    {
     "name": "광역 투자자",
-    "fee": 2400,
+    "fee": 4000,
     "requirements": [
      [
       "produced:circuit",
@@ -1194,7 +1189,7 @@
      ],
      [
       "deliveries",
-      3,
+      10,
       "지역 간 운송"
      ]
     ],
@@ -1207,7 +1202,7 @@
    },
    {
     "name": "자동차 제조사",
-    "fee": 2800,
+    "fee": 4800,
     "requirements": [
      [
       "railRoutes",
@@ -1227,7 +1222,7 @@
    },
    {
     "name": "기술 기업군",
-    "fee": 3300,
+    "fee": 6000,
     "requirements": [
      [
       "produced:car",
@@ -1236,7 +1231,7 @@
      ],
      [
       "contracts",
-      12,
+      19,
       "납품 계약"
      ]
     ],
@@ -1248,17 +1243,17 @@
    },
    {
     "name": "기반시설 운영자",
-    "fee": 3800,
+    "fee": 7000,
     "requirements": [
-     [
-      "produced:medicine",
-      24,
-      "의약품 생산"
-     ],
      [
       "sites",
       3,
       "운영 거점"
+     ],
+     [
+      "railRoutes",
+      2,
+      "철도 운송망"
      ]
     ],
     "unlocks": [
@@ -1270,16 +1265,16 @@
    },
    {
     "name": "개발구 운영권자",
-    "fee": 4400,
+    "fee": 8000,
     "requirements": [
      [
       "revenue",
-      200000,
+      280000,
       "교역 수입"
      ],
      [
       "deliveries",
-      12,
+      55,
       "지역 간 운송"
      ]
     ],
@@ -1291,16 +1286,16 @@
    },
    {
     "name": "치안권 보유자",
-    "fee": 5000,
+    "fee": 9500,
     "requirements": [
      [
       "defense",
-      2,
+      1,
       "경비대 편성"
      ],
      [
       "produced:medicine",
-      60,
+      90,
       "의약품 생산"
      ]
     ],
@@ -1312,7 +1307,7 @@
    },
    {
     "name": "재정 운영권자",
-    "fee": 5800,
+    "fee": 11000,
     "requirements": [
      [
       "investment",
@@ -1326,7 +1321,7 @@
      ],
      [
       "contracts",
-      16,
+      27,
       "납품 계약"
      ]
     ],
@@ -1337,7 +1332,7 @@
    },
    {
     "name": "자치구 대표",
-    "fee": 6700,
+    "fee": 12500,
     "requirements": [
      [
       "sites",
@@ -1350,9 +1345,9 @@
       "주민 지지"
      ],
      [
-      "produced:engine",
-      10,
-      "마력 기관 생산"
+      "contracts",
+      30,
+      "납품 계약"
      ]
     ],
     "unlocks": [
@@ -1362,7 +1357,7 @@
    },
    {
     "name": "자치정부 수장",
-    "fee": 7700,
+    "fee": 14000,
     "requirements": [
      [
       "defense",
@@ -1371,7 +1366,7 @@
      ],
      [
       "railRoutes",
-      2,
+      3,
       "철도 운송망"
      ],
      [
@@ -1387,7 +1382,7 @@
    },
    {
     "name": "독립 선언국",
-    "fee": 8800,
+    "fee": 16000,
     "requirements": [
      [
       "recognition",
@@ -1412,11 +1407,11 @@
    },
    {
     "name": "승인 독립국",
-    "fee": 10000,
+    "fee": 19000,
     "requirements": [
      [
       "recognition",
-      4,
+      3,
       "외교 지지국"
      ],
      [
@@ -1426,7 +1421,7 @@
      ],
      [
       "deliveries",
-      30,
+      190,
       "지역 간 운송"
      ]
     ],
@@ -1437,7 +1432,7 @@
    },
    {
     "name": "지역 강국",
-    "fee": 12500,
+    "fee": 28000,
     "requirements": [
      [
       "sites",
@@ -1467,7 +1462,7 @@
    },
    {
     "name": "다지역 연방",
-    "fee": 15000,
+    "fee": 38000,
     "requirements": [
      [
       "territories",
@@ -1480,9 +1475,9 @@
       "주민 지지"
      ],
      [
-      "produced:car",
-      70,
-      "자동차 생산"
+      "deliveries",
+      230,
+      "지역 간 운송"
      ]
     ],
     "unlocks": [
@@ -1492,7 +1487,7 @@
    },
    {
     "name": "열강",
-    "fee": 18000,
+    "fee": 56000,
     "requirements": [
      [
       "sites",
@@ -1506,7 +1501,7 @@
      ],
      [
       "produced:airship",
-      10,
+      14,
       "비공정 건조"
      ]
     ],
@@ -1517,7 +1512,7 @@
    },
    {
     "name": "패권국",
-    "fee": 21000,
+    "fee": 70000,
     "requirements": [
      [
       "territories",
@@ -1526,7 +1521,7 @@
      ],
      [
       "revenue",
-      1000000,
+      1100000,
       "교역 수입"
      ],
      [
@@ -1946,25 +1941,29 @@
    "file": "src/app/game/campaign.js",
    "current": "800G · 강철 6 · 부품 4",
    "next": "1200G · 강철 4 · 작업복 4 · 통조림 4",
-   "reason": "작업복·통조림의 상시 소비처."
+   "reason": "작업복·통조림의 상시 소비처.",
+   "supersededBy": "lateGame20260929.council"
   },
   "campaign.council.invest": {
    "file": "src/app/game/campaign.js",
    "current": "1600G · 기본 배당 45G/일",
    "next": "2500G · 기본 배당 80G/일",
-   "reason": "후반 수입 상승에 맞춰 출자금을 올리고 회수 기간을 35일에서 31일로 줄인다."
+   "reason": "후반 수입 상승에 맞춰 출자금을 올리고 회수 기간을 35일에서 31일로 줄인다.",
+   "supersededBy": "lateGame20260929.council"
   },
   "campaign.council.territory": {
    "file": "src/app/game/campaign.js",
    "current": "1800G",
    "next": "3000G",
-   "reason": "후반 목표 수입(2~3만G/일) 대비 명목 비용 보정."
+   "reason": "후반 목표 수입(2~3만G/일) 대비 명목 비용 보정.",
+   "supersededBy": "lateGame20260929.council"
   },
   "campaign.council.recognition": {
    "file": "src/app/game/campaign.js",
    "current": "650G · 자동차 1 (stateAction recognition 동일)",
    "next": "1200G · 자동차 1 (두 곳 모두)",
-   "reason": "같은 이유."
+   "reason": "같은 이유.",
+   "supersededBy": "lateGame20260929.council"
   },
   "living-economy.clinic": {
    "file": "src/app/game/living-economy.js",
@@ -2648,25 +2647,27 @@
    "quarry": [
     {
      "id": "copper",
-     "name": "구리 광맥",
-     "inputs": {},
+     "name": "구리 광맥 선광",
+     "inputs": {
+      "water": 1
+     },
      "output": "copper",
-     "amount": 2,
-     "period": 14,
+     "amount": 3,
+     "period": 16,
      "unlock": 14
     }
    ],
    "bakery": [
     {
      "id": "cake",
-     "name": "케이크",
+     "name": "달걀 적은 케이크",
      "inputs": {
-      "flour": 2,
-      "egg": 2
+      "flour": 3,
+      "egg": 1
      },
      "output": "cake",
-     "amount": 1,
-     "period": 14,
+     "amount": 2,
+     "period": 18,
      "unlock": 7
     }
    ],
@@ -2676,7 +2677,7 @@
      "name": "가마 유리",
      "inputs": {
       "stone": 3,
-      "wood": 2
+      "wood": 1
      },
      "output": "glass",
      "amount": 2,
@@ -2740,29 +2741,28 @@
    "steamworks": [
     {
      "id": "wire",
-     "name": "구리 전선",
+     "name": "증기 인발 전선",
      "inputs": {
       "copper": 2,
       "coal": 1,
       "water": 1
      },
      "output": "wire",
-     "amount": 3,
-     "period": 22,
+     "amount": 4,
+     "period": 30,
      "unlock": 16
     }
    ],
    "refinery": [
     {
      "id": "polymer",
-     "name": "합성 소재",
+     "name": "무수 합성 소재",
      "inputs": {
-      "oil": 3,
-      "water": 1
+      "oil": 3
      },
      "output": "polymer",
-     "amount": 2,
-     "period": 24,
+     "amount": 3,
+     "period": 26,
      "unlock": 16
     }
    ],
@@ -4227,6 +4227,1288 @@
     "clover": "양봉장은 두 칸 안에 야생 클로버가 없으면 「야생 클로버 필요」로 멈춘다"
    }
   }
+ },
+ "lateGame20260929": {
+  "date": "2026-09-29",
+  "doc": "docs/BALANCE_PATCH_20260928.md 15",
+  "audit": "중후반 감사 A2-M1·M3·E1·L1·L2·U1~U4·F1·R1·P1·P3, 코드 감사 C1·C4·C6·C7",
+  "council": {
+   "welfare": {
+    "money": 250,
+    "items": {
+     "bread": 4
+    },
+    "perSite": true,
+    "unrest": 12,
+    "support": 12
+   },
+   "defense": {
+    "money": 1200,
+    "items": {
+     "steel": 4,
+     "workwear": 4,
+     "canned": 4
+    },
+    "from": 22,
+    "upkeep": 25
+   },
+   "invest": {
+    "money": 2500,
+    "growth": 1.4,
+    "maxSteps": 10,
+    "yield": 0.1,
+    "legacy": 80
+   },
+   "territory": {
+    "money": 3000,
+    "support": 65,
+    "defense": 2,
+    "from": 28,
+    "stage": 20
+   },
+   "recognition": {
+    "money": 1200,
+    "items": {
+     "car": 1
+    },
+    "from": 25,
+    "stage": 20
+   },
+   "aid": {
+    "money": 180,
+    "items": {
+     "bread": 8
+    },
+    "relation": 12
+   },
+   "pact": {
+    "money": 750,
+    "relation": 55,
+    "defense": 2,
+    "stage": 20
+   },
+   "stateRecognition": {
+    "money": 1200,
+    "items": {
+     "car": 1
+    },
+    "relation": 55,
+    "stage": 20
+   },
+   "route": {
+    "truck": 120,
+    "rail": 360
+   }
+  },
+  "councilRules": {
+   "welfare": "거점 수만큼 곱한 값 · 하루 한 번 · 모든 거점 불만 −12 · 파업 종료 · 주민 지지 +12",
+   "perRank": "defense는 22단계, recognition은 25단계, 다른 거점 territory는 28단계부터 단계마다 하나씩 열리고 남은 몫은 넘어간다(허용 수 = rank − from + 1 − 이미 한 수)",
+   "invest": "출자금 = 2500 × 1.4^(출자 수, 최대 10) · 배당 = 출자금 × 0.1 × 정세(0.5~1.3) · stake 없는 옛 출자는 80G",
+   "messages": "돈이 모자라면 simulation.moneyShort 문구 + 모자란 물건"
+  },
+  "upkeep": {
+   "fromRank": 13,
+   "facility": 0.03,
+   "idle": 0.25,
+   "sitePerStage": 15,
+   "guardPerUnit": 25,
+   "formula": "rank ≥ 13부터 매일: Σ(건설비 × 0.03, 꺼 둔 시설 × 0.25, 주택·타일·지형·창고·내구도 0 제외) + (거점 수 − 1) × 15 × max(1, rank − 5) + 경비대 × 25"
+  },
+  "airFreight": {
+   "factor": 1.2,
+   "rule": "가동 중인 비공정 선착장이 한 곳이라도 있으면 신생국 주문 대금 ×1.2"
+  },
+  "stateOrders": "campaign.stateOrders()가 모든 열린 주문을 대금 순으로, tradeAll()이 보낼 수 있는 주문을 운송 수단이 남는 동안 보낸다",
+  "completion": {
+   "field": "campaign.completion",
+   "keys": [
+    "day",
+    "seconds",
+    "revenue",
+    "produced",
+    "sold",
+    "contracts",
+    "sites",
+    "territories",
+    "recognition",
+    "states",
+    "battles"
+   ],
+   "restored": "패권국 저장에 기록이 없으면 불러올 때 현재 값으로 만들고 restored:true"
+  },
+  "legacy": [
+   {
+    "id": "revenue",
+    "name": "대륙 교역 기록",
+    "text": "누적 교역 수입",
+    "base": 1500000,
+    "growth": 1.6
+   },
+   {
+    "id": "exports",
+    "name": "대륙 수출 기록",
+    "text": "누적 판매 수량",
+    "base": 20000,
+    "growth": 1.5
+   },
+   {
+    "id": "pacts",
+    "name": "신생국 안정",
+    "text": "방위 협정을 맺은 신생국",
+    "base": 3,
+    "step": 3
+   },
+   {
+    "id": "fleet",
+    "name": "비공정 함대",
+    "text": "누적 비공정 건조",
+    "base": 20,
+    "growth": 1.5
+   },
+   {
+    "id": "federation",
+    "name": "평온한 연방",
+    "text": "불만 40 미만인 자치 지역",
+    "base": 6,
+    "step": 2
+   }
+  ],
+  "legacyTarget": "step이 있으면 base + step × 달성 단계, 없으면 base × growth^달성 단계",
+  "unrestCauses": "campaign.unrestCauses(site): 적자 +10 또는 식량(빵+밀+생선 4 미만) +4, 아니면 −1 · 감염(병원 보호 없음) +3 · 20단계 이후 자치권 없음 +1 · 의사당 −2. worldDay와 거점 현황이 같은 목록을 쓴다",
+  "ranks": [
+   {
+    "id": 6,
+    "name": "등록 사업주",
+    "fee": [
+     300,
+     300
+    ],
+    "requirements": [
+     [
+      [
+       "produced:cloth",
+       8,
+       "직물 생산"
+      ],
+      [
+       "revenue",
+       2400,
+       "누적 판매 수입"
+      ]
+     ],
+     [
+      [
+       "produced:cloth",
+       8,
+       "직물 생산"
+      ],
+      [
+       "revenue",
+       8000,
+       "누적 판매 수입"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 7,
+    "name": "지역 공급자",
+    "fee": [
+     350,
+     350
+    ],
+    "requirements": [
+     [
+      [
+       "produced:egg",
+       20,
+       "달걀 생산"
+      ],
+      [
+       "contracts",
+       4,
+       "납품 계약"
+      ]
+     ],
+     [
+      [
+       "produced:egg",
+       20,
+       "달걀 생산"
+      ],
+      [
+       "contracts",
+       6,
+       "납품 계약"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 8,
+    "name": "제조 허가업자",
+    "fee": [
+     400,
+     400
+    ],
+    "requirements": [
+     [
+      [
+       "produced:cake",
+       10,
+       "케이크 생산"
+      ],
+      [
+       "contracts",
+       6,
+       "납품 계약"
+      ]
+     ],
+     [
+      [
+       "produced:cake",
+       10,
+       "케이크 생산"
+      ],
+      [
+       "contracts",
+       8,
+       "납품 계약"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 9,
+    "name": "지역 납품업자",
+    "fee": [
+     500,
+     500
+    ],
+    "requirements": [
+     [
+      [
+       "produced:brick",
+       20,
+       "벽돌 생산"
+      ],
+      [
+       "revenue",
+       6000,
+       "교역 수입"
+      ]
+     ],
+     [
+      [
+       "produced:brick",
+       20,
+       "벽돌 생산"
+      ],
+      [
+       "revenue",
+       16000,
+       "교역 수입"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 10,
+    "name": "공인 계약업자",
+    "fee": [
+     600,
+     600
+    ],
+    "requirements": [
+     [
+      [
+       "produced:workwear",
+       8,
+       "작업복 생산"
+      ],
+      [
+       "produced:glass",
+       8,
+       "유리 생산"
+      ],
+      [
+       "contracts",
+       8,
+       "납품 계약"
+      ]
+     ],
+     [
+      [
+       "produced:workwear",
+       8,
+       "작업복 생산"
+      ],
+      [
+       "produced:glass",
+       8,
+       "유리 생산"
+      ],
+      [
+       "contracts",
+       10,
+       "납품 계약"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 11,
+    "name": "개척 사업자",
+    "fee": [
+     700,
+     700
+    ],
+    "requirements": [
+     [
+      [
+       "expansions",
+       2,
+       "부지 확장"
+      ],
+      [
+       "produced:plank",
+       120,
+       "판재 생산"
+      ]
+     ],
+     [
+      [
+       "workers",
+       28,
+       "주민"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 13,
+    "name": "법인 대표",
+    "fee": [
+     1000,
+     1200
+    ],
+    "requirements": [
+     [
+      [
+       "automatic",
+       1,
+       "자동 물류 가동"
+      ],
+      [
+       "revenue",
+       20000,
+       "교역 수입"
+      ]
+     ],
+     [
+      [
+       "automatic",
+       1,
+       "자동 물류 가동"
+      ],
+      [
+       "revenue",
+       47000,
+       "교역 수입"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 14,
+    "name": "중공업 사업자",
+    "fee": [
+     1200,
+     1500
+    ],
+    "requirements": [
+     [
+      [
+       "produced:iron",
+       16,
+       "철광석 생산"
+      ],
+      [
+       "produced:coal",
+       16,
+       "석탄 생산"
+      ],
+      [
+       "expansions",
+       3,
+       "부지 확장"
+      ]
+     ],
+     [
+      [
+       "produced:iron",
+       16,
+       "철광석 생산"
+      ],
+      [
+       "produced:coal",
+       16,
+       "석탄 생산"
+      ],
+      [
+       "workers",
+       40,
+       "주민"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 15,
+    "name": "에너지 사업자",
+    "fee": [
+     1450,
+     2200
+    ],
+    "requirements": [
+     [
+      [
+       "produced:steel",
+       18,
+       "강철 생산"
+      ],
+      [
+       "debtFree",
+       1,
+       "채무 청산"
+      ]
+     ],
+     [
+      [
+       "produced:steel",
+       18,
+       "강철 생산"
+      ],
+      [
+       "debtFree",
+       1,
+       "채무 청산"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 16,
+    "name": "산업단지 운영자",
+    "fee": [
+     1700,
+     2800
+    ],
+    "requirements": [
+     [
+      [
+       "produced:fuel",
+       12,
+       "연료 생산"
+      ],
+      [
+       "produced:copper",
+       16,
+       "구리광석 생산"
+      ],
+      [
+       "sites",
+       2,
+       "운영 거점"
+      ]
+     ],
+     [
+      [
+       "produced:fuel",
+       12,
+       "연료 생산"
+      ],
+      [
+       "produced:copper",
+       16,
+       "구리광석 생산"
+      ],
+      [
+       "sites",
+       2,
+       "운영 거점"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 17,
+    "name": "정밀 제조업자",
+    "fee": [
+     2000,
+     3400
+    ],
+    "requirements": [
+     [
+      [
+       "produced:polymer",
+       18,
+       "합성 소재 생산"
+      ],
+      [
+       "produced:wire",
+       12,
+       "전선 생산"
+      ],
+      [
+       "produced:mana",
+       8,
+       "마력 결정 생산"
+      ]
+     ],
+     [
+      [
+       "produced:polymer",
+       18,
+       "합성 소재 생산"
+      ],
+      [
+       "produced:wire",
+       12,
+       "전선 생산"
+      ],
+      [
+       "produced:mana",
+       8,
+       "마력 결정 생산"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 18,
+    "name": "광역 투자자",
+    "fee": [
+     2400,
+     4000
+    ],
+    "requirements": [
+     [
+      [
+       "produced:circuit",
+       12,
+       "회로 생산"
+      ],
+      [
+       "produced:concrete",
+       12,
+       "콘크리트 생산"
+      ],
+      [
+       "deliveries",
+       3,
+       "지역 간 운송"
+      ]
+     ],
+     [
+      [
+       "produced:circuit",
+       12,
+       "회로 생산"
+      ],
+      [
+       "produced:concrete",
+       12,
+       "콘크리트 생산"
+      ],
+      [
+       "deliveries",
+       10,
+       "지역 간 운송"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 19,
+    "name": "자동차 제조사",
+    "fee": [
+     2800,
+     4800
+    ],
+    "requirements": [
+     [
+      [
+       "railRoutes",
+       1,
+       "철도 운송망"
+      ],
+      [
+       "produced:canned",
+       12,
+       "통조림 생산"
+      ]
+     ],
+     [
+      [
+       "railRoutes",
+       1,
+       "철도 운송망"
+      ],
+      [
+       "produced:canned",
+       12,
+       "통조림 생산"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 20,
+    "name": "기술 기업군",
+    "fee": [
+     3300,
+     6000
+    ],
+    "requirements": [
+     [
+      [
+       "produced:car",
+       6,
+       "자동차 생산"
+      ],
+      [
+       "contracts",
+       12,
+       "납품 계약"
+      ]
+     ],
+     [
+      [
+       "produced:car",
+       6,
+       "자동차 생산"
+      ],
+      [
+       "contracts",
+       19,
+       "납품 계약"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 21,
+    "name": "기반시설 운영자",
+    "fee": [
+     3800,
+     7000
+    ],
+    "requirements": [
+     [
+      [
+       "produced:medicine",
+       24,
+       "의약품 생산"
+      ],
+      [
+       "sites",
+       3,
+       "운영 거점"
+      ]
+     ],
+     [
+      [
+       "sites",
+       3,
+       "운영 거점"
+      ],
+      [
+       "railRoutes",
+       2,
+       "철도 운송망"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 22,
+    "name": "개발구 운영권자",
+    "fee": [
+     4400,
+     8000
+    ],
+    "requirements": [
+     [
+      [
+       "revenue",
+       200000,
+       "교역 수입"
+      ],
+      [
+       "deliveries",
+       12,
+       "지역 간 운송"
+      ]
+     ],
+     [
+      [
+       "revenue",
+       280000,
+       "교역 수입"
+      ],
+      [
+       "deliveries",
+       55,
+       "지역 간 운송"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 23,
+    "name": "치안권 보유자",
+    "fee": [
+     5000,
+     9500
+    ],
+    "requirements": [
+     [
+      [
+       "defense",
+       2,
+       "경비대 편성"
+      ],
+      [
+       "produced:medicine",
+       60,
+       "의약품 생산"
+      ]
+     ],
+     [
+      [
+       "defense",
+       1,
+       "경비대 편성"
+      ],
+      [
+       "produced:medicine",
+       90,
+       "의약품 생산"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 24,
+    "name": "재정 운영권자",
+    "fee": [
+     5800,
+     11000
+    ],
+    "requirements": [
+     [
+      [
+       "investment",
+       2,
+       "산업 투자"
+      ],
+      [
+       "produced:lamp",
+       24,
+       "마력등 생산"
+      ],
+      [
+       "contracts",
+       16,
+       "납품 계약"
+      ]
+     ],
+     [
+      [
+       "investment",
+       2,
+       "산업 투자"
+      ],
+      [
+       "produced:lamp",
+       24,
+       "마력등 생산"
+      ],
+      [
+       "contracts",
+       27,
+       "납품 계약"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 25,
+    "name": "자치구 대표",
+    "fee": [
+     6700,
+     12500
+    ],
+    "requirements": [
+     [
+      [
+       "sites",
+       4,
+       "운영 거점"
+      ],
+      [
+       "support",
+       65,
+       "주민 지지"
+      ],
+      [
+       "produced:engine",
+       10,
+       "마력 기관 생산"
+      ]
+     ],
+     [
+      [
+       "sites",
+       4,
+       "운영 거점"
+      ],
+      [
+       "support",
+       65,
+       "주민 지지"
+      ],
+      [
+       "contracts",
+       30,
+       "납품 계약"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 26,
+    "name": "자치정부 수장",
+    "fee": [
+     7700,
+     14000
+    ],
+    "requirements": [
+     [
+      [
+       "defense",
+       4,
+       "경비대 편성"
+      ],
+      [
+       "railRoutes",
+       2,
+       "철도 운송망"
+      ],
+      [
+       "produced:mithril",
+       10,
+       "미스릴 강 생산"
+      ]
+     ],
+     [
+      [
+       "defense",
+       4,
+       "경비대 편성"
+      ],
+      [
+       "railRoutes",
+       3,
+       "철도 운송망"
+      ],
+      [
+       "produced:mithril",
+       10,
+       "미스릴 강 생산"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 27,
+    "name": "독립 선언국",
+    "fee": [
+     8800,
+     16000
+    ],
+    "requirements": [
+     [
+      [
+       "recognition",
+       2,
+       "외교 지지국"
+      ],
+      [
+       "support",
+       70,
+       "주민 지지"
+      ],
+      [
+       "building:parliament",
+       1,
+       "의사당 건립"
+      ]
+     ],
+     [
+      [
+       "recognition",
+       2,
+       "외교 지지국"
+      ],
+      [
+       "support",
+       70,
+       "주민 지지"
+      ],
+      [
+       "building:parliament",
+       1,
+       "의사당 건립"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 28,
+    "name": "승인 독립국",
+    "fee": [
+     10000,
+     19000
+    ],
+    "requirements": [
+     [
+      [
+       "recognition",
+       4,
+       "외교 지지국"
+      ],
+      [
+       "produced:airship",
+       3,
+       "비공정 건조"
+      ],
+      [
+       "deliveries",
+       30,
+       "지역 간 운송"
+      ]
+     ],
+     [
+      [
+       "recognition",
+       3,
+       "외교 지지국"
+      ],
+      [
+       "produced:airship",
+       3,
+       "비공정 건조"
+      ],
+      [
+       "deliveries",
+       190,
+       "지역 간 운송"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 29,
+    "name": "지역 강국",
+    "fee": [
+     12500,
+     28000
+    ],
+    "requirements": [
+     [
+      [
+       "sites",
+       5,
+       "운영 거점"
+      ],
+      [
+       "investment",
+       4,
+       "산업 투자"
+      ],
+      [
+       "building:fortress",
+       2,
+       "방위 요새"
+      ],
+      [
+       "revenue",
+       700000,
+       "교역 수입"
+      ]
+     ],
+     [
+      [
+       "sites",
+       5,
+       "운영 거점"
+      ],
+      [
+       "investment",
+       4,
+       "산업 투자"
+      ],
+      [
+       "building:fortress",
+       2,
+       "방위 요새"
+      ],
+      [
+       "revenue",
+       700000,
+       "교역 수입"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 30,
+    "name": "다지역 연방",
+    "fee": [
+     15000,
+     38000
+    ],
+    "requirements": [
+     [
+      [
+       "territories",
+       3,
+       "자치권 확보 지역"
+      ],
+      [
+       "support",
+       75,
+       "주민 지지"
+      ],
+      [
+       "produced:car",
+       70,
+       "자동차 생산"
+      ]
+     ],
+     [
+      [
+       "territories",
+       3,
+       "자치권 확보 지역"
+      ],
+      [
+       "support",
+       75,
+       "주민 지지"
+      ],
+      [
+       "deliveries",
+       230,
+       "지역 간 운송"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 31,
+    "name": "열강",
+    "fee": [
+     18000,
+     56000
+    ],
+    "requirements": [
+     [
+      [
+       "sites",
+       6,
+       "운영 거점"
+      ],
+      [
+       "recognition",
+       6,
+       "외교 지지국"
+      ],
+      [
+       "produced:airship",
+       10,
+       "비공정 건조"
+      ]
+     ],
+     [
+      [
+       "sites",
+       6,
+       "운영 거점"
+      ],
+      [
+       "recognition",
+       6,
+       "외교 지지국"
+      ],
+      [
+       "produced:airship",
+       14,
+       "비공정 건조"
+      ]
+     ]
+    ]
+   },
+   {
+    "id": 32,
+    "name": "패권국",
+    "fee": [
+     21000,
+     70000
+    ],
+    "requirements": [
+     [
+      [
+       "territories",
+       5,
+       "자치권 확보 지역"
+      ],
+      [
+       "revenue",
+       1000000,
+       "교역 수입"
+      ],
+      [
+       "defense",
+       10,
+       "방위대 편성"
+      ],
+      [
+       "produced:car",
+       120,
+       "자동차 생산"
+      ]
+     ],
+     [
+      [
+       "territories",
+       5,
+       "자치권 확보 지역"
+      ],
+      [
+       "revenue",
+       1100000,
+       "교역 수입"
+      ],
+      [
+       "defense",
+       10,
+       "방위대 편성"
+      ],
+      [
+       "produced:car",
+       120,
+       "자동차 생산"
+      ]
+     ]
+    ]
+   }
+  ],
+  "recipes": {
+   "quarry": "구리 광맥 선광: 물 1 → 구리 3 / 16초 (전: 무투입 2 / 14초, 철광산 구리 3/18초에 밀림)",
+   "bakery": "달걀 적은 케이크: 밀가루 3 · 달걀 1 → 2 / 18초 (전: 밀가루 2 · 달걀 2 → 1 / 14초, 제과점에 밀림)",
+   "kiln": "가마 유리: 석재 3 · 목재 1 (전: 목재 2)",
+   "steamworks": "증기 인발 전선: 구리 2 · 석탄 1 · 물 1 → 4 / 30초 (전: 3 / 22초)",
+   "refinery": "무수 합성 소재: 원유 3 → 3 / 26초 (전: 원유 3 · 물 1 → 2 / 24초)",
+   "check": "balance-report.mjs C9: 같은 단계에 원료를 덜 쓰고 같거나 빠르게 만드는 줄이 있으면 실패"
+  },
+  "descriptions": {
+   "hospital": "의약품과 물을 공급받는 동안 감염을 빠르게 치료하고, 감염 중에도 거점 불만이 오르지 않게 막습니다. 질병 발생 자체는 막지 못합니다.",
+   "airdock": "양쪽 거점에 운송 가속 시설이 가동하면 트럭·철도 운송 시간이 40% 짧아집니다. 가동하는 동안 신생국 교역품을 비공정으로 실어 대금이 20% 오릅니다."
+  },
+  "simulationRules": {
+   "source": "F1 규칙 수리(2026-09-29), 값은 simulation.js",
+   "upgradeCost": "1→2 건설비의 25%, 2→3 40%(최소 10G), 주택은 단계 × 60G",
+   "specializeCost": "max(100G, 건설비의 15%)",
+   "damage": "내구도 50 미만부터 속도 = 0.25 + 0.75 × 내구도/50",
+   "strike": "생산 속도 ×0.75",
+   "earlyStorm": "사업 단계 8(법인 대표) 전 폭풍은 내구도를 20 밑으로 내리지 않음",
+   "goodEvents": {
+    "harvest": "농장 생산 ×1.5, 80초",
+    "merchant": "판매가 ×1.25, 100초",
+    "migrants": "가장 한가한 주택 주민 +1, 모두 차면 60 + 30 × 사업 단계 G"
+   },
+   "sanction": "통상 협상 max(150G, 어제 수입의 4%)",
+   "firstContract": "첫 영주 주문은 절반(밀 6)",
+   "refund": "지은 지 30초 안 철거는 전액 환불",
+   "campaignTick": "화면 밖 거점은 0.25 시뮬레이션 초 단위로 몰아 계산",
+   "routeFuel": "거점 간 노선은 spareFuel − 실은 연료 ≥ FUEL_PER_TRIP일 때만 연료를 태움"
+  },
+  "bot": {
+   "file": "tests/full-campaign.mjs",
+   "changes": [
+    "남는 돈을 모두 산업 투자에 넣던 반복문 제거 · 다음 단계가 요구하는 수만큼만 출자",
+    "땅은 빈 건설 칸이 4개 미만이거나 채석장 바위가 바닥났을 때만 삼",
+    "다음 단계가 주민 수를 요구하면 가장 새 주택을 하나 더 지음",
+    "다음 단계가 납품 계약을 셀 때 열린 주문 품목을 건설·개선에 쓰지 않음",
+    "하루 한 번 신생국 주문을 모두 보냄(tradeAll)",
+    "지점은 노선으로 받은 품목을 자동 판매",
+    "철도 노선은 다음 단계가 요구하는 수만큼 연결",
+    "승급마다 다음 단계 조건의 도착 순간 값을 promotions[].nextOnArrival로 기록"
+   ],
+   "campaignTrace": "tests/audit-2/campaign-trace.mjs는 봇을 복사하지 않고 full-campaign.mjs를 읽어 계측한다"
+  },
+  "result": {
+   "days": 59,
+   "segmentEnds": [
+    7,
+    18,
+    30,
+    39,
+    51,
+    59
+   ],
+   "segmentTargets": [
+    6,
+    16,
+    27,
+    35,
+    47,
+    60
+   ],
+   "averageIncome": [
+    1256,
+    4098,
+    11316,
+    22108,
+    32023,
+    55868
+   ],
+   "A3PoorDays": "2/41",
+   "A4": {
+    "maxGap": 5,
+    "maxMoney": 99275,
+    "limit": 140000
+   },
+   "investments": 4,
+   "metOnArrival": "8/79 (pacing.mjs)",
+   "lastGateProduction": "17/32",
+   "feeWaitOver60s": "31단계 75초"
+  }
+ },
+ "pacing": {
+  "baseTimeScale": 0.5,
+  "dayGameSeconds": 80,
+  "dayRealSecondsAt1x": 160,
+  "eventWarningRealSeconds": 40,
+  "speedMultipliers": [
+   1,
+   2,
+   4
+  ],
+  "clock": "real frame delta is scaled once before simulation/campaign ticks; saved timestamps remain game seconds"
  },
  "expansion20260930": {
   "date": "2026-09-30",

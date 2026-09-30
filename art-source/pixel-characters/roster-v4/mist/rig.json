@@ -95,7 +95,11 @@
         ]
       ],
       "legs": [],
-      "tailStart": 84
+      "tailStart": 84,
+      "tailBounds": [
+        44,
+        84
+      ]
     },
     {
       "image": "NW.png",
@@ -176,7 +180,11 @@
         ]
       ],
       "legs": [],
-      "tailStart": 84
+      "tailStart": 84,
+      "tailBounds": [
+        44,
+        84
+      ]
     }
   ],
   "toolFile": "tools/crystal.png",

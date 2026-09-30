@@ -1,0 +1,465 @@
+{
+ "1920x1080": {
+  "atlas": [
+   121,
+   234,
+   1320,
+   717
+  ],
+  "atlasCls": {},
+  "svgs": [],
+  "buttons": [],
+  "sheets": [
+   {
+    "href": "http://localhost:5173/src/app/globals.css",
+    "rules": 844,
+    "atlasRules": 63
+   },
+   {
+    "href": "http://localhost:5173/src/app/design-tokens.css",
+    "rules": 1,
+    "atlasRules": 0
+   },
+   {
+    "href": "http://localhost:5173/src/app/game-panels.css",
+    "rules": 223,
+    "atlasRules": 12
+   },
+   {
+    "href": "http://localhost:5173/src/app/game-ui.css",
+    "rules": 281,
+    "atlasRules": 51
+   },
+   {
+    "href": "http://localhost:5173/src/app/start-screens.css",
+    "rules": 42,
+    "atlasRules": 0
+   },
+   {
+    "rules": 97,
+    "atlasRules": 0
+   }
+  ],
+  "shell": [
+   121,
+   182,
+   1320,
+   871
+  ],
+  "terrain": [
+   203,
+   234,
+   1156,
+   717
+  ],
+  "controls": null
+ },
+ "1440x900": {
+  "atlas": [
+   33,
+   231,
+   1016,
+   540
+  ],
+  "atlasCls": {},
+  "svgs": [],
+  "buttons": [],
+  "sheets": [
+   {
+    "href": "http://localhost:5173/src/app/globals.css",
+    "rules": 844,
+    "atlasRules": 63
+   },
+   {
+    "href": "http://localhost:5173/src/app/design-tokens.css",
+    "rules": 1,
+    "atlasRules": 0
+   },
+   {
+    "href": "http://localhost:5173/src/app/game-panels.css",
+    "rules": 223,
+    "atlasRules": 12
+   },
+   {
+    "href": "http://localhost:5173/src/app/game-ui.css",
+    "rules": 281,
+    "atlasRules": 51
+   },
+   {
+    "href": "http://localhost:5173/src/app/start-screens.css",
+    "rules": 42,
+    "atlasRules": 0
+   },
+   {
+    "rules": 97,
+    "atlasRules": 0
+   }
+  ],
+  "shell": [
+   33,
+   179,
+   1016,
+   694
+  ],
+  "terrain": [
+   106,
+   231,
+   871,
+   540
+  ],
+  "controls": null
+ },
+ "1366x768": {
+  "atlas": [
+   33,
+   229,
+   942,
+   410
+  ],
+  "atlasCls": {},
+  "svgs": [],
+  "buttons": [],
+  "sheets": [
+   {
+    "href": "http://localhost:5173/src/app/globals.css",
+    "rules": 844,
+    "atlasRules": 63
+   },
+   {
+    "href": "http://localhost:5173/src/app/design-tokens.css",
+    "rules": 1,
+    "atlasRules": 0
+   },
+   {
+    "href": "http://localhost:5173/src/app/game-panels.css",
+    "rules": 223,
+    "atlasRules": 12
+   },
+   {
+    "href": "http://localhost:5173/src/app/game-ui.css",
+    "rules": 281,
+    "atlasRules": 51
+   },
+   {
+    "href": "http://localhost:5173/src/app/start-screens.css",
+    "rules": 42,
+    "atlasRules": 0
+   },
+   {
+    "rules": 97,
+    "atlasRules": 0
+   }
+  ],
+  "shell": [
+   33,
+   177,
+   942,
+   564
+  ],
+  "terrain": [
+   173,
+   229,
+   661,
+   410
+  ],
+  "controls": null
+ },
+ "390x844": {
+  "atlas": [
+   13,
+   220,
+   364,
+   248
+  ],
+  "atlasCls": {},
+  "svgs": [],
+  "buttons": [],
+  "sheets": [
+   {
+    "href": "http://localhost:5173/src/app/globals.css",
+    "rules": 844,
+    "atlasRules": 63
+   },
+   {
+    "href": "http://localhost:5173/src/app/design-tokens.css",
+    "rules": 1,
+    "atlasRules": 0
+   },
+   {
+    "href": "http://localhost:5173/src/app/game-panels.css",
+    "rules": 223,
+    "atlasRules": 12
+   },
+   {
+    "href": "http://localhost:5173/src/app/game-ui.css",
+    "rules": 281,
+    "atlasRules": 51
+   },
+   {
+    "href": "http://localhost:5173/src/app/start-screens.css",
+    "rules": 42,
+    "atlasRules": 0
+   },
+   {
+    "rules": 97,
+    "atlasRules": 0
+   }
+  ],
+  "shell": [
+   13,
+   172,
+   364,
+   388
+  ],
+  "terrain": [
+   13,
+   232,
+   364,
+   226
+  ],
+  "controls": null
+ },
+ "844x390": {
+  "atlas": [
+   21,
+   199,
+   482,
+   144
+  ],
+  "atlasCls": {},
+  "svgs": [],
+  "buttons": [],
+  "sheets": [
+   {
+    "href": "http://localhost:5173/src/app/globals.css",
+    "rules": 844,
+    "atlasRules": 63
+   },
+   {
+    "href": "http://localhost:5173/src/app/design-tokens.css",
+    "rules": 1,
+    "atlasRules": 0
+   },
+   {
+    "href": "http://localhost:5173/src/app/game-panels.css",
+    "rules": 223,
+    "atlasRules": 12
+   },
+   {
+    "href": "http://localhost:5173/src/app/game-ui.css",
+    "rules": 281,
+    "atlasRules": 51
+   },
+   {
+    "href": "http://localhost:5173/src/app/start-screens.css",
+    "rules": 42,
+    "atlasRules": 0
+   },
+   {
+    "rules": 97,
+    "atlasRules": 0
+   }
+  ],
+  "shell": [
+   21,
+   147,
+   482,
+   298
+  ],
+  "terrain": [
+   146,
+   199,
+   232,
+   144
+  ],
+  "controls": null
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1440x900: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1366x768: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "390x844: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "844x390: Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "consoleWarnings": [],
+  "failedRequests": [
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/dawn-bakery.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/orchard-harvest.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/textile-looms.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/dairy-morning.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/glass-furnace.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/pottery-kiln.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/wetland-ferry.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/oasis-market.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/volcano-forge.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/winter-delivery.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/desert-oil.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/mountain-mine.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/coast-fishing.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/clinic-morning.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/crystal-lab.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/airship-dock.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/evening-market.webp",
+   "1920x1080: 404 http://localhost:5173/assets/screens/daily-v3/riverside-rest.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/dairy-morning.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/textile-looms.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/orchard-harvest.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/dawn-bakery.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/glass-furnace.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/pottery-kiln.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/mountain-mine.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/volcano-forge.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/wetland-ferry.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/desert-oil.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/winter-delivery.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/oasis-market.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/coast-fishing.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/clinic-morning.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/riverside-rest.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/crystal-lab.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/airship-dock.webp",
+   "1440x900: 404 http://localhost:5173/assets/screens/daily-v3/evening-market.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/dawn-bakery.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/orchard-harvest.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/dairy-morning.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/textile-looms.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/pottery-kiln.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/glass-furnace.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/mountain-mine.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/desert-oil.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/oasis-market.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/volcano-forge.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/winter-delivery.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/wetland-ferry.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/airship-dock.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/clinic-morning.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/evening-market.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/coast-fishing.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/crystal-lab.webp",
+   "1366x768: 404 http://localhost:5173/assets/screens/daily-v3/riverside-rest.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/orchard-harvest.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/dawn-bakery.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/dairy-morning.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/glass-furnace.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/textile-looms.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/pottery-kiln.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/mountain-mine.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/oasis-market.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/desert-oil.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/wetland-ferry.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/volcano-forge.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/winter-delivery.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/crystal-lab.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/coast-fishing.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/clinic-morning.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/airship-dock.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/evening-market.webp",
+   "390x844: 404 http://localhost:5173/assets/screens/daily-v3/riverside-rest.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/dawn-bakery.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/pottery-kiln.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/orchard-harvest.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/dairy-morning.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/textile-looms.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/glass-furnace.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/desert-oil.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/mountain-mine.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/volcano-forge.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/wetland-ferry.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/oasis-market.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/winter-delivery.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/coast-fishing.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/clinic-morning.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/crystal-lab.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/evening-market.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/airship-dock.webp",
+   "844x390: 404 http://localhost:5173/assets/screens/daily-v3/riverside-rest.webp"
+  ]
+ }
+}

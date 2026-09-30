@@ -53,7 +53,7 @@ export function createPixelCharacter(index, race, appearance) {
  shadow.scale.y = .7;
  shadow.position.y = .008;
  group.add(shadow);
- group.userData = { pixel: true, worker: true, original: true, appearance: identity.id, gender: identity.gender, identity, image, texture, sprite, atlas: initial, pixelHeight: height, current: 'idle', frame: 0, direction: 0, lastTime: 0, actionTime: 0, flying: ['spirit', 'fae'].includes(race) };
+ group.userData = { pixel: true, worker: true, original: true, appearance: identity.id, gender: identity.gender, identity, image, texture, sprite, shadow, atlas: initial, pixelHeight: height, current: 'idle', frame: 0, direction: 0, lastTime: 0, actionTime: 0, flying: ['spirit', 'fae'].includes(race) };
  return group;
 }
 
@@ -82,6 +82,7 @@ export function animatePixelCharacter(group, worker, time, camera) {
  const deathClip=pixelClip('defeat',metadata),deathDuration=metadata?.authoredDefeat?deathClip.frames.length/deathClip.fps:0;
  u.sprite.material.rotation = defeated&&!metadata?.authoredDefeat ? -Math.PI / 2 : 0;
  u.sprite.material.opacity = defeated ? Math.max(0,Math.min(1,1-(elapsed-deathDuration)/Math.max(.1,2-deathDuration))) : 1;
+ u.shadow.material.opacity = .16 * u.sprite.material.opacity;
  if(defeated)u.sprite.position.y=metadata?.authoredDefeat ? .035 : .08;
  u.lastTime = time;
  return true;

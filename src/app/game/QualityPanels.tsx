@@ -1,7 +1,9 @@
+import {remainingSeconds} from './game-time';
 import ResourceIcon from './ResourceIcon';
 'use client';
 import {useState} from 'react';
 import {Button} from '@/components/ui/button';
+import {Home} from 'lucide-react';
 import {Switch} from '@/components/ui/switch';
 import {Tabs,TabsContent,TabsList,TabsTrigger} from '@/components/ui/tabs';
 import {Progress} from '@/components/ui/progress';
@@ -10,6 +12,7 @@ import {FACTIONS} from './world';
 import {contractState,fleetState,permitted,tutorialStep} from './ui-rules';
 import {FleetLine} from './Operations';
 import {ROUTE_KINDS} from './trade-routes';
+import {COUNCIL} from './campaign';
 
 export function MarketPanel({sim:s,onAction,refresh}:any){
  const [mode,setMode]=useState('sell'),[everything,setEverything]=useState(false);
@@ -36,14 +39,21 @@ export function Tutorial({sim:s,onTool,onGoals,onDismiss,onAction}:any){
  const deal=step.action==='contract'?contractState(s):null;
  return <aside className="tutorial-card panel"><button className="tutorial-dismiss" aria-label="안내 닫기" onClick={onDismiss}>×</button><small>{index+1} / {steps.length}</small><strong>{step.title}</strong><p>{step.text}</p>
  {deal?<Button size="sm" disabled={!deal.ready} onClick={()=>onAction(s.fulfill())}>{deal.label==='납품'?(deal.ready?'납품 +'+deal.contract.reward+'G':(RESOURCES as Record<string,{name:string}>)[deal.contract.item].name+' '+deal.have+' / '+deal.contract.amount):deal.label}</Button>
- :<Button size="sm" onClick={()=>step.tool?onTool(step.tool):onGoals()}>{step.tool?(BUILDINGS as any)[step.tool].name+' 선택':'신분과 권한 열기'}</Button>}</aside>;
+ :<Button size="sm" onClick={()=>step.tool?onTool(step.tool):onGoals()}>{step.tool?(BUILDINGS as any)[step.tool].name+' 선택':'신분과 권한 열기'}</Button>}
+ {(deal?!deal.ready:!!step.waiting)&&<div className="tutorial-wait" role="group" aria-label="기다리는 동안 할 일"><small>모이는 동안</small><Button size="sm" variant="outline" onClick={()=>onTool('house')}><Home size={14}/>주택 하나 더</Button></div>}</aside>;
 }
 
-export function RaidPanel({sim:s,onAction}:any){const r=s.raid;if(!r||r.finished)return null;return <aside className="raid-panel panel" role="status"><div><strong>{(FACTIONS as any)[r.faction].name} 습격</strong><span>{Math.max(0,Math.ceil(r.ends-s.time))}초 · 적 {s.attackers.filter((a:any)=>a.hp>0).length}명</span></div><Progress value={Math.max(0,100*(r.ends-s.time)/65)}/><Button size="sm" disabled={r.boosted} onClick={()=>onAction(s.mobilize())}>{r.boosted?'경계 강화 중':'경비 2명 · 80G + 밀 6'}</Button></aside>;}
+export function RaidPanel({sim:s,onAction}:any){const r=s.raid;if(!r||r.finished)return null;return <aside className="raid-panel panel" role="status"><div><strong>{(FACTIONS as any)[r.faction].name} 습격</strong><span>{remainingSeconds(r.ends-s.time,s)}초 · 적 {s.attackers.filter((a:any)=>a.hp>0).length}명</span></div><Progress value={Math.max(0,100*(r.ends-s.time)/65)}/><Button size="sm" disabled={r.boosted} onClick={()=>onAction(s.mobilize())}>{r.boosted?'경계 강화 중':'경비 2명 · 80G + 밀 6'}</Button></aside>;}
 
 export function EmergingStates({campaign:c,onAction}:any){
- const [selected,setSelected]=useState('');const state=c.newStates.find((s:any)=>s.id===selected&&!s.dissolved)||c.newStates.filter((s:any)=>!s.dissolved).at(-1);
+ const [selected,setSelected]=useState('');const live=c.newStates.filter((s:any)=>!s.dissolved),state=live.find((s:any)=>s.id===selected)||live.at(-1);
  if(!state)return <div className="empty-state"><strong>아직 신생 국가가 없습니다.</strong><p>산업이 성장하고 불만이 쌓이면 기존 국가에서 새로운 나라가 독립합니다.</p></div>;
- const order=c.stateOrder(state);
- return <section className="state-diplomacy"><label>신생 국가<select value={state.id} onChange={e=>setSelected(e.target.value)}>{[...c.newStates].filter((s:any)=>!s.dissolved).reverse().map((s:any)=><option key={s.id} value={s.id}>{s.name}</option>)}</select></label><div className="state-profile"><strong>{state.name}</strong><p>{c.stateOrigin(state)}에서 독립 · 산업 {state.industry}단계 · {state.provinceIds?.length||0}개 영토</p><p>{state.pact?'국경 자유 통행':state.relation<15?'국경 봉쇄':state.relation>=55?'우호 통행세 3G':'통행세 12G'} · 관계가 현지 시장과 운송에 영향을 줍니다.</p><div className="council-stats"><span>외교 관계 <b>{Math.round(state.relation)} / 100</b></span><span>내부 불만 <b>{Math.round(state.unrest)}%</b></span></div></div><div className="state-contract"><strong>{(RESOURCES as any)[order.item].name} {order.amount}개</strong><span>대금 {order.reward}G · 관계 +10</span><Button disabled={state.lastTradeDay===c.lastWorldDay} onClick={()=>onAction(c.stateAction('trade',state.id))}>{state.lastTradeDay===c.lastWorldDay?'오늘 교역 완료':'교역 계약 이행'}</Button></div><div className="council-actions"><Button variant="outline" onClick={()=>onAction(c.stateAction('aid',state.id))}>민생 지원<small>180G · 빵 8 · 관계 +12</small></Button><Button variant="outline" disabled={state.pact} onClick={()=>onAction(c.stateAction('pact',state.id))}>{state.pact?'방위 협정 체결됨':'상호 방위 협정'}<small>관계 55 · 750G</small></Button><Button variant="outline" disabled={c.recognition.includes(state.id)} onClick={()=>onAction(c.stateAction('recognition',state.id))}>독립 지지 요청<small>관계 55 · 650G · 자동차 1</small></Button></div></section>;
+ // A2-U4: every open order in one table, best paid first, with one button for all that can leave now. Prices and conditions
+ // of aid, pacts and recognition come from campaign.js councilTerms, the text the rules refuse with (A2-L1).
+ const orders=c.stateOrders(),ready=orders.filter((o:any)=>o.ready).length,open=orders.filter((o:any)=>!o.done).length,terms=(a:string)=>c.councilTerms(a);
+ return <section className="state-diplomacy">
+ <div className="state-orders-head"><strong>신생국 주문 {open}건</strong><small>{c.airFreight()?'비공정 특송 중 · 대금 +20%':'나라마다 하루 한 건 · 목록가의 1.45배'}</small><Button size="sm" disabled={!ready} onClick={()=>onAction(c.tradeAll())}>보낼 수 있는 {ready}건 모두 보내기</Button></div>
+ <div className="state-orders" style={{maxHeight:'16rem',overflow:'auto'}}><table><thead><tr><th>국가</th><th>주문</th><th>대금</th><th>보내기</th></tr></thead><tbody>{orders.map((o:any)=><tr key={o.state.id} className={o.state.id===state.id?'active':''}><td><button type="button" onClick={()=>setSelected(o.state.id)}>{o.state.name}</button></td><td>{(RESOURCES as any)[o.order.item].name} {o.order.amount}<small> · 보유 {o.have}</small></td><td>{o.order.reward.toLocaleString()}G</td><td><Button size="sm" variant="outline" disabled={!o.ready} onClick={()=>onAction(c.stateAction('trade',o.state.id))}>{o.ready?'보내기':o.reason}</Button></td></tr>)}</tbody></table></div>
+ <label>외교 대상<select value={state.id} onChange={e=>setSelected(e.target.value)}>{[...live].reverse().map((s:any)=><option key={s.id} value={s.id}>{s.name}</option>)}</select></label><div className="state-profile"><strong>{state.name}</strong><p>{c.stateOrigin(state)}에서 독립 · 산업 {state.industry}단계 · {state.provinceIds?.length||0}개 영토</p><p>{state.pact?'국경 자유 통행':state.relation<15?'국경 봉쇄':state.relation>=55?'우호 통행세 3G':'통행세 12G'} · 관계가 현지 시장과 운송에 영향을 줍니다.</p><div className="council-stats"><span>외교 관계 <b>{Math.round(state.relation)} / 100</b></span><span>내부 불만 <b>{Math.round(state.unrest)}%</b></span></div></div>
+ <div className="council-actions"><Button variant="outline" onClick={()=>onAction(c.stateAction('aid',state.id))}>민생 지원<small>{terms('aid')} · 관계 +{COUNCIL.aid.relation}</small></Button><Button variant="outline" disabled={state.pact} onClick={()=>onAction(c.stateAction('pact',state.id))}>{state.pact?'방위 협정 체결됨':'상호 방위 협정'}<small>{terms('pact')}</small></Button><Button variant="outline" disabled={c.recognition.includes(state.id)} onClick={()=>onAction(c.stateAction('recognition',state.id))}>독립 지지 요청<small>{terms('stateRecognition')}{c.stage>=COUNCIL.stateRecognition.stage?' · 사절 '+c.allowance('recognition')+'명':''}</small></Button></div></section>;
 }

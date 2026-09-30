@@ -1,0 +1,110 @@
+[step] K01-galleryEsc
+[step] K02-worldAtlas
+[step] K03-newGame
+[step] K04-blankMarker
+[step] K05-dialogExit
+[step] K06-mapEdgesEsc
+[step] K07-markerLag
+[step] K08-healthOverlap
+[step] K09-stormNumbers
+{
+ "at": "2026-09-29T13:05:58.546Z",
+ "overrides": [
+  "health.infection=35, rank=1 (operations card shown with the infection alert)",
+  "nextEvent = now + 1"
+ ],
+ "K01-galleryEsc": {
+  "stillInGallery": false
+ },
+ "K02-worldAtlas": {
+  "atlas": [
+   121,
+   234,
+   1320,
+   717
+  ],
+  "atlasInView": true,
+  "oversizedIcons": 0,
+  "clickOnMapChangesNation": true
+ },
+ "K03-newGame": {
+  "ms": 260,
+  "modeAfterDialogEsc": null
+ },
+ "K04-blankMarker": [
+  {
+   "text": "",
+   "span": "창고",
+   "spanDisplay": "none",
+   "icon": false,
+   "size": [
+    26,
+    27
+   ],
+   "cls": "facility-marker waiting"
+  }
+ ],
+ "K05-dialogExit": [
+  {
+   "title": "조작법",
+   "chars": 18,
+   "opacity": 1
+  },
+  null,
+  null,
+  null,
+  null,
+  null
+ ],
+ "K06-mapEdgesEsc": {
+  "openAfterEsc": true
+ },
+ "K07-markerLag": {
+  "offsetPxStill": [
+   12
+  ],
+  "offsetPxMidDrag": [
+   134
+  ],
+  "offsetPxAfter": [
+   12
+  ]
+ },
+ "K08-healthOverlap": {
+  "overlap": [
+   {
+    "w": 222,
+    "h": 49,
+    "onTop": ".operations-card",
+    "a": [
+     1656,
+     164,
+     244,
+     215
+    ],
+    "b": [
+     1678,
+     330,
+     222,
+     64
+    ]
+   }
+  ],
+  "healthText": "감염 36%\n방역으로 확산을 늦추세요\n방역",
+  "sanitizeButtonReachable": false
+ },
+ "K09-stormNumbers": {
+  "event": "storm",
+  "toast": [
+   "폭풍 예고 · 20초 뒤 발생합니다."
+  ],
+  "hud": "폭풍 · 78초\n보강 · 70G + 목재 4",
+  "hudAfter2s": "폭풍 · 70초\n보강 · 70G + 목재 4"
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

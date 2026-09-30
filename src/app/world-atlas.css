@@ -1,0 +1,57 @@
+.atlas-v2 .world-atlas text { stroke:none; text-shadow:none; letter-spacing:0; font-family:inherit; }
+.atlas-v2 .atlas-viewport { background:#688767; }
+.atlas-v2 .atlas-breadcrumb>span { white-space:nowrap; font-size:11px; color:#d5ddc2; }
+.atlas-v2 .atlas-legend { gap:10px; padding:5px 12px; flex-wrap:wrap; }
+.atlas-v2 .atlas-legend>span { white-space:nowrap; gap:4px; }
+.atlas-v2 .atlas-legend img { width:23px; height:23px; object-fit:contain; image-rendering:pixelated; }
+.atlas-v2 .atlas-cell-readout span { line-height:1.5; }
+.atlas-v2 .atlas-minimap { position:absolute; left:14px; bottom:54px; width:118px; height:75px; overflow:hidden; border:2px solid #e4d39c; background:#375e52; border-radius:3px; box-shadow:0 2px 5px #183e3933; padding:0; }
+.atlas-v2 .atlas-minimap svg { display:block; width:100%; height:100%; }
+.atlas-v2 .atlas-screen-labels { paint-order:normal; }
+.atlas-v2 .atlas-selection { filter:drop-shadow(0 1px 1px #274333); }
+.local-map-preview { border:1px solid var(--ui-rule); border-radius:4px; padding:9px; background:#eeebd8; margin:12px 0; }
+.local-map-preview header { display:flex; align-items:center; justify-content:space-between; gap:8px; color:var(--ui-ink); margin-bottom:7px; }
+.local-map-preview header strong { font-size:12px; }
+.local-map-preview header span { font-size:10px; color:var(--ui-muted); }
+.local-preview-body { display:grid; grid-template-columns:minmax(108px,136px) minmax(0,1fr); align-items:center; gap:10px; }
+.local-preview-map { min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px; }
+.local-preview-map canvas { width:100%; height:auto; aspect-ratio:1; display:block; border:1px solid #687957; image-rendering:pixelated; border-radius:2px; }
+.local-preview-map>span { font-size:9px; color:var(--ui-muted); }
+.local-preview-info { display:flex; flex-direction:column; gap:6px; min-width:0; font-size:10px; color:var(--ui-muted); }
+.local-preview-info b { font-size:10px; color:var(--ui-forest); margin:5px 0; }
+.local-preview-layers { display:flex; gap:4px; margin-top:7px; }
+.local-preview-layers button { flex:1; min-height:28px; border:1px solid #c6c4a9; border-radius:3px; color:var(--ui-muted); font-size:10px; background:#faf6e6; }
+.local-preview-layers button[aria-pressed=true] { color:#f7efd9; background:var(--ui-forest); border-color:var(--ui-forest); }
+.world-map-screen .realm-place h2 { font-size:21px; }
+.world-map-screen .realm-place { padding-top:12px; }
+.world-map-screen .realm-policy { margin-bottom:13px; }
+.world-map-screen .alliance-residents img { height:83px; }
+.campaign-world-layout { grid-template-columns:minmax(0,1fr) 290px; }
+.campaign-site-panel .local-preview-body { grid-template-columns:110px minmax(0,1fr); gap:8px; }
+.campaign-province-picker { display:flex; flex-direction:column; gap:7px; margin-top:12px; color:var(--ui-muted); font-size:11px; }
+.campaign-province-picker select { width:100%; min-height:38px; padding:6px; }
+.expansion-offer { margin:14px 0; padding:12px; border:1px solid var(--ui-rule); border-radius:4px; background:#eeebd8; }
+.expansion-offer header { display:flex; flex-direction:column; gap:6px; }
+.expansion-offer header strong { color:var(--ui-ink); font-size:14px; line-height:1.5; }
+.expansion-status { align-self:flex-start; font-size:10px; color:#5c6750; background:#dbdec6; padding:3px 6px; border-radius:2px; }
+.expansion-status.available,.expansion-status.owned { color:#f7efd9; background:var(--ui-forest); }
+.expansion-requirements { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin:11px 0; }
+.expansion-requirements span { display:flex; justify-content:space-between; align-items:center; gap:5px; padding:6px; border:1px solid #c8c9ae; border-radius:2px; background:#faf6e6; font-size:10px; color:var(--ui-muted); }
+.expansion-requirements b { font-size:10px; color:var(--ui-forest); font-variant-numeric:tabular-nums; }
+.expansion-requirements .missing b { color:#96563c; }
+.expansion-offer>p { color:var(--ui-muted); font-size:11px; line-height:1.65; margin:9px 0; }
+.expansion-offer>button { width:100%; min-height:39px; font-size:12px; }
+.expansion-offer .offer-help { margin-bottom:0; font-size:10px; }
+.campaign-site-list-title { font-size:12px; margin:17px 0 9px; color:var(--ui-ink); }
+@media(max-width:1100px) { .campaign-world-layout { grid-template-columns:minmax(0,1fr) 250px; }.campaign-site-panel .local-preview-body { grid-template-columns:100px minmax(0,1fr); } }
+@media(max-width:700px) {
+ .atlas-v2 .atlas-breadcrumb>span,.atlas-v2 .atlas-breadcrumb>svg:last-of-type { display:none; }
+ .atlas-v2 .atlas-legend { gap:7px; padding:5px 9px; font-size:9px; }
+ .atlas-v2 .atlas-legend img { width:20px; height:20px; }
+ .atlas-v2 .atlas-region-select { flex:1; text-align:right; }.atlas-v2 .atlas-region-select select { max-width:90px; font-size:10px; }
+ .atlas-v2 .atlas-minimap { width:84px; height:54px; }
+ .atlas-v2 .atlas-cell-readout span { font-size:10px; }.atlas-v2 .atlas-bottom { padding:10px; }
+ .world-map-screen .alliance-residents img { height:100px; }
+ .campaign-world-layout { display:flex; flex-direction:column; }.campaign-world-layout .atlas-shell { width:100%; height:390px; }
+ .campaign-site-panel { width:100%; max-height:none; overflow:visible; }.campaign-site-panel .local-preview-body { grid-template-columns:136px minmax(0,1fr); }
+}

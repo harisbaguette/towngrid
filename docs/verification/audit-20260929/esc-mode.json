@@ -1,0 +1,14 @@
+{
+ "start": "warehouse",
+ "dialogOpen": "warehouse",
+ "focusInDialog": true,
+ "afterX": "warehouse",
+ "reselected": "warehouse",
+ "afterEsc": null,
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

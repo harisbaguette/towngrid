@@ -1,5 +1,6 @@
 import {RESOURCES,BUILDINGS,N,CONTRACT_WAIT} from './simulation.js';
-import {activeTerminal,tradeCapacity} from './trade-terminals.js';
+import {activeTerminal,tradeCapacity,terminalsOf} from './trade-terminals.js';
+import {recordTerminalTransfer} from './logistics-visual-events.js';
 // Every map has a fixed export road from the west edge to the starting land.
 // Sold goods leave the warehouse on a vehicle and are paid for when it reaches the export terminal.
 // Imports ride the same vehicles the other way, and the lord's contracts and state orders go out on them too.
@@ -93,7 +94,8 @@ export function fleet(s){
  for(const sh of s.shipments){const slot=slots.find(v=>!v.busy&&v.kind===(sh.vehicle||'wagon'))||slots.find(v=>!v.busy);if(slot)slot.busy=true;}
  return slots;
 }
-/** Fuel above the warehouse reserve (production needs, freight, the open contract and the player's own reserve). */
+/** Fuel above the warehouse reserve (production needs, freight, the open contract and the player's own reserve). Anything
+ *  that burns fuel from a site's stock (vehicles here, the campaign's freight trucks) should spend only this. */
 export const spareFuel=s=>Math.floor((s.availableStock?.('fuel')??s.stock.fuel??0)-(s.minimumStock?.('fuel')??0));
 /** The vehicle the next shipment would take: a free one first, then a fuel one while spare fuel lasts. hold: fuel the
  *  shipment itself carries, which the vehicle may not burn. */
@@ -106,15 +108,19 @@ export function nextVehicle(s,hold=0){
 export function idleVehicles(s){const slots=fleet(s).filter(v=>!v.busy);return slots.filter(v=>!VEHICLES[v.kind].fuel).length+Math.min(slots.filter(v=>VEHICLES[v.kind].fuel).length,Math.max(0,Math.floor(spareFuel(s)/FUEL_PER_TRIP)));}
 /** Goods the next vehicle can carry: the terminal's lot times its load. */
 export const vehicleLoad=(s,kind=nextVehicle(s)||'wagon')=>Math.max(1,Math.floor(tradeCapacity(s)*VEHICLES[kind].load));
+/** Fuel a shipment carries that the reserve has not already set aside, which its vehicle may not burn. The lord's order
+ *  is already in the reserve (economy.js reserveFor) and leaves with this shipment, so it holds nothing extra (audit C7:
+ *  it was counted twice and a truck needed the order's fuel twice over). An import carries nothing out. */
+export const fuelHold=(item,amount,kind)=>item==='fuel'&&kind!=='import'&&kind!=='contract'?amount:0;
 /** Why nothing can leave now, or null. */
 export function shipmentError(s,hold=0){
  const {route,error}=exportRoute(s);if(!route)return error;if(nextVehicle(s,hold))return null;
  const slots=fleet(s),fuelIdle=slots.some(v=>!v.busy&&VEHICLES[v.kind].fuel);
- return '운송 수단 '+slots.filter(v=>v.busy).length+'대가 모두 나가 있습니다'+(fuelIdle?' · 연료가 있으면 트럭'+(waterside(s)?'·증기선':'')+'이 더 나갑니다':'');
+ return '운송 수단 '+slots.filter(v=>v.busy).length+'대가 모두 나가 있습니다'+(fuelIdle?' · 트럭'+(waterside(s)?'·증기선':'')+'은 예비분 밖 연료 '+FUEL_PER_TRIP+'개로 출발합니다 (지금 '+Math.max(0,spareFuel(s)-hold)+'개)':'');
 }
 /** Send goods (or, for an import, an empty vehicle) toward the terminal. kind: undefined sale, 'contract', 'state', 'import'. */
 export function dispatchShipment(s,item,amount,revenue,auto,extra={}){
- const hold=item==='fuel'&&extra.kind!=='import'?amount:0,error=shipmentError(s,hold);if(error)return error;const vehicle=nextVehicle(s,hold),spec=VEHICLES[vehicle],boat=spec.water>0&&waterRoute(s),route=boat||exportRoute(s).route;
+ const hold=fuelHold(item,amount,extra.kind),error=shipmentError(s,hold);if(error)return error;const vehicle=nextVehicle(s,hold),spec=VEHICLES[vehicle],boat=spec.water>0&&waterRoute(s),route=boat||exportRoute(s).route;
  if(spec.fuel){s.stock.fuel-=FUEL_PER_TRIP;s.logisticsStats.fuel=(s.logisticsStats.fuel||0)+FUEL_PER_TRIP;s.logisticsStats.fuelTrips=(s.logisticsStats.fuelTrips||0)+1;}
  s.shipments.push({id:(s.nextShipmentId=(s.nextShipmentId||0)+1),item,amount,revenue,auto:!!auto,...extra,vehicle,route:route.map(p=>({x:p.x,z:p.z})),progress:0,phase:'out'});return null;
 }
@@ -129,6 +135,8 @@ export function shipmentPose(sh){
 // At the terminal a sale, contract or state order is paid once (the phase turns to 'back' in the same step, so a save
 // holds either the unpaid or the paid shipment). An import is loaded there and unloaded at the warehouse on return.
 function arrive(s,sh){
+ const goal=sh.route.at(-1),terminal=terminalsOf(s).find(t=>t.building&&t.usable&&t.goals.some(p=>p.x===goal.x&&p.z===goal.z));
+ if(terminal)recordTerminalTransfer(s,sh,terminal.building,goal);
  const end=sh.route[sh.route.length-1];if(sh.kind==='import'){s.sound('pickup',end.x,end.z);return;}
  s.money+=sh.revenue;s.budget.income+=sh.revenue;s.totalRevenue+=sh.revenue;s.sold[sh.item]=(s.sold[sh.item]||0)+sh.amount;
  if(sh.kind==='contract'){s.contracts++;s.contractReadyAt=s.time+CONTRACT_WAIT;s.sound('contract',end.x,end.z);s.notify('영주 납품 완료 · '+RESOURCES[sh.item].name+' '+sh.amount+'개 · +'+sh.revenue+'G · 다음 주문은 하루 뒤','success');return;}

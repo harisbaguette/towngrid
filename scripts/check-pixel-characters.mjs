@@ -38,6 +38,7 @@ for (const identity of identities) {
  for (const file of [identity.portrait, identity.sheet]) assert.ok(existsSync(`public${file}`), `${identity.id}: missing ${file}`);
  const png = readFileSync(`public${identity.sheet}`);
  const meta = JSON.parse(readFileSync(`public/assets/pixel-characters/${identity.id}/frames.json`));
+ assert.equal(meta.rigFinish, 'continuous-joints-1', `${identity.id}: repack the shared joint finish`);
  const columns = 64;
  assert.equal(meta.columns.length, columns);
  assert.equal(png.readUInt32BE(16), columns * 128, `${identity.id}: atlas width`);

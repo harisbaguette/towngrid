@@ -1,3 +1,5 @@
+import {realSeconds, remainingSeconds} from './game-time.js';
+
 const trials={
  2:{key:'delivery',target:18,name:'주민이 자원 18개 운반',right:'첫 납품 보너스가 10% 늘어납니다.'},
  3:{key:'reserves',target:1,name:'목재 12 · 물 8 비축',right:'개간 허가로 다음 확장 비용이 10% 줄어듭니다.'},
@@ -16,7 +18,14 @@ export function trialValue(s,key){
  const sites=s.campaign?.sites.map(v=>v.sim)||[s];
  return ({delivery:sites.reduce((n,v)=>n+v.logisticsStats.delivered,0),direct:sites.reduce((n,v)=>n+v.logisticsStats.direct,0),reserves:+(s.stock.wood>=12&&s.stock.water>=8),diversity:Object.values(s.sold).filter(n=>n>0).length,uptime:s.challenge.bestUptime||0,healthy:s.challenge.bestHealthy||0,defended:s.campaign?.battles.filter(v=>v.defeated>=3||!v.damage).length||0,stableSites:s.campaign?.sites.filter(v=>v.territory&&v.unrest<40).length||0})[key]||0;
 }
-export function nextTrial(s){const t=trials[s.rank+1];return t?{...t,current:trialValue(s,t.key),done:trialValue(s,t.key)>=t.target}:null;}
+export function nextTrial(s){
+ const t=trials[s.rank+1];if(!t)return null;
+ const current=trialValue(s,t.key),timed=t.key==='uptime'||t.key==='healthy';
+ const displayCurrent=timed?Math.floor(realSeconds(current,s)+1e-9):Math.floor(current);
+ const displayTarget=timed?remainingSeconds(t.target,s):t.target;
+ const name=t.key==='uptime'?'생산 시설 3곳을 '+displayTarget+'초 연속 가동':t.key==='healthy'?'감염 15% 이하로 '+displayTarget+'초 운영':t.name;
+ return {...t,name,current,done:current>=t.target,displayCurrent,displayTarget};
+}
 export function tickChallenges(s,dt){
  const c=s.challenge;
  c.uptime=s.buildings.filter(b=>b.working).length>=3?(c.uptime||0)+dt:0;c.bestUptime=Math.max(c.bestUptime||0,c.uptime);

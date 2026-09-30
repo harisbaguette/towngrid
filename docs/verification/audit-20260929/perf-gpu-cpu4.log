@@ -1,0 +1,271 @@
+[step] load
+[step] fps
+[step] memory 1 min at 4x
+[step] {"minute":0,"realS":2,"heapMB":32.2,"nodes":1014,"listeners":673,"documents":1,"game":167,"buildings":37,"workers":9,"shipments":0,"notices":2,"geometries":73,"textures":74,"programs":44,"sceneChildren":8,"worldChildren":230,"toasts":1,"rebuilds":0,"rebuildMsP95":0,"fps":7,"p95":133.3,"frames":47}
+[step] {"minute":1,"realS":62,"heapMB":34.2,"nodes":1028,"listeners":749,"documents":1,"game":404,"buildings":37,"workers":9,"shipments":0,"notices":5,"geometries":73,"textures":74,"programs":44,"sceneChildren":8,"worldChildren":230,"toasts":1,"rebuilds":0,"rebuildMsP95":0,"fps":9,"p95":116.7,"frames":65}
+{
+ "load": {
+  "home": {
+   "titleVisibleMs": 1245,
+   "homeReadyMs": 38829,
+   "titleClicks": 3
+  },
+  "slowestRequests": [
+   {
+    "u": "/src/app/globals.css",
+    "start": 857,
+    "ms": 128,
+    "wait": 123
+   },
+   {
+    "u": "/assets/brand/towngrid-title.png",
+    "start": 856,
+    "ms": 120,
+    "wait": 13
+   },
+   {
+    "u": "/assets/screens/daily-v3/records-room.webp",
+    "start": 2299,
+    "ms": 81,
+    "wait": 40
+   },
+   {
+    "u": "/assets/screens/daily-v3/village-arrival.webp",
+    "start": 2298,
+    "ms": 80,
+    "wait": 40
+   },
+   {
+    "u": "/assets/screens/daily-v3/river-crossing.webp",
+    "start": 2298,
+    "ms": 80,
+    "wait": 40
+   },
+   {
+    "u": "/assets/screens/daily-v3/map-table.webp",
+    "start": 2298,
+    "ms": 79,
+    "wait": 40
+   },
+   {
+    "u": "/assets/pixel-environment/resourceGoods.png",
+    "start": 2345,
+    "ms": 33,
+    "wait": 2
+   },
+   {
+    "u": "/assets/pixel-environment/weaver.png",
+    "start": 2358,
+    "ms": 31,
+    "wait": 2
+   },
+   {
+    "u": "/assets/pixel-environment/confectionery.png",
+    "start": 2358,
+    "ms": 31,
+    "wait": 2
+   },
+   {
+    "u": "/assets/pixel-environment/kiln.png",
+    "start": 2359,
+    "ms": 31,
+    "wait": 2
+   },
+   {
+    "u": "/assets/pixel-environment/tailor.png",
+    "start": 2359,
+    "ms": 31,
+    "wait": 2
+   },
+   {
+    "u": "/assets/pixel-environment/glassworks.png",
+    "start": 2359,
+    "ms": 31,
+    "wait": 2
+   }
+  ],
+  "requestCount": 250,
+  "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "demoMs": 3979,
+  "totalToPlayableMs": 42839
+ },
+ "scene": {
+  "buildings": 37,
+  "workers": 9,
+  "models": 46,
+  "geometries": 72,
+  "textures": 74,
+  "quality": "auto",
+  "maxFps": 60,
+  "pixelRatio": 1,
+  "shadows": true
+ },
+ "fps": {
+  "default-1x": {
+   "frames": 34,
+   "p50": 33.4,
+   "p95": 166.7,
+   "max": 216.7,
+   "gameFps": 17,
+   "renderer": "webgl",
+   "longTasks": 14,
+   "rebuilds": 0
+  },
+  "4x": {
+   "frames": 47,
+   "p50": 33.3,
+   "p95": 133.3,
+   "max": 133.4,
+   "gameFps": 29,
+   "renderer": "webgl",
+   "longTasks": 11,
+   "rebuilds": 0
+  },
+  "zoomed-out": {
+   "frames": 54,
+   "p50": 16.7,
+   "p95": 116.7,
+   "max": 150.1,
+   "gameFps": 28,
+   "renderer": "webgl",
+   "longTasks": 13,
+   "rebuilds": 0
+  },
+  "zoomed-in": {
+   "frames": 99,
+   "p50": 16.7,
+   "p95": 50.1,
+   "max": 66.7,
+   "gameFps": 47,
+   "renderer": "webgl",
+   "longTasks": 3,
+   "rebuilds": 0
+  },
+  "labels-on": {
+   "frames": 30,
+   "p50": 33.4,
+   "p95": 183.4,
+   "max": 200,
+   "gameFps": 16,
+   "renderer": "webgl",
+   "longTasks": 16,
+   "rebuilds": 0
+  },
+  "rotate": {
+   "first10": [
+    -12.4,
+    33.3,
+    133.4,
+    16.7,
+    149.9,
+    100,
+    33.3,
+    16.7,
+    166.7,
+    33.3
+   ],
+   "max": 166.7
+  },
+  "dragging": {
+   "frames": 22,
+   "p50": 50.1,
+   "p95": 183.4,
+   "max": 233.3,
+   "gameFps": 5,
+   "renderer": "webgl"
+  },
+  "build-dock-open": {
+   "frames": 33,
+   "p50": 33.3,
+   "p95": 183.3,
+   "max": 199.9,
+   "gameFps": 17,
+   "renderer": "webgl",
+   "longTasks": 10,
+   "rebuilds": 0
+  },
+  "phone-390": {
+   "frames": 67,
+   "p50": 16.7,
+   "p95": 116.7,
+   "max": 133.4,
+   "gameFps": 29,
+   "renderer": "webgl",
+   "longTasks": 10,
+   "rebuilds": 0
+  }
+ },
+ "rebuild": {
+  "count": 0,
+  "perMinute": 0
+ },
+ "longTasks": {
+  "count": 594,
+  "over50": 584,
+  "over100": 155,
+  "over200": 8,
+  "max": 2843
+ },
+ "first": {
+  "minute": 0,
+  "realS": 2,
+  "heapMB": 32.2,
+  "nodes": 1014,
+  "listeners": 673,
+  "documents": 1,
+  "game": 167,
+  "buildings": 37,
+  "workers": 9,
+  "shipments": 0,
+  "notices": 2,
+  "geometries": 73,
+  "textures": 74,
+  "programs": 44,
+  "sceneChildren": 8,
+  "worldChildren": 230,
+  "toasts": 1,
+  "rebuilds": 0,
+  "rebuildMsP95": 0,
+  "fps": 7,
+  "p95": 133.3,
+  "frames": 47
+ },
+ "last": {
+  "minute": 1,
+  "realS": 62,
+  "heapMB": 34.2,
+  "nodes": 1028,
+  "listeners": 749,
+  "documents": 1,
+  "game": 404,
+  "buildings": 37,
+  "workers": 9,
+  "shipments": 0,
+  "notices": 5,
+  "geometries": 73,
+  "textures": 74,
+  "programs": 44,
+  "sceneChildren": 8,
+  "worldChildren": 230,
+  "toasts": 1,
+  "rebuilds": 0,
+  "rebuildMsP95": 0,
+  "fps": 9,
+  "p95": 116.7,
+  "frames": 65
+ },
+ "profileTop": [
+  "1324ms 22.2% (program) :0",
+  "840ms 14.1% exports.jsxDEV react_jsx-dev-runtime.js:191",
+  "237ms 4.0% loop scene.js:584",
+  "175ms 2.9% getParameters three.module-LOgJmgpk.js:46049",
+  "165ms 2.8% updateMatrixWorld three.module-LOgJmgpk.js:10046",
+  "143ms 2.4% exports.createElement react.js:591",
+  "132ms 2.2% getProgram three.module-LOgJmgpk.js:52154",
+  "113ms 1.9% (idle) :0",
+  "112ms 1.9% setProgram three.module-LOgJmgpk.js:52255",
+  "96ms 1.6% WebGLRenderer.renderBufferDirect three.module-LOgJmgpk.js:51717",
+  "85ms 1.4% refreshMaterialUniforms three.module-LOgJmgpk.js:49981",
+  "71ms 1.2% run :0"
+ ]
+}

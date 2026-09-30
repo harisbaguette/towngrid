@@ -7,8 +7,16 @@ import {makePixelBuilding,makePixelProp} from '../src/app/game/pixel-environment
 import {SERVICE_OUTPUTS} from '../src/app/game/production-visuals.js';
 import {makeMapTerrain,connectionMask,waterKind,landscapeWater} from '../src/app/game/pixel-terrain.js';
 import {networkSamples} from '../src/app/game/pixel-network.js';
+import {makeBuilding} from '../src/app/game/models.js';
 
 assert.deepEqual(Object.keys(BUILDINGS).filter(id=>!BUILDINGS[id].tile).sort(),[...PIXEL_BUILDINGS].sort(),'Every current facility must have authored art');
+// The game entry point must use the same pixel art as previews, with no 3D fallback.
+for(const [id,def] of Object.entries(BUILDINGS)){
+ const model=makeBuilding(id,'human');
+ if(def.tile)assert.ok(model.children.every(m=>ENVIRONMENT_ASSETS[m.userData.environmentId]),id+' authored network texture');
+ else {assert.equal(model.userData.buildingType,id,id+' runtime identity');assert.ok(ENVIRONMENT_ASSETS[model.userData.environmentId],id+' runtime sprite');}
+}
+assert.throws(()=>makeBuilding('missing-art'),/Missing pixel building/);
 for(const [id,spec] of Object.entries(ENVIRONMENT_ASSETS)){
  const png=await readFile(new URL('../public'+spec.sheet,import.meta.url));
  assert.equal(png.readUInt32BE(16),192*spec.frames,id+' atlas columns');

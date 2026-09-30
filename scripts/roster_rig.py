@@ -10,8 +10,9 @@ import math
 from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageOps
-from mira_rig import clean, bone, move, joint, foot_phase, prop_image
+from mira_rig import clean, move, joint, foot_phase, prop_image
 from mira_portrait import bake_portrait
+from rig_skinning import limb_layers, SKINNING_REVISION
 
 ROOT=Path('art-source/pixel-characters/roster-v4')
 COUNTS={'idle':4,'walk':12,'carry':12,'work':8,'pickup':6,'greet':6}
@@ -49,9 +50,11 @@ def prepare(source,view,spec):
         rgba=np.array(image)
         core|=(rgba[:,:,0]>135)&(rgba[:,:,1]>145)&(rgba[:,:,2]>100)&(rgba[:,:,1]>=rgba[:,:,0])&(X>68)&(Y<80)
     if spec['kind']=='spirit':
-        arm_distance=np.minimum.reduce([segment_distance(*np.array(limb[1:])) for limb in view['arms']])
-        core|=(Y>=view['tailStart'])&(arm_distance>5)
-    extras=[{'image':masked(image,poly_mask(v['polygon'])),'pivot':np.array(v['pivot'],float),'kind':v['kind']} for v in view.get('extras',[])]
+        left,right=view.get('tailBounds',[44,84])
+        tail_region=(Y>=view['tailStart'])&(X>=left)&(X<=right)
+        core|=tail_region
+    extras=[{'image':masked(image,poly_mask(v['polygon'])),'pivot':np.array(v['pivot'],float),'kind':v['kind'],
+             'offset':np.array(v.get('offset',[0,0]),float)} for v in view.get('extras',[])]
     extra_mask=np.zeros((128,128),bool)
     for extra in view.get('extras',[]): extra_mask|=poly_mask(extra['polygon'])
     candidates=[]
@@ -66,7 +69,7 @@ def prepare(source,view,spec):
     lower_start=min((limb[0][1] for limb in view.get('legs',[])),default=view.get('tailStart',85))
     # Pixels above a limb's root are never reassigned to the opposite arm.
     # That used to rotate tiny shoulder/hair fragments beside the face.
-    core|=(distances.min(axis=0)>spec.get('partRadius',8))&(Y<lower_start)
+    core|=(distances.min(axis=0)>spec.get('partRadius',24))&(Y<lower_start)
     # Core polygon is reviewed per view, preserving head, torso, hair and hems.
     result={'core':masked(image,core&~extra_mask),'arms':[],'legs':[],
             'extras':extras,'forward':np.array([-.70710678,.40824829 if view['image']=='SW.png' else -.40824829]),'view':view}
@@ -84,7 +87,7 @@ def prepare(source,view,spec):
             entry['lower']=masked(lower,Y<=c[1]+1)
         result[kind].append(entry)
     if spec['kind']=='spirit':
-        tail=Y>=view['tailStart']
+        tail=tail_region
         result['tail']=masked(result['core'],tail)
         result['core']=masked(result['core'],~tail)
     return result
@@ -133,7 +136,7 @@ def transform_extra(extra,phase,offset):
     else:
         angle=math.sin(phase*math.tau)*3
         image=image.rotate(angle,Image.Resampling.NEAREST,center=tuple(pivot))
-    return move(image,offset)
+    return move(image,offset+extra['offset'])
 
 
 def remove_specks(image,protected_top):
@@ -166,7 +169,7 @@ def render(rig,action,phase,spec,crate,tool):
     poses=horse_pose(rig,phase,moving,offset,spec) if spec['kind']=='centaur' else legs_pose(rig,phase,moving,offset,spec) if rig['legs'] else []
     for limb,(pose,foot) in zip(rig['legs'],poses):
         a,b,c=limb['joints'];root,knee,end=pose
-        leg_layers.append([bone(limb['upper'],a,b,root,knee),bone(limb['lower'],b,c,knee,end),move(limb['foot'],end-c)])
+        leg_layers.append(limb_layers(limb,root,knee,end))
         audit['feet'].append({**foot,'ankle':end.round(4).tolist()})
     shoulders=np.array([p['joints'][0] for p in rig['arms']])
     crate_center=shoulders.mean(axis=0)+[0,21]+f*10+offset
@@ -188,7 +191,7 @@ def render(rig,action,phase,spec,crate,tool):
             amount=math.sin(math.pi*phase)**.4
             end=end*(1-amount)+(root+[5*math.sin(phase*math.pi*6),-12])*amount
         elbow=joint(root,end,lengths,-f)
-        arms.append([bone(limb['upper'],a,b,root,elbow),bone(limb['lower'],b,c,elbow,end),end])
+        arms.append([*limb_layers(limb,root,elbow,end),end])
     for extra in rig['extras']:layer.alpha_composite(transform_extra(extra,phase,offset))
     for img in arms[0][:2]:layer.alpha_composite(img)
     for pair in leg_layers:
@@ -253,13 +256,11 @@ def pack_roster_rig(spec_path,output='public/assets/pixel-characters'):
           'directions':['SW','NW','NE','SE'],'cell':[128,128],'columns':columns,'frames':192,
           'portrait':'portrait.png','atlas':'sprites.png','bodyPixels':100,
           'anchors':anchors,
-          'portraitAnimation':animation,'clips':clips,'animationMethod':'authored-texture-joint-rig',
+          'portraitAnimation':animation,'clips':clips,'animationMethod':'authored-texture-joint-rig','rigFinish':SKINNING_REVISION,
           'locomotion':spec['kind'],'worldHeight':spec['worldHeight'],'gait':spec['gait'],'rigAudit':audits,'profession':spec.get('profession'),'workStyle':spec.get('workStyle','labor'),
           'mirroredDirections':{'SE':'SW','NE':'NW'},'limitations':['Opposite views mirrored','Attack shares profession work','No dedicated injury/death drawing']}
     from character_actions import append_actions
-    # Wide sleeves must belong to the arm when folded across the torso.
-    # Keep established locomotion masks for the earlier cast, while combat
-    # gets the complete sleeve instead of leaving its outer edge on the core.
+    # Work and combat share the same complete sleeve masks and joint mapping.
     action_rigs=[prepare(source,v,{**spec,'partRadius':24}) for v in spec['views']]
     atlas,meta=append_actions(atlas,meta,action_rigs,spec)
     atlas.save(target/'sprites.png',optimize=True)

@@ -1,0 +1,3582 @@
+{
+ "timing": {
+  "home": {
+   "titleVisibleMs": 158,
+   "homeReadyMs": 33452,
+   "titleClicks": 3
+  },
+  "newGameMs": 275,
+  "reload": {
+   "titleVisibleMs": 102,
+   "homeReadyMs": 32478,
+   "titleClicks": 2
+  },
+  "continueMs": 235
+ },
+ "home": {
+  "audioAfterTitleClick": {
+   "ctx": "no-instance"
+  },
+  "layout": {
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  "buttons": [
+   {
+    "text": "이어하기",
+    "disabled": true
+   },
+   {
+    "text": "새 게임",
+    "disabled": false
+   },
+   {
+    "text": "불러오기",
+    "disabled": false
+   },
+   {
+    "text": "설정",
+    "disabled": false
+   },
+   {
+    "text": "일러스트 테스트",
+    "disabled": false
+   },
+   {
+    "text": "지형 8종 테스트",
+    "disabled": false
+   },
+   {
+    "text": "초반 마을 테스트",
+    "disabled": false
+   },
+   {
+    "text": "산업도시 둘러보기",
+    "disabled": false
+   },
+   {
+    "text": "마을의 하루",
+    "disabled": false
+   },
+   {
+    "text": "대기 화면",
+    "disabled": false
+   },
+   {
+    "text": "",
+    "disabled": false
+   }
+  ],
+  "gallery": {
+   "titles": [
+    "미라의 정비소",
+    "마르나의 광산 공방",
+    "실렌의 관개 온실",
+    "로웬의 설원 철도",
+    "하나의 항구 배송",
+    "브론의 숲속 목공소"
+   ],
+   "distinct": 6,
+   "escapeLeaves": false
+  },
+  "settings": {
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "소리 32x18"
+    ],
+    "smallText": []
+   },
+   "text": "설정 소리, 화면, 저장을 설정합니다. 소리 전체 82 음악 48 효과음 85 환경음 45 음악 듣기 효과음 듣기 환경음 듣기 기본 음량 복원 소리 켜짐 · 51/51개 준비됨 그래픽 품질 자동 높음 균형 절전 에셋 출처 닫기",
+   "escCloses": true
+  },
+  "titleBack": true
+ },
+ "world": {
+  "layout": {
+   "covered": [],
+   "offscreen": [],
+   "clipped": [
+    "에스테른 왕국 (ellipsis)"
+   ],
+   "tinyTargets": [],
+   "smallText": [
+    "1칸 = 24 × 24 마을 10px",
+    "15, 15 10px",
+    "시작 거점 10px",
+    "적대 세력 10px",
+    "정착 가능 10px",
+    "에스테른 왕국 10px",
+    "24 × 24 타일 네 방향으로 이어지는 땅 10px",
+    "SMALL 10px",
+    "하벤 수도권에서 첫 마을을 엽니다. 10px"
+   ]
+  },
+  "options": [
+   {
+    "id": "estern",
+    "text": "에스테른 왕국",
+    "group": "인족"
+   },
+   {
+    "id": "kardum",
+    "text": "카르둠 산악왕국",
+    "group": "인족"
+   },
+   {
+    "id": "rivente",
+    "text": "리벤트 연방",
+    "group": "인족"
+   },
+   {
+    "id": "broden",
+    "text": "브로덴 철도연방",
+    "group": "인족"
+   },
+   {
+    "id": "harren",
+    "text": "하렌 농업공화국",
+    "group": "인족"
+   },
+   {
+    "id": "torvik",
+    "text": "토르비크 기업국",
+    "group": "인족"
+   },
+   {
+    "id": "silvaen",
+    "text": "실바엔 수림왕국",
+    "group": "엘프족"
+   },
+   {
+    "id": "miel",
+    "text": "미엘 수정공국",
+    "group": "엘프족"
+   },
+   {
+    "id": "arsel",
+    "text": "아르셀 공업연방",
+    "group": "엘프족"
+   },
+   {
+    "id": "elune",
+    "text": "엘루네 기술공화국",
+    "group": "엘프족"
+   },
+   {
+    "id": "neiren",
+    "text": "네이렌 해양공화국",
+    "group": "엘프족"
+   },
+   {
+    "id": "sylune",
+    "text": "실루네 자치왕국",
+    "group": "엘프족"
+   },
+   {
+    "id": "nezar",
+    "text": "네자르 마도왕국",
+    "group": "마족 · 적대 세력"
+   },
+   {
+    "id": "vesra",
+    "text": "베스라 연구공화국",
+    "group": "마족 · 적대 세력"
+   },
+   {
+    "id": "zail",
+    "text": "자일 상업도시국가",
+    "group": "마족 · 적대 세력"
+   },
+   {
+    "id": "urkan",
+    "text": "우르칸 부족연맹",
+    "group": "오크족 · 적대 세력"
+   },
+   {
+    "id": "fizden",
+    "text": "피즈덴 공업공화국",
+    "group": "오크족 · 적대 세력"
+   },
+   {
+    "id": "morgal",
+    "text": "모르갈 노동공화국",
+    "group": "오크족 · 적대 세력"
+   },
+   {
+    "id": "griv",
+    "text": "그리브 상업연맹",
+    "group": "오크족 · 적대 세력"
+   },
+   {
+    "id": "orbel",
+    "text": "오르벨 산업왕국",
+    "group": "오크족 · 적대 세력"
+   },
+   {
+    "id": "nubrik",
+    "text": "누브릭 기술국",
+    "group": "오크족 · 적대 세력"
+   },
+   {
+    "id": "lumea",
+    "text": "루메아 연안왕국",
+    "group": "수인족 · 적대 세력"
+   },
+   {
+    "id": "karyon",
+    "text": "카리온 용인왕국",
+    "group": "수인족 · 적대 세력"
+   },
+   {
+    "id": "neria",
+    "text": "네리아 해양연합",
+    "group": "수인족 · 적대 세력"
+   },
+   {
+    "id": "tavira",
+    "text": "타비라 자유도시연합",
+    "group": "수인족 · 적대 세력"
+   },
+   {
+    "id": "serkan",
+    "text": "세르칸 에너지공화국",
+    "group": "수인족 · 적대 세력"
+   },
+   {
+    "id": "pelara",
+    "text": "펠라라 수로왕국",
+    "group": "수인족 · 적대 세력"
+   },
+   {
+    "id": "savera",
+    "text": "사베라 산악연방",
+    "group": "수인족 · 적대 세력"
+   },
+   {
+    "id": "arvonn",
+    "text": "아르본 항만연방",
+    "group": "수인족 · 적대 세력"
+   },
+   {
+    "id": "thalia",
+    "text": "탈리아 조류공화국",
+    "group": "수인족 · 적대 세력"
+   }
+  ],
+  "hostile": {
+   "id": "nezar",
+   "start": "적대 세력 · 시작 불가",
+   "disabled": true,
+   "secondary": [
+    "(off)",
+    "(off)",
+    ""
+   ]
+  },
+  "atlasClickTargets": 30,
+  "atlasChangedNation": false,
+  "startLabel": "이 땅에서 시작",
+  "scroll": {
+   "startButtonBottom": 1015,
+   "viewport": 1080,
+   "startInView": true,
+   "cardScroll": 0,
+   "sheetScroll": 0
+  }
+ },
+ "session": {
+  "log": [],
+  "shots": [
+   {
+    "name": "C10-session-01.png",
+    "snap": {
+     "t": 6.9,
+     "day": 1,
+     "rank": 0,
+     "money": 1160,
+     "debt": 1000,
+     "contracts": 0,
+     "paused": false,
+     "speed": 4,
+     "owned": 64,
+     "workers": 1,
+     "buildings": [
+      "house@10,12:L1:hp100",
+      "warehouse@11,12:L1:hp100"
+     ],
+     "stock": {
+      "wood": 40,
+      "stone": 29,
+      "water": 16,
+      "grain": 8
+     }
+    },
+    "ui": {
+     "tutorial": true,
+     "tutorialText": "물을 공급하세요",
+     "operations": false,
+     "nextBuild": null,
+     "bottleneck": [],
+     "promotionReady": false,
+     "facility": false,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "name": "C10-session-02.png",
+    "snap": {
+     "t": 244.7,
+     "day": 4,
+     "rank": 1,
+     "money": 768,
+     "debt": 1000,
+     "contracts": 0,
+     "paused": false,
+     "speed": 4,
+     "owned": 64,
+     "workers": 1,
+     "buildings": [
+      "field@11,13:L1:hp100",
+      "house@10,12:L1:hp100",
+      "lumber@10,11:L1:hp100",
+      "warehouse@11,12:L1:hp100",
+      "well@11,11:L1:hp100"
+     ],
+     "stock": {
+      "wood": 68,
+      "stone": 25,
+      "water": 82,
+      "grain": 11
+     }
+    },
+    "ui": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": false,
+     "dialog": false,
+     "weather": "폭풍 · 6초 보강 완료",
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "name": "C10-session-03.png",
+    "snap": {
+     "t": 486.5,
+     "day": 7,
+     "rank": 1,
+     "money": 889,
+     "debt": 1000,
+     "contracts": 2,
+     "paused": false,
+     "speed": 4,
+     "owned": 64,
+     "workers": 1,
+     "buildings": [
+      "field@11,13:L1:hp100",
+      "house@10,12:L1:hp100",
+      "lumber@10,11:L1:hp100",
+      "warehouse@11,12:L1:hp100",
+      "well@11,11:L1:hp100"
+     ],
+     "stock": {
+      "wood": 89,
+      "stone": 25,
+      "water": 162,
+      "grain": 11
+     }
+    },
+    "ui": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": false,
+     "dialog": false,
+     "weather": "폭풍 · 41초 보강 완료",
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "name": "C10-session-04.png",
+    "snap": {
+     "t": 728.6,
+     "day": 10,
+     "rank": 1,
+     "money": 1166,
+     "debt": 1000,
+     "contracts": 4,
+     "paused": false,
+     "speed": 4,
+     "owned": 64,
+     "workers": 1,
+     "buildings": [
+      "field@11,13:L1:hp100",
+      "house@10,12:L1:hp100",
+      "lumber@10,11:L1:hp100",
+      "warehouse@11,12:L1:hp100",
+      "well@11,11:L1:hp100"
+     ],
+     "stock": {
+      "wood": 113,
+      "stone": 25,
+      "water": 244,
+      "grain": 1
+     }
+    },
+    "ui": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": false,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "name": "C10-session-05.png",
+    "snap": {
+     "t": 971.9,
+     "day": 13,
+     "rank": 1,
+     "money": 1076,
+     "debt": 1000,
+     "contracts": 4,
+     "paused": false,
+     "speed": 4,
+     "owned": 64,
+     "workers": 1,
+     "buildings": [
+      "field@11,13:L1:hp100",
+      "house@10,12:L1:hp100",
+      "lumber@10,11:L1:hp100",
+      "warehouse@11,12:L1:hp100",
+      "well@11,11:L1:hp100"
+     ],
+     "stock": {
+      "wood": 158,
+      "stone": 25,
+      "water": 270,
+      "grain": 13
+     }
+    },
+    "ui": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": false,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "name": "C10-session-06.png",
+    "snap": {
+     "t": 1216.3,
+     "day": 16,
+     "rank": 1,
+     "money": 916,
+     "debt": 1000,
+     "contracts": 4,
+     "paused": false,
+     "speed": 4,
+     "owned": 64,
+     "workers": 1,
+     "buildings": [
+      "field@11,13:L1:hp100",
+      "house@10,12:L1:hp100",
+      "lumber@10,11:L1:hp100",
+      "warehouse@11,12:L1:hp100",
+      "well@11,11:L1:hp100"
+     ],
+     "stock": {
+      "wood": 190,
+      "stone": 25,
+      "water": 270,
+      "grain": 19
+     }
+    },
+    "ui": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": false,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   }
+  ],
+  "startUi": {
+   "tutorial": true,
+   "tutorialText": "첫 창고",
+   "operations": false,
+   "nextBuild": null,
+   "bottleneck": [],
+   "promotionReady": false,
+   "facility": false,
+   "dialog": false,
+   "weather": null,
+   "raid": false,
+   "health": false,
+   "finance": false,
+   "pause": false
+  },
+  "firstPromotionShot": true,
+  "actions": [
+   {
+    "s": 1,
+    "a": "guide:주민 주택 선택",
+    "placed": "house@10,12 audio=play:build,play:build"
+   },
+   {
+    "s": 3,
+    "a": "guide:우물 선택",
+    "placed": "well@11,11 audio=play:build,play:build,play:well,play:well"
+   },
+   {
+    "s": 5,
+    "a": "guide:밀밭 선택",
+    "placed": "field@11,13 audio=play:build,play:build,play:footstep,play:footstep,play:pickup,play:footstep"
+   },
+   {
+    "s": 7,
+    "a": "guide:벌목장 선택",
+    "placed": "lumber@10,11 audio=play:build,play:build,play:lumber,play:drop,play:footstep,play:lumber,play:field,play:footstep,play:footstep"
+   },
+   {
+    "s": 21,
+    "a": "goals:promote",
+    "audio": [
+     "interact:click",
+     "play:click",
+     "success:",
+     "tone:392",
+     "tone:493.88",
+     "tone:587.33",
+     "tone:783.99",
+     "play:promotion",
+     "success:",
+     "tone:392",
+     "tone:493.88",
+     "tone:587.33",
+     "tone:783.99"
+    ],
+    "toasts": [
+     "등록 농노 승급"
+    ],
+    "rank": 1
+   },
+   {
+    "s": 23,
+    "a": "bottleneck:우물 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 29,
+    "a": "bottleneck:우물 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 34,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 39,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 44,
+    "a": "reinforce",
+    "audio": [
+     "interact:click",
+     "play:click",
+     "play:build",
+     "play:build"
+    ]
+   },
+   {
+    "s": 45,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "폭풍 · 74초 보강 완료",
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 51,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "폭풍 · 52초 보강 완료",
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 56,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "폭풍 · 30초 보강 완료",
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 61,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "폭풍 · 9초 보강 완료",
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 65,
+    "a": "contract",
+    "audio": [
+     "play:footstep",
+     "interact:click",
+     "play:click",
+     "play:click",
+     "play:dispatch",
+     "tone:95",
+     "play:well",
+     "play:footstep",
+     "play:well"
+    ],
+    "toasts": []
+   },
+   {
+    "s": 68,
+    "a": "bottleneck:벌목장 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 73,
+    "a": "bottleneck:우물 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 79,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 84,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 88,
+    "a": "contract",
+    "audio": [
+     "play:footstep",
+     "interact:click",
+     "play:click",
+     "play:click",
+     "play:dispatch",
+     "tone:95",
+     "play:footstep",
+     "play:footstep",
+     "play:footstep",
+     "play:well"
+    ],
+    "toasts": []
+   },
+   {
+    "s": 90,
+    "a": "bottleneck:우물 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 97,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 102,
+    "a": "bottleneck:우물 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 108,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 113,
+    "a": "bottleneck:우물 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "폭풍 · 80초 보강 · 70G + 목재 4",
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 114,
+    "a": "reinforce",
+    "audio": [
+     "interact:click",
+     "play:click",
+     "play:build",
+     "play:build"
+    ]
+   },
+   {
+    "s": 118,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "폭풍 · 59초 보강 완료",
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 124,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "폭풍 · 35초 보강 완료",
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 130,
+    "a": "bottleneck:우물 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "폭풍 · 13초 보강 완료",
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 135,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 141,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 146,
+    "a": "bottleneck:우물 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 151,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 154,
+    "a": "contract",
+    "audio": [
+     "play:footstep",
+     "interact:click",
+     "play:click",
+     "play:click",
+     "play:dispatch",
+     "tone:95",
+     "play:well",
+     "play:well",
+     "play:footstep",
+     "play:footstep"
+    ],
+    "toasts": [
+     "밀 16개 납품 출발 · 도착 시 +173G"
+    ]
+   },
+   {
+    "s": 157,
+    "a": "bottleneck:우물 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 162,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 168,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 173,
+    "a": "bottleneck:우물 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 178,
+    "a": "contract",
+    "audio": [
+     "interact:click",
+     "play:click",
+     "play:click",
+     "play:dispatch",
+     "tone:95",
+     "play:drop",
+     "play:footstep",
+     "play:lumber",
+     "play:footstep"
+    ],
+    "toasts": [
+     "목재 18개 납품 출발 · 도착 시 +194G"
+    ]
+   },
+   {
+    "s": 179,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 185,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "감염병 · 78초",
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 191,
+    "a": "bottleneck:우물 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "감염병 · 56초",
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 196,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "감염병 · 35초",
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 201,
+    "a": "bottleneck:우물 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "감염병 · 14초",
+     "raid": false,
+     "health": false,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 207,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 212,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 217,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 223,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 228,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 233,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 239,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 244,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 250,
+    "a": "bottleneck:밀밭 · 운반 대기",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "밀밭 · 운반 대기"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 251,
+    "a": "reinforce",
+    "audio": [
+     "play:lumber",
+     "interact:click",
+     "play:click",
+     "play:build"
+    ]
+   },
+   {
+    "s": 255,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "폭풍 · 64초 보강 완료",
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 260,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "폭풍 · 42초 보강 완료",
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 266,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "폭풍 · 20초 보강 완료",
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 271,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 277,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 282,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 288,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 293,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 299,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 305,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 311,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 317,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 320,
+    "a": "reinforce",
+    "audio": [
+     "interact:click",
+     "play:click",
+     "play:build",
+     "play:build"
+    ]
+   },
+   {
+    "s": 322,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "폭풍 · 74초 보강 완료",
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 327,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "폭풍 · 52초 보강 완료",
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 333,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": "폭풍 · 31초 보강 완료",
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 338,
+    "a": "contract",
+    "audio": [
+     "interact:click",
+     "play:click",
+     "play:click",
+     "play:dispatch",
+     "tone:95",
+     "play:field",
+     "play:pickup"
+    ],
+    "toasts": [
+     "밀 20개 납품 출발 · 도착 시 +216G"
+    ]
+   },
+   {
+    "s": 343,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 348,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 354,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   },
+   {
+    "s": 359,
+    "a": "bottleneck:우물 · 창고 가득 참",
+    "placed": null,
+    "after": {
+     "tutorial": false,
+     "tutorialText": null,
+     "operations": true,
+     "nextBuild": null,
+     "bottleneck": [
+      "우물 · 창고 가득 참"
+     ],
+     "promotionReady": false,
+     "facility": true,
+     "dialog": false,
+     "weather": null,
+     "raid": false,
+     "health": true,
+     "finance": false,
+     "pause": false
+    }
+   }
+  ],
+  "noGuideSeconds": null,
+  "end": {
+   "t": 1434,
+   "day": 18,
+   "rank": 1,
+   "money": 1002,
+   "debt": 1000,
+   "contracts": 5,
+   "paused": false,
+   "speed": 4,
+   "owned": 64,
+   "workers": 1,
+   "buildings": [
+    "field@11,13:L1:hp100",
+    "house@10,12:L1:hp100",
+    "lumber@10,11:L1:hp100",
+    "warehouse@11,12:L1:hp100",
+    "well@11,11:L1:hp100"
+   ],
+   "stock": {
+    "wood": 216,
+    "stone": 25,
+    "water": 270,
+    "grain": 5
+   }
+  },
+  "endUi": {
+   "tutorial": false,
+   "tutorialText": null,
+   "operations": true,
+   "nextBuild": null,
+   "bottleneck": [
+    "우물 · 창고 가득 참"
+   ],
+   "promotionReady": false,
+   "facility": false,
+   "dialog": false,
+   "weather": null,
+   "raid": false,
+   "health": true,
+   "finance": false,
+   "pause": false
+  },
+  "toasts": [
+   {
+    "t": 39506,
+    "type": null,
+    "text": "밝은 경계 안의 빈 칸에 창고를 놓으세요.",
+    "game": 0
+   },
+   {
+    "t": 61350,
+    "type": null,
+    "text": "2일째 · 유지비·세금 32G 지출",
+    "game": 80
+   },
+   {
+    "t": 62743,
+    "type": "success",
+    "text": "등록 농노 승급",
+    "game": 84
+   },
+   {
+    "t": 82835,
+    "type": null,
+    "text": "3일째 · 유지비·세금 30G 지출",
+    "game": 161
+   },
+   {
+    "t": 85259,
+    "type": "warning",
+    "text": "폭풍 예고 · 20초 뒤 발생합니다.",
+    "game": 171
+   },
+   {
+    "t": 102938,
+    "type": null,
+    "text": "4일째 · 유지비·세금 30G 지출",
+    "game": 241
+   },
+   {
+    "t": 105403,
+    "type": "success",
+    "text": "보강한 시설이 폭풍을 버텼습니다.",
+    "game": 251
+   },
+   {
+    "t": 106604,
+    "type": "success",
+    "text": "밀 12개 납품 출발 · 도착 시 +130G",
+    "game": 256
+   },
+   {
+    "t": 109054,
+    "type": "success",
+    "text": "영주 납품 완료 · 밀 12개 · +130G · 다음 주문은 하루 뒤",
+    "game": 266
+   },
+   {
+    "t": 122784,
+    "type": null,
+    "text": "5일째 · 유지비·세금 30G 지출",
+    "game": 320
+   },
+   {
+    "t": 130068,
+    "type": "success",
+    "text": "목재 14개 납품 출발 · 도착 시 +151G",
+    "game": 349
+   },
+   {
+    "t": 132103,
+    "type": "success",
+    "text": "영주 납품 완료 · 목재 14개 · +151G · 다음 주문은 하루 뒤",
+    "game": 357
+   },
+   {
+    "t": 143004,
+    "type": null,
+    "text": "6일째 · 유지비·세금 30G 지출",
+    "game": 400
+   },
+   {
+    "t": 154721,
+    "type": "warning",
+    "text": "폭풍 예고 · 20초 뒤 발생합니다.",
+    "game": 447
+   },
+   {
+    "t": 163161,
+    "type": null,
+    "text": "7일째 · 유지비·세금 30G 지출",
+    "game": 481
+   },
+   {
+    "t": 174898,
+    "type": "success",
+    "text": "보강한 시설이 폭풍을 버텼습니다.",
+    "game": 528
+   },
+   {
+    "t": 183387,
+    "type": null,
+    "text": "8일째 · 유지비·세금 30G 지출",
+    "game": 561
+   },
+   {
+    "t": 195888,
+    "type": "success",
+    "text": "밀 16개 납품 출발 · 도착 시 +173G",
+    "game": 611
+   },
+   {
+    "t": 198304,
+    "type": "success",
+    "text": "영주 납품 완료 · 밀 16개 · +173G · 다음 주문은 하루 뒤",
+    "game": 621
+   },
+   {
+    "t": 203105,
+    "type": null,
+    "text": "9일째 · 유지비·세금 30G 지출",
+    "game": 640
+   },
+   {
+    "t": 219373,
+    "type": "success",
+    "text": "목재 18개 납품 출발 · 도착 시 +194G",
+    "game": 705
+   },
+   {
+    "t": 221789,
+    "type": "success",
+    "text": "영주 납품 완료 · 목재 18개 · +194G · 다음 주문은 하루 뒤",
+    "game": 715
+   },
+   {
+    "t": 223405,
+    "type": null,
+    "text": "10일째 · 유지비·세금 30G 지출",
+    "game": 721
+   },
+   {
+    "t": 226241,
+    "type": "warning",
+    "text": "감염병 예고 · 20초 뒤 발생합니다.",
+    "game": 732
+   },
+   {
+    "t": 243587,
+    "type": null,
+    "text": "11일째 · 유지비·세금 30G 지출",
+    "game": 801
+   },
+   {
+    "t": 246436,
+    "type": "warning",
+    "text": "감염 발생 · 방역(35G · 물 8 · 목재 3)으로 확산을 낮추세요.",
+    "game": 812
+   },
+   {
+    "t": 263769,
+    "type": null,
+    "text": "12일째 · 유지비·세금 30G 지출",
+    "game": 882
+   },
+   {
+    "t": 283818,
+    "type": null,
+    "text": "13일째 · 유지비·세금 30G 지출",
+    "game": 962
+   },
+   {
+    "t": 292819,
+    "type": "warning",
+    "text": "폭풍 예고 · 20초 뒤 발생합니다.",
+    "game": 997
+   },
+   {
+    "t": 303887,
+    "type": null,
+    "text": "14일째 · 유지비·세금 30G 지출",
+    "game": 1042
+   },
+   {
+    "t": 312907,
+    "type": "success",
+    "text": "보강한 시설이 폭풍을 버텼습니다.",
+    "game": 1078
+   },
+   {
+    "t": 323574,
+    "type": null,
+    "text": "15일째 · 유지비·세금 30G 지출",
+    "game": 1120
+   },
+   {
+    "t": 343657,
+    "type": null,
+    "text": "16일째 · 유지비·세금 30G 지출",
+    "game": 1200
+   },
+   {
+    "t": 362123,
+    "type": "warning",
+    "text": "폭풍 예고 · 20초 뒤 발생합니다.",
+    "game": 1274
+   },
+   {
+    "t": 363760,
+    "type": null,
+    "text": "17일째 · 유지비·세금 30G 지출",
+    "game": 1280
+   },
+   {
+    "t": 379690,
+    "type": "success",
+    "text": "밀 20개 납품 출발 · 도착 시 +216G",
+    "game": 1344
+   },
+   {
+    "t": 382184,
+    "type": "success",
+    "text": "영주 납품 완료 · 밀 20개 · +216G · 다음 주문은 하루 뒤",
+    "game": 1354
+   },
+   {
+    "t": 382187,
+    "type": "success",
+    "text": "보강한 시설이 폭풍을 버텼습니다.",
+    "game": 1354
+   },
+   {
+    "t": 383824,
+    "type": null,
+    "text": "18일째 · 유지비·세금 30G 지출",
+    "game": 1360
+   }
+  ],
+  "audioCounts": {
+   "interact:click": 190,
+   "play:click": 363,
+   "play:build": 18,
+   "play:well": 428,
+   "play:footstep": 2791,
+   "play:pickup": 198,
+   "play:drop": 197,
+   "play:lumber": 501,
+   "play:field": 94,
+   "success:": 2,
+   "tone:392": 2,
+   "tone:493.88": 2,
+   "tone:587.33": 2,
+   "tone:783.99": 2,
+   "play:promotion": 1,
+   "play:storm": 4,
+   "tone:48": 4,
+   "play:dispatch": 5,
+   "tone:95": 5,
+   "play:contract": 5,
+   "play:illness": 1,
+   "tone:196": 1
+  },
+  "audioState": {
+   "ctx": "running",
+   "muted": false,
+   "unlocked": true
+  }
+ },
+ "panels": {
+  "market": {
+   "title": "시장",
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "목재 자동 판매 32x18",
+     "석재 자동 판매 32x18",
+     "물 자동 판매 32x18",
+     "밀 자동 판매 32x18",
+     "판재 자동 판매 32x18",
+     "빵 자동 판매 32x18",
+     "생선 자동 판매 32x18",
+     "훈제 생선 자동 판매 32x18",
+     "케이크 자동 판매 32x18"
+    ],
+    "smallText": []
+   },
+   "scroll": {
+    "h": 992,
+    "top": 44,
+    "bottom": 1036,
+    "vh": 1080,
+    "scrollable": false,
+    "scrollH": 990
+   },
+   "closeButton": [
+    "닫기"
+   ],
+   "xButton": true,
+   "xCloses": true,
+   "outsideCloses": true,
+   "escCloses": true,
+   "pausedWhileOpen": false
+  },
+  "goals": {
+   "title": "신분과 권한",
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   },
+   "scroll": {
+    "h": 991,
+    "top": 45,
+    "bottom": 1035,
+    "vh": 1080,
+    "scrollable": false,
+    "scrollH": 989
+   },
+   "closeButton": [
+    "닫기"
+   ],
+   "xButton": true,
+   "xCloses": true,
+   "outsideCloses": true,
+   "escCloses": true,
+   "pausedWhileOpen": false
+  },
+  "residents": {
+   "title": "주민",
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   },
+   "scroll": {
+    "h": 956,
+    "top": 62,
+    "bottom": 1018,
+    "vh": 1080,
+    "scrollable": false,
+    "scrollH": 954
+   },
+   "closeButton": [
+    "닫기"
+   ],
+   "xButton": true,
+   "xCloses": true,
+   "outsideCloses": true,
+   "escCloses": true,
+   "pausedWhileOpen": false
+  },
+  "world": {
+   "error": "locator.click: Error: strict mode violation: getByRole('button', { name: '세계 지도' }) resolved to 2 elements:"
+  },
+  "settings": {
+   "title": "설정",
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "소리 32x18"
+    ],
+    "smallText": []
+   },
+   "scroll": {
+    "h": 992,
+    "top": 44,
+    "bottom": 1036,
+    "vh": 1080,
+    "scrollable": false,
+    "scrollH": 990
+   },
+   "closeButton": [
+    "닫기"
+   ],
+   "xButton": true,
+   "xCloses": true,
+   "outsideCloses": true,
+   "escCloses": true,
+   "pausedWhileOpen": false
+  },
+  "help": {
+   "title": "조작법",
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   },
+   "scroll": {
+    "h": 798,
+    "top": 141,
+    "bottom": 939,
+    "vh": 1080,
+    "scrollable": false,
+    "scrollH": 796
+   },
+   "closeButton": [
+    "닫기"
+   ],
+   "xButton": true,
+   "xCloses": true,
+   "outsideCloses": true,
+   "escCloses": true,
+   "pausedWhileOpen": false
+  },
+  "money": {
+   "title": "시장",
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "목재 자동 판매 32x18",
+     "석재 자동 판매 32x18",
+     "물 자동 판매 32x18",
+     "밀 자동 판매 32x18",
+     "판재 자동 판매 32x18",
+     "빵 자동 판매 32x18",
+     "생선 자동 판매 32x18",
+     "훈제 생선 자동 판매 32x18",
+     "케이크 자동 판매 32x18"
+    ],
+    "smallText": []
+   },
+   "scroll": {
+    "h": 992,
+    "top": 44,
+    "bottom": 1036,
+    "vh": 1080,
+    "scrollable": false,
+    "scrollH": 990
+   },
+   "closeButton": [
+    "닫기"
+   ],
+   "xButton": true,
+   "xCloses": true,
+   "outsideCloses": true,
+   "escCloses": true,
+   "pausedWhileOpen": false
+  },
+  "worldTabsError": "locator.click: Error: strict mode violation: getByRole('button', { name: '세계 지도' }) resolved to 2 elements:",
+  "credits": {
+   "text": "제작 에셋\n\n사용한 에셋의 출처입니다.\n\n건축 부품 · 소품\nKenney — Fantasy Town Kit\n\n픽셀 캐릭터 · 일러스트와 방향별 동작\n타운그리드 오리지널 에셋\n\n예인선 · 순찰선 · 등대 · 작업 도구\n타운그리드 자체 제작\n\n효과음\nKenney — RPG Audio\n\n현대 공장 · 자동차 · 기차\nKenney — Industrial / Car / Train Kit\n\n기존 골렘 모델\nShyr Games — Stan the Golem\n\n동물 · 용 · 해양 캐릭터\nQuaternius — Animated Animals\nAnimated Monsters\nAnimated Fish\n\n추가 농장 · 말 · 로봇\nQuaternius — Farm Buildings / Animated Animals / Robot\n\n공장 기계 · 선박 · 상업 건물\nKenney — Factory / Watercraft / Commercial\n\n배경 음악\npebonius — calm theme\n환경 음악\nTinyWorlds — Forest Ambience\n\n외부 에셋: CC0. 주민과 적대 캐릭터는 이 프로젝트에서 제작한 픽셀 에셋입니다. 선박·등대·도구는 직접 제작한 모델이며 동물"
+  },
+  "build": {
+   "기초": {
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "items": [
+     {
+      "name": "창고",
+      "disabled": true,
+      "price": "건설됨",
+      "cls": "built"
+     },
+     {
+      "name": "흙길",
+      "disabled": false,
+      "price": "4",
+      "cls": ""
+     },
+     {
+      "name": "우물",
+      "disabled": false,
+      "price": "60",
+      "cls": ""
+     },
+     {
+      "name": "벌목장",
+      "disabled": false,
+      "price": "90",
+      "cls": ""
+     },
+     {
+      "name": "채석장",
+      "disabled": false,
+      "price": "100",
+      "cls": ""
+     },
+     {
+      "name": "자재 보관소",
+      "disabled": true,
+      "price": "임차 사업주",
+      "cls": "unaffordable"
+     }
+    ]
+   },
+   "주거": {
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "items": [
+     {
+      "name": "주민 주택",
+      "disabled": false,
+      "price": "60",
+      "cls": ""
+     },
+     {
+      "name": "드워프 주택",
+      "disabled": true,
+      "price": "공인 계약업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "티탄 주택",
+      "disabled": true,
+      "price": "법인 대표",
+      "cls": "unaffordable"
+     }
+    ]
+   },
+   "농축산": {
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "items": [
+     {
+      "name": "밀밭",
+      "disabled": false,
+      "price": "45",
+      "cls": ""
+     },
+     {
+      "name": "어항",
+      "disabled": false,
+      "price": "180",
+      "cls": ""
+     },
+     {
+      "name": "목화밭",
+      "disabled": true,
+      "price": "계약 농노",
+      "cls": ""
+     },
+     {
+      "name": "약초원",
+      "disabled": true,
+      "price": "준자유민",
+      "cls": ""
+     },
+     {
+      "name": "양계장",
+      "disabled": true,
+      "price": "등록 사업주",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "급수탑",
+      "disabled": true,
+      "price": "지역 공급자",
+      "cls": ""
+     },
+     {
+      "name": "말 축사",
+      "disabled": true,
+      "price": "제조 허가업자",
+      "cls": ""
+     }
+    ]
+   },
+   "가공": {
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "items": [
+     {
+      "name": "제재소",
+      "disabled": false,
+      "price": "150",
+      "cls": ""
+     },
+     {
+      "name": "제분소",
+      "disabled": true,
+      "price": "개간 농노",
+      "cls": ""
+     },
+     {
+      "name": "훈제장",
+      "disabled": true,
+      "price": "개간 농노",
+      "cls": ""
+     },
+     {
+      "name": "빵집",
+      "disabled": true,
+      "price": "계약 농노",
+      "cls": ""
+     },
+     {
+      "name": "방직소",
+      "disabled": true,
+      "price": "준자유민",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "제과점",
+      "disabled": true,
+      "price": "지역 공급자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "벽돌 가마",
+      "disabled": true,
+      "price": "제조 허가업자",
+      "cls": ""
+     },
+     {
+      "name": "봉제소",
+      "disabled": true,
+      "price": "지역 납품업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "유리 공방",
+      "disabled": true,
+      "price": "지역 납품업자",
+      "cls": "unaffordable"
+     }
+    ]
+   },
+   "중공업": {
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "items": [
+     {
+      "name": "진료소",
+      "disabled": true,
+      "price": "준자유민",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "증기 발전소",
+      "disabled": true,
+      "price": "개척 사업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "기계 공장",
+      "disabled": true,
+      "price": "개척 사업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "자동 물류센터",
+      "disabled": true,
+      "price": "동력 제조업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "철광산",
+      "disabled": true,
+      "price": "법인 대표",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "탄광",
+      "disabled": true,
+      "price": "법인 대표",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "증기 기계공장",
+      "disabled": true,
+      "price": "중공업 사업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "제철소",
+      "disabled": true,
+      "price": "중공업 사업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "구리 광산",
+      "disabled": true,
+      "price": "에너지 사업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "화학 공장",
+      "disabled": true,
+      "price": "산업단지 운영자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "전선 공장",
+      "disabled": true,
+      "price": "산업단지 운영자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "시멘트 공장",
+      "disabled": true,
+      "price": "정밀 제조업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "통조림 공장",
+      "disabled": true,
+      "price": "광역 투자자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "용광로",
+      "disabled": true,
+      "price": "지역 강국",
+      "cls": "unaffordable"
+     }
+    ]
+   },
+   "동력·마법": {
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "items": [
+     {
+      "name": "물레방아",
+      "disabled": true,
+      "price": "공인 계약업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "송유·송수관",
+      "disabled": true,
+      "price": "개척 사업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "변전소",
+      "disabled": true,
+      "price": "개척 사업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "풍력 발전기",
+      "disabled": true,
+      "price": "동력 제조업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "유정",
+      "disabled": true,
+      "price": "에너지 사업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "정유소",
+      "disabled": true,
+      "price": "에너지 사업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "마력 추출소",
+      "disabled": true,
+      "price": "산업단지 운영자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "마탑",
+      "disabled": true,
+      "price": "정밀 제조업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "마력 발전소",
+      "disabled": true,
+      "price": "기반시설 운영자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "축전 시설",
+      "disabled": true,
+      "price": "기반시설 운영자",
+      "cls": "unaffordable"
+     }
+    ]
+   },
+   "첨단": {
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "items": [
+     {
+      "name": "전자 공장",
+      "disabled": true,
+      "price": "정밀 제조업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "자동차 공장",
+      "disabled": true,
+      "price": "자동차 제조사",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "제약 공장",
+      "disabled": true,
+      "price": "기술 기업군",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "마력등 공방",
+      "disabled": true,
+      "price": "치안권 보유자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "마력 기관 공장",
+      "disabled": true,
+      "price": "재정 운영권자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "미스릴 정련소",
+      "disabled": true,
+      "price": "자치구 대표",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "비공정 조선소",
+      "disabled": true,
+      "price": "독립 선언국",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "자동 조립 공장",
+      "disabled": true,
+      "price": "다지역 연방",
+      "cls": "unaffordable"
+     }
+    ]
+   },
+   "운송": {
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "items": [
+     {
+      "name": "도로 물류 집하지",
+      "disabled": false,
+      "price": "120",
+      "cls": ""
+     },
+     {
+      "name": "작은 수로 나룻터",
+      "disabled": false,
+      "price": "150",
+      "cls": ""
+     },
+     {
+      "name": "운하 선착장",
+      "disabled": true,
+      "price": "준자유민",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "하천 선착장",
+      "disabled": true,
+      "price": "준자유민",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "포장 도로",
+      "disabled": true,
+      "price": "등록 사업주",
+      "cls": ""
+     },
+     {
+      "name": "포장 도로 물류센터",
+      "disabled": true,
+      "price": "등록 사업주",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "강 항구",
+      "disabled": true,
+      "price": "지역 납품업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "호수 항",
+      "disabled": true,
+      "price": "지역 납품업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "바다 연안항",
+      "disabled": true,
+      "price": "개척 사업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "화물역",
+      "disabled": true,
+      "price": "광역 투자자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "철도",
+      "disabled": true,
+      "price": "광역 투자자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "철도 터미널",
+      "disabled": true,
+      "price": "광역 투자자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "마력 중계소",
+      "disabled": true,
+      "price": "기반시설 운영자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "공항",
+      "disabled": true,
+      "price": "기반시설 운영자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "공항 터미널",
+      "disabled": true,
+      "price": "기반시설 운영자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "비공정 선착장",
+      "disabled": true,
+      "price": "승인 독립국",
+      "cls": "unaffordable"
+     }
+    ]
+   },
+   "도시": {
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "items": [
+     {
+      "name": "장터",
+      "disabled": true,
+      "price": "등록 사업주",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "결계 초소",
+      "disabled": true,
+      "price": "중공업 사업자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "종합 병원",
+      "disabled": true,
+      "price": "기술 기업군",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "투자 사무소",
+      "disabled": true,
+      "price": "개발구 운영권자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "경비대 본부",
+      "disabled": true,
+      "price": "개발구 운영권자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "방위 요새",
+      "disabled": true,
+      "price": "치안권 보유자",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "의사당",
+      "disabled": true,
+      "price": "자치정부 수장",
+      "cls": "unaffordable"
+     },
+     {
+      "name": "대륙 거래소",
+      "disabled": true,
+      "price": "열강",
+      "cls": "unaffordable"
+     }
+    ]
+   }
+  },
+  "buildEscCloses": true,
+  "mapEdges": {
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "주변 지형 닫기 18x18"
+    ],
+    "smallText": [
+     "건설 · 농업 공간 10px",
+     "담수 · 어업 · 강 항구 10px"
+    ]
+   },
+   "text": "주변 지형과 자원 비옥한 평야 높은 비옥도 · 넓은 경작지 북쪽 · 평지 건설 · 농업 공간 동쪽 · 평지 건설 · 농업 공간 남쪽 · 큰 강 담수 · 어업 · 강 항구 서쪽 · 평지 건설 · 농업 공간 방향을 누르면 해당 지형으로 이동합니다.",
+   "escCloses": false,
+   "focusMoved": true,
+   "overlay": "fertility"
+  },
+  "warehouseMarker": 0,
+  "facility": {
+   "open": true,
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   }
+  },
+  "facilityDetails": {
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [
+    "시설 가동 32x18"
+   ],
+   "smallText": []
+  },
+  "facilityEscCloses": true,
+  "tile": {
+   "open": true,
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "타일 정보 닫기 16x16"
+    ],
+    "smallText": []
+   },
+   "text": "비옥한 평야 · 9, 11 나무와 바위가 적어 넓게 경작할 수 있습니다. 비옥도가 높으며 담수 옆에서는 물 운반도 줄어듭니다. 여기에 건설 밀 생산 효율 136% 취수 효율 137% 채석 효율 115% 마력 농도 60% 원유 농도 30% 나무 심기 · 15G + 물 2"
+  }
+ },
+ "input": {
+  "start": {
+   "view": 0,
+   "zoom": 1,
+   "target": [
+    8,
+    0,
+    10
+   ],
+   "paused": false,
+   "speed": 1,
+   "mode": null,
+   "dock": false
+  },
+  "afterE": {
+   "view": 1,
+   "zoom": 1,
+   "target": [
+    8,
+    0,
+    10
+   ],
+   "paused": false,
+   "speed": 1,
+   "mode": null,
+   "dock": false
+  },
+  "afterQ": {
+   "view": 0,
+   "zoom": 1,
+   "target": [
+    8,
+    0,
+    10
+   ],
+   "paused": false,
+   "speed": 1,
+   "mode": null,
+   "dock": false
+  },
+  "afterB": {
+   "view": 0,
+   "zoom": 1,
+   "target": [
+    8,
+    0,
+    10
+   ],
+   "paused": false,
+   "speed": 1,
+   "mode": null,
+   "dock": true
+  },
+  "afterEsc": {
+   "view": 0,
+   "zoom": 1,
+   "target": [
+    8,
+    0,
+    10
+   ],
+   "paused": false,
+   "speed": 1,
+   "mode": null,
+   "dock": false
+  },
+  "afterSpace": {
+   "view": 0,
+   "zoom": 1,
+   "target": [
+    8,
+    0,
+    10
+   ],
+   "paused": true,
+   "speed": 1,
+   "mode": null,
+   "dock": false
+  },
+  "afterSpace2": {
+   "view": 0,
+   "zoom": 1,
+   "target": [
+    8,
+    0,
+    10
+   ],
+   "paused": false,
+   "speed": 1,
+   "mode": null,
+   "dock": false
+  },
+  "after3": {
+   "view": 0,
+   "zoom": 1,
+   "target": [
+    8,
+    0,
+    10
+   ],
+   "paused": false,
+   "speed": 4,
+   "mode": null,
+   "dock": false
+  },
+  "after1": {
+   "view": 0,
+   "zoom": 1,
+   "target": [
+    8,
+    0,
+    10
+   ],
+   "paused": false,
+   "speed": 1,
+   "mode": null,
+   "dock": false
+  },
+  "afterPlus": {
+   "view": 0,
+   "zoom": 1.15,
+   "target": [
+    8,
+    0,
+    10
+   ],
+   "paused": false,
+   "speed": 1,
+   "mode": null,
+   "dock": false
+  },
+  "afterMinus": {
+   "view": 0,
+   "zoom": 1,
+   "target": [
+    8,
+    0,
+    10
+   ],
+   "paused": false,
+   "speed": 1,
+   "mode": null,
+   "dock": false
+  },
+  "keysInDialog": {
+   "view": 0,
+   "zoom": 1,
+   "target": [
+    8,
+    0,
+    10
+   ],
+   "paused": true,
+   "speed": 1,
+   "mode": null,
+   "dock": false
+  },
+  "wheelIn": {
+   "before": 1,
+   "after": 1.143
+  },
+  "wheelOut": 0.875,
+  "leftDrag": {
+   "before": [
+    8,
+    0,
+    10
+   ],
+   "after": [
+    4.96,
+    0,
+    11.01
+   ],
+   "selectedAfter": false
+  },
+  "rightDrag": {
+   "before": [
+    4.95,
+    0,
+    11.02
+   ],
+   "after": [
+    8,
+    0,
+    10
+   ]
+  },
+  "markerLag": {
+   "lagMs": 284
+  }
+ },
+ "saveLoad": {
+  "saveToast": [
+   "19일째 · 유지비·세금 30G 지출",
+   "이 브라우저에 저장했습니다."
+  ],
+  "saveStatus": "저장됨 · 오후 09:20",
+  "continueEnabled": true,
+  "diff": {},
+  "before": {
+   "t": 1458,
+   "day": 19,
+   "rank": 1,
+   "money": 972,
+   "debt": 1000,
+   "contracts": 5,
+   "paused": true,
+   "speed": 1,
+   "owned": 64,
+   "workers": 1,
+   "buildings": [
+    "field@11,13:L1:hp100",
+    "house@10,12:L1:hp100",
+    "lumber@10,11:L1:hp100",
+    "warehouse@11,12:L1:hp100",
+    "well@11,11:L1:hp100"
+   ],
+   "stock": {
+    "wood": 222,
+    "stone": 25,
+    "water": 270,
+    "grain": 5
+   }
+  },
+  "pausedLabel": true,
+  "confirmNew": {
+   "shown": true,
+   "text": "새 땅에서 시작할까요? 현재 저장은 백업으로 남깁니다. 설정에서 이전 백업을 복구할 수 있습니다. 취소 백업하고 새로 시작 닫기"
+  }
+ },
+ "feedback": {
+  "newGame": {
+   "toasts": [
+    {
+     "t": 39506,
+     "type": null,
+     "text": "밝은 경계 안의 빈 칸에 창고를 놓으세요.",
+     "game": 0
+    }
+   ],
+   "audio": [
+    "interact:click",
+    "play:click"
+   ],
+   "audioState": {
+    "ctx": "running",
+    "muted": false,
+    "unlocked": true
+   }
+  },
+  "warehouse": {
+   "point": {
+    "px": 959.9999999999995,
+    "py": 540.0000000000002,
+    "onCanvas": true,
+    "top": null
+   },
+   "audio": [
+    "play:build",
+    "play:build"
+   ],
+   "toasts": [],
+   "ui": {
+    "tutorial": true,
+    "tutorialText": "주민을 맞이하세요",
+    "operations": false,
+    "nextBuild": null,
+    "bottleneck": [],
+    "promotionReady": false,
+    "facility": false,
+    "dialog": false,
+    "weather": null,
+    "raid": false,
+    "health": false,
+    "finance": false,
+    "pause": false
+   }
+  },
+  "dialogExit": [
+   {
+    "title": "조작법",
+    "bodyChars": 18,
+    "opacity": "1"
+   },
+   {
+    "title": "조작법",
+    "bodyChars": 18,
+    "opacity": "0.591489"
+   },
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null
+  ]
+ },
+ "longTasks": {
+  "count": 4,
+  "over100": 3,
+  "max": 673,
+  "top": [
+   {
+    "t": 1264,
+    "d": 673
+   },
+   {
+    "t": 597,
+    "d": 666
+   },
+   {
+    "t": 32571,
+    "d": 138
+   },
+   {
+    "t": 128,
+    "d": 57
+   }
+  ]
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": [
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/Game.tsx?t=1790684403737",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/WorldMap.tsx?t=1790684403737",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/CampaignPanel.tsx?t=1790684403737",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/world.js",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/components/ui/progress.tsx",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/pixel-character-data.js",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/Operations.tsx",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/persistence.js",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/map-edges.js",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/facility-staff.js",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/QualityPanels.tsx",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/assets.js?t=1790683045511",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/simulation.js",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/production-visuals.js",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/audio.js",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/campaign.js",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/ResourceIcon.tsx",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/StartScreens.tsx?t=1790683099908",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/components/ui/dialog.tsx",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/components/ui/switch.tsx",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/ui-rules.js",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/ResidentRoster.tsx",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/MapEdges.tsx",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/CharacterSprite.tsx",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/lib/utils.ts",
+   "1920x1080: FAILED net::ERR_ABORTED http://localhost:5173/src/app/game/screen-art.js?t=1790683099902"
+  ]
+ }
+}

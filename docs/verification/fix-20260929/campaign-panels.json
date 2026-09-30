@@ -1,0 +1,88 @@
+{
+ "overrides": [
+  "campaign.spawnState x3",
+  "campaign.battles +2"
+ ],
+ "sizes": {
+  "1366x768": {
+   "injected": {
+    "states": 3,
+    "orders": 3
+   },
+   "world": {
+    "siteStatus": 2,
+    "battles": 2
+   },
+   "orders": {
+    "rows": 3,
+    "width": 1135,
+    "scrollX": false,
+    "headSticky": "sticky"
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   },
+   "councilCards": [
+    {
+     "inside": true,
+     "overflow": false
+    },
+    {
+     "inside": true,
+     "overflow": false
+    },
+    {
+     "inside": true,
+     "overflow": false
+    }
+   ]
+  },
+  "390x844": {
+   "injected": {
+    "states": 3,
+    "orders": 3
+   },
+   "world": {
+    "siteStatus": 2,
+    "battles": 2
+   },
+   "orders": {
+    "rows": 3,
+    "width": 337,
+    "scrollX": false,
+    "headSticky": "sticky"
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   },
+   "councilCards": [
+    {
+     "inside": true,
+     "overflow": false
+    },
+    {
+     "inside": true,
+     "overflow": false
+    },
+    {
+     "inside": true,
+     "overflow": false
+    }
+   ]
+  }
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

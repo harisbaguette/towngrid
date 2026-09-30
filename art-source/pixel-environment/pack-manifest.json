@@ -7585,7 +7585,12 @@
       }
     },
     "sugarfield": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/sugarfield.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
@@ -7594,32 +7599,30 @@
           192
         ],
         [
-          192,
           0,
+          192,
           192,
           192
         ],
         [
+          0,
           384,
-          0,
           192,
           192
         ],
         [
-          576,
           0,
+          576,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -7635,11 +7638,23 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "fields-a-generated.png",
+      "iconSource": "farm-v12/sugarfield-icon.png"
     },
     "saltfield": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/saltfield.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
+        [
+          0,
+          0,
+          192,
+          192
+        ],
         [
           0,
           192,
@@ -7647,32 +7662,24 @@
           192
         ],
         [
-          192,
-          192,
-          192,
-          192
-        ],
-        [
+          0,
           384,
           192,
-          192,
           192
         ],
         [
+          0,
           576,
-          192,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -7688,11 +7695,29 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "fields-a-generated.png",
+      "iconSource": "farm-v12/saltfield-icon.png"
     },
     "vineyard": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/vineyard.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
+        [
+          0,
+          0,
+          192,
+          192
+        ],
+        [
+          0,
+          192,
+          192,
+          192
+        ],
         [
           0,
           384,
@@ -7700,32 +7725,18 @@
           192
         ],
         [
-          192,
-          384,
-          192,
-          192
-        ],
-        [
-          384,
-          384,
-          192,
-          192
-        ],
-        [
+          0,
           576,
-          384,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -7741,44 +7752,48 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "fields-a-generated.png",
+      "iconSource": "farm-v12/vineyard-icon.png"
     },
     "cocoafarm": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/cocoafarm.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
+        [
+          0,
+          0,
+          192,
+          192
+        ],
+        [
+          0,
+          192,
+          192,
+          192
+        ],
+        [
+          0,
+          384,
+          192,
+          192
+        ],
         [
           0,
           576,
           192,
           192
-        ],
-        [
-          192,
-          576,
-          192,
-          192
-        ],
-        [
-          384,
-          576,
-          192,
-          192
-        ],
-        [
-          576,
-          576,
-          192,
-          192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -7794,44 +7809,48 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "fields-a-generated.png",
+      "iconSource": "farm-v12/cocoafarm-icon.png"
     },
     "berryfield": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/berryfield.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          768,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          768,
           192,
           192
         ],
         [
+          0,
           384,
-          768,
           192,
           192
         ],
         [
+          0,
           576,
-          768,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -7847,44 +7866,48 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "fields-b-generated.png",
+      "iconSource": "farm-v12/berryfield-icon.png"
     },
     "mintfield": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/mintfield.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          960,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          960,
           192,
           192
         ],
         [
+          0,
           384,
-          960,
           192,
           192
         ],
         [
+          0,
           576,
-          960,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -7900,44 +7923,48 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "fields-b-generated.png",
+      "iconSource": "farm-v12/mintfield-icon.png"
     },
     "pumpkinpatch": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/pumpkinpatch.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          1152,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          1152,
           192,
           192
         ],
         [
+          0,
           384,
-          1152,
           192,
           192
         ],
         [
+          0,
           576,
-          1152,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -7953,44 +7980,48 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "fields-b-generated.png",
+      "iconSource": "farm-v12/pumpkinpatch-icon.png"
     },
     "oakfarm": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/oakfarm.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          1344,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          1344,
           192,
           192
         ],
         [
+          0,
           384,
-          1344,
           192,
           192
         ],
         [
+          0,
           576,
-          1344,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8006,44 +8037,48 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "fields-b-generated.png",
+      "iconSource": "farm-v12/oakfarm-icon.png"
     },
     "winery": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/winery.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          1536,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          1536,
           192,
           192
         ],
         [
+          0,
           384,
-          1536,
           192,
           192
         ],
         [
+          0,
           576,
-          1536,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8059,44 +8094,47 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "works-generated.png"
     },
     "chocolatier": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v11/chocolatier.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          1728,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          1728,
           192,
           192
         ],
         [
+          0,
           384,
-          1728,
           192,
           192
         ],
         [
+          0,
           576,
-          1728,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8112,44 +8150,47 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "buildings-generated.png"
     },
     "sheeppen": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v11/sheeppen.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          1920,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          1920,
           192,
           192
         ],
         [
+          0,
           384,
-          1920,
           192,
           192
         ],
         [
+          0,
           576,
-          1920,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8165,44 +8206,47 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "barns-generated.png"
     },
     "milkbarn": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v11/milkbarn.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          2112,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          2112,
           192,
           192
         ],
         [
+          0,
           384,
-          2112,
           192,
           192
         ],
         [
+          0,
           576,
-          2112,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8218,44 +8262,47 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "barns-generated.png"
     },
     "apiary": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/apiary.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          2304,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          2304,
           192,
           192
         ],
         [
+          0,
           384,
-          2304,
           192,
           192
         ],
         [
+          0,
           576,
-          2304,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8271,44 +8318,47 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "works-generated.png"
     },
     "duckhouse": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v11/duckhouse.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          2496,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          2496,
           192,
           192
         ],
         [
+          0,
           384,
-          2496,
           192,
           192
         ],
         [
+          0,
           576,
-          2496,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8324,44 +8374,47 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "barns-generated.png"
     },
     "feedmill": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/feedmill.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          2688,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          2688,
           192,
           192
         ],
         [
+          0,
           384,
-          2688,
           192,
           192
         ],
         [
+          0,
           576,
-          2688,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8377,44 +8430,47 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "works-generated.png"
     },
     "sandpit": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/sandpit.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          2880,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          2880,
           192,
           192
         ],
         [
+          0,
           384,
-          2880,
           192,
           192
         ],
         [
+          0,
           576,
-          2880,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8430,44 +8486,47 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "works-generated.png"
     },
     "clayfield": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/clayfield.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          3072,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          3072,
           192,
           192
         ],
         [
+          0,
           384,
-          3072,
           192,
           192
         ],
         [
+          0,
           576,
-          3072,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8483,44 +8542,47 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "terrain-generated.png"
     },
     "packshop": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v11/packshop.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          3264,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          3264,
           192,
           192
         ],
         [
+          0,
           384,
-          3264,
           192,
           192
         ],
         [
+          0,
           576,
-          3264,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8536,44 +8598,47 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "buildings-generated.png"
     },
     "solarpanel": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v11/solarpanel.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          3456,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          3456,
           192,
           192
         ],
         [
+          0,
           384,
-          3456,
           192,
           192
         ],
         [
+          0,
           576,
-          3456,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8589,44 +8654,47 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "buildings-generated.png"
     },
     "pond": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/pond.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          3648,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          3648,
           192,
           192
         ],
         [
+          0,
           384,
-          3648,
           192,
           192
         ],
         [
+          0,
           576,
-          3648,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8642,44 +8710,47 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "terrain-generated.png"
     },
     "pasture": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/pasture.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          3840,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          3840,
           192,
           192
         ],
         [
+          0,
           384,
-          3840,
           192,
           192
         ],
         [
+          0,
           576,
-          3840,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8695,44 +8766,47 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "terrain-generated.png"
     },
     "clover": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/clover.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          4032,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          4032,
           192,
           192
         ],
         [
+          0,
           384,
-          4032,
           192,
           192
         ],
         [
+          0,
           576,
-          4032,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -8748,548 +8822,194 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "terrain-generated.png"
     },
     "sugarGrowth": {
-      "source": "farm-v9/crops-source.png",
-      "rects": [
-        [
-          0,
-          0,
-          192,
-          192
-        ],
-        [
-          192,
-          0,
-          192,
-          192
-        ],
-        [
-          384,
-          0,
-          192,
-          192
-        ],
-        [
-          576,
-          0,
-          192,
-          192
-        ]
-      ],
+      "source": "farm-v12/sugarGrowth.png",
+      "prepacked": true,
       "columns": 4,
       "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
       "anchor": [
         0.5,
         0.94
       ],
-      "generator": "farm-v9/build.py"
+      "states": {
+        "growth": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "original": "crops-a-generated.png"
     },
     "saltGrowth": {
-      "source": "farm-v9/crops-source.png",
-      "rects": [
-        [
-          0,
-          192,
-          192,
-          192
-        ],
-        [
-          192,
-          192,
-          192,
-          192
-        ],
-        [
-          384,
-          192,
-          192,
-          192
-        ],
-        [
-          576,
-          192,
-          192,
-          192
-        ]
-      ],
+      "source": "farm-v12/saltGrowth.png",
+      "prepacked": true,
       "columns": 4,
       "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
       "anchor": [
         0.5,
         0.94
       ],
-      "generator": "farm-v9/build.py"
+      "states": {
+        "growth": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "original": "crops-a-generated.png"
     },
     "grapeRedGrowth": {
-      "source": "farm-v9/crops-source.png",
-      "rects": [
-        [
-          0,
-          384,
-          192,
-          192
-        ],
-        [
-          192,
-          384,
-          192,
-          192
-        ],
-        [
-          384,
-          384,
-          192,
-          192
-        ],
-        [
-          576,
-          384,
-          192,
-          192
-        ]
-      ],
+      "source": "farm-v12/grapeRedGrowth.png",
+      "prepacked": true,
       "columns": 4,
       "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
       "anchor": [
         0.5,
         0.94
       ],
-      "generator": "farm-v9/build.py"
+      "states": {
+        "growth": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "original": "crops-a-generated.png"
     },
     "grapeWhiteGrowth": {
-      "source": "farm-v9/crops-source.png",
-      "rects": [
-        [
-          0,
-          576,
-          192,
-          192
-        ],
-        [
-          192,
-          576,
-          192,
-          192
-        ],
-        [
-          384,
-          576,
-          192,
-          192
-        ],
-        [
-          576,
-          576,
-          192,
-          192
-        ]
-      ],
+      "source": "farm-v12/grapeWhiteGrowth.png",
+      "prepacked": true,
       "columns": 4,
       "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
       "anchor": [
         0.5,
         0.94
       ],
-      "generator": "farm-v9/build.py"
+      "states": {
+        "growth": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "original": "crops-b-generated.png"
     },
     "cocoaGrowth": {
-      "source": "farm-v9/crops-source.png",
-      "rects": [
-        [
-          0,
-          768,
-          192,
-          192
-        ],
-        [
-          192,
-          768,
-          192,
-          192
-        ],
-        [
-          384,
-          768,
-          192,
-          192
-        ],
-        [
-          576,
-          768,
-          192,
-          192
-        ]
-      ],
+      "source": "farm-v12/cocoaGrowth.png",
+      "prepacked": true,
       "columns": 4,
       "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
       "anchor": [
         0.5,
         0.94
       ],
-      "generator": "farm-v9/build.py"
+      "states": {
+        "growth": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "original": "crops-b-generated.png"
     },
     "strawberryGrowth": {
-      "source": "farm-v9/crops-source.png",
-      "rects": [
-        [
-          0,
-          960,
-          192,
-          192
-        ],
-        [
-          192,
-          960,
-          192,
-          192
-        ],
-        [
-          384,
-          960,
-          192,
-          192
-        ],
-        [
-          576,
-          960,
-          192,
-          192
-        ]
-      ],
+      "source": "farm-v12/strawberryGrowth.png",
+      "prepacked": true,
       "columns": 4,
       "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
       "anchor": [
         0.5,
         0.94
       ],
-      "generator": "farm-v9/build.py"
+      "states": {
+        "growth": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "original": "crops-b-generated.png"
     },
     "mintGrowth": {
-      "source": "farm-v9/crops-source.png",
-      "rects": [
-        [
-          0,
-          1152,
-          192,
-          192
-        ],
-        [
-          192,
-          1152,
-          192,
-          192
-        ],
-        [
-          384,
-          1152,
-          192,
-          192
-        ],
-        [
-          576,
-          1152,
-          192,
-          192
-        ]
-      ],
+      "source": "farm-v12/mintGrowth.png",
+      "prepacked": true,
       "columns": 4,
       "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
       "anchor": [
         0.5,
         0.94
       ],
-      "generator": "farm-v9/build.py"
+      "states": {
+        "growth": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "original": "crops-c-generated.png"
     },
     "pumpkinGrowth": {
-      "source": "farm-v9/crops-source.png",
-      "rects": [
-        [
-          0,
-          1344,
-          192,
-          192
-        ],
-        [
-          192,
-          1344,
-          192,
-          192
-        ],
-        [
-          384,
-          1344,
-          192,
-          192
-        ],
-        [
-          576,
-          1344,
-          192,
-          192
-        ]
-      ],
+      "source": "farm-v12/pumpkinGrowth.png",
+      "prepacked": true,
       "columns": 4,
       "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
       "anchor": [
         0.5,
         0.94
       ],
-      "generator": "farm-v9/build.py"
+      "states": {
+        "growth": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "original": "crops-c-generated.png"
     },
     "oakGrowth": {
-      "source": "farm-v9/crops-source.png",
-      "rects": [
-        [
-          0,
-          1536,
-          192,
-          192
-        ],
-        [
-          192,
-          1536,
-          192,
-          192
-        ],
-        [
-          384,
-          1536,
-          192,
-          192
-        ],
-        [
-          576,
-          1536,
-          192,
-          192
-        ]
-      ],
+      "source": "farm-v12/oakGrowth.png",
+      "prepacked": true,
       "columns": 4,
       "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
       "anchor": [
         0.5,
         0.94
       ],
-      "generator": "farm-v9/build.py"
+      "states": {
+        "growth": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "original": "crops-c-generated.png"
     },
     "farmGoods": {
-      "source": "farm-v9/goods-source.png",
-      "rects": [
-        [
-          0,
-          0,
-          192,
-          192
-        ],
-        [
-          192,
-          0,
-          192,
-          192
-        ],
-        [
-          384,
-          0,
-          192,
-          192
-        ],
-        [
-          576,
-          0,
-          192,
-          192
-        ],
-        [
-          768,
-          0,
-          192,
-          192
-        ],
-        [
-          960,
-          0,
-          192,
-          192
-        ],
-        [
-          1152,
-          0,
-          192,
-          192
-        ],
-        [
-          1344,
-          0,
-          192,
-          192
-        ],
-        [
-          1536,
-          0,
-          192,
-          192
-        ],
-        [
-          1728,
-          0,
-          192,
-          192
-        ],
-        [
-          1920,
-          0,
-          192,
-          192
-        ],
-        [
-          2112,
-          0,
-          192,
-          192
-        ],
-        [
-          2304,
-          0,
-          192,
-          192
-        ],
-        [
-          2496,
-          0,
-          192,
-          192
-        ],
-        [
-          2688,
-          0,
-          192,
-          192
-        ],
-        [
-          2880,
-          0,
-          192,
-          192
-        ],
-        [
-          3072,
-          0,
-          192,
-          192
-        ],
-        [
-          3264,
-          0,
-          192,
-          192
-        ],
-        [
-          3456,
-          0,
-          192,
-          192
-        ],
-        [
-          3648,
-          0,
-          192,
-          192
-        ],
-        [
-          3840,
-          0,
-          192,
-          192
-        ],
-        [
-          4032,
-          0,
-          192,
-          192
-        ],
-        [
-          4224,
-          0,
-          192,
-          192
-        ],
-        [
-          4416,
-          0,
-          192,
-          192
-        ],
-        [
-          4608,
-          0,
-          192,
-          192
-        ],
-        [
-          4800,
-          0,
-          192,
-          192
-        ],
-        [
-          4992,
-          0,
-          192,
-          192
-        ],
-        [
-          5184,
-          0,
-          192,
-          192
-        ],
-        [
-          5376,
-          0,
-          192,
-          192
-        ],
-        [
-          5568,
-          0,
-          192,
-          192
-        ],
-        [
-          5760,
-          0,
-          192,
-          192
-        ],
-        [
-          5952,
-          0,
-          192,
-          192
-        ],
-        [
-          6144,
-          0,
-          192,
-          192
-        ],
-        [
-          6336,
-          0,
-          192,
-          192
-        ],
-        [
-          6528,
-          0,
-          192,
-          192
-        ]
-      ],
+      "source": "farm-v12/farmGoods.png",
+      "prepacked": true,
       "columns": 35,
       "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
       "anchor": [
         0.5,
         0.5
@@ -9331,26 +9051,19 @@
         "foodparcel",
         "giftparcel"
       ],
-      "generator": "farm-v9/build.py"
+      "original": [
+        "../farm-v11/icons-generated.png",
+        "goods-a-generated.png",
+        "goods-b-generated.png",
+        "goods-c-generated.png"
+      ]
     },
     "farmParts": {
-      "source": "farm-v9/parts-source.png",
-      "rects": [
-        [
-          0,
-          0,
-          192,
-          192
-        ],
-        [
-          192,
-          0,
-          192,
-          192
-        ]
-      ],
+      "source": "farm-v12/farmParts.png",
+      "prepacked": true,
       "columns": 2,
       "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
       "anchor": [
         0.5,
         0.5
@@ -9359,44 +9072,369 @@
         "bees",
         "rotor"
       ],
-      "generator": "farm-v9/build.py"
+      "original": "goods-d-generated.png"
+    },
+    "cargoWagonMotion": {
+      "source": "motion-v10/cargoWagonMotion.png",
+      "prepacked": true,
+      "columns": 8,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "revision": "environment-motion-1"
+    },
+    "cargoTruckEmptyMotion": {
+      "source": "motion-v10/cargoTruckEmptyMotion.png",
+      "prepacked": true,
+      "columns": 8,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "revision": "environment-motion-1"
+    },
+    "cargoTrainEmptyMotion": {
+      "source": "motion-v10/cargoTrainEmptyMotion.png",
+      "prepacked": true,
+      "columns": 8,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "revision": "environment-motion-1"
+    },
+    "cargoSledMotion": {
+      "source": "motion-v10/cargoSledMotion.png",
+      "prepacked": true,
+      "columns": 8,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "revision": "environment-motion-1"
+    },
+    "cargoSteamerMotion": {
+      "source": "motion-v10/cargoSteamerMotion.png",
+      "prepacked": true,
+      "columns": 8,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "revision": "environment-motion-1"
+    },
+    "cargoRaftMotion": {
+      "source": "motion-v10/cargoRaftMotion.png",
+      "prepacked": true,
+      "columns": 8,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "revision": "environment-motion-1"
+    },
+    "cargoPlaneMotion": {
+      "source": "motion-v10/cargoPlaneMotion.png",
+      "prepacked": true,
+      "columns": 8,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "revision": "environment-motion-1"
+    },
+    "cargoAirshipMotion": {
+      "source": "motion-v10/cargoAirshipMotion.png",
+      "prepacked": true,
+      "columns": 8,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "revision": "environment-motion-1"
+    },
+    "cargoShipMotion": {
+      "source": "motion-v10/cargoShipMotion.png",
+      "prepacked": true,
+      "columns": 8,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "revision": "environment-motion-1"
+    },
+    "cargoFerryMotion": {
+      "source": "motion-v10/cargoFerryMotion.png",
+      "prepacked": true,
+      "columns": 8,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9427083333333334
+      ],
+      "revision": "environment-motion-1"
+    },
+    "coastportBody": {
+      "source": "motion-v10/coastportBody.png",
+      "prepacked": true,
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "revision": "environment-motion-1"
+    },
+    "coastportHoist": {
+      "source": "motion-v10/coastportHoist.png",
+      "prepacked": true,
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "revision": "environment-motion-1"
+    },
+    "riverportBody": {
+      "source": "motion-v10/riverportBody.png",
+      "prepacked": true,
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "revision": "environment-motion-1"
+    },
+    "riverportHoist": {
+      "source": "motion-v10/riverportHoist.png",
+      "prepacked": true,
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "revision": "environment-motion-1"
+    },
+    "polarportBody": {
+      "source": "motion-v10/polarportBody.png",
+      "prepacked": true,
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "revision": "environment-motion-1"
+    },
+    "polarportHoist": {
+      "source": "motion-v10/polarportHoist.png",
+      "prepacked": true,
+      "columns": 1,
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.69
+      ],
+      "revision": "environment-motion-1"
+    },
+    "farmSheep": {
+      "source": "farm-v11/farmSheep.png",
+      "prepacked": true,
+      "columns": 8,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9166666666666666
+      ],
+      "original": "sheep-generated.png"
+    },
+    "farmCow": {
+      "source": "farm-v11/farmCow.png",
+      "prepacked": true,
+      "columns": 8,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9166666666666666
+      ],
+      "original": "cow-generated.png"
+    },
+    "farmDuck": {
+      "source": "farm-v11/farmDuck.png",
+      "prepacked": true,
+      "columns": 8,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "directions": [
+        "SE",
+        "NE",
+        "NW",
+        "SW"
+      ],
+      "anchor": [
+        0.5,
+        0.9166666666666666
+      ],
+      "original": "duck-generated.png"
+    },
+    "farmBee": {
+      "source": "farm-v11/farmBee.png",
+      "prepacked": true,
+      "columns": 4,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "anchor": [
+        0.5,
+        0.9166666666666666
+      ],
+      "original": "bee-generated.png"
     },
     "shallowmine": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/shallowmine.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          4224,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          4224,
           192,
           192
         ],
         [
+          0,
           384,
-          4224,
           192,
           192
         ],
         [
+          0,
           576,
-          4224,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -9412,44 +9450,48 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "support-generated.png",
+      "iconSource": "farm-v12/shallowmine-icon.png"
     },
     "windpump": {
-      "source": "farm-v9/buildings-source.png",
+      "source": "farm-v12/windpump.png",
+      "prepacked": false,
+      "columns": 1,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "building": true,
       "rects": [
         [
           0,
-          4416,
+          0,
           192,
           192
         ],
         [
+          0,
           192,
-          4416,
           192,
           192
         ],
         [
+          0,
           384,
-          4416,
           192,
           192
         ],
         [
+          0,
           576,
-          4416,
           192,
           192
         ]
       ],
-      "columns": 1,
       "directions": [
         "SE",
         "NE",
         "NW",
         "SW"
       ],
-      "opaqueTile": true,
       "baseline": 181,
       "anchor": [
         0.5,
@@ -9465,68 +9507,15 @@
           0
         ]
       },
-      "generator": "farm-v9/build.py"
+      "original": "support-generated.png",
+      "iconSource": "farm-v12/windpump-icon.png"
     },
     "farmGoods2": {
-      "source": "farm-v9/goods2-source.png",
-      "rects": [
-        [
-          0,
-          0,
-          192,
-          192
-        ],
-        [
-          192,
-          0,
-          192,
-          192
-        ],
-        [
-          384,
-          0,
-          192,
-          192
-        ],
-        [
-          576,
-          0,
-          192,
-          192
-        ],
-        [
-          768,
-          0,
-          192,
-          192
-        ],
-        [
-          960,
-          0,
-          192,
-          192
-        ],
-        [
-          1152,
-          0,
-          192,
-          192
-        ],
-        [
-          1344,
-          0,
-          192,
-          192
-        ],
-        [
-          1536,
-          0,
-          192,
-          192
-        ]
-      ],
+      "source": "farm-v12/farmGoods2.png",
+      "prepacked": true,
       "columns": 9,
       "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
       "anchor": [
         0.5,
         0.5
@@ -9542,7 +9531,24 @@
         "honeycomb",
         "jetfuel"
       ],
-      "generator": "farm-v9/build.py"
+      "original": "goods-d-generated.png"
+    },
+    "farmWorkParts": {
+      "source": "farm-v12/farmWorkParts.png",
+      "prepacked": true,
+      "columns": 3,
+      "opaqueTile": true,
+      "generator": "scripts/pack-farm-refresh.mjs",
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "order": [
+        "rotor",
+        "press",
+        "pulley"
+      ],
+      "original": "goods-d-generated.png"
     }
   }
 }

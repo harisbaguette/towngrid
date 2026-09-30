@@ -1,0 +1,14 @@
+{
+ "buildingTypes": 109,
+ "iconsHumanMs": 578,
+ "iconsElfMs": 563,
+ "rebuildMs": 10,
+ "setSimulationMs": 7,
+ "throttle": 1,
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

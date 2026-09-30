@@ -1,0 +1,49 @@
+{
+ "fragility": {
+  "sameModule": true,
+  "error": "Missing pixel building: auditNoArt"
+ },
+ "markers1366": {
+  "count": 26,
+  "overlappingPairs": 11,
+  "examples": [
+   "59초 운반 지원 중 / 0 생산 중 40x17",
+   "59초 운반 지원 중 / 0초 공급 준비 15x8",
+   "2 생산 중 / 0 생산 중 55x22",
+   "2 생산 중 / 0 생산 중 22x13",
+   "0 생산 중 / 0 생산 중 55x8",
+   "0 생산 중 / 0 생산 중 55x8"
+  ]
+ },
+ "markers844": {
+  "count": 25,
+  "overlappingPairs": 44
+ },
+ "phoneToast": {
+  "hint": [
+   10,
+   659,
+   370,
+   42
+  ],
+  "toasts": [
+   {
+    "text": "밝은 경계 안의 빈 칸에 창고를 놓으세요.",
+    "box": [
+     16,
+     677,
+     358,
+     55
+    ],
+    "overHint": true
+   }
+  ],
+  "hintCovered": true
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

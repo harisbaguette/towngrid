@@ -1,0 +1,22 @@
+{
+  "atlasCount": 16,
+  "identicalAfterPacking": true,
+  "hashes": {
+    "cargoWagonMotion": "4ede58555e6724493d2fb1d6004f1094707b934b61a3d098ffc970261b004499",
+    "cargoTruckEmptyMotion": "71101550f89c474a1774388bbd019c821627f622a04cb535e8e256f6afbc2dff",
+    "cargoTrainEmptyMotion": "bce61c382038fa189bdd92100e0828b142cccac9d1cde48f1a79980cbf419bb6",
+    "cargoSledMotion": "7493cd4c6186883fadc0584fbf2dee745cf37e00ad50ab5f6fe9a570411effb4",
+    "cargoSteamerMotion": "4b0460bc3301e5f2cb62e60e4315ca411118f27d1a46a6c656369be2e2988475",
+    "cargoRaftMotion": "623bf7119f566f375e1c598024acf15f00c24f7c71ca59f31d5dc638a460f90b",
+    "cargoPlaneMotion": "a64390f5e4b78f6031555a6529d3206f2edfd40db973474dae5cf7750d9aaffd",
+    "cargoAirshipMotion": "8c5a0887216e2355f880b546a195879107a99d2afa00305ad789c1cd653133eb",
+    "cargoShipMotion": "7206b75e9746d562f13e0f51e2388a0682b0841b989b43fbfd42f75b556171e3",
+    "cargoFerryMotion": "d721e392950231655ddc5d976744e2cb0e4cdb3bd536848c5bb6999edce87bd9",
+    "coastportBody": "02b1430d9392ee916863a412ae0467c2cdf8b80124a401f2213c83ff87d8c37b",
+    "coastportHoist": "c6a5a195cd3428a77b760f3c5e616bebe2324c8ea1291da7818d4b7ce3bbc5cc",
+    "riverportBody": "26585aeb13a5b1b4288df70013a791f6ed99b999aec946df927245eaa3718f5c",
+    "riverportHoist": "9de181f7d8edbdd8c1e1ef6c6a38ef04921b874bba28f4804d3336741e233719",
+    "polarportBody": "21456b919a377912a540ac47ba269c44a7c610fd02fd58ba4250b5b25e488a5e",
+    "polarportHoist": "90def447ab246d81fbabed3917e90632c78816c9f0d94fbbb427ee43eec41a0c"
+  }
+}

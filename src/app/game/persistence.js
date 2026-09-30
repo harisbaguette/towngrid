@@ -1,5 +1,5 @@
 import {PROVINCES} from './territory.js';
-import {BUILDINGS,RESOURCES,N,homeCapacity} from './simulation.js';
+import {BUILDINGS,RESOURCES,N,homeCapacity,unpackTiles,GOOD_EVENTS} from './simulation.js';
 import {NATIONS,RANKS,RACES} from './world.js';
 import {MAX_EXPORT_CARTS,VEHICLES} from './export-route.js';
 import {validLayout} from './world-grid.js';
@@ -12,7 +12,7 @@ const point=k=>typeof k==='string'&&/^\d{1,2},\d{1,2}$/.test(k)&&k.split(',').ev
 const ref=(table,key)=>typeof key==='string'&&Object.hasOwn(table,key);
 const label=(v,max=500)=>typeof v==='string'&&v.length<=max;
 const route=value=>Array.isArray(value)&&value.length<=N*N&&value.every(p=>p&&number(p.x,0,N-1)&&number(p.z,0,N-1));
-const events=['storm','illness','strike','raid','manaStorm','sanction'];
+const events=['storm','illness','strike','raid','manaStorm','sanction',...GOOD_EVENTS];
 function numericFields(o,keys,min=0,max=1e12){for(const k of keys)if(o[k]!==undefined&&!number(o[k],min,max))fail();}
 function flags(o,keys){for(const k of keys)if(o[k]!==undefined&&typeof o[k]!=='boolean')fail();}
 function safeObject(value,depth=0){if(depth>40||(typeof value==='number'&&!Number.isFinite(value)))fail();if(value&&typeof value==='object')for(const [k,v]of Object.entries(value)){if(['__proto__','prototype','constructor'].includes(k))fail();safeObject(v,depth+1);}}
@@ -28,7 +28,7 @@ function validateSimulation(s){
  if(s.logisticsStats)numericFields(s.logisticsStats,['direct','delivered','fuel','fuelTrips']);
  if(s.race&&!ref(RACES,s.race))fail();
  if(!['river','coast','highland'].includes(s.region)||s.land!==undefined&&!validLayout(s.land))fail();
- numericFields(s,['time','nextEvent','nextId','seed','raidCount','eventCount','contracts','contractReadyAt','expansions','totalRevenue','wardUntil','healthUntil','outageUntil','strikeUntil','sanctionUntil','batteryCharge','diseaseUntil']);
+ numericFields(s,['time','nextEvent','nextId','seed','raidCount','eventCount','contracts','contractReadyAt','expansions','totalRevenue','wardUntil','healthUntil','outageUntil','strikeUntil','sanctionUntil','harvestUntil','merchantUntil','batteryCharge','diseaseUntil']);
  numericFields(s,['lastRecoveryDay'],-1e12);flags(s,['family','protected','emergencyUsed']);
  if(s.budget){if(typeof s.budget!=='object')fail();numericFields(s.budget,['day','income','expenses','lastIncome','lastExpenses']);}
  if(s.autoSell)for(const[k,v]of Object.entries(s.autoSell))if(!ref(RESOURCES,k)||typeof v!=='boolean')fail();
@@ -37,7 +37,7 @@ function validateSimulation(s){
  for(const b of s.buildings){if(!ref(BUILDINGS,b.type)||!Number.isInteger(b.id)||ids.has(b.id)||!Number.isInteger(b.x)||!Number.isInteger(b.z)||b.x<0||b.x>=N||b.z<0||b.z>=N||!number(b.health,0,100)||!number(b.out)||!number(b.progress,0,1.01)||!b.inputs)fail();ids.add(b.id);const k=`${b.x},${b.z}`;if(occupied.has(k))fail();occupied.add(k);for(const[r,n]of Object.entries(b.inputs))if(!ref(RESOURCES,r)||!number(n))fail();}
  // A chosen product must be one of the facility's recipes; the running batch lists real resources.
  for(const b of s.buildings){if(b.recipe!==undefined&&!BUILDINGS[b.type].recipes?.some(r=>r.id===b.recipe))fail();if(b.batch!==undefined)resourceMap(b.batch);}
- for(const b of s.buildings){if(b.level!==undefined&&(!Number.isInteger(b.level)||b.level<1||b.level>3))fail();if(b.race&&!ref(RACES,b.race))fail();numericFields(b,['activeUntil','age','animationTime','cycles']);numericFields(b,['priority'],0,2);flags(b,['enabled','working','specialized','armorUsed']);}
+ for(const b of s.buildings){if(b.level!==undefined&&(!Number.isInteger(b.level)||b.level<1||b.level>3))fail();if(b.race&&!ref(RACES,b.race))fail();numericFields(b,['activeUntil','age','animationTime','cycles','refundUntil']);numericFields(b,['priority'],0,2);flags(b,['enabled','working','specialized','armorUsed']);}
  if(s.nextId!==undefined&&(!Number.isInteger(s.nextId)||[...ids].some(id=>id>=s.nextId)))fail();
  for(const key of ['roads','rails','paved','pipes','conveyors'])if(s[key]&&(!Array.isArray(s[key])||!s[key].every(point)))fail();
  if(s.shipments!==undefined&&(!Array.isArray(s.shipments)||s.shipments.length>MAX_EXPORT_CARTS))fail();for(const sh of s.shipments||[]){if(!sh||!Number.isInteger(sh.id)||!ref(RESOURCES,sh.item)||!Number.isInteger(sh.amount)||!number(sh.amount,1,1e6)||!number(sh.revenue)||!route(sh.route)||!sh.route.length||!number(sh.progress,0,sh.route.length-1)||!['out','back'].includes(sh.phase))fail();flags(sh,['auto']);if(sh.kind!==undefined&&!['contract','state','import'].includes(sh.kind)||sh.vehicle!==undefined&&!ref(VEHICLES,sh.vehicle)||sh.label!==undefined&&!label(sh.label,2000))fail();numericFields(sh,['cost']);}if(s.nextShipmentId!==undefined&&!Number.isInteger(s.nextShipmentId))fail();
@@ -48,7 +48,10 @@ function validateSimulation(s){
  if(s.guards&&(!Array.isArray(s.guards)||s.guards.length>8))fail();for(const g of s.guards||[]){if(!g||!ref(RACES,g.race)||!route(g.route)||!number(g.x,-1,N)||!number(g.z,-1,N)||!number(g.hp,0,75)||!ids.has(g.homeId))fail();}
  if(s.attackers&&(!Array.isArray(s.attackers)||s.attackers.length>100))fail();for(const w of s.attackers||[]){if(!w||!ref(RACES,w.race)||!number(w.x,-1,N)||!number(w.z,-1,N)||!route(w.route)||!number(w.hp)||!number(w.maxHp,1)||w.hp>w.maxHp)fail();numericFields(w,['until','delay']);numericFields(w,['dir'],-1e12);}
  if(s.raid){if(!['demon','orc','beast'].includes(s.raid.faction))fail();numericFields(s.raid,['started','ends','strength','damage','defeated','boostUntil','lastHit']);flags(s.raid,['finished','boosted','disrupted']);}
- if(s.tiles&&(!Array.isArray(s.tiles)||s.tiles.length!==N*N||s.tiles.some(t=>!t||![null,'tree','rock','sapling'].includes(t.nature)||!number(t.remaining,-100,1e6))))fail();
+ // Tiles are saved as one packed string (tileState); older saves hold an array of tile objects (tiles).
+ const tileList=s.tileState!==undefined?unpackTiles(s.tileState):s.tiles;
+ if(tileList&&(!Array.isArray(tileList)||tileList.length!==N*N||tileList.some(t=>!t||![null,'tree','rock','sapling'].includes(t.nature)||!number(t.remaining,-100,1e6)||t.growAt!==undefined&&!number(t.growAt))))fail();
+ if(s.tileState!==undefined&&!tileList)fail();
  if(s.events&&(!Array.isArray(s.events)||s.events.length>1000))fail();
  for(const e of s.events||[])if(!e||!events.includes(e.type)||!number(e.time))fail();
  if(s.rank!==undefined&&(!Number.isInteger(s.rank)||s.rank<0||s.rank>=RANKS.length))fail();
@@ -85,9 +88,20 @@ export function decodeSave(raw){if(typeof raw!=='string'||raw.length>8_000_000)f
 function validRaw(raw){try{if(raw){decodeSave(raw);return true;}}catch{}return false;}
 export function backupSave(storage){const raw=storage.getItem(SAVE_KEY);if(!validRaw(raw))return false;storage.setItem(BACKUP_KEY,raw);if(storage.getItem(BACKUP_KEY)!==raw)throw new Error('이전 진행을 백업하지 못했습니다. 저장 파일을 먼저 내보내세요.');return true;}
 export function readRecovery(storage){for(const key of [RECOVERY_KEY,BACKUP_KEY]){const raw=storage.getItem(key);if(validRaw(raw))return raw;}throw new Error('복구 가능한 백업이 없습니다. 저장 파일을 불러오세요.');}
+// The save this module last wrote and read back per storage: already validated, so the next autosave need not parse and
+// validate it again before keeping it as the recovery copy (audit C4: that was half of every autosave on a large empire).
+const written=new WeakMap();
+const quotaError=e=>e&&(e.name==='QuotaExceededError'||e.name==='NS_ERROR_DOM_QUOTA_REACHED'||e.code===22||e.code===1014||/quota/i.test(e.message||''));
 export function writeSave(storage,data){
  const raw=encodeSave(data),previous=storage.getItem(SAVE_KEY);
  // Keep new-game/import backups separate from rolling recovery. Corrupt data never replaces a healthy backup.
- if(previous!==raw&&validRaw(previous)){storage.setItem(RECOVERY_KEY,previous);if(storage.getItem(RECOVERY_KEY)!==previous)throw new Error('자동 백업을 확인하지 못했습니다.');}
- storage.setItem(SAVE_KEY,raw);if(storage.getItem(SAVE_KEY)!==raw)throw new Error('저장을 확인하지 못했습니다.');return raw;
+ // When the browser's storage is too full for both copies (audit C5), the rolling recovery copy gives way to the save
+ // itself; the new-game backup (BACKUP_KEY) is the player's other game and is never dropped here.
+ if(previous!==raw&&(written.get(storage)===previous||validRaw(previous))){
+  try{storage.setItem(RECOVERY_KEY,previous);if(storage.getItem(RECOVERY_KEY)!==previous)throw new Error('자동 백업을 확인하지 못했습니다.');}
+  catch(e){if(!quotaError(e))throw e;storage.removeItem(RECOVERY_KEY);}
+ }
+ try{storage.setItem(SAVE_KEY,raw);}
+ catch(e){if(!quotaError(e))throw e;storage.removeItem(RECOVERY_KEY);try{storage.setItem(SAVE_KEY,raw);}catch(again){if(!quotaError(again))throw again;throw new Error('브라우저 저장 공간이 부족해 저장하지 못했습니다. 저장 파일을 내보내 보관하세요.');}}
+ if(storage.getItem(SAVE_KEY)!==raw)throw new Error('저장을 확인하지 못했습니다.');written.set(storage,raw);return raw;
 }

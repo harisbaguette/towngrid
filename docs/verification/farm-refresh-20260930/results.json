@@ -1,0 +1,1982 @@
+{
+  "errors": [],
+  "failed": [],
+  "results": [
+    {
+      "renderer": "webgl",
+      "group": "farmcrops",
+      "view": 0,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "saltfield",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "vineyard",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "cocoafarm",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmcrops",
+      "view": 1,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "saltfield",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "vineyard",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "cocoafarm",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmcrops",
+      "view": 2,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "saltfield",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "vineyard",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "cocoafarm",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmcrops",
+      "view": 3,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "saltfield",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "vineyard",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "cocoafarm",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmfruits",
+      "view": 0,
+      "rows": [
+        {
+          "type": "berryfield",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "mintfield",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pumpkinpatch",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "oakfarm",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmfruits",
+      "view": 1,
+      "rows": [
+        {
+          "type": "berryfield",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "mintfield",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pumpkinpatch",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "oakfarm",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmfruits",
+      "view": 2,
+      "rows": [
+        {
+          "type": "berryfield",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "mintfield",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pumpkinpatch",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "oakfarm",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmfruits",
+      "view": 3,
+      "rows": [
+        {
+          "type": "berryfield",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "mintfield",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pumpkinpatch",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "oakfarm",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "ranch",
+      "view": 0,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 6,
+              "action": "feed"
+            }
+          ]
+        },
+        {
+          "type": "milkbarn",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1,
+              "action": "walk"
+            }
+          ]
+        },
+        {
+          "type": "apiary",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 0
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 2
+            }
+          ]
+        },
+        {
+          "type": "duckhouse",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 5,
+              "action": "feed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "ranch",
+      "view": 1,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 6,
+              "action": "feed"
+            }
+          ]
+        },
+        {
+          "type": "milkbarn",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1,
+              "action": "walk"
+            }
+          ]
+        },
+        {
+          "type": "apiary",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 0
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 2
+            }
+          ]
+        },
+        {
+          "type": "duckhouse",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 5,
+              "action": "feed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "ranch",
+      "view": 2,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 6,
+              "action": "feed"
+            }
+          ]
+        },
+        {
+          "type": "milkbarn",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1,
+              "action": "walk"
+            }
+          ]
+        },
+        {
+          "type": "apiary",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 0
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 2
+            }
+          ]
+        },
+        {
+          "type": "duckhouse",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 5,
+              "action": "feed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "ranch",
+      "view": 3,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 6,
+              "action": "feed"
+            }
+          ]
+        },
+        {
+          "type": "milkbarn",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1,
+              "action": "walk"
+            }
+          ]
+        },
+        {
+          "type": "apiary",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 0
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 2
+            }
+          ]
+        },
+        {
+          "type": "duckhouse",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 5,
+              "action": "feed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmworks",
+      "view": 0,
+      "rows": [
+        {
+          "type": "feedmill",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "winery",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "chocolatier",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "packshop",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmworks",
+      "view": 1,
+      "rows": [
+        {
+          "type": "feedmill",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "winery",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "chocolatier",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "packshop",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmworks",
+      "view": 2,
+      "rows": [
+        {
+          "type": "feedmill",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "winery",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "chocolatier",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "packshop",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmworks",
+      "view": 3,
+      "rows": [
+        {
+          "type": "feedmill",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "winery",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "chocolatier",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "packshop",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmland",
+      "view": 0,
+      "rows": [
+        {
+          "type": "sandpit",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clayfield",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "solarpanel",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmland",
+      "view": 1,
+      "rows": [
+        {
+          "type": "sandpit",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clayfield",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "solarpanel",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmland",
+      "view": 2,
+      "rows": [
+        {
+          "type": "sandpit",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clayfield",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "solarpanel",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmland",
+      "view": 3,
+      "rows": [
+        {
+          "type": "sandpit",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clayfield",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "solarpanel",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmterrain",
+      "view": 0,
+      "rows": [
+        {
+          "type": "pond",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pasture",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clover",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmterrain",
+      "view": 1,
+      "rows": [
+        {
+          "type": "pond",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pasture",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clover",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmterrain",
+      "view": 2,
+      "rows": [
+        {
+          "type": "pond",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pasture",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clover",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmterrain",
+      "view": 3,
+      "rows": [
+        {
+          "type": "pond",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pasture",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clover",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmsupport",
+      "view": 0,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "windpump",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmsupport",
+      "view": 1,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "windpump",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmsupport",
+      "view": 2,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "windpump",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "group": "farmsupport",
+      "view": 3,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "windpump",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmcrops",
+      "view": 0,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "saltfield",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "vineyard",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "cocoafarm",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmcrops",
+      "view": 1,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "saltfield",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "vineyard",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "cocoafarm",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmcrops",
+      "view": 2,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "saltfield",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "vineyard",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "cocoafarm",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmcrops",
+      "view": 3,
+      "rows": [
+        {
+          "type": "sugarfield",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "saltfield",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "vineyard",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "cocoafarm",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmfruits",
+      "view": 0,
+      "rows": [
+        {
+          "type": "berryfield",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "mintfield",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pumpkinpatch",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "oakfarm",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmfruits",
+      "view": 1,
+      "rows": [
+        {
+          "type": "berryfield",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "mintfield",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pumpkinpatch",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "oakfarm",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmfruits",
+      "view": 2,
+      "rows": [
+        {
+          "type": "berryfield",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "mintfield",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pumpkinpatch",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "oakfarm",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmfruits",
+      "view": 3,
+      "rows": [
+        {
+          "type": "berryfield",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "mintfield",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pumpkinpatch",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "oakfarm",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "ranch",
+      "view": 0,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 6,
+              "action": "feed"
+            }
+          ]
+        },
+        {
+          "type": "milkbarn",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1,
+              "action": "walk"
+            }
+          ]
+        },
+        {
+          "type": "apiary",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 0
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 2
+            }
+          ]
+        },
+        {
+          "type": "duckhouse",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 5,
+              "action": "feed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "ranch",
+      "view": 1,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 6,
+              "action": "feed"
+            }
+          ]
+        },
+        {
+          "type": "milkbarn",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1,
+              "action": "walk"
+            }
+          ]
+        },
+        {
+          "type": "apiary",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 0
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 2
+            }
+          ]
+        },
+        {
+          "type": "duckhouse",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 5,
+              "action": "feed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "ranch",
+      "view": 2,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 6,
+              "action": "feed"
+            }
+          ]
+        },
+        {
+          "type": "milkbarn",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1,
+              "action": "walk"
+            }
+          ]
+        },
+        {
+          "type": "apiary",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 0
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 2
+            }
+          ]
+        },
+        {
+          "type": "duckhouse",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 5,
+              "action": "feed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "ranch",
+      "view": 3,
+      "rows": [
+        {
+          "type": "sheeppen",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 6,
+              "action": "feed"
+            }
+          ]
+        },
+        {
+          "type": "milkbarn",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1,
+              "action": "walk"
+            }
+          ]
+        },
+        {
+          "type": "apiary",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 0
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 1
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 2
+            }
+          ]
+        },
+        {
+          "type": "duckhouse",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": [
+            {
+              "visible": true,
+              "image": true,
+              "frame": 3,
+              "action": "walk"
+            },
+            {
+              "visible": true,
+              "image": true,
+              "frame": 5,
+              "action": "feed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmworks",
+      "view": 0,
+      "rows": [
+        {
+          "type": "feedmill",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "winery",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "chocolatier",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "packshop",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmworks",
+      "view": 1,
+      "rows": [
+        {
+          "type": "feedmill",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "winery",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "chocolatier",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "packshop",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmworks",
+      "view": 2,
+      "rows": [
+        {
+          "type": "feedmill",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "winery",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "chocolatier",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "packshop",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmworks",
+      "view": 3,
+      "rows": [
+        {
+          "type": "feedmill",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "winery",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "chocolatier",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "packshop",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmland",
+      "view": 0,
+      "rows": [
+        {
+          "type": "sandpit",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clayfield",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "solarpanel",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmland",
+      "view": 1,
+      "rows": [
+        {
+          "type": "sandpit",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clayfield",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "solarpanel",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmland",
+      "view": 2,
+      "rows": [
+        {
+          "type": "sandpit",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clayfield",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "solarpanel",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmland",
+      "view": 3,
+      "rows": [
+        {
+          "type": "sandpit",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clayfield",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "solarpanel",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmterrain",
+      "view": 0,
+      "rows": [
+        {
+          "type": "pond",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pasture",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clover",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmterrain",
+      "view": 1,
+      "rows": [
+        {
+          "type": "pond",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pasture",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clover",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmterrain",
+      "view": 2,
+      "rows": [
+        {
+          "type": "pond",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pasture",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clover",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmterrain",
+      "view": 3,
+      "rows": [
+        {
+          "type": "pond",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "pasture",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "clover",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmsupport",
+      "view": 0,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "windpump",
+          "view": 0,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmsupport",
+      "view": 1,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "windpump",
+          "view": 1,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmsupport",
+      "view": 2,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "windpump",
+          "view": 2,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "group": "farmsupport",
+      "view": 3,
+      "rows": [
+        {
+          "type": "shallowmine",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        },
+        {
+          "type": "windpump",
+          "view": 3,
+          "bodyFrame": 0,
+          "layers": []
+        }
+      ]
+    }
+  ]
+}

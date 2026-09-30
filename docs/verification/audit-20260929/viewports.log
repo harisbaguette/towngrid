@@ -1,0 +1,1253 @@
+[step] 1920x1080 home
+[step] 1920x1080 world
+[step] 1920x1080 newGame
+[step] 1920x1080 guideHouse
+[step] 1920x1080 buildDock
+[step] 1920x1080 facility
+[step] 1920x1080 tile
+[step] 1920x1080 dialogs
+[step] 1920x1080 mapEdges
+[step] 1920x1080 showcase
+[step] 1366x768 home
+[step] 1366x768 world
+[step] 1366x768 newGame
+[step] 1366x768 guideHouse
+[step] 1366x768 buildDock
+[step] 1366x768 facility
+[step] 1366x768 tile
+[step] 1366x768 dialogs
+[step] 1366x768 mapEdges
+[step] 1366x768 showcase
+[step] 390x844 home
+[step] 390x844 world
+[step] 390x844 newGame
+[step] 390x844 guideHouse
+[step] 390x844 buildDock
+[step] 390x844 facility
+[step] 390x844 tile
+[step] 390x844 dialogs
+[step] 390x844 mapEdges
+[step] 390x844 touchCamera
+[step] 390x844 showcase
+[step] 844x390 home
+[step] 844x390 world
+[step] 844x390 newGame
+[step] 844x390 guideHouse
+[step] 844x390 buildDock
+[step] 844x390 facility
+[step] 844x390 tile
+[step] 844x390 dialogs
+[step] 844x390 mapEdges
+[step] 844x390 touchCamera
+[step] 844x390 showcase
+{
+ "1920x1080": {
+  "touch": false,
+  "home": {
+   "timing": {
+    "titleVisibleMs": 195,
+    "homeReadyMs": 33422,
+    "titleClicks": 3
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   }
+  },
+  "world": {
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [
+     "에스테른 왕국 (ellipsis)"
+    ],
+    "tinyTargets": [],
+    "smallText": [
+     "1칸 = 24 × 24 마을 10px",
+     "15, 15 10px",
+     "시작 거점 10px",
+     "적대 세력 10px",
+     "정착 가능 10px",
+     "에스테른 왕국 10px",
+     "24 × 24 타일 네 방향으로 이어지는 땅 10px",
+     "SMALL 10px",
+     "하벤 수도권에서 첫 마을을 엽니다. 10px"
+    ]
+   },
+   "startButton": {
+    "top": 970,
+    "bottom": 1015,
+    "inView": true,
+    "pageScroll": 0
+   }
+  },
+  "newGame": {
+   "hud": {
+    "mapVisiblePct": 91,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "Close toast 20x20"
+    ],
+    "smallText": [
+     "1 10px"
+    ]
+   },
+   "warehousePoint": {
+    "px": 959.9999999999995,
+    "py": 540.0000000000002,
+    "onCanvas": true,
+    "top": null
+   },
+   "built": [
+    "warehouse"
+   ],
+   "hudAfter": {
+    "mapVisiblePct": 93,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layoutAfter": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": [
+     "1 10px"
+    ]
+   }
+  },
+  "guideHouse": {
+   "hud": {
+    "mapVisiblePct": 93,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "placementHint": "주민 주택 배치\n60G · 1타일 · 목재 4 · 석재 1",
+   "point": {
+    "px": 903.8474026704797,
+    "py": 507.58028281610524,
+    "onCanvas": true,
+    "top": null
+   },
+   "built": [
+    "warehouse",
+    "house"
+   ],
+   "hudAfter": {
+    "mapVisiblePct": 93,
+    "overlaps": [],
+    "offscreen": []
+   }
+  },
+  "buildDock": {
+   "hud": {
+    "mapVisiblePct": 85,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   },
+   "tabs": [
+    {
+     "t": "기초",
+     "visible": true
+    },
+    {
+     "t": "주거",
+     "visible": true
+    },
+    {
+     "t": "농축산",
+     "visible": true
+    },
+    {
+     "t": "가공",
+     "visible": true
+    },
+    {
+     "t": "중공업",
+     "visible": true
+    },
+    {
+     "t": "동력·마법",
+     "visible": true
+    },
+    {
+     "t": "첨단",
+     "visible": true
+    },
+    {
+     "t": "운송",
+     "visible": true
+    },
+    {
+     "t": "도시",
+     "visible": true
+    }
+   ],
+   "items": {
+    "total": 6,
+    "fullyVisible": 6,
+    "itemW": 112,
+    "itemH": 124
+   },
+   "wheelScrolled": 0
+  },
+  "facility": {
+   "open": true,
+   "hud": {
+    "mapVisiblePct": 88,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": [
+     "SPAN 10px"
+    ]
+   }
+  },
+  "tile": {
+   "open": true,
+   "hud": {
+    "mapVisiblePct": 90,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "타일 정보 닫기 16x16"
+    ],
+    "smallText": []
+   }
+  },
+  "dialogs": {
+   "market": {
+    "fit": {
+     "box": [
+      665,
+      44,
+      590,
+      992
+     ],
+     "fits": true,
+     "scrollable": false,
+     "overflowY": "hidden"
+    },
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [
+      "목재 자동 판매 32x18",
+      "석재 자동 판매 32x18",
+      "물 자동 판매 32x18",
+      "밀 자동 판매 32x18",
+      "빵 자동 판매 32x18",
+      "생선 자동 판매 32x18",
+      "훈제 생선 자동 판매 32x18",
+      "케이크 자동 판매 32x18"
+     ],
+     "smallText": []
+    },
+    "closeButton": {
+     "x": 1203,
+     "y": 65,
+     "w": 32,
+     "h": 32,
+     "inView": true
+    }
+   },
+   "goals": {
+    "fit": {
+     "box": [
+      665,
+      77,
+      590,
+      926
+     ],
+     "fits": true,
+     "scrollable": false,
+     "overflowY": "hidden"
+    },
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "closeButton": {
+     "x": 1203,
+     "y": 98,
+     "w": 32,
+     "h": 32,
+     "inView": true
+    }
+   },
+   "residents": {
+    "fit": {
+     "box": [
+      665,
+      168,
+      590,
+      744
+     ],
+     "fits": true,
+     "scrollable": false,
+     "overflowY": "hidden"
+    },
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "closeButton": {
+     "x": 1203,
+     "y": 189,
+     "w": 32,
+     "h": 32,
+     "inView": true
+    }
+   },
+   "world": {
+    "error": "locator.click: Error: strict mode violation: getByRole('button', { name: '세계 지도' }) resolved to 2 elements:"
+   },
+   "settings": {
+    "fit": {
+     "box": [
+      665,
+      44,
+      590,
+      992
+     ],
+     "fits": true,
+     "scrollable": false,
+     "overflowY": "hidden"
+    },
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [
+      "소리 32x18"
+     ],
+     "smallText": []
+    },
+    "closeButton": {
+     "x": 1203,
+     "y": 65,
+     "w": 32,
+     "h": 32,
+     "inView": true
+    }
+   },
+   "help": {
+    "fit": {
+     "box": [
+      665,
+      141,
+      590,
+      798
+     ],
+     "fits": true,
+     "scrollable": false,
+     "overflowY": "hidden"
+    },
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "closeButton": {
+     "x": 1203,
+     "y": 162,
+     "w": 32,
+     "h": 32,
+     "inView": true
+    }
+   }
+  },
+  "mapEdges": {
+   "hud": {
+    "mapVisiblePct": 90,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "주변 지형 닫기 18x18"
+    ],
+    "smallText": [
+     "건설 · 농업 공간 10px",
+     "담수 · 어업 · 강 항구 10px"
+    ]
+   }
+  },
+  "showcase": {
+   "hud": {
+    "mapVisiblePct": 88,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "습격 체험 41x18",
+     "시작 화면 56x18",
+     "Close toast 20x20"
+    ],
+    "smallText": [
+     "2 10px"
+    ]
+   },
+   "markers": {
+    "count": 26,
+    "overlappingPairs": 2,
+    "underHud": 0
+   }
+  }
+ },
+ "1366x768": {
+  "touch": false,
+  "home": {
+   "timing": {
+    "titleVisibleMs": 514,
+    "homeReadyMs": 3029,
+    "titleClicks": 2
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   }
+  },
+  "world": {
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [
+     "에스테른 왕국 (ellipsis)"
+    ],
+    "tinyTargets": [],
+    "smallText": [
+     "1칸 = 24 × 24 마을 10px",
+     "15, 15 10px",
+     "시작 거점 10px",
+     "적대 세력 10px",
+     "정착 가능 10px",
+     "에스테른 왕국 10px",
+     "24 × 24 타일 네 방향으로 이어지는 땅 10px",
+     "SMALL 10px",
+     "하벤 수도권에서 첫 마을을 엽니다. 10px"
+    ]
+   },
+   "startButton": {
+    "top": 658,
+    "bottom": 703,
+    "inView": true,
+    "pageScroll": 0
+   }
+  },
+  "newGame": {
+   "hud": {
+    "mapVisiblePct": 82,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "Close toast 20x20"
+    ],
+    "smallText": [
+     "1 10px"
+    ]
+   },
+   "warehousePoint": {
+    "px": 682.9999999999997,
+    "py": 384.00000000000017,
+    "onCanvas": true,
+    "top": null
+   },
+   "built": [
+    "warehouse"
+   ],
+   "hudAfter": {
+    "mapVisiblePct": 85,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layoutAfter": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": [
+     "1 10px"
+    ]
+   }
+  },
+  "guideHouse": {
+   "hud": {
+    "mapVisiblePct": 84,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "placementHint": "주민 주택 배치\n60G · 1타일 · 목재 4 · 석재 1",
+   "point": {
+    "px": 643.06926412123,
+    "py": 360.9459788914526,
+    "onCanvas": true,
+    "top": null
+   },
+   "built": [
+    "warehouse",
+    "house"
+   ],
+   "hudAfter": {
+    "mapVisiblePct": 86,
+    "overlaps": [],
+    "offscreen": []
+   }
+  },
+  "buildDock": {
+   "hud": {
+    "mapVisiblePct": 68,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   },
+   "tabs": [
+    {
+     "t": "기초",
+     "visible": true
+    },
+    {
+     "t": "주거",
+     "visible": true
+    },
+    {
+     "t": "농축산",
+     "visible": true
+    },
+    {
+     "t": "가공",
+     "visible": true
+    },
+    {
+     "t": "중공업",
+     "visible": true
+    },
+    {
+     "t": "동력·마법",
+     "visible": true
+    },
+    {
+     "t": "첨단",
+     "visible": true
+    },
+    {
+     "t": "운송",
+     "visible": true
+    },
+    {
+     "t": "도시",
+     "visible": true
+    }
+   ],
+   "items": {
+    "total": 6,
+    "fullyVisible": 6,
+    "itemW": 112,
+    "itemH": 124
+   },
+   "wheelScrolled": 0
+  },
+  "facility": {
+   "open": true,
+   "hud": {
+    "mapVisiblePct": 76,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": [
+     "SPAN 10px"
+    ]
+   }
+  },
+  "tile": {
+   "open": true,
+   "hud": {
+    "mapVisiblePct": 77,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "타일 정보 닫기 16x16"
+    ],
+    "smallText": []
+   }
+  },
+  "dialogs": {
+   "market": {
+    "fit": {
+     "box": [
+      388,
+      44,
+      590,
+      680
+     ],
+     "fits": true,
+     "scrollable": false,
+     "overflowY": "hidden"
+    },
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [
+      "목재 자동 판매 32x18",
+      "석재 자동 판매 32x18",
+      "물 자동 판매 32x18",
+      "밀 자동 판매 32x18",
+      "빵 자동 판매 32x18"
+     ],
+     "smallText": []
+    },
+    "closeButton": {
+     "x": 926,
+     "y": 65,
+     "w": 32,
+     "h": 32,
+     "inView": true
+    }
+   },
+   "goals": {
+    "fit": {
+     "box": [
+      388,
+      44,
+      590,
+      680
+     ],
+     "fits": true,
+     "scrollable": false,
+     "overflowY": "hidden"
+    },
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "closeButton": {
+     "x": 926,
+     "y": 65,
+     "w": 32,
+     "h": 32,
+     "inView": true
+    }
+   },
+   "residents": {
+    "fit": {
+     "box": [
+      388,
+      44,
+      590,
+      680
+     ],
+     "fits": true,
+     "scrollable": false,
+     "overflowY": "hidden"
+    },
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "closeButton": {
+     "x": 926,
+     "y": 65,
+     "w": 32,
+     "h": 32,
+     "inView": true
+    }
+   },
+   "world": {
+    "error": "locator.click: Error: strict mode violation: getByRole('button', { name: '세계 지도' }) resolved to 2 elements:"
+   },
+   "settings": {
+    "fit": {
+     "box": [
+      388,
+      44,
+      590,
+      680
+     ],
+     "fits": true,
+     "scrollable": false,
+     "overflowY": "hidden"
+    },
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [
+      "소리 32x18"
+     ],
+     "smallText": []
+    },
+    "closeButton": {
+     "x": 926,
+     "y": 65,
+     "w": 32,
+     "h": 32,
+     "inView": true
+    }
+   },
+   "help": {
+    "fit": {
+     "box": [
+      388,
+      44,
+      590,
+      680
+     ],
+     "fits": true,
+     "scrollable": false,
+     "overflowY": "hidden"
+    },
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "closeButton": {
+     "x": 926,
+     "y": 65,
+     "w": 32,
+     "h": 32,
+     "inView": true
+    }
+   }
+  },
+  "mapEdges": {
+   "hud": {
+    "mapVisiblePct": 78,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "주변 지형 닫기 18x18"
+    ],
+    "smallText": [
+     "건설 · 농업 공간 10px",
+     "담수 · 어업 · 강 항구 10px"
+    ]
+   }
+  },
+  "showcase": {
+   "hud": {
+    "mapVisiblePct": 77,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [
+     "우물 · 생산 중 · 물 2개 · 16% · 생산 중 <- facility-marker working production"
+    ],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "습격 체험 41x18",
+     "시작 화면 56x18",
+     "Close toast 20x20"
+    ],
+    "smallText": [
+     "2 10px"
+    ]
+   },
+   "markers": {
+    "count": 26,
+    "overlappingPairs": 11,
+    "underHud": 0
+   }
+  }
+ },
+ "390x844": {
+  "touch": true,
+  "home": {
+   "timing": {
+    "titleVisibleMs": 549,
+    "homeReadyMs": 3037,
+    "titleClicks": 2
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   }
+  },
+  "world": {
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [
+     "에스테른 왕국 (ellipsis)"
+    ],
+    "tinyTargets": [],
+    "smallText": [
+     "새로운 개척 10px",
+     "대륙 전체 10px",
+     "에스테른 왕국 10px",
+     "1칸 = 24 × 24 마을 9px",
+     "15, 15 10px",
+     "하벤 수도권 · 시작 거점 10px",
+     "시작 거점 9px",
+     "적대 세력 9px",
+     "정착 가능 10px",
+     "24 × 24 타일 네 방향으로 이어지는 땅 10px",
+     "SMALL 10px",
+     "하벤 수도권에서 첫 마을을 엽니다. 10px"
+    ]
+   },
+   "startButton": {
+    "top": 1329,
+    "bottom": 1374,
+    "inView": false,
+    "pageScroll": 0
+   }
+  },
+  "newGame": {
+   "hud": {
+    "mapVisiblePct": 57,
+    "overlaps": [
+     ".placement-hint x [data-sonner-toaster] [data-sonner-toast] 358x23"
+    ],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "Close toast 20x20"
+    ],
+    "smallText": [
+     "G 10px",
+     "1 / 7 10px",
+     "1 / 33 9px",
+     "에스테른 왕국 9px",
+     "1 10px"
+    ]
+   },
+   "warehousePoint": {
+    "px": 194.99999999999972,
+    "py": 422.00000000000017,
+    "onCanvas": true,
+    "top": null
+   },
+   "afterFirstTap": {
+    "built": 0,
+    "toasts": [
+     "다시 누르면 건설",
+     "밝은 경계 안의 빈 칸에 창고를 놓으세요."
+    ]
+   },
+   "built": [
+    "warehouse"
+   ],
+   "hudAfter": {
+    "mapVisiblePct": 62,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layoutAfter": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "Close toast 20x20"
+    ],
+    "smallText": [
+     "G 10px",
+     "2 / 7 10px",
+     "1 / 33 9px",
+     "에스테른 왕국 9px",
+     "1 10px"
+    ]
+   }
+  },
+  "guideHouse": {
+   "hud": {
+    "mapVisiblePct": 57,
+    "overlaps": [
+     ".placement-hint x [data-sonner-toaster] [data-sonner-toast] 358x23"
+    ],
+    "offscreen": []
+   },
+   "placementHint": "주민 주택 배치\n60G · 1타일 · 목재 4 · 석재 1",
+   "point": {
+    "px": 152.9719631463768,
+    "py": 397.7351016090495,
+    "onCanvas": true,
+    "top": null
+   },
+   "built": [
+    "warehouse",
+    "house"
+   ],
+   "hudAfter": {
+    "mapVisiblePct": 58,
+    "overlaps": [
+     "[data-sonner-toaster] [data-sonner-toast] x [data-sonner-toaster] [data-sonner-toast] 340x40"
+    ],
+    "offscreen": []
+   }
+  },
+  "buildDock": {
+   "hud": {
+    "mapVisiblePct": 37,
+    "overlaps": [
+     "[data-sonner-toaster] [data-sonner-toast] x [data-sonner-toaster] [data-sonner-toast] 340x38"
+    ],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   },
+   "tabs": [
+    {
+     "t": "기초",
+     "visible": true
+    },
+    {
+     "t": "주거",
+     "visible": true
+    },
+    {
+     "t": "농축산",
+     "visible": true
+    },
+    {
+     "t": "가공",
+     "visible": true
+    },
+    {
+     "t": "중공업",
+     "visible": true
+    },
+    {
+     "t": "동력·마법",
+     "visible": true
+    },
+    {
+     "t": "첨단",
+     "visible": true
+    },
+    {
+     "t": "운송",
+     "visible": true
+    },
+    {
+     "t": "도시",
+     "visible": true
+    }
+   ],
+   "items": {
+    "total": 6,
+    "fullyVisible": 3,
+    "itemW": 99,
+    "itemH": 109
+   },
+   "swipeScrolled": 274
+  },
+  "facility": {
+   "open": true,
+   "hud": {
+    "mapVisiblePct": 39,
+    "overlaps": [
+     "[data-sonner-toaster] [data-sonner-toast] x [data-sonner-toaster] [data-sonner-toast] 340x39"
+    ],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": [
+     "SPAN 10px"
+    ]
+   }
+  },
+  "tile": {
+   "open": true,
+   "hud": {
+    "mapVisiblePct": 34,
+    "overlaps": [
+     ".tile-panel x [data-sonner-toaster] [data-sonner-toast] 290x23",
+     ".tile-panel x [data-sonner-toaster] [data-sonner-toast] 290x33",
+     "[data-sonner-toaster] [data-sonner-toast] x [data-sonner-toaster] [data-sonner-toast] 340x40"
+    ],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "타일 정보 닫기 16x16"
+    ],
+    "smallText": []
+   }
+  },
+  "dialogs": {
+   "market": {
+    "fit": {
+     "box": [
+      12,
+      38,
+      367,
+      768
+     ],
+     "fits": true,
+     "scrollable": false,
+     "overflowY": "hidden"
+    },
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [
+      "목재 자동 판매 32x18",
+      "석재 자동 판매 32x18",
+      "물 자동 판매 32x18",
+      "밀 자동 판매 32x18",
+      "빵 자동 판매 32x18",
+      "생선 자동 판매 32x18"
+     ],
+     "smallText": []
+    },
+    "closeButton": {
+     "x": 331,
+     "y": 54,
+     "w": 32,
+     "h": 32,
+     "inView": true
+    }
+   },
+   "goals": {
+    "fit": {
+     "box": [
+      12,
+      38,
+      367,
+      768
+     ],
+     "fits": true,
+     "scrollable": false,
+     "overflowY": "hidden"
+    },
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "closeButton": {
+     "x": 331,
+     "y": 54,
+     "w": 32,
+     "h": 32,
+     "inView": true
+    }
+   },
+   "residents": {
+    "fit": {
+     "box": [
+      12,
+      38,
+      367,
+      768
+     ],
+     "fits": true,
+     "scrollable": false,
+     "overflowY": "hidden"
+    },
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [],
+     "smallText": []
+    },
+    "closeButton": {
+     "x": 331,
+     "y": 54,
+     "w": 32,
+     "h": 32,
+     "inView": true
+    }
+   },
+   "world": {
+    "error": "locator.click: Error: strict mode violation: getByRole('button', { name: '세계 지도' }) resolved to 2 elements:"
+   },
+   "settings": {
+    "fit": {
+     "box": [
+      12,
+      38,
+      367,
+      768
+     ],
+     "fits": true,
+     "scrollable": false,
+     "overflowY": "hidden"
+    },
+    "layout": {
+     "covered": [],
+     "offscreen": [],
+     "clipped": [],
+     "tinyTargets": [
+      "소리 32x18"
+     ],
+     "smallText": []
+    },
+    "closeButton": {
+     "x": 331,
+     "y": 54,
+     "w": 32,
+     "h": 32,
+     "inView": true
+    }
+   },
+   "help": {
+    "error": "locator.click: Timeout 30000ms exceeded."
+   }
+  },
+  "mapEdges": {
+   "hud": {
+    "mapVisiblePct": 42,
+    "overlaps": [
+     ".map-edges x .camera-controls 56x36"
+    ],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [
+     "주변 지형 닫기 18x18"
+    ],
+    "smallText": [
+     "건설 · 농업 공간 10px",
+     "담수 · 어업 · 강 항구 10px"
+    ]
+   }
+  },
+  "touchCamera": {
+   "before": {
+    "zoom": 1,
+    "target": [
+     8,
+     0,
+     10
+    ]
+   },
+   "afterPan": {
+    "zoom": 1,
+    "target": [
+     6.52,
+     0,
+     10.34
+    ]
+   },
+   "afterPinch": {
+    "zoom": 2.594,
+    "target": [
+     6.43,
+     0,
+     10.38
+    ]
+   },
+   "panned": true,
+   "pinchZoomed": true,
+   "selectedAfterGestures": false
+  },
+  "showcase": {
+   "hud": {
+    "mapVisiblePct": 53,
+    "overlaps": [],
+    "offscreen": []
+   },
+   "layout": {
+    "covered": [
+     "우물 · 생산 중 · 물 2개 · 13% · 생산 중 <- facility-marker working production",
+     "빵집 · 생산 중 · 빵 0개 · 33% · 생산 중 <- qu

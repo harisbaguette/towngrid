@@ -1,0 +1,164 @@
+{
+ "overrides": [
+  "J6: warehouse placed free, rank=3 (guide ends at rank 2), contracts=1, flour stock = order size",
+  "fixture rank8 loaded; random events silenced (nextEvent far) so each check triggers only its own case",
+  "J1: first plain producer out=10 and its product stock = storage capacity",
+  "J4: trees within reach of one lumber camp cut down (nature null, as the simulation does when a tree runs out)",
+  "J3: three facilities set to health 40",
+  "J5: one facility health 30, money 20 (then -300), game paused during the check",
+  "J12: infection 35, storm pending in 80 game s at 4x, raid started"
+ ],
+ "J6": {
+  "card": [
+   "next-build: 빵집 짓기 밀가루·물·목재 → 빵",
+   "quick-contract: 밀가루 납품 14 / 14 · 425G 납품",
+   "contract-warning: 납품하면 승급 목표 빵의 재료 밀가루가 4개 모자랍니다",
+   "fleet-line: 운송 0/5대 운행",
+   "next-goal: 준자유민 빵 판매 0/10"
+  ],
+  "warning": "납품하면 승급 목표 빵의 재료 밀가루가 4개 모자랍니다"
+ },
+ "start": [
+  "bottleneck-block: 채석장 · 자원 고갈 네 칸 안의 내 땅에 바위가 없습니다(경계 밖 바위는 못 씀). 바위가 남은 곳으로 옮기거나 옆 구역을 사세요. 영토 확장",
+  "next-build: 벽돌 가마 짓기 석재·목재 → 벽돌",
+  "quick-contract: 빵 납품 9 / 28 · 1552G 75초",
+  "fleet-line: 운송 1/5대 운행",
+  "next-goal: 지역 납품업자 벽돌 생산 0/20"
+ ],
+ "J1": {
+  "target": {
+   "id": 4,
+   "type": "field",
+   "item": "grain"
+  },
+  "card": [
+   "bottleneck-block: 밀밭 · 창고 가득 참 재고를 팔아 창고 자리를 비우세요. 자재 보관소를 지으면 보관 한도가 늘어납니다. 밀 10개 팔기",
+   "next-build: 벽돌 가마 짓기 석재·목재 → 벽돌",
+   "quick-contract: 빵 납품 9 / 28 · 1552G 74초",
+   "fleet-line: 운송 1/5대 운행",
+   "next-goal: 지역 납품업자 벽돌 생산 0/20"
+  ],
+  "smallHeight": 54,
+  "fix": [
+   {
+    "text": "밀 10개 팔기",
+    "box": [
+     1113,
+     270,
+     101,
+     32
+    ]
+   }
+  ],
+  "nextBuild": [
+   {
+    "text": "벽돌 가마 짓기 석재·목재 → 벽돌",
+    "box": [
+     1103,
+     311,
+     242,
+     57
+    ]
+   }
+  ],
+  "soldLot": 10,
+  "autoSellOn": true,
+  "sellHint": "팔 수 있는 재고 12,921G어치\n자금이 줄고 있습니다 · 직물 48 · 목재 273 · 약초 148"
+ },
+ "J4": {
+  "lumber": {
+   "id": 5
+  },
+  "card": [
+   "bottleneck-block: 벌목장 · 자원 고갈 네 칸 안의 내 땅에 나무가 없습니다(경계 밖 나무는 못 씀). 빈 칸을 눌러 묘목(15G · 물 2)을 심거나 옆 구역을 사세요. 묘목 심",
+   "next-build: 벽돌 가마 짓기 석재·목재 → 벽돌",
+   "quick-contract: 빵 납품 21 / 28 · 1552G 42초",
+   "fleet-line: 운송 2/5대 운행",
+   "next-goal: 지역 납품업자 벽돌 생산 0/20"
+  ],
+  "fix": [
+   {
+    "text": "묘목 심기 · 15G + 물 2",
+    "box": [
+     1113,
+     288,
+     149,
+     32
+    ]
+   },
+   {
+    "text": "영토 확장",
+    "box": [
+     1113,
+     326,
+     88,
+     32
+    ]
+   }
+  ],
+  "saplingsAdded": 1
+ },
+ "J3": {
+  "card": [
+   "bottleneck-block: 우물 · 생산 중 내구도 40% · 속도 85% · 수리비 30G",
+   "repair-all: 모두 수리 · 3곳 · 합계 90G",
+   "next-build: 벽돌 가마 짓기 석재·목재 → 벽돌",
+   "quick-contract: 빵 납품 21 / 28 · 1552G 40초",
+   "fleet-line: 운송 2/5대 운행",
+   "next-goal: 지역 납품업자 벽돌 생산 0/20"
+  ],
+  "button": "모두 수리 · 3곳 · 합계 90G",
+  "damagedAfter": 0
+ },
+ "J5": {
+  "card": "우물\nLv.2",
+  "repairDisabled": true,
+  "shortFunds": "15G 부족\n회생 자금",
+  "moneyAfterFund": 500,
+  "financeCard": "운영 자금 -300G\n300G 부족\n5일 후 회생 자금\n재고 팔기"
+ },
+ "J12": {
+  "stack": [
+   "raid-panel",
+   "weather-warning",
+   "health-alert",
+   "operations-card"
+  ],
+  "overlaps": [
+   "operations-card x camera-controls 177x39"
+  ],
+  "sanitizeReachable": true,
+  "raidReachable": true
+ },
+ "B15": {
+  "hud": "폭풍 · 20초\n보강 · 70G + 목재 4",
+  "gameSecondsLeft": 76
+ },
+ "J9": {
+  "toasts": [],
+  "news": [
+   "14일 · 하벤 외곽 개척지 14일째 · 유지비·세금 53G 지출",
+   "13일 · 하벤 외곽 개척지 13일째 · 유지비·세금 53G 지출"
+  ]
+ },
+ "J8": {
+  "title": "장부",
+  "days": [
+   "13일째 · 하루 판매 수입 +1,619G 유지비·세금 −53G 건설·수리·기타 +0G 순이익 +1,566G",
+   "오늘 지금까지 판매 수입 +0G 유지비·세금 −53G 건설·수리·기타 +0G 순이익 −53G"
+  ],
+  "rows": [
+   "물 생산 72 · 사용 73 · 판매 0 -1",
+   "밀 생산 78 · 사용 37 · 판매 0 +41",
+   "목화 생산 52 · 사용 25 · 판매 0 +27",
+   "목재 생산 30 · 사용 37 · 판매 0 -7",
+   "생선 생산 51 · 사용 5 · 판매 40 +6"
+  ]
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

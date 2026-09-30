@@ -1,0 +1,197 @@
+
+> towngrid@0.1.0 test
+> node scripts/test-local.mjs
+
+
+[tests/simulation.mjs]
+{
+  "result": "PASS",
+  "breadSold": 80,
+  "money": 1564,
+  "grainProduced": 201,
+  "workers": 5,
+  "industryParts": 8,
+  "checked": [
+    "food chain and hauling",
+    "profits after wages",
+    "save/load with cargo",
+    "land expansion",
+    "storm and repair",
+    "debt and family",
+    "water proximity rules",
+    "powered industry",
+    "pause"
+  ]
+}
+
+[tests/export-route.mjs]
+{"result":"PASS","checked":["export road on every region","no warehouse no export","paid on arrival","cart limit","save/load in transit","carts return","road protected","blocked route","old save upgrade","tampered route rejected","starter and showcase villages"]}
+
+[tests/trade-routes.mjs]
+{"result":"PASS","checked":["port sizes by water","a land route in every province","10 route kinds on the map","estuary and upper river ports","no province inside a lake","gate lot by land route","auto lot min(10,cap)","unknown terminal rejected","vanished terminal falls back","tampered choice rejected","old save loads","campaign sites use their province"]}
+
+[tests/trade-terminals.mjs]
+{"result":"PASS","checked":["user lot sizes","gate lot 10","ports on water only","port kind by tile water","river port ships 100","road hub needs joined road","paved hub needs paving","choice save/load/fallback","broken terminal skipped","rail terminal and its price","airport and air terminal","ice snowmobile and polar ports","desert sand","mountain side and conveyor","pipe moves water","power reach and substation","showcase powered","old saves"]}
+
+[tests/world-grid.mjs]
+{"result":"PASS","checked":["one site square per province","sides are neighbour squares","trade water = side water","every terrain on some side","capitals play like their nation","sea under a fifth","all ecologies playable","ferry routes","start land and road dry","port on its own water","layout saved","bad layout rejected","mountain side ground and conveyors","old saves keep region water","bare map legacy","campaign sites on their square"]}
+
+[tests/map-edges.mjs]
+Map edges: four rotated layouts, mountain yield/resources, forest density, sea/freshwater ports/irrigation, matching scenery and save compatibility PASS.
+
+[tests/biomes.mjs]
+Biomes PASS: eight playable profiles, actual resource advantages, oil/oasis, marsh water, matching scenery, deterministic generation and old/new saves.
+
+[tests/residents.mjs]
+RESIDENTS PASS
+
+[tests/facility-staff.mjs]
+Facility staff: fixed housing identities, both factions, all workplaces, state synchronization and save preservation PASS
+
+[tests/character-movement.mjs]
+{
+  "result": "CHARACTER MOVEMENT PASS",
+  "comparisons": [
+    {
+      "fps": 20,
+      "oldDistance": 22.237,
+      "distance": 23.7,
+      "oldLossPercent": 6.173
+    },
+    {
+      "fps": 30,
+      "oldDistance": 23.079,
+      "distance": 23.7,
+      "oldLossPercent": 2.62
+    },
+    {
+      "fps": 60,
+      "oldDistance": 23.079,
+      "distance": 23.7,
+      "oldLossPercent": 2.62
+    },
+    {
+      "fps": 144,
+      "oldDistance": 23.608958,
+      "distance": 23.7,
+      "oldLossPercent": 0.384
+    }
+  ],
+  "cornerTraversal": true,
+  "blockedNodes": true,
+  "logistics": true,
+  "speedChangeWithoutPhaseJump": true
+}
+
+[tests/character-motion.mjs]
+Character motion: 51 rigs × 4 views, moving cargo, handling, planted pivots, damage, CPU defeat and fading shadows PASS
+
+[tests/campaign.mjs]
+PASS: 1-tile facilities; seven playable subtypes share modern industries; enemies locked; delayed freight and in-flight save/load; regional inventory conservation; automatic residents; specialties; emerging states; earned status.
+
+[tests/balance-20260928.mjs]
+PASS balance patch 2026-09-28: data, M1~M11, constants, contracts, storm, raid trial, advice, sapling, old saves
+
+[tests/second-pass-20260928.mjs]
+PASS second pass 2026-09-28: products, contract and import transport, vehicles and fuel, state trade, disease, storm, old saves
+
+[tests/release.mjs]
+PASS rotating recovery preserves independent new-game backup and rejects corrupt replacement
+PASS nested save validation and 75-day world growth with bounded successor names
+PASS audio: 87 facilities mapped; 24 working facilities -> 36 sounds in 10 s, max 4/s, max gain 0.057, 4 concurrent, 9 samples
+PASS audio fallback, volume sanitation, voice cap, background playlist/beds, pause/mute, reusable noise and full node cleanup
+RELEASE REGRESSIONS PASS
+
+[tests/pixel-environment.mjs]
+Pixel environment: six building states / four views / harvest / growth / PNG layout / starter production and saves in all playable nations passed.
+
+[tests/pixel-industry.mjs]
+35 industry buildings: four views, fixed architecture, inventory, service expiry/power/disable, paused tools, battery and sparse ghosts passed.
+
+[tests/pixel-world.mjs]
+World art: 82 facilities, 41 new profiles; atlas coverage, stock/pause/services, terrain/save/roads, and 16 network topologies passed.
+
+[tests/art-completion.mjs]
+Art coverage passed: 82 buildings, 10 vehicles × 4 headings × 4 views, 42 UI icons, 63 recipes, damage/repair and shipment loading.
+
+[tests/quarter-camera.mjs]
+Quarter camera: four views, fixed pitch, orbit lock, return to origin, target and zoom preservation passed.
+
+[tests/screen-art.mjs]
+Screen artwork: no-repeat decks, reload persistence, unavailable/corrupt storage and 9 runtime assets verified.
+
+[scripts/check-pixel-characters.mjs]
+51 character identities, four facings, 256 cells each; alternating 12-frame walk/carry and foot contacts verified.
+
+[tests/audit/export-chokepoint.mjs]
+{"before":{"connected":true,"error":null,"busy":0,"carts":3,"vehicles":[{"kind":"wagon","busy":false,"name":"마차","fuel":false},{"kind":"wagon","busy":false,"name":"마차","fuel":false},{"kind":"raft","busy":false,"name":"뗏목","fuel":false},{"kind":"truck","busy":false,"name":"트럭","fuel":true},{"kind":"steamer","busy":false,"name":"증기선","fuel":true}],"fuelFree":3,"fuelPerTrip":1,"fuelReady":false,"spareFuel":0,"waterside":true,"waterRoute":true,"inTransit":0,"imports":0,"contract":false},"placementWarning":"수출길을 막는 자리입니다 · 창고에서 수출 관문까지 가는 길이 끊깁니다","built":{"ok":false,"error":"수출길을 막는 자리입니다 · 창고에서 수출 관문까지 가는 길이 끊깁니다"},"after":{"connected":true,"error":null,"busy":0,"carts":3,"vehicles":[{"kind":"wagon","busy":false,"name":"마차","fuel":false},{"kind":"wagon","busy":false,"name":"마차","fuel":false},{"kind":"raft","busy":false,"name":"뗏목","fuel":false},{"kind":"truck","busy":false,"name":"트럭","fuel":true},{"kind":"steamer","busy":false,"name":"증기선","fuel":true}],"fuelFree":3,"fuelPerTrip":1,"fuelReady":false,"spareFuel":0,"waterside":true,"waterRoute":true,"inTransit":0,"imports":0,"contract":false},"sale":{"ok":true,"amount":10,"revenue":97}}
+NOT-REPRODUCED X1-export-chokepoint-8-11 :: {"placementWarning":"수출길을 막는 자리입니다 · 창고에서 수출 관문까지 가는 길이 끊깁니다","after":null}
+river export choke tiles on starting land: []
+coast export choke tiles on starting land: []
+highland export choke tiles on starting land: []
+NOT-REPRODUCED X2-autosell-silent-when-blocked :: {"connected":false,"shipments":0,"notices":["자동 판매 멈춤 · 창고에서 수출 관문까지 길이 막혔습니다"],"note":"older save with a house on (8,11); stock set directly to 200 wood to trigger auto-sell"}
+
+[export-chokepoint] 0 of 2 audit findings reproduced
+
+[tests/audit/raid-gated-trial.mjs]
+first raid (game days) per seed ["2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일","2.4일"]
+NOT-REPRODUCED T1-trial-waits-on-random-raid :: {"medianDays":2.4,"max":2.4,"neverWithin40Days":0,"code":"progression.js:9 defended; simulation.js:183 raid only via chooseEvent"}
+
+[raid-gated-trial] 0 of 1 audit findings reproduced
+
+[tests/audit/events-early.mjs]
+NOT-REPRODUCED V1-illness-advice-names-locked-clinic :: {"rank":0,"notice":"감염 발생 · 방역(35G · 물 8 · 목재 3)으로 확산을 낮추세요.","alert":"진료소에 약초와 물 공급","clinicUnlock":"준자유민","infectionPerDayNoAction":[49,65,79,88,94,97,98,99,100,100],"note":"nextEvent set directly to roll events sooner"}
+NOT-REPRODUCED V2-storm-target-deterministic-first-building :: {"hitsAcrossLayouts":["","","","","",""],"code":"simulation.js:192-194 list.find(nearWater)||list[0]"}
+NOT-REPRODUCED V3-hints-name-locked-buildings :: []
+
+[events-early] 0 of 3 audit findings reproduced
+
+[tests/audit/progression-and-docs.mjs]
+redundant []
+unreachable []
+NOT-REPRODUCED P1-requirements-already-met-by-earlier-rank :: {"count":0,"items":[]}
+NOT-REPRODUCED P2-requirement-without-means :: []
+doc rank rows 33 of 33 ; facility rows 87 of 87
+NOT-REPRODUCED D1-design-doc-rank-table-drift :: []
+NOT-REPRODUCED D2-design-doc-facility-table-drift :: []
+NOT-REPRODUCED D3-facilities-missing-from-design-doc :: []
+NOT-REPRODUCED D4-design-doc-says-GLB-residents :: {"line":0,"note":"AGENTS.md: residents are 2D pixel atlases (public/assets/pixel-characters)"}
+
+[progression-and-docs] 0 of 6 audit findings reproduced
+
+[tests/audit/stock-ledger.mjs]
+{"seconds":900,"actions":136,"imports":18,"contracts":9,"recipeSwitches":51,"fuelTrips":5,"anomalies":0,"sample":[]}
+NOT-REPRODUCED L1-unexplained-item-delta :: {"count":0,"byContext":[]}
+NOT-REPRODUCED L2-negative-stock :: []
+NOT-REPRODUCED L3-stock-above-capacity :: {"over":[["grain",415,390]],"reported":["grain"]}
+
+[stock-ledger] 0 of 3 audit findings reproduced
+
+[tests/audit/save-edges.mjs]
+["mid-raid speed4",true,null]
+["rescue river detour",true,null]
+["route ambush speed4",true,null,[-0.7]]
+["carts + pending storm",true,null]
+NOT-REPRODUCED S1-roundtrip-failure :: []
+save size [{"sites":1,"saveChars":70935,"threeCopiesMB":0.41},{"sites":4,"saveChars":146769,"threeCopiesMB":0.84},{"sites":8,"saveChars":298461,"threeCopiesMB":1.71},{"sites":16,"saveChars":601831,"threeCopiesMB":3.44},{"sites":24,"saveChars":905225,"threeCopiesMB":5.18}]
+
+[save-edges] 0 of 1 audit findings reproduced
+
+[tests/audit/debt-spiral.mjs]
+[{"day":11,"money":745,"debt":1000,"wage":31,"loans":0,"unrest":5,"support":75},{"day":21,"money":435,"debt":1000,"wage":31,"loans":0,"unrest":0,"support":80},{"day":31,"money":500,"debt":1488,"wage":36,"loans":1,"unrest":0,"support":72},{"day":41,"money":500,"debt":1956,"wage":41,"loans":2,"unrest":0,"support":72},{"day":51,"money":454,"debt":2436,"wage":46,"loans":3,"unrest":0,"support":80},{"day":61,"money":347,"debt":2915,"wage":51,"loans":4,"unrest":0,"support":80},{"day":71,"money":170,"debt":3380,"wage":55,"loans":5,"unrest":0,"support":80},{"day":81,"money":305,"debt":4349,"wage":65,"loans":7,"unrest":0,"support":80}]
+NOT-REPRODUCED B1-debt-spiral-irreversible :: {"after80Days":{"day":81,"money":305,"debt":4349,"wage":65,"loans":7,"unrest":0,"support":80},"referenceIncomePerDayWithGrainAutoSell":103,"code":"simulation.js:90 wage adds ceil(debt*1%); economy.js:39-40 loan adds 130% to debt"}
+
+[debt-spiral] 0 of 1 audit findings reproduced
+
+[tests/audit/branch-site.mjs]
+{"found":{"ok":true,"id":"site-2"},"builtAtBranch":[["warehouse",true],["house",true],["lumber",true],["well",true]],"branchStock":{"wood":38,"stone":11,"water":31},"route":{"status":"운송 중","completed":1},"deliveries":1,"branchStatus":["warehouse@11,12:운반 중","house@11,14:정상 운영","lumber@9,10:생산 중","well@13,12:운반 대기"]}
+NOT-REPRODUCED G1-branch-cannot-bootstrap :: {"found":{"ok":true,"id":"site-2"},"steps":[["warehouse",true],["house",true],["lumber",true],["well",true]],"route":"운송 중"}
+
+[branch-site] 0 of 1 audit findings reproduced
+
+[tests/audit/sapling-timer.mjs]
+NOT-REPRODUCED Y1-sapling-eta-understated :: {"shownDays":2,"actualDays":2,"code":"Game.tsx tile panel ceil((growAt-time)/80); simulation.js:149 growth only on day change"}
+
+[sapling-timer] 0 of 1 audit findings reproduced
+
+TownGrid local regression checks passed.

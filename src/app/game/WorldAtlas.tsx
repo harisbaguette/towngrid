@@ -1,50 +1,106 @@
 'use client';
-import {useId,useState} from 'react';
+import {memo,useEffect,useId,useRef,useState} from 'react';
+import {ChevronRight,Compass,Focus,Globe2,Grid2X2,MapPin,Minus,Plus,Route} from 'lucide-react';
 import {biomeOf} from './biome-data';
 import {PROVINCES,cellsPath} from './territory';
-import {NATIONS,ATLAS_REGIONS,FACTIONS} from './world';
+import {NATIONS,ATLAS_REGIONS} from './world';
 import {MAJOR_ROUTES,WATERWAYS,TRADE_LINKS} from './trade-routes';
-import {WORLD_CELLS,CELL,COLS,ROWS,TERRAIN_NAMES,SIDES,SIDE_NAMES,layoutOf} from './world-grid';
-import {MAP_LABELS} from './world-map';
-// The continent is a grid of squares (world-grid.js). Each site is one square, and each side of its
-// map is the square beside it, so the atlas tints every square that is not plain land or open sea.
-const TERRAIN_FILL:any={mountain:['#8a7a66',.35],forest:['#4f7d45',.3],desert:['#f1cf7c',.4],ice:['#f4fbff',.55],lake:['#5fa8d3',.45],river:['#5fa8d3',.45],canal:['#5fa8d3',.45],stream:['#5fa8d3',.4]};
-// Geometry and labels follow the authoritative world squares.
-const LAND_PATH=(WORLD_CELLS as any[]).filter(c=>c.terrain!=='coast').map(c=>`M${c.cx*CELL} ${c.cz*CELL}h${CELL}v${CELL}h-${CELL}Z`).join('');
-const GREAT_RIVERS=(WATERWAYS as any[]).filter(w=>w.kind==='river').map(w=>({...w,label:w.line[Math.floor(w.line.length/2)]}));
-const BASE_FILL:any={plain:'#a4b873',forest:'#688c58',mountain:'#978d7c',desert:'#dcb878',ice:'#e5f0ee',coast:'#75b6c9',river:'#69abc4',lake:'#69abc4',canal:'#6faec3',stream:'#78b9cd'};
-const TINTED=(WORLD_CELLS as any[]).filter(c=>TERRAIN_FILL[c.terrain]&&!c.site);
-const SITE_CELLS=(WORLD_CELLS as any[]).filter(c=>c.site).map(c=>{const p:any=PROVINCES.find((p:any)=>p.id===c.site),l:any=layoutOf(c.site);return {...c,p,ecology:biomeOf(l),label:p.name+' · '+biomeOf(l)?.name+' · '+SIDES.map(([side]:any)=>(SIDE_NAMES as any)[side]+' '+(TERRAIN_NAMES as any)[l.edges[side]]).join(' · ')};});
-const paths=Object.keys(NATIONS).map(id=>cellsPath((PROVINCES as any[]).filter(p=>p.nation===id).flatMap(p=>p.cells)));
-const colors:any={human:['#e8d599','#e3c48d','#d5bb89'],elf:['#b9d3ac','#a6c9b4','#c8d7ae'],demon:['#c7afc8','#baa8c1'],orc:['#d9af9b','#cda889'],beast:['#b1c8c9','#9cbdc8']};
-// trade: the connection the current site sells through (sim.tradeConnection()), highlighted on the map.
-export default function WorldAtlas({nation,onNation,sites=[],routes=[],states=[],provinces={},trade=null}:any){const [focus,setFocus]=useState('all'),uid=useId().replace(/:/g,''),selected=(NATIONS as any)[nation];return <div className="atlas-shell">
- <nav className="atlas-controls" aria-label="세계 지도 확대"><button onClick={()=>setFocus('all')} className={focus==='all'?'active':''}>대륙 전체</button>{ATLAS_REGIONS.map((r:any)=><button key={r.id} onClick={()=>setFocus(r.id)} className={focus===r.id?'active':''}>{r.name}</button>)}</nav>
- <svg className={'world-atlas '+(focus==='all'?'whole-world':'')} viewBox={ATLAS_REGIONS.find((r:any)=>r.id===focus)?.view||`0 0 ${COLS*CELL} ${ROWS*CELL}`} role="group" aria-label="이르데아 대륙. 가운데 세 잎 내해와 북쪽·남동쪽 두 만, 다섯 큰 강으로 나뉜 30개 국가">
- <defs><clipPath id={'land-'+uid}><path d={LAND_PATH} clipRule="evenodd"/></clipPath><pattern id={'grid-'+uid} width={CELL} height={CELL} patternUnits="userSpaceOnUse"><path d={`M${CELL} 0H0V${CELL}`} fill="none" stroke="#fff" strokeWidth=".6" opacity=".35"/></pattern><pattern id={'enemy-'+uid} width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><path d="M0 0V8" stroke="#795c73" strokeWidth="1" opacity=".17"/></pattern><linearGradient id={'water-'+uid} x2="0" y2="1"><stop stopColor="#a5d5e6"/><stop offset="1" stopColor="#72b4d1"/></linearGradient></defs>
- <g className="world-terrain" aria-hidden="true" pointerEvents="none">{(WORLD_CELLS as any[]).map(c=><rect key={c.cx+','+c.cz} x={c.cx*CELL} y={c.cz*CELL} width={CELL} height={CELL} fill={BASE_FILL[c.terrain]}/>)}</g>
+import {CELL,TERRAIN_NAMES,layoutOf} from './world-grid';
+import {ATLAS_WIDTH,ATLAS_HEIGHT,FULL_VIEW,NATION_SHAPES,CELL_PROVINCES,PROVINCE_INDEX,clampView,viewAround,zoomView,tileAt} from './atlas-geometry';
+import {ATLAS_ART,atlasSprite} from './atlas-terrain';
+import {startingProvince,defaultStartingProvince} from './starting-sites';
+import {placeAtlasLabels} from './atlas-labels';
+import '../world-atlas.css';
 
- <g clipPath={`url(#land-${uid})`}>
- {Object.entries(NATIONS).map(([id,n]:any,i:number)=><g key={id} className={'country '+(id===nation?'chosen':'')}><path d={paths[i]} fill={id===nation?"#ffe599":colors[n.faction][i%colors[n.faction].length]} fillOpacity={id===nation?.25:.075} stroke={id===nation?"#fff0a9":"#f9f6da"} strokeOpacity={id===nation?1:.4} strokeWidth={id===nation?3:1.1} strokeDasharray={id===nation?undefined:"4 5"} tabIndex={0} role="button" aria-label={n.name+' 선택'+(!n.playable?' · 적대국':'')} aria-pressed={id===nation} onClick={()=>onNation(id)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onNation(id);}}}/>{!n.playable&&<path d={paths[i]} fill={`url(#enemy-${uid})`} pointerEvents="none"/>}</g>)}
+const EMPTY:any[]=[];
+const Terrain=memo(function Terrain({uid}:{uid:string}){return <g className="world-terrain" pointerEvents="none" aria-hidden="true">
+ <defs><pattern id={uid+'-grid'} width={CELL} height={CELL} patternUnits="userSpaceOnUse"><path d={'M0 '+CELL+'V0H'+CELL} fill="none" stroke="#fbf2cf" strokeWidth=".55" strokeOpacity=".28"/></pattern></defs>
+ <image href={ATLAS_ART+'terrain.webp'} width={ATLAS_WIDTH} height={ATLAS_HEIGHT} preserveAspectRatio="none" style={{imageRendering:'pixelated'}}/>
+ <rect width={ATLAS_WIDTH} height={ATLAS_HEIGHT} fill={'url(#'+uid+'-grid)'}/>
+</g>;});
+const TradeNetwork=memo(function TradeNetwork(){return <g className="trade-network" pointerEvents="none" aria-hidden="true">
+ {TRADE_LINKS.map((l:any)=><path key={l.id+l.from} d={'M'+l.from+'L'+l.to} className={'trade-link '+l.kind} vectorEffect="non-scaling-stroke"/>)}
+ {WATERWAYS.filter((w:any)=>w.kind==='coast'||w.kind==='river').map((w:any)=><polyline key={w.id} points={(w.lane||w.line).join(' ')} className={'water-lane '+w.kind} vectorEffect="non-scaling-stroke"/>)}
+ {MAJOR_ROUTES.map((r:any)=><g key={r.id} className={'trade-route '+r.kind}><polyline points={r.points.join(' ')} className="casing" vectorEffect="non-scaling-stroke"/><polyline points={r.points.join(' ')} vectorEffect="non-scaling-stroke"/></g>)}
+</g>;});
 
- {PROVINCES.filter((p:any)=>provinces[p.id]?.owner&&provinces[p.id].owner!==p.nation).map((p:any)=>{const state=states.find((s:any)=>s.id===provinces[p.id].owner);return <path key={p.id} d={cellsPath(p.cells)} fill={state?.pact?'#86b5c8':'#d59360'} fillOpacity=".45" stroke="#ffecd2" strokeWidth="1.6"><title>{state?.name} · {p.name} · {p.resource}</title></path>;})}
- <g className="terrain-grid" pointerEvents="none">{TINTED.map((c:any)=><rect key={c.cx+','+c.cz} className={'cell-'+c.terrain} x={c.cx*CELL} y={c.cz*CELL} width={CELL} height={CELL} fill={TERRAIN_FILL[c.terrain][0]} fillOpacity={TERRAIN_FILL[c.terrain][1]}/>)}<rect width="1300" height="806" fill={`url(#grid-${uid})`}/></g>
- {SITE_CELLS.map((c:any)=><rect key={'site-'+c.site} className="site-cell" x={c.cx*CELL+1} y={c.cz*CELL+1} width={CELL-2} height={CELL-2} fill={c.ecology?.color||TERRAIN_FILL[c.terrain]?.[0]||'#fff8dd'} fillOpacity=".3" stroke={c.p.nation===nation?'#fff0a9':'#fffbe8'} strokeOpacity=".9" strokeWidth="1.4" onClick={()=>onNation(c.p.nation)}><title>{c.label}</title></rect>)}
- {GREAT_RIVERS.map((r:any)=><g key={r.name} pointerEvents="none"><text className="river-label" x={r.label[0]} y={r.label[1]}>{r.name}</text></g>)}
- </g>
- <g className="waterways" pointerEvents="none" aria-hidden="true">
- {WATERWAYS.filter((w:any)=>w.kind==='lake').map((w:any)=><g key={w.id} className="waterway lake"><path d={'M'+w.line.join('L')+'Z'}/><text x={w.center[0]} y={w.center[1]+3} textAnchor="middle">{w.name}</text></g>)}
- {WATERWAYS.filter((w:any)=>['canal','stream','ferry'].includes(w.kind)).map((w:any)=><g key={w.id} className={'waterway '+w.kind}><polyline points={w.line.join(' ')} className="bank"/><polyline points={w.line.join(' ')}/></g>)}
- </g>
- <g className="trade-network" pointerEvents="none" aria-hidden="true">
- {TRADE_LINKS.map((l:any)=><path key={l.id+l.from} d={`M${l.from}L${l.to}`} className={'trade-link '+l.kind}/>)}
- {WATERWAYS.filter((w:any)=>w.kind==='coast'||w.kind==='river').map((w:any)=><polyline key={w.id} points={(w.lane||w.line).join(' ')} className={'water-lane '+w.kind}/>)}
- {MAJOR_ROUTES.map((r:any)=><g key={r.id} className={'trade-route '+r.kind}><polyline points={r.points.join(' ')} className="casing"/><polyline points={r.points.join(' ')}/></g>)}
- {trade&&<g className="trade-mine"><polyline points={trade.line.join(' ')}/><path d={`M${trade.from}L${trade.to}`}/><circle cx={trade.from[0]} cy={trade.from[1]} r="7"/></g>}
- </g>
- <g pointerEvents="none" aria-hidden="true">{WATERWAYS.filter((w:any)=>w.kind==='coast').map((w:any)=><text key={w.id} x={w.label[0]} y={w.label[1]} className="sea-label" textAnchor="middle">{w.name}</text>)}{(MAP_LABELS as any[]).map(l=>{const x=(l.at[0]+.5)*CELL,y=(l.at[1]+.5)*CELL;return <text key={l.name} x={x} y={y} className="range-label" textAnchor="middle" transform={l.vertical?`rotate(90 ${x} ${y})`:undefined}>{l.name}</text>;})}</g>
- {routes.map((r:any)=>{const a=sites.find((s:any)=>s.id===r.from),b=sites.find((s:any)=>s.id===r.to);if(!a||!b||a.nation===b.nation)return null;const p=(NATIONS as any)[a.nation].point,q=(NATIONS as any)[b.nation].point;return <path key={r.id} d={`M${p}Q${(p[0]+q[0])/2} ${Math.min(p[1],q[1])-65} ${q}`} className={'atlas-route '+(r.cargo?'moving':'')} fill="none" stroke={r.mode==='rail'?'#a66a32':'#397dba'} strokeWidth="3"/>;})}
- {Object.entries(NATIONS).map(([id,n]:any)=><g key={id} transform={`translate(${n.point})`} onClick={()=>onNation(id)} className={'atlas-label '+(nation===id?'selected':'')} role="presentation"><circle r={nation===id?15:9} fill={nation===id?'#2c86b4':'#fff8dd'} stroke={n.playable?'#487655':'#886076'} strokeWidth="2"/>{n.playable?<path d="M-4 1 0-4 4 1V5H-4Z" fill={nation===id?'#fff':'#537354'}/>:<path d="m-3-3 6 6m0-6-6 6" stroke="#886076" strokeWidth="2"/>}<text y="-21" textAnchor="middle">{focus==='all'?n.capital:n.name}</text>{sites.some((s:any)=>s.nation===id)&&<path d="M15-9v23m0-23h13l-3 5 3 5H15" fill="#f4c75e" stroke="#4e7453" strokeWidth="1"/>}{states.some((s:any)=>(s.rootNation||s.parent)===id)&&<circle cx="-16" cy="10" r="5" fill="#e67c5c"/>}</g>)}
- {states.filter((s:any)=>s.point&&s.provinceIds?.length).map((s:any)=><g key={s.id} className="new-state-label" transform={`translate(${s.point})`}><circle r="5" fill="#f8edbb" stroke="#685743"/><text y="15" textAnchor="middle">{s.name}</text></g>)}
- </svg><div className="atlas-legend"><span><i className="legend-start"/>시작 가능</span><span><i className="legend-enemy"/>적대 세력</span><span className="legend-trade"><i className="silk"/>비단길</span><span className="legend-trade"><i className="paved"/>포장 무역로</span><span className="legend-trade"><i className="minor"/>시골·산길</span><span className="legend-trade"><i className="sea"/>항로</span><span className="legend-trade"><i className="river"/>강·운하·하천</span><span className="legend-trade"><i className="lake"/>호수</span><span><i className="legend-site"/>거점 칸</span><span><i className="legend-mountain"/>산</span><span><i className="legend-forest"/>숲</span><span><i className="legend-ice"/>얼음 지대</span><span><i className="legend-desert"/>사막</span><strong>{selected?.name} · {(FACTIONS as any)[selected?.faction]?.name}</strong></div>
- </div>}
+export default function WorldAtlas({nation,onNation,sites=EMPTY,routes=EMPTY,states=EMPTY,provinces={},trade=null,activeProvinceId,onVisit,startProvinceId,onStartProvince,campaign,selectedProvinceId,onProvince}:any){
+ const uid=useId().replace(/:/g,''),svg=useRef<SVGSVGElement>(null),viewport=useRef<HTMLDivElement>(null);
+ const [size,setSize]=useState({width:900,height:600});
+ const [view,setView]=useState(()=>sites.length?viewAround(PROVINCE_INDEX.get(activeProvinceId)?.point||(NATIONS as any)[nation].point):FULL_VIEW);
+ const [network,setNetwork]=useState(false),[region,setRegion]=useState(sites.length?'nation':'all');
+ const [selection,setSelection]=useState<{nation:string;cx:number;cz:number}|null>(null);
+ const drag=useRef<any>(null),pointers=useRef(new Map<number,{x:number;y:number}>()),pinch=useRef<any>(null),previousNation=useRef(nation);
+ const externalId=onStartProvince?startProvinceId:selectedProvinceId;
+ useEffect(()=>{const element=viewport.current;if(!element)return;const observer=new ResizeObserver(([entry])=>setSize({width:Math.max(1,entry.contentRect.width),height:Math.max(1,entry.contentRect.height)}));observer.observe(element);return()=>observer.disconnect();},[]);
+ useEffect(()=>{if(previousNation.current!==nation){previousNation.current=nation;setView(current=>current.width===ATLAS_WIDTH?current:viewAround((NATIONS as any)[nation].point,current.width));}},[nation]);
+ useEffect(()=>{const p=PROVINCE_INDEX.get(externalId);if(p&&p.nation===nation){setSelection({nation,cx:p.cell[0],cz:p.cell[1]});setView(current=>current.width===ATLAS_WIDTH?current:viewAround(p.point,current.width));}},[nation,externalId]);
+ useEffect(()=>{
+  const element=svg.current;if(!element)return;
+  const wheel=(event:WheelEvent)=>{if(event.ctrlKey||event.metaKey)return;const matrix=element.getScreenCTM();if(!matrix)return;event.preventDefault();const point=new DOMPoint(event.clientX,event.clientY).matrixTransform(matrix.inverse());const delta=event.deltaY*(event.deltaMode===1?16:event.deltaMode===2?400:1);setView(current=>zoomView(current,Math.exp(Math.max(-100,Math.min(100,delta))*.004),[point.x,point.y]));setRegion('custom');};
+  element.addEventListener('wheel',wheel,{passive:false});return()=>element.removeEventListener('wheel',wheel);
+ },[]);
+ const selected=(NATIONS as any)[nation],activeProvince=PROVINCE_INDEX.get(activeProvinceId);
+ const focused=PROVINCE_INDEX.get(externalId)||(activeProvince?.nation===nation?activeProvince:null)||(onStartProvince?defaultStartingProvince(nation):null)||PROVINCE_INDEX.get(nation+'-0')!;
+ const cell=selection&&selection.nation===nation?selection:{cx:focused.cell[0],cz:focused.cell[1]};
+ const tile=tileAt((cell.cx+.5)*CELL,(cell.cz+.5)*CELL)!;
+ const province:any=CELL_PROVINCES.get(cell.cx+','+cell.cz),siteProvince:any=tile.site?PROVINCE_INDEX.get(tile.site):null;
+ const ownedSite=sites.find((s:any)=>s.provinceId===tile.site),close=view.width<ATLAS_WIDTH*.6,detail=view.width<ATLAS_WIDTH*.32;
+ const ecology=siteProvince?biomeOf(layoutOf(tile.site)):null;
+ const unit=1/Math.min(size.width/view.width,size.height/view.height);
+ const visible=(p:any)=>p.point[0]>=view.x&&p.point[0]<=view.x+view.width&&p.point[1]>=view.y&&p.point[1]<=view.y+view.height;
+ const point=(e:{clientX:number;clientY:number})=>{const matrix=svg.current?.getScreenCTM();if(!matrix)return null;const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(matrix.inverse());return [p.x,p.y];};
+ const selectCell=(cx:number,cz:number)=>{
+  const target=tileAt((cx+.5)*CELL,(cz+.5)*CELL);if(!target)return false;
+  const owner:any=CELL_PROVINCES.get(cx+','+cz),id=owner?.nation||nation;
+  setSelection({nation:id,cx,cz});if(id!==nation)onNation(id);
+  onStartProvince?.(startingProvince(id,target.site)?.id||null);onProvince?.(target.site||null);return true;
+ };
+ const focusNation=()=>{setView(viewAround(selected.point));setRegion('nation');};
+ const focusCell=()=>{setView(viewAround([(cell.cx+.5)*CELL,(cell.cz+.5)*CELL],CELL*8));setRegion('custom');};
+ const reset=()=>{setView(FULL_VIEW);setRegion('all');};
+ const pickRegion=(id:string)=>{setRegion(id);if(id==='all'){reset();return;}const r=ATLAS_REGIONS.find((r:any)=>r.id===id);if(r){const [x,y,width,height]=r.view.split(' ').map(Number);setView(viewAround([x+width/2,y+height/2],Math.max(width,height*ATLAS_WIDTH/ATLAS_HEIGHT)));}};
+ const statusOf=(p:any)=>sites.some((s:any)=>s.provinceId===p.id)?'owned':!(NATIONS as any)[p.nation].playable?'hostile':onStartProvince?(startingProvince(p.nation,p.id)?'available':'capital'):campaign?campaign.siteOffer(p.nation,p.id).status:p.capital?'capital':'locked';
+ const markers=PROVINCES.filter((p:any)=>visible(p)&&(p.capital||p.nation===nation||sites.some((s:any)=>s.provinceId===p.id))).map((p:any)=>({...p,status:statusOf(p)}));
+ const labels=placeAtlasLabels([
+  ...Object.entries(NATIONS).filter(([id,n]:any)=>visible(n)&&(!detail||id===nation)).map(([id,n]:any)=>({id:'nation-'+id,text:n.name,point:n.point,font:id===nation?13:11,priority:id===nation?90:20,kind:'nation'})),
+  ...(close?markers.filter((p:any)=>p.nation===nation||p.status==='owned').map((p:any)=>({id:p.id,text:p.capital?'수도 · '+(NATIONS as any)[p.nation].capital:p.name.split(' ').slice(1).join(' '),point:p.point,font:11,priority:p.id===tile.site?100:p.status==='owned'?80:40,kind:'site',offset:20})):[]),
+  ...(!close?WATERWAYS.filter((w:any)=>w.kind==='coast').map((w:any)=>({id:w.id,text:w.name,point:w.label,font:12,priority:10,kind:'water',offset:0})):[]),
+  ...states.filter((s:any)=>s.point&&s.provinceIds?.length&&close).map((s:any)=>({id:s.id,text:s.name,point:s.point,font:11,priority:35,kind:'state'}))
+ ],view,size);
+ const offer=campaign&&tile.site?campaign.siteOffer(siteProvince.nation,tile.site):null;
+ const statusText=ownedSite?'내 거점':onStartProvince?(startingProvince(nation,tile.site)?'시작 가능':siteProvince?.capital?'수도권 · 시작 불가':!selected.playable?'적대 세력 · 시작 불가':!siteProvince?'정착 부지 아님 · 시작 불가':'시작 불가'):offer?(offer.ok?'진출 가능':offer.reason):'정착 부지 아님';
+ return <div className="atlas-shell atlas-v2" data-detail={detail?'site':close?'region':'continent'}>
+  <div className="atlas-toolbar"><nav className="atlas-breadcrumb" aria-label="지도 범위"><button onClick={reset} aria-pressed={view.width===ATLAS_WIDTH}><Globe2 size={16}/>대륙 전체</button><ChevronRight size={14}/><button onClick={focusNation} aria-pressed={region==='nation'}>{selected.name}</button>{detail&&<><ChevronRight size={14}/><span>거점 주변</span></>}</nav><button className={'atlas-layer '+(network?'active':'')} aria-label="무역로 표시" aria-pressed={network} onClick={()=>setNetwork(!network)}><Route size={16}/><span>무역로</span></button></div>
+  <div ref={viewport} className="atlas-viewport">
+   <svg ref={svg} className={'world-atlas '+(!close?'whole-world':'')} viewBox={[view.x,view.y,view.width,view.height].join(' ')} role="group" tabIndex={0} aria-label="이르데아 격자 지도. 방향키로 칸 선택, Enter로 주변 확대, 더하기와 빼기로 확대·축소"
+    onPointerDown={e=>{if(e.button!==0)return;e.currentTarget.setPointerCapture(e.pointerId);pointers.current.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.current.size===2){const [a,b]=[...pointers.current.values()];pinch.current={distance:Math.hypot(a.x-b.x,a.y-b.y),view,point:point({clientX:(a.x+b.x)/2,clientY:(a.y+b.y)/2}),center:{x:(a.x+b.x)/2,y:(a.y+b.y)/2}};drag.current=null;}else drag.current={x:e.clientX,y:e.clientY,view,moved:false};}}
+    onPointerMove={e=>{if(!pointers.current.has(e.pointerId))return;pointers.current.set(e.pointerId,{x:e.clientX,y:e.clientY});const p=pinch.current;if(p&&pointers.current.size===2){const [a,b]=[...pointers.current.values()],distance=Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)),next=zoomView(p.view,p.distance/distance,p.point);const scale=Math.min(size.width/next.width,size.height/next.height);setView(clampView({...next,x:next.x-((a.x+b.x)/2-p.center.x)/scale,y:next.y-((a.y+b.y)/2-p.center.y)/scale}));setRegion('custom');return;}const d=drag.current;if(!d)return;const dx=e.clientX-d.x,dy=e.clientY-d.y;if(Math.abs(dx)+Math.abs(dy)>5)d.moved=true;if(d.moved){const scale=svg.current?.getScreenCTM()?.a||1;setView(clampView({...d.view,x:d.view.x-dx/scale,y:d.view.y-dy/scale}));setRegion('custom');}}}
+    onPointerUp={e=>{pointers.current.delete(e.pointerId);if(pinch.current){pinch.current=null;drag.current=null;return;}const d=drag.current;drag.current=null;if(!d||d.moved)return;const p=point(e);if(p){const t=tileAt(p[0],p[1]);if(t)selectCell(t.cx,t.cz);}}}
+    onPointerCancel={e=>{pointers.current.delete(e.pointerId);drag.current=null;pinch.current=null;}}
+    onDoubleClick={e=>{const p=point(e);if(p){setView(viewAround(p,view.width*.55));setRegion('custom');}}}
+    onKeyDown={e=>{const dirs:any={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]};if(dirs[e.key]){e.preventDefault();const [dx,dz]=dirs[e.key];if(selectCell(cell.cx+dx,cell.cz+dz)&&close)setView(viewAround([(cell.cx+dx+.5)*CELL,(cell.cz+dz+.5)*CELL],view.width));}else if(e.key==='Enter'){e.preventDefault();focusCell();}else if(['+','=','-','Home'].includes(e.key)){e.preventDefault();if(e.key==='Home')reset();else setView(zoomView(view,e.key==='-'?1.4:1/1.4));}}}>
+    <Terrain uid={uid}/>
+    <g className="country-borders" pointerEvents="none" aria-hidden="true">{NATION_SHAPES.map((shape:any)=><path key={shape.id} d={shape.boundary} fill="none" stroke={shape.id===nation?'#ffe6a1':'#f4edcc'} strokeWidth={shape.id===nation?2.3:.65} strokeOpacity={shape.id===nation?.95:.5} vectorEffect="non-scaling-stroke"/>)}<path d={NATION_SHAPES.find((shape:any)=>shape.id===nation)?.path} fill="#fff2b1" fillOpacity=".045"/></g>
+    {PROVINCES.filter((p:any)=>provinces[p.id]?.owner&&provinces[p.id].owner!==p.nation).map((p:any)=><path key={p.id} d={cellsPath(p.cells)} fill="#bc7b65" fillOpacity=".28" pointerEvents="none"/>)}
+    {network&&<TradeNetwork/>}
+    {trade&&network&&<g className="trade-network trade-mine" pointerEvents="none"><polyline points={trade.line.join(' ')} vectorEffect="non-scaling-stroke"/><path d={'M'+trade.from+'L'+trade.to} vectorEffect="non-scaling-stroke"/></g>}
+    {routes.map((r:any)=>{const a=sites.find((s:any)=>s.id===r.from),b=sites.find((s:any)=>s.id===r.to);if(!a||!b)return null;const p=PROVINCE_INDEX.get(a.provinceId)?.point,q=PROVINCE_INDEX.get(b.provinceId)?.point;if(!p||!q)return null;return <path key={r.id} d={'M'+p+'L'+q} className={'atlas-route '+(r.cargo?'moving':'')} fill="none" stroke="#f7d280" strokeWidth="2" strokeDasharray="5 4" vectorEffect="non-scaling-stroke" pointerEvents="none"/>;})}
+    {campaign&&siteProvince&&!ownedSite&&<path d={'M'+(PROVINCE_INDEX.get(activeProvinceId)?.point||selected.point)+'L'+siteProvince.point} stroke={offer?.ok?'#ffe5a0':'#ddd9bf'} strokeWidth="2" strokeDasharray="4 5" fill="none" vectorEffect="non-scaling-stroke" pointerEvents="none"/>}
+    <g className="atlas-sites" pointerEvents="none">{markers.map((p:any)=>{const own=p.status==='owned',available=p.status==='available'||p.status==='materials',w=(close?30:22)*unit;return <g key={p.id} data-province={p.id} data-status={p.status} className={'atlas-site '+p.status}>
+     {(p.nation===nation||own)&&<rect x={p.cell[0]*CELL+1} y={p.cell[1]*CELL+1} width={CELL-2} height={CELL-2} rx={1.5} fill={own?'#2e6c58':available?'#fff3b9':'#233f39'} fillOpacity={own?.27:available?.12:.16} stroke={own?'#92d5a3':available?'#ffdf8b':'#d2d2b5'} strokeWidth={own||available?1.5:1} strokeDasharray={p.status==='locked'?'3 3':undefined} vectorEffect="non-scaling-stroke"/>}
+     <image href={atlasSprite(own?'settlement':p.status==='hostile'?'hostile':p.capital?'capital':'frontier')} x={p.point[0]-w/2} y={p.point[1]-w*.65} width={w} height={w} style={{imageRendering:'pixelated',opacity:p.status==='locked'?.6:1}}/>
+     {p.status==='locked'&&<g transform={`translate(${p.point[0]+w*.33} ${p.point[1]+w*.18}) scale(${unit})`}><rect x="-4" y="-2" width="8" height="7" rx="1" fill="#eae0bc" stroke="#4b5e4c"/><path d="M-2-2v-3a2 2 0 014 0v3" fill="none" stroke="#eae0bc" strokeWidth="2"/></g>}
+    </g>;})}</g>
+    <g className="atlas-screen-labels" pointerEvents="none">{labels.map((label:any)=><g key={label.id} className={'atlas-screen-label '+label.kind} data-label={label.id}><rect x={label.x-label.width/2} y={label.y-label.height/2} width={label.width} height={label.height} rx={3*unit} fill={label.kind==='water'?'#245d718c':'#f6efd7ed'} stroke={label.kind==='water'?'#8ab8b6':'#385d4977'} strokeWidth=".6" vectorEffect="non-scaling-stroke"/><text x={label.x} y={label.y} textAnchor="middle" dominantBaseline="central" style={{fontSize:label.font,fill:label.kind==='water'?'#f4ecd1':'#2c493b',fontWeight:label.kind==='nation'?750:650}}>{label.text}</text></g>)}</g>
+    <rect className="atlas-selection" x={cell.cx*CELL+.5} y={cell.cz*CELL+.5} width={CELL-1} height={CELL-1} rx="1" fill="none" stroke="#fff2be" strokeWidth="3" vectorEffect="non-scaling-stroke" pointerEvents="none"/>
+   </svg>
+   <span className="atlas-compass" aria-hidden="true"><Compass size={22}/><b>N</b></span>
+   {close&&<button className="atlas-minimap" onClick={reset} aria-label="대륙 전체로 돌아가기"><svg viewBox={'0 0 '+ATLAS_WIDTH+' '+ATLAS_HEIGHT} aria-hidden="true"><image href={ATLAS_ART+'terrain.webp'} width={ATLAS_WIDTH} height={ATLAS_HEIGHT}/><rect x={view.x} y={view.y} width={view.width} height={view.height} fill="#fff1bb33" stroke="#fff0b5" strokeWidth="12"/></svg></button>}
+   <div className="atlas-zoom" aria-label="지도 확대"><button aria-label="세계 지도 확대" onClick={()=>{setView(zoomView(view,1/1.5));setRegion('custom');}} disabled={view.width<=CELL*8}><Plus size={19}/></button><button aria-label="세계 지도 축소" onClick={()=>{setView(zoomView(view,1.5));setRegion('custom');}} disabled={view.width>=ATLAS_WIDTH}><Minus size={19}/></button><button aria-label="선택 국가로 이동" onClick={focusNation}><Focus size={18}/></button></div>
+   <span className="atlas-scale"><Grid2X2 size={15}/>1칸 = 24 × 24 마을</span>
+  </div>
+  <div className="atlas-bottom"><div className="atlas-cell-readout" aria-live="polite"><MapPin size={17}/><div><strong>{ecology?.name||(TERRAIN_NAMES as any)[tile.terrain]}<small>{cell.cx+1}, {cell.cz+1}</small></strong><span>{ownedSite?.name||siteProvince?.name||(province?(NATIONS as any)[province.nation].name:'자연 지형')} · {statusText}</span></div></div><button className="atlas-inspect" onClick={()=>ownedSite&&onVisit&&ownedSite.provinceId!==activeProvinceId?onVisit(ownedSite.id):focusCell()}>{ownedSite&&onVisit&&ownedSite.provinceId!==activeProvinceId?'거점 이동':'주변 확대'}<ChevronRight size={15}/></button></div>
+  <div className="atlas-legend"><span><img src={atlasSprite('capital')} alt=""/>수도</span><span><img src={atlasSprite('frontier')} alt=""/>{onStartProvince?'시작 후보':'진출 후보'}</span>{sites.length>0&&<span><img src={atlasSprite('settlement')} alt=""/>내 거점</span>}<span><img src={atlasSprite('hostile')} alt=""/>적대</span><label className="atlas-region-select"><span className="sr-only">지도 지역</span><select aria-label="지도 지역" value={['all','west','north','south'].includes(region)?region:''} onChange={e=>pickRegion(e.target.value)}><option value="" disabled>직접 탐색</option><option value="all">대륙 전체</option>{ATLAS_REGIONS.map((r:any)=><option key={r.id} value={r.id}>{r.name}</option>)}</select></label></div>
+ </div>;
+}

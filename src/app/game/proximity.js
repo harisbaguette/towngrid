@@ -1,4 +1,4 @@
-import {BUILDINGS,RESOURCES} from './simulation.js';
+import {BUILDINGS,RESOURCES,damageFactor} from './simulation.js';
 import {RACES,unlockRank} from './world.js';
 // Project-specific balance, inspired by Town Star's documented adjacency rules.
 // Distances use a square tile radius; roads use orthogonal adjacency.
@@ -24,6 +24,8 @@ export const EXTRACTORS=['well','lumber','quarry','sandpit','clayfield','ironmin
 export const clusterMax=type=>EXTRACTORS.includes(type)?EXTRACT_MAX:CLUSTER_MAX;
 /** Mountain shade and wind shelter by distance 1..5 (steps 3,2,2,1,1); salt by distance to the sea 1..2. */
 const MOUNTAIN=[0,3,2,2,1,1],SALT=[0,2,1];
+// Simulation.placementEffects caches this result per spot (simulation.js effectsKey). Any state read here besides building
+// positions and types, roads, fixed terrain and the running state of polluters and irrigators must be added to that key.
 export function placementEffects(sim,type,x,z){
  const d=BUILDINGS[type],modern=terrainRules(sim),crop=!!d?.irrigable,need=modern?d?.waterNeed||0:0;
  let pollution=0,shade=0,windBlock=0,water=0,reservoir=false,ponds=0,waterScore=0,open=false,mountain=0,coast=9,flooded=false,graze=0,clover=0,cluster=0,serves=0;const sources=[];
@@ -78,12 +80,14 @@ const open=(sim,type)=>!!sim&&sim.rank>=unlockRank(type),obj=w=>w+((w.charCodeAt
 export function operationHint(status,sim){
  if(status.endsWith(' 대기')&&status!=='운반 대기')return '원료 재고와 창고에서 이 시설까지의 통로를 확인하세요.';
  if(status.endsWith(' 주민 필요')){const race=Object.keys(RACES).find(r=>status===RACES[r].name+' 주민 필요'),house=Object.keys(BUILDINGS).find(t=>BUILDINGS[t].resident===race);return house?obj(BUILDINGS[house].name)+' 지어 '+RACES[race].name+' 주민을 들이세요. 이 작업장은 '+RACES[race].name+'만 다룹니다.':'이 작업장을 다루는 주민의 주택을 지으세요.';}
- return {'도로 연결 필요':'시설 옆에 흙길을 놓고 창고까지 이어주세요.','출입구 막힘':'시설 옆 한 칸을 비우세요.','창고 경로 막힘':'창고와 이어지는 빈 칸이나 흙길을 만드세요.','전력 부족':'발전 시설에 원료를 공급하거나 발전 시설을 더 지으세요.','전력망 밖 · 변전소 필요':'발전소 여섯 칸 안으로 옮기거나, 발전소와 이 시설 사이에 변전소를 지어 전기를 이어주세요.','운반 대기':'주민 주택을 더 짓거나 개선해 운반할 주민을 늘리고, 창고까지 흙길을 이으세요.'+(open(sim,'logistics')?' 자동 물류센터를 가동하면 운반량이 두 배가 됩니다.':''),'창고 가득 참':'재고를 팔아 창고 자리를 비우세요.'+(open(sim,'depot')?' 자재 보관소를 지으면 보관 한도가 늘어납니다.':''),'수리 필요':'수리하면 생산이 다시 시작됩니다.','야생 클로버 필요':'양봉장 두 칸 안에 야생 클로버를 심으세요.','자원 고갈':'벌목장은 나무를 심고, 채석장은 자원 주변으로 옮기세요.','가동 중지':'가동 스위치를 켜세요.','창고 필요':'창고를 먼저 지으세요.'}[status]||'';
+ return {'도로 연결 필요':'시설 옆에 흙길을 놓고 창고까지 이어주세요.','출입구 막힘':'시설 옆 한 칸을 비우세요.','창고 경로 막힘':'창고와 이어지는 빈 칸이나 흙길을 만드세요.','전력 부족':'발전 시설에 원료를 공급하거나 발전 시설을 더 지으세요.','전력망 밖 · 변전소 필요':'발전소 여섯 칸 안으로 옮기거나, 발전소와 이 시설 사이에 변전소를 지어 전기를 이어주세요.','운반 대기':'주민 주택을 더 짓거나 개선해 운반할 주민을 늘리고, 창고까지 흙길을 이으세요.'+(open(sim,'logistics')?' 자동 물류센터를 가동하면 운반량이 두 배가 됩니다.':''),'창고 가득 참':'재고를 팔아 창고 자리를 비우세요.'+(open(sim,'depot')?' 자재 보관소를 지으면 보관 한도가 늘어납니다.':''),'수리 필요':'수리하면 생산이 다시 시작됩니다.','야생 클로버 필요':'양봉장 두 칸 안에 야생 클로버를 심으세요.','자원 고갈':'네 칸 안의 내 땅에 남은 자원이 없습니다. 경계 밖 나무·바위는 쓸 수 없습니다. 벌목장은 빈 칸에 묘목(15G · 물 2, 160초 뒤 자람)을 심거나 옆 구역을 사서 영토를 넓히고, 채석장은 바위가 남은 곳으로 옮기세요.','가동 중지':'가동 스위치를 켜세요.','창고 필요':'창고를 먼저 지으세요.'}[status]||'';
 }
 
 export function productionDiagnosis(sim,b,definitions,resources){
  const fallback={text:operationHint(b.status,sim),label:'시설 확인',focus:b.id,tool:null};
- if(b.health<100)return {...fallback,text:'내구도 '+Math.round(b.health)+'% · 수리비 '+sim.repairCost(b)+'G'};
+ if(b.health<100){const slow=damageFactor(b.health);return {...fallback,text:'내구도 '+Math.round(b.health)+'%'+(slow<1&&b.health>0?' · 속도 '+Math.round(slow*100)+'%':'')+' · 수리비 '+sim.repairCost(b)+'G'};}
+ // J4: a depleted lumber camp or quarry names the two ways out, planting inside the border and buying the next block.
+ if(b.status==='자원 고갈'){const tree=definitions[b.type]?.natural==='tree';return {text:(tree?'네 칸 안의 내 땅에 나무가 없습니다(경계 밖 나무는 못 씀). 빈 칸을 눌러 묘목(15G · 물 2)을 심거나 옆 구역을 사세요.':'네 칸 안의 내 땅에 바위가 없습니다(경계 밖 바위는 못 씀). 바위가 남은 곳으로 옮기거나 옆 구역을 사세요.'),label:'영토 확장',focus:b.id,tool:'expand'};}
  if(b.status==='야생 클로버 필요')return {...fallback,label:'야생 클로버 선택',focus:null,tool:open(sim,'clover')?'clover':null};
  if(!b.status.endsWith(' 대기')||b.status==='운반 대기')return fallback;
  const missing=Object.entries(sim.effectiveInputs(b)).find(([r,n])=>(b.inputs[r]||0)<n);

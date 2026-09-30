@@ -4,11 +4,15 @@ import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const suites = [
+  'tests/game-time.mjs',
   'tests/simulation.mjs',
   'tests/export-route.mjs',
   'tests/trade-routes.mjs',
   'tests/trade-terminals.mjs',
   'tests/world-grid.mjs',
+  'tests/atlas-geometry.mjs',
+  'tests/starting-sites.mjs',
+  'tests/world-atlas.mjs',
   'tests/map-edges.mjs',
   'tests/biomes.mjs',
   'tests/residents.mjs',
@@ -24,8 +28,11 @@ const suites = [
   'tests/pixel-environment.mjs',
   'tests/pixel-industry.mjs',
   'tests/pixel-world.mjs',
+  'tests/building-art-guard.mjs',
   'tests/art-completion.mjs',
+  'tests/environment-motion.mjs',
   'tests/farm-art.mjs',
+  'tests/farm-motion.mjs',
   'tests/quarter-camera.mjs',
   'tests/screen-art.mjs',
   'scripts/check-pixel-characters.mjs',

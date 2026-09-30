@@ -1,0 +1,93 @@
+{
+ "1366x768": {
+  "minimal": {
+   "markers": 0,
+   "overlappingPairs": 0,
+   "examples": [],
+   "grouped": []
+  },
+  "labels": {
+   "markers": 18,
+   "overlappingPairs": 0,
+   "examples": [],
+   "grouped": [
+    "+3",
+    "+2",
+    "+3",
+    "+1",
+    "+3",
+    "+2",
+    "+3",
+    "+1",
+    "+1"
+   ]
+  }
+ },
+ "B11": {
+  "still": {
+   "n": 18,
+   "max": 0
+  },
+  "midDragMax": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "after": {
+   "n": 19,
+   "max": 0
+  }
+ },
+ "B12": {
+  "sceneHover": {
+   "x": 10,
+   "z": 12,
+   "mode": null
+  },
+  "marker": {
+   "text": "창고",
+   "spanDisplay": "block",
+   "size": [
+    29,
+    27
+   ]
+  }
+ },
+ "844x390": {
+  "minimal": {
+   "markers": 0,
+   "overlappingPairs": 0,
+   "examples": [],
+   "grouped": []
+  },
+  "labels": {
+   "markers": 6,
+   "overlappingPairs": 0,
+   "examples": [],
+   "grouped": [
+    "+11",
+    "+7",
+    "+3",
+    "+8",
+    "+2"
+   ]
+  }
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

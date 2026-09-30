@@ -1,0 +1,43 @@
+{
+  "characters": 51,
+  "cells": 13056,
+  "preservedPortraits": 102,
+  "attachments": [
+    {
+      "id": "kai",
+      "row": 1,
+      "frame": 44,
+      "detachedAfter": 0,
+      "detachedBefore": 1
+    },
+    {
+      "id": "dew",
+      "row": 1,
+      "frame": 16,
+      "detachedAfter": 0,
+      "detachedBefore": 1
+    },
+    {
+      "id": "fia",
+      "row": 0,
+      "frame": 59,
+      "detachedAfter": 0,
+      "detachedBefore": 3
+    },
+    {
+      "id": "sora",
+      "row": 0,
+      "frame": 28,
+      "detachedAfter": 0,
+      "detachedBefore": 1
+    },
+    {
+      "id": "sora",
+      "row": 0,
+      "frame": 59,
+      "detachedAfter": 0,
+      "detachedBefore": 1
+    }
+  ],
+  "preservedGaits": 51
+}

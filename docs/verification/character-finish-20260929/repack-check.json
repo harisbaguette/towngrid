@@ -1,0 +1,42 @@
+[
+  {
+    "id": "sora",
+    "identicalFiles": [
+      "sprites.png",
+      "frames.json",
+      "walk-preview.gif",
+      "portrait.png",
+      "portrait-idle.png"
+    ]
+  },
+  {
+    "id": "mira",
+    "identicalFiles": [
+      "sprites.png",
+      "frames.json",
+      "walk-preview.gif",
+      "portrait.png",
+      "portrait-idle.png"
+    ]
+  },
+  {
+    "id": "kai",
+    "identicalFiles": [
+      "sprites.png",
+      "frames.json",
+      "walk-preview.gif",
+      "portrait.png",
+      "portrait-idle.png"
+    ]
+  },
+  {
+    "id": "borik",
+    "identicalFiles": [
+      "sprites.png",
+      "frames.json",
+      "walk-preview.gif",
+      "portrait.png",
+      "portrait-idle.png"
+    ]
+  }
+]

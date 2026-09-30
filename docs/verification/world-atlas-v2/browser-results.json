@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "viewport": [
+    1440,
+    900
+  ],
+  "mobile": [
+    390,
+    844
+  ],
+  "terrainElements": 5,
+  "checked": [
+    "pixel terrain and marker assets, constant screen text size, label collisions, actual resource preview",
+    "mobile pinch, minimap, no accidental selection, no horizontal overflow",
+    "real imported campaign, exact selected province and seed, exact price charge, owned marker, foreign promotion lock, mobile settlement visit"
+  ],
+  "errors": [],
+  "failed": []
+}

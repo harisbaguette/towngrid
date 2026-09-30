@@ -1,0 +1,79 @@
+{
+  "before": [
+    {
+      "action": "carry",
+      "direction": 0,
+      "elapsed": 0.156,
+      "frame": 19
+    },
+    {
+      "action": "turn",
+      "direction": 0,
+      "elapsed": 0,
+      "frame": 60
+    },
+    {
+      "action": "turn",
+      "direction": 0,
+      "elapsed": 0.04,
+      "frame": 60
+    },
+    {
+      "action": "idle",
+      "direction": 3,
+      "elapsed": 0,
+      "frame": 0
+    },
+    {
+      "action": "turn",
+      "direction": 3,
+      "elapsed": 0,
+      "frame": 60
+    },
+    {
+      "action": "turn",
+      "direction": 3,
+      "elapsed": 0.08999999999999997,
+      "frame": 61
+    }
+  ],
+  "after": [
+    {
+      "action": "carry",
+      "direction": 0,
+      "elapsed": 0.156,
+      "frame": 19
+    },
+    {
+      "action": "carry",
+      "direction": 3,
+      "elapsed": 0.21600000000000003,
+      "frame": 20
+    },
+    {
+      "action": "carry",
+      "direction": 3,
+      "elapsed": 0.276,
+      "frame": 21
+    },
+    {
+      "action": "carry",
+      "direction": 3,
+      "elapsed": 0.276,
+      "frame": 41
+    },
+    {
+      "action": "drop",
+      "direction": 2,
+      "elapsed": 0,
+      "frame": 41
+    },
+    {
+      "action": "drop",
+      "direction": 2,
+      "elapsed": 0.09,
+      "frame": 40
+    }
+  ],
+  "cpuDefeatFrame": 59
+}

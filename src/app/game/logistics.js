@@ -72,7 +72,7 @@ export function moveWorkers(s,dt){
    t.carried=true;w.phase='destination';w.route=route.path;w.handling=null;s.sound('pickup',w.x,w.z);
   }else{
    const dest=targetOf(s,t);if(t.targetId)dest.inputs[t.item]=(dest.inputs[t.item]||0)+t.amount;else s.stock[t.item]+=t.amount;
-   s.logisticsStats.delivered+=t.amount;if(t.sourceId&&t.targetId)s.logisticsStats.direct+=t.amount;
+   const st=s.logisticsStats;st.delivered=(st.delivered||0)+t.amount;if(t.sourceId&&t.targetId)st.direct=(st.direct||0)+t.amount;
    s.logisticsStats.last={from:t.sourceId,to:t.targetId,item:t.item,amount:t.amount,time:s.time};
    s.sound('drop',w.x,w.z);w.task=null;w.handling=null;w.phase='idle';
   }

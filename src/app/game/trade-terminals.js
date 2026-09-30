@@ -8,6 +8,7 @@ import {tradeOptions,ROUTE_KINDS} from './trade-routes.js';
 import {EXPORT_TILES,EXPORT_GATE,findExportRoute} from './export-route.js';
 import {provinceZone} from './infrastructure.js';
 import {TERRAIN_NAMES} from './world-grid.js';
+import {recordNetworkTransfer} from './logistics-visual-events.js';
 
 const K=(x,z)=>x+','+z;
 const around=(x,z)=>[[x+1,z],[x-1,z],[x,z+1],[x,z-1]];
@@ -121,7 +122,8 @@ export function tickNetworks(s,dt){
   const move=(from,to,n)=>{n=Math.min(n,budget);if(n<=0)return;budget-=n;
    if(from===store)s.stock[item]-=n;else from.out-=n;
    if(to===store)s.stock[item]+=n;else to.inputs[item]=(to.inputs[item]||0)+n;
-   s.logisticsStats.direct=(s.logisticsStats.direct||0)+n;};
+   s.logisticsStats.direct=(s.logisticsStats.direct||0)+n;
+   recordNetworkTransfer(s,net,from,to,item,n);};
   for(const to of sinks)for(const from of sources)move(from,to,Math.min(spare(from),want(to)));
   if(store){for(const from of sources)move(from,store,Math.min(spare(from),Math.floor(s.storageCapacity-s.stock[item])));
    for(const to of sinks)move(store,to,Math.min(Math.floor(available(s,item)),want(to)));}

@@ -3,7 +3,8 @@ import fs from 'node:fs';
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {clone} from 'three/addons/utils/SkeletonUtils.js';
-import {posedBounds} from '../src/app/game/assets.js';
+// Historical GLB archive check; these models are no longer loaded by the game.
+function posedBounds(root){root.updateMatrixWorld(true);root.traverse(m=>{if(m.isSkinnedMesh){m.skeleton.update();m.computeBoundingBox();}});return new THREE.Box3().setFromObject(root);}
 // Geometry-only loading: textures are tested by the live browser, skinning here.
 globalThis.self=globalThis;
 globalThis.ProgressEvent=class{constructor(type,values){Object.assign(this,values);}};

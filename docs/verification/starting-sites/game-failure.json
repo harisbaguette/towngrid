@@ -1,0 +1,7 @@
+{
+  "error": "Error: Game scene initialization failed before the world map opened",
+  "errors": [],
+  "consoleErrors": [
+    "Error: Missing pixel building: sugarfield\n    at makeBuilding (http://localhost:5173/src/app/game/models.js?t=1790686101377:8:23)\n    at GameScene.icons (http://localhost:5173/src/app/game/scene.js?t=1790686101377:795:18)\n    at http://localhost:5173/src/app/game/Game.tsx?t=1790685969534:377:27"
+  ]
+}

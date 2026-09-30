@@ -11,7 +11,9 @@ const anomalies=[];let actions=[];
 function step(dt,label){const before=mass(s),prog=new Map(s.buildings.map(b=>[b.id,{p:b.progress,c:b.cycles||0}])),prod={...s.produced},ship=new Set(s.shipments.map(v=>v.id)),shipBefore=s.shipments.map(v=>({...v})),inf=s.health.infection;
  s.tick(dt);const after=mass(s),expect=Object.fromEntries(items.map(r=>[r,0]));
  for(const[r,n]of Object.entries(s.produced))expect[r]+=n-(prod[r]||0);
- for(const b of s.buildings){const p=prog.get(b.id);if(!p)continue;if(p.p===0&&(b.progress>0||(b.cycles||0)>p.c))for(const[r,n]of Object.entries(s.effectiveInputs(b)))expect[r]-=n;}
+ // A completed cycle can immediately start its next batch with the same tick's
+ // remainder. Count batch starts even when progress stays above zero.
+ for(const b of s.buildings){const p=prog.get(b.id);if(!p)continue;const starts=(b.cycles||0)-p.c+(b.progress>0?1:0)-(p.p>0?1:0);if(starts>0)for(const[r,n]of Object.entries(s.effectiveInputs(b)))expect[r]-=n*starts;}
  // A new shipment takes its goods (an import takes none until it unloads) and a fuel vehicle burns its trip's fuel;
  // an import that has left the list has unloaded at the warehouse.
  for(const sh of s.shipments)if(!ship.has(sh.id)){if(sh.kind!=='import')expect[sh.item]-=sh.amount;if(VEHICLES[sh.vehicle]?.fuel)expect.fuel-=FUEL_PER_TRIP;}
@@ -21,7 +23,7 @@ for(let i=0;i<4*900;i++){
  let label='tick';
  if(i%80===40){const raw=JSON.parse(JSON.stringify(s.save()));const m0=mass(s);s=new Simulation(s.region,raw);s.nextEvent=1e9;const m1=mass(s);for(const r of items)if(Math.abs(m1[r]-m0[r])>1e-6)anomalies.push({t:s.time,item:r,unexplained:m1[r]-m0[r],during:'save/load'});}
  if(i%120===60){const carrier=s.workers.find(w=>w.task?.carried);if(carrier){const h=s.buildings.find(b=>b.id===carrier.homeId);const m0=mass(s);const {type,x,z,level}=h;s.demolish(x,z);const m1=mass(s);for(const r of items)if(Math.abs(m1[r]-m0[r])>1e-6)anomalies.push({t:s.time,item:r,unexplained:m1[r]-m0[r],during:'demolish home of carrier'});s.build(type,x,z,true);s.at(x,z).level=level;actions.push('home-demolish');}}
- if(i%120===0&&i){const b=s.buildings.filter(b=>BUILDINGS[b.type].period&&!BUILDINGS[b.type].home)[(i/120)%20];if(b){const m0=mass(s);const {type,x,z}=b;s.demolish(x,z);const m1=mass(s);for(const r of items)if(Math.abs(m1[r]-m0[r])>1e-6)anomalies.push({t:s.time,item:r,unexplained:m1[r]-m0[r],during:'demolish '+type});s.build(type,x,z,true);actions.push('demolish '+type);}}
+ if(i%120===0&&i){const b=s.buildings.filter(b=>BUILDINGS[b.type].period&&!BUILDINGS[b.type].home)[(i/120)%20];if(b){const m0=mass(s);const {type,x,z}=b,batch={...(b.progress>0?b.batch||s.effectiveInputs(b):{})};s.demolish(x,z);const m1=mass(s);for(const r of items)if(Math.abs(m1[r]-m0[r]-(batch[r]||0))>1e-6)anomalies.push({t:s.time,item:r,unexplained:m1[r]-m0[r]-(batch[r]||0),during:'demolish '+type});s.build(type,x,z,true);actions.push('demolish '+type);}}
  // Second pass: switching a facility's product hands back exactly what its running cycle consumed (a cycle saved
  // without a batch record counts as having consumed its recipe's inputs); imports, contracts
  // and fuel vehicles are covered by the shipment rules in step().

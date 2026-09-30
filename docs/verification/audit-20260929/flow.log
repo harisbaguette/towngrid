@@ -1,0 +1,26 @@
+[step] home
+[step] world map
+[step] new game
+[step] session 6 min
+[step] panels
+[step] input
+[step] save/load
+{
+ "timing": {
+  "home": {
+   "titleVisibleMs": 158,
+   "homeReadyMs": 33452,
+   "titleClicks": 3
+  },
+  "newGameMs": 275,
+  "reload": {
+   "titleVisibleMs": 102,
+   "homeReadyMs": 32478,
+   "titleClicks": 2
+  },
+  "continueMs": 235
+ },
+ "errors": 0,
+ "consoleErrors": 0,
+ "failed": 26
+}

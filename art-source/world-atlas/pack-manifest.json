@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "source": "art-source/world-atlas/atlas-source.png",
+  "markerSource": "art-source/world-atlas/markers-source.png",
+  "width": 3200,
+  "height": 1984,
+  "cellPixels": 64,
+  "grid": [
+    50,
+    31
+  ],
+  "sprites": [
+    "woodland",
+    "pines",
+    "grove",
+    "elderwood",
+    "peak",
+    "ridge",
+    "crags",
+    "snowpeak",
+    "dunes",
+    "oasis",
+    "reeds",
+    "volcano",
+    "capital",
+    "frontier",
+    "settlement",
+    "hostile"
+  ],
+  "worldHash": "39dc1c18241bc8e01b7ea0371c1135c484d49b9c9debf441038cfa8c9ed6ddf3",
+  "sourceHash": "3690c27e9787ada8c4340bf8f5398480d974067aabea5b53b7e0ac5c0b46bd8f",
+  "markerSourceHash": "d6784357f79a252e24098cf21e6629bc85ebdb0b5397034abac7982611e74ef1",
+  "terrainBytes": 1308408
+}

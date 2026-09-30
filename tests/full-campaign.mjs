@@ -1,3 +1,4 @@
+import {BASE_TIME_SCALE, realSeconds} from '../src/app/game/game-time.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {Campaign} from '../src/app/game/campaign.js';
@@ -20,8 +21,10 @@ const incoming=(s,r)=>s.shipments.filter(sh=>sh.kind==='import'&&sh.item===r).re
 // enough is free (availableStock) rather than merely in the warehouse.
 function order(s,r,n){const need=Math.ceil(n-s.availableStock(r)-incoming(s,r));if(need>0)s.buy(r,Math.min(100,need+6));}
 function buyMissing(s,cost,items){let budget=cost;for(const [r,n] of Object.entries(items||{}))budget+=Math.max(0,n-s.availableStock(r)-incoming(s,r))*Math.ceil(RESOURCES[r].price*1.85);if(s.money<budget+120)return false;for(const [r,n] of Object.entries(items||{}))if(s.availableStock(r)<n)order(s,r,n);return Object.entries(items||{}).every(([r,n])=>s.availableStock(r)>=n);}
+// While the next rank counts lord orders, the goods of the open order are not spent on construction.
+const heldForOrder=s=>s.campaign&&!s.contractStatus().ready&&(s.promotion()?.requirements||[]).some(q=>q.key==='contracts'&&!q.done)?s.contract()?.item:null;
 function build(s,type,desired=1){if(s.rank<unlockRank(type)||count(s,type)>=desired)return;
- const def=BUILDINGS[type];if(!buyMissing(s,s.buildCost(type),def.materials))return;
+ const def=BUILDINGS[type],held=heldForOrder(s);if(held&&def.materials?.[held])return;if(!buyMissing(s,s.buildCost(type),def.materials))return;
  const free=s.tiles.filter(t=>t.terrain!=='water'&&s.ownedAt(t.x,t.z)&&!s.at(t.x,t.z)&&!s.roads.has(t.x+','+t.z)&&(type==='warehouse'||t.z%2===0&&t.x!==13));
  const onGrid=(def.power||type==='substation')&&gridNodes(s).length>0,tiles=onGrid?free.filter(t=>inReach(s,t)):[...free];
  if(type==='substation'){const gain=t=>free.filter(f=>!inReach(s,f)&&Math.max(Math.abs(f.x-t.x),Math.abs(f.z-t.z))<=POWER_REACH).length;tiles.sort((a,b)=>gain(b)-gain(a));}
@@ -35,7 +38,7 @@ function build(s,type,desired=1){if(s.rank<unlockRank(type)||count(s,type)>=desi
 const PLAN=[['house',4],['well',3],['field',3],['lumber',2],['sawmill',1],['quarry',1],['mill',1],['bakery',1],['cottonfield',2],['herbgarden',2],['clinic',1],['weaver',1],['dock',2],['smokehouse',1],['depot',1],['henhouse',1],['marketplace',1],['confectionery',1],['reservoir',1],['kiln',1],['stable',1],['tailor',1],['glassworks',1],['watermill',1],['dwarfhouse',2],['generator',1],['workshop',1],['windturbine',1],['logistics',1],['ironmine',1],['coalpit',1],['titanhouse',1],['smelter',1],['steamworks',1],['wardpost',1],['oilpump',1],['refinery',1],['coppermine',1],['chemical',1],['manaextractor',1],['wiremill',1],['electronics',1],['magetower',1],['cementworks',1],['station',1],['cannery',1],['automotive',1],['laboratory',1],['hospital',1],['arcanepower',1],['battery',1],['leyrelay',1],['bank',1],['barracks',1],['fortress',2],['lampworks',1],['engineworks',1],['mithrilforge',1],['parliament',1],['shipyard',1],['airdock',1],['blastfurnace',1],['assemblyline',1],['exchange',1]];
 // Intermediates feed other chains and are never auto-sold; smoked fish is sold until the cannery needs it.
 const KEEP=['water','wood','stone','iron','coal','oil','mana','steel','fuel','polymer','circuit','cotton','herb','egg','cloth','brick','glass','copper','wire','concrete','canned','engine','mithril'];
-let contractsSent=0,recipeSwitches=0;const switchedAt=new Map(),recipeUse={};
+let contractsSent=0,recipeSwitches=0,tradedDay=0,stateTrades=0;const switchedAt=new Map(),recipeUse={};
 function chooseRecipes(s){
  const waiting=new Set(s.buildings.map(b=>Object.keys(RESOURCES).find(r=>b.status===RESOURCES[r].name+' 대기')).filter(Boolean));
  const asked=new Set((s.promotion()?.requirements||[]).filter(q=>!q.done&&q.key.startsWith('produced:')).map(q=>q.key.split(':')[1]));
@@ -51,10 +54,14 @@ function operate(){const s=c.home.sim;c.activeId=c.homeId;
  if(s.promotion()?.requirements.some(r=>r.key==='expansions'&&!r.done)&&s.money>=s.expansionCost()){for(const [x,z]of [[4,3],[3,4],[2,4],[1,3],[3,1]])if(s.expand(x,z).ok)break;}
  // Hauling grows with the town: one more basic house every two ranks, as a player adds homes when goods wait.
  for(const [type,n] of PLAN)build(s,type,type==='house'?Math.min(18,n+Math.floor(s.rank/2)):n);
+ // A rank that asks for more residents gets another home of the newest unlocked kind.
+ if(s.promotion()?.requirements.some(q=>q.key==='workers'&&!q.done)){const home=Object.keys(BUILDINGS).filter(t=>BUILDINGS[t].home&&unlockRank(t)<=s.rank).sort((a,b)=>unlockRank(b)-unlockRank(a))[0];build(s,home,count(s,home)+1);}
  chooseRecipes(s);
  // Like a player reading "X 대기" on a facility, add one more producer of a starved input (at most three of a kind).
  if(s.money>(s.promotion()?.fee||0)+500){const starved=new Set(s.buildings.map(b=>Object.keys(RESOURCES).find(r=>b.status===RESOURCES[r].name+' 대기')).filter(Boolean));for(const r of starved){const p=Object.keys(BUILDINGS).filter(t=>BUILDINGS[t].output===r&&BUILDINGS[t].period&&unlockRank(t)<=s.rank).sort((a,b)=>unlockRank(b)-unlockRank(a))[0];if(p&&count(s,p)<3){build(s,p,count(s,p)+1);break;}}}
- for(const site of c.sites){const sim=site.sim;for(const b of sim.buildings){if(b.health<100&&sim.money>sim.repairCost(b)+100)sim.repair(b.id);if(b.level<3&&BUILDINGS[b.type].home&&sim.money>200&&sim.stock.wood>=6)sim.upgrade(b.id);if(b.level<3&&BUILDINGS[b.type].period&&sim.money>1200&&sim.stock.plank>=3)sim.upgrade(b.id);}
+ // Upgrades wait while they would eat the goods of the lord's open order.
+ const ordered=heldForOrder(s);
+ for(const site of c.sites){const sim=site.sim;for(const b of sim.buildings){if(b.health<100&&sim.money>sim.repairCost(b)+100)sim.repair(b.id);if(b.level<3&&sim.upgradeItem(b)===ordered)continue;if(b.level<3&&BUILDINGS[b.type].home&&sim.money>200&&sim.stock.wood>=6)sim.upgrade(b.id);if(b.level<3&&BUILDINGS[b.type].period&&sim.money>1200&&sim.stock.plank>=3)sim.upgrade(b.id);}
   if(sim.money>300)for(const t of sim.tiles)if(sim.ownedAt(t.x,t.z)&&t.z%2===1&&!sim.at(t.x,t.z)&&!sim.roads.has(t.x+','+t.z)&&sim.money>220)sim.build('road',t.x,t.z);
   if(sim.health.infection>15&&sim.health.sanitationUntil<sim.time&&sim.money>100)sim.sanitize();if(sim.pendingEvent?.type==='storm')sim.reinforce();if(sim.raid&&!sim.raid.finished)sim.mobilize();
   if(site.id!==c.homeId){build(sim,'warehouse');if(sim.warehouse){build(sim,'house');build(sim,'generator');build(sim,'station');}for(const r of ['wood','water'])if(sim.stock[r]+incoming(sim,r)<12&&sim.money>1200)sim.buy(r,30);}
@@ -68,19 +75,27 @@ function operate(){const s=c.home.sim;c.activeId=c.homeId;
  if(s.contractStatus().ready&&s.fulfill().ok)contractsSent++;
  if(s.debt&&(s.money>1400||(s.promotion()?.requirements.some(r=>r.key==='debtFree'&&!r.done)&&s.money>300)))s.repay();if(!s.family&&s.rank>=2&&s.money>400)s.rescue();if(s.rank>=5&&!s.charter)s.chooseCharter('commons');
  if(s.rank>=2&&s.expansions<2&&s.money>s.expansionCost()+300){for(const [x,z]of [[4,3],[3,4],[2,4]])if(s.expand(x,z).ok)break;}
- const p=s.promotion();if(p?.ready){assert.equal(s.promote().ok,true);milestones.push({rank:s.rank+1,name:RANKS[s.rank].name,day:s.day,money:Math.floor(s.money)});console.log(JSON.stringify(milestones.at(-1)));}
+ // Each promotion also records how far the next rank's requirements already stand the moment it lands (audit A2-P1).
+ const p=s.promotion();if(p?.ready){assert.equal(s.promote().ok,true);milestones.push({rank:s.rank+1,name:RANKS[s.rank].name,day:s.day,money:Math.floor(s.money),nextOnArrival:(s.promotion()?.requirements||[]).map(q=>[q.key,Math.floor(q.current),q.target])});console.log(JSON.stringify(milestones.at(-1)));}
  const neededSites=Math.max(s.rank>=20?3:2,...(s.promotion()?.requirements||[]).filter(r=>r.key==='sites').map(r=>r.target));
  if(s.rank>=13&&c.sites.length<neededSites&&s.money>2600&&buyMissing(s,1400,{wood:24,stone:16,water:8}))c.foundSite('estern','highland');
  if(c.sites.length>1&&s.stock.steel>15&&!c.routes.length)c.createRoute(c.homeId,c.sites[1].id,'steel',6,'truck');
- if(s.rank>=18){for(const site of c.sites.slice(1,3))if(c.stationReady(s)&&c.stationReady(site.sim)&&!c.routes.some(r=>r.to===site.id&&r.mode==='rail'))c.createRoute(c.homeId,site.id,'grain',6,'rail');}
+ // A branch sells what the routes bring into its own market instead of letting its warehouse fill up.
+ for(const r of c.routes){const to=c.sites.find(v=>v.id===r.to);if(to&&to.id!==c.homeId)to.sim.autoSell[r.item]=true;}
+ if(s.rank>=18){for(const site of c.sites.slice(1,1+Math.max(2,(s.promotion()?.requirements||[]).find(q=>q.key==='railRoutes')?.target||0)))if(c.stationReady(s)&&c.stationReady(site.sim)&&!c.routes.some(r=>r.to===site.id&&r.mode==='rail'))c.createRoute(c.homeId,site.id,'grain',6,'rail');}
  if(s.rank>=22&&s.money>2600&&c.defense<12)c.council('defense');
  if(s.rank>=24&&c.support<87&&s.money>1000)c.council('welfare');
  if(s.rank>=25&&s.money>2800){for(const id of Object.keys(NATIONS).filter(id=>NATIONS[id].playable&&id!=='estern'&&!c.recognition.includes(id))){if(c.recognition.length>=6)break;if(!c.council('recognition',id).ok)break;}for(const site of c.sites)if(!site.territory&&s.money>3400)c.council('territory',site.id);}
- // Surplus above the next fee and a working buffer is reinvested like a player would: more land first,
- // then industry investment, which pays a daily dividend (campaign.council('invest')).
- const buffer=()=>(s.promotion()?.fee||0)+1000;
- if(s.money>buffer()+s.expansionCost()){let grown=false;for(let z=0;z<6&&!grown;z++)for(let x=0;x<6&&!grown;x++)if(s.canExpand(x,z))grown=s.expand(x,z).ok;}
- while(s.rank>=23&&s.money>buffer()+2500&&c.council('invest','estern').ok);
+ // Money is spent on what the next promotion asks, never poured into land or stakes nobody needs (audit A2-M1): the bot
+ // buys land when a build finds no tile (build) or a rank asks for it, and takes the stakes the next rank asks for.
+ const asked=key=>(s.promotion()?.requirements||[]).find(q=>q.key===key)?.target||0,buffer=()=>(s.promotion()?.fee||0)+1000;
+ // Land is bought ahead while the town is short of room (fewer than four free building tiles) or a quarry has run out of rock.
+ const room=s.tiles.filter(t=>t.terrain!=='water'&&s.ownedAt(t.x,t.z)&&!s.at(t.x,t.z)&&!s.roads.has(t.x+','+t.z)&&t.z%2===0&&t.x!==13).length;
+ const spent=s.buildings.some(b=>b.type==='quarry'&&!s.closestNatural(b,'rock'));
+ if((room<4||spent)&&s.money>buffer()+s.expansionCost()){let grown=false;for(let z=0;z<6&&!grown;z++)for(let x=0;x<6&&!grown;x++)if(s.canExpand(x,z))grown=s.expand(x,z).ok;}
+ if(c.investments.length<asked('investment')&&s.money>buffer()+c.investPrice())c.council('invest','estern');
+ // Once a day the player sends every emerging-state order that can leave (EmergingStates "모두 보내기").
+ if(c.newStates.length&&tradedDay!==c.lastWorldDay){tradedDay=c.lastWorldDay;if(c.tradeAll().ok)stateTrades++;}
  // Plant after local timber runs low; actions have normal material/cash costs.
  if(s.buildings.some(b=>b.type==='lumber'&&!s.closestNatural(b,'tree'))&&s.money>200){for(const t of s.tiles){if(t.x<8||t.x>15||t.z<8||t.z>15||t.z%2===1)continue;if(s.plant(t.x,t.z).ok)break;}}
  if(s.money<100)s.recover();
@@ -112,7 +127,7 @@ const acceptance={
  A5:{rule:'구간별 평균 일일 수입이 A→F 단조 증가 · E 평균이 C 평균의 2배 이상',averages:segments.map(v=>v.averageIncome),pass:segments.every((v,i)=>!i||v.averageIncome>segments[i-1].averageIncome)&&segments[4].averageIncome>=segments[2].averageIncome*2}
 };
 const fuel=c.sites.reduce((n,v)=>n+(v.sim.logisticsStats.fuel||0),0),fuelTrips=c.sites.reduce((n,v)=>n+(v.sim.logisticsStats.fuelTrips||0),0);
-const result={day:c.active.day,sites:c.sites.length,revenue:Math.round(c.treasury.totalRevenue),produced:c.treasury.produced,milestones:milestones.length,contracts:c.treasury.contracts,contractsSent,recipeSwitches,recipeUse,fuelBurnedByVehicles:fuel,fuelTrips};
+const result={day:c.active.day,baseTimeScale:BASE_TIME_SCALE,completionRealMinutesAt1x:Math.round(realSeconds(c.active.time)/60),sites:c.sites.length,revenue:Math.round(c.treasury.totalRevenue),produced:c.treasury.produced,milestones:milestones.length,contracts:c.treasury.contracts,contractsSent,recipeSwitches,recipeUse,fuelBurnedByVehicles:fuel,fuelTrips,investments:c.investments.length,stateTradeDays:stateTrades,upkeepPerDay:c.upkeep(),completion:c.completion};
 assert.ok(recipeSwitches>0,'the player uses alternative products');assert.ok(fuel>0&&fuelTrips>0,'fuel vehicles run and burn fuel');
 fs.writeFileSync(new URL('../docs/FULL_CAMPAIGN_RESULT.json',import.meta.url),JSON.stringify({date:new Date().toISOString().slice(0,10),test:'tests/full-campaign.mjs',method:'Normal paid player actions and elapsed time; no injected cash, stock, production or ranks. Roads built through player actions. Periodic save/restore. Days are recorded at each day change: rank and cash at the end of the day, revenue earned that day across all sites, facilities on the map.',result,segments,acceptance,promotions:milestones,days},null,1)+'\n');
 console.log(JSON.stringify({segments,acceptance},null,1));

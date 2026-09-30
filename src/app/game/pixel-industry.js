@@ -3,6 +3,7 @@ import { INDUSTRY_PROFILES } from './pixel-industry-data.js';
 import { EXPANSION_PROFILES } from './pixel-expansion-data.js';
 import { FARM_PROFILES } from './pixel-farm-data.js';
 import { RESOURCE_FRAMES } from './resource-art.js';
+import {projectPart} from './pixel-part-projection.js';
 
 export function attachIndustryAnimation(type, {part, position, setFrame, rope, screenPoint}) {
  const profile = INDUSTRY_PROFILES[type] || EXPANSION_PROFILES[type] || FARM_PROFILES[type];
@@ -54,6 +55,7 @@ export function attachIndustryAnimation(type, {part, position, setFrame, rope, s
    // Heat is a small flame pose, never a scale change of the architecture.
    if(spec.motion==='flicker')layer.userData.sprite.scale.set(spec.size,spec.size*(beat%3===0? .88:1),1);
    layer.userData.flipX = !!spec.flip?.[view];
+   if(spec.motion==='spin')projectPart(layer,view,spec.axis||'x');
    position(layer,x,y,angle);setFrame(layer,spec.motion==='peck'&&work?Math.floor(clock*4)%4:spec.frame,spec.directional?view:0);
    if(line){
     const from=spec.tether[view],points=line.geometry.attributes.position;

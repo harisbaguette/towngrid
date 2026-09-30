@@ -47,6 +47,10 @@ def cut_object(image, labels, obj):
 
 
 def pack_character(spec, output):
+    if spec.get('rigFinish'):
+        from rig_skinning import SKINNING_REVISION
+        if spec['rigFinish'] != SKINNING_REVISION:
+            raise ValueError(f"{spec['id']}: unsupported rig finish {spec['rigFinish']}")
     if spec.get('runtimeRig'):
         from roster_rig import pack_roster_rig
         return pack_roster_rig(spec['runtimeRig'], output)

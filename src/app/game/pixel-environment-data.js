@@ -6,8 +6,12 @@ import { FARM_BUILDINGS } from './pixel-farm-data.js';
 import { FARM_CROP_ATLASES, FARM_GOODS_ORDER, FARM_GOODS2_ORDER, FARM_PART_FRAMES } from './pixel-farm-sockets.js';
 import { NEW_VEHICLE_SIZES } from './vehicle-art.js';
 import { RESOURCE_FRAMES } from './resource-art.js';
+import {MOTION_ASSETS} from './pixel-motion-data.js';
+import {FARM_MOTION_ASSETS} from './pixel-farm-motion.js';
 export const ENVIRONMENT_CELL = 192;
 export const ENVIRONMENT_ASSETS = {
+ ...MOTION_ASSETS,
+ ...FARM_MOTION_ASSETS,
  ...Object.fromEntries(Object.entries(NEW_VEHICLE_SIZES).map(([id,size])=>[id,{scenery:true,sheet:`/assets/pixel-environment/${id}.png`,frames:1,directions:4,anchor:[.5,181/192],size}])),
  resourceGoods:{cutout:true,sheet:'/assets/pixel-environment/resourceGoods.png',frames:Object.keys(RESOURCE_FRAMES).length,anchor:[.5,.5],size:.4},
  supportArt:{cutout:true,sheet:'/assets/pixel-environment/supportArt.png',frames:12,anchor:[.5,.5],size:.4},
@@ -22,6 +26,7 @@ export const ENVIRONMENT_ASSETS = {
  farmGoods:{cutout:true,sheet:'/assets/pixel-environment/farmGoods.png',frames:FARM_GOODS_ORDER.length,anchor:[.5,.5],size:.4},
  farmGoods2:{cutout:true,sheet:'/assets/pixel-environment/farmGoods2.png',frames:FARM_GOODS2_ORDER.length,anchor:[.5,.5],size:.4},
  farmParts:{cutout:true,sheet:'/assets/pixel-environment/farmParts.png',frames:Object.keys(FARM_PART_FRAMES).length,anchor:[.5,.5],size:.4},
+ farmWorkParts:{cutout:true,sheet:'/assets/pixel-environment/farmWorkParts.png',frames:3,anchor:[.5,.5],size:.4},
  ...Object.fromEntries(Object.entries({rock:.95,mossrock:.95,oreRock:1.05,cliff:1.6,pine:1.9,willow:1.9,palm:1.9,bush:.65,reeds:.52,ruin:1.8,lighthouse:2.1,exportGate:1.4,cargoTruck:.8,cargoTrain:1.25,fishingBoat:1.15}).map(([id,size])=>[id,{scenery:true,sheet:`/assets/pixel-environment/${id}.png`,frames:1,directions:4,anchor:[.5,181/192],size}])),
  clouds:{scenery:true,sheet:'/assets/pixel-environment/clouds.png',frames:4,anchor:[.5,.5],size:3},
  birds:{scenery:true,sheet:'/assets/pixel-environment/birds.png',frames:4,anchor:[.5,.5],size:.30},

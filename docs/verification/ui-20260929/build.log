@@ -1,0 +1,67 @@
+
+  vinext build  (Vite 8.0.13)
+
+[1/5] analyze client references...
+[2Ktransforming...✓ 230 modules transformed.
+rendering chunks...
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - rsc:scan-strip (38%)
+  - vinext:rsc-client-reference-loaders (31%)
+  - rsc:virtual-client-package (4%)
+  - alias (4%)
+  - rsc:use-server (4%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+✓ built in 12.66s
+[2/5] analyze server references...
+[2Ktransforming...✓ 281 modules transformed.
+rendering chunks...
+✓ built in 1.39s
+[3/5] build rsc environment...
+[2Ktransforming...✓ 227 modules transformed.
+rendering chunks...
+computing gzip size...
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - vinext:jsx-in-js (31%)
+  - rsc:virtual-client-package (31%)
+  - vinext:css-data-url (11%)
+  - vinext:og-inline-fetch-assets (9%)
+  - rsc:use-server (4%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+✓ built in 10.73s
+[4/5] build client environment...
+[2Ktransforming...✓ 2078 modules transformed.
+rendering chunks...
+computing gzip size...
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - vinext:css-data-url (16%)
+  - vinext:middleware-server-only (16%)
+  - alias (13%)
+  - vinext:og-inline-fetch-assets (13%)
+  - rsc:virtual-client-package (9%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+✓ built in 3.03s
+[5/5] build ssr environment...
+[2Ktransforming...✓ 287 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 938ms
+[0m
+  Route (app)
+  ─ ? /
+
+  ? Unknown
+
+  ? Some routes could not be classified. vinext currently uses static analysis
+    and cannot detect dynamic API usage (headers(), cookies(), etc.) at build time.
+    Automatic classification will be improved in a future release.
+
+  Build complete. Run `vinext start` to start the production server.
+

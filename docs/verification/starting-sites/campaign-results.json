@@ -1,0 +1,32 @@
+[
+  {
+    "suite": "tests/campaign.mjs",
+    "status": 0,
+    "stdout": "PASS: 1-tile facilities; seven playable subtypes share modern industries; enemies locked; delayed freight and in-flight save/load; regional inventory conservation; automatic residents; specialties; emerging states; earned status.\n",
+    "stderr": ""
+  },
+  {
+    "suite": "tests/release.mjs",
+    "status": 0,
+    "stdout": "PASS rotating recovery preserves independent new-game backup and rejects corrupt replacement\nPASS nested save validation and 75-day world growth with bounded successor names\nPASS audio: 109 facilities mapped; 24 working facilities -> 36 sounds in 10 s, max 4/s, max gain 0.057, 4 concurrent, 9 samples\nPASS audio fallback, volume sanitation, voice cap, background playlist/beds, pause/mute, reusable noise and full node cleanup\nRELEASE REGRESSIONS PASS\n",
+    "stderr": ""
+  },
+  {
+    "suite": "tests/audit/branch-site.mjs",
+    "status": 0,
+    "stdout": "{\"found\":{\"ok\":true,\"id\":\"site-2\"},\"builtAtBranch\":[[\"warehouse\",true],[\"house\",true],[\"lumber\",true],[\"well\",true]],\"branchStock\":{\"wood\":38,\"stone\":11,\"water\":31},\"route\":{\"status\":\"운송 중\",\"completed\":1},\"deliveries\":1,\"branchStatus\":[\"warehouse@11,12:운반 중\",\"house@11,14:정상 운영\",\"lumber@9,10:생산 중\",\"well@13,12:운반 대기\"]}\nNOT-REPRODUCED G1-branch-cannot-bootstrap :: {\"found\":{\"ok\":true,\"id\":\"site-2\"},\"steps\":[[\"warehouse\",true],[\"house\",true],[\"lumber\",true],[\"well\",true]],\"route\":\"운송 중\"}\n\n[branch-site] 0 of 1 audit findings reproduced\n",
+    "stderr": ""
+  },
+  {
+    "suite": "tests/audit/save-edges.mjs",
+    "status": 0,
+    "stdout": "[\"mid-raid speed4\",true,null]\n[\"rescue river detour\",true,null]\n[\"route ambush speed4\",true,null,[-0.7]]\n[\"carts + pending storm\",true,null]\nNOT-REPRODUCED S1-roundtrip-failure :: []\nsave size [{\"sites\":1,\"saveChars\":71838,\"threeCopiesMB\":0.41},{\"sites\":4,\"saveChars\":148610,\"threeCopiesMB\":0.85},{\"sites\":8,\"saveChars\":302178,\"threeCopiesMB\":1.73},{\"sites\":16,\"saveChars\":609300,\"threeCopiesMB\":3.49},{\"sites\":24,\"saveChars\":916446,\"threeCopiesMB\":5.24}]\n\n[save-edges] 0 of 1 audit findings reproduced\n",
+    "stderr": ""
+  },
+  {
+    "suite": "tests/audit/first-ten-minutes.mjs",
+    "status": 0,
+    "stdout": "{\"t\":0,\"what\":\"창고\"}\n{\"t\":0,\"what\":\"주민 주택\"}\n{\"t\":0,\"what\":\"우물\"}\n{\"t\":0,\"what\":\"밀밭\"}\n{\"t\":0,\"what\":\"벌목장\"}\n{\"t\":0,\"what\":\"초기 자원\",\"day\":1,\"rank\":0,\"money\":965,\"debt\":1000,\"contracts\":0,\"stock\":{\"wood\":36,\"stone\":25,\"water\":16,\"grain\":8},\"produced\":{},\"sold\":{}}\n{\"t\":0,\"what\":\"상태 field = 물 대기\"}\n{\"t\":44,\"what\":\"승급 → 등록 농노\",\"fee\":35}\n{\"t\":48,\"what\":\"상태 lumber = 운반 대기\"}\n{\"t\":54,\"what\":\"상태 well = 운반 대기\"}\n{\"t\":55,\"what\":\"상태 field = 운반 대기\"}\n{\"t\":190,\"what\":\"사건 발생: storm\",\"broken\":[]}\n{\"t\":195,\"what\":\"납품 출발\",\"item\":\"grain\",\"amount\":12,\"reward\":130}\n{\"t\":202,\"what\":\"납품 완료\",\"contracts\":1}\n{\"t\":282,\"what\":\"납품 출발\",\"item\":\"wood\",\"amount\":14,\"reward\":151}\n{\"t\":288,\"what\":\"납품 완료\",\"contracts\":2}\n{\"t\":398,\"what\":\"사건 발생: illness\",\"broken\":[]}\n10분 후 {\"t\":600,\"day\":8,\"rank\":1,\"money\":1001,\"debt\":1000,\"contracts\":2,\"stock\":{\"wood\":160,\"stone\":25,\"water\":225,\"grain\":14},\"produced\":{\"water\":228,\"wood\":150,\"grain\":30},\"sold\":{\"grain\":12,\"wood\":14}}\n시설 [\"warehouse@11,12:운반 중\",\"house@11,14:정상 운영\",\"well@13,12:생산 중\",\"field@13,13:운반 대기\",\"lumber@9,10:운반 대기(hp70)\"]\n다음 승급 {\"name\":\"개간 농노\",\"trial\":{\"key\":\"delivery\",\"target\":18,\"name\":\"주민이 자원 18개 운반\",\"right\":\"첫 납품 보너스가 10% 늘어납니다.\",\"current\":379,\"done\":true},\"req\":[{\"key\":\"produced:plank\",\"target\":12,\"name\":\"판재 생산\",\"current\":0,\"done\":false},{\"key\":\"contracts\",\"target\":2,\"name\":\"영주 납품\",\"current\":2,\"done\":true}],\"fee\":60}\nNOT-REPRODUCED E1-storm-kills-sole-well :: {\"t\":190,\"broken\":[]}\ncontract spam {\"orders\":7,\"arrivals\":7,\"minGap\":87,\"wait\":80,\"sameTickDispatches\":0,\"reward\":1361,\"market\":1077,\"ratio\":1.264,\"premiumPerMinute\":28,\"cash10min\":[1160,2318],\"before\":\"이전: 시작 33초에 밀 12·목재 14 두 건이 같은 틱에 끝남, 10분 동안 765→3,150G\"}\nNOT-REPRODUCED K1-contract-same-tick :: {\"orders\":7,\"arrivals\":7,\"minGap\":87,\"wait\":80,\"sameTickDispatches\":0,\"reward\":1361,\"market\":1077,\"ratio\":1.264,\"premiumPerMinute\":28,\"cash10min\":[1160,2318],\"before\":\"이전: 시작 33초에 밀 12·목재 14 두 건이 같은 틱에 끝남, 10분 동안 765→3,150G\"}\nNOT-REPRODUCED K2-contract-dominates-sale :: {\"rule\":\"10분 동안 계약 보상 합이 같은 물건을 같은 시각 시장에 판 값의 1.4배 이하\",\"orders\":7,\"arrivals\":7,\"minGap\":87,\"wait\":80,\"sameTickDispatches\":0,\"reward\":1361,\"market\":1077,\"ratio\":1.264,\"premiumPerMinute\":28,\"cash10min\":[1160,2318],\"before\":\"이전: 시작 33초에 밀 12·목재 14 두 건이 같은 틱에 끝남, 10분 동안 765→3,150G\"}\nNOT-REPRODUCED U1-rank1-guidance-gap :: {\"secondsWithNoGuidanceCard\":0,\"bot\":\"optimal bot; a human stays longer\",\"note\":\"neither the tutorial (ui-rules tutorialStep) nor the operations card (Game.tsx <Operations hidden>) is on screen\"}\n\n[first-ten-minutes] 0 of 4 audit findings reproduced\n",
+    "stderr": ""
+  }
+]

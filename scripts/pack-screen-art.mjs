@@ -12,12 +12,14 @@ try { sharp = require('sharp'); } catch {
   if (!entry) throw new Error('Run npm run setup first: the locked sharp dependency is required.');
   sharp = require(resolve(store, entry, 'node_modules/sharp'));
 }
-const manifest = JSON.parse(await readFile(resolve(root, 'art-source/screen-concepts/2026-09-27/runtime-backgrounds/manifest.json'), 'utf8'));
+const manifests = await Promise.all(['pixel-refresh', 'daily-expansion'].map(async folder => JSON.parse(await readFile(resolve(root, `art-source/screen-concepts/2026-09-29/${folder}/manifest.json`), 'utf8'))));
 let before = 0, after = 0;
-for (const item of manifest.images) {
+for (const item of manifests.flatMap(manifest => manifest.images)) {
   const source = resolve(root, item.source), destination = resolve(root, item.output);
   await mkdir(dirname(destination), { recursive: true });
-  await sharp(source).webp({ quality: 90, effort: 6 }).toFile(destination);
+  await sharp(source).webp({ quality: 90, effort: 6, smartSubsample: true }).toFile(destination);
+  // Small gallery previews; full artwork is fetched only when viewed.
+  await sharp(source).resize(240, 135, { fit: 'cover', kernel: 'nearest' }).webp({ quality: 85, effort: 6 }).toFile(destination.replace(/\.webp$/, '-thumb.webp'));
   const input = (await stat(source)).size, output = (await stat(destination)).size;
   before += input; after += output;
   console.log(`${item.id}: ${input} -> ${output} bytes`);

@@ -1,0 +1,200 @@
+/* Supporting layouts for residents, facility controls, trade and goals. */
+.bottleneck{display:flex;align-items:center;gap:9px;width:100%;padding:11px;text-align:left;background:#fbedd0;border-bottom:1px solid #dec991;color:#6d542d}
+.bottleneck>svg{flex-shrink:0}.bottleneck span{flex:1}.bottleneck strong,.bottleneck small{display:block}.bottleneck strong{font-size:14px}.bottleneck small{margin-top:4px;font-size:12px;line-height:1.5}
+.network-ok{display:flex;align-items:center;gap:7px;padding:10px;font-size:13px;background:#d6e8dd}.network-ok span{display:flex;align-items:center;gap:4px;margin-left:auto;font-size:12px}
+.quick-contract{display:flex;align-items:center;gap:9px;padding:11px}.quick-contract>div{flex:1}.quick-contract strong,.quick-contract span{display:block;font-size:14px}.quick-contract span{font-size:12px;margin-top:2px}.quick-contract button{background:var(--ui-forest);color:white;border:1px solid var(--ui-outline);min-height:36px}
+.promotion-ready{display:flex;align-items:center;justify-content:center;gap:8px;background:#f1d686;width:100%;padding:8px;font-weight:700;font-size:13px}
+.health-alert{position:absolute;right:31px;top:210px;z-index:8;display:flex;gap:8px;align-items:center;max-width:280px;padding:10px;background:#f4e5dd;border:1px solid #dcaa94;color:#854f3b}.health-alert>div{flex:1}.health-alert strong,.health-alert span{display:block}.health-alert strong{font-size:14px}.health-alert span{font-size:12px;margin-top:3px}.health-alert button{padding:7px 9px;background:#a6604d;color:white;border-radius:3px}
+.facility-marker.fault{background:#fff0cb!important;border-color:#bd863b!important;color:#6f4c22!important;min-width:0;box-shadow:0 2px 8px #4b381633}.facility-marker.fault span{display:inline!important;font-size:12px}.facility-marker.fault i{background:#deae54}
+.delivery-status{display:flex;align-items:center;gap:7px;font-size:13px;padding:7px 0;color:var(--ui-muted)}
+.rescue-chapter{margin-top:17px;padding:15px;border:1px solid #aac5cf;background:#fff8e9}.chapter-heading{display:flex;align-items:center;gap:8px;margin-bottom:11px}.chapter-heading span{margin-left:auto;font-size:13px}.rescue-chapter h3{margin-top:12px;font-size:18px}.rescue-chapter p{font-size:14px;line-height:1.7;margin:5px 0 12px}.rescue-actions{display:flex;flex-wrap:wrap;gap:8px}.rescue-chapter>small{display:block;margin-top:10px}
+.charter-panel{margin-top:18px;padding:14px;border:1px dashed #7ca2b8}.charter-panel p{font-size:14px;line-height:1.6;margin:7px 0 10px}.charter-panel>div{display:grid;grid-template-columns:1fr;gap:7px}.charter-panel button{display:flex;justify-content:space-between;gap:15px;padding:11px;height:auto;white-space:normal}.charter-panel small{font-size:12px;line-height:1.6}.promotion-trial{display:flex;flex-wrap:wrap;gap:7px}.promotion-trial small{width:100%;font-size:13px;color:#52738a}.market-low{color:#a96042;font-style:normal}.market-high{color:#2f705f;font-style:normal}.new-state-label text{font-size:10px;fill:#4c4432;paint-order:stroke;stroke:#fff1d3;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+
+.map-edge-list{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.map-edge-list>button,.map-edge-list>div{display:flex;gap:7px;align-items:center;min-width:0;padding:9px 6px;background:#eaf0df;border-radius:6px;text-align:left}
+.map-edge-list>button:hover{background:#dce8c9}
+.map-edge-list svg{flex-shrink:0;color:#497456}
+.map-edge-list strong,.map-edge-list small{display:block}
+.map-edge-list strong{font-size:12px;line-height:1.5}
+.map-edge-list small{font-size:10px;line-height:1.5;color:#557068}
+.realm-edges{margin:14px 0;color:#345869}.realm-edges>strong{display:block;font-size:13px;margin-bottom:7px}
+.tile-panel .tile-landscape{font-size:12px;line-height:1.5;color:#60766c;margin:6px 0 10px}
+
+.facility-main{display:flex;align-items:center;gap:9px}
+.facility-model{width:96px;height:94px;object-fit:contain;flex-shrink:0}
+.facility-summary{flex:1;min-width:0;padding-right:17px}
+.facility-summary h2{font-size:20px;font-weight:850;display:flex;align-items:center;gap:8px;line-height:1.3;margin:0 0 3px}
+.facility-summary h2 small{font-size:12px;font-weight:600;color:#738981}
+.facility-status{display:block;font-size:14px;color:#488854;font-weight:700}
+.facility-status.blocked{color:#b27535}
+.facility-summary p{font-size:14px;line-height:1.5;color:#657a72;margin:4px 0}
+.facility-card .recipe{display:flex;align-items:center;gap:5px;padding:7px 0;border:0;flex-wrap:wrap;margin:0}
+.facility-card .recipe span{display:flex;gap:4px;align-items:center;padding:0 3px;background:none;border:0;color:var(--ui-ink);font-size:14px}
+.facility-card .recipe .missing{color:#ae7039}
+.facility-card .recipe b{margin-left:4px;font-weight:850}
+.facility-card .production-progress{height:7px!important;padding:0;border:0;background:#dfe8d8!important}
+.facility-card .production-progress>div{background:#66ad67!important}
+.facility-advice{display:flex;gap:6px;align-items:start;margin:6px 0;padding:7px 8px;background:#f7eac1;border-radius:6px;color:#7a5a2c;font-size:13px;line-height:1.45}
+.facility-advice svg{flex-shrink:0;margin-top:2px}
+.facility-quick-actions{display:flex;align-items:center;gap:6px;margin:5px 0 7px}
+.facility-staff{display:flex;align-items:center;gap:8px;padding:2px 8px;border-top:1px solid #aac9cb;background:#e5f0ed}
+.facility-staff .pixel-character{width:54px;height:54px;flex-shrink:0}
+.facility-staff span strong,.facility-staff span small{display:block}
+.facility-staff strong{font-size:13px}.facility-staff small{font-size:12px;color:#47707a}
+.facility-quick-actions button{height:32px!important;min-height:32px;font-size:13px;border-radius:7px!important}
+.facility-durability{margin-left:auto;font-size:12px;color:#718579}
+.facility-card [data-slot=button]{background:var(--ui-forest);color:#fff;border:1px solid var(--ui-outline);box-shadow:0 2px 0 #c2d7d6;font-weight:700}
+.facility-details{border-top:1px solid #cad9cf;margin:0 -13px;padding:0 13px}
+.facility-details summary{list-style:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:8px 1px;font-size:13px;font-weight:700;color:var(--ui-muted);min-height:33px}
+.facility-details summary::-webkit-details-marker{display:none}
+.facility-details[open] summary svg{transform:rotate(90deg)}
+.facility-details-body{padding:3px 0 12px;display:flex;flex-direction:column;gap:6px}
+.facility-details-body>p{font-size:14px;line-height:1.5;color:var(--ui-muted)}
+.facility-card .operation-controls{font-size:13px}
+.facility-card .operation-controls select,.facility-card .specialty-control select{font-size:14px;min-height:32px}
+.facility-card .specialty-control{font-size:13px}
+
+/* Character art uses one transparent atlas in portraits, previews and the map. */
+.pixel-character { display: inline-block; flex: none; width: 80px; height: 80px; background-size: 800% 800%; background-repeat: no-repeat; background-position: 0 var(--pixel-direction,0%); image-rendering: pixelated; transform: translateX(var(--pixel-anchor-0,0%)); }
+.pixel-action-walk { animation: pixel-walk .62s steps(1,end) infinite; }
+.pixel-action-carry { animation: pixel-carry .48s steps(1,end) infinite; }
+.pixel-action-work { animation: pixel-work .72s steps(1,end) infinite; }
+.pixel-action-attack { animation: pixel-attack .62s steps(1,end) infinite; }
+@keyframes pixel-walk { 0%,100% { background-position-x: 14.285714%; transform: translateX(var(--pixel-anchor-1,0%)); } 25%,75% { background-position-x: 28.571429%; transform: translateX(var(--pixel-anchor-2,0%)); } 50% { background-position-x: 42.857143%; transform: translateX(var(--pixel-anchor-3,0%)); } }
+@keyframes pixel-carry { 0%,100% { background-position-x: 57.142857%; transform: translateX(var(--pixel-anchor-4,0%)); } 50% { background-position-x: 71.428571%; transform: translateX(var(--pixel-anchor-5,0%)); } }
+@keyframes pixel-work { 0%,100% { background-position-x: 85.714286%; transform: translateX(var(--pixel-anchor-6,0%)); } 50% { background-position-x: 100%; transform: translateX(var(--pixel-anchor-7,0%)); } }
+@keyframes pixel-attack { 0%,100% { background-position-x: 0; transform: translateX(var(--pixel-anchor-0,0%)); } 25% { background-position-x: 85.714286%; transform: translateX(var(--pixel-anchor-6,0%)); } 50%,75% { background-position-x: 100%; transform: translateX(var(--pixel-anchor-7,0%)); } }
+.alliance-residents .resident-pair { min-height: 118px; align-items: stretch; overflow: visible; }
+.resident-mini:only-child { width: 100%; }
+.resident-mini { width: 50%; min-width: 0; position: relative; height: 150px; overflow: hidden; }
+.alliance-residents .resident-pair .resident-mini img { width: 100%; max-width: 100%; height: 100px; margin: 0; object-fit: contain; object-position: center bottom; image-rendering: pixelated; }
+.alliance-residents .resident-mini .pixel-character { position: absolute; width: 60px; height: 60px; bottom: -1px; left: 50%; margin-left: -30px; padding: 0; }
+.resident-profile { display: grid; grid-template-columns: minmax(120px,1fr) minmax(140px,1fr); min-height: 244px; gap: 10px; background: var(--ui-paper-deep); border: 1px solid var(--ui-rule); border-radius: 3px; overflow: hidden; }
+.resident-illustration { width: 100%; height: 280px; object-fit: contain; object-position: center bottom; image-rendering: pixelated; }
+.resident-profile-info { display: flex; flex-direction: column; align-items: center; padding: 14px 8px 10px; gap: 4px; }
+.resident-profile-info>strong { font-size: 22px; color: var(--ui-ink); }
+.resident-profile-info>span { font-size: 14px; color: var(--ui-muted); }
+.resident-profile-info .resident-current-duty { color: #2a7768; font-size: 13px; }
+.resident-profile-info .resident-preview { width: 116px; height: 116px; margin: 0; }
+.resident-directions { display: grid; grid-template-columns: repeat(2,28px); gap: 3px; }
+.resident-directions button { min-width: 28px; min-height: 25px; padding: 0; border: 1px solid var(--ui-rule); background: var(--ui-paper); color: #456b7e; border-radius: 2px; }
+.resident-directions button[aria-pressed=true],.resident-actions button[aria-pressed=true] { background: var(--ui-forest); color: #fff; border-color: #305f73; }
+.resident-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 8px 0 12px; }
+.resident-actions button { min-height: 35px; border: 1px solid var(--ui-rule); border-radius: 3px; padding: 5px 13px; background: var(--ui-paper); color: #426b7d; font-size: 14px; }
+.pixel-resident-list .resident-choice { display: flex; align-items: center; gap: 9px; min-width: 0; text-align: left; background: var(--ui-paper); border: 1px solid var(--ui-rule); padding: 6px; border-radius: 3px; }
+.pixel-resident-list .resident-choice[aria-pressed=true] { border-color: var(--ui-forest); box-shadow: inset 0 0 0 1px var(--ui-forest); background: var(--ui-sage); }
+.pixel-resident-list .resident-portrait { width: 61px; height: 82px; object-fit: contain; image-rendering: pixelated; background: var(--ui-paper-deep); }
+.pixel-resident-list .resident-choice>span { min-width: 0; display: flex; flex-direction: column; }
+.pixel-resident-list .resident-choice strong { font-size: 15px; }
+.pixel-resident-list .resident-choice small { display: block; font-size: 13px; }
+@media(max-width:700px) { .resident-illustration { height: 262px; }.resident-profile-info { padding-inline: 3px; }.resident-mini { height: 139px; }.alliance-residents .resident-pair .resident-mini img { height: 92px; } }
+@media(prefers-reduced-motion:reduce) { .pixel-character { animation: none; } }
+
+
+/* World trade routes (trade-routes.js): major routes are thick, small feeder routes thin and dashed. */
+.trade-network polyline, .trade-network path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.trade-route .casing { stroke: #3b2f22; stroke-width: 6.5; opacity: .35; }
+.trade-route.silk polyline:last-child { stroke: #f0b43c; stroke-width: 4; stroke-dasharray: 14 5; }
+.trade-route.paved polyline:last-child { stroke: #f3ecd9; stroke-width: 3.6; }
+.water-lane.river { stroke: #0f4f8e; stroke-width: 3; stroke-dasharray: 7 6; opacity: .85; }
+.water-lane.coast { stroke: #f4fbff; stroke-width: 2.6; stroke-dasharray: 10 8; opacity: .85; }
+.trade-link { stroke-width: 1.5; stroke-dasharray: 3 4; opacity: .8; }
+.trade-link.rural { stroke: #8f6134; }
+.trade-link.mountain { stroke: #6a4535; }
+.trade-link.river, .trade-link.lake, .trade-link.canal, .trade-link.stream, .trade-link.ferry { stroke: #1f6fa8; }
+.trade-link.silk, .trade-link.paved { stroke: #f3ecd9; }
+/* Lakes, canals, streams and small waterways drawn over the painted atlas (WATERWAYS). */
+.waterway path, .waterway polyline { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.waterway.lake path { fill: #3f9fcf; stroke: #e6f6f8; stroke-width: 2.4; }
+.waterway.lake text { font-size: 8px; font-weight: 700; fill: #f4fbff; paint-order: stroke; stroke: #1f5f84; stroke-width: 2px; }
+.waterway .bank { stroke: #e9dcb4; opacity: .9; }
+.waterway.canal .bank { stroke-width: 7; }
+.waterway.canal polyline:last-child { stroke: #2f86bf; stroke-width: 4; }
+.waterway.stream .bank { stroke-width: 4.6; opacity: .6; }
+.waterway.stream polyline:last-child { stroke: #3d9fd3; stroke-width: 2.6; }
+.waterway.ferry .bank { stroke-width: 3.4; opacity: .55; }
+.waterway.ferry polyline:last-child { stroke: #5cb4df; stroke-width: 1.6; }
+.trade-mine polyline, .trade-mine path { stroke: #ff6a3d; stroke-width: 3; opacity: .75; }
+.trade-mine path { stroke-width: 2.6; stroke-dasharray: none; opacity: 1; }
+.trade-mine circle { fill: #ff6a3d; stroke: #fff; stroke-width: 2.5; }
+.atlas-legend .legend-trade i { width: 18px; height: 0; border: 0; border-radius: 0; background: none; border-top: 4px dashed #f0b43c; }
+.atlas-legend .legend-trade i.paved { border-top: 4px solid #cfc5ab; }
+.atlas-legend .legend-trade i.river { border-top-color: #0f4f8e; }
+.atlas-legend .legend-trade i.sea { border-top: 3px dashed #7fb4d3; }
+.atlas-legend .legend-trade i.minor { border-top: 2px dashed #8f6134; }
+.atlas-legend i.legend-ice { background: #f4fbff; border-color: #9fc3d8; }
+.atlas-legend i.legend-desert { background: #f1cf7c; border-color: #b8913e; }
+.atlas-legend i.legend-mountain { background: #b3a590; border-color: #6f604d; }
+.atlas-legend i.legend-forest { background: #8fb383; border-color: #4f7d45; }
+.atlas-legend i.legend-site { background: #fff8dd; border: 2px solid #9a8a5a; border-radius: 1px; }
+.world-atlas .site-cell { cursor: pointer; }
+.atlas-legend .legend-trade i.lake { width: 14px; height: 9px; border: 2px solid #e6f6f8; border-radius: 50%; background: #3f9fcf; box-shadow: 0 0 0 1px #7fb4d3; }
+.trade-route-card { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; align-items: center; margin: 0 0 10px; padding: 9px 11px; border-radius: 10px; background: #eef5fa; border: 1px solid #c4dbe8; color: #2f5670; }
+.trade-route-card strong { display: block; font-size: 14px; }
+.trade-route-card small { font-size: 12px; color: #52748b; }
+.trade-route-card dl { display: flex; gap: 12px; margin: 0; }
+.trade-route-card dl div { text-align: center; }
+.trade-route-card dt { font-size: 11px; color: #52748b; }
+.trade-route-card dd { margin: 0; font-size: 16px; font-weight: 800; }
+.trade-route-card label { grid-column: 1 / -1; display: flex; gap: 8px; align-items: center; font-size: 13px; }
+.trade-route-card select { flex: 1; min-width: 0; padding: 5px 7px; border-radius: 7px; border: 1px solid #a9c6d8; background: #fff; }
+.is-playing .facility-labels.minimal .facility-marker.production:not(.chosen) span{display:block}
+.is-playing .facility-labels.minimal .facility-marker.production:not(.chosen)>svg:first-child{display:block;flex-shrink:0}
+.is-playing .facility-marker.production{height:27px;padding:3px 5px 5px;gap:5px}
+.is-playing .facility-marker.production>i{bottom:0;background:#cca33e}
+.is-playing .facility-marker.production[data-production="working"]{border-color:#e2bf67}
+.is-playing .facility-marker.production[data-production="ready"]{border-color:#71aa84}
+/* Next promotion goal: stays on the operations card after the guide ends (U1); names the first unmet condition (H7). */
+.next-goal{display:flex;align-items:center;gap:7px;width:100%;padding:8px 9px;text-align:left;background:var(--ui-sage);border-top:1px solid #c9dde6;color:var(--town-ink)}
+.next-goal>svg{flex-shrink:0;color:var(--town-blue)}.next-goal span{flex:1;min-width:0}.next-goal strong,.next-goal small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.next-goal strong{font-size:13px}.next-goal small{margin-top:2px;font-size:12px;opacity:.75}
+.next-goal:hover{background:var(--ui-paper-deep)}
+.is-playing .bottleneck.export-blocked{background:#fbe0d3;color:#8a3f24}
+.market-more{display:block;width:100%;margin-top:8px;padding:9px;border:1px dashed #a9c6d8;border-radius:8px;background:var(--town-paper);color:var(--town-blue);font-size:13px;font-weight:700}
+.market-more:hover{background:#fff}
+.help-crews{margin:6px 0 0;padding-left:16px;font-size:12px;line-height:1.6;color:var(--town-ink);opacity:.8}
+/* Phone: the guide and the operations card share the top-right slot with a tall facility card, so they yield while it is open. */
+@media(max-width:700px){.is-playing.facility-open .tutorial-card,.is-playing.facility-open .operations-card{display:none}}
+/* Locked upgrade and specialty buttons keep their reason readable instead of fading to 50% (H3). */
+.facility-card [data-slot=button]:disabled{opacity:1;background:#e3ebef;color:#5b7483;border-color:#c5d5de;box-shadow:none}
+.facility-card [data-slot=button]:disabled small{color:#8a5a2b;font-weight:700}
+
+.biome-summary{display:flex;flex-direction:column;gap:3px;padding:9px 0 12px;color:#345869}.biome-summary strong{font-size:15px}.biome-summary span{font-size:12px;color:#667969}.world-secondary a{align-self:center;font-size:13px;color:#4e7e98;text-decoration:underline}
+/* Next build once the first-session guide ends: one line that picks the build tool (ui-rules nextBuild). */
+.next-build{display:flex;align-items:center;gap:7px;width:100%;padding:8px 9px;text-align:left;background:#fff4d2;border-bottom:1px solid #ecd9a2;color:#6b5320}
+.next-build>svg{flex-shrink:0}.next-build>svg:first-child{color:#b27a1c}.next-build span{flex:1;min-width:0}
+.next-build strong,.next-build small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.next-build strong{font-size:13px}.next-build small{margin-top:2px;font-size:12px;opacity:.8}
+.next-build:hover{background:#ffedba}
+/* Product picker of multi-product facilities: output icon + name, then input -> output icons or the lock reason. */
+.recipe-picker{display:flex;gap:6px;padding:6px 0 8px;overflow-x:auto}
+.recipe-picker button{flex:1 0 104px;display:flex;flex-direction:column;gap:3px;padding:6px 7px;border:1px solid var(--ui-rule);border-radius:7px;background:var(--ui-paper);color:var(--town-ink);text-align:left}
+.recipe-picker button.current{border:2px solid var(--town-blue);background:var(--ui-sage);padding:5px 6px}
+.recipe-picker button:disabled{background:#eceeec;color:#6c7a80;cursor:not-allowed}
+.recipe-picker button:not(:disabled):not(.current):hover{background:#fff}
+.recipe-picker button:focus-visible{outline:2px solid var(--town-edge);outline-offset:1px}
+.recipe-name{display:flex;align-items:center;gap:5px;min-width:0}.recipe-name strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.recipe-flow,.recipe-lock{display:flex;align-items:center;gap:4px;font-size:12px;flex-wrap:wrap}
+.recipe-flow span{display:inline-flex;align-items:center;gap:1px}
+.recipe-lock{color:#8a5a2b;font-weight:700}
+/* Export fleet: one icon per vehicle slot, filled while out; fuel vehicles carry a gold underline. */
+.fleet-line{display:flex;align-items:center;gap:7px;padding:6px 9px;font-size:12px;font-weight:700;color:#3f6b35;border-top:1px solid #d5e4cf}
+.fleet-line.fuel-short{color:#8a5a2b;background:#fff4d9}
+.fleet-icons{display:flex;gap:3px}
+.fleet-icons i{display:grid;place-items:center;width:21px;height:21px;border-radius:5px;background:#eef3ee;color:#9db2a5;border-bottom:2px solid transparent}
+.fleet-icons i.busy{background:var(--ui-forest);color:#fff}
+.fleet-icons i.fuel{border-bottom-color:#d7a445}
+.export-status{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap}
+.export-status .fleet-line{padding:0;border:0;background:none;color:inherit}
+.export-pending{margin-left:auto;font-size:12px}
+.fleet-line{flex-wrap:wrap;row-gap:3px}.fleet-line>span:last-child{white-space:nowrap}
+@media(max-width:700px){.operations-card .fleet-line{padding:5px 6px;gap:5px}.operations-card .fleet-icons i{width:19px;height:19px}.operations-card .fleet-unit{display:none}}
+/* Long facility names ("포장 도로 물류센터") were cut mid-letter by the tile; end them with an ellipsis (title has the full text). */
+.is-playing .build-item strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-inline:3px}
+/* The dialog touch-size rule (globals: .game-dialog button min-height 40px) stretched switches into 32x40 boxes; keep the
+   drawn pill and give it the 40px hit area with an invisible pad instead. */
+/* Market rows also force every button to 27-36px tall with !important, so the pill size has to win the same way. */
+.game-dialog [data-slot=switch]{min-height:0!important;height:1.15rem!important;min-width:2rem;padding:0!important;position:relative}
+.game-dialog [data-slot=switch]::after{content:'';position:absolute;inset:-11px -6px}
+/* Phone: the map-edge button sits at the same bottom-left spot as the facility card and the tile panel; it yields to them. */
+@media(max-width:700px){.is-playing.facility-open .map-edges,.is-playing:has(.tile-panel) .map-edges{display:none}}

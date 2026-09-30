@@ -102,6 +102,8 @@ def superseded():
         ids |= {i for entry in spec.get('crops', []) for i in entry.get('ids', [])}
         if spec.get('resources') or spec.get('goods'):
             ids.add('farmGoods')
+        if spec.get('goods2'):
+            ids.update(('farmGoods2', 'farmParts'))
     # Only ids whose refreshed atlas is actually registered count; a planned
     # but unpacked refresh must not leave the facility without a picture.
     manifest = json.loads((ENV / 'pack-manifest.json').read_text(encoding='utf8'))

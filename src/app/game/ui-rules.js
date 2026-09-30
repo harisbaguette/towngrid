@@ -1,3 +1,4 @@
+import {remainingSeconds} from './game-time.js';
 // What the HUD shows, derived from the same simulation data the rules use.
 // Plain JS so node probes (tests/audit) can check the screen logic without a browser.
 import {BUILDINGS,RESOURCES} from './simulation.js';
@@ -5,10 +6,12 @@ import {RACES,RANKS,unlockRank} from './world.js';
 import {operationHint} from './proximity.js';
 import {provinceZone} from './infrastructure.js';
 import {SERVICE_OUTPUTS} from './production-visuals.js';
+import {recoveryReady,RECOVERY_LIMIT} from './economy.js';
 
 const particle=(w,withFinal,without)=>{const c=w.charCodeAt(w.length-1)-0xac00;return w+(c>=0&&c<11172&&c%28?withFinal:without);};
 export const objectOf=w=>particle(w,'을','를');
 export const topicOf=w=>particle(w,'은','는');
+export const subjectOf=w=>particle(w,'이','가');
 
 /** House type that brings the crew race a stalled facility waits for ("드워프 주민 필요"), or null. */
 export function crewHouse(status){
@@ -28,7 +31,7 @@ export function exportBlocked(s){
 export function promotionParts(s,p){
  if(!p)return [];
  const parts=p.requirements.map(r=>({label:r.name,current:Math.min(r.current,r.target),target:r.target}));
- if(p.trial)parts.push({label:p.trial.name,current:Math.min(Math.floor(p.trial.current),p.trial.target),target:p.trial.target,done:p.trial.done});
+ if(p.trial)parts.push({label:p.trial.name,current:Math.min(p.trial.displayCurrent,p.trial.displayTarget),target:p.trial.displayTarget,done:p.trial.done});
  if(p.fee>0)parts.push({label:'승급비',current:Math.min(Math.floor(s.money),p.fee),target:p.fee,unit:'G'});
  return parts.map(v=>({...v,done:v.done??v.current>=v.target}));
 }
@@ -51,7 +54,7 @@ export function tutorialStep(s){
  {done:s.buildings.some(b=>b.type==='field'),title:'밀을 생산하세요',text:'우물 근처에 밀밭을 놓고 통로를 남기세요.',tool:'field'},
  {done:s.buildings.some(b=>b.type==='lumber'),title:'목재를 확보하세요',text:'나무에서 네 칸 이내에 벌목장을 지으세요.',tool:'lumber'},
  {done:s.contracts>0,title:'첫 납품',text:s.contractStatus?.().inTransit?'납품 물건이 관문으로 가는 중입니다. 도착하면 값을 받습니다.':'창고에 모인 재고로 영주에게 납품하세요.',tool:null,action:'contract'},
- {done:s.rank>0,title:'첫 승급',text:need?need+' 달성 후 승급':'지금 승급할 수 있습니다.',tool:null}
+ {done:s.rank>0,title:'첫 승급',text:need?need+' 달성 후 승급':'지금 승급할 수 있습니다.',tool:null,waiting:!!need}
  ];
  const index=steps.findIndex(v=>!v.done);return index<0?null:{...steps[index],index,total:steps.length};
 }
@@ -136,7 +139,7 @@ export function contractState(s){
  const c=s.contract(),have=Math.floor(s.availableStock(c.item)),st=typeof s.contractStatus==='function'?s.contractStatus():null;
  if(!st)return {contract:c,have,ready:have>=c.amount,label:'납품',note:''};
  if(st.inTransit)return {contract:c,have,ready:false,label:'운송 중',note:'',transit:true};
- const wait=Math.ceil(st.wait||0);
+ const wait=remainingSeconds(st.wait||0,s);
  if(wait>0)return {contract:c,have,ready:false,label:wait+'초',note:'',wait};
  // A short stock already shows as have/amount; the note is for other stops (export road cut).
  return {contract:c,have,ready:!!st.ready,label:'납품',note:!st.ready&&have>=c.amount?st.error||'':''};
@@ -152,4 +155,132 @@ export function fleetState(s){
  const names=[...new Set(waiting.map(v=>v.name))].join('·');
  const short=freeOut&&waiting.length>0&&!e.fuelReady;
  return {vehicles:e.vehicles,busy,total:e.vehicles.length,fuelNote:short?'연료 부족':'',waiting:short?names+' 대기':''};
+}
+
+// ---- 2026-09-29 HUD fixes (F3a): problem -> fix actions, ledger, notices ----
+
+/** Stock that can be sold now (above auto-sale reserve and contract hold), priced at the current market quote. */
+export function sellableStock(s){
+ const items=[];let value=0;
+ for(const id of Object.keys(RESOURCES)){
+  const n=Math.floor(typeof s.availableStock==='function'?s.availableStock(id):s.stock[id]||0)-(typeof s.minimumStock==='function'?s.minimumStock(id):0);if(n<1)continue;
+  const v=typeof s.saleQuote==='function'?s.saleQuote(id,Math.min(n,60))*n/Math.min(n,60):RESOURCES[id].price*n;
+  items.push({id,n,value:Math.round(v)});value+=v;
+ }
+ return {value:Math.round(value),items:items.sort((a,b)=>b.value-a.value)};
+}
+/** One market lot for a quick sale: 10 or the trade route capacity when smaller, never more than what may be sold. */
+export function quickSaleLot(s,item){
+ const cap=typeof s.tradeConnection==='function'?s.tradeConnection().capacity||10:10;
+ const free=Math.floor(typeof s.availableStock==='function'?s.availableStock(item):s.stock[item]||0);
+ return Math.max(0,Math.min(10,cap,free));
+}
+/** Item a facility makes now (chosen product of a multi-product facility). */
+export const outputOf=(s,b)=>(typeof s.recipeOf==='function'?s.recipeOf(b)?.output:null)||BUILDINGS[b.type]?.output||null;
+
+/** Owned empty tile nearest to a depleted gatherer, inside its four-tile reach, where plant() succeeds (economy.js plant). */
+export function plantSpot(s,b){
+ if(BUILDINGS[b.type]?.natural!=='tree')return null;let best=null,bestD=Infinity;
+ for(let x=b.x-4;x<=b.x+4;x++)for(let z=b.z-4;z<=b.z+4;z++){
+  const d=Math.abs(x-b.x)+Math.abs(z-b.z);if(d<1||d>4||d>=bestD)continue;const t=s.tile(x,z);
+  if(!t||t.terrain==='water'||!s.ownedAt(x,z)||s.at(x,z)||t.nature||s.roads.has(x+','+z))continue;best={x,z};bestD=d;
+ }
+ return best;
+}
+
+/** Damaged facilities, worst first, with the summed repair cost (simulation repairAllCost) and the cheapest single repair. */
+export function repairPlan(s){
+ const list=s.buildings.filter(b=>b.health<100).sort((a,b)=>a.health-b.health),costs=list.map(b=>s.repairCost(b));
+ return {list,total:typeof s.repairAllCost==='function'?s.repairAllCost():costs.reduce((n,v)=>n+v,0),cheapest:costs.length?Math.min(...costs):0};
+}
+/** Whether an emergency fund may be granted now (economy.js recoveryReady) and, when only the five-day wait blocks it, how long. */
+export function recoveryState(s){
+ if(recoveryReady(s))return {ready:true,reason:''};
+ if(s.money>RECOVERY_LIMIT)return {ready:false,reason:''};
+ const last=s.campaign?.treasury?.lastRecoveryDay??s.lastRecoveryDay??-10;
+ return {ready:false,reason:Math.max(1,5-(s.day-last))+'일 후 회생 자금'};
+}
+
+/**
+ * The open contract takes stock the next promotion still needs (J6): the goal item itself when the goal is to sell it, or an
+ * ingredient of a goal item, and what is left after the delivery no longer covers the rest of that goal.
+ * null when there is no conflict. {item,goal,kind,short}
+ */
+export function contractConflict(s){
+ const c=s.contract?.(),p=s.promotion?.();if(!c||!p)return null;
+ const left=Math.floor(typeof s.availableStock==='function'?s.availableStock(c.item):s.stock[c.item]||0)-c.amount;
+ for(const r of p.requirements||[]){
+  if(r.done)continue;const [kind,goal]=String(r.key).split(':');if(kind!=='produced'&&kind!=='sold')continue;
+  const rest=Math.max(0,r.target-r.current);let need=0;
+  if(goal===c.item)need=kind==='sold'?rest:0;
+  else{const line=Object.values(BUILDINGS).flatMap(d=>productsOf(d)).find(x=>x.output===goal&&(x.inputs||{})[c.item]);if(line)need=Math.ceil(rest/Math.max(1,line.amount||1))*line.inputs[c.item];}
+  if(need>0&&left<need)return {item:c.item,goal,kind,short:need-Math.max(0,left)};
+ }
+ return null;
+}
+
+/** Money back for demolishing a facility: the simulation's own refund when it has one, else the long-standing 40 % rule. */
+export function demolishRefund(s,b){
+ if(typeof s.demolishRefund==='function'){const r=s.demolishRefund(b);return typeof r==='number'?{money:r}:r||{money:0};}
+ return {money:Math.floor((BUILDINGS[b.type]?.cost||0)*(b.specialized&&b.race==='goblin'?.65:.4))};
+}
+
+/** Facilities that open at exactly this rank and this settlement can build. */
+export const unlockedAt=(s,rank)=>Object.keys(BUILDINGS).filter(t=>unlockRank(t)===rank&&rank>0&&offered(s,t));
+
+/**
+ * Tile numbers for the info panel. `now` holds the ones a facility of the current rank can use; the rest wait behind 더 보기.
+ * {id,label,value,now}
+ */
+export function tileMetrics(s,t){
+ const uses=type=>!BUILDINGS[type]||s.rank>=unlockRank(type);
+ return [
+  {id:'field',label:'밀 생산 효율',value:Math.round(s.tileMultiplier('field',t.x,t.z)*100)+'%',now:uses('field')},
+  {id:'well',label:'취수 효율',value:Math.round(s.tileMultiplier('well',t.x,t.z)*100)+'%',now:uses('well')},
+  {id:'quarry',label:'채석 효율',value:Math.round(s.tileMultiplier('quarry',t.x,t.z)*100)+'%',now:uses('quarry')},
+  {id:'mana',label:'마력 농도',value:(t.mana??0)+'%',now:BUILDINGS.manaextractor?uses('manaextractor'):false},
+  {id:'oil',label:'원유 농도',value:(t.oil??t.ore??0)+'%',now:BUILDINGS.oilpump?uses('oilpump'):false},
+ ];
+}
+
+/**
+ * Where a notice goes. Warnings ask the player to act and always pop up; successes confirm; plain info (daily upkeep,
+ * world news, a storm that did no harm) goes to the ledger news list unless it answers the player's own action just now.
+ * Notices of a settlement not on screen pop up only as warnings, named after that settlement.
+ * Returns 'warning' | 'success' | 'info' | null (null = news list only).
+ */
+export function noticeRoute(notice,{active=true,ownAction=false}={}){
+ if(notice.type==='warning')return 'warning';
+ if(!active)return null;
+ if(notice.type==='success')return 'success';
+ return ownAction&&notice.type!=='news'?'info':null;
+}
+
+/** Day-boundary snapshot of what the ledger compares: money, sales income so far that day, stock, produced and sold counters. */
+export const ledgerSnapshot=s=>({day:s.day,time:s.time,money:s.money,income:s.budget?.income||0,stock:{...s.stock},produced:{...(s.produced||{})},sold:{...(s.sold||{})}});
+/**
+ * Difference of two snapshots: money change and, per item, made / sold / used (made - sold - stock change, other uses
+ * such as facility inputs, contracts and construction). Items with no movement are left out.
+ */
+export function ledgerDiff(a,b){
+ const items=[];
+ for(const id of Object.keys(RESOURCES)){
+  const made=(b.produced[id]||0)-(a.produced[id]||0),sold=(b.sold[id]||0)-(a.sold[id]||0),change=Math.floor(b.stock[id]||0)-Math.floor(a.stock[id]||0);
+  const used=Math.max(0,Math.round(made-sold-change));if(!made&&!sold&&!change)continue;
+  items.push({id,made:Math.round(made),sold:Math.round(sold),used,change});
+ }
+ return {days:Math.max(1,(b.time-a.time)/80),money:Math.round(b.money-a.money),items:items.sort((x,y)=>(y.made+y.used)-(x.made+x.used))};
+}
+/**
+ * Merge facility markers that would overlap on screen (B13): the most important marker of a close group stays and carries
+ * the count of the rest. `solo` markers (selected, hovered) neither absorb nor join. Input items need x, y, rank, solo and
+ * may give their screen width w (labels on), else gapX stands for it.
+ */
+export function clusterMarkers(items,gapX=50,gapY=28){
+ const groups=[];
+ for(const m of [...items].sort((a,b)=>b.rank-a.rank)){
+  const g=!m.solo&&groups.find(v=>!v.lead.solo&&Math.abs(v.lead.x-m.x)<((v.lead.w||gapX)+(m.w||gapX))/2&&Math.abs(v.lead.y-m.y)<gapY);
+  if(g)g.members.push(m);else groups.push({lead:m,members:[]});
+ }
+ return groups;
 }

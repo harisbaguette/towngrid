@@ -1,0 +1,139 @@
+{
+  "version": "farm-v11",
+  "generator": "OpenAI image_gen",
+  "references": "Existing TownGrid pixel artwork; no external style assets.",
+  "views": [
+    "SE",
+    "NE",
+    "NW",
+    "SW"
+  ],
+  "cellSize": 192,
+  "buildingBaseline": 181,
+  "buildingFiles": {
+    "buildings-generated.png": [
+      "solarpanel",
+      "chocolatier",
+      "packshop"
+    ],
+    "barns-generated.png": [
+      "sheeppen",
+      "milkbarn",
+      "duckhouse"
+    ]
+  },
+  "resources": {
+    "icons-generated.png": [
+      {
+        "id": "wax",
+        "frame": 23
+      },
+      {
+        "id": "wool",
+        "frame": 18
+      }
+    ]
+  },
+  "animation": {
+    "animals": {
+      "files": [
+        "sheep-generated.png",
+        "cow-generated.png",
+        "duck-generated.png"
+      ],
+      "columns": 8,
+      "rows": 4,
+      "poses": [
+        "idle",
+        "walk-a",
+        "walk-b",
+        "walk-c",
+        "walk-d",
+        "feed-lower",
+        "feed-low",
+        "feed-raise"
+      ],
+      "anchor": [
+        0.5,
+        0.9166666666666666
+      ]
+    },
+    "bee": {
+      "file": "bee-generated.png",
+      "columns": 4,
+      "rows": 1,
+      "poses": [
+        "wings-up",
+        "wings-wide",
+        "wings-down",
+        "wings-half"
+      ]
+    }
+  },
+  "packing": "node scripts/pack-farm-refresh.mjs && node scripts/pack-resource-icons.mjs",
+  "socketSource": "src/app/game/pixel-farm-data.js: REFRESH_SOCKETS",
+  "animalPlacementSource": "src/app/game/pixel-farm-motion.js: FARM_ANIMALS",
+  "prompts": [
+    {
+      "file": "buildings-generated.png",
+      "references": [
+        "public/assets/pixel-environment/bakery.png",
+        "public/assets/pixel-environment/solarpanel.png",
+        "public/assets/pixel-environment/chocolatier.png",
+        "public/assets/pixel-environment/packshop.png"
+      ],
+      "prompt": "Create a production sprite atlas for TownGrid by redrawing the THREE supplied old buildings (solar panel, chocolate workshop, packing workshop) to match the FIRST reference's polished warm pixel-art bakery style. The reference files are vertical 4-direction atlases. Output ONE image arranged as exactly FOUR columns and THREE rows of equal square cells (1536x1152 ideal). Transparent background, no labels, no text, no grid lines. Each cell contains one complete 1x1 square ground tile in isometric diamond projection, same exact footprint and scale across all twelve cells. Each tile bottom vertex must be centered, generous transparent margin. Row 1 solar array: low flat rectangular BLUE photovoltaic panel planes, silver rectangular edge frames, visible triangulated metal supports and a compact inverter; from the back show FLAT light-gray rear plates, never tubes or cylinders. Row 2 chocolate workshop: cream plaster, dark cocoa roof, unmistakable large chocolate-bar emblem attached on BOTH visible roof slopes, copper chocolate vat on one side and cocoa sacks; no loose smoke or fire painted in; large readable pixels, few details. Row 3 packing workshop: timber frame, teal roof, large parcel emblem on both roof slopes, recognizable open packing bench with empty short roller conveyor on one side and paper rolls; do not paint finished products on ground. In EACH row columns represent camera directions SE, NE, NW, SW, 90 degree rotations around THE SAME building, preserving equipment world locations. Use the old atlas orientation conventions exactly; do not merely mirror one front view four times. Bakery reference dictates style: crisp stepped pixel edges, bold dark outline, broad highlighted color masses, no smooth rendering, no gradients, no voxel noise. Readable at 96px. NO characters or animals. Building and all equipment fully fit inside one diamond ground tile. This is actual game sprite art, not a presentation sheet.",
+      "revision": "Edit this sprite atlas, preserving ALL other pixels and layout. Correct ONLY the SECOND solar array (top row, second column): this is the opposite quarter-turn camera view and must display the FLAT LIGHT GRAY BACKS of all THREE rectangular solar panels with straight silver cross braces and triangular supports, like the THIRD solar array but viewed from the other rear diagonal. Keep its exact tile footprint and inverter position. No blue photovoltaic surface visible except a thin edge. The first and fourth top-row arrays remain front-facing blue, the second and third are rear-facing gray. Do not change the bottom two rows. Transparent background unchanged. Pixel-art sprite atlas, no text."
+    },
+    {
+      "file": "barns-generated.png",
+      "references": [
+        "public/assets/pixel-environment/sheeppen.png",
+        "public/assets/pixel-environment/milkbarn.png",
+        "public/assets/pixel-environment/duckhouse.png",
+        "public/assets/pixel-environment/bakery.png"
+      ],
+      "prompt": "Create TownGrid game building sprite atlas: exactly 4 columns x 3 rows of equal square cells, ideally 1536x1152, transparent background, no labels or lines. Redraw the first THREE references in the polished crisp chunky pixel style of the FOURTH bakery reference. Row1 sheep enclosure, Row2 dairy cow barn, Row3 duck house. Columns in each row are SE, NE, NW, SW camera directions around same fixed geometry, matching original reference row directions. Essential: REMOVE ALL ANIMALS from all twelve cells, they will be animated separately. NO sheep, NO cows, NO ducks, NO birds. Keep an open grassy front/side yard in each tile so animals can be placed there. Sheep pen: small red-roof timber shelter at one corner, low split-rail fencing, straw manger. Dairy barn: compact red barn with white timber X door and dark slate roof in back-left area, milk churns by door, substantial OPEN grassy yard on right side. Duck house: small teal roof timber hut and oval blue pond with wide grassy bank; no ducks or ripples attached to animals. Match the original world locations of shelter/barn/pond in all views. Each model and props fit within ONE square ground tile projected as an isometric diamond. Strong dark outlines, large color blocks, minimal fine detail, no smooth 3D, no blurry pixels. Same square footprint centered in every cell, same bottom tip, generous transparent margin. Do not enlarge buildings to fill the animal yard. The barn occupies under half of the floor, keep animal yard at least one third of floor."
+    },
+    {
+      "file": "icons-generated.png",
+      "references": [
+        "public/assets/pixel-environment/resources/wax.png",
+        "public/assets/pixel-environment/resources/wool.png",
+        "public/assets/pixel-environment/resources/bread.png"
+      ],
+      "prompt": "Redraw the first two resource icons for a polished pixel-art industrial farming game, matching the third reference's bread icon style: bold dark stepped outlines, clear broad color clusters, attractive warm highlights, genuine hand-pixelled appearance at 64px, no gradients or blur. Output one sprite sheet with TWO square cells side by side, 1024x512 or 1536x768, transparent background. No words. Left cell: BEESWAX, unmistakably a rolled sheet of amber beeswax honeycomb with a curled tubular edge revealing hexagonal comb cells and two small UNLIT candles with visible dark wicks; honey amber, NOT cheese, not a wedge, no cheese holes. Right cell: SHEEP WOOL, a large rolled sheep fleece on a small wooden shearing board with dark metal sheep shears in front; elongated curled locks of cream wool, NOT cotton balls, no yarn ball. Both icons centered with equal scale and 12 percent transparent margin. Preserve hard pixel boundaries; simple shapes legible at tiny HUD size."
+    },
+    {
+      "file": "bee-generated.png",
+      "references": [
+        "public/assets/pixel-environment/bakery.png"
+      ],
+      "prompt": "Create a PIXEL ART game animation strip of one tiny honey bee, matching reference pixel style. Output exactly FOUR square cells in ONE horizontal row, transparent background, no labels, no grid. Each cell contains the exact same single golden bee with 3 dark stripes, two tiny antennae, a dark head facing down-right, two pale blue-white wings. Body position and shape identical across frames. Columns are a flutter cycle: wings raised high; wings spread wide; wings down low; wings spread half high. NOT four bees in a swarm: each cell is one independent animation frame of the same bee. No trail, no blur, no flowers, no honey, no ground, no shadow. Strong dark 1px outline at native small sprite scale, broad 2-4px amber highlights. Readable at 16px. Each bee centered occupying 60 percent of its square cell, wide transparent margins. Output 1024x256 ideal."
+    },
+    {
+      "file": "sheep-generated.png",
+      "references": [
+        "public/assets/pixel-environment/sheeppen.png",
+        "public/assets/pixel-environment/bakery.png"
+      ],
+      "prompt": "Draw an animation sprite atlas of ONE sheep for TownGrid. A woolly cream sheep with charcoal face, two small ears and four short dark legs. No horns, no fleece shedding. Match the bakery reference's rich chunky PIXEL ART, dark pixel outline and broad warm shading. The animal should match the sheep in the first reference but drawn much more clearly. NO BUILDING, no ground tile, no props, no grass, no text, no shadows, transparent background. Layout EXACTLY EIGHT columns and FOUR rows, each cell square, full sheet ideally 1536x768. Exactly 32 sprites. Row 1 animal facing down-right (SE); row 2 up-right (NE); row 3 up-left (NW); row 4 down-left (SW). SAME animal and scale across all 32. COLUMNS: 1 neutral standing; 2 walking left front leg forward; 3 walking passing pose; 4 walking right front leg forward; 5 walking passing opposite; 6 lowering head toward ground to feed; 7 head fully lowered eating/pecking; 8 head half raised chewing. Truly articulate legs and head; do not just translate whole static sprite. Body center and planted-foot baseline aligned consistently in all cells. Each sprite occupies 65 percent of cell width with generous transparent margin. Four diagonal camera views slightly from above, feet all visible when in front. Crisp pixel clusters without smooth gradients, legible when reduced to 32 pixels. No extra animals, only this one sheep once in each cell."
+    },
+    {
+      "file": "cow-generated.png",
+      "references": [
+        "public/assets/pixel-environment/milkbarn.png",
+        "public/assets/pixel-environment/bakery.png"
+      ],
+      "prompt": "Draw an animation sprite atlas of ONE cow for TownGrid. A black-and-white dairy cow with pink muzzle, small ears, short horns, four dark hooves, and a tail. Preserve identical black patches. Match the bakery reference's rich chunky PIXEL ART, dark pixel outline and broad warm shading. The animal should match the cow in the first reference but drawn much more clearly. NO BUILDING, no ground tile, no props, no grass, no text, no shadows, transparent background. Layout EXACTLY EIGHT columns and FOUR rows, each cell square, full sheet ideally 1536x768. Exactly 32 sprites. Row 1 animal facing down-right (SE); row 2 up-right (NE); row 3 up-left (NW); row 4 down-left (SW). SAME animal and scale across all 32. COLUMNS: 1 neutral standing; 2 walking left front leg forward; 3 walking passing pose; 4 walking right front leg forward; 5 walking passing opposite; 6 lowering head toward ground to feed; 7 head fully lowered eating/pecking; 8 head half raised chewing. Truly articulate legs and head; do not just translate whole static sprite. Body center and planted-foot baseline aligned consistently in all cells. Each sprite occupies 65 percent of cell width with generous transparent margin. Four diagonal camera views slightly from above, feet all visible when in front. Crisp pixel clusters without smooth gradients, legible when reduced to 32 pixels. No extra animals, only this one cow once in each cell."
+    },
+    {
+      "file": "duck-generated.png",
+      "references": [
+        "public/assets/pixel-environment/duckhouse.png",
+        "public/assets/pixel-environment/bakery.png"
+      ],
+      "prompt": "Draw an animation sprite atlas of ONE duck for TownGrid. A white domestic duck with orange bill, orange webbed feet and small blue-gray wing shadow. Preserve its round body. Match the bakery reference's rich chunky PIXEL ART, dark pixel outline and broad warm shading. The animal should match the duck in the first reference but drawn much more clearly. NO BUILDING, no ground tile, no props, no grass, no text, no shadows, transparent background. Layout EXACTLY EIGHT columns and FOUR rows, each cell square, full sheet ideally 1536x768. Exactly 32 sprites. Row 1 animal facing down-right (SE); row 2 up-right (NE); row 3 up-left (NW); row 4 down-left (SW). SAME animal and scale across all 32. COLUMNS: 1 neutral standing; 2 walking left front leg forward; 3 walking passing pose; 4 walking right front leg forward; 5 walking passing opposite; 6 lowering head toward ground to feed; 7 head fully lowered eating/pecking; 8 head half raised chewing. Truly articulate legs and head; do not just translate whole static sprite. Body center and planted-foot baseline aligned consistently in all cells. Each sprite occupies 65 percent of cell width with generous transparent margin. Four diagonal camera views slightly from above, feet all visible when in front. Crisp pixel clusters without smooth gradients, legible when reduced to 32 pixels. No extra animals, only this one duck once in each cell."
+    }
+  ]
+}

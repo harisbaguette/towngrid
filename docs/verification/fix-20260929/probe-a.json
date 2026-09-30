@@ -1,0 +1,164 @@
+{
+ "overrides": [
+  "tutorial buildings placed through sim.build(...,free) on the nearest valid tile",
+  "C5: Storage.prototype.setItem throws for the save key during the check",
+  "B5/A2-E1: sim.promotion() patched to report ready so the promote button is enabled",
+  "A2-E1: rank set to the one below the top (31)"
+ ],
+ "B10": {
+  "modeAfterDialogEsc": "warehouse",
+  "modeAfterSecondDialog": "warehouse"
+ },
+ "B4": {
+  "helpTitle": "조작법",
+  "keys": "이동: 왼쪽·오른쪽 드래그 · 확대: 휠\n90° 회전: Q·E / 회전 버튼 · 네 방향 쿼터뷰\n건설 목록:"
+ },
+ "B9": {
+  "titlesWhileClosing": [
+   "신분과 권한",
+   null
+  ]
+ },
+ "warehouse": {
+  "x": 11,
+  "z": 12,
+  "id": 1
+ },
+ "house": {
+  "x": 10,
+  "z": 12,
+  "id": 2
+ },
+ "well": {
+  "x": 11,
+  "z": 11,
+  "id": 3
+ },
+ "field": {
+  "x": 11,
+  "z": 13,
+  "id": 4
+ },
+ "lumber": {
+  "x": 10,
+  "z": 11,
+  "id": 5
+ },
+ "J2": {
+  "firstContract": "납품 +65G",
+  "step": "첫 납품",
+  "text": "납품 물건이 관문으로 가는 중입니다. 도착하면 값을 받습니다.",
+  "wait": [
+   {
+    "text": "4배 빠르게",
+    "box": [
+     1117,
+     369,
+     104,
+     32
+    ]
+   },
+   {
+    "text": "주택 하나 더",
+    "box": [
+     1227,
+     369,
+     104,
+     32
+    ]
+   }
+  ],
+  "speedAfter": 4
+ },
+ "B14": {
+  "openBefore": 1,
+  "openAfterEsc": 0
+ },
+ "J13": {
+  "flows": [
+   {
+    "name": "제재소",
+    "flow": "목재 → 판재",
+    "price": "등록 농노 승급 시 열림"
+   },
+   {
+    "name": "제분소",
+    "flow": "밀 → 밀가루",
+    "price": "개간 농노 승급 시 열림"
+   },
+   {
+    "name": "훈제장",
+    "flow": "생선·목재 → 훈제 생선",
+    "price": "개간 농노 승급 시 열림"
+   },
+   {
+    "name": "빵집",
+    "flow": "밀가루·물·목재 → 빵",
+    "price": "계약 농노 승급 시 열림"
+   },
+   {
+    "name": "방직소",
+    "flow": "목화 → 직물",
+    "price": "준자유민 승급 시 열림"
+   },
+   {
+    "name": "제과점",
+    "flow": "밀가루·달걀 → 케이크",
+    "price": "지역 공급자 승급 시 열림"
+   }
+  ]
+ },
+ "J15": {
+  "rows": [
+   "밀 생산 효율 136%",
+   "취수 효율 137%",
+   "채석 효율 115%"
+  ],
+  "more": "더 보기 · 나중에 쓰는 수치 2개"
+ },
+ "J7": {
+  "label": "철거 · +24G",
+  "armed": "한 번 더 눌러 철거 · +24G",
+  "moneyGained": 24,
+  "wellLeft": false,
+  "fresh": {
+   "label": "철거 · +60G · 재료 전액 · 30초",
+   "moneyBack": 60
+  }
+ },
+ "C5": {
+  "shownAfterFailure": 1,
+  "stillShownAfterAutosave": 1,
+  "afterRecovery": 0
+ },
+ "B5": {
+  "dialog": "승급",
+  "unlocked": [
+   "제재소",
+   "작은 수로 나룻터"
+  ],
+  "audio": [
+   "play:promotion"
+  ],
+  "successCalls": 0,
+  "fanfareTones": 12
+ },
+ "A2E1": {
+  "dialog": "패권국 달성",
+  "stats": [
+   "걸린 날 1일",
+   "누적 수입 0G",
+   "총 생산량 0개",
+   "운영 거점 1곳",
+   "총 판매량 0개",
+   "영주 납품 0회"
+  ],
+  "closed": true
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

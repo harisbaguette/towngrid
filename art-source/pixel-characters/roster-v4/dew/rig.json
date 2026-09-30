@@ -95,7 +95,35 @@
         ]
       ],
       "legs": [],
-      "tailStart": 80
+      "tailStart": 80,
+      "tailBounds": [
+        44,
+        80
+      ],
+      "fixedPixels": [
+        [
+          [
+            82,
+            53
+          ],
+          [
+            94,
+            53
+          ],
+          [
+            94,
+            74
+          ],
+          [
+            85,
+            74
+          ],
+          [
+            84,
+            63
+          ]
+        ]
+      ]
     },
     {
       "image": "NW.png",
@@ -176,7 +204,31 @@
         ]
       ],
       "legs": [],
-      "tailStart": 80
+      "tailStart": 80,
+      "tailBounds": [
+        44,
+        80
+      ],
+      "fixedPixels": [
+        [
+          [
+            83,
+            48
+          ],
+          [
+            94,
+            48
+          ],
+          [
+            94,
+            67
+          ],
+          [
+            84,
+            67
+          ]
+        ]
+      ]
     }
   ],
   "toolFile": "tools/crystal.png",

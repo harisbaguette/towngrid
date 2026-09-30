@@ -1,3 +1,4 @@
+import {BASE_TIME_SCALE, realSeconds} from '../src/app/game/game-time.js';
 // Balance report: reads the live game tables (RESOURCES, BUILDINGS, RANKS) and prints
 // per-building economics, resource sinks, the unlock ladder and pass/fail checks.
 //
@@ -13,6 +14,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { RESOURCES, BUILDINGS, Simulation, CONTRACT_PREMIUM, CONTRACT_WAIT } from '../src/app/game/simulation.js';
 import { RANKS, unlockRank } from '../src/app/game/world.js';
+import { COUNCIL } from '../src/app/game/campaign.js';
 import { CLUSTER_STEP, CLUSTER_MAX, EXTRACT_MAX, clusterMax } from '../src/app/game/proximity.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -83,8 +85,8 @@ function chainSec(r, seen = new Set()) {
   const inputs = Object.entries(r.inputs || {}).reduce((n, [x, k]) => n + k * tileSec(x, seen), 0);
   return (r.period + inputs) / r.amount;
 }
-const density = r => price(r) * 60 / tileSec(r);            // G per tile-minute, best chain
-const lineDensity = r => price(r.output) * 60 / chainSec(r);
+const density = r => price(r) * 60 * BASE_TIME_SCALE / tileSec(r);            // G per tile-minute, best chain
+const lineDensity = r => price(r.output) * 60 * BASE_TIME_SCALE / chainSec(r);
 // Processing depth: raw lines are 0, a line is one more than its deepest input's shallowest producer.
 const depthMemo = new Map();
 function depthOf(res, seen = new Set()) {
@@ -98,12 +100,12 @@ const lineDepth = (r, seen = new Set()) => hasInputs(r) ? 1 + Math.max(...Object
 
 // ---------- 1. building economics ----------
 const economy = lines.filter(l => RESOURCES[l.r.output]).map(l => {
-  const d = BUILDINGS[l.id], r = l.r, perMin = 60 / r.period;
+  const d = BUILDINGS[l.id], r = l.r, perMin = 60 * BASE_TIME_SCALE / r.period;
   const out = price(r.output) * r.amount, inp = value(r.inputs);
   const net = (out - inp) * perMin, cost = d.cost + value(d.materials);
   const inputDensity = Math.max(0, ...Object.keys(r.inputs || {}).map(density));
   return {
-    id: l.key, building: l.id, recipe: r.id, alt: l.alt, name: lineName(l), group: d.group, rank: l.rank, period: r.period, depth: lineDepth(r),
+    id: l.key, building: l.id, recipe: r.id, alt: l.alt, name: lineName(l), group: d.group, rank: l.rank, period: r.period, realPeriod: realSeconds(r.period), depth: lineDepth(r),
     inputs: r.inputs || {}, output: r.output, amount: r.amount,
     outPerMin: round(out * perMin), inPerMin: round(inp * perMin), netPerMin: round(net),
     netPerSec: round(net / 60, 2), buildValue: cost, paybackMin: round(cost / net, 1),
@@ -136,6 +138,8 @@ function scanCodeSinks() {
     const item = Simulation.prototype.upgradeItem.call({}, { type: id, level: 1 });
     if (item) (found[item] ??= new Set()).add('upgrade');
   }
+  // Council and diplomacy prices are paid through one table (campaign.js COUNCIL), not literal stock lines.
+  for (const a of Object.values(COUNCIL)) for (const r of Object.keys(a.items || {})) (found[r] ??= new Set()).add('campaign');
   for (const s of patch?.codeSinks || []) (found[s.resource] ??= new Set()).add(s.where);
   return found;
 }
@@ -204,6 +208,10 @@ const processing = economy.filter(e => e.premium !== null);
 const sameInputs = (a, b) => Object.keys(a || {}).sort().join() === Object.keys(b || {}).sort().join();
 const alternatives = lines.filter(l => l.alt).map(l => { const base = recipesOf(l.id)[0]; return { line: l, distinct: l.r.output !== base.output || !sameInputs(l.r.inputs, base.inputs) }; });
 const recipeFacilities = new Set(alternatives.map(a => a.line.id)).size;
+// An alternative is a trap when another line of the same product, open no later, uses only inputs the alternative also uses,
+// needs no more of each per unit made and makes at least as many per second (audit A2-R1). Each alternative needs an edge.
+const perUnit = (r, k) => (r.inputs?.[k] || 0) / r.amount, rate = r => r.amount / r.period;
+const dominated = alternatives.map(a => ({ a, by: lines.filter(l => l !== a.line && l.r.output === a.line.r.output && l.rank <= a.line.rank && Object.keys(l.r.inputs || {}).every(k => k in (a.line.r.inputs || {}) && perUnit(l.r, k) <= perUnit(a.line.r, k)) && rate(l.r) >= rate(a.line.r)) })).filter(v => v.by.length);
 // Production time: early lines show results quickly, and the average period grows with processing depth.
 const earlySlow = economy.filter(e => e.rank <= LIMITS.earlyPeriodRank && e.period > LIMITS.earlyPeriod);
 const byDepth = Object.entries(economy.filter(e => !e.alt).reduce((m, e) => ((m[e.depth] ??= []).push(e.period), m), {})).map(([d, p]) => [+d, p.reduce((n, v) => n + v, 0) / p.length]).sort((a, b) => a[0] - b[0]);
@@ -239,15 +247,15 @@ const checks = [
   { id: 'C6', name: `가공 시설이 원료 사슬보다 타일당 분당 가치 ${LIMITS.premium}배 이상`, value: processing.filter(e => e.premium < LIMITS.premium).map(e => `${e.name} ${e.premium}`).join(', ') || '전부 충족', pass: processing.every(e => e.premium >= LIMITS.premium) },
   { id: 'C7', name: `가공 시설 산출가/투입가 ${LIMITS.marginRatio}배 이상`, value: processing.filter(e => e.margin < LIMITS.marginRatio).map(e => `${e.name} ${e.margin}`).join(', ') || '전부 충족', pass: processing.every(e => e.margin >= LIMITS.marginRatio) },
   { id: 'C8', name: '해금 순서 모순 없음(요구 실적·투입·자재·계약·대안 제품)', value: problems.length ? problems.length + '건' : '없음', pass: !problems.length },
-  { id: 'C9', name: `대안 제품 시설 ${LIMITS.recipeFacilities}곳 이상 · 모든 대안이 다른 사슬을 공급하거나 다른 원료를 씀`, value: recipeFacilities + '곳 · ' + (alternatives.filter(a => !a.distinct).map(a => lineName(a.line)).join(', ') || '모두 구별됨'), pass: recipeFacilities >= LIMITS.recipeFacilities && alternatives.every(a => a.distinct) },
+  { id: 'C9', name: `대안 제품 시설 ${LIMITS.recipeFacilities}곳 이상 · 모든 대안이 다른 사슬을 공급하거나 다른 원료를 씀 · 같은 단계에 더 적은 원료로 같거나 빠르게 만드는 줄이 없음`, value: recipeFacilities + '곳 · ' + (alternatives.filter(a => !a.distinct).map(a => lineName(a.line)).join(', ') || '모두 구별됨') + ' · ' + (dominated.map(v => lineName(v.a.line) + ' < ' + v.by.map(lineName).join('/')).join(', ') || '밀리는 대안 없음'), pass: recipeFacilities >= LIMITS.recipeFacilities && alternatives.every(a => a.distinct) && !dominated.length },
   { id: 'C10', name: `계약 보상 목록가의 ${LIMITS.contractPremium}배 이하 · 다음 계약 대기 ${LIMITS.contractWait}초 이상`, value: '최대 ' + Math.max(...CONTRACT_PREMIUM) + '배 · ' + CONTRACT_WAIT + '초', pass: Math.max(...CONTRACT_PREMIUM) <= LIMITS.contractPremium && CONTRACT_WAIT >= LIMITS.contractWait },
-  { id: 'C11', name: `${LIMITS.earlyPeriodRank}단계까지 열리는 생산 주기 ${LIMITS.earlyPeriod}초 이하 · 가공 깊이별 평균 주기가 깊을수록 김`, value: (earlySlow.map(e => e.name + ' ' + e.period + 's').join(', ') || '초반 전부 충족') + ' · ' + byDepth.map(([d, p]) => d + '단 ' + round(p) + 's').join(' < '), pass: !earlySlow.length && depthRises },
+  { id: 'C11', name: `${LIMITS.earlyPeriodRank}단계까지 열리는 생산 주기 ${LIMITS.earlyPeriod}게임초 이하 · 가공 깊이별 평균 주기가 깊을수록 김`, value: (earlySlow.map(e => e.name + ' ' + e.period + 's').join(', ') || '초반 전부 충족') + ' · ' + byDepth.map(([d, p]) => d + '단 ' + round(p) + 's').join(' < '), pass: !earlySlow.length && depthRises },
   clusterCheck(clustered, 'C12', `원료 밭을 같은 시설 모으기 최대(시간 -${round(CLUSTER_STEP * CLUSTER_MAX * 100, 0)}%)로 지어도 가공 시설이 타일당 분당 가치 ${LIMITS.premium}배 이상`),
   clusterCheck(clusteredAll, 'C13', `원료 밭(시간 -${round(CLUSTER_STEP * CLUSTER_MAX * 100, 0)}%)과 우물·벌목장·채석장·광산 등 채취 시설(시간 -${round(CLUSTER_STEP * EXTRACT_MAX * 100, 0)}%)을 모두 같은 시설 모으기 최대로 지어도 가공 시설이 타일당 분당 가치 ${LIMITS.premium}배 이상`),
 ];
 
 // ---------- output ----------
-const report = { source: patchFile ? 'patch:' + patchFile : 'code', counts: { resources: Object.keys(RESOURCES).length, buildings: Object.keys(BUILDINGS).length, producers: economy.filter(e => !e.alt).length, alternatives: alternatives.length, recipeFacilities, ranks: RANKS.length }, startSet, economy, support, sinks, ladder, emptyRanks, unlockRanks, problems, checks };
+const report = { source: patchFile ? 'patch:' + patchFile : 'code', pacing: {baseTimeScale: BASE_TIME_SCALE, dayRealSeconds: realSeconds(80)}, counts: { resources: Object.keys(RESOURCES).length, buildings: Object.keys(BUILDINGS).length, producers: economy.filter(e => !e.alt).length, alternatives: alternatives.length, recipeFacilities, ranks: RANKS.length }, startSet, economy, support, sinks, ladder, emptyRanks, unlockRanks, problems, checks };
 // Per-line premiums under C12 (fields clustered) and C13 (every raw line clustered), keyed like economy[].id.
 report.clusterPremium = { fields: Object.fromEntries(clustered.map(c => [c.line.key, c.premium])), all: Object.fromEntries(clusteredAll.map(c => [c.line.key, c.premium])) };
 if (flag('--json')) { console.log(JSON.stringify(report, null, 1)); }
@@ -256,8 +264,8 @@ else {
   const fmt = o => Object.entries(o).map(([r, n]) => name(r) + ' ' + n).join(' · ') || '—';
   console.log(`# 밸런스 보고서 (${report.source})\n`);
   console.log(`자원 ${report.counts.resources}종 · 시설 ${report.counts.buildings}종(생산 ${report.counts.producers}, 대안 제품 ${report.counts.alternatives}개 · ${report.counts.recipeFacilities}곳) · 승급 ${report.counts.ranks}단계 · 시작 시설: ${startSet.map(name).join(', ')}\n`);
-  console.log('## 1. 생산 시설 경제 (기준 속도·기준 가격)\n');
-  table(economy, [['단계', e => e.rank], ['시설', e => e.name], ['그룹', e => e.group], ['깊이', e => e.depth], ['주기s', e => e.period], ['투입', e => fmt(e.inputs)], ['산출', e => name(e.output) + ' ' + e.amount], ['산출/분', e => e.outPerMin], ['원가/분', e => e.inPerMin], ['순이익/분', e => e.netPerMin], ['건설가치', e => e.buildValue], ['회수(분)', e => e.paybackMin], ['타일당/분', e => e.tileValuePerMin], ['가공우위', e => e.premium], ['산출/투입', e => e.margin]]);
+  console.log('## 1. 생산 시설 경제 (1배속 실제 시간·기준 가격)\n');
+  table(economy, [['단계', e => e.rank], ['시설', e => e.name], ['그룹', e => e.group], ['깊이', e => e.depth], ['주기(실제 초)', e => e.realPeriod], ['투입', e => fmt(e.inputs)], ['산출', e => name(e.output) + ' ' + e.amount], ['산출/분', e => e.outPerMin], ['원가/분', e => e.inPerMin], ['순이익/분', e => e.netPerMin], ['건설가치', e => e.buildValue], ['회수(분)', e => e.paybackMin], ['타일당/분', e => e.tileValuePerMin], ['가공우위', e => e.premium], ['산출/투입', e => e.margin]]);
   console.log('## 2. 지원·특수 시설\n');
   table(support, [['단계', e => e.rank], ['시설', e => e.name], ['그룹', e => e.group], ['효과', e => e.effect], ['투입', e => fmt(e.inputs)], ['건설가치', e => e.buildValue]]);
   console.log('## 3. 자원 소비처\n');

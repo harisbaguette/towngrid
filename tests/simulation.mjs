@@ -21,3 +21,6 @@ const coast=new Simulation('coast');assert.equal(coast.canBuild('dock',10,10),'ê
 const demo=createShowcase();assert.ok(demo.power&&demo.horse&&demo.automatic);run(demo,80);assert.ok(demo.produced.gear>=4,'powered machine industry produces parts');
 const paused=demo.time;demo.paused=true;run(demo,5);assert.equal(demo.time,paused);
 console.log(JSON.stringify({result:'PASS',breadSold:s.sold.bread,money:Math.floor(s.money),grainProduced:s.produced.grain,workers:s.workers.length,industryParts:demo.produced.gear,checked:['food chain and hauling','profits after wages','save/load with cargo','land expansion','storm and repair','debt and family','water proximity rules','powered industry','pause']},null,2));
+
+// Rule fixes of the 2026-09-29 audits live in their own file and run with this suite.
+await import('./rules-20260929.mjs');

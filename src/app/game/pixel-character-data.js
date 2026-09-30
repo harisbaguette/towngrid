@@ -49,6 +49,7 @@ export function pixelAction(worker) {
  if (worker.attacking) return 'attack';
  if (worker.handling) return worker.handling === 'pickup' ? 'pickup' : 'drop';
  if (worker.walking) return worker.task?.carried || worker.phase === 'destination' ? 'carry' : 'walk';
+ if (worker.task?.carried) return 'carry';
  if (worker.working) return 'work';
  return 'idle';
 }

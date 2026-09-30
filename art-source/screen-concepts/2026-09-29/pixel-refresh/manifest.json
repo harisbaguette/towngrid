@@ -1,0 +1,87 @@
+{
+  "generated": "2026-09-29",
+  "status": "Pixel screen refresh reflecting current biomes, industry and logistics. Approved brand reused; previous concepts preserved.",
+  "images": [
+    {
+      "id": "waiting-background",
+      "source": "art-source/screen-concepts/2026-09-29/pixel-refresh/waiting-background.png",
+      "output": "public/assets/screens/pixel-v2/waiting-background.webp",
+      "references": [
+        "public/assets/screens/waiting-background.webp"
+      ],
+      "prompt": "Create ONE full-bleed landscape 16:9 runtime illustration for TownGrid, a pixel-art tile-based production and logistics town game. Use intentional crisp pixel clusters, stepped edges and controlled 3-4 tone material ramps, like a high-quality 480x270 pixel scene enlarged using nearest neighbour. Coherent pixel scale across EVERYTHING, recognizable bold silhouettes and generous large color areas. No fine texture noise, smooth anime linework, photographic effects, painted blur, 3D render, text, letters, logo, frame or UI. Teal roofs, warm ochre supplies, evergreen forest and cyan water. Fantasy-industrial countryside with modern trucks, steam rail and restrained magic machinery. The supplied reference establishes palette and world, but SIMPLIFY it for readability. Facilities stand on separate square plots linked by roads seen in quarter view. At most a few clear representative facilities, not a crowded miniature city. Refresh the title background from the reference. Dusk, inviting illuminated village below a spacious indigo sunset sky taking upper 38% (logo added later). A broad river bordered by land winds between golden grain fields and an industrial harbor. Snow-capped ore mountains in far left, dense forest slope, warm dry sandy shore far right, all connected land, no vast ocean. Lower two thirds: a sawmill with stacked logs, small mill and wheat field, ore mine on mountain edge, teal-roof factory with cyan energy cell, railway crossing stone bridge, one cargo steamer at a small quay and delivery truck on a road. Camera reads one connected production town; each function clear. Keep central 45% attractive for narrow mobile crop, the bottom 15% quiet river/dark foreground for start button. NO castle as main focal point, industry and town are the focus. Preserve cozy dusk identity of reference."
+    },
+    {
+      "id": "home-background",
+      "source": "art-source/screen-concepts/2026-09-29/pixel-refresh/home-background.png",
+      "output": "public/assets/screens/pixel-v2/home-background.webp",
+      "references": [
+        "public/assets/screens/home-background.webp"
+      ],
+      "prompt": "Create ONE full-bleed landscape 16:9 runtime illustration for TownGrid, a pixel-art tile-based production and logistics town game. Use intentional crisp pixel clusters, stepped edges and controlled 3-4 tone material ramps, like a high-quality 480x270 pixel scene enlarged using nearest neighbour. Coherent pixel scale across EVERYTHING, recognizable bold silhouettes and generous large color areas. No fine texture noise, smooth anime linework, photographic effects, painted blur, 3D render, text, letters, logo, frame or UI. Teal roofs, warm ochre supplies, evergreen forest and cyan water. Fantasy-industrial countryside with modern trucks, steam rail and restrained magic machinery. The supplied reference establishes palette and world, but SIMPLIFY it for readability. Facilities stand on separate square plots linked by roads seen in quarter view. At most a few clear representative facilities, not a crowded miniature city. Refresh this HOME MENU background. Essential layout: LEFT 38% is quiet dark evergreen trees with large calm blocks and low contrast, completely free of buildings, workers or focal points, reserved for real HTML menu. Main scene RIGHT 62% is a sunny playable-looking quarter-view square-tile settlement along a river mouth into a small inland bay. Show a readable production chain: grain field and mill, lumber shed/logs, ore-loading mountain mine, compact teal-roof smelter with orange furnace, railway depot and short freight train, cargo truck and one simple small harbor/steamer. Road grid connects distinct square plots, sensible land and water. Snowy ridge far background, some golden dry terrain right shoreline, turquoise water. No enormous castle. Simplify props and architecture relative to reference. Bright daytime, confident large shapes, leave the left side dark and quiet."
+    },
+    {
+      "id": "loading-background",
+      "source": "art-source/screen-concepts/2026-09-29/pixel-refresh/loading-background.png",
+      "output": "public/assets/screens/pixel-v2/loading-background.webp",
+      "references": [
+        "public/assets/screens/loading-background.webp"
+      ],
+      "prompt": "Create ONE full-bleed landscape 16:9 runtime illustration for TownGrid, a pixel-art tile-based production and logistics town game. Use intentional crisp pixel clusters, stepped edges and controlled 3-4 tone material ramps, like a high-quality 480x270 pixel scene enlarged using nearest neighbour. Coherent pixel scale across EVERYTHING, recognizable bold silhouettes and generous large color areas. No fine texture noise, smooth anime linework, photographic effects, painted blur, 3D render, text, letters, logo, frame or UI. Teal roofs, warm ochre supplies, evergreen forest and cyan water. Fantasy-industrial countryside with modern trucks, steam rail and restrained magic machinery. The supplied reference establishes palette and world, but SIMPLIFY it for readability. Facilities stand on separate square plots linked by roads seen in quarter view. At most a few clear representative facilities, not a crowded miniature city. Refresh the GENERAL LOADING background. One readable loaded freight train crosses a stone bridge from fertile wooded plain on left to compact industrial inland port on right. Large separated recognizable cargo: timber, grain sacks, steel crates. Behind: small fishing boat on river, cargo truck on parallel road, teal-roof warehouse with simple gantry crane and pale snowy mineral mountains. A small distant airship above port signals higher industry. Composition center middle 60% focal area, BOTTOM 25% quiet dark teal water/shaded ground for loading text. Wide calm image, latest shipping and resource industry without clutter. Train and cargo remain legible as bold pixel silhouettes, no smeared details."
+    },
+    {
+      "id": "mira-workshop",
+      "source": "art-source/screen-concepts/2026-09-29/pixel-refresh/mira-workshop.png",
+      "output": "public/assets/screens/pixel-v2/mira-workshop.webp",
+      "references": [
+        "public/assets/screens/mira-workshop.webp"
+      ],
+      "prompt": "Redraw the supplied existing TownGrid work illustration as AUTHENTIC CRISP PIXEL ART, not smooth anime. One single full-bleed 16:9 landscape loading background. Preserve SAME identifiable adult character, face/hair colors, species, work outfit and tools as reference. Recompose so head and BOTH working hands fit central 38% of the image for mobile crop, face above center, coherent hands actually touching tool and material. Keep bottom 22% quieter low-contrast for HTML loading text. Picture should look drawn on about a 480x270 pixel canvas enlarged nearest-neighbour: consistent clearly visible blocky pixels, angular pixel clusters, hard 3-4 shade ramps, no antialias, no smooth outlined anime, no photograph, no blurred depth of field. Friendly high quality expressive pixel character, adult proportions, NOT a tiny chibi. Simplify drastically to one character, one readable work task and two or three supporting objects. Large color areas and silhouettes, limited teal / amber / wood-brown palette. No detailed ornament, lettering, UI, logo, fantasy castle or random knickknacks. TownGrid is production/logistics in a magical modern industrial town. Mira, chestnut high ponytail, amber eyes, teal rolled-sleeve jacket over cream ribbed shirt, gloves. She uses wrench to repair the accessible engine of a compact teal cargo truck. A sunlit harbor outside open garage, square crate stacks and a small cargo vessel. Functional uncluttered workshop, focus on her friendly face and hands. Tools are practical."
+    },
+    {
+      "id": "marna-workshop",
+      "source": "art-source/screen-concepts/2026-09-29/pixel-refresh/marna-workshop.png",
+      "output": "public/assets/screens/pixel-v2/marna-workshop.webp",
+      "references": [
+        "public/assets/screens/marna-workshop.webp"
+      ],
+      "prompt": "Redraw the supplied existing TownGrid work illustration as AUTHENTIC CRISP PIXEL ART, not smooth anime. One single full-bleed 16:9 landscape loading background. Preserve SAME identifiable adult character, face/hair colors, species, work outfit and tools as reference. Recompose so head and BOTH working hands fit central 38% of the image for mobile crop, face above center, coherent hands actually touching tool and material. Keep bottom 22% quieter low-contrast for HTML loading text. Picture should look drawn on about a 480x270 pixel canvas enlarged nearest-neighbour: consistent clearly visible blocky pixels, angular pixel clusters, hard 3-4 shade ramps, no antialias, no smooth outlined anime, no photograph, no blurred depth of field. Friendly high quality expressive pixel character, adult proportions, NOT a tiny chibi. Simplify drastically to one character, one readable work task and two or three supporting objects. Large color areas and silhouettes, limited teal / amber / wood-brown palette. No detailed ornament, lettering, UI, logo, fantasy castle or random knickknacks. TownGrid is production/logistics in a magical modern industrial town. Marna, stout strong adult dwarf woman, red-orange braid, round goggles resting on head, charcoal shirt and mustard leather work apron. She tightens a screw in one simple brass-cased gear mechanism with protected cyan energy cell on bench. Background broad shapes of an ore mining basin and a smelting works, orange furnace. Strong short dwarf build and capable expression."
+    },
+    {
+      "id": "silen-greenhouse",
+      "source": "art-source/screen-concepts/2026-09-29/pixel-refresh/silen-greenhouse.png",
+      "output": "public/assets/screens/pixel-v2/silen-greenhouse.webp",
+      "references": [
+        "public/assets/screens/silen-greenhouse.webp"
+      ],
+      "prompt": "Redraw the supplied existing TownGrid work illustration as AUTHENTIC CRISP PIXEL ART, not smooth anime. One single full-bleed 16:9 landscape loading background. Preserve SAME identifiable adult character, face/hair colors, species, work outfit and tools as reference. Recompose so head and BOTH working hands fit central 38% of the image for mobile crop, face above center, coherent hands actually touching tool and material. Keep bottom 22% quieter low-contrast for HTML loading text. Picture should look drawn on about a 480x270 pixel canvas enlarged nearest-neighbour: consistent clearly visible blocky pixels, angular pixel clusters, hard 3-4 shade ramps, no antialias, no smooth outlined anime, no photograph, no blurred depth of field. Friendly high quality expressive pixel character, adult proportions, NOT a tiny chibi. Simplify drastically to one character, one readable work task and two or three supporting objects. Large color areas and silhouettes, limited teal / amber / wood-brown palette. No detailed ornament, lettering, UI, logo, fantasy castle or random knickknacks. TownGrid is production/logistics in a magical modern industrial town. Silen, adult female elf with long pale sage hair and pointed ears, green eyes, olive green cloak over cream work clothes. She turns a large brass valve feeding water to neat seedling trays; one protected green crystal pump. Sunlit greenhouse overlooking fertile grain fields and a narrow freshwater irrigation channel. Brass pipes have clear readable connection. Calm competent expression."
+    },
+    {
+      "id": "rowan-rail",
+      "source": "art-source/screen-concepts/2026-09-29/pixel-refresh/rowan-rail.png",
+      "output": "public/assets/screens/pixel-v2/rowan-rail.webp",
+      "references": [
+        "public/assets/screens/rowan-rail.webp"
+      ],
+      "prompt": "Redraw the supplied existing TownGrid work illustration as AUTHENTIC CRISP PIXEL ART, not smooth anime. One single full-bleed 16:9 landscape loading background. Preserve SAME identifiable adult character, face/hair colors, species, work outfit and tools as reference. Recompose so head and BOTH working hands fit central 38% of the image for mobile crop, face above center, coherent hands actually touching tool and material. Keep bottom 22% quieter low-contrast for HTML loading text. Picture should look drawn on about a 480x270 pixel canvas enlarged nearest-neighbour: consistent clearly visible blocky pixels, angular pixel clusters, hard 3-4 shade ramps, no antialias, no smooth outlined anime, no photograph, no blurred depth of field. Friendly high quality expressive pixel character, adult proportions, NOT a tiny chibi. Simplify drastically to one character, one readable work task and two or three supporting objects. Large color areas and silhouettes, limited teal / amber / wood-brown palette. No detailed ornament, lettering, UI, logo, fantasy castle or random knickknacks. TownGrid is production/logistics in a magical modern industrial town. Rowan, adult human man with tousled brown hair, teal eyes and light stubble, teal workcoat over cream shirt, leather gloves. He kneels tightening a large wheel linkage bolt on teal and brass locomotive. Frame his head AND wheel/tool near central area. Background of a snowy rail freight depot, two simple ore wagons, pale mineral mountain. Warm amber lamplight contrasts blue snow."
+    },
+    {
+      "id": "hana-dispatch",
+      "source": "art-source/screen-concepts/2026-09-29/pixel-refresh/hana-dispatch.png",
+      "output": "public/assets/screens/pixel-v2/hana-dispatch.webp",
+      "references": [
+        "public/assets/screens/hana-dispatch.webp"
+      ],
+      "prompt": "Redraw the supplied existing TownGrid work illustration as AUTHENTIC CRISP PIXEL ART, not smooth anime. One single full-bleed 16:9 landscape loading background. Preserve SAME identifiable adult character, face/hair colors, species, work outfit and tools as reference. Recompose so head and BOTH working hands fit central 38% of the image for mobile crop, face above center, coherent hands actually touching tool and material. Keep bottom 22% quieter low-contrast for HTML loading text. Picture should look drawn on about a 480x270 pixel canvas enlarged nearest-neighbour: consistent clearly visible blocky pixels, angular pixel clusters, hard 3-4 shade ramps, no antialias, no smooth outlined anime, no photograph, no blurred depth of field. Friendly high quality expressive pixel character, adult proportions, NOT a tiny chibi. Simplify drastically to one character, one readable work task and two or three supporting objects. Large color areas and silhouettes, limited teal / amber / wood-brown palette. No detailed ornament, lettering, UI, logo, fantasy castle or random knickknacks. TownGrid is production/logistics in a magical modern industrial town. Hana, adult human woman with short black bob, warm brown eyes, rust-red work jacket, cream blouse, gloves and brown messenger strap. She ties string around one large goods parcel on dispatch bench. Behind her a sandy inland bay harbor and loading crane with a small cargo steamer and delivery truck. Clear practical shipping, no clutter, centered face and hand task."
+    },
+    {
+      "id": "bron-carpentry",
+      "source": "art-source/screen-concepts/2026-09-29/pixel-refresh/bron-carpentry.png",
+      "output": "public/assets/screens/pixel-v2/bron-carpentry.webp",
+      "references": [
+        "public/assets/screens/bron-carpentry.webp"
+      ],
+      "prompt": "Redraw the supplied existing TownGrid work illustration as AUTHENTIC CRISP PIXEL ART, not smooth anime. One single full-bleed 16:9 landscape loading background. Preserve SAME identifiable adult character, face/hair colors, species, work outfit and tools as reference. Recompose so head and BOTH working hands fit central 38% of the image for mobile crop, face above center, coherent hands actually touching tool and material. Keep bottom 22% quieter low-contrast for HTML loading text. Picture should look drawn on about a 480x270 pixel canvas enlarged nearest-neighbour: consistent clearly visible blocky pixels, angular pixel clusters, hard 3-4 shade ramps, no antialias, no smooth outlined anime, no photograph, no blurred depth of field. Friendly high quality expressive pixel character, adult proportions, NOT a tiny chibi. Simplify drastically to one character, one readable work task and two or three supporting objects. Large color areas and silhouettes, limited teal / amber / wood-brown palette. No detailed ornament, lettering, UI, logo, fantasy castle or random knickknacks. TownGrid is production/logistics in a magical modern industrial town. Bron, powerful short stocky adult male dwarf, red-orange hair tied back and thick ginger beard, dark blue shirt and leather apron, gloves. Both hands guide a wood plane along one securely clamped plank, clear curled shavings. Workshop open to dense forest sawmill with stacked cut timber outside and one cart. Strong arm/hand silhouettes, warm morning colors."
+    }
+  ]
+}

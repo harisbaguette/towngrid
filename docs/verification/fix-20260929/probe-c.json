@@ -1,0 +1,28 @@
+{
+ "overrides": [
+  "fixture rank22 loaded; random events silenced on every site, then one real event scheduled on an off-screen site"
+ ],
+ "C1": {
+  "site": "하벤 개발구 2",
+  "toasts": [
+   "하벤 개발구 2 · 마력성 감염병 예고 · 20초 뒤 발생합니다."
+  ]
+ },
+ "C9": {
+  "queuedOffScreen": 0
+ },
+ "C2": {
+  "arrivedAt": "하벤 개발구 2",
+  "toastsOnArrival": [],
+  "soundsOnArrival": [],
+  "newWarningHere": [
+   "마력성 감염병 예고 · 20초 뒤 발생합니다."
+  ]
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

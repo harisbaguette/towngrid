@@ -1,0 +1,39 @@
+{
+  "result": "PASS",
+  "scope": "Screen components; no settlement renderer or production simulation",
+  "checked": [
+    "24 daily and 4 transition images decoded; category filters, thumbnails and keyboard navigation",
+    "random home shown, stable across rerenders, caption opens matching artwork, default-home probability branch",
+    "actual loading component rotates after 8 seconds; transition automatically finishes and supports keyboard skip",
+    "390px portrait and 844x390 landscape, full-image gallery, long titles without overflow",
+    "failed random artwork keeps the default home; existing save untouched"
+  ],
+  "titles": [
+    "미라의 정비소",
+    "마르나의 광산 공방",
+    "실렌의 관개 온실",
+    "로웬의 설원 철도",
+    "하나의 항구 배송",
+    "브론의 숲속 목공소",
+    "리엔의 새벽 빵집",
+    "에단의 수확",
+    "로아의 목장",
+    "나라의 직조소",
+    "보리크와 오리엘의 유리 공방",
+    "도린과 엘바르의 채석장",
+    "타론의 광산 운반",
+    "테린의 사막 유정",
+    "비안의 오아시스 장터",
+    "셀리아의 갈대숲 나루터",
+    "세린의 고원 대장간",
+    "닥스의 설원 배송",
+    "날리아의 어선",
+    "베라의 진료소",
+    "세드릭의 마력 연구실",
+    "아이리스의 비공정",
+    "벨의 저녁 시장",
+    "카이와 피아의 강가 휴식"
+  ],
+  "errors": [],
+  "failed": []
+}
