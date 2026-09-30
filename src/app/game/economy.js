@@ -30,13 +30,16 @@ export function purchase(sim, item, quantity) {
  return {ok:true,cost,incoming:true};
 }
 
+/** Game seconds a planted sapling takes to grow into a tree. */
+export const SAPLING_GROW = 160;
+
 export function plant(sim, x, z) {
  const t = sim.tile(x,z);
  if (!t || t.terrain === 'water' || !sim.ownedAt(x,z) || sim.at(x,z) || t.nature || sim.roads.has(`${x},${z}`))
   return {ok:false,error:'소유한 빈 땅에 묘목을 심으세요'};
  const short = sim.moneyShort?.(15, '조림 비용 '); if (short) return {ok:false,error:short};
  if ((sim.availableStock?.('water') ?? sim.stock.water) < 2) return {ok:false,error:'조림 비용 15G와 물 2개가 필요합니다'};
- sim.money -= 15; sim.stock.water -= 2; t.nature = 'sapling'; t.remaining = 0; t.growAt = sim.time + 160;
+ sim.money -= 15; sim.stock.water -= 2; t.nature = 'sapling'; t.remaining = 0; t.growAt = sim.time + SAPLING_GROW;
  sim.revision++; sim.sound('plant'); return {ok:true};
 }
 

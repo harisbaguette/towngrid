@@ -19,7 +19,8 @@ export function crewHouse(status){
  return (race&&Object.keys(BUILDINGS).find(k=>BUILDINGS[k].home&&(BUILDINGS[k].resident||'human')===race))||null;
 }
 /** Advice for a blocked status, including the crew stall that operationHint has no text for. Empty when running. */
-export function blockHint(status){const hint=operationHint(status);if(hint)return hint;const house=crewHouse(status);return house?BUILDINGS[house].name+' 건설 필요':'';}
+// Pass the simulation for advice that quotes a time (real seconds at its speed) or names facilities already unlocked.
+export function blockHint(status,sim){const hint=operationHint(status,sim);if(hint)return hint;const house=crewHouse(status);return house?BUILDINGS[house].name+' 건설 필요':'';}
 
 /** The export road to the west gate is cut, so every sale stops; auto tells whether an auto sale is waiting on it. */
 export function exportBlocked(s){

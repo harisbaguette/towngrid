@@ -1,0 +1,389 @@
+{
+ "date": "2026-09-30",
+ "origin": "http://localhost:5173",
+ "errors": [
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — ",
+  "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — "
+ ],
+ "failed": [],
+ "results": [
+  {
+   "site": {
+    "province": "elune-2",
+    "ecology": "meadow",
+    "edges": {
+     "n": "mountain",
+     "e": "plain",
+     "s": "river",
+     "w": "plain"
+    }
+   }
+  },
+  {
+   "name": "얕은 광산(물가 미리보기)",
+   "at": [
+    5,
+    5
+   ],
+   "text": "생산 효율 70% 통로 확보 필요 침수 -30% 산 그늘 2"
+  },
+  {
+   "name": "풍력 양수기(밭 없는 미리보기)",
+   "at": [
+    5,
+    13
+   ],
+   "text": "생산 효율 100% 통로 확보 필요 물 받을 작물 없음"
+  },
+  {
+   "name": "얕은 광산",
+   "at": [
+    18,
+    9
+   ],
+   "text": "생산 효율 100% 통로 확보 필요",
+   "built": "shallowmine",
+   "card": "얕은 광산 Lv.1 생산 중 철광석 2 철광석 2 얕은 구리 광맥 2 광부 · 엘바르 작업 중 · 자동 배치 가동 중지 내구도 100% 철거 · +88G 효율·개선·특화 산이나 광맥이 없어도 어디서나 땅을 얕게 파 철광석 2개를 캡니다. 철광산의 절반 속도이며 타일 광물량과 산 지면의 영향을 받지 않습니다. 구리광석을 캐도록 바꿀 수 있고, 물가에 붙이면 침수로 30% 느려집니다. 도로 없음 오염 0/6 그늘 0/3 생산 효율 100% 가동 작업 순서 낮음 보통 우선 내구도 100% 특화 작업 방식 특화 시설에서 4회 생산마다 주원료 1개 회수 엘프 정령 켄타로스 요정족 특화 · 100G + 판재 2 특화 유지비 하루 2G 생산 개선 +30% 55G · 판재 190/3"
+  },
+  {
+   "name": "사탕수수밭",
+   "at": [
+    4,
+    13
+   ],
+   "text": "생산 효율 142% 통로 확보 필요 물 0/8 · 운반 필요",
+   "built": "sugarfield",
+   "card": "사탕수수밭 Lv.1 생산 중 사탕수수 0 재배사 · 엘리온 작업 중 · 자동 배치 가동 중지 내구도 100% 철거 · +24G 효율·개선·특화 물 1개로 사탕수수 3개를 기릅니다. 물 요구량 8 · 주변 물로 채우면 물 운반 없이 자랍니다. 제분소에서 설탕으로 만듭니다. 도로 없음 오염 0/6 그늘 0/3 풍력 양수기 관개 · 운반 생략 생산 효율 142% 가동 작업 순서 낮음 보통 우선 내구도 100% 특화 작업 방식 특화 발전·마법·전자 시설의 작업 속도 +12% 엘프 정령 켄타로스 요정족 특화 · 100G + 판재 2 특화 유지비 하루 2G 생산 개선 +30% 15G · 판재 190/3"
+  },
+  {
+   "name": "풍력 양수기",
+   "at": [
+    5,
+    13
+   ],
+   "text": "생산 효율 100% 통로 확보 필요 물 받는 작물 1곳",
+   "built": "windpump",
+   "card": "풍력 양수기 Lv.1 관개 공급 중 관개 117초 재배사 · 엘리온 작업 중 · 자동 배치 가동 중지 내구도 100% 철거 · +96G 효율·개선·특화 바람으로 물을 길어 올려 120초간 주변 두 칸 작물의 물 요구량을 모두 채웁니다. 급수탑과 달리 물과 전력이 필요 없습니다. 주변 높은 건물이나 산이 바람을 가리면 느려져 물이 끊기는 때가 생깁니다. 도로 없음 오염 0/6 바람막이 0/3 물 받는 작물 1곳 생산 효율 100% 가동 작업 순서 낮음 보통 우선 내구도 100% 특화 작업 방식 켄타로스 운반자의 이동 속도 +15% · 특화 시설 작업 +5% 엘프 정령 켄타로스 요정족 특화 · 100G + 판재 2 특화 유지비 하루 2G 생산 개선 +30% 60G · 판재 190/3",
+   "window1x": {
+    "span": 120,
+    "left": 117
+   },
+   "card4x": "풍력 양수기 Lv.1 관개 공급 중 관개 29초 재배사 · 엘리온 작업 중 · 자동 배치 가동 중지 내구도 100% 철거 · +96G 효율·개선·특화 바람으로 물을 길어 올려 30초간 주변 두 칸 작물의 물 요구량을 모두 채웁니다. 급수탑과 달리 물과 전력이 필요 없습니다. 주변 높은 건물이나 산이 바람을 가리면 느려져 물이 끊기는 때가 생깁니다. 도로 없음 오염 0/6 바람막이 0/3 물 받는 작물 1곳 생산 효율 100% 가동 작업 순서 낮음 보통 우선 내구도 100% 특화 작업 방식 켄타로스 운반자의 이동 속도 +15% · 특화 시설 작업 +5% 엘프 정령 켄타로스 요정족 특화 · 100G + 판재 2 특화 유지비 하루 2G 생산 개선 +30% 60G · 판재 190/3",
+   "window4x": {
+    "span": 30,
+    "left": 29
+   }
+  },
+  {
+   "state": {
+    "mine": {
+     "status": "생산 중",
+     "cycles": 2,
+     "iron": 4
+    },
+    "pump": {
+     "status": "관개 공급 중",
+     "left": 59
+    },
+    "field": {
+     "water": 1,
+     "status": "생산 중"
+    }
+   }
+  },
+  {
+   "views": [
+    {
+     "label": "shallowmine",
+     "view": 0,
+     "layers": [
+      "pulley-0",
+      "output-0"
+     ]
+    },
+    {
+     "label": "shallowmine",
+     "view": 1,
+     "layers": [
+      "pulley-0",
+      "output-0"
+     ]
+    },
+    {
+     "label": "shallowmine",
+     "view": 2,
+     "layers": [
+      "pulley-0",
+      "output-0"
+     ]
+    },
+    {
+     "label": "shallowmine",
+     "view": 3,
+     "layers": [
+      "pulley-0",
+      "output-0"
+     ]
+    },
+    {
+     "label": "windpump",
+     "view": 0,
+     "layers": [
+      "rotor-0"
+     ]
+    },
+    {
+     "label": "windpump",
+     "view": 1,
+     "layers": [
+      "rotor-0"
+     ]
+    },
+    {
+     "label": "windpump",
+     "view": 2,
+     "layers": [
+      "rotor-0"
+     ]
+    },
+    {
+     "label": "windpump",
+     "view": 3,
+     "layers": [
+      "rotor-0"
+     ]
+    }
+   ],
+   "span": 13
+  },
+  {
+   "stopped": "0초 중지"
+  },
+  {
+   "damage": [
+    {
+     "label": "shallowmine",
+     "health": 40,
+     "type": "shallowmine",
+     "direction": 0,
+     "image": true,
+     "body": false,
+     "damage": 0.06999999999999999,
+     "kind": "structure",
+     "layers": [
+      "structure-piece-0",
+      "structure-piece-1",
+      "structure-piece-2",
+      "structure-piece-3",
+      "pulley-0",
+      "output-0",
+      "damage-cracks"
+     ]
+    },
+    {
+     "label": "windpump",
+     "health": 40,
+     "type": "windpump",
+     "direction": 0,
+     "image": true,
+     "body": false,
+     "damage": 0.06999999999999999,
+     "kind": "tower",
+     "layers": [
+      "structure-piece-0",
+      "structure-piece-1",
+      "structure-piece-2",
+      "structure-piece-3",
+      "rotor-0",
+      "damage-cracks"
+     ]
+    },
+    {
+     "label": "shallowmine",
+     "health": 0,
+     "type": "shallowmine",
+     "direction": 0,
+     "image": true,
+     "body": false,
+     "damage": 1,
+     "kind": "structure",
+     "layers": [
+      "structure-piece-0",
+      "structure-piece-1",
+      "structure-piece-2",
+      "structure-piece-3",
+      "damage-cracks",
+      "damage-rubble",
+      "repair-needed"
+     ]
+    },
+    {
+     "label": "windpump",
+     "health": 0,
+     "type": "windpump",
+     "direction": 0,
+     "image": true,
+     "body": false,
+     "damage": 1,
+     "kind": "tower",
+     "layers": [
+      "structure-piece-0",
+      "structure-piece-1",
+      "structure-piece-2",
+      "structure-piece-3",
+      "damage-cracks",
+      "damage-rubble",
+      "repair-needed"
+     ]
+    },
+    {
+     "label": "windpump",
+     "health": 0,
+     "marker": "0초 파손"
+    }
+   ],
+   "repaired": [
+    100,
+    100
+   ]
+  }
+ ]
+}

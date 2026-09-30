@@ -4,13 +4,17 @@
 // it with a click, runs the clock at 4x with the speed key, opens the facility cards, turns the camera with E through
 // the four quarter views and shows the damaged and broken states. Rank, money, stock and land are set directly in
 // the page so the late facilities can be placed, and health is set directly for the damage captures.
+// It also reads the irrigation texts fixed on 2026-09-30 (docs/EXPANSION_20260929.md 6): the pump preview counts the
+// crops in reach, the pump card names wind shelter, the watered field names the pump instead of `물 0/8`, the supply
+// window in the description equals the card's real seconds at 1x and 4x, and a broken or stopped pump shows no supply
+// time on its marker. Captures go to docs/verification/expansion-4-20260930/ (the first run is kept in expansion-3).
 // Usage: node tests/expansion-new-browser.mjs <playwright/index.mjs> <chrome.exe>   (dev server: TOWNGRID_URL, default :5173)
 // In `npm test` the paths come from TOWNGRID_PLAYWRIGHT and TOWNGRID_CHROME; without them or a running dev server the
 // suite reports SKIP instead of failing, because the headless regressions run without a browser.
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-const origin=process.env.TOWNGRID_URL||'http://localhost:5173',out=new URL('../docs/verification/expansion-3-20260930/',import.meta.url);
+const origin=process.env.TOWNGRID_URL||'http://localhost:5173',out=new URL('../docs/verification/expansion-4-20260930/',import.meta.url);
 const playwright=process.argv[2]||process.env.TOWNGRID_PLAYWRIGHT,chrome=process.argv[3]||process.env.TOWNGRID_CHROME;
 const serverUp=await fetch(origin,{signal:AbortSignal.timeout(3000)}).then(r=>r.ok,()=>false);
 if(!playwright||!chrome||!serverUp){console.log('SKIP expansion-new-browser: '+(!playwright||!chrome?'no TOWNGRID_PLAYWRIGHT/TOWNGRID_CHROME':'dev server not running at '+origin));process.exit(0);}
@@ -95,8 +99,10 @@ try{
  assert.match(mine.text,/생산 효율 100%/);assert.doesNotMatch(mine.text,/침수|그늘/);
  // 2. Wind pump beside a sugar cane field (water need 8): the field needs carried water until the pump runs.
  const farmAt=await pick('farm');assert.ok(farmAt,'flat room for a field and a pump');const [fx,fz]=farmAt,pumpAt=[fx+1,fz];
+ const lone=await preview('풍력 양수기',pumpAt,'04a-windpump-preview-no-crop');await page.keyboard.press('Escape');
+ assert.match(lone.text,/물 받을 작물 없음/);results.push({name:'풍력 양수기(밭 없는 미리보기)',at:pumpAt,text:lone.text});
  const field=await place('사탕수수밭',farmAt,'03-field-before-pump-preview');assert.equal(field.built,'sugarfield');assert.match(field.text,/물 0\/8 · 운반 필요/);
- const pump=await place('풍력 양수기',pumpAt,'04-windpump-preview');assert.equal(pump.built,'windpump');assert.match(pump.text,/생산 효율 100%/);
+ const pump=await place('풍력 양수기',pumpAt,'04-windpump-preview');assert.equal(pump.built,'windpump');assert.match(pump.text,/생산 효율 100%/);assert.match(pump.text,/물 받는 작물 1곳/);
  // Run the clock at 4x (key 3) until the mine has finished a cycle and the pump has lifted water.
  await page.keyboard.press('3');
  await page.waitForFunction(([m,p])=>{const s=window.tgScene.sim,a=s.at(...m),b=s.at(...p);return a.cycles>0&&b.activeUntil>s.time;},[mineAt,pumpAt],{timeout:60000,polling:500});
@@ -106,8 +112,13 @@ try{
  assert.ok(state.mine.cycles>0&&state.mine.iron>0,'the mine has dug iron ore');assert.equal(state.pump.status,'관개 공급 중');assert.equal(state.field.water,1,'the pump waters the field');
  results.push(mine,field,pump,{state});
  mine.card=await card(mineAt,'05-shallowmine-card');assert.match(mine.card,/얕은 광산/);assert.match(mine.card,/철광석/);
+ // The description's window and the card's countdown are both real seconds (60 game seconds: 120 at 1x, 30 at 4x).
+ const supply=async(text,speed)=>{const span=Number(text.match(/(\d+)초간/)?.[1]),left=Number(text.match(/관개 (\d+)초/)?.[1]);assert.equal(span,120/speed,'description at '+speed+'x');assert.ok(left>0&&left<=span,'card '+left+' of '+span);return {span,left};};
  pump.card=await card(pumpAt,'06-windpump-card');assert.match(pump.card,/풍력 양수기/);assert.match(pump.card,/관개 공급 중/);
- field.card=await card(farmAt,'07-field-watered-card');assert.match(field.card,/운반 생략/);
+ assert.match(pump.card,/바람막이 0\/3/);assert.doesNotMatch(pump.card,/그늘/);pump.window1x=await supply(pump.card,1);
+ await page.keyboard.press('3');await page.waitForFunction(p=>{const s=window.tgScene.sim,b=s.at(...p);return b.activeUntil-s.time>40;},pumpAt,{timeout:60000,polling:250});
+ pump.card4x=await card(pumpAt,'06b-windpump-card-4x');pump.window4x=await supply(pump.card4x,4);await page.keyboard.press('1');await page.waitForTimeout(300);
+ field.card=await card(farmAt,'07-field-watered-card');assert.match(field.card,/풍력 양수기 관개 · 운반 생략/);assert.doesNotMatch(field.card,/물 0\/8/);
  // 3. Four quarter views: the E key turns the camera 90 degrees; both buildings follow with their own view row.
  const mid=[(mineAt[0]+pumpAt[0])/2,(mineAt[1]+pumpAt[1])/2],span=Math.max(Math.abs(mineAt[0]-pumpAt[0]),Math.abs(mineAt[1]-pumpAt[1]));
  await page.keyboard.press('Escape');const views=[];
@@ -131,6 +142,9 @@ try{
    // The lattice pump tower breaks like the other towers (upper sections fold lower); the mine frame like a structure.
    assert.equal(m.kind,label==='windpump'?'tower':'structure',label+' damage profile');
    const c=await proj(at[0],.35,at[1]);await shot(`09-${label}-health-${health}`,{clip:{x:c.px-170,y:c.py-190,width:340,height:300}});
+   // The broken pump's marker (a fault, so it shows with 시설명 off) carries no supply time.
+   if(label==='windpump'&&!health){const id=await sim(p=>window.tgScene.sim.at(...p).id,at),text=(await page.locator('[data-building-id="'+id+'"]').first().innerText()).replace(/\s+/g,' ');damage.push({label,health,marker:text});
+    assert.match(text,/파손/);assert.doesNotMatch(text,/[1-9]\d*초/,'no supply time on a broken pump: '+text);}
   }
  }
  // Repair through the facility card as a player would; the silhouette comes back.
@@ -142,6 +156,16 @@ try{
   repaired.push(await sim(([x,z])=>window.tgScene.sim.at(x,z).health,at));await page.getByRole('button',{name:'시설 정보 닫기'}).click().catch(()=>{});
  }
  assert.deepEqual(repaired,[100,100],'both repaired from the card');
+ // Stopped from its card, the pump shows no supply time either; the switch turns it back on.
+ {await page.keyboard.press('Escape');await focus(pumpAt);const id=await sim(p=>window.tgScene.sim.at(...p).id,pumpAt);
+  {const marker=page.locator('[data-building-id="'+id+'"]');if(await marker.count())await marker.first().click();else{const p=await proj(pumpAt[0],.45,pumpAt[1]);await page.mouse.click(p.px,p.py);}}
+  await page.locator('.facility-card').waitFor({timeout:5000});await page.locator('.facility-card button',{hasText:'가동 중지'}).first().click();await page.getByRole('button',{name:'시설 정보 닫기'}).click().catch(()=>{});await page.waitForTimeout(500);
+  // A stopped facility is no fault, so with 시설명 off its marker shows while the pointer is on its tile.
+  {const p=await proj(pumpAt[0],0,pumpAt[1]);await page.mouse.move(p.px,p.py);await page.waitForTimeout(150);await page.mouse.move(p.px+1,p.py);}
+  await page.locator('[data-building-id="'+id+'"]').first().waitFor({timeout:5000});
+  const text=(await page.locator('[data-building-id="'+id+'"]').first().innerText()).replace(/\s+/g,' ');const c=await proj(pumpAt[0],.35,pumpAt[1]);await shot('13-windpump-stopped',{clip:{x:c.px-170,y:c.py-190,width:340,height:300}});
+  assert.match(text,/중지/);assert.doesNotMatch(text,/[1-9]\d*초/,'no supply time on a stopped pump: '+text);results.push({stopped:text});
+  assert.ok(await sim(p=>{const s=window.tgScene.sim,b=s.at(...p);return s.setOperation(b.id,true).ok;},pumpAt));}
  await focus(pumpAt,2.6);await page.waitForTimeout(500);{const c=await proj(pumpAt[0],.35,pumpAt[1]);await shot('10-windpump-repaired',{clip:{x:c.px-170,y:c.py-190,width:340,height:300}});}
  results.push({damage,repaired});
  // 5. The same two bodies side by side in the art check page, WebGL and CPU renderer, four views: the pump's water tub
@@ -161,4 +185,4 @@ try{
 }finally{
  await writeFile(new URL('results.json',out),JSON.stringify({date:'2026-09-30',origin,errors,failed,results},null,1)+'\n');await browser.close();
 }
-console.log('PASS new facilities in the game screen: 얕은 광산 (flat, waterside preview), 풍력 양수기 (beside 사탕수수밭), four views, damage and repair; console errors 0');
+console.log('PASS new facilities in the game screen: 얕은 광산 (flat, waterside preview), 풍력 양수기 (beside 사탕수수밭), four views, damage and repair; irrigation texts (crops in reach, wind shelter, pump on the field, real-second window, no time when broken or stopped); console errors 0');

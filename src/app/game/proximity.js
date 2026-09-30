@@ -1,5 +1,7 @@
 import {BUILDINGS,RESOURCES,damageFactor} from './simulation.js';
 import {RACES,unlockRank} from './world.js';
+import {remainingSeconds} from './game-time.js';
+import {SAPLING_GROW} from './economy.js';
 // Project-specific balance, inspired by Town Star's documented adjacency rules.
 // Distances use a square tile radius; roads use orthogonal adjacency.
 export const EMISSIONS={generator:2,steamworks:2,smelter:3,refinery:3,chemical:3,coalpit:2,oilpump:2,automotive:1,kiln:1,glassworks:2,cementworks:2,wiremill:1,mithrilforge:2,blastfurnace:3,shipyard:1,cannery:1};
@@ -8,7 +10,7 @@ export const HEIGHTS={warehouse:2,house:1,dwarfhouse:1,titanhouse:1,spirithouse:
 // land.ecology (every site made since 2026-09-28) plays them; an older map keeps the old rules, as it keeps its
 // old ground. The terrain facilities (pond, pasture, clover) work on every map.
 export const terrainRules=sim=>!!sim.layout?.ecology;
-export const MINES=['ironmine','coalpit','coppermine','sandpit','shallowmine'],HERDS=['sheeppen','milkbarn'];
+export const MINES=['ironmine','coalpit','coppermine','sandpit','shallowmine'],HERDS=['sheeppen','milkbarn'],WIND=['mill','windturbine','windpump'];
 /** Water within two tiles: a touching tile gives 2, the next ring 1. Open water (river, lake, marsh pool) within
  *  two tiles also gives a base of 3, so a wheat field (need 3) is watered exactly where the old rule watered it. */
 export const WATER_RING=[0,2,1],OPEN_WATER=3;
@@ -28,18 +30,19 @@ const MOUNTAIN=[0,3,2,2,1,1],SALT=[0,2,1];
 // positions and types, roads, fixed terrain and the running state of polluters and irrigators must be added to that key.
 export function placementEffects(sim,type,x,z){
  const d=BUILDINGS[type],modern=terrainRules(sim),crop=!!d?.irrigable,need=modern?d?.waterNeed||0:0;
- let pollution=0,shade=0,windBlock=0,water=0,reservoir=false,ponds=0,waterScore=0,open=false,mountain=0,coast=9,flooded=false,graze=0,clover=0,cluster=0,serves=0;const sources=[];
+ let pollution=0,shade=0,windBlock=0,water=0,reservoir=false,ponds=0,waterScore=0,open=false,mountain=0,coast=9,flooded=false,graze=0,clover=0,cluster=0,serves=0,irrigator=null;const sources=[];const irrigates=d?.output==='irrigation';
  for(const b of sim.buildings){if(b.x===x&&b.z===z)continue;const distance=Math.max(Math.abs(b.x-x),Math.abs(b.z-z));
   const dirty=EMISSIONS[b.type]||0,height=HEIGHTS[b.type]||0;
   if(b.health>0&&b.enabled!==false&&dirty&&distance<=dirty){pollution+=dirty+1-distance;sources.push({type:b.type,kind:'pollution',distance});}
   if(height&&distance<=height){shade=Math.max(shade,height+1-distance);windBlock=Math.max(windBlock,height+1-distance);}
   // A water tower and a wind pump both water the crops within two tiles while their supply window runs.
-  if(crop&&BUILDINGS[b.type]?.output==='irrigation'&&b.health>0&&b.enabled!==false&&b.activeUntil>sim.time&&distance<=2)reservoir=true;
+  if(crop&&BUILDINGS[b.type]?.output==='irrigation'&&b.health>0&&b.enabled!==false&&b.activeUntil>sim.time&&distance<=2){reservoir=true;irrigator=irrigator||b.type;}
   if(distance<=2){
    if(b.type==='pond'){ponds++;waterScore+=WATER_RING[distance];if(distance===1)flooded=true;}
    else if(b.type==='pasture')graze+=WATER_RING[distance];
    else if(b.type==='clover')clover++;
-   const bd=BUILDINGS[b.type];if(type==='pond'&&(modern?bd.waterNeed:bd.irrigable)||type==='pasture'&&HERDS.includes(b.type)||type==='clover'&&b.type==='apiary')serves++;
+   // An irrigator counts the crops its supply window will water (the same crops the reservoir flag above reaches).
+   const bd=BUILDINGS[b.type];if(type==='pond'&&(modern?bd.waterNeed:bd.irrigable)||irrigates&&bd.irrigable&&(!modern||bd.waterNeed)||type==='pasture'&&HERDS.includes(b.type)||type==='clover'&&b.type==='apiary')serves++;
   }
   if(modern&&b.type===type&&distance===1)cluster++;
  }
@@ -54,18 +57,24 @@ export function placementEffects(sim,type,x,z){
  pollution=Math.min(6,pollution);shade=Math.min(3,shade);windBlock=Math.min(3,windBlock);
  const salt=modern?SALT[coast]||0:0;flooded=modern&&MINES.includes(type)&&flooded;cluster=modern&&d?.period&&RESOURCES[d.output]?Math.min(clusterMax(type),cluster):0;
  const road=[[1,0],[-1,0],[0,1],[0,-1]].some(([dx,dz])=>sim.roads.has((x+dx)+','+(z+dz)));
- const sensitive=crop||['stable','dock','henhouse','sheeppen','milkbarn','duckhouse','apiary'].includes(type),wind=['mill','windturbine','windpump'].includes(type);
+ const sensitive=crop||['stable','dock','henhouse','sheeppen','milkbarn','duckhouse','apiary'].includes(type),wind=WIND.includes(type);
  // A solar panel loses 20% per shade step (docs/BALANCE_PATCH_20260928.md 13-2). Salt slows an irrigated crop 15% a
  // step and speeds a salt pan 20% a step; a flooded mine runs at 70%; pasture feeds a herd 10% a point up to 40%.
  const speed=(sensitive?Math.max(.4,1-pollution*.1-(crop?shade*.1+salt*.15:0)):1)*(wind?Math.max(.4,1-windBlock*.2):1)*(type==='solarpanel'?Math.max(.4,1-shade*.2):1)
   *(type==='saltfield'?1+salt*.2:1)*(flooded?.7:1)*(HERDS.includes(type)?1+Math.min(.4,graze*.1):1)/(1-cluster*CLUSTER_STEP);
  const blocked=type==='apiary'&&!clover?'야생 클로버 필요':null;
- return {water,waterScore,waterNeed:need,pollution,shade,mountain,windBlock,salt,flooded,graze,clover,cluster,serves,blocked,modern,road,speed,sources};
+ return {water,waterScore,waterNeed:need,irrigator,pollution,shade,mountain,windBlock,salt,flooded,graze,clover,cluster,serves,blocked,modern,road,speed,sources};
 }
+/** The height rule by what it does here: wind facilities lose wind behind a tall building or a mountain, the rest lose
+ *  light (both come from the same heights, so the values are equal; only the name differs). */
+export function shelterNote(type,e){const wind=WIND.includes(type),value=wind?e.windBlock:e.shade;return {name:(value&&e.mountain>=value?'산 ':'')+(wind?'바람막이':'그늘'),value};}
 /** Short notes on the rules that act on this facility at this spot, for the placement preview and the facility panel. */
 export function effectNotes(type,e){
  const d=BUILDINGS[type],out=[],crop=!!d?.irrigable,add=(text,tone='')=>out.push({text,tone});
- if(e.waterNeed)add('물 '+e.waterScore+'/'+e.waterNeed+(e.water?' · 운반 생략':' · 운반 필요'),e.water?'positive':'');else if(crop&&e.water)add('담수 관개 · 물 운반 생략','positive');
+ // A running water tower or wind pump fills the whole demand, so the ring score beside it would read as a shortfall.
+ const piped=e.irrigator&&BUILDINGS[e.irrigator].name+' 관개 · 운반 생략';
+ if(e.waterNeed)add(piped&&e.waterScore<e.waterNeed?piped:'물 '+e.waterScore+'/'+e.waterNeed+(e.water?' · 운반 생략':' · 운반 필요'),e.water?'positive':'');else if(crop&&e.water)add(piped||'담수 관개 · 물 운반 생략','positive');
+ if(d?.output==='irrigation')add(e.serves?'물 받는 작물 '+e.serves+'곳':'물 받을 작물 없음',e.serves?'positive':'negative');
  if(e.cluster)add('같은 시설 '+e.cluster+' · 시간 -'+Math.round(e.cluster*CLUSTER_STEP*100)+'%','positive');
  if(e.salt&&(crop||type==='saltfield'))add('소금기 '+e.salt,type==='saltfield'?'positive':'negative');
  if(e.flooded)add('침수 -30%','negative');
@@ -80,7 +89,7 @@ const open=(sim,type)=>!!sim&&sim.rank>=unlockRank(type),obj=w=>w+((w.charCodeAt
 export function operationHint(status,sim){
  if(status.endsWith(' 대기')&&status!=='운반 대기')return '원료 재고와 창고에서 이 시설까지의 통로를 확인하세요.';
  if(status.endsWith(' 주민 필요')){const race=Object.keys(RACES).find(r=>status===RACES[r].name+' 주민 필요'),house=Object.keys(BUILDINGS).find(t=>BUILDINGS[t].resident===race);return house?obj(BUILDINGS[house].name)+' 지어 '+RACES[race].name+' 주민을 들이세요. 이 작업장은 '+RACES[race].name+'만 다룹니다.':'이 작업장을 다루는 주민의 주택을 지으세요.';}
- return {'도로 연결 필요':'시설 옆에 흙길을 놓고 창고까지 이어주세요.','출입구 막힘':'시설 옆 한 칸을 비우세요.','창고 경로 막힘':'창고와 이어지는 빈 칸이나 흙길을 만드세요.','전력 부족':'발전 시설에 원료를 공급하거나 발전 시설을 더 지으세요.','전력망 밖 · 변전소 필요':'발전소 여섯 칸 안으로 옮기거나, 발전소와 이 시설 사이에 변전소를 지어 전기를 이어주세요.','운반 대기':'주민 주택을 더 짓거나 개선해 운반할 주민을 늘리고, 창고까지 흙길을 이으세요.'+(open(sim,'logistics')?' 자동 물류센터를 가동하면 운반량이 두 배가 됩니다.':''),'창고 가득 참':'재고를 팔아 창고 자리를 비우세요.'+(open(sim,'depot')?' 자재 보관소를 지으면 보관 한도가 늘어납니다.':''),'수리 필요':'수리하면 생산이 다시 시작됩니다.','야생 클로버 필요':'양봉장 두 칸 안에 야생 클로버를 심으세요.','자원 고갈':'네 칸 안의 내 땅에 남은 자원이 없습니다. 경계 밖 나무·바위는 쓸 수 없습니다. 벌목장은 빈 칸에 묘목(15G · 물 2, 160초 뒤 자람)을 심거나 옆 구역을 사서 영토를 넓히고, 채석장은 바위가 남은 곳으로 옮기세요.','가동 중지':'가동 스위치를 켜세요.','창고 필요':'창고를 먼저 지으세요.'}[status]||'';
+ return {'도로 연결 필요':'시설 옆에 흙길을 놓고 창고까지 이어주세요.','출입구 막힘':'시설 옆 한 칸을 비우세요.','창고 경로 막힘':'창고와 이어지는 빈 칸이나 흙길을 만드세요.','전력 부족':'발전 시설에 원료를 공급하거나 발전 시설을 더 지으세요.','전력망 밖 · 변전소 필요':'발전소 여섯 칸 안으로 옮기거나, 발전소와 이 시설 사이에 변전소를 지어 전기를 이어주세요.','운반 대기':'주민 주택을 더 짓거나 개선해 운반할 주민을 늘리고, 창고까지 흙길을 이으세요.'+(open(sim,'logistics')?' 자동 물류센터를 가동하면 운반량이 두 배가 됩니다.':''),'창고 가득 참':'재고를 팔아 창고 자리를 비우세요.'+(open(sim,'depot')?' 자재 보관소를 지으면 보관 한도가 늘어납니다.':''),'수리 필요':'수리하면 생산이 다시 시작됩니다.','야생 클로버 필요':'양봉장 두 칸 안에 야생 클로버를 심으세요.','자원 고갈':'네 칸 안의 내 땅에 남은 자원이 없습니다. 경계 밖 나무·바위는 쓸 수 없습니다. 벌목장은 빈 칸에 묘목(15G · 물 2, '+remainingSeconds(SAPLING_GROW,sim)+'초 뒤 자람)을 심거나 옆 구역을 사서 영토를 넓히고, 채석장은 바위가 남은 곳으로 옮기세요.','가동 중지':'가동 스위치를 켜세요.','창고 필요':'창고를 먼저 지으세요.'}[status]||'';
 }
 
 export function productionDiagnosis(sim,b,definitions,resources){

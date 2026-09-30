@@ -9,7 +9,10 @@ import {Campaign} from '../src/app/game/campaign.js';
 import {PROVINCES} from '../src/app/game/territory.js';
 import {layoutOf,legacyLayout} from '../src/app/game/world-grid.js';
 import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
-import {EMISSIONS,HEIGHTS,MINES,HERDS,WATER_RING,OPEN_WATER,CLUSTER_STEP,CLUSTER_MAX,EXTRACTORS,EXTRACT_MAX,clusterMax,terrainRules,effectNotes,productionDiagnosis,operationHint} from '../src/app/game/proximity.js';
+import {EMISSIONS,HEIGHTS,MINES,HERDS,WATER_RING,OPEN_WATER,CLUSTER_STEP,CLUSTER_MAX,EXTRACTORS,EXTRACT_MAX,clusterMax,terrainRules,effectNotes,productionDiagnosis,operationHint,shelterNote,WIND} from '../src/app/game/proximity.js';
+import {describeFacility,productionVisualState} from '../src/app/game/production-visuals.js';
+import {realSeconds} from '../src/app/game/game-time.js';
+import {SAPLING_GROW} from '../src/app/game/economy.js';
 import {blockHint} from '../src/app/game/ui-rules.js';
 
 const run=(s,t)=>{for(let i=0;i<t*4;i++)s.tick(.25);};
@@ -231,5 +234,52 @@ const speedOf=(s,b)=>{const period=s.recipeOf?s.recipeOf(b).period:BUILDINGS[b.t
  const old=new Simulation('river');for(const t of old.tiles)old.owned.add(t.x+','+t.z);/* land owned directly */const o=old.tiles.find(t=>t.terrain!=='water'&&nearest(old,t,isWater)>4&&t.x>3&&t.z>3&&t.x<20&&dryAt(old,old.tile(t.x+2,t.z)));
  old.build('windpump',o.x+2,o.z,true);old.at(o.x+2,o.z).activeUntil=old.time+60;/* supply window set directly */assert.equal(old.placementEffects('sugarfield',o.x,o.z).water,1);
  ok.push('wind pump: waters crops within 2 without inputs, gaps when sheltered, '+(share*100).toFixed(0)+'% under 3 steps');}
+
+// 13. What the screen says about irrigators (the five text faults found in the game screen on 2026-09-30,
+//     docs/EXPANSION_20260929.md 6): the pump preview counts the crops it will water, the wind rule is named wind
+//     shelter, a crop watered by a pump or water tower does not also show its ring score as a shortfall, the supply
+//     window in the description is in the real seconds the card counts down, and a broken or stopped supplier shows no
+//     supply time. The water tower, wind turbine and windmill share the same code paths and are checked alongside.
+{const s=site(s=>!!s.layout.ecology);const q=quiet(s,t=>[[0,0],[1,0],[2,0],[1,1],[5,0]].every(([dx,dz])=>dryAt(s,s.tile(t.x+dx,t.z+dz))));
+ const notes=(type,x,z)=>effectNotes(type,s.placementEffects(type,x,z)).map(n=>n.text);
+ // (1) preview: no crop yet, then one field two tiles away.
+ for(const type of ['windpump','reservoir'])assert.ok(notes(type,q.x+2,q.z).includes('물 받을 작물 없음'),type+' with no crop in reach');
+ s.build('sugarfield',q.x,q.z,true);s.build('mintfield',q.x+1,q.z+1,true);
+ for(const type of ['windpump','reservoir'])assert.ok(notes(type,q.x+2,q.z).includes('물 받는 작물 2곳'),type+' preview counts both crops');
+ assert.ok(notes('windpump',q.x+5,q.z).includes('물 받을 작물 없음'),'three tiles is out of reach');
+ // (2) the height rule is named by what it does: wind shelter for the three wind facilities, shade for the rest.
+ const e0=s.placementEffects('windpump',q.x+2,q.z);for(const type of WIND)assert.equal(shelterNote(type,e0).name,'바람막이');assert.equal(shelterNote('sugarfield',e0).name,'그늘');
+ const hill=s.tiles.find(t=>dryAt(s,t)&&!isMountain(t)&&nearest(s,t,isMountain)===1);
+ if(hill){const e=s.placementEffects('windpump',hill.x,hill.z);assert.deepEqual(shelterNote('windpump',e),{name:'산 바람막이',value:e.windBlock});assert.equal(e.windBlock,e.shade);}
+ // (3) the watered field card: the running pump replaces the ring score (0/8) with the supplier.
+ s.build('windpump',q.x+2,q.z,true);const pump=s.at(q.x+2,q.z);s.stock.water=0;/* stock set directly */
+ for(let i=0;i<400&&!(pump.activeUntil>s.time);i++)s.tick(.25);s.tick(.25);/* effects are read once per step */assert.ok(pump.activeUntil>s.time,'the pump lifts water');
+ const field=notes('sugarfield',q.x,q.z);assert.ok(field.includes('풍력 양수기 관개 · 운반 생략'),field.join(' | '));assert.ok(!field.some(t=>/물 0\/8/.test(t)),'no 0/8 beside a watered field');
+ assert.equal(s.placementEffects('sugarfield',q.x,q.z).water,1);
+ // (4) description and card: the same real seconds at 1x and 4x, taken the moment a window starts.
+ assert.doesNotMatch(BUILDINGS.windpump.description,/\d+초간/,'no fixed number in the raw text');
+ for(const speed of [1,2,4]){s.speed=speed;pump.activeUntil=s.time+60;/* a fresh 60 s window, as a finished cycle sets */
+  const shown=productionVisualState('windpump',pump,s).displayValue,text=describeFacility('windpump',s);
+  assert.equal(shown,realSeconds(60,s)+'초');assert.ok(text.includes(realSeconds(60,s)+'초간'),speed+'x: '+text.slice(0,30));assert.doesNotMatch(text,/[{}]/);}
+ s.speed=1;
+ // (5) broken, stopped or expired: no supply time on the marker or the card; repair resumes the rest of the window.
+ pump.activeUntil=s.time+53;pump.health=0;s.revision++;/* health set directly */let v=productionVisualState('windpump',pump,s);
+ assert.deepEqual([v.label,v.displayValue,v.remaining,v.active],['파손','0초',0,false]);assert.equal(s.placementEffects('sugarfield',q.x,q.z).water,0,'a broken pump waters nothing');
+ pump.health=100;v=productionVisualState('windpump',pump,s);assert.equal(v.displayValue,'106초','repaired: the window left');
+ assert.ok(s.setOperation(pump.id,false).ok);v=productionVisualState('windpump',pump,s);assert.deepEqual([v.label,v.displayValue],['중지','0초']);assert.ok(s.setOperation(pump.id,true).ok);
+ pump.activeUntil=s.time-1;assert.equal(productionVisualState('windpump',pump,s).displayValue,'0초','expired');
+ // The same for the water tower (irrigation) and a wind turbine (power).
+ s.demolish(pump.x,pump.z);s.build('reservoir',q.x+2,q.z,true);const tower=s.at(q.x+2,q.z);tower.activeUntil=s.time+60;/* window set directly */
+ assert.ok(notes('sugarfield',q.x,q.z).includes('급수탑 관개 · 운반 생략'),'water tower named on the field');
+ tower.health=0;assert.equal(productionVisualState('reservoir',tower,s).displayValue,'0초');
+ const spot=s.tiles.find(t=>dryAt(s,t)&&s.canBuild('windturbine',t.x,t.z,true)===null);s.build('windturbine',spot.x,spot.z,true);const turbine=s.at(spot.x,spot.z);turbine.activeUntil=s.time+60;
+ assert.equal(productionVisualState('windturbine',turbine,s).displayValue,'120초');turbine.health=0;assert.equal(productionVisualState('windturbine',turbine,s).displayValue,'0초');
+ // Old maps name the pump or tower instead of 담수 관개.
+ const old=new Simulation('river');for(const t of old.tiles)old.owned.add(t.x+','+t.z);/* land owned directly */const o=old.tiles.find(t=>t.terrain!=='water'&&nearest(old,t,isWater)>4&&t.x>3&&t.z>3&&t.x<20&&dryAt(old,old.tile(t.x+2,t.z)));
+ old.build('windpump',o.x+2,o.z,true);old.at(o.x+2,o.z).activeUntil=old.time+60;/* supply window set directly */
+ assert.deepEqual(effectNotes('sugarfield',old.placementEffects('sugarfield',o.x,o.z)).map(n=>n.text),['풍력 양수기 관개 · 운반 생략']);
+ // The same root: the sapling in the depleted-camp advice grows in real seconds, not game seconds.
+ assert.ok(operationHint('자원 고갈',s).includes(realSeconds(SAPLING_GROW,s)+'초 뒤 자람'));s.speed=4;assert.ok(operationHint('자원 고갈',s).includes(realSeconds(SAPLING_GROW,s)+'초 뒤 자람'));assert.ok(blockHint('자원 고갈',s).includes('80초 뒤 자람'),'the facility advice passes the speed');s.speed=1;
+ ok.push('irrigator texts: crops in reach, wind shelter, supplier on the field, real-second window, no time when broken');}
 
 console.log('PASS expansion rules 5/5, terrain facilities 3/3, shallow mine and wind pump: '+ok.join('; '));

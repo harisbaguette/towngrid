@@ -107,7 +107,7 @@ export const EXPANSION2_RESOURCES={
 };
 export const EXPANSION2_BUILDINGS={
  shallowmine:{name:'얕은 광산',group:'industry',cost:220,materials:{wood:6,plank:4},period:16,output:'iron',amount:2,description:'산이나 광맥이 없어도 어디서나 땅을 얕게 파 철광석 2개를 캡니다. 철광산의 절반 속도이며 타일 광물량과 산 지면의 영향을 받지 않습니다. 구리광석을 캐도록 바꿀 수 있고, 물가에 붙이면 침수로 30% 느려집니다.'},
- windpump:{name:'풍력 양수기',group:'farm',cost:240,materials:{plank:6,stone:4},period:40,output:'irrigation',amount:1,description:'바람으로 물을 길어 올려 60초간 주변 두 칸 작물의 물 요구량을 모두 채웁니다. 급수탑과 달리 물과 전력이 필요 없습니다. 주변 높은 건물이나 산이 바람을 가리면 느려져 물이 끊기는 때가 생깁니다.'}
+ windpump:{name:'풍력 양수기',group:'farm',cost:240,materials:{plank:6,stone:4},period:40,output:'irrigation',amount:1,description:'바람으로 물을 길어 올려 {supply}초간 주변 두 칸 작물의 물 요구량을 모두 채웁니다. 급수탑과 달리 물과 전력이 필요 없습니다. 주변 높은 건물이나 산이 바람을 가리면 느려져 물이 끊기는 때가 생깁니다.'}
 };
 Object.assign(MODERN_RESOURCES,EXPANSION2_RESOURCES);Object.assign(MODERN_BUILDINGS,EXPANSION2_BUILDINGS);
 export const EXPANSION2_RANKS={windpump:10,shallowmine:12};

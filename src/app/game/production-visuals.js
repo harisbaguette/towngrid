@@ -10,6 +10,13 @@ export const SERVICE_OUTPUTS = {
  health: { name: '의료', label: '의료 지원 중', duration: 65 },
 };
 
+/** A facility's description with its supply window ({supply} in the text) in the real seconds that the facility card
+ *  counts down (game-time.js), so both read the same number at every speed. */
+export function describeFacility(type, sim) {
+ const def = BUILDINGS[type], service = SERVICE_OUTPUTS[def?.output];
+ return !def ? '' : service ? def.description.replace('{supply}', String(remainingSeconds(service.duration, sim))) : def.description;
+}
+
 // Output on the pad and work in progress are independent: a facility can keep
 // producing while a carrier is on the way. Never infer inventory from a timer.
 export function productionVisualState(type, building = {}, sim) {
@@ -21,12 +28,15 @@ export function productionVisualState(type, building = {}, sim) {
  const count = Math.max(0, Math.floor(building.out || 0));
  const enabled = building.enabled !== false && !(building.health <= 0);
  const service = SERVICE_OUTPUTS[made.output];
- const remaining = service ? Math.max(0, (building.activeUntil || 0) - (sim?.time || 0)) : 0;
+ const left = service ? Math.max(0, (building.activeUntil || 0) - (sim?.time || 0)) : 0;
  // A live simulation answers per building (local grid, trade-terminals.js); a plain context only has a global flag.
  const powerBlocked = !!(def.power && (typeof sim?.poweredAt === 'function' && building.type ? !sim.poweredAt(building) : sim?.power === false));
  const outage = made.output === 'power' && sim?.outageUntil > sim?.time;
  const working = enabled && !powerBlocked && !outage && !!building.working;
- const active = !!(service && enabled && remaining > 0 && !powerBlocked && !outage);
+ const active = !!(service && enabled && left > 0 && !powerBlocked && !outage);
+ // A stopped, broken, cut-off or expired supply shows no time left: a broken pump waters nothing even though its
+ // window has not run out (proximity.js skips it), and repairing it resumes the rest of the window.
+ const remaining = active ? left : 0;
  const facility = building.type ? building : { ...building, type };
  const inputs = sim?.effectiveInputs?.(facility) ?? def.inputs ?? {};
  // Ingredients are consumed at the START of a cycle. Empty inputs during a
