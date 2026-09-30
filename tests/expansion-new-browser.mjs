@@ -5,13 +5,18 @@
 // the four quarter views and shows the damaged and broken states. Rank, money, stock and land are set directly in
 // the page so the late facilities can be placed, and health is set directly for the damage captures.
 // Usage: node tests/expansion-new-browser.mjs <playwright/index.mjs> <chrome.exe>   (dev server: TOWNGRID_URL, default :5173)
+// In `npm test` the paths come from TOWNGRID_PLAYWRIGHT and TOWNGRID_CHROME; without them or a running dev server the
+// suite reports SKIP instead of failing, because the headless regressions run without a browser.
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-const {chromium}=await import(pathToFileURL(process.argv[2]).href);
 const origin=process.env.TOWNGRID_URL||'http://localhost:5173',out=new URL('../docs/verification/expansion-3-20260930/',import.meta.url);
+const playwright=process.argv[2]||process.env.TOWNGRID_PLAYWRIGHT,chrome=process.argv[3]||process.env.TOWNGRID_CHROME;
+const serverUp=await fetch(origin,{signal:AbortSignal.timeout(3000)}).then(r=>r.ok,()=>false);
+if(!playwright||!chrome||!serverUp){console.log('SKIP expansion-new-browser: '+(!playwright||!chrome?'no TOWNGRID_PLAYWRIGHT/TOWNGRID_CHROME':'dev server not running at '+origin));process.exit(0);}
+const {chromium}=await import(pathToFileURL(playwright).href);
 await mkdir(out,{recursive:true});
-const browser=await chromium.launch({headless:true,executablePath:process.argv[3],args:['--enable-unsafe-swiftshader']});
+const browser=await chromium.launch({headless:true,executablePath:chrome,args:['--enable-unsafe-swiftshader']});
 const errors=[],failed=[],results=[];
 const ctx=await browser.newContext({viewport:{width:1440,height:900}});
 await ctx.addInitScript(()=>{window.WebSocket=class{constructor(){this.readyState=0;}addEventListener(){}removeEventListener(){}send(){}close(){}};});
@@ -76,7 +81,7 @@ async function card(at,file){
 }
 /** What the renderer holds for the building at `at`: its view row, damage and part layers. */
 const model=at=>sim(([x,z])=>{const g=window.tgScene,b=g.sim.at(x,z);let m=null;g.models.get(b.id)?.traverse(o=>{if(!m&&o.userData?.buildingType===b.type&&o.userData.layers)m=o;});
- return m&&{type:b.type,direction:m.userData.direction,image:!!m.userData.image,body:m.userData.sprite.visible,damage:m.userData.damageAmount??0,
+ return m&&{type:b.type,direction:m.userData.direction,image:!!m.userData.image,body:m.userData.sprite.visible,damage:m.userData.damageAmount??0,kind:m.userData.damageProfile?.kind??null,
   layers:m.userData.layers.filter(l=>l.visible).map(l=>l.name)};},at);
 
 try{
@@ -123,6 +128,8 @@ try{
   for(const [label,at] of [['shallowmine',mineAt],['windpump',pumpAt]]){
    await focus(at,2.6);await page.waitForTimeout(700);const m=await model(at);damage.push({label,health,...m});
    assert.ok(m.layers.includes('damage-cracks'),label+' cracks at '+health);if(!health)assert.ok(m.layers.includes('damage-rubble')&&m.damage>.9,label+' collapses');
+   // The lattice pump tower breaks like the other towers (upper sections fold lower); the mine frame like a structure.
+   assert.equal(m.kind,label==='windpump'?'tower':'structure',label+' damage profile');
    const c=await proj(at[0],.35,at[1]);await shot(`09-${label}-health-${health}`,{clip:{x:c.px-170,y:c.py-190,width:340,height:300}});
   }
  }
@@ -137,6 +144,19 @@ try{
  assert.deepEqual(repaired,[100,100],'both repaired from the card');
  await focus(pumpAt,2.6);await page.waitForTimeout(500);{const c=await proj(pumpAt[0],.35,pumpAt[1]);await shot('10-windpump-repaired',{clip:{x:c.px-170,y:c.py-190,width:340,height:300}});}
  results.push({damage,repaired});
+ // 5. The same two bodies side by side in the art check page, WebGL and CPU renderer, four views: the pump's water tub
+ // and wind wheel are compared against the earlier captures in docs/verification/expansion-art-20260930/.
+ for(const renderer of ['webgl','canvas']){
+  await page.setViewportSize({width:1100,height:1000});
+  await page.goto(origin+'/production-preview.html?group=farmsupport'+(renderer==='canvas'?'&renderer=canvas':''));
+  await page.waitForFunction(()=>window.productionPreview);await page.locator('#pause').click();await page.locator('[data-state="working-ready"]').click();
+  for(let view=0;view<4;view++){
+   await page.locator('#view').selectOption(String(view));await page.evaluate(()=>window.productionPreview.setTime(7.4));await page.waitForTimeout(250);
+   const rows=await page.evaluate(()=>window.productionPreview.items.map(i=>({type:i.type,direction:i.model.userData.direction,parts:i.model.userData.layers.filter(l=>l.visible&&/^(rotor|pulley)/.test(l.name)).map(l=>l.name)})));
+   assert.deepEqual(rows.map(r=>[r.type,r.direction,r.parts.length]),[['shallowmine',view,1],['windpump',view,1]],renderer+' view '+view);
+   await shot(`11-art-${renderer}-${['se','ne','nw','sw'][view]}`,{clip:renderer==='webgl'?{x:20,y:328,width:860,height:248}:{x:20,y:328,width:1060,height:400}});
+  }
+ }
  assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);
 }finally{
  await writeFile(new URL('results.json',out),JSON.stringify({date:'2026-09-30',origin,errors,failed,results},null,1)+'\n');await browser.close();

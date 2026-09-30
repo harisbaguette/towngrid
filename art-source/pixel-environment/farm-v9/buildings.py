@@ -349,7 +349,7 @@ def oakfarm():
     plots(v, C['soil'], None, 6, 3.5)
     corner_posts(v, 6, 32, 9)
     # stacked oak logs at the back, pale end rings facing the camera sides
-    for n, (cj, ck) in enumerate(((5, 7.2), (9.4, 7.2), (7.2, 11))):
+    for cj, ck in ((5, 7.2), (9.4, 7.2), (7.2, 11)):
         m = v.cyl_i(cj, ck, 2.2, 22, 36)
         v.put(m, stripes(C['bark'], 'i', 3, .8))
         v.put(v.cyl_i(cj, ck, 1.6, 35, 36), C['ring'])
@@ -467,7 +467,7 @@ def feedmill():
     v = model()
     slab(v, C['stone'], 25)
     # corrugated silo with a cone roof
-    v.put(v.cyl(10, 10, 6.5, 5, 24), lambda I, J, K: np.where(((np.floor(np.arctan2(J - 10, I - 10) * 6) % 2) == 0)[..., None], C['silo'], tone(C['silo'], .88)))
+    v.put(v.cyl(10, 10, 6.5, 5, 24), lambda I, J, _K: np.where(((np.floor(np.arctan2(J - 10, I - 10) * 6) % 2) == 0)[..., None], C['silo'], tone(C['silo'], .88)))
     for k in (10, 15, 20):
         v.put(v.cyl(10, 10, 6.9, k, k + 1), C['steel'])
     v.put(v.cyl(10, 10, 7.0, 23, 24.5), C['steel'])
@@ -623,8 +623,8 @@ def clayfield():
 def solarpanel():
     v = model()
     slab(v, C['stone'], 43)
-    grid_panel = lambda I, J, K: np.where((((np.floor(I - .5) % 4) == 0) | ((np.floor(K - .5) % 3) == 0))[..., None], C['blue2'], C['blue'])
-    for n, cj in enumerate((8, 19, 30)):
+    grid_panel = lambda I, _J, K: np.where((((np.floor(I - .5) % 4) == 0) | ((np.floor(K - .5) % 3) == 0))[..., None], C['blue2'], C['blue'])
+    for cj in (8, 19, 30):
         # a tilted panel row rising toward -j, facing the front
         panel = v.box(4, 36, cj - 4.5, cj + 4.5, 6, 17) & (np.abs((v.K - 8) - (cj + 4.5 - v.J) * .45) < .8)
         v.put(panel, grid_panel)
@@ -648,7 +648,7 @@ def pond():
     ground(v, C['grass'], C['grass2'], 51)
     basin = ((v.I - 20) / 15.5) ** 2 + ((v.J - 20.5) / 14) ** 2 + .15 * np.sin(v.I * .7) <= 1
     v.cut(basin & (v.K > 1))
-    v.put(basin & (v.K > 0) & (v.K < 2), lambda I, J, K: np.where((((I * 5 + J * 3).astype(int) % 13) == 0)[..., None], C['water2'], np.where((((I - 20) ** 2 + (J - 20) ** 2) < 60)[..., None], C['water3'], C['water'])))
+    v.put(basin & (v.K > 0) & (v.K < 2), lambda I, J, _K: np.where((((I * 5 + J * 3).astype(int) % 13) == 0)[..., None], C['water2'], np.where((((I - 20) ** 2 + (J - 20) ** 2) < 60)[..., None], C['water3'], C['water'])))
     rim = (((v.I - 20) / 17) ** 2 + ((v.J - 20.5) / 15.6) ** 2 + .15 * np.sin(v.I * .7) <= 1) & ~basin
     rocks = rim & (v.K > 2) & (v.K < 4.5) & ((((v.I * 1.3).astype(int) + (v.J * 1.1).astype(int)) % 3) != 0)
     v.put(rocks, speckle(C['stone'], C['stone2'], 52, .45))
@@ -666,7 +666,7 @@ def pasture():
     of evenly scattered noise, a stone water trough and a round hay bale."""
     v = model()
     ground(v, C['grass3'], C['grass'], 53)
-    stripe = lambda I, J, K: np.where(((np.floor((J - 1) / 4) % 2) == 0)[..., None], tone(C['grass3'], 1.04), tone(C['grass3'], .9))
+    stripe = lambda _I, J, _K: np.where(((np.floor((J - 1) / 4) % 2) == 0)[..., None], tone(C['grass3'], 1.04), tone(C['grass3'], .9))
     v.put(v.box(1, 39, 1, 39, 2, 3), stripe)
     rng = np.random.default_rng(54)
     for ci, cj in ((13, 15), (24, 25), (11, 29), (28, 13)):

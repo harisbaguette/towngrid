@@ -1,7 +1,7 @@
 // Individual buildings keep their own original textures when sections collapse.
 // No intact building is rotated; the foundation stays on its one-tile footprint.
 const plots=new Set(['field','cottonfield','herbgarden','sugarfield','saltfield','vineyard','cocoafarm','berryfield','mintfield','pumpkinpatch','oakfarm','pond','pasture','clover','clayfield','sandpit']);
-const towers=new Set(['magetower','leyrelay','windturbine','arcanepower','blastfurnace','oilpump','ironmine','coppermine']);
+const towers=new Set(['magetower','leyrelay','windturbine','windpump','arcanepower','blastfurnace','oilpump','ironmine','coppermine']);
 const yards=new Set(['dock','coastport','polarport','riverport','lakeport','ferrydock','polarferry','canaldock','streamdock','airport','airterminal','solarpanel']);
 export function buildingDamageProfile(type) {
  const seed=[...type].reduce((v,c)=>v+c.charCodeAt(0),0);

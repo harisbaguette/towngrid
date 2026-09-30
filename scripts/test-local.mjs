@@ -24,6 +24,7 @@ const suites = [
   'tests/second-pass-20260928.mjs',
   'tests/expansion-chains.mjs',
   'tests/expansion-rules.mjs',
+  'tests/expansion-new-browser.mjs',
   'tests/release.mjs',
   'tests/pixel-environment.mjs',
   'tests/pixel-industry.mjs',
