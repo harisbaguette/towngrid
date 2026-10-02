@@ -1,0 +1,11 @@
+{
+  "samples": 576,
+  "legacyClippedPixels": 12933,
+  "clippedPixels": 0,
+  "trainClippedPixels": 0,
+  "cpuAnchorError": 0.4960937500006253,
+  "frontOccludedPixels": 0,
+  "behindOccludedPixels": 2314,
+  "legacyBuildingOccludedPixels": 7798,
+  "errors": []
+}

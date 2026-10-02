@@ -1,0 +1,24 @@
+{
+  "facilities": 106,
+  "resources": 80,
+  "latestFacilities": [
+    "shallowmine",
+    "windpump"
+  ],
+  "latestGoods": [
+    "dough",
+    "baguette",
+    "batter",
+    "fancycake",
+    "decorcake",
+    "winebottle",
+    "sangria",
+    "honeycomb",
+    "jetfuel"
+  ],
+  "changedGoods": [
+    "lantern",
+    "pie"
+  ],
+  "missing": []
+}

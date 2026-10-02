@@ -1,0 +1,162 @@
+{
+  "animation": {
+    "before": {
+      "hash": -315756871,
+      "count": 3059,
+      "frame": "3",
+      "active": "true"
+    },
+    "after": {
+      "hash": 1590938456,
+      "count": 3055,
+      "frame": "20",
+      "active": "true"
+    }
+  },
+  "homeAudio": {
+    "rms": 0.00204,
+    "levels": {
+      "music": 0.00112,
+      "effects": 0,
+      "ambience": 0.00145
+    },
+    "state": "running",
+    "loaded": 71,
+    "total": 71,
+    "failed": 0,
+    "voices": 3,
+    "loading": false,
+    "music": "calm-theme",
+    "ambience": [
+      "amb-river",
+      "forest-ambience"
+    ]
+  },
+  "pause": {
+    "manual": true,
+    "reducedMotion": true,
+    "hiddenTab": true,
+    "resumed": true
+  },
+  "scenes": [
+    "mira",
+    "marna",
+    "silen",
+    "rowan",
+    "hana",
+    "bron",
+    "dawn-bakery",
+    "orchard-harvest",
+    "dairy-morning",
+    "textile-looms",
+    "glass-furnace",
+    "stone-quarry",
+    "mountain-mine",
+    "desert-oil",
+    "oasis-market",
+    "wetland-ferry",
+    "volcano-forge",
+    "winter-delivery",
+    "coast-fishing",
+    "clinic-morning",
+    "crystal-lab",
+    "airship-dock",
+    "evening-market",
+    "riverside-rest",
+    "map-table",
+    "village-arrival",
+    "river-crossing",
+    "records-room"
+  ],
+  "roomAudio": {
+    "rms": 0.06535,
+    "levels": {
+      "music": 0.05353,
+      "effects": 0.0117,
+      "ambience": 0.00291
+    },
+    "state": "running",
+    "loaded": 71,
+    "total": 71,
+    "failed": 0,
+    "voices": 11,
+    "loading": false,
+    "music": "calm-theme",
+    "ambience": [
+      "amb-hearth",
+      "amb-room"
+    ]
+  },
+  "actions": [
+    "open",
+    "hover",
+    "click",
+    "sawmill",
+    "well",
+    "field",
+    "footstep",
+    "hover",
+    "click",
+    "open",
+    "close",
+    "hover",
+    "click",
+    "rotate",
+    "zoom",
+    "pause",
+    "resume"
+  ],
+  "decoded": {
+    "sheep-bleat": {
+      "duration": 1.0579583333333333,
+      "rms": 0.06307311277057846
+    },
+    "cow-low": {
+      "duration": 1.6616770833333334,
+      "rms": 0.06288553050471123
+    },
+    "duck-quack": {
+      "duration": 0.70965625,
+      "rms": 0.06276815741043867
+    },
+    "hen-cluck": {
+      "duration": 0.5703385416666666,
+      "rms": 0.06191309566125841
+    },
+    "bee-buzz": {
+      "duration": 0.9186354166666667,
+      "rms": 0.03523416882449785
+    },
+    "ui-save": {
+      "duration": 0.64,
+      "rms": 0.07028084842730155
+    },
+    "ui-load": {
+      "duration": 0.64,
+      "rms": 0.07051746387029038
+    },
+    "ui-notice": {
+      "duration": 0.5703385416666666,
+      "rms": 0.07006549005612896
+    },
+    "contract-complete": {
+      "duration": 0.70965625,
+      "rms": 0.07063158214290215
+    },
+    "transport-depart": {
+      "duration": 0.941859375,
+      "rms": 0.06305338034598154
+    },
+    "transport-arrive": {
+      "duration": 0.66321875,
+      "rms": 0.06336012182685587
+    }
+  },
+  "soundControls": {
+    "effectsSlider": true,
+    "mute": true,
+    "unmute": true
+  },
+  "errors": [],
+  "failed": []
+}

@@ -1,0 +1,321 @@
+{
+  "resourceIcons": 86,
+  "served": [
+    {
+      "port": 5173,
+      "id": "pie"
+    },
+    {
+      "port": 5173,
+      "id": "lantern"
+    },
+    {
+      "port": 5173,
+      "id": "dough"
+    },
+    {
+      "port": 5173,
+      "id": "baguette"
+    },
+    {
+      "port": 5173,
+      "id": "batter"
+    },
+    {
+      "port": 5173,
+      "id": "fancycake"
+    },
+    {
+      "port": 5173,
+      "id": "decorcake"
+    },
+    {
+      "port": 5173,
+      "id": "winebottle"
+    },
+    {
+      "port": 5173,
+      "id": "sangria"
+    },
+    {
+      "port": 5173,
+      "id": "honeycomb"
+    },
+    {
+      "port": 5173,
+      "id": "jetfuel"
+    },
+    {
+      "port": 5174,
+      "id": "pie"
+    },
+    {
+      "port": 5174,
+      "id": "lantern"
+    },
+    {
+      "port": 5174,
+      "id": "dough"
+    },
+    {
+      "port": 5174,
+      "id": "baguette"
+    },
+    {
+      "port": 5174,
+      "id": "batter"
+    },
+    {
+      "port": 5174,
+      "id": "fancycake"
+    },
+    {
+      "port": 5174,
+      "id": "decorcake"
+    },
+    {
+      "port": 5174,
+      "id": "winebottle"
+    },
+    {
+      "port": 5174,
+      "id": "sangria"
+    },
+    {
+      "port": 5174,
+      "id": "honeycomb"
+    },
+    {
+      "port": 5174,
+      "id": "jetfuel"
+    }
+  ],
+  "renders": [
+    {
+      "renderer": "webgl",
+      "view": 0,
+      "items": [
+        {
+          "type": "shallowmine",
+          "view": 0,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "pulley-0",
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "type": "windpump",
+          "view": 0,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "rotor-0",
+              "loaded": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "view": 1,
+      "items": [
+        {
+          "type": "shallowmine",
+          "view": 1,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "pulley-0",
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "type": "windpump",
+          "view": 1,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "rotor-0",
+              "loaded": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "view": 2,
+      "items": [
+        {
+          "type": "shallowmine",
+          "view": 2,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "pulley-0",
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "type": "windpump",
+          "view": 2,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "rotor-0",
+              "loaded": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "webgl",
+      "view": 3,
+      "items": [
+        {
+          "type": "shallowmine",
+          "view": 3,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "pulley-0",
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "type": "windpump",
+          "view": 3,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "rotor-0",
+              "loaded": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "view": 0,
+      "items": [
+        {
+          "type": "shallowmine",
+          "view": 0,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "pulley-0",
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "type": "windpump",
+          "view": 0,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "rotor-0",
+              "loaded": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "view": 1,
+      "items": [
+        {
+          "type": "shallowmine",
+          "view": 1,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "pulley-0",
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "type": "windpump",
+          "view": 1,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "rotor-0",
+              "loaded": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "view": 2,
+      "items": [
+        {
+          "type": "shallowmine",
+          "view": 2,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "pulley-0",
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "type": "windpump",
+          "view": 2,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "rotor-0",
+              "loaded": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "view": 3,
+      "items": [
+        {
+          "type": "shallowmine",
+          "view": 3,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "pulley-0",
+              "loaded": true
+            }
+          ]
+        },
+        {
+          "type": "windpump",
+          "view": 3,
+          "bodyFrame": 0,
+          "parts": [
+            {
+              "name": "rotor-0",
+              "loaded": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "failed": []
+}

@@ -1,0 +1,132 @@
+{
+ "label": "port4199-run2",
+ "url": "http://127.0.0.1:4199",
+ "fps": {
+  "default-1x": {
+   "frames": 121,
+   "p50": 16.7,
+   "p95": 16.8,
+   "max": 16.8,
+   "gameFps": 60,
+   "renderer": "webgl",
+   "longTasks": 0
+  },
+  "4x": {
+   "frames": 121,
+   "p50": 16.7,
+   "p95": 16.7,
+   "max": 16.8,
+   "gameFps": 60,
+   "renderer": "webgl",
+   "longTasks": 0
+  },
+  "labels-on": {
+   "frames": 121,
+   "p50": 16.7,
+   "p95": 16.7,
+   "max": 16.8,
+   "gameFps": 60,
+   "renderer": "webgl",
+   "longTasks": 0
+  },
+  "dragging": {
+   "frames": 121,
+   "p50": 16.7,
+   "p95": 16.8,
+   "max": 16.8,
+   "gameFps": 60,
+   "renderer": "webgl"
+  },
+  "build-dock-open": {
+   "frames": 121,
+   "p50": 16.7,
+   "p95": 16.8,
+   "max": 16.9,
+   "gameFps": 60,
+   "renderer": "webgl",
+   "longTasks": 0
+  }
+ },
+ "startup": {
+  "home": {
+   "titleVisibleMs": 247,
+   "homeReadyMs": 5426,
+   "titleClicks": 2
+  },
+  "longTasksToHome": [
+   {
+    "t": 958,
+    "d": 977
+   },
+   {
+    "t": 1936,
+    "d": 947
+   },
+   {
+    "t": 371,
+    "d": 99
+   },
+   {
+    "t": 105,
+    "d": 94
+   }
+  ],
+  "demoMs": 693,
+  "longTasksDemo": {
+   "count": 1,
+   "totalMs": 555,
+   "top": [
+    {
+     "t": 5588,
+     "d": 555
+    }
+   ]
+  }
+ },
+ "scene": {
+  "engine": "three.js r186",
+  "cameraView": "남동",
+  "cameraQuarter": "0",
+  "cameraAzimuth": "0.7853981633974483",
+  "cameraPolar": "0.9553166181245092",
+  "fps": "60",
+  "renderer": "webgl",
+  "geometries": "72",
+  "textures": "74",
+  "models": "46",
+  "gameTime": "3",
+  "characterStyle": "pixel",
+  "characterFrames": "0:20,3:10,0:1,0:1,0:1,0:1,0:1,0:1,0:1"
+ },
+ "profileTop": [
+  "(idle) :-1 75.5%",
+  "(program) :-1 5.2%",
+  "updateMatrixWorld facility-staff-BC24tYtS.js:0 2.0%",
+  "loop scene-DQJFO9D2.js:10 1.2%",
+  "h facility-staff-BC24tYtS.js:4168 1.1%",
+  "Xn facility-staff-BC24tYtS.js:0 1.1%",
+  "tick facility-staff-BC24tYtS.js:0 0.8%",
+  "ct facility-staff-BC24tYtS.js:4219 0.8%",
+  "Pm.renderBufferDirect facility-staff-BC24tYtS.js:4219 0.7%",
+  "multiplyMatrices facility-staff-BC24tYtS.js:0 0.6%",
+  "i facility-staff-BC24tYtS.js:4219 0.5%",
+  "effectiveInputs facility-staff-BC24tYtS.js:0 0.5%",
+  "ft facility-staff-BC24tYtS.js:4219 0.5%",
+  "Hm facility-staff-BC24tYtS.js:4219 0.4%",
+  "ot facility-staff-BC24tYtS.js:4219 0.3%"
+ ],
+ "R": {
+  "errors": [],
+  "consoleErrors": [
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "1920x1080: Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "consoleWarnings": [],
+  "failedRequests": [
+   "1920x1080: 404 http://127.0.0.1:4199/src/app/game/scene.js",
+   "1920x1080: FAILED net::ERR_ABORTED http://127.0.0.1:4199/src/app/game/scene.js",
+   "1920x1080: 404 http://127.0.0.1:4199/src/app/game/audio.js",
+   "1920x1080: FAILED net::ERR_ABORTED http://127.0.0.1:4199/src/app/game/audio.js"
+  ]
+ }
+}

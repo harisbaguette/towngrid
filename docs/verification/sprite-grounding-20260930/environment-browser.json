@@ -1,0 +1,22 @@
+{
+  "errors": [],
+  "failed": [],
+  "modes": [
+    {
+      "mode": "webgl",
+      "facilities": 106,
+      "vehicles": 10,
+      "views": 4,
+      "cranes": 3,
+      "mobile": true
+    },
+    {
+      "mode": "canvas",
+      "facilities": 106,
+      "vehicles": 10,
+      "views": 4,
+      "cranes": 3,
+      "mobile": true
+    }
+  ]
+}

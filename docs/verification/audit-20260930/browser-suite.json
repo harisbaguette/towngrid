@@ -1,0 +1,289 @@
+{
+ "at": "2026-09-30T12:25:13.547Z",
+ "count": 47,
+ "pass": 39,
+ "results": [
+  {
+   "test": "tests/art-completion-browser.mjs",
+   "exit": 0,
+   "seconds": 6,
+   "tail": "[{\"mode\":\"webgl\",\"vehicles\":10,\"views\":4,\"buildings\":106,\"icons\":86,\"mobile\":true,\"noSave\":true},{\"mode\":\"canvas\",\"vehicles\":10,\"views\":4,\"buildings\":106,\"icons\":86,\"mobile\":true,\"noSave\":true}]"
+  },
+  {
+   "test": "tests/art-completion-game.mjs",
+   "exit": 1,
+   "seconds": 125,
+   "tail": "    triggerUncaughtException(\r\n    ^\r\n\r\nlocator.waitFor: Timeout 120000ms exceeded.\r\nCall log:\r\n\u001b[2m  - waiting for getByRole('button', { name: '초반 마을 테스트', exact: true }) to be visible\u001b[22m\r\n\r\n    at C:\\Users\\ghd12\\Desktop\\TownGrid\\work\\audit3-sandbox\\tests\\art-completion-game.mjs:15:63 {\r\n  name: 'TimeoutError'\r\n}\r\n\r\nNode.js v22.18.0"
+  },
+  {
+   "test": "tests/audio-browser.mjs",
+   "exit": 0,
+   "seconds": 93,
+   "tail": "  \"calm-theme\": 117.2,\n  \"music-town\": 99.2,\n  \"music-harp\": 62.3,\n  \"amb-river\": 52,\n  \"amb-coast\": 44,\n  \"amb-wind\": 6,\n  \"forest-ambience\": 44.7,\n  \"amb-crickets\": 11.5\n },\n \"audioFail\": [],\n \"errors\": []\n}"
+  },
+  {
+   "test": "tests/audit-2/browser-final.mjs",
+   "exit": 0,
+   "seconds": 17,
+   "tail": "   \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/wetland-f\",\n   \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/wetland-f\",\n   \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/wetland-f\",\n   \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\n   \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/wetland-f\",\n   \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\n   \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\"\n  ],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/audit-2/browser-flow.mjs",
+   "exit": 0,
+   "seconds": 357,
+   "tail": "  \"newGameMs\": 334,\n  \"reload\": {\n   \"titleVisibleMs\": 126,\n   \"homeReadyMs\": 2070,\n   \"titleClicks\": 2\n  },\n  \"continueMs\": 504\n },\n \"errors\": 0,\n \"consoleErrors\": 67,\n \"failed\": 0\n}"
+  },
+  {
+   "test": "tests/audit-2/browser-misc.mjs",
+   "exit": 0,
+   "seconds": 134,
+   "tail": "   \"1920x1080: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\n   \"1920x1080: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\n   \"1920x1080: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\",\n   \"1920x1080: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\n   \"1920x1080: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\",\n   \"1920x1080: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"1920x1080: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"1920x1080: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"1920x1080: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\n   \"1920x1080: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"1920x1080: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\n   \"1920x1080: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain"
+  },
+  {
+   "test": "tests/audit-2/browser-perf.mjs",
+   "exit": 0,
+   "seconds": 630,
+   "tail": "  \"154ms 2.9% updateMatrixWorld three.module-LOgJmgpk.js:10046\",\n  \"104ms 2.0% getParameters three.module-LOgJmgpk.js:46049\",\n  \"72ms 1.4% exports.jsxDEV react_jsx-dev-runtime.js:191\",\n  \"71ms 1.3% getProgram three.module-LOgJmgpk.js:52154\",\n  \"59ms 1.1% WebGLRenderer.renderBufferDirect three.module-LOgJmgpk.js:51717\",\n  \"52ms 1.0% setProgram three.module-LOgJmgpk.js:52255\",\n  \"46ms 0.9% projectObject three.module-LOgJmgpk.js:52007\",\n  \"45ms 0.9% refreshMaterialUniforms three.module-LOgJmgpk.js:49981\",\n  \"44ms 0.8% (garbage collector) :0\",\n  \"43ms 0.8% multiplyMatrices three.module-LOgJmgpk.js:8252\"\n ]\n}"
+  },
+  {
+   "test": "tests/audit-2/browser-recheck.mjs",
+   "exit": 0,
+   "seconds": 80,
+   "tail": "   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/orchard-h\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/orchard-h\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/orchard-h\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may"
+  },
+  {
+   "test": "tests/audit-2/browser-viewports.mjs",
+   "exit": 0,
+   "seconds": 162,
+   "tail": "    \"zoom\": 2.594,\n    \"target\": [\n     6.43,\n     0,\n     10.38\n    ]\n   },\n   \"panned\": true,\n   \"pinchZoomed\": true,\n   \"selectedAfterGestures\": false\n  },\n  \""
+  },
+  {
+   "test": "tests/audit/browser-balance-20260928-followup.mjs",
+   "exit": 1,
+   "seconds": 2,
+   "tail": "    ^\r\n\r\npage.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5181/\r\nCall log:\r\n\u001b[2m  - navigating to \"http://localhost:5181/\", waiting until \"load\"\u001b[22m\r\n\r\n    at home (C:\\Users\\ghd12\\Desktop\\TownGrid\\work\\audit3-sandbox\\tests\\audit\\browser-balance-20260928-followup.mjs:12:65)\r\n    at C:\\Users\\ghd12\\Desktop\\TownGrid\\work\\audit3-sandbox\\tests\\audit\\browser-balance-20260928-followup.mjs:13:20 {\r\n  name: 'Error'\r\n}\r\n\r\nNode.js v22.18.0"
+  },
+  {
+   "test": "tests/audit/browser-balance-20260928.mjs",
+   "exit": 2,
+   "seconds": 316,
+   "tail": "[build] fortress true 717ms {\"heapMB\":236,\"geo\":23,\"tex\":31,\"fps\":\"34\"}\n[build] parliament true 798ms {\"heapMB\":239,\"geo\":24,\"tex\":33,\"fps\":\"24\"}\n[build] airdock true 773ms {\"heapMB\":243,\"geo\":25,\"tex\":35,\"fps\":\"19\"}\n[build] exchange true 765ms {\"heapMB\":245,\"geo\":26,\"tex\":36,\"fps\":\"17\"}\n[step] built 8/26 via UI\n[step] key e mem {\"heapMB\":248,\"fps\":\"60\"}\n[step] key e mem {\"heapMB\":253,\"fps\":\"60\"}\n[step] key e mem {\"heapMB\":256,\"fps\":\"60\"}\n[step] key e mem {\"heapMB\":259,\"fps\":\"60\"}\n[step] key q mem {\"heapMB\":262,\"fps\":\"60\"}\n[step] 26 sheets + fps\nABORT locator.click: Timeout 30000ms exceeded."
+  },
+  {
+   "test": "tests/audit/browser-first-session.mjs",
+   "exit": 0,
+   "seconds": 139,
+   "tail": "  \"screenshot 03-new-game.png\",\n  \"screenshot 04-after-warehouse.png\",\n  \"screenshot 05-five-buildings.png\",\n  \"screenshot 06a-contract-ready.png\",\n  \"screenshot 06-goals-dialog.png\",\n  \"screenshot 07-rank1-hud.png\",\n  \"screenshot 08-market.png\",\n  \"screenshot 09-unowned-tile.png\",\n  \"screenshot 10-after-first-event.png\",\n  \"screenshot 11-phone-hud.png\"\n ]\n}"
+  },
+  {
+   "test": "tests/audit/browser-ui-2-20260928.mjs",
+   "exit": 0,
+   "seconds": 56,
+   "tail": "  \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\",\n  \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\n  \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\",\n  \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n  \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n  \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n  \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\n  \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n  \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\n  \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\",\n  \"1440x900: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\n  \"1440x900"
+  },
+  {
+   "test": "tests/biomes-browser.mjs",
+   "exit": 1,
+   "seconds": 70,
+   "tail": "    ^\r\n\r\nAssertionError [ERR_ASSERTION]: false == true\r\n    at file:///C:/Users/ghd12/Desktop/TownGrid/work/audit3-sandbox/tests/biomes-browser.mjs:37:9 {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '=='\r\n}\r\n\r\nNode.js v22.18.0"
+  },
+  {
+   "test": "tests/campaign-panels-browser.mjs",
+   "exit": 0,
+   "seconds": 15,
+   "tail": "{\"overrides\":[\"campaign.spawnState x3\",\"campaign.battles +2\"],\"sizes\":{\"1366x768\":{\"injected\":{\"states\":3,\"orders\":3},\"world\":{\"siteStatus\":2,\"battles\":2},\"orders\":{\"rows\":3,\"width\":1135,\"scrollX\":false,\"headSticky\":\"sticky\"},\"layout\":{\"covered\":[],\"offscreen\":[],\"clipped\":[],\"tinyTargets\":[],\"smallText\":[]},\"councilCards\":[{\"inside\":true,\"overflow\":false},{\"inside\":true,\"overflow\":false},{\"inside\":true,\"overflow\":false}]},\"390x844\":{\"injected\":{\"states\":3,\"orders\":3},\"world\":{\"siteStatus\":2,\"battles\":2},\"orders\":{\"rows\":3,\"width\":337,\"scrollX\":false,\"headSticky\":\"sticky\"},\"layout\":{\"covered\":[],\"offscreen\":[],\"clipped\":[],\"tinyTargets\":[],\"smallText\":[]},\"councilCards\":[{\"inside\":true,\"overflow\":false},{\"inside\":true,\"overflow\":false},{\"inside\":true,\"overflow\":false}]}},\"R\":{\"errors\":[],\"consoleErrors\":[],\"consoleWarnings\":[],\"failedRequests\":[]}}"
+  },
+  {
+   "test": "tests/environment-motion-browser.mjs",
+   "exit": 0,
+   "seconds": 9,
+   "tail": "{\"errors\":[],\"failed\":[],\"modes\":[{\"mode\":\"webgl\",\"facilities\":106,\"vehicles\":10,\"views\":4,\"cranes\":3,\"mobile\":true},{\"mode\":\"canvas\",\"facilities\":106,\"vehicles\":10,\"views\":4,\"cranes\":3,\"mobile\":true}]}"
+  },
+  {
+   "test": "tests/environment-parts-browser.mjs",
+   "exit": 0,
+   "seconds": 3,
+   "tail": "Rotating parts: 4 views × 3 poses × WebGL/CPU PASS."
+  },
+  {
+   "test": "tests/expansion-new-browser.mjs",
+   "exit": 0,
+   "seconds": 120,
+   "tail": "PASS new facilities in the game screen: 얕은 광산 (flat, waterside preview), 풍력 양수기 (beside 사탕수수밭), four views, damage and repair; console errors 0"
+  },
+  {
+   "test": "tests/expansion-rules-browser.mjs",
+   "exit": 0,
+   "seconds": 139,
+   "tail": "PASS expansion rules in the game screen: 태양광 패널, 연못, 연못, 포도밭, 연못, 양봉장, 야생 클로버, 밀밭, 소금밭"
+  },
+  {
+   "test": "tests/farm-art-browser.mjs",
+   "exit": 0,
+   "seconds": 13,
+   "tail": "Expansion art: 24 facilities × 4 views (WebGL/CPU), 44 UI icons, 106 buildings in the art list, 24/24 new facilities with damage layers."
+  },
+  {
+   "test": "tests/farm-refresh-browser.mjs",
+   "exit": 0,
+   "seconds": 18,
+   "tail": "Farm refresh browser: farmcrops, farmfruits, ranch, farmworks, farmland, farmterrain, farmsupport, both renderers, four views, growth stages, six states, resource icons, animation, pause, disable, mobile and no save passed."
+  },
+  {
+   "test": "tests/fix-20260929/probe-a.mjs",
+   "exit": 1,
+   "seconds": 42,
+   "tail": "    triggerUncaughtException(\r\n    ^\r\n\r\nlocator.click: Timeout 30000ms exceeded.\r\nCall log:\r\n\u001b[2m  - waiting for locator('.tutorial-wait button').filter({ hasText: '4배' })\u001b[22m\r\n\r\n    at C:\\Users\\ghd12\\Desktop\\TownGrid\\work\\audit3-sandbox\\tests\\fix-20260929\\probe-a.mjs:37:64 {\r\n  name: 'TimeoutError'\r\n}\r\n\r\nNode.js v22.18.0"
+  },
+  {
+   "test": "tests/fix-20260929/probe-b.mjs",
+   "exit": 0,
+   "seconds": 55,
+   "tail": "   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/records-r\"\n  ],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/fix-20260929/probe-c.mjs",
+   "exit": 0,
+   "seconds": 13,
+   "tail": "   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/records-r\",\n   \"1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/river-cro\"\n  ],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/fix-20260929/probe-d.mjs",
+   "exit": 0,
+   "seconds": 48,
+   "tail": "   \"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\n   \"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\n   \"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\n   \"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\",\n   \"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/records-r\"\n  ],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/fix-20260929/probe-e.mjs",
+   "exit": 0,
+   "seconds": 14,
+   "tail": "   \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/records-r\"\n  ],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/fix-20260929/probe-markers.mjs",
+   "exit": 0,
+   "seconds": 17,
+   "tail": "   \"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\n   \"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\",\n   \"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\n   \"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\",\n   \"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\n   \"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\"\n  ],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/fix-20260930/toast-landscape.mjs",
+   "exit": 0,
+   "seconds": 8,
+   "tail": "{\"panel\":[272,90,572,303],\"toast\":[584,90,820,166],\"overlap\":false,\"errors\":[],\"consoleErrors\":[\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table\",\"844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a\"]}"
+  },
+  {
+   "test": "tests/game-time-browser.mjs",
+   "exit": 0,
+   "seconds": 16,
+   "tail": "{\"result\":\"PASS\",\"samples\":[{\"speed\":1,\"real\":4.006599999999628,\"acceptedReal\":4.016700000000006,\"game\":2.008350000000009},{\"speed\":2,\"real\":4.008700000000187,\"acceptedReal\":4.0168000000000195,\"game\":4.01680000000004},{\"speed\":4,\"real\":4.008099999999628,\"acceptedReal\":4.000099999999938,\"game\":8.000200000000088}],\"pause\":true,\"camera\":true,\"resume\":true,\"pageErrors\":[]}"
+  },
+  {
+   "test": "tests/layout-fix-browser.mjs",
+   "exit": 0,
+   "seconds": 72,
+   "tail": "    \"empty\": 0,\n    \"broken\": 0\n   }\n  }\n },\n \"R\": {\n  \"errors\": [],\n  \"consoleErrors\": [],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/map-edges-browser.mjs",
+   "exit": 0,
+   "seconds": 18,
+   "tail": "Map sides, scenery, actual production, normal game controls, WebGL/CPU and mobile PASS."
+  },
+  {
+   "test": "tests/mira-preview-browser.mjs",
+   "exit": 0,
+   "seconds": 5,
+   "tail": "Mira preview: runtime assets, 7 actions, 4 directions, correct aspect ratio, mobile and browser errors passed."
+  },
+  {
+   "test": "tests/mira-runtime-browser.mjs",
+   "exit": 0,
+   "seconds": 65,
+   "tail": "{\"atlas\":\"8192x512 RGBA\",\"newFrames\":256,\"legacyActionFrames\":0,\"views\":4,\"activity\":{\"seconds\":55.01770000000108,\"frames\":[4,5,6,7,8,9,10,11,12,13,14,15],\"actions\":[\"walk\",\"idle\",\"pickup\",\"carry\",\"drop\"],\"delivered\":112,\"counts\":{\"moving\":9343,\"handling\":3388,\"holding\":53,\"corners\":198},\"mismatches\":[]},\"portrait\":{\"width\":220,\"height\":314},\"uiClips\":11,\"errors\":[],\"failedAssets\":[]}"
+  },
+  {
+   "test": "tests/perf-prod-browser.mjs",
+   "exit": 0,
+   "seconds": 28,
+   "tail": "[step] default-1x {\"frames\":121,\"p50\":16.7,\"p95\":16.8,\"max\":16.8,\"gameFps\":60,\"renderer\":\"webgl\",\"longTasks\":0}\n[step] 4x {\"frames\":120,\"p50\":16.7,\"p95\":16.8,\"max\":33.4,\"gameFps\":60,\"renderer\":\"webgl\",\"longTasks\":0}\n[step] labels-on {\"frames\":121,\"p50\":16.7,\"p95\":16.8,\"max\":16.8,\"gameFps\":60,\"renderer\":\"webgl\",\"longTasks\":0}\n[step] build-dock-open {\"frames\":121,\"p50\":16.7,\"p95\":16.8,\"max\":16.8,\"gameFps\":60,\"renderer\":\"webgl\",\"longTasks\":0}\n{\"label\":\"run\",\"startup\":{\"demoMs\":1125,\"longTasksDemo\":{\"count\":1,\"totalMs\":977}},\"fps\":{\"default-1x\":[121,16.7,16.8],\"4x\":[120,16.7,16.8],\"labels-on\":[121,16.7,16.8],\"dragging\":[120,16.7,16.8],\"build-dock-open\":[121,16.7,16.8]},\"errors\":[],\"consoleErrors\":[]}"
+  },
+  {
+   "test": "tests/pixel-environment-browser.mjs",
+   "exit": 0,
+   "seconds": 7,
+   "tail": "Browser verification passed: sample controls, mobile layout, live game, four camera directions, keyboard, pan, zoom, assets."
+  },
+  {
+   "test": "tests/pixel-industry-browser.mjs",
+   "exit": 1,
+   "seconds": 22,
+   "tail": "    ^\r\n\r\nAssertionError [ERR_ASSERTION]: 0 == true\r\n    at file:///C:/Users/ghd12/Desktop/TownGrid/work/audit3-sandbox/tests/pixel-industry-browser.mjs:74:9 {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 0,\r\n  expected: true,\r\n  operator: '=='\r\n}\r\n\r\nNode.js v22.18.0"
+  },
+  {
+   "test": "tests/pixel-readability-browser.mjs",
+   "exit": 0,
+   "seconds": 3,
+   "tail": "Pixel readability capture passed: 48/80px comparison, mobile layout, actual square tile outlines in four views, assets and page errors."
+  },
+  {
+   "test": "tests/pixel-world-browser.mjs",
+   "exit": 0,
+   "seconds": 35,
+   "tail": "41 new facilities: six states, four views, WebGL/CPU; five regions, ports, overlays, save invariance and mobile passed."
+  },
+  {
+   "test": "tests/production-visuals-browser.mjs",
+   "exit": 0,
+   "seconds": 4,
+   "tail": "Production visuals: six states, independent working/output, four views, mobile, WebGL and CPU passed."
+  },
+  {
+   "test": "tests/roster-browser.mjs",
+   "exit": 0,
+   "seconds": 13,
+   "tail": "Roster gallery, portraits, 4 views, facility work/stop, resident UI, mobile and CPU PASS"
+  },
+  {
+   "test": "tests/screen-components-browser.mjs",
+   "exit": 0,
+   "seconds": 15,
+   "tail": "    \"세린의 고원 대장간\",\n    \"닥스의 설원 배송\",\n    \"날리아의 어선\",\n    \"베라의 진료소\",\n    \"세드릭의 마력 연구실\",\n    \"아이리스의 비공정\",\n    \"벨의 저녁 시장\",\n    \"카이와 피아의 강가 휴식\"\n  ],\n  \"errors\": [],\n  \"failed\": []\n}"
+  },
+  {
+   "test": "tests/specialists-browser.mjs",
+   "exit": 0,
+   "seconds": 17,
+   "tail": "51 identities, both factions, 4 real scene views, resident UI/mobile, combat and CPU PASS"
+  },
+  {
+   "test": "tests/start-screens-browser.mjs",
+   "exit": 0,
+   "seconds": 25,
+   "tail": "{\n  \"result\": \"PASS\",\n  \"checked\": [\n    \"title keyboard entry, no-save continue disabled, stable random home, home/settings/world navigation, 24 daily + 4 transition gallery, filters/thumbnails/arrows\",\n    \"actual save import, long-load artwork advances, immediate completion, playable demo, saved game preserved\",\n    \"390px mobile, short landscape, reduced motion\",\n    \"normal motion context-specific transitions, keyboard skip, default home probability branch\",\n    \"no legacy GLB requests throughout home, save import and playable demo\"\n  ],\n  \"errors\": [],\n  \"failed\": []\n}"
+  },
+  {
+   "test": "tests/starter-environment-browser.mjs",
+   "exit": 1,
+   "seconds": 57,
+   "tail": "  }\n}\nnode:internal/modules/run_main:123\r\n    triggerUncaughtException(\r\n    ^\r\n\r\npage.waitForFunction: Timeout 45000ms exceeded.\r\n    at C:\\Users\\ghd12\\Desktop\\TownGrid\\work\\audit3-sandbox\\tests\\starter-environment-browser.mjs:111:13 {\r\n  name: 'TimeoutError'\r\n}\r\n\r\nNode.js v22.18.0"
+  },
+  {
+   "test": "tests/starting-sites-browser.mjs",
+   "exit": 0,
+   "seconds": 9,
+   "tail": "World ready\nPASS (full game): noncapital selection, blocked terrain, mobile start and saved location"
+  },
+  {
+   "test": "tests/ui-design-browser.mjs",
+   "exit": 0,
+   "seconds": 55,
+   "tail": "page loaded\nworld opened\nworld ready\n{\n  \"atlas\": {\n    \"nodes\": 210,\n    \"terrainNodes\": 5,\n    \"view\": \"0 0 1300 806\"\n  },\n  \"blocked\": [],\n  \"errors\": []\n}"
+  },
+  {
+   "test": "tests/world-atlas-browser.mjs",
+   "exit": 1,
+   "seconds": 7,
+   "tail": "\r\n1 !== 2\r\n\r\n    at file:///C:/Users/ghd12/Desktop/TownGrid/work/audit3-sandbox/tests/world-atlas-browser.mjs:68:9 {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 1,\r\n  expected: 2,\r\n  operator: 'strictEqual'\r\n}\r\n\r\nNode.js v22.18.0"
+  }
+ ]
+}

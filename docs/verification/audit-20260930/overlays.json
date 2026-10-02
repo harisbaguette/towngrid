@@ -1,0 +1,272 @@
+{
+ "390x844": {
+  "intro": null,
+  "homeButton": [
+   {
+    "scroller": ".world-map-screen",
+    "scrollTop": 360,
+    "position": "absolute",
+    "box": [
+     319,
+     18,
+     57,
+     32
+    ],
+    "hidden": [
+     "세계 지도 축소 (14x5)",
+     "선택 국가로 이동 (36x5)",
+     "주변 확대 (48x5)"
+    ]
+   },
+   {
+    "scroller": ".world-map-screen",
+    "scrollTop": 480,
+    "position": "absolute",
+    "box": [
+     319,
+     18,
+     57,
+     32
+    ],
+    "hidden": [
+     "정착 가능 (40x16)"
+    ]
+   },
+   {
+    "scroller": ".world-map-screen",
+    "scrollTop": 600,
+    "position": "absolute",
+    "box": [
+     319,
+     18,
+     57,
+     32
+    ],
+    "hidden": [
+     "비수도권 지역을 선택하세요 하벤 북부 구릉 하벤 동부  (42x28)"
+    ]
+   }
+  ],
+  "scrollers": [
+   ".world-map-screen"
+  ],
+  "labelsUnderOverlays": [],
+  "atlasSvg": {
+   "svg": [
+    364,
+    318
+   ],
+   "viewport": [
+    364,
+    318
+   ]
+  }
+ },
+ "844x390": {
+  "intro": null,
+  "homeButton": [
+   {
+    "scroller": ".world-map-screen",
+    "scrollTop": 120,
+    "position": "absolute",
+    "box": [
+     763,
+     20,
+     65,
+     36
+    ],
+    "hidden": [
+     "에스테른 왕국 카르둠 산악왕국 리벤트 연방 브로덴 철도 (50x33)"
+    ]
+   },
+   {
+    "scroller": ".world-map-screen",
+    "scrollTop": 240,
+    "position": "absolute",
+    "box": [
+     763,
+     20,
+     65,
+     36
+    ],
+    "hidden": [
+     "하벤 외곽 개척지 (50x25)"
+    ]
+   },
+   {
+    "scroller": ".world-map-screen",
+    "scrollTop": 480,
+    "position": "absolute",
+    "box": [
+     763,
+     20,
+     65,
+     36
+    ],
+    "hidden": [
+     "동 · 하천 (34x18)"
+    ]
+   },
+   {
+    "scroller": ".world-map-screen",
+    "scrollTop": 840,
+    "position": "absolute",
+    "box": [
+     763,
+     20,
+     65,
+     36
+    ],
+    "hidden": [
+     "엘프족 (50x26)",
+     "엘프족 (12x17)"
+    ]
+   }
+  ],
+  "scrollers": [
+   ".world-map-screen"
+  ],
+  "labelsUnderOverlays": [],
+  "atlasSvg": {
+   "svg": [
+    486,
+    234
+   ],
+   "viewport": [
+    486,
+    234
+   ]
+  }
+ },
+ "1366x768": {
+  "intro": null,
+  "homeButton": [
+   {
+    "scroller": ".realm-sheet",
+    "scrollTop": 120,
+    "position": "absolute",
+    "box": [
+     1277,
+     20,
+     65,
+     36
+    ],
+    "hidden": [
+     "에스테른 왕국 카르둠 산악왕국 리벤트 연방 브로덴 철도 (46x33)"
+    ]
+   },
+   {
+    "scroller": ".realm-sheet",
+    "scrollTop": 240,
+    "position": "absolute",
+    "box": [
+     1277,
+     20,
+     65,
+     36
+    ],
+    "hidden": [
+     "하벤 외곽 개척지 (46x27)"
+    ]
+   },
+   {
+    "scroller": ".realm-sheet",
+    "scrollTop": 360,
+    "position": "absolute",
+    "box": [
+     1277,
+     20,
+     65,
+     36
+    ],
+    "hidden": [
+     "24 × 24 (35x6)"
+    ]
+   }
+  ],
+  "scrollers": [
+   ".realm-sheet"
+  ],
+  "labelsUnderOverlays": [],
+  "atlasSvg": {
+   "svg": [
+    928,
+    670
+   ],
+   "viewport": [
+    928,
+    670
+   ]
+  }
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/airship-d",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/airship-d",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/airship-d",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/airship-d",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/airship-d",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/airship-d",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/airship-d",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/airship-d",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/airship-d",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table",
+   "390x844: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/dairy-mor",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/dairy-mor",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/dairy-mor",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/dairy-mor",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/dairy-mor",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/dairy-mor",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/dairy-mor",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/dairy-mor",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/dairy-mor",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table",
+   "844x390: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/mountain-",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/mountain-",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/mountain-",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/mountain-",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/mountain-",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/mountain-",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/mountain-",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/mountain-",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/mountain-",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table"
+  ],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

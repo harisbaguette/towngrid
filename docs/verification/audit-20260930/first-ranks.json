@@ -1,0 +1,633 @@
+{
+ "viewport": {
+  "width": 1366,
+  "height": 768
+ },
+ "target": 3,
+ "ranks": [
+  {
+   "rank": 1,
+   "realS": 45,
+   "gameS": 55,
+   "stallS": 45
+  },
+  {
+   "rank": 2,
+   "realS": 78,
+   "gameS": 118,
+   "stallS": 32
+  },
+  {
+   "rank": 3,
+   "realS": 139,
+   "gameS": 240,
+   "stallS": 62
+  }
+ ],
+ "actions": [
+  {
+   "s": 0,
+   "a": "guide:주민 주택 선택",
+   "placed": "house@10,12"
+  },
+  {
+   "s": 2,
+   "a": "guide:우물 선택",
+   "placed": "well@11,11"
+  },
+  {
+   "s": 4,
+   "a": "guide:밀밭 선택",
+   "placed": "field@11,13"
+  },
+  {
+   "s": 6,
+   "a": "guide:벌목장 선택",
+   "placed": "lumber@10,11"
+  },
+  {
+   "s": 7,
+   "a": "guide:납품 +65G",
+   "placed": null
+  },
+  {
+   "s": 9,
+   "a": "guide:주택 하나 더",
+   "placed": "house@10,13"
+  },
+  {
+   "s": 10,
+   "a": "guide:주택 하나 더",
+   "placed": "house@12,11"
+  },
+  {
+   "s": 12,
+   "a": "guide:주택 하나 더",
+   "placed": "house@12,13"
+  },
+  {
+   "s": 14,
+   "a": "guide:신분과 권한 열기",
+   "placed": null
+  },
+  {
+   "s": 16,
+   "a": "guide:신분과 권한 열기",
+   "placed": null
+  },
+  {
+   "s": 18,
+   "a": "guide:신분과 권한 열기",
+   "placed": null
+  },
+  {
+   "s": 21,
+   "a": "guide:신분과 권한 열기",
+   "placed": null
+  },
+  {
+   "s": 23,
+   "a": "guide:신분과 권한 열기",
+   "placed": null
+  },
+  {
+   "s": 25,
+   "a": "guide:신분과 권한 열기",
+   "placed": null
+  },
+  {
+   "s": 27,
+   "a": "guide:신분과 권한 열기",
+   "placed": null
+  },
+  {
+   "s": 30,
+   "a": "guide:신분과 권한 열기",
+   "placed": null
+  },
+  {
+   "s": 32,
+   "a": "guide:신분과 권한 열기",
+   "placed": null
+  },
+  {
+   "s": 34,
+   "a": "guide:신분과 권한 열기",
+   "placed": null
+  },
+  {
+   "s": 37,
+   "a": "guide:신분과 권한 열기",
+   "placed": null
+  },
+  {
+   "s": 39,
+   "a": "guide:신분과 권한 열기",
+   "placed": null
+  },
+  {
+   "s": 41,
+   "a": "guide:신분과 권한 열기",
+   "placed": null
+  },
+  {
+   "s": 44,
+   "a": "guide:신분과 권한 열기",
+   "placed": null
+  },
+  {
+   "s": 45,
+   "a": "dialog:promote"
+  },
+  {
+   "s": 49,
+   "a": "next-build:제재소 짓기 목재 → 판재",
+   "placed": "sawmill@9,12"
+  },
+  {
+   "s": 63,
+   "a": "bottleneck:벌목장 · 운반 대기 주민 주택을 더 짓거나 개선해 운반할 주민을 늘리고, 창고까지 흙길을 이으세요.",
+   "placed": null
+  },
+  {
+   "s": 70,
+   "a": "contract"
+  },
+  {
+   "s": 74,
+   "a": "bottleneck:벌목장 · 운반 대기 주민 주택을 더 짓거나 개선해 운반할 주민을 늘리고, 창고까지 흙길을 이으세요.",
+   "placed": null
+  },
+  {
+   "s": 78,
+   "a": "promote"
+  },
+  {
+   "s": 80,
+   "a": "expand@6,10",
+   "expansions": 1
+  },
+  {
+   "s": 82,
+   "a": "next-build:제분소 짓기 밀 → 밀가루",
+   "placed": "mill@11,10"
+  },
+  {
+   "s": 85,
+   "a": "bottleneck:우물 · 출입구 막힘 시설 옆 한 칸을 비우세요.",
+   "placed": null
+  },
+  {
+   "s": 86,
+   "a": "next-build:훈제장 짓기 생선·목재 → 훈제 생선",
+   "placed": "smokehouse:no-tile"
+  },
+  {
+   "s": 90,
+   "a": "next-build:훈제장 짓기 생선·목재 → 훈제 생선",
+   "placed": "smokehouse:no-tile"
+  },
+  {
+   "s": 93,
+   "a": "next-build:훈제장 짓기 생선·목재 → 훈제 생선",
+   "placed": "smokehouse:no-tile"
+  },
+  {
+   "s": 95,
+   "a": "bottleneck:우물 · 출입구 막힘 시설 옆 한 칸을 비우세요.",
+   "placed": null
+  },
+  {
+   "s": 97,
+   "a": "next-build:훈제장 짓기 생선·목재 → 훈제 생선",
+   "placed": "smokehouse@11,14"
+  },
+  {
+   "s": 100,
+   "a": "bottleneck:우물 · 출입구 막힘 시설 옆 한 칸을 비우세요.",
+   "placed": null
+  },
+  {
+   "s": 101,
+   "a": "next-build:소금밭 짓기 물 → 소금",
+   "placed": "saltfield:no-tile"
+  },
+  {
+   "s": 105,
+   "a": "next-build:소금밭 짓기 물 → 소금",
+   "placed": "saltfield@9,11"
+  },
+  {
+   "s": 109,
+   "a": "bottleneck:우물 · 출입구 막힘 시설 옆 한 칸을 비우세요.",
+   "placed": null
+  },
+  {
+   "s": 114,
+   "a": "bottleneck:우물 · 출입구 막힘 시설 옆 한 칸을 비우세요.",
+   "placed": null
+  },
+  {
+   "s": 119,
+   "a": "bottleneck:우물 · 출입구 막힘 시설 옆 한 칸을 비우세요.",
+   "placed": null
+  },
+  {
+   "s": 123,
+   "a": "bottleneck:우물 · 출입구 막힘 시설 옆 한 칸을 비우세요.",
+   "placed": null
+  },
+  {
+   "s": 128,
+   "a": "bottleneck:우물 · 출입구 막힘 시설 옆 한 칸을 비우세요.",
+   "placed": null
+  },
+  {
+   "s": 133,
+   "a": "bottleneck:우물 · 출입구 막힘 시설 옆 한 칸을 비우세요.",
+   "placed": null
+  },
+  {
+   "s": 137,
+   "a": "bottleneck:우물 · 출입구 막힘 시설 옆 한 칸을 비우세요.",
+   "placed": null
+  },
+  {
+   "s": 139,
+   "a": "promote"
+  }
+ ],
+ "stalls": [],
+ "samples": [
+  {
+   "s": 1,
+   "t": 2,
+   "rank": 0,
+   "money": 1160,
+   "debt": 1000,
+   "contracts": 0,
+   "speed": 4,
+   "paused": false,
+   "buildings": 2,
+   "workers": 1,
+   "carts": 0,
+   "shipments": 0,
+   "types": "warehouse,house",
+   "produced": {
+    "water": 0,
+    "grain": 0,
+    "wood": 0,
+    "plank": 0,
+    "flour": 0
+   },
+   "stock": {
+    "water": 16,
+    "grain": 8,
+    "wood": 40,
+    "plank": 0,
+    "flour": 0,
+    "stone": 29
+   },
+   "promotion": {
+    "fee": 35,
+    "ready": false,
+    "req": [
+     "물 생산 0/12",
+     "밀 생산 0/12"
+    ]
+   },
+   "states": "warehouse:운반 중 | house:정상 운영",
+   "tutorialBody": "창고 주변에 우물을 지으세요.",
+   "ui": {
+    "tutorial": true,
+    "tutorialText": "물을 공급하세요",
+    "nextBuild": null,
+    "bottleneck": [],
+    "promotionReady": false,
+    "facility": false,
+    "dialog": false,
+    "weather": false,
+    "raid": false,
+    "objective": "농노\n1 / 33",
+    "operations": null
+   },
+   "fps": "60"
+  },
+  {
+   "s": 31,
+   "t": 42,
+   "rank": 0,
+   "money": 850,
+   "debt": 1000,
+   "contracts": 1,
+   "speed": 4,
+   "paused": false,
+   "buildings": 8,
+   "workers": 4,
+   "carts": 0,
+   "shipments": 0,
+   "types": "warehouse,house,well,field,lumber",
+   "produced": {
+    "water": 14,
+    "grain": 6,
+    "wood": 9,
+    "plank": 0,
+    "flour": 0
+   },
+   "stock": {
+    "water": 21,
+    "grain": 5,
+    "wood": 27,
+    "plank": 0,
+    "flour": 0,
+    "stone": 22
+   },
+   "promotion": {
+    "fee": 35,
+    "ready": false,
+    "req": [
+     "물 생산 14/12",
+     "밀 생산 6/12"
+    ]
+   },
+   "states": "warehouse:운반 중 | house:정상 운영 | well:생산 중 | field:생산 중 | lumber:생산 중 | house:정상 운영 | house:정상 운영 | house:정상 운영",
+   "tutorialBody": "밀 생산 12 달성 후 승급",
+   "ui": {
+    "tutorial": true,
+    "tutorialText": "첫 승급",
+    "nextBuild": null,
+    "bottleneck": [],
+    "promotionReady": false,
+    "facility": false,
+    "dialog": true,
+    "weather": false,
+    "raid": false,
+    "objective": "농노\n1 / 33",
+    "operations": null
+   },
+   "fps": "60"
+  },
+  {
+   "s": 62,
+   "t": 88,
+   "rank": 1,
+   "money": 631,
+   "debt": 1000,
+   "contracts": 1,
+   "speed": 4,
+   "paused": false,
+   "buildings": 9,
+   "workers": 4,
+   "carts": 0,
+   "shipments": 0,
+   "types": "warehouse,house,well,field,lumber,sawmill",
+   "produced": {
+    "water": 34,
+    "grain": 21,
+    "wood": 27,
+    "plank": 3,
+    "flour": 0
+   },
+   "stock": {
+    "water": 35,
+    "grain": 14,
+    "wood": 27,
+    "plank": 0,
+    "flour": 0,
+    "stone": 19
+   },
+   "promotion": {
+    "fee": 60,
+    "ready": false,
+    "req": [
+     "판재 생산 3/12",
+     "영주 납품 1/2"
+    ]
+   },
+   "states": "warehouse:운반 중 | house:정상 운영 | well:생산 중 | field:생산 중 | lumber:운반 대기 | house:정상 운영 | house:정상 운영 | house:정상 운영 | sawmill:생산 중",
+   "tutorialBody": null,
+   "ui": {
+    "tutorial": false,
+    "tutorialText": null,
+    "nextBuild": null,
+    "bottleneck": [
+     "벌목장 · 운반 대기 주민 주택을 더 짓거나 개선해 운반할 주민을 늘리고, 창고까지 흙길을 이으세요."
+    ],
+    "promotionReady": false,
+    "facility": false,
+    "dialog": false,
+    "weather": false,
+    "raid": false,
+    "objective": "등록 농노\n2 / 33",
+    "operations": "벌목장 · 운반 대기\n주민 주택을 더 짓거나 개선해 운반할 주민을 늘리고, 창고까지 흙길을 이으세요.\n목재 납품\n27 / 14 · 151G\n9초\n운송\n0/5대 운행\n개간 농노\n판재 생산 3/12"
+   },
+   "fps": "60"
+  },
+  {
+   "s": 92,
+   "t": 147,
+   "rank": 2,
+   "money": 372,
+   "debt": 1000,
+   "contracts": 2,
+   "speed": 4,
+   "paused": false,
+   "buildings": 10,
+   "workers": 4,
+   "carts": 0,
+   "shipments": 0,
+   "types": "warehouse,house,well,field,lumber,sawmill,mill",
+   "produced": {
+    "water": 52,
+    "grain": 36,
+    "wood": 39,
+    "plank": 18,
+    "flour": 3
+   },
+   "stock": {
+    "water": 42,
+    "grain": 23,
+    "wood": 4,
+    "plank": 6,
+    "flour": 0,
+    "stone": 15
+   },
+   "promotion": {
+    "fee": 100,
+    "ready": false,
+    "req": [
+     "밀가루 생산 3/12",
+     "개간지 확장 1/1"
+    ]
+   },
+   "states": "warehouse:운반 중 | house:정상 운영 | well:출입구 막힘 | field:생산 중 | lumber:생산 중 | house:정상 운영 | house:정상 운영 | house:정상 운영 | sawmill:생산 중 | mill:생산 중",
+   "tutorialBody": null,
+   "ui": {
+    "tutorial": false,
+    "tutorialText": null,
+    "nextBuild": "훈제장 짓기 생선·목재 → 훈제 생선",
+    "bottleneck": [
+     "우물 · 출입구 막힘 시설 옆 한 칸을 비우세요."
+    ],
+    "promotionReady": false,
+    "facility": false,
+    "dialog": false,
+    "weather": false,
+    "raid": false,
+    "objective": "개간 농노\n3 / 33",
+    "operations": "우물 · 출입구 막힘\n시설 옆 한 칸을 비우세요.\n훈제장 짓기\n생선·목재 → 훈제 생선\n밀 납품\n23 / 16 · 190G\n26초\n\n납품하면 승급 목표 밀가루의 재료 밀이 5개 모자랍니다\n\n운송\n0/5대 운행\n계약 농노\n밀가루 생산 0/12"
+   },
+   "fps": "60"
+  },
+  {
+   "s": 122,
+   "t": 207,
+   "rank": 2,
+   "money": 151,
+   "debt": 1000,
+   "contracts": 2,
+   "speed": 4,
+   "paused": false,
+   "buildings": 12,
+   "workers": 4,
+   "carts": 0,
+   "shipments": 0,
+   "types": "warehouse,house,well,field,lumber,sawmill,mill,smokehouse,saltfield",
+   "produced": {
+    "water": 52,
+    "grain": 39,
+    "wood": 54,
+    "plank": 33,
+    "flour": 15
+   },
+   "stock": {
+    "water": 40,
+    "grain": 11,
+    "wood": 1,
+    "plank": 21,
+    "flour": 6,
+    "stone": 10
+   },
+   "promotion": {
+    "fee": 100,
+    "ready": false,
+    "req": [
+     "밀가루 생산 15/12",
+     "개간지 확장 1/1"
+    ]
+   },
+   "states": "warehouse:운반 중 | house:정상 운영 | well:출입구 막힘 | field:출입구 막힘 | lumber:생산 중 | house:정상 운영 | house:정상 운영 | house:정상 운영 | sawmill:운반 대기 | mill:생산 중 | smokehouse:생선 대기 | saltfield:생산 중",
+   "tutorialBody": null,
+   "ui": {
+    "tutorial": false,
+    "tutorialText": null,
+    "nextBuild": null,
+    "bottleneck": [
+     "우물 · 출입구 막힘 시설 옆 한 칸을 비우세요."
+    ],
+    "promotionReady": false,
+    "facility": false,
+    "dialog": false,
+    "weather": true,
+    "raid": false,
+    "objective": "개간 농노\n3 / 33",
+    "operations": "우물 · 출입구 막힘\n시설 옆 한 칸을 비우세요.\n팔 수 있는 재고 707G어치\n자금이 줄고 있습니다 · 판재 21 · 밀가루 6 · 물 32\n소금 납품\n0 / 16 · 296G\n납품\n운송\n0/5대 운행\n계약 농노\n목재 12 · 물 8 비축 0/1"
+   },
+   "fps": "60"
+  }
+ ],
+ "home": {
+  "titleVisibleMs": 447,
+  "homeReadyMs": 4418,
+  "titleClicks": 3
+ },
+ "start": "estern-5",
+ "newGameMs": 293,
+ "warehouse": "warehouse@11,12",
+ "guidanceAtExpansion": {
+  "tutorial": false,
+  "tutorialText": null,
+  "nextBuild": "제분소 짓기 밀 → 밀가루",
+  "bottleneck": [
+   "벌목장 · 운반 대기 주민 주택을 더 짓거나 개선해 운반할 주민을 늘리고, 창고까지 흙길을 이으세요."
+  ],
+  "promotionReady": false,
+  "facility": false,
+  "dialog": false,
+  "weather": false,
+  "raid": false,
+  "objective": "개간 농노\n3 / 33",
+  "operations": "벌목장 · 운반 대기\n주민 주택을 더 짓거나 개선해 운반할 주민을 늘리고, 창고까지 흙길을 이으세요.\n제분소 짓기\n밀 → 밀가루\n밀 납품\n23 / 16 · 190G\n39초\n\n납품하면 승급 목표 밀가루의 재료 밀이 5개 모자랍니다\n\n운송\n1/5대 운행\n계약 농노\n밀가루 생산 0/12"
+ },
+ "end": {
+  "t": 240,
+  "rank": 3,
+  "money": 14,
+  "debt": 1000,
+  "contracts": 2,
+  "speed": 4,
+  "paused": false,
+  "buildings": 12,
+  "workers": 4,
+  "carts": 0,
+  "shipments": 0,
+  "types": "warehouse,house,well,field,lumber,sawmill,mill,smokehouse,saltfield",
+  "produced": {
+   "water": 52,
+   "grain": 39,
+   "wood": 66,
+   "plank": 39,
+   "flour": 24
+  },
+  "stock": {
+   "water": 36,
+   "grain": 8,
+   "wood": 15,
+   "plank": 27,
+   "flour": 12,
+   "stone": 10
+  },
+  "promotion": {
+   "fee": 160,
+   "ready": false,
+   "req": [
+    "빵 판매 0/10",
+    "몸값 채무 청산 0/1"
+   ]
+  },
+  "states": "warehouse:운반 중 | house:정상 운영 | well:출입구 막힘 | field:출입구 막힘 | lumber:생산 중 | house:정상 운영 | house:정상 운영 | house:정상 운영 | sawmill:운반 대기 | mill:운반 대기 | smokehouse:생선 대기 | saltfield:생산 중",
+  "tutorialBody": null
+ },
+ "realSeconds": 140,
+ "gameRate": 1.71,
+ "maxCarts": 0,
+ "R": {
+  "errors": [],
+  "consoleErrors": [
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/waiting-b",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/pixel-v2/home-back",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/evening-m",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/evening-m",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/evening-m",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/evening-m",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/evening-m",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/evening-m",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/evening-m",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/evening-m",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/evening-m",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/map-table",
+   "1366x768: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /assets/screens/daily-v3/village-a"
+  ],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

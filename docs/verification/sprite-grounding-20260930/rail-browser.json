@@ -1,0 +1,17 @@
+{
+  "results": [
+    {
+      "mode": "webgl",
+      "samples": 41,
+      "views": 4,
+      "disconnectedHidden": true
+    },
+    {
+      "mode": "canvas",
+      "samples": 41,
+      "views": 4,
+      "disconnectedHidden": true
+    }
+  ],
+  "errors": []
+}
