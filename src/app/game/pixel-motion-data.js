@@ -1,4 +1,4 @@
-import {NEW_VEHICLE_SIZES} from './vehicle-art.js';
+import {NEW_VEHICLE_SIZES,VEHICLE_ANCHORS} from './vehicle-art.js';
 export const MOTION_FRAMES=8;
 export const CRANE_RIGS={
  coastport:[[143,66,179,108,160,54,160,89],[28,64,63,107,45,49,45,87],[129,65,162,102,144,48,145,84],[13,65,48,108,29,55,30,88]],
@@ -6,7 +6,7 @@ export const CRANE_RIGS={
  polarport:[[154,78,179,106,167,64,167,94],[21,70,45,97,32,57,33,84],[141,72,158,90,146,59,148,80],[13,77,38,106,24,61,25,95]],
 };
 export const MOTION_ASSETS={
- ...Object.fromEntries(Object.entries(NEW_VEHICLE_SIZES).map(([id,size])=>[id+'Motion',{scenery:true,sheet:`/assets/pixel-environment/${id}Motion.png`,frames:MOTION_FRAMES,directions:4,anchor:[.5,181/192],size}])),
+ ...Object.fromEntries(Object.entries(NEW_VEHICLE_SIZES).map(([id,size])=>[id+'Motion',{scenery:true,sheet:`/assets/pixel-environment/${id}Motion.png`,frames:MOTION_FRAMES,directions:4,anchor:VEHICLE_ANCHORS[id]||[.5,181/192],size}])),
  ...Object.fromEntries(Object.keys(CRANE_RIGS).flatMap(id=>['Body','Hoist'].map(kind=>[id+kind,{cutout:true,structure:kind==='Body',sheet:`/assets/pixel-environment/${id+kind}.png`,frames:1,directions:4,anchor:[.5,.69],size:1.4}]))),
 };
 // Distance, not wall-clock time, advances legs and wheels. Camera changes and

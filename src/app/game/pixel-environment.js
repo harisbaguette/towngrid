@@ -9,6 +9,7 @@ import {attachBuildingCondition} from './pixel-building-condition.js';
 import {CRANE_RIGS,vehicleMotion} from './pixel-motion-data.js';
 import {logisticsVisualEvents} from './logistics-visual-events.js';
 import {attachFarmAnimals} from './pixel-farm-motion.js';
+import {groundSprite} from './sprite-grounding.js';
 
 const images = new Map(), pending = new Map(), alphaMasks = new Map(), baseTextures = new Map();
 export async function loadPixelEnvironment() {
@@ -70,11 +71,7 @@ function setFrame(object, frame, direction = 0) {
  u.texture.repeat.x = (u.flipX ? -1 : 1) / spec.frames;
  u.texture.offset.set((frame + (u.flipX ? 1 : 0)) / spec.frames, (rows - 1 - u.direction) / rows);
  if (spec.building || spec.structure) {
-  // Keep the drawn footprint centred on its tile while lifting the billboard
-  // out of the opaque ground. Moving along the view ray preserves its screen
-  // position; a vertical-only lift would make the building appear to float.
-  const lift = Math.max(0, (181 / 192 - spec.anchor[1]) * spec.size * Math.sin(QUARTER_POLAR)) + .01;
-  u.sprite.position.setFromSphericalCoords(lift / Math.cos(QUARTER_POLAR), QUARTER_POLAR, quarterAzimuth(u.direction));
+  groundSprite(u.sprite,{azimuth:quarterAzimuth(direction),scale:object.scale.x});
  }
 }
 
@@ -257,7 +254,10 @@ export function makePixelBuilding(type, race) {
 export function makePixelTree(kind = 0, scale = 1) {
  const group = createSprite('oak', scale);
  group.userData.phase = kind * .47;
- group.userData.animate = (time, tile, harvesting = false) => setFrame(group, oakFrame(tile, time, harvesting, group.userData.phase));
+ group.userData.animate = (time, tile, harvesting = false, view = 0) => {
+  setFrame(group, oakFrame(tile, time, harvesting, group.userData.phase));
+  groundSprite(group.userData.sprite,{azimuth:quarterAzimuth(view),scale:group.scale.x});
+ };
  return group;
 }
 
@@ -269,6 +269,7 @@ export function makePixelProp(id, scale = 1, variant = 0) {
   // Vehicles turn in world space, so select the corresponding authored face.
   const facing=u.vehicle||u.oriented?view-Math.round(group.rotation.y/(Math.PI/2)):view;
   setFrame(group,frame,facing);
+  groundSprite(u.sprite,{azimuth:quarterAzimuth(view),heading:group.rotation.y,scale:group.scale.x});
  };
  u.animate(0,null,false,0);return group;
 }
@@ -314,7 +315,7 @@ export function makePixelVehicle(mode='truck',item='steel') {
   const [x,y]=pads[id][u.direction],spec=ENVIRONMENT_ASSETS[id],angle=quarterAzimuth(view);
   normal.setFromSphericalCoords(1,QUARTER_POLAR,angle);right.set(Math.cos(angle),0,-Math.sin(angle));up.crossVectors(normal,right);
   cargo.position.copy(right).multiplyScalar((x/192-spec.anchor[0])*spec.size)
-   .addScaledVector(up,(spec.anchor[1]-y/192)*spec.size).addScaledVector(normal,.012).applyAxisAngle(axis,-group.rotation.y);
+   .addScaledVector(up,(spec.anchor[1]-y/192)*spec.size).addScaledVector(normal,.012).applyAxisAngle(axis,-group.rotation.y).add(u.sprite.position);
  };
  u.animate(0,null,false,0);return group;
 }
@@ -322,7 +323,9 @@ export function makePixelVehicle(mode='truck',item='steel') {
 export function makeNetworkCargo(item,kind){
  const group=createSprite('resourceGoods'),u=group.userData;
  u.sprite.scale.setScalar(kind==='pipe'?.12:.22);u.sprite.material.depthWrite=false;
- setFrame(group,RESOURCE_FRAMES[item]??0);u.networkCargo=true;u.item=item;return group;
+ setFrame(group,RESOURCE_FRAMES[item]??0);u.networkCargo=true;u.item=item;
+ u.animate=(_time,_tile,_working,view=0)=>groundSprite(u.sprite,{azimuth:quarterAzimuth(view)});
+ return group;
 }
 
 export function makePixelWater(count, width = 1.005, height = 1.005) {

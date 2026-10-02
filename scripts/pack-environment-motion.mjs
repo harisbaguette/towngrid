@@ -1,6 +1,7 @@
 // Bake articulated poses from the approved original pixels. No replacement bodies.
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createRequire} from 'node:module';
+import {VEHICLE_ANCHORS} from '../src/app/game/vehicle-art.js';
 const wrangler=createRequire(import.meta.resolve('wrangler'));
 const sharp=createRequire(wrangler.resolve('miniflare'))('sharp');
 const folder='art-source/pixel-environment/motion-v10',out='public/assets/pixel-environment';
@@ -34,7 +35,7 @@ const registered={};
 async function publish(id,raw,frames,base){
  const png=await sharp(raw,{raw:{width:N*frames,height:N*4,channels:4}}).png().toBuffer();
  await writeFile(folder+'/'+id+'.png',png);await writeFile(out+'/'+id+'.png',png);
- registered[id]={source:'motion-v10/'+id+'.png',prepacked:true,columns:frames,directions:['SE','NE','NW','SW'],anchor:base==='building'?[.5,.69]:[.5,181/192],revision:rig.revision};
+ registered[id]={source:'motion-v10/'+id+'.png',prepacked:true,columns:frames,directions:['SE','NE','NW','SW'],anchor:base==='building'?[.5,.69]:VEHICLE_ANCHORS[id.replace(/Motion$/,'')]||[.5,181/192],revision:rig.revision};
 }
 for(const [id,spec] of Object.entries(rig.vehicles)){
  const raw=await sharp(out+'/'+id+'.png').ensureAlpha().raw().toBuffer();

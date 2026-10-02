@@ -135,14 +135,14 @@ export class SoftwareRenderer {
   const u=root.userData,ctx=this.ctx,image=u.image;if(!image)return;
   const size=Math.max(1,Math.round(u.pixelHeight*this.pixelsPerWorldUnit));
   const cellWidth=image.width/u.atlas.columns,cellHeight=image.height/u.atlas.rows;
-  const lift=u.sprite.position.y*this.pixelsPerWorldUnit;
-  const x=Math.round(center.x-size*u.sprite.center.x),y=Math.round(center.y-size*(1-u.sprite.center.y)-lift);
+  const position=u.sprite.getWorldPosition(new THREE.Vector3()),anchor=this.project(position.x,position.y,position.z);
+  const x=Math.round(anchor.x-size*u.sprite.center.x),y=Math.round(anchor.y-size*(1-u.sprite.center.y));
   ctx.save();ctx.imageSmoothingEnabled=false;ctx.globalAlpha=u.sprite.material.opacity;
   ctx.fillStyle='#183d3d35';ctx.beginPath();ctx.ellipse(center.x,center.y+1,size*.18,size*.065,0,0,Math.PI*2);ctx.fill();
   if(u.sprite.material.rotation){
    // Authored defeat frames already contain the fallen body. Only rotate
    // legacy sprites, around the same anchor and with the WebGL rotation sign.
-   ctx.translate(center.x,center.y-lift);ctx.rotate(-u.sprite.material.rotation);
+   ctx.translate(anchor.x,anchor.y);ctx.rotate(-u.sprite.material.rotation);
    ctx.drawImage(image,u.frame*cellWidth,u.atlas.row*cellHeight,cellWidth,cellHeight,-size*u.sprite.center.x,-size*(1-u.sprite.center.y),size,size);
   }else ctx.drawImage(image,u.frame*cellWidth,u.atlas.row*cellHeight,cellWidth,cellHeight,x,y,size,size);
   ctx.restore();

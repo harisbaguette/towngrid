@@ -99,6 +99,12 @@ try{
  assert.ok(effects.length>=10,'facilities are audible: '+effects.length);assert.ok(perSecond<=WORLD_LIMITS.perSecond,'effect starts per second '+perSecond);
  assert.ok(maxGain<=WORLD_LIMITS.gain,'max gain '+maxGain);assert.ok(peakVoices<=WORLD_LIMITS.voices,'concurrent '+peakVoices);assert.ok(samples.size>=4,'varied samples '+samples.size);
  console.log(`PASS audio: ${Object.keys(BUILDINGS).length} facilities mapped; 24 working facilities -> ${effects.length} sounds in 10 s, max ${perSecond}/s, max gain ${maxGain.toFixed(3)}, ${peakVoices} concurrent, ${samples.size} samples`);
+ // Home scenes retain their ambience while simulation is paused; gameplay pause still silences it.
+ a.paused=true;a.setPresentation('forge');a.tick();await settle();a.tick();
+ assert.ok(a.status.ambience.includes('amb-hearth'),'home forge ambience while simulation paused');
+ a.setPresentation('room');a.tick();await settle();a.tick();advance(5,.5,()=>a.tick());
+ assert.ok(a.status.ambience.includes('amb-room'));assert.ok(!a.status.ambience.includes('amb-hearth')||a.beds['amb-hearth'].target<.3);
+ a.setPresentation(null);advance(5,.5,()=>a.tick());assert.equal(a.status.ambience.length,0,'game pause removes presentation ambience');
  a.dispose();assert.equal(activeConnections,0);assert.equal(a.voices.size,0);
  console.log('PASS audio fallback, volume sanitation, voice cap, background playlist/beds, pause/mute, reusable noise and full node cleanup');
 }finally{Object.assign(globalThis,original);}

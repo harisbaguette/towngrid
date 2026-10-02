@@ -1,6 +1,6 @@
 import {readFile,writeFile} from 'node:fs/promises';
 import {createRequire} from 'node:module';
-import {NEW_VEHICLE_SIZES} from '../src/app/game/vehicle-art.js';
+import {NEW_VEHICLE_SIZES,VEHICLE_ANCHORS} from '../src/app/game/vehicle-art.js';
 const wrangler=createRequire(import.meta.resolve('wrangler'));
 const sharp=createRequire(wrangler.resolve('miniflare'))('sharp');
 const path='art-source/pixel-environment/pack-manifest.json';
@@ -15,7 +15,7 @@ for(const [file,ids,rows] of sources){
  const source='completion-v8/'+file,{width}=await sharp('art-source/pixel-environment/'+source).metadata();
  for(const [column,id] of ids.entries()){
   const left=Math.floor(width*column/ids.length),right=Math.floor(width*(column+1)/ids.length);
-  manifest.assets[id]={source,rects:rows.slice(0,-1).map((top,row)=>[left,top,right-left,rows[row+1]-top]),columns:1,fit:[174,170],baseline:181,directions:['SE','NE','NW','SW'],anchor:[.5,181/192],size:NEW_VEHICLE_SIZES[id]};
+  manifest.assets[id]={source,rects:rows.slice(0,-1).map((top,row)=>[left,top,right-left,rows[row+1]-top]),columns:1,fit:[174,170],baseline:181,directions:['SE','NE','NW','SW'],anchor:VEHICLE_ANCHORS[id]||[.5,181/192],size:NEW_VEHICLE_SIZES[id]};
  }
 }
 const supportRows=[0,530,860,1254],rects=[];

@@ -19,6 +19,7 @@ import { configureQuarterControls, applyQuarterView, settleQuarterControls, QUAR
 import { facilityRoster } from './facility-staff.js';
 import { tradeProvince } from './trade-routes.js';
 import { edgePoint } from './world-grid.js';
+import { stationRailPath, railPathPose } from './freight-path.js';
 
 function release(root){if(!root)return;root.traverse(n=>{if(n.geometry&&!n.geometry.userData.shared)n.geometry.dispose();if(n.material&&(!n.geometry?.userData.shared||n.userData.ownedMaterial))for(const m of(Array.isArray(n.material)?n.material:[n.material]))if(m&&!m.userData.shared)m.dispose();if(n.userData.pixel||n.userData.pixelEnvironment||n.userData.pixelWater||n.userData.pixelSurface)n.userData.texture.dispose();if(n.isSkinnedMesh)n.skeleton.dispose();if(n.isInstancedMesh)n.dispose();if(n.userData.mixer){n.userData.mixer.stopAllAction();n.userData.mixer.uncacheRoot(n.userData.root);}});}
 // Trees and rocks outside the owned land cannot be harvested yet (J4): they are drawn washed out (half-way to a light
@@ -155,6 +156,7 @@ export class GameScene{
    if(water){const boat=makePixelProp(PORT_VEHICLES[b.type],.65);boat.userData.vehicle=true;boat.position.set(water.x,-.16,water.z);boat.rotation.y=Math.atan2(b.x-water.x,b.z-water.z);this.world.add(boat);moorings.add(water.x+','+water.z);this.dockBoats.push({boat,b,x:water.x,z:water.z});}
   }
   for(const w of sim.workers){const m=makeWorker(w.id,w.race||this.sim.race,w.appearance);this.workerModels.set(w.id,m);this.world.add(m);}
+  this.railPath=stationRailPath(sim);
   this.freight=[];for(const route of sim.campaign?.routes||[]){if(route.from!==sim.siteId&&route.to!==sim.siteId)continue;const m=makeFreightVehicle(route.mode,route.item);this.world.add(m);this.freight.push({m,route});}const gate=makeExportGate();gate.position.set(EXPORT_GATE.x,.01,EXPORT_GATE.z);this.world.add(gate);this.decorations.push(gate);this.exportCarts=new Map();this.drawExpansions();const tileSelection=this.tileSelection;this.select(this.selection);if(tileSelection&&!this.selection)this.selectTile(tileSelection.x,tileSelection.z);this.lastRevision=sim.revision;
  }
  loop(now){
@@ -174,7 +176,7 @@ export class GameScene{
   for(const n of this.nature){if(n.userData.stumpUntil)n.visible=this.sim.time<n.userData.stumpUntil;else n.userData.animate?.(this.sim.time,n.userData.tile,harvesting.has(n.userData.tile),this.viewIndex);}
   this.terrain?.userData.animate(this.sim.time);
   const transfers=logisticsVisualEvents(this.sim).filter(e=>e.path),visibleTransfers=new Set(transfers.map(e=>e.id));
-  for(const event of transfers){let m=this.networkCargo.get(event.id);if(!m){m=makeNetworkCargo(event.item,event.kind);this.networkCargo.set(event.id,m);this.world.add(m);}const pose=transferPose(event,this.sim.time);m.position.set(pose.x,event.kind==='pipe'?.09:.15,pose.z);}
+  for(const event of transfers){let m=this.networkCargo.get(event.id);if(!m){m=makeNetworkCargo(event.item,event.kind);this.networkCargo.set(event.id,m);this.world.add(m);}const pose=transferPose(event,this.sim.time);m.position.set(pose.x,event.kind==='pipe'?.09:.15,pose.z);m.userData.animate(this.sim.time,null,false,this.viewIndex);}
   for(const [id,m]of this.networkCargo)if(!visibleTransfers.has(id)){this.world.remove(m);release(m);this.networkCargo.delete(id);}
   for(const enemy of [...(this.sim.attackers||[]),...(this.sim.guards||[])]){let m=this.enemyModels.get(enemy.id);if(!m){m=makeWorker(Number(enemy.id)||0,enemy.race,enemy.appearance);const bar=new THREE.Group();const bg=new THREE.Mesh(new THREE.PlaneGeometry(.5,.065),new THREE.MeshBasicMaterial({color:'#382f35',side:THREE.DoubleSide}));const hp=new THREE.Mesh(new THREE.PlaneGeometry(.46,.035),new THREE.MeshBasicMaterial({color:enemy.guard?'#59baa3':'#eb826c',side:THREE.DoubleSide}));bar.add(bg,hp);bar.position.y=1.45;hp.position.z=.002;bar.userData.fill=hp;m.add(bar);m.userData.hpBar=bar;m.userData.worker=true;this.enemyModels.set(enemy.id,m);this.world.add(m);}animateWorker(m,enemy,this.sim.time,this.camera);if(m.userData.hpBar){m.userData.hpBar.visible=enemy.hp>0;m.userData.hpBar.quaternion.copy(m.quaternion).invert().multiply(this.camera.quaternion);m.userData.hpBar.userData.fill.scale.x=Math.max(.01,(enemy.hp??1)/(enemy.maxHp??1));}}for(const[id,m]of this.enemyModels){if(![...this.sim.attackers,...(this.sim.guards||[])].some(e=>e.id===id)){this.world.remove(m);release(m);this.enemyModels.delete(id);}}
   this.uiAccum+=dt;this.frameSamples=(this.frameSamples||0)+1;this.frameElapsed=(this.frameElapsed||0)+dt;if(this.uiAccum>.4){this.uiAccum=0;this.renderer.domElement.dataset.fps=String(Math.round(this.frameSamples/this.frameElapsed));this.renderer.domElement.dataset.renderer=this.renderer.isSoftware?'canvas':'webgl';this.renderer.domElement.dataset.geometries=String(this.renderer.info?.memory.geometries||(this.renderer.cache?.size||0)+(this.renderer.poseCache?.size||0));this.renderer.domElement.dataset.textures=String(this.renderer.info?.memory.textures||0);this.renderer.domElement.dataset.models=String(this.models.size+this.workerModels.size+this.enemyModels.size);this.renderer.domElement.dataset.gameTime=String(Math.round(this.sim.time*10)/10);this.renderer.domElement.dataset.characterStyle='pixel';this.renderer.domElement.dataset.characterFrames=[...this.workerModels.values()].map(m=>m.userData.direction+':'+m.userData.frame).join(',');this.frameSamples=0;this.frameElapsed=0;this.callbacks.onUpdate?.(this.sim);const w=this.container.clientWidth,h=this.container.clientHeight;this.callbacks.onMarkers?.(this.sim.buildings.filter(b=>!this.mode).map(b=>{const p=this.markerPoint(b,w,h);return {id:b.id,type:b.type,status:b.status,working:b.working,x:p.x,y:p.y};}).filter(m=>m.x>-200&&m.x<w+200&&m.y>-200&&m.y<h+200));}
@@ -187,7 +189,14 @@ export class GameScene{
    m.position.set(p.x,kind==='raft'||kind==='steamer'?-.16:.08,p.z);m.rotation.y=Math.atan2(p.dx,p.dz);m.userData.animate?.(this.sim.time,null,false,this.viewIndex);
   }
   for(const[id,m]of this.exportCarts||[])if(!this.sim.shipments?.some(sh=>sh.id===id)){this.world.remove(m);release(m);this.exportCarts.delete(id);}
-  for(const {m,route} of this.freight||[]){const station=this.sim.buildings.find(b=>b.type==='station')||this.sim.warehouse;m.visible=!!route.cargo&&!!station;if(station){const p=1-route.remaining/route.duration;m.position.set(station.x-2+p*5,.08,station.z+1);m.rotation.y=Math.PI/2;m.userData.animate?.(this.sim.time,null,false,this.viewIndex);}}const paintKey=this.sim.time+':'+this.sim.revision+':'+this.camera.matrixWorld.elements.join(',')+':'+this.camera.zoom+':'+this.mode+':'+this.selection+':'+this.hover?.x+','+this.hover?.z+':'+this.container.clientWidth+':'+this.container.clientHeight;if(!this.sim.paused||paintKey!==this.lastPaint){this.renderer.render(this.scene,this.camera);this.lastPaint=paintKey;}this.frame=requestAnimationFrame(this.loop);
+  for(const {m,route} of this.freight||[]){
+   const p=1-route.remaining/route.duration;
+   const station=this.sim.buildings.find(b=>b.type==='station')||this.sim.warehouse;
+   const pose=route.mode==='rail'?railPathPose(this.railPath,p,route.to===this.sim.siteId):station?{x:station.x-2+p*5,z:station.z+1,dir:Math.PI/2}:null;
+   m.visible=!!route.cargo&&!!pose;
+   if(m.visible){m.position.set(pose.x,route.mode==='rail'?.04:.08,pose.z);m.rotation.y=pose.dir;m.userData.animate?.(this.sim.time,null,false,this.viewIndex);}
+  }
+  const paintKey=this.sim.time+':'+this.sim.revision+':'+this.camera.matrixWorld.elements.join(',')+':'+this.camera.zoom+':'+this.mode+':'+this.selection+':'+this.hover?.x+','+this.hover?.z+':'+this.container.clientWidth+':'+this.container.clientHeight;if(!this.sim.paused||paintKey!==this.lastPaint){this.renderer.render(this.scene,this.camera);this.lastPaint=paintKey;}this.frame=requestAnimationFrame(this.loop);
  }
  // Building art does not depend on the race (only resident portraits do), so each building icon is drawn once per
  // scene and shared by every race's icon object. Icons are drawn a few per idle period (placed types first) and

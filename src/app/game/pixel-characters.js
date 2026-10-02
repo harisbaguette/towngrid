@@ -3,6 +3,7 @@ import { pixelIdentity, pixelRoster, pixelClip, pixelAtlasFrame, PIXEL_HEIGHT, P
 import { pixelMetadata } from './pixel-character-meta.js';
 import { characterDistance } from './character-movement.js';
 import { characterPose } from './character-motion-state.js';
+import { groundSprite } from './sprite-grounding.js';
 
 const images = new Map(), loading = new Map(), textures = new Map();
 export async function loadPixelCharacters(race) {
@@ -37,7 +38,7 @@ export function createPixelCharacter(index, race, appearance) {
  texture.repeat.set(1 / initial.columns, 1 / initial.rows);
  texture.offset.set(0, (initial.rows - 1 - initial.row) / initial.rows);
  texture.needsUpdate = !!image;
- const material = new THREE.SpriteMaterial({ map: texture, transparent: true, alphaTest: .08, depthWrite: false, toneMapped: false });
+ const material = new THREE.SpriteMaterial({ map: texture, transparent: true, alphaTest: .08, depthWrite: true, toneMapped: false });
  const sprite = new THREE.Sprite(material);
  sprite.geometry.userData.shared = true;
  sprite.userData.ownedMaterial = true;
@@ -82,8 +83,10 @@ export function animatePixelCharacter(group, worker, time, camera) {
  const deathClip=pixelClip('defeat',metadata),deathDuration=metadata?.authoredDefeat?deathClip.frames.length/deathClip.fps:0;
  u.sprite.material.rotation = defeated&&!metadata?.authoredDefeat ? -Math.PI / 2 : 0;
  u.sprite.material.opacity = defeated ? Math.max(0,Math.min(1,1-(elapsed-deathDuration)/Math.max(.1,2-deathDuration))) : 1;
+ u.sprite.material.depthWrite = u.sprite.material.opacity === 1;
  u.shadow.material.opacity = .16 * u.sprite.material.opacity;
  if(defeated)u.sprite.position.y=metadata?.authoredDefeat ? .035 : .08;
+ groundSprite(u.sprite, { azimuth: cameraAzimuth, height: u.sprite.position.y });
  u.lastTime = time;
  return true;
 }

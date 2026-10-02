@@ -6,8 +6,10 @@ Object.assign(FILES,{cottonfield:'clothBelt',herbgarden:'clothBelt',kiln:'metalP
 Object.assign(FILES,{reservoir:'metalPot2',depot:'doorOpen_1',windturbine:'creak1',hover:'cloth1',tab:'bookOpen',open:'bookOpen',close:'bookClose',pause:'cloth1',resume:'bookPlace1',rotate:'clothBelt',zoom:'cloth3',select:'bookPlace1',save:'bookClose',load:'bookOpen',nation:'bookOpen',contract:'handleCoins',promotion:'handleCoins',storm:'doorClose_1',illness:'bookClose'});
 // Trade terminals, networks and the substation (infrastructure.js) reuse the existing samples too.
 Object.assign(FILES,{roadhub:'doorOpen_1',pavedroad:'footstep04',pavedhub:'doorOpen_1',snowmobile:'creak2',ferrydock:'cloth3',canaldock:'cloth3',streamdock:'cloth3',riverport:'beltHandle1',lakeport:'beltHandle1',coastport:'beltHandle1',polarferry:'cloth3',polarport:'beltHandle1',railterminal:'beltHandle1',airport:'metalLatch',airterminal:'beltHandle1',pipe:'metalPot2',substation:'metalClick',conveyor:'beltHandle1'});
+// Original sound designs are reproducible with scripts/build-presentation-audio.py.
+Object.assign(FILES,{hover:'ui-hover',tab:'ui-tab',open:'ui-open',close:'ui-close',select:'ui-select',pause:'ui-pause',resume:'ui-resume',rotate:'ui-rotate',zoom:'ui-zoom',save:'ui-save',load:'ui-load',nation:'ui-tab',notify:'ui-notice',contract:'contract-complete',dispatch:'transport-depart',delivery:'transport-arrive'});
 // Building sounds are chosen by what the facility does, so facilities added later get a fitting sound without a FILES entry.
-// Every sample below is a CC0 recording listed in public/assets/audio/music-sources.json.
+// Recordings are listed in music-sources.json; original animal calls in presentation-sounds.json.
 export const SOUND_PROFILES={
  wood:{files:['chop','impactWood_medium_001'],gain:.9,cadence:1.7},
  saw:{files:['saw-stroke','knifeSlice'],gain:.75,cadence:1.8},
@@ -20,6 +22,11 @@ export const SOUND_PROFILES={
  mill:{files:['creak1','creak3'],gain:.6,cadence:2.6},
  farm:{files:['footstep_grass_002','clothBelt','impactSoft_medium_002'],gain:.75,cadence:2.8},
  animal:{files:['footstep_wood_001','creak2','impactSoft_medium_002'],gain:.7,cadence:3},
+ sheep:{files:['sheep-bleat'],gain:.5,cadence:7},
+ cow:{files:['cow-low'],gain:.5,cadence:8},
+ duck:{files:['duck-quack'],gain:.55,cadence:6},
+ hen:{files:['hen-cluck'],gain:.5,cadence:6},
+ bee:{files:['bee-buzz'],gain:.4,cadence:5},
  kitchen:{files:['metalPot2','impactTin_medium_000','boil-bubble'],gain:.6,cadence:2.5},
  cloth:{files:['cloth3','cloth2','impactWood_medium_001'],gain:.7,cadence:1.9},
  glass:{files:['impactGlass_light_001','boil-bubble'],gain:.5,cadence:2.4},
@@ -36,9 +43,9 @@ export const SOUND_PROFILES={
 };
 // Only facilities whose output/group would pick the wrong family are listed here.
 const BUILDING_SOUNDS={road:'road',pavedroad:'road',logistics:'cargo',conveyor:'cargo',clinic:'civic',generator:'machine',windturbine:'mill',watermill:'mill',arcanepower:'magic',leyrelay:'magic',chemical:'chemistry',laboratory:'chemistry',refinery:'chemistry',pipe:'water',bank:'coins',marketplace:'coins',exchange:'coins',barracks:'guard',fortress:'guard',mithrilforge:'metal',ferrydock:'dock',canaldock:'dock',streamdock:'dock',polarferry:'dock',pond:'water',windpump:'mill'};
-const OUTPUT_SOUNDS={wood:'wood',plank:'saw',stone:'stone',iron:'stone',coal:'stone',copper:'stone',water:'water',irrigation:'water',grain:'farm',cotton:'farm',herb:'farm',horse:'animal',egg:'animal',fish:'dock',flour:'mill',bread:'kitchen',cake:'kitchen',smokedfish:'kitchen',canned:'machine',cloth:'cloth',workwear:'cloth',glass:'glass',lamp:'glass',brick:'furnace',steel:'furnace',concrete:'machine',gear:'metal',wire:'machine',engine:'machine',car:'machine',airship:'machine',circuit:'electric',power:'electric',oil:'machine',fuel:'chemistry',polymer:'chemistry',medicine:'chemistry',health:'civic',mana:'magic',ward:'magic',mithril:'magic',transit:'cargo',
+const OUTPUT_SOUNDS={wood:'wood',plank:'saw',stone:'stone',iron:'stone',coal:'stone',copper:'stone',water:'water',irrigation:'water',grain:'farm',cotton:'farm',herb:'farm',horse:'animal',egg:'hen',fish:'dock',flour:'mill',bread:'kitchen',cake:'kitchen',smokedfish:'kitchen',canned:'machine',cloth:'cloth',workwear:'cloth',glass:'glass',lamp:'glass',brick:'furnace',steel:'furnace',concrete:'machine',gear:'metal',wire:'machine',engine:'machine',car:'machine',airship:'machine',circuit:'electric',power:'electric',oil:'machine',fuel:'chemistry',polymer:'chemistry',medicine:'chemistry',health:'civic',mana:'magic',ward:'magic',mithril:'magic',transit:'cargo',
  sugarcane:'farm',salt:'water',grapered:'farm',grapewhite:'farm',cocoa:'farm',strawberry:'farm',mint:'farm',pumpkin:'farm',oakwood:'wood',sugar:'mill',winered:'kitchen',winewhite:'kitchen',barrel:'saw',chocolate:'kitchen',jam:'kitchen',candy:'kitchen',pie:'kitchen',lantern:'glass',
- wool:'animal',yarn:'cloth',milk:'animal',butter:'kitchen',honey:'animal',wax:'animal',feed:'mill',duckegg:'animal',clay:'stone',sand:'stone',limestone:'stone',chromium:'stone',bluesteel:'furnace',woodbox:'saw',clothbox:'cloth',foodparcel:'cargo',giftparcel:'cargo'};
+ wool:'sheep',yarn:'cloth',milk:'cow',butter:'kitchen',honey:'bee',wax:'bee',feed:'mill',duckegg:'duck',clay:'stone',sand:'stone',limestone:'stone',chromium:'stone',bluesteel:'furnace',woodbox:'saw',clothbox:'cloth',foodparcel:'cargo',giftparcel:'cargo'};
 const GROUP_SOUNDS={base:'store',farm:'farm',home:'home',craft:'metal',industry:'machine',advanced:'machine',energy:'electric',transport:'cargo',civic:'civic'};
 export function soundProfileOf(type){
  if(BUILDING_SOUNDS[type])return BUILDING_SOUNDS[type];
@@ -53,6 +60,12 @@ const DEFAULT_VOLUMES={master:.82,music:.48,effects:.85,ambience:.45};
 export const MUSIC=['calm-theme','music-town','music-harp'];
 export const AMBIENCE={river:'amb-river',coast:'amb-coast',highland:'amb-wind'};
 export const LAYERS={day:'forest-ambience',evening:'amb-crickets'};
+export const FRONT_AMBIENCE={
+ river:{'amb-river':.7,'forest-ambience':.45},coast:{'amb-coast':.65,'amb-wind':.15},
+ evening:{'amb-river':.45,'amb-crickets':.5},garden:{'forest-ambience':.7,'amb-wind':.2},
+ winter:{'amb-wind':.65},wind:{'amb-wind':.6},workshop:{'amb-workshop':.8,'forest-ambience':.15},
+ forge:{'amb-hearth':.9,'amb-workshop':.3},magic:{'amb-arcane':.8,'amb-room':.3},room:{'amb-room':.8,'amb-hearth':.25},
+};
 // Source loudness trims in dB (ffmpeg volumedetect mean). Built files are levelled already (music -20 dB, beds -24 dB RMS);
 // the two original downloads are far quieter: calm-theme -26.7 dB, forest-ambience -51 dB.
 const TRIM={'calm-theme':6.7,'forest-ambience':25};
@@ -60,7 +73,7 @@ const MUSIC_FADE=4;
 // Building/footstep sounds share one budget so dozens of working facilities never pile up.
 export const WORLD_LIMITS={perSecond:4,voices:5,gain:.16,radius:13,gap:.6,nearby:3};
 export const SAMPLE_FILES=[...new Set([...Object.values(FILES),...Object.values(SOUND_PROFILES).flatMap(p=>p.files)])];
-export const BACKGROUND_FILES=[...MUSIC,...Object.values(AMBIENCE),...Object.values(LAYERS)];
+export const BACKGROUND_FILES=[...new Set([...MUSIC,...Object.values(AMBIENCE),...Object.values(LAYERS),...Object.values(FRONT_AMBIENCE).flatMap(Object.keys)])];
 const WIND_ECOLOGY=['snow','desert','basin','volcanic'];
 const db=v=>Math.pow(10,v/20);
 export class GameAudio{
@@ -71,8 +84,9 @@ export class GameAudio{
  get paused(){return this._paused;}
  // Game pause silences the world (effects, ambience); the music keeps playing so dialogs never restart it.
  set paused(value){const next=!!value,changed=next!==this._paused;this._paused=next;if(next&&changed)this.stopVoices(['effects']);if(changed)this.ambience();}
+ setPresentation(preset){const next=FRONT_AMBIENCE[preset]?preset:null;if(this.presentation===next)return;this.presentation=next;this.ambience();}
  start(){
-  if(this.disposed||typeof window==='undefined'||!(window.AudioContext||window.webkitAudioContext))return;
+  if(this.disposed||typeof window==='undefined'||(typeof document!=='undefined'&&document.hidden)||!(window.AudioContext||window.webkitAudioContext))return;
   if(!this.context){
    const c=this.context=new(window.AudioContext||window.webkitAudioContext)();
    this.gain=c.createGain();this.compressor=c.createDynamicsCompressor();this.compressor.threshold.value=-12;this.compressor.knee.value=18;this.compressor.ratio.value=4;this.gain.connect(this.compressor);if(c.createAnalyser){this.analyser=c.createAnalyser();this.analyser.fftSize=512;this.waveform=new Float32Array(512);this.compressor.connect(this.analyser);this.analyser.connect(c.destination);}else this.compressor.connect(c.destination);
@@ -152,13 +166,14 @@ export class GameAudio{
  }
  // Region bed + birds by day / crickets towards evening. One ambience cycle = 6 in-game days.
  ambienceMix(){
+  if(this.presentation)return FRONT_AMBIENCE[this.presentation];
   const bed=this.region==='coast'?AMBIENCE.coast:this.region==='highland'||WIND_ECOLOGY.includes(this.ecology)?AMBIENCE.highland:AMBIENCE.river;
   const evening=.5-.5*Math.cos(2*Math.PI*((this.clock/480)%1)),open=bed===AMBIENCE.river?.8:.55;
   return {[bed]:1,[LAYERS.day]:open*(1-evening*.85),[LAYERS.evening]:.75*evening};
  }
  ambience(){
   if(this.muted||this.disposed||this.context?.state!=='running')return;
-  const c=this.context,now=c.currentTime,mix=this.paused?{}:this.ambienceMix();
+  const c=this.context,now=c.currentTime,mix=this.paused&&!this.presentation?{}:this.ambienceMix();
   for(const name of new Set([...Object.keys(this.beds),...Object.keys(mix)])){
    const target=(mix[name]||0)*db(TRIM[name]||0);let voice=this.voices.has(this.beds[name])?this.beds[name]:null;
    if(!voice&&target>0){const buffer=this.buffers[name];if(!buffer){if(!this.failed.includes(name))this.fetchBuffer(name);else if(name.startsWith('amb-')&&now-(this.last.bedNoise??-10)>4){this.last.bedNoise=now;this.noise(4.5,this.region==='coast'?.17:.05,this.region==='highland'?320:1100,'ambience');}continue;}
@@ -169,6 +184,9 @@ export class GameAudio{
    if(Math.abs(voice.target-target)>.001){voice.g.gain.setTargetAtTime(target,now,target>voice.target?1.2:.5);voice.target=target;voice.idleSince=target>0?null:now;}
    if(target===0&&now-(voice.idleSince??now)>4){voice.stop();delete this.beds[name];}
   }
+  // Browsing all scenes must not retain every decoded ambience track in memory.
+  const retained=this.ambienceMix();
+  for(const name of BACKGROUND_FILES)if(!MUSIC.includes(name)&&!retained[name]&&!this.voices.has(this.beds[name]))delete this.buffers[name];
  }
  play(type,{pan=0,volume=.35,world=false}={}){
   if(this.context?.state!=='running'||this.muted||this.disposed)return false;const now=this.context.currentTime;
@@ -179,7 +197,7 @@ export class GameAudio{
    this.worldStarts=this.worldStarts.filter(t=>now-t<1.1);if(this.worldStarts.length>=WORLD_LIMITS.perSecond)return false;
    if([...this.voices].filter(v=>v.world).length>=WORLD_LIMITS.voices)return false;
    volume=Math.min(volume,WORLD_LIMITS.gain);this.worldStarts.push(now);
-  }else if(now-(this.last[key]??-10)<.13)return false;
+  }else if(now-(this.last[key]??-10)<(type==='notify'?4:.13))return false;
   this.last[key]=now;
   // A promotion has its own fanfare (B5); it no longer shares the coin sample of a sale.
   if(type==='promotion'){this.fanfare();return true;}
@@ -188,7 +206,7 @@ export class GameAudio{
   if(buffer){const src=this.context.createBufferSource(),g=this.context.createGain(),p=this.context.createStereoPanner(),[lo,hi]=profile?.rate||[.94,1.06];src.buffer=buffer;src.playbackRate.value=lo+Math.random()*(hi-lo);g.gain.value=Math.min(world?WORLD_LIMITS.gain:1,volume*(profile?.gain??1));p.pan.value=Math.max(-1,Math.min(1,pan));src.connect(g);g.connect(p);p.connect(this.effectsGain);if(!this.track(src,[g,p],'effects',{world})){p.disconnect();return false;}src.start();}
   else if(!world)this.tone(type==='invalid'?110:520,.09,'triangle',.08);
   if(world)return true;
-  if(type==='storm'){this.noise(2,.45,280);this.tone(48,1.8,'sine',.2);}if(type==='illness')this.tone(196,.5,'sine',.16);if(type==='dispatch')this.tone(95,.55,'sawtooth',.04);if(type==='delivery')this.tone(660,.15,'sine',.07);if(type==='manaStorm'){this.noise(1.4,.2,1500);this.tone(82,.8,'sine',.08);}if(type==='victory')this.success();if(type==='defend')this.tone(220,.4,'triangle',.09);if(type==='impact')this.noise(.25,.08,400);
+  if(type==='storm'){this.noise(2,.45,280);this.tone(48,1.8,'sine',.2);}if(type==='illness')this.tone(196,.5,'sine',.16);if(type==='manaStorm'){this.noise(1.4,.2,1500);this.tone(82,.8,'sine',.08);}if(type==='victory')this.success();if(type==='defend')this.tone(220,.4,'triangle',.09);if(type==='impact')this.noise(.25,.08,400);
   return true;
  }
  interact(type='click'){const ready=this.start();if(this.context?.state==='running')this.play(type,{volume:type==='hover'?.10:.48});else ready?.then(ok=>{if(ok)this.play(type,{volume:.48});});}
@@ -199,7 +217,7 @@ export class GameAudio{
  }
  test(channel){this.start();this.context?.resume().then(()=>{if(channel==='effects')this.play('build');if(channel==='music'){if(this.voices.has(this.musicVoice))return;this.music();if(!this.voices.has(this.musicVoice))for(const[i,f]of [293.66,369.99,440].entries())this.tone(f,.65,'triangle',.12,i*.25,'music');}if(channel==='ambience')this.preview(Object.keys(this.ambienceMix())[0]);}).catch(()=>{});}
  update(sim,camera){
-  this.paused=sim.paused;this.region=sim.region;this.ecology=sim.layout?.ecology||null;this.clock=sim.time||0;const events=sim.soundEvents.splice(0);
+  this.presentation=null;this.paused=sim.paused;this.region=sim.region;this.ecology=sim.layout?.ecology||null;this.clock=sim.time||0;const events=sim.soundEvents.splice(0);
   const cx=camera?.x??12,cz=camera?.z??12,fall=(x,z,r=WORLD_LIMITS.radius)=>Math.max(0,1-Math.hypot(x-cx,z-cz)/r)**2,pan=x=>Math.max(-.35,Math.min(.35,(x-cx)/12));
   for(const e of events){
    if(e.type==='footstep'){const f=fall(e.x,e.z,8);if(f>.05)this.play('footstep',{pan:pan(e.x),volume:.06*f});continue;}

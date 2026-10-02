@@ -77,7 +77,7 @@ for (let view = 0; view < 4; view++) {
   assert.deepEqual(u.texture.repeat.toArray(), [1/64, 1/4]);
   assert.deepEqual(u.texture.offset.toArray(), [u.frame/64, (3-u.direction)/4]);
   assert.equal(u.sprite.center.x, pixelMetadata.get('mira').anchors[u.direction][u.frame][0]);
-  SoftwareRenderer.prototype.drawPixelCharacter.call({ctx,pixelsPerWorldUnit:100},group,{x:100,y:200});
+  SoftwareRenderer.prototype.drawPixelCharacter.call({ctx,pixelsPerWorldUnit:100,project:()=>({x:100,y:200})},group,{x:100,y:200});
   assert.deepEqual(crop,[u.frame*128,u.direction*128,128,128]);
  }
 }

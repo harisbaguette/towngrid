@@ -1,5 +1,7 @@
 # Asset credits
 
+The 24 UI, transport, animal and ambience sounds listed in `audio/presentation-sounds.json` are original procedural synthesis. Rebuild the OGG/MP3 pairs with `scripts/build-presentation-audio.py`; they contain no third-party recordings.
+
 `pixel-environment/solarpanel`, `chocolatier`, `packshop`, `sheeppen`, `milkbarn`, `duckhouse`, `farmSheep`, `farmCow`, `farmDuck`, `farmBee`, and the wool/wax resource cutouts use OpenAI image generation with this project's pixel artwork as references. Sources and packing instructions are in `art-source/pixel-environment/farm-v11/`. Animal poses are generated sprite frames; travel paths and animation playback are code-driven.
 
 All third-party assets included here are CC0 (public domain dedication).

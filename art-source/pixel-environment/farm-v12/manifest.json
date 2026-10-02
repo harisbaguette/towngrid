@@ -12,6 +12,9 @@
     {"file": "terrain-generated.png", "ids": ["clayfield", "pond", "pasture", "clover"]},
     {"file": "support-generated.png", "ids": ["shallowmine", "windpump"]}
   ],
+  "goodsOverrides": [
+    {"file": "goods-pumpkin-generated.png", "columns": 2, "rows": 1, "ids": ["pie", "lantern"]}
+  ],
   "goods": [
     {"file": "goods-a-generated.png", "columns": 4, "rows": 3, "ids": ["sugarcane", "salt", "grapered", "grapewhite", "cocoa", "strawberry", "mint", "pumpkin", "oakwood", "sugar", "winered", "winewhite"]},
     {"file": "goods-b-generated.png", "columns": 4, "rows": 3, "ids": ["barrel", "chocolate", "jam", "candy", "pie", "lantern", "yarn", "milk", "butter", "honey", "feed", "duckegg"]},

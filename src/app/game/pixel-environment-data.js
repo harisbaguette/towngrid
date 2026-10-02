@@ -4,7 +4,7 @@ import { INDUSTRY_BUILDINGS } from './pixel-industry-data.js';
 import { EXPANSION_BUILDINGS } from './pixel-expansion-data.js';
 import { FARM_BUILDINGS } from './pixel-farm-data.js';
 import { FARM_CROP_ATLASES, FARM_GOODS_ORDER, FARM_GOODS2_ORDER, FARM_PART_FRAMES } from './pixel-farm-sockets.js';
-import { NEW_VEHICLE_SIZES } from './vehicle-art.js';
+import { NEW_VEHICLE_SIZES, VEHICLE_ANCHORS } from './vehicle-art.js';
 import { RESOURCE_FRAMES } from './resource-art.js';
 import {MOTION_ASSETS} from './pixel-motion-data.js';
 import {FARM_MOTION_ASSETS} from './pixel-farm-motion.js';
@@ -12,7 +12,7 @@ export const ENVIRONMENT_CELL = 192;
 export const ENVIRONMENT_ASSETS = {
  ...MOTION_ASSETS,
  ...FARM_MOTION_ASSETS,
- ...Object.fromEntries(Object.entries(NEW_VEHICLE_SIZES).map(([id,size])=>[id,{scenery:true,sheet:`/assets/pixel-environment/${id}.png`,frames:1,directions:4,anchor:[.5,181/192],size}])),
+ ...Object.fromEntries(Object.entries(NEW_VEHICLE_SIZES).map(([id,size])=>[id,{scenery:true,sheet:`/assets/pixel-environment/${id}.png`,frames:1,directions:4,anchor:VEHICLE_ANCHORS[id]||[.5,181/192],size}])),
  resourceGoods:{cutout:true,sheet:'/assets/pixel-environment/resourceGoods.png',frames:Object.keys(RESOURCE_FRAMES).length,anchor:[.5,.5],size:.4},
  supportArt:{cutout:true,sheet:'/assets/pixel-environment/supportArt.png',frames:12,anchor:[.5,.5],size:.4},
  biomeGround:{sheet:'/assets/pixel-environment/biomeGround.png',frames:8},

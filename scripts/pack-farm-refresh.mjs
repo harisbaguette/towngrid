@@ -133,7 +133,17 @@ for(const sheet of layout.goods){
  }
 }
 if(goodsCells.filter(Boolean).length!==35)throw new Error('Incomplete resource artwork');
-await saveAtlas('farmGoods',goodsCells,35,{anchor:[.5,.5],order,original:['../farm-v11/icons-generated.png',...layout.goods.map(s=>s.file)]},refreshed);
+const revised=new Set();
+for(const sheet of layout.goodsOverrides||[]){
+ const cells=await cut(sheet.file,sheet.columns,sheet.rows,refreshed);
+ if(cells.length!==sheet.ids.length)throw new Error('Resource correction cell count: '+sheet.file);
+ for(const [i,id] of sheet.ids.entries()){
+  const slot=order.indexOf(id);
+  if(slot<0||!goodsCells[slot]||revised.has(id))throw new Error('Unknown or duplicate resource correction: '+id);
+  goodsCells[slot]=await fitIcon(cells[i]);revised.add(id);
+ }
+}
+await saveAtlas('farmGoods',goodsCells,35,{anchor:[.5,.5],order,original:['../farm-v11/icons-generated.png',...layout.goods.map(s=>s.file),...(layout.goodsOverrides||[]).map(s=>s.file)]},refreshed);
 
 const supplement=layout.goods2;
 const extraCells=await cut(supplement.file,supplement.columns,supplement.rows,refreshed);

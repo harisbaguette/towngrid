@@ -1,0 +1,175 @@
+{
+  "origin": "Original deterministic synthesis; no external recordings.",
+  "generator": "scripts/build-presentation-audio.py",
+  "sampleRate": 44100,
+  "files": [
+    {
+      "name": "ui-open",
+      "seconds": 0.555,
+      "loop": false,
+      "rmsDb": -23.01,
+      "peak": 0.3032
+    },
+    {
+      "name": "ui-close",
+      "seconds": 0.555,
+      "loop": false,
+      "rmsDb": -23.01,
+      "peak": 0.327
+    },
+    {
+      "name": "ui-tab",
+      "seconds": 0.295,
+      "loop": false,
+      "rmsDb": -23.01,
+      "peak": 0.2454
+    },
+    {
+      "name": "ui-select",
+      "seconds": 0.22,
+      "loop": false,
+      "rmsDb": -23.02,
+      "peak": 0.2152
+    },
+    {
+      "name": "ui-hover",
+      "seconds": 0.22,
+      "loop": false,
+      "rmsDb": -28.02,
+      "peak": 0.1238
+    },
+    {
+      "name": "ui-pause",
+      "seconds": 0.555,
+      "loop": false,
+      "rmsDb": -23.01,
+      "peak": 0.321
+    },
+    {
+      "name": "ui-resume",
+      "seconds": 0.555,
+      "loop": false,
+      "rmsDb": -23.01,
+      "peak": 0.3366
+    },
+    {
+      "name": "ui-save",
+      "seconds": 0.63,
+      "loop": false,
+      "rmsDb": -23.0,
+      "peak": 0.317
+    },
+    {
+      "name": "ui-load",
+      "seconds": 0.63,
+      "loop": false,
+      "rmsDb": -23.0,
+      "peak": 0.2895
+    },
+    {
+      "name": "ui-notice",
+      "seconds": 0.555,
+      "loop": false,
+      "rmsDb": -23.01,
+      "peak": 0.3498
+    },
+    {
+      "name": "contract-complete",
+      "seconds": 0.705,
+      "loop": false,
+      "rmsDb": -23.0,
+      "peak": 0.2986
+    },
+    {
+      "name": "ui-rotate",
+      "seconds": 0.22,
+      "loop": false,
+      "rmsDb": -27.22,
+      "peak": 0.1506
+    },
+    {
+      "name": "ui-zoom",
+      "seconds": 0.22,
+      "loop": false,
+      "rmsDb": -27.25,
+      "peak": 0.1578
+    },
+    {
+      "name": "transport-depart",
+      "seconds": 0.93,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.3066
+    },
+    {
+      "name": "transport-arrive",
+      "seconds": 0.66,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.264
+    },
+    {
+      "name": "sheep-bleat",
+      "seconds": 1.05,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.1731
+    },
+    {
+      "name": "cow-low",
+      "seconds": 1.65,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.1702
+    },
+    {
+      "name": "hen-cluck",
+      "seconds": 0.55,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.2782
+    },
+    {
+      "name": "duck-quack",
+      "seconds": 0.7,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.2828
+    },
+    {
+      "name": "bee-buzz",
+      "seconds": 0.9,
+      "loop": false,
+      "rmsDb": -29.0,
+      "peak": 0.1109
+    },
+    {
+      "name": "amb-hearth",
+      "seconds": 16.0,
+      "loop": true,
+      "rmsDb": -30.0,
+      "peak": 0.1684
+    },
+    {
+      "name": "amb-workshop",
+      "seconds": 16.0,
+      "loop": true,
+      "rmsDb": -32.0,
+      "peak": 0.1053
+    },
+    {
+      "name": "amb-room",
+      "seconds": 16.0,
+      "loop": true,
+      "rmsDb": -35.0,
+      "peak": 0.0695
+    },
+    {
+      "name": "amb-arcane",
+      "seconds": 16.0,
+      "loop": true,
+      "rmsDb": -33.0,
+      "peak": 0.0843
+    }
+  ]
+}

@@ -1,5 +1,11 @@
 # TownGrid 로컬 개발 인수인계 — 2026-09-27
 
+## 홈 화면 움직임과 소리
+
+`screen-motion.js`의 그림별 좌표와 `ScreenMotion.tsx`가 물결·연기·등불·눈·불씨를 재생한다. 원화는 그대로 표시하고 투명 캔버스를 겹친다. 오른쪽 아래 정지 버튼, 기기의 동작 줄이기 설정, 숨겨진 탭에서 멈춘다. `towngrid-screen-motion`은 화면 설정이며 게임 저장과 별개다.
+
+`audio.js`의 `FRONT_AMBIENCE`는 홈·갤러리의 그림에 맞는 환경음을 선택한다. 실제 게임에서는 거점 지형의 환경음으로 전환한다. `interface-audio.ts`가 포인터·키보드의 버튼 활성화를 함께 처리한다. 새 효과음·동물 울음·환경음 24종의 원본은 `scripts/build-presentation-audio.py`, 목록은 `public/assets/audio/presentation-sounds.json`이며 OGG/MP3를 함께 생성한다.
+
 ## 2026-09-29 운송·건물 동작 마감
 
 운송 10종은 `motion-v10/rig.json`의 8프레임 아틀라스를 사용한다. 실제 이동 거리로 말 다리·바퀴·노·프로펠러가 진행하며 이동 중인 배만 물결을 남긴다. 항구 3종의 인양과 관·컨베이어의 화물 표시는 실제 배송 이벤트를 읽는다. `logistics-visual-events.js`의 이벤트는 저장하지 않는다.

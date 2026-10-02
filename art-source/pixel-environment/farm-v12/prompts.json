@@ -45,5 +45,9 @@
   },
   {
     "file": "goods-d-generated.png"
+  },
+  {
+    "file": "goods-pumpkin-generated.png",
+    "prompt": "Create a corrected TWO-ICON sprite sheet for TownGrid matching the supplied reference icon sheet's crisp richly colored pixel art, warm dark outlines, broad readable color clusters, subtle isometric view, not smooth vector or photorealistic. Exactly TWO equal square cells in ONE horizontal row, true TRANSPARENT background, ample transparent margins between both isolated icons and all sheet edges. No text, labels, decorative border, grid, ground tile or cast shadow outside the object. LEFT: unmistakable PUMPKIN PIE, a round golden fluted crust with exposed smooth deep orange pumpkin custard filling, a single triangular slice slightly pulled outward in front to show orange filling layers and pastry base, tiny white cream dollop on slice. No red berries, no red filling, no lattice top. RIGHT: an unmistakable carved PUMPKIN LANTERN / jack-o-lantern: round orange ribbed pumpkin body, short curved green-brown stem and lid, two triangular cutout eyes and wide friendly carved smile glowing warm candle-yellow from inside, small simple yarn loop handle emerging behind lid. It is made from pumpkin, wax candle, and yarn. NO metal lantern housing, no glass windows, no hurricane lantern. Keep both icons similarly sized, clean silhouettes legible at 64px. Match the reference texture and perspective, but draw ONLY these two corrected items on this new two-cell sheet, not the other reference items."
   }
 ]

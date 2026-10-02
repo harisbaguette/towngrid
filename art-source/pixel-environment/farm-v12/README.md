@@ -4,6 +4,8 @@
 
 `manifest.json`에 원화의 행·열과 상품 순서, `prompts.json`에 생성·수정 요청이 있다. `*-generated.png`는 이미지 모델 원본이며, 나머지 PNG는 실행 규격으로 패킹한 그림이다.
 
+`goodsOverrides`는 호박 파이와 호박등의 개별 교체 원화다. 기본 상품 시트를 자른 뒤 같은 상품 칸에 덮어 넣는다.
+
 ```sh
 node scripts/pack-farm-refresh.mjs
 node scripts/pack-resource-icons.mjs

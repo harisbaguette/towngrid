@@ -3,6 +3,8 @@ export const VEHICLE_ART = {
  sled:'cargoSled', plane:'cargoPlane', airship:'cargoAirship', ship:'cargoShip', ferry:'cargoFerry',
 };
 export const NEW_VEHICLE_SIZES = {cargoWagon:1.18,cargoSled:.85,cargoPlane:1.35,cargoAirship:1.25,cargoRaft:.95,cargoSteamer:1.1,cargoShip:1.4,cargoFerry:1.05,cargoTruckEmpty:.8,cargoTrainEmpty:1.25};
+// Rail contact is at the centre of the wheel footprint, not the image bottom.
+export const VEHICLE_ANCHORS = {cargoTrainEmpty:[.5,140/192]};
 // A water shipment is carried to the shore over land. Its boat must never drive
 // through fields; old saves without a vehicle are horse-drawn wagons.
 export function shipmentVehicle(sh,sim,pose){

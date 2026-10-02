@@ -19,6 +19,7 @@ const suites = [
   'tests/facility-staff.mjs',
   'tests/character-movement.mjs',
   'tests/character-motion.mjs',
+  'tests/sprite-grounding.mjs',
   'tests/campaign.mjs',
   'tests/balance-20260928.mjs',
   'tests/second-pass-20260928.mjs',
@@ -36,6 +37,7 @@ const suites = [
   'tests/farm-motion.mjs',
   'tests/quarter-camera.mjs',
   'tests/screen-art.mjs',
+  'tests/screen-motion.mjs',
   'scripts/check-pixel-characters.mjs',
   // 2026-09-28 audit probes whose simulation-side defects are fixed; --regression fails if one comes back.
   ...['export-chokepoint','raid-gated-trial','events-early','progression-and-docs','stock-ledger','save-edges','debt-spiral','branch-site','sapling-timer'].map(p=>['tests/audit/'+p+'.mjs','--regression']),
