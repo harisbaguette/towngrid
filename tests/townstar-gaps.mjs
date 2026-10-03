@@ -4,13 +4,13 @@ import assert from 'node:assert/strict';
 import {Campaign,UPKEEP} from '../src/app/game/campaign.js';
 import {Simulation,CLEAR_COST,CLEAR_FROM,UNPAID_SPEED} from '../src/app/game/simulation.js';
 import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
-import {capacity,freeSpace,deposit,STORE_MODES} from '../src/app/game/storage.js';
+import {capacity,freeSpace,deposit,STORE_MODES,roomFor,used} from '../src/app/game/storage.js';
 import {HAUL_GEAR,haulLoad} from '../src/app/game/logistics.js';
 import {starsOf,seasonOf,SEASONS,WEEK_DAYS,DAILY,GIFT,standings} from '../src/app/game/league.js';
 import {LAND_SALES} from '../src/app/game/land-sale.js';
 import {awaySeconds,catchUp,OFFLINE} from '../src/app/game/offline.js';
 import {PENALTY_STEP} from '../src/app/game/proximity.js';
-import {slowSpot,goalAction} from '../src/app/game/ui-rules.js';
+import {slowSpot,goalAction,fullStoreSale,outputOf,depletedMove} from '../src/app/game/ui-rules.js';
 import {WORLD_PLOTS} from '../src/app/game/territory.js';
 import {layoutOf} from '../src/app/game/world-grid.js';
 
@@ -85,4 +85,52 @@ let n=0;const ok=label=>{n++;console.log('PASS',label);};
 {const c=new Campaign({nation:'estern'}),s=c.active;c.treasury.contracts=3;c.treasury.contractReadyAt=0;s.money=20000;const [x,z]=freeTile(s,'field');s.build('field',x,z,true);
  const order=s.contract();s.stock[order.item]=0;assert.equal(order.item,'grain','the only base good made here');const a=goalAction(s,'contracts');assert.equal(a.kind,'market');assert.equal(a.item,'grain');ok('contract import offer');}
 
+// 13. Review 2026-10-03. An event announced when the town was saved stays announced through the catch-up (resolving it
+//     re-armed the next event, and storms and raids ran while away), and every site gets its own speed back.
+{const c=new Campaign({nation:'estern'}),s=c.active;c.treasury.rank=12;s.nextEvent=s.time;s.paused=false;for(let i=0;i<8&&!s.pendingEvent;i++)c.tick(.25);
+ assert.ok(s.pendingEvent,'an event is announced');const type=s.pendingEvent.type,events=s.eventCount;const r=catchUp(c,OFFLINE.maxReal);
+ assert.equal(s.eventCount,events,'no event resolved while away');assert.equal(s.pendingEvent?.type,type);assert.ok(s.pendingEvent.at>s.time);
+ const h=new Campaign({nation:'estern'});h.treasury.rank=15;h.active.money+=50000;for(const [k,v] of Object.entries({wood:200,stone:200,plank:100,brick:100,steel:100}))h.active.stock[k]+=v;
+ assert.ok(h.foundSite('estern').ok);catchUp(h,600);assert.deepEqual(h.sites.map(v=>v.sim.speed),[1,1],'branches back to their speed');ok('offline keeps an announced event and the speeds '+Math.round(r.game));}
+
+// 14. A dedicated depot keeps what it holds when switched (a full water tank back to every good is refused), and a
+//     freight route counts only the room that takes its good.
+{const c=new Campaign({nation:'estern'}),s=c.active;c.treasury.rank=6;const [x,z]=freeTile(s,'depot');const id=s.build('depot',x,z,true).id,b=s.buildings.find(v=>v.id===id);
+ assert.ok(s.setStoreMode(id,'water').ok);deposit(s,'water',2000,b);assert.match(s.setStoreMode(id,null).error,/새 용량/);assert.equal(b.mode,'water');assert.deepEqual(s.storageOverflow(),[]);
+ assert.equal(roomFor(s,'water')-roomFor(s,'steel'),capacity(s,b)-used(b),'the tank is room for water only');
+ deposit(s,'wood',roomFor(s,'wood'));assert.equal(roomFor(s,'steel'),0);const steel=s.stock.steel;
+ const route={id:'route-9',from:c.homeId,to:c.homeId,item:'steel',amount:5,mode:'truck',enabled:true,cargo:5,remaining:0,duration:1,completed:0,status:''};
+ c.tickRoute(route,.25);assert.equal(route.status,'도착지 창고 가득 참');assert.equal(s.stock.steel,steel,'no steel squeezed into the full warehouse');ok('depot shrink refused, route room per good');}
+
+// 15. A daily reward completed by a branch's sale is booked with that branch: its money flow and its income agree, and
+//     the home's ledger keeps no unexplained difference.
+{const c=new Campaign({nation:'estern'}),s=c.active;c.treasury.rank=15;s.money+=50000;for(const [k,v] of Object.entries({wood:200,stone:200,plank:100,brick:100,steel:100}))s.stock[k]+=v;
+ const o=c.foundSite('estern');c.activeId=o.id;const br=c.active,home=c.home.sim;for(const v of c.sites)v.sim.nextEvent=1e12;
+ br.build('warehouse',...freeTile(br,'warehouse'),true);br.stock.wood+=50;br.stock.fuel+=40;br.ledger();home.ledger();
+ const l=c.league;l.daily.goal=10;l.daily.done=false;l.daily.from=l.total;const day=br.day,other=[br.ledger().today.other,home.ledger().today.other];
+ assert.ok(br.sell('wood',10).ok);for(let i=0;i<4000&&!l.daily.done;i++)c.tick(.25);assert.ok(l.daily.done);assert.equal(br.day,day,'the same day');
+ assert.equal(br.ledger().today.other,other[0],'branch: the reward is income');assert.equal(home.ledger().today.other,other[1],'home: nothing unexplained');ok('daily reward booked with the selling site');}
+
+// 16. The slow-spot row renders every 0.4 s and every revision bump rebuilds the scene: a repeat look bumps nothing, and
+//     a town short of the move's price (no suggestion, as before) does not scan every spot again.
+{const c=new Campaign({nation:'estern'}),s=c.active;s.money+=3000;const [x,z]=freeTile(s,'field');s.build('field',x,z,true);
+ const near=[[x+1,z],[x-1,z],[x,z+1],[x,z-1]].find(([a,b])=>!s.canBuild('warehouse',a,b,true));s.build('warehouse',...near,true);
+ const rev0=s.revision,first=slowSpot(s),rev=s.revision;assert.ok(first);assert.ok(rev-rev0<=2,'one lift for the whole scan');for(let i=0;i<5;i++)slowSpot(s);assert.equal(s.revision,rev,'no rebuild while nothing changed');
+ const money=s.money;s.money=0;assert.equal(slowSpot(s),null);assert.equal(s.revision,rev);s.money=money;assert.deepEqual([slowSpot(s).x,slowSpot(s).z],[first.x,first.z]);ok('slow spot kept per map state');}
+
+// 17. A facility stalled at 창고 가득 참 beside a full water tank: the fix sells a good from the stores that take its
+//     output, not the tank's water (selling water there makes no room for wood).
+{const c=new Campaign({nation:'estern'}),s=c.active;c.treasury.rank=6;s.build('warehouse',...freeTile(s,'warehouse'),true);const id=s.build('depot',...freeTile(s,'depot'),true).id;s.setStoreMode(id,'water');
+ deposit(s,'water',2000,s.buildings.find(b=>b.id===id));deposit(s,'wood',roomFor(s,'wood'));s.build('lumber',...freeTile(s,'lumber'),true);run(c,500);
+ const camp=s.buildings.find(b=>b.type==='lumber');assert.equal(camp.status,'창고 가득 참');const fix=fullStoreSale(s,outputOf(s,camp));assert.notEqual(fix.item,'water');
+ assert.ok(s.warehouse.inventory[fix.item]>0||s.starterStore.inventory[fix.item]>0,'a good the full stores hold');assert.equal(fullStoreSale(s).item,'water','without the output: the plain largest stock');ok('full-store fix ignores a dedicated depot');}
+
+
+// 18. Moving a facility onto a tree pays the clearing fee and gets the wood, as building there does.
+{const c=new Campaign({nation:'estern'}),s=c.active;c.treasury.rank=CLEAR_FROM;s.money+=2000;const [x,z]=freeTile(s,'well',null);const id=s.build('well',x,z,true).id;const [tx,tz]=freeTile(s,'well','tree');
+ const fee=s.relocationCost(s.buildings.find(b=>b.id===id),tx,tz),wood=s.stock.wood,m=s.money;assert.ok(fee>=CLEAR_COST.tree+5);assert.ok(s.relocate(id,tx,tz).ok);assert.equal(m-s.money,fee);assert.equal(s.stock.wood,wood+2);ok('relocation clearing fee');}
+
+// 19. A lumber camp with no tree left in reach is offered the nearest owned spot with trees, and the move works.
+{const c=new Campaign({nation:'estern'}),s=c.active;s.money+=2000;const [x,z]=freeTile(s,'lumber',null);const id=s.build('lumber',x,z,true).id,b=s.buildings.find(v=>v.id===id);
+ for(const t of s.tiles)if(t.nature==='tree'&&Math.abs(t.x-x)<=4&&Math.abs(t.z-z)<=4){t.nature=null;t.remaining=0;}s.revision++;const m=depletedMove(s,b);assert.ok(m,'a spot with trees');assert.ok(s.relocate(id,m.x,m.z).ok);assert.ok(s.closestNatural(b,'tree'));ok('depleted gatherer move');}
 console.log('\n[townstar-gaps] '+n+' checks pass');

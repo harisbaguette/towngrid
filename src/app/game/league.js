@@ -11,9 +11,10 @@ export const starsOf=(item,amount)=>Math.max(1,Math.ceil((RESOURCES[item]?.price
 export const CONTRACT_STARS=1.5;
 /** Prize for the week's place (1st..8th) times the prize base of the rank (LEAGUE_BASE + per rank). */
 export const LEAGUE_PRIZE=[5,3,2,1,.5,0,0,0],LEAGUE_BASE=100,LEAGUE_PER_RANK=60;
-/** The daily goal: 80% of the stars of an average recent day, up 8% for each goal met before (Town Star's rising daily
- *  star goal), never under 30. Meeting it pays 1G a star of the goal. */
-export const DAILY={share:.8,growth:1.08,min:30,pay:1};
+/** The daily goal: 80% of the stars of an average recent day, up 8% for each day of the current run of goals met, at most six (Town Star's rising daily
+ *  star goal), never under 30. Meeting it pays half a G a star of the goal (1G let the reference bot hoard
+ *  over twice the last fee near the end, tests/full-campaign.mjs A4). */
+export const DAILY={share:.8,growth:1.08,maxSteps:6,min:30,pay:.5};
 /** A gift to a neighbour: one unit every 30 game seconds, relation +1 per 40G of list price (1..3), and a thank-you
  *  payment the first time the relation reaches 60, 75 and 90. */
 export const GIFT={wait:30,step:40,max:3,thanks:[60,75,90],thanksBase:150,thanksPerRank:50};
@@ -41,11 +42,13 @@ export function ensureLeague(campaign){
 /** A sale or a lord's order reached its buyer (export-route.js arrive): count its stars. */
 export function awardStars(s,sh){
  const c=s.campaign;if(!c?.league||!RESOURCES[sh.item]||sh.kind==='import')return 0;
- const n=Math.round(starsOf(sh.item,sh.amount)*(sh.kind==='contract'?CONTRACT_STARS:1));addStars(c,n);return n;
+ const n=Math.round(starsOf(sh.item,sh.amount)*(sh.kind==='contract'?CONTRACT_STARS:1));addStars(c,n,s);return n;
 }
-function addStars(c,n){const l=c.league;l.stars+=n;l.total+=n;l.dayStars+=n;
- const d=l.daily;if(!d.done&&l.total-d.from>=d.goal){d.done=true;d.met++;d.streak++;const pay=Math.round(d.goal*DAILY.pay);c.treasury.money+=pay;const b=c.home?.sim?.budget;if(b)b.income+=pay;c.active.notify('오늘의 도전 달성 · 별 '+d.goal+'개 · +'+pay+'G','success');c.active.sound('contract');}}
-export const dailyGoal=(l)=>{const avg=l.recent.length?l.recent.reduce((n,v)=>n+v,0)/l.recent.length:0;return Math.max(DAILY.min,Math.round(avg*DAILY.share*DAILY.growth**l.daily.met));};
+/** Count stars; a daily reward they complete is booked as income of `site`, the site whose step moved the money (its
+ *  books.flow measures that step, simulation.js BOOKED), or of the home site when no site step runs (a gift). */
+function addStars(c,n,site=null){const l=c.league;l.stars+=n;l.total+=n;l.dayStars+=n;
+ const d=l.daily;if(!d.done&&l.total-d.from>=d.goal){d.done=true;d.met++;d.streak++;const pay=Math.round(d.goal*DAILY.pay);c.treasury.money+=pay;const b=(site||c.home?.sim)?.budget;if(b)b.income+=pay;c.active.notify('오늘의 도전 달성 · 별 '+d.goal+'개 · +'+pay+'G','success');c.active.sound('contract');}}
+export const dailyGoal=(l)=>{const avg=l.recent.length?l.recent.reduce((n,v)=>n+v,0)/l.recent.length:0;return Math.max(DAILY.min,Math.round(avg*DAILY.share*DAILY.growth**Math.min(DAILY.maxSteps,l.daily.streak||0)));};
 const prizeBase=c=>LEAGUE_BASE+LEAGUE_PER_RANK*c.rank;
 /** The table of the running week: the player and the rival houses, best first. */
 export function standings(c){const l=c.league;if(!l)return [];return [{id:'player',name:c.home?.name||'내 마을',score:l.stars,player:true},...l.rivals.map(r=>({id:r.id,name:r.name,score:Math.round(r.score)}))].sort((a,b)=>b.score-a.score||(a.player?-1:1));}

@@ -9,7 +9,7 @@ import {CHARTERS} from './progression';
 import {RESCUE_PRICES} from './living-economy';
 import {productionDiagnosis} from './proximity';
 import {unlockRank} from './world';
-import {blockHint,contractConflict,contractState,crewHouse,exportBlocked,fleetState,fullStoreSale,goalAction,nextBuild,plannedNeeds,shortfall,objectOf,outputOf,plantSpot,promotionParts,quickSaleLot,recoveryState,repairPlan,sellableStock,slowSpot,subjectOf} from './ui-rules';
+import {blockHint,contractConflict,contractState,crewHouse,exportBlocked,fleetState,fullStoreSale,goalAction,nextBuild,plannedNeeds,shortfall,objectOf,outputOf,plantSpot,promotionParts,quickSaleLot,recoveryState,repairPlan,sellableStock,slowSpot,subjectOf,depletedMove} from './ui-rules';
 
 const B:any=BUILDINGS,R:any=RESOURCES;
 const VEHICLE_ICONS:Record<string,typeof Truck>={wagon:Caravan,raft:Sailboat,truck:Truck,steamer:Ship};
@@ -48,10 +48,11 @@ function FixActions({sim:s,b,onAction,onTool,onMarket,onFocus,repairs}:any){
  // K-02: a facility shut in names the neighbours that close its sides; selecting one opens its card (demolish is there).
  if(b.status==='출입구 막힘'&&typeof s.doorBlockers==='function'){const near=s.doorBlockers(b).filter((v:any,i:number,all:any[])=>all.findIndex((w:any)=>w.id===v.id)===i);if(!near.length)return null;
   return <div className="fix-actions">{near.slice(0,4).map((n:any)=><Button key={n.id} size="sm" variant="outline" onClick={()=>onFocus?.(n.id)}>{B[n.type].name} 선택</Button>)}</div>;}
- if(b.status==='창고 가득 참'){const sale=fullStoreSale(s),item=sale?.item,lot=sale?.lot||0;if(!item)return null;
+ if(b.status==='창고 가득 참'){const sale=fullStoreSale(s,outputOf(s,b)),item=sale?.item,lot=sale?.lot||0;if(!item)return null;
   return <div className="fix-actions"><Button size="sm" disabled={lot<1} onClick={()=>onAction(s.sell(item,lot),'')}><Coins size={14}/>{R[item].name} {lot}개 팔기</Button>{!s.autoSell[item]&&<Button size="sm" variant="outline" onClick={()=>onAction(autoSellOn(s,item))}>자동 판매 켜기</Button>}{sale.discard>0&&<Button size="sm" variant="outline" onClick={()=>onAction(s.discardStock(sale.store,item,sale.discard))}>{R[item].name} {sale.discard}개 버리기</Button>}</div>;}
  if(b.status==='자원 고갈'&&b.health>=100){const spot=plantSpot(s,b),plantWhy=spot&&s.plantShort?s.plantShort(spot.x,spot.z):null;
-  return <div className="fix-actions">{spot&&<Button size="sm" disabled={!!plantWhy} onClick={()=>onAction(s.plant(spot.x,spot.z),'build')}><Sprout size={14}/>묘목 심기 · 15G + 물 2</Button>}<Button size="sm" variant="outline" onClick={()=>onTool('expand')}><Grid2X2Plus size={14}/>영토 확장 · {s.expansionCost()}G</Button>{spot&&<CostShort sim={s} text={plantWhy} price={ACTION_PRICES.plant} onAction={onAction} onMarket={onMarket}/>}</div>;}
+  const move=depletedMove(s,b);
+  return <div className="fix-actions">{move&&<Button size="sm" onClick={()=>onAction(s.relocate(b.id,move.x,move.z),'build')}><ArrowRight size={14}/>{B[b.type].natural==='tree'?'나무':'바위'} 남은 곳으로 옮기기 · {move.cost}G</Button>}{spot&&<Button size="sm" disabled={!!plantWhy} onClick={()=>onAction(s.plant(spot.x,spot.z),'build')}><Sprout size={14}/>묘목 심기 · 15G + 물 2</Button>}<Button size="sm" variant="outline" onClick={()=>onTool('expand')}><Grid2X2Plus size={14}/>영토 확장 · {s.expansionCost()}G</Button>{spot&&<CostShort sim={s} text={plantWhy} price={ACTION_PRICES.plant} onAction={onAction} onMarket={onMarket}/>}</div>;}
  if(b.health<100&&repairs.list.length<2){const cost=s.repairCost(b);
   return <div className="fix-actions"><Button size="sm" disabled={s.money<cost} onClick={()=>onAction(s.repair(b.id),'build')}><Wrench size={14}/>수리 · {cost}G</Button><ShortFunds sim={s} need={cost} onAction={onAction} onMarket={onMarket}/></div>;}
  return null;

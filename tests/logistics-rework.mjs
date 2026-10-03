@@ -40,7 +40,8 @@ for(const[nation,n]of Object.entries(NATIONS))for(const p of startingProvinces(n
 }
 {
  const s=fresh(),w=place(s,'warehouse');deposit(s,'wood',20,w);const snapshot={...s.stock},old={x:w.x,z:w.z};
- const p=s.tiles.find(t=>!s.canRelocate(w.id,t.x,t.z));assert.ok(p);const cash=s.money,moved=s.relocate(w.id,p.x,p.z);assert.ok(moved.ok);assert.ok(s.money<cash);assert.equal(w.inventory.wood,20);assert.deepEqual({...s.stock},snapshot);assert.equal(s.at(old.x,old.z),undefined);assert.ok(w.movingUntil>s.time);assert.equal(reload(s).buildings.find(b=>b.id===w.id).x,p.x);run(s,7);assert.ok(!w.movingUntil);assert.equal(s.demolish(w.x,w.z).ok,false,'stock must be moved before demolition');
+ // A clear tile: a tree or rock spot would add the two wood or stone its clearing gives (relocation.js).
+ const p=s.tiles.find(t=>!t.nature&&!s.canRelocate(w.id,t.x,t.z));assert.ok(p);const cash=s.money,moved=s.relocate(w.id,p.x,p.z);assert.ok(moved.ok);assert.ok(s.money<cash);assert.equal(w.inventory.wood,20);assert.deepEqual({...s.stock},snapshot);assert.equal(s.at(old.x,old.z),undefined);assert.ok(w.movingUntil>s.time);assert.equal(reload(s).buildings.find(b=>b.id===w.id).x,p.x);run(s,7);assert.ok(!w.movingUntil);assert.equal(s.demolish(w.x,w.z).ok,false,'stock must be moved before demolition');
 }
 {
  const s=fresh(),h=place(s,'house');run(s,20);assert.equal(s.workers[0].atHome,true);place(s,'well');run(s,8);assert.ok(s.workers[0].task||!s.workers[0].atHome,'resident leaves when a job exists');assert.equal(s.workers.length,1);

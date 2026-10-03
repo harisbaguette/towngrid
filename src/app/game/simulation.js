@@ -430,6 +430,8 @@ export class Simulation{
   const made=this.recipeOf(b).output,refund=this.demolishRefund(b);if(RESOURCES[made])this.stock[made]+=b.out;this.money+=refund.money;for(const[r,n]of Object.entries(refund.materials||{}))this.stock[r]=(this.stock[r]||0)+n;
   // A cancelled build undoes the clearing too: the tree, rock or sapling goes back on its tile and the two wood or stone
   // the clearing gave are taken back, so building and cancelling leaves the stock as it was (player audit: 44 → 41 → 46).
+  // A cancelled build takes its clearing fee back off the day's expenses, where build() put it.
+  if(refund.full&&b.clearing)this.budget.expenses=Math.max(0,this.budget.expenses-b.clearing);
   if(refund.full&&b.cleared){const t=this.tile(b.x,b.z),c=b.cleared,gain=c.nature==='tree'?'wood':c.nature==='rock'?'stone':null;t.nature=c.nature;t.remaining=c.remaining;if(c.growAt!==undefined)t.growAt=c.growAt;if(gain)this.stock[gain]=Math.max(0,(this.stock[gain]||0)-2);}
   if(refund.full)this.notify(BUILDINGS[b.type].name+' 건설 취소 · '+refund.money+'G와 재료 전액 환불','success');
   if(isStore(b))removeStore(this,b);this.buildings=this.buildings.filter(a=>a.id!==b.id);this.syncWorkers();this.revision++;return {ok:true,refund:refund.money,full:!!refund.full};
@@ -451,7 +453,7 @@ export class Simulation{
  discardStock(id,item,amount){const b=storeById(this,id);if(!b||!RESOURCES[item]||!Number.isInteger(amount)||amount<1)return {ok:false,error:'폐기할 품목과 수량을 확인하세요'};if(storeStock(this,b,item)<amount)return {ok:false,error:'운반 중인 물량을 제외한 재고가 부족합니다'};withdraw(this,item,amount,b);this.notify(RESOURCES[item].name+' '+amount+'개 폐기');return {ok:true,amount};}
  setStoreDrain(id,drain){const b=stores(this,false).find(v=>v.id===id);if(!b)return {ok:false,error:'보관 장소가 없습니다'};b.drain=!!drain;return {ok:true};}
  canRelocate(id,x,z){return canRelocate(this,id,x,z);}
- relocationCost(b){return relocationCost(this,b);}
+ relocationCost(b,x,z){return relocationCost(this,b,x,z);}
  relocate(id,x,z){return relocate(this,id,x,z);}
  /** placementEffects (proximity.js) scans every building and the tiles around; the result is kept per spot until effectsKey
   *  changes (audit C4: it was a third of the frame time on a developed site). */
@@ -534,6 +536,8 @@ export class Simulation{
   *  longer take must be moved out first. */
  setStoreMode(id,mode){const b=this.buildings.find(v=>v.id===id&&v.type==='depot');if(!b)return {ok:false,error:'자재 보관소만 전용으로 바꿀 수 있습니다'};if(mode!==null&&!STORE_MODES[mode])return {ok:false,error:'보관 방식을 확인하세요'};
   const next={...b,mode:mode||undefined},bad=Object.entries(b.inventory||{}).filter(([r,n])=>n>0&&!accepts(next,r));if(bad.length)return {ok:false,error:bad.map(([r])=>RESOURCES[r].name).slice(0,3).join('·')+' 먼저 옮기거나 파세요'};
+  // A smaller capacity (a full water tank back to every good) must still hold what is inside.
+  const room=capacity(this,next);if(used(b)>room)return {ok:false,error:'보관 중인 '+Math.ceil(used(b)).toLocaleString('ko-KR')+'개가 새 용량 '+room.toLocaleString('ko-KR')+'개를 넘습니다 · 먼저 옮기거나 파세요'};
   if(this.workers.some(w=>w.task?.targetStore===b.id)||this.shipments.some(sh=>sh.storeId===b.id))return {ok:false,error:'이 보관소로 오는 운반이 끝난 뒤 바꾸세요'};
   if(mode)b.mode=mode;else delete b.mode;this.revision++;return {ok:true};}
  /** Keep at most `cap` of a good (0 clears it): its makers stop being emptied at the cap and rest with their output full. */

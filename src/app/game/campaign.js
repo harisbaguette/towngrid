@@ -6,6 +6,7 @@ import {dispatchShipment,spareFuel,shipmentError,fuelHold,FUEL_PER_TRIP} from '.
 import {defaultStartingProvince,startingProvince} from './starting-sites.js';
 import {expansionOffer,SITE_MATERIALS} from './site-expansion.js';
 import {newLeague,ensureLeague,leagueDay,sendGift} from './league.js';
+import {roomFor} from './storage.js';
 // Running transit facilities of a site: the smallest travel-time factor they offer (M5), 1 when none run.
 const transitFactor=sim=>Math.min(1,...sim.buildings.filter(b=>BUILDINGS[b.type].output==='transit'&&b.health>0&&b.enabled!==false&&b.activeUntil>sim.time).map(b=>BUILDINGS[b.type].transitFactor||1));
 const SHARED=['money','debt','family','rank','contracts','contractReadyAt','totalRevenue','produced','sold','emergencyUsed','rescueQuest','charter','haulGear'];
@@ -84,7 +85,7 @@ export class Campaign{
   const elapsed=Math.min(.25,dt)*speed;for(const route of this.routes)this.tickRoute(route,elapsed);const day=this.active.day;if(day>this.lastWorldDay){while(this.lastWorldDay<day){this.lastWorldDay++;this.worldDay();}}}
  closeRoute(id){const r=this.routes.find(v=>v.id===id);if(!r)return fail('노선을 찾을 수 없습니다');r.enabled=false;if(r.cargo){r.closing=true;r.status='도착 후 폐쇄';}else{this.routes=this.routes.filter(v=>v.id!==id);}for(const s of this.sites)s.sim.revision++;return ok();}
  tickRoute(r,dt){const from=this.sites.find(s=>s.id===r.from)?.sim,to=this.sites.find(s=>s.id===r.to)?.sim;if(!from||!to)return;if(r.ambush>0){r.ambush-=dt;r.status='수인족 기습 · 우회 중';return;}
-  if(r.cargo){r.remaining-=dt;r.status='운송 중';if(r.remaining<=0){if(to.storageUsed+r.cargo>to.storageCapacity){r.remaining=0;r.status='도착지 창고 가득 참';return;}to.stock[r.item]+=r.cargo;this.deliveries++;r.completed++;r.cargo=0;r.remaining=0;r.status='하역 완료';this.active.sound('delivery');if(r.closing){this.routes=this.routes.filter(v=>v!==r);for(const s of this.sites)s.sim.revision++;}}return;}
+  if(r.cargo){r.remaining-=dt;r.status='운송 중';if(r.remaining<=0){if(roomFor(to,r.item)<r.cargo){r.remaining=0;r.status='도착지 창고 가득 참';return;}to.stock[r.item]+=r.cargo;this.deliveries++;r.completed++;r.cargo=0;r.remaining=0;r.status='하역 완료';this.active.sound('delivery');if(r.closing){this.routes=this.routes.filter(v=>v!==r);for(const s of this.sites)s.sim.revision++;}}return;}
   if(!r.enabled){r.status='노선 중지';return;}if(from.availableStock(r.item)<r.amount){r.status='화물 부족';return;}
   if(from.warehouse?.health<=0||to.warehouse?.health<=0){r.status='창고 수리 필요';return;}
   if(r.mode==='rail'&&(!this.stationReady(from)||!this.stationReady(to))){r.status='화물역·선로·전력 확인';return;}

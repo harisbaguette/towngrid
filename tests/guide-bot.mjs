@@ -14,7 +14,7 @@ import {productionDiagnosis} from '../src/app/game/proximity.js';
 import {RESCUE_PRICES} from '../src/app/game/living-economy.js';
 import {startingProvinces} from '../src/app/game/starting-sites.js';
 import {layoutOf} from '../src/app/game/world-grid.js';
-import {blockHint,contractConflict,contractState,crewHouse,exportBlocked,fullStoreSale,goalAction,nextBuild,plannedNeeds,plantSpot,promotionParts,quickSaleLot,recoveryState,repairPlan,sellableStock,shortfall,slowSpot,tutorialStep} from '../src/app/game/ui-rules.js';
+import {blockHint,contractConflict,contractState,crewHouse,exportBlocked,fullStoreSale,goalAction,nextBuild,outputOf,plannedNeeds,plantSpot,promotionParts,quickSaleLot,recoveryState,repairPlan,sellableStock,shortfall,slowSpot,depletedMove,tutorialStep} from '../src/app/game/ui-rules.js';
 
 const DAY=80;                // game seconds per day (simulation.js get day)
 const TARGET=7;              // rank index 7 = 8단계 지역 공급자
@@ -80,7 +80,8 @@ function play(start){
   if(urgent){
    const house=urgent.health>=100?crewHouse(urgent.status)||(urgent.status==='운반 대기'?'house':null):null,diag=house?{tool:house}:productionDiagnosis(sim,urgent,BUILDINGS,RESOURCES);
    if(urgent.status==='출입구 막힘'){const n=sim.doorBlockers(urgent)[0];if(n&&ready('unblock:'+n.id,20))act(BUILDINGS[n.type].name+' 철거',()=>sim.demolish(n.x,n.z));}
-   else if(urgent.status==='창고 가득 참'){const sale=fullStoreSale(sim);if(sale){act(RESOURCES[sale.item].name+' 팔기',()=>sim.sell(sale.item,sale.lot));if(sale.discard)act(RESOURCES[sale.item].name+' 버리기',()=>sim.discardStock(sale.store,sale.item,sale.discard),40);if(!sim.autoSell[sale.item])sim.autoSell[sale.item]=true;}}
+   else if(urgent.status==='창고 가득 참'){const sale=fullStoreSale(sim,outputOf(sim,urgent));if(sale){act(RESOURCES[sale.item].name+' 팔기',()=>sim.sell(sale.item,sale.lot));if(sale.discard)act(RESOURCES[sale.item].name+' 버리기',()=>sim.discardStock(sale.store,sale.item,sale.discard),40);if(!sim.autoSell[sale.item])sim.autoSell[sale.item]=true;}}
+   else if(urgent.status==='자원 고갈'&&urgent.health>=100&&depletedMove(sim,urgent)&&ready('move:'+urgent.id,60)){const m=depletedMove(sim,urgent);act(BUILDINGS[urgent.type].name+' 옮기기',()=>sim.relocate(urgent.id,m.x,m.z));}
    else if(urgent.status==='자원 고갈'&&urgent.health>=100){const spot=plantSpot(sim,urgent);if(spot&&!sim.plantShort(spot.x,spot.z))act('묘목 심기',()=>sim.plant(spot.x,spot.z));else if(ready('deplete-expand',120))place('expand');}
    else if(urgent.health<100&&repairPlan(sim).list.length<2&&sim.money>=sim.repairCost(urgent))act('수리',()=>sim.repair(urgent.id));
    else if(diag?.tool&&ready('diag:'+diag.tool,90))place(diag.tool);

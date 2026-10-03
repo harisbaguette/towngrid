@@ -1,6 +1,7 @@
 // Offline progress (Town Star's "Update Town Offline", docs/TOWNSTAR_RULES.md): a town continued from the browser's save
 // runs the real time it was closed, up to half an hour, before the player sees it. Production, hauling, auto-sales and
-// shipments go on; no storm, raid or other event starts while away (each site's next event moves back by the time away).
+// shipments go on; no storm, raid or other event starts while away (each site's next event, and one already announced,
+// moves back by the time away).
 import {BASE_TIME_SCALE} from './game-time.js';
 
 export const OFFLINE={maxReal:1800,minReal:60,speed:4};
@@ -12,12 +13,16 @@ const totals=c=>({money:c.treasury.money,revenue:c.treasury.totalRevenue||0,prod
 /** Run `real` seconds of time away on a campaign; returns what changed, or null when too short to bother. */
 export function catchUp(c,real){
  if(!c||!(real>=OFFLINE.minReal))return null;
- const capped=Math.min(real,OFFLINE.maxReal),game=capped*BASE_TIME_SCALE,active=c.active,speed=active.speed,paused=active.paused,before=totals(c);
- for(const site of c.sites)site.sim.nextEvent=Math.max(site.sim.nextEvent,site.sim.time)+game;
+ const capped=Math.min(real,OFFLINE.maxReal),game=capped*BASE_TIME_SCALE,active=c.active,before=totals(c);
+ // Campaign.tick sets every site's speed and pause from the active one; all of them get their own back afterwards.
+ const kept=c.sites.map(site=>({sim:site.sim,speed:site.sim.speed,paused:site.sim.paused}));
+ // An event already announced when the town was saved waits too: resolving it while away would also re-arm nextEvent
+ // (Simulation.resolveEvent) and let the next storms or raids start before the player is back.
+ for(const site of c.sites){const s=site.sim;s.nextEvent=Math.max(s.nextEvent,s.time)+game;if(s.pendingEvent)s.pendingEvent.at=Math.max(s.pendingEvent.at,s.time)+game;}
  active.speed=OFFLINE.speed;active.paused=false;
  const end=active.time+game;let guard=0;
  while(active.time<end-1e-6&&guard++<game*8){c.tick(.25);}
- active.speed=speed;active.paused=paused;for(const site of c.sites){site.sim.soundEvents=[];}
+ for(const k of kept){k.sim.speed=k.speed;k.sim.paused=k.paused;k.sim.soundEvents=[];}
  const after=totals(c);
  return {real:capped,game,days:game/80,capped:real>OFFLINE.maxReal,income:Math.round(after.revenue-before.revenue),money:Math.round(after.money-before.money),produced:after.produced-before.produced,stars:after.stars-before.stars};
 }

@@ -22,6 +22,8 @@ export const storeById=(s,id)=>id===0?s.starterStore:s.buildings.find(b=>b.id===
 export const storeStock=(s,b,item)=>Math.max(0,(b.inventory?.[item]||0)-s.workers.reduce((n,w)=>n+(w.task?.sourceStore===b.id&&!w.task.carried&&w.task.item===item?w.task.amount:0),0));
 const distance=(a,b)=>Math.abs(a.x-b.x)+Math.abs(a.z-b.z);
 export function nearbyStores(s,point,item){return stores(s).filter(b=>accepts(b,item)).sort((a,b)=>distance(a,point)-distance(b,point));}
+/** Room for one good across the stores that take it, as deposit fills them (a water tank is no room for steel). */
+export const roomFor=(s,item)=>stores(s).reduce((n,b)=>n+(accepts(b,item)?Math.max(0,capacity(s,b)-used(b)):0),0);
 // stock remains the public aggregate used by recipes, construction, the ledger and old saves.
 // Its setters account for all existing callers; physical transfers specify a store explicitly.
 export function initStorage(s,saved){

@@ -8,6 +8,7 @@ import {provinceZone} from './infrastructure.js';
 import {SERVICE_OUTPUTS} from './production-visuals.js';
 import {recoveryReady,RECOVERY_LIMIT} from './economy.js';
 import {EXPANSION_BUILDINGS,EXPANSION2_BUILDINGS} from './industry.js';
+import {accepts} from './storage.js';
 
 const particle=(w,withFinal,without)=>{const c=w.charCodeAt(w.length-1)-0xac00;return w+(c>=0&&c<11172&&c%28?withFinal:without);};
 export const objectOf=w=>particle(w,'을','를');
@@ -306,8 +307,13 @@ export function shortfall(s,p){
 }
 /** A full store holds every good together (storage.js capacity), so its fix sells the largest stock no plan on screen needs,
  *  not the stalled facility's own output (tests/guide-bot.mjs sold the smoked fish an open order was waiting on). */
-export function fullStoreSale(s){
- const top=sellableStock(s,plannedNeeds(s,nextBuild(s))).items.sort((a,b)=>b.n-a.n)[0];if(!top)return null;
+export function fullStoreSale(s,output=null){
+ // A depot set to one kind of goods (storage.js STORE_MODES) takes nothing else: selling water out of a full water tank
+ // makes no room for the wood a lumber camp waits to store. With such a depot the goods are ranked by what the stores
+ // taking the stalled `output` hold; without one every store takes every good and the ranking is the plain stock.
+ const items=sellableStock(s,plannedNeeds(s,nextBuild(s))).items,dedicated=output&&s.buildings?.some(b=>b.mode);
+ const inRoom=id=>[s.starterStore,...s.buildings].filter(b=>b?.inventory&&!(b.health<=0)&&b.enabled!==false&&!(b.movingUntil>s.time)&&accepts(b,output)).reduce((n,b)=>n+(b.inventory[id]||0),0);
+ const top=dedicated?items.map(v=>({...v,n:Math.min(v.n,Math.floor(inRoom(v.id)))})).filter(v=>v.n>0).sort((a,b)=>b.n-a.n)[0]:items.sort((a,b)=>b.n-a.n)[0];if(!top)return null;
  // With no fuel a sale cannot leave and an import has no room, and a distillery cannot put fuel in a full store: the only way
  // out is to throw some stock away (tests/guide-bot.mjs locked at 1,080/1,080 with fuel 0 for ten days).
  const store=s.warehouse,held=Math.floor(store?.inventory?.[top.id]||0),dry=!!fleetState(s)?.fuelNote;
@@ -445,17 +451,41 @@ export function clusterMarkers(items,gapX=50,gapY=28){
  * Town Star's efficiency needle (docs/TOWNSTAR_RULES.md): the facility its spot slows most (shade, wind shelter or
  * pollution cutting at least 20%), with the nearest owned spot that runs it at least 15 points faster and the move's
  * price. null when every facility runs within 20% of its spot's best. The operations card shows it and tests/guide-bot.mjs
- * presses it, as a player would.
+ * presses it, as a player would. The card renders every 0.4 s and checking a spot the way canRelocate does lifts the
+ * facility off its tile, which bumps Simulation.revision and so rebuilds the scene: the answer is kept while the revision
+ * stays the same, the whole list is checked under one lift, and money and the facility's shipments (canRelocate's other
+ * checks, which change without a revision) are read when the answer is returned.
  */
+const SLOW_SPOTS=new WeakMap();
 export function slowSpot(s){
  if(typeof s.placementEffects!=='function'||typeof s.canRelocate!=='function')return null;
+ const kept=SLOW_SPOTS.get(s),v=kept&&kept.revision===s.revision&&(!kept.spot||s.buildings.includes(kept.spot.building)&&!(kept.spot.building.movingUntil>s.time))?kept.spot:(()=>{const spot=findSlowSpot(s);SLOW_SPOTS.set(s,{revision:s.revision,spot});return spot;})();
+ if(!v)return null;const b=v.building,cost=s.relocationCost(b);
+ if(s.moneyShort?.(cost)||s.shipments?.some(sh=>sh.storeId===b.id||sh.terminalId==='b:'+b.id))return null;
+ return {...v,cost};
+}
+function findSlowSpot(s){
  const penalty=(type,x,z)=>{const e=s.placementEffects(type,x,z);return {speed:e.speed,hit:(e.pollution||0)+(e.shade||0)+(e.windBlock||0)};};
  let worst=null;
  for(const b of s.buildings){const d=BUILDINGS[b.type];if(!d?.period||b.health<=0||b.enabled===false||b.movingUntil>s.time)continue;
   const now=penalty(b.type,b.x,b.z);if(!now.hit||now.speed>=.8)continue;if(!worst||now.speed<worst.from)worst={b,from:now.speed};}
- if(!worst)return null;const {b}=worst,door=s.warehouse&&s.entries(s.warehouse)[0];let best=null;
- for(const k of s.owned){const [x,z]=k.split(',').map(Number);if(s.at(x,z)||s.roads.has(k))continue;const to=s.placementEffects(b.type,x,z).speed;if(to<worst.from+.15)continue;
-  const far=Math.abs(x-b.x)+Math.abs(z-b.z);if(best&&(far>best.far||far===best.far&&to<=best.to))continue;
-  if(s.canRelocate(b.id,x,z))continue;if(door&&!s.routeTo(door,{x,z,size:1}))continue;best={x,z,to,far};}
- return best?{building:b,x:best.x,z:best.z,from:worst.from,to:best.to,cost:s.relocationCost(b)}:null;
+ if(!worst)return null;const {b,from}=worst;
+ // The faster spots, nearest first and the faster on a tie, judged where the facility stands now.
+ const spots=[];
+ for(const k of s.owned){const [x,z]=k.split(',').map(Number);if(s.at(x,z)||s.roads.has(k))continue;const to=s.placementEffects(b.type,x,z).speed;if(to<from+.15)continue;spots.push({x,z,to,far:Math.abs(x-b.x)+Math.abs(z-b.z)});}
+ spots.sort((p,q)=>p.far-q.far||q.to-p.to);
+ // canRelocate's tile check (canBuild with the facility off its tile) for the whole list under one lift.
+ const list=s.buildings;let open=[];s.buildings=list.filter(v=>v!==b);s.revision++;
+ try{open=spots.filter(p=>!s.canBuild(b.type,p.x,p.z,true));}finally{s.buildings=list;s.revision++;}
+ const door=s.warehouse&&s.entries(s.warehouse)[0],best=open.find(p=>!door||s.routeTo(door,{x:p.x,z:p.z,size:1}));
+ return best?{building:b,x:best.x,z:best.z,from,to:best.to}:null;
+}
+
+/** A depleted lumber camp or quarry: the nearest owned spot with trees or rock left within four tiles it can move to, or
+ *  null. The operations card offers it beside planting and expanding; tests/guide-bot.mjs presses it first. */
+export function depletedMove(s,b){
+ const nature=BUILDINGS[b?.type]?.natural;if(!nature||typeof s.canRelocate!=='function')return null;let best=null;
+ for(const k of s.owned){const [x,z]=k.split(',').map(Number),t=s.tile(x,z);if(t.nature||s.at(x,z)||s.roads.has(k))continue;const far=Math.abs(x-b.x)+Math.abs(z-b.z);if(best&&far>=best.far)continue;
+  if(!s.closestNatural({x,z,size:1},nature)||s.canRelocate(b.id,x,z))continue;best={x,z,far};}
+ return best&&{x:best.x,z:best.z,cost:s.relocationCost(b,best.x,best.z)};
 }

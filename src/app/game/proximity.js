@@ -90,9 +90,12 @@ export function slowNotes(type,e,panel=false){
  // In the facility panel a rule that applies is always listed with its scale ("바람막이 0/3"); the preview lists only hits.
  const add=(name,value,max,cut)=>{const old=Math.min(60,value*(cut==='solar'?20:cut)),pct=e.modern&&cut!=='solar'?Math.max(old,Math.round((1-Math.max(PENALTY_FLOOR,1/PENALTY_STEP**value))*100)):old;if(value>0||panel)out.push({text:name+' '+value+(panel?'/'+max:'')+(value>0?' · 생산 -'+pct+'%':''),tone:value>0?'negative':''});};
  if(sensitive)add('오염',e.pollution||0,6,10);
+ // On a current map pollution and shade multiply on a crop (placementEffects steep): their joint cut is more than either line.
+ const joint=e.modern&&crop&&e.pollution>0&&e.shade>0?Math.round((1-Math.min(Math.max(.4,1-e.pollution*.1-e.shade*.1),Math.max(PENALTY_FLOOR,1/PENALTY_STEP**(e.pollution+e.shade))))*100):0;
  if(crop)add((e.shade&&e.mountain>=e.shade?'산 ':'')+'그늘',e.shade||0,3,10);
  if(WIND.includes(type))add((e.windBlock&&e.mountain>=e.windBlock?'산 ':'')+'바람막이',e.windBlock||0,3,20);
  if(type==='solarpanel')add('산 그늘',Math.min(3,e.mountain||0),3,'solar');
+ if(joint)out.push({text:'오염·그늘 함께 · 생산 -'+joint+'%',tone:'negative'});
  return out;
 }
 /** Short notes on the rules that act on this facility at this spot, for the placement preview and the facility panel. */

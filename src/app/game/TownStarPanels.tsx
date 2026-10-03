@@ -8,7 +8,7 @@ import {Gift,PartyPopper,Star,Trophy,Truck,Warehouse} from 'lucide-react';
 import ResourceIcon from './ResourceIcon';
 import {RESOURCES} from './simulation';
 import {NATIONS} from './world';
-import {LEAGUE_PRIZE,LEAGUE_BASE,LEAGUE_PER_RANK,WEEK_DAYS,GIFT,seasonOf,standings,giftShort} from './league';
+import {DAILY,LEAGUE_PRIZE,LEAGUE_BASE,LEAGUE_PER_RANK,WEEK_DAYS,GIFT,seasonOf,standings,giftShort} from './league';
 import {HAUL_GEAR,haulLoad} from './logistics';
 import '../townstar.css';
 
@@ -29,7 +29,7 @@ export function LeaguePanel({campaign:c,onAction}:any){
   <section className="league-card daily" aria-label="오늘의 도전">
    <header><Star size={17}/><strong>오늘의 도전</strong><span>{d.done?'달성':'별 '+num(Math.min(done,d.goal))+' / '+num(d.goal)}</span></header>
    <Progress value={Math.min(100,done/d.goal*100)}/>
-   <small>상품을 팔거나 납품하면 별을 받습니다(목록가 10G마다 1개, 납품은 1.5배). 달성하면 {num(d.goal)}G를 받고, 다음 목표가 8% 오릅니다.{d.streak>1?' · 연속 '+d.streak+'일':''}</small>
+   <small>상품을 팔거나 납품하면 별을 받습니다(목록가 10G마다 1개, 납품은 1.5배). 달성하면 {num(Math.round(d.goal*DAILY.pay))}G를 받습니다. 연속으로 달성하면 다음 목표가 하루 8%씩(최대 6일) 오르고, 놓치면 다시 낮아집니다.{d.streak>1?' · 연속 '+d.streak+'일':''}</small>
   </section>
   <section className="league-card season" aria-label="계절 축제">
    <header><PartyPopper size={17}/><strong>{season.name}</strong><span>{left}일 남음</span></header>
@@ -55,7 +55,9 @@ export function LeaguePanel({campaign:c,onAction}:any){
 const CAPS=[0,50,100,200,400];
 export function HaulPanel({sim:s,onAction}:any){
  const offer=s.haulGearOffer?.(),load=haulLoad(s)*(s.automatic?2:1);
- const made=[...(s.madeGoods?.()||[])].filter((id:any)=>R[id]).sort((a:any,b:any)=>R[a].price-R[b].price);
+ // The cap is this site's (Simulation.stockCap) and only stops this site's pickups: its own products, and any good still
+ // capped here so the cap can be lifted.
+ const made=[...new Set([...s.buildings.map((b:any)=>s.recipeOf(b)?.output),...Object.keys(s.stockCap||{})])].filter((id:any)=>R[id]).sort((a:any,b:any)=>R[a].price-R[b].price);
  return <div className="haul-panel">
   <section className="league-card" aria-label="운반 장비">
    <header><Truck size={17}/><strong>운반 장비</strong><span>한 번에 {load}개</span></header>
