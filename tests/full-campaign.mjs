@@ -29,7 +29,8 @@ function build(s,type,desired=1){if(s.rank<unlockRank(type)||count(s,type)>=desi
  const onGrid=(def.power||type==='substation')&&gridNodes(s).length>0,tiles=onGrid?free.filter(t=>inReach(s,t)):[...free];
  if(type==='substation'){const gain=t=>free.filter(f=>!inReach(s,f)&&Math.max(Math.abs(f.x-t.x),Math.abs(f.z-t.z))<=POWER_REACH).length;tiles.sort((a,b)=>gain(b)-gain(a));}
  else if(def.irrigable)tiles.sort((a,b)=>s.placementEffects(type,b.x,b.z).water-s.placementEffects(type,a.x,a.z).water||Math.abs(a.x-11)+Math.abs(a.z-12)-Math.abs(b.x-11)-Math.abs(b.z-12));
- else tiles.sort((a,b)=>Math.abs(a.x-11)+Math.abs(a.z-12)-Math.abs(b.x-11)-Math.abs(b.z-12));
+ // The placement preview's slowdown (proximity.js slowNotes) counts like a few tiles of walking.
+ else{const far=t=>Math.abs(t.x-11)+Math.abs(t.z-12)+(1-s.placementEffects(type,t.x,t.z).speed)*8;const cost=new Map(tiles.map(t=>[t,far(t)]));tiles.sort((a,b)=>cost.get(a)-cost.get(b));}
  for(const t of tiles){if(type!=='warehouse'&&!s.routeTo(s.entries(s.warehouse)[0],{x:t.x,z:t.z,size:1}))continue;if(s.build(type,t.x,t.z).ok)return;}
  if(onGrid&&type!=='substation'){build(s,'substation',count(s,'substation')+1);return;}
  if(s.money>s.expansionCost()+400){for(let z=0;z<6;z++)for(let x=0;x<6;x++)if(s.canExpand(x,z)){s.expand(x,z);return;}}
@@ -81,7 +82,7 @@ function operate(){const s=c.home.sim;c.activeId=c.homeId;
  if(s.debt&&(s.money>1400||(s.promotion()?.requirements.some(r=>r.key==='debtFree'&&!r.done)&&s.money>300)))s.repay();if(!s.family&&s.rank>=2&&s.money>400)s.rescue();if(s.rank>=5&&!s.charter)s.chooseCharter('commons');
  if(s.rank>=2&&s.expansions<2&&s.money>s.expansionCost()+300){for(const [x,z]of [[4,3],[3,4],[2,4]])if(s.expand(x,z).ok)break;}
  // Each promotion also records how far the next rank's requirements already stand the moment it lands (audit A2-P1).
- const p=s.promotion();if(p?.ready){assert.equal(s.promote().ok,true);milestones.push({rank:s.rank+1,name:RANKS[s.rank].name,day:s.day,money:Math.floor(s.money),nextOnArrival:(s.promotion()?.requirements||[]).map(q=>[q.key,Math.floor(q.current),q.target])});console.log(JSON.stringify(milestones.at(-1)));}
+ const p=s.promotion();if(p?.ready){assert.equal(s.promote().ok,true);milestones.push({rank:s.rank+1,name:RANKS[s.rank].name,day:s.day,elapsed:+(s.time/80).toFixed(2),money:Math.floor(s.money),nextOnArrival:(s.promotion()?.requirements||[]).map(q=>[q.key,Math.floor(q.current),q.target])});console.log(JSON.stringify(milestones.at(-1)));}
  const neededSites=Math.max(s.rank>=20?3:2,...(s.promotion()?.requirements||[]).filter(r=>r.key==='sites').map(r=>r.target));
  if(s.rank>=13&&c.sites.length<neededSites&&s.money>2600&&buyMissing(s,1400,{wood:24,stone:16,water:8}))c.foundSite('estern','highland');
  // The first freight route opens with spare steel, or with timber as soon as the next rank counts inter-site freight
@@ -122,7 +123,9 @@ assert.equal(c.rank,32,'all 33 ranks must be reachable through player actions');
 
 // Acceptance criteria A1~A5 (docs/BALANCE_PATCH_20260928.md 9-3).
 const SEGMENTS=[['A 개척',1,6,6],['B 가공',7,13,16],['C 중공업',14,19,27],['D 첨단',20,23,35],['E 자치',24,28,47],['F 국가',29,32,60]];
-const reached=rank=>milestones.find(m=>m.rank-1>=rank)?.day;
+// Segment targets are days played (6 days = 480 game seconds), so the end is the elapsed time, not the 1-based day number
+// (reaching 임차 사업주 7.1 days in is day 8 by number but inside the 7.5-day window).
+const reached=rank=>milestones.find(m=>m.rank-1>=rank)?.elapsed;
 const full=days.filter(d=>!d.partial);
 const segments=SEGMENTS.map(([name,from,to,target])=>{const rows=full.filter(d=>d.rank>=from-(from===1?1:0)&&d.rank<=to);return {name,ranks:from+'~'+to,endDay:reached(to),target,window:[target*.75,target*1.25],averageIncome:rows.length?Math.round(rows.reduce((n,d)=>n+d.income,0)/rows.length):0,days:rows.length};});
 const perDay=Object.values(milestones.reduce((m,v)=>(m[v.day]=(m[v.day]||0)+1,m),{}));

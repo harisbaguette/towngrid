@@ -73,7 +73,12 @@ export function goalAction(s,key){
   const c=typeof s.contract==='function'?s.contract():null,ready=typeof s.contractStatus!=='function'||contractState(s).ready;
   // A maker that stands but waits for a material nothing here makes (a smokehouse with no fishery) gets its supplier.
   const fix=!ready&&c?.item&&Math.floor(s.availableStock?.(c.item)||0)<c.amount?starved(c.item):null;if(fix)return fix;
-  if(ready||!c?.item||s.buildings.some(b=>b.health>0&&outputOf(s,b)===c.item)||Math.floor(s.availableStock?.(c.item)||0)>=c.amount)return {kind:'contract',label:'납품'};
+  // Made here but eaten by the chain faster than the order fills (guide-bot 2026-10-03: 밀 16 open for eleven days with
+  // 7,000G in hand): with money to spare the card offers to import the rest of the order.
+  const have=Math.floor(s.availableStock?.(c?.item)||0),lack=c?.item?c.amount-have:0;
+  if(!ready&&lack>0&&s.buildings.some(b=>b.health>0&&outputOf(s,b)===c.item)&&s.money>=Math.ceil(RESOURCES[c.item].price*1.85)*lack*3+300&&!s.shipments?.some(sh=>sh.kind==='import'&&sh.item===c.item))
+   return {kind:'market',label:RESOURCES[c.item].name+' '+lack+'개 수입 · 납품용',item:c.item,amount:c.amount};
+  if(ready||!c?.item||s.buildings.some(b=>b.health>0&&outputOf(s,b)===c.item)||have>=c.amount)return {kind:'contract',label:'납품'};
   return build(maker(c.item),BUILDINGS[maker(c.item)]?.name+' 짓기 · 납품 '+RESOURCES[c.item].name)||{kind:'market',label:RESOURCES[c.item].name+' 수입',item:c.item,amount:c.amount};
  }
  if(key==='expansions')return {kind:'tool',tool:'expand',label:'영토 확장 · '+(typeof s.expansionCost==='function'?s.expansionCost():'')+'G'};
@@ -434,4 +439,23 @@ export function clusterMarkers(items,gapX=50,gapY=28){
   if(g)g.members.push(m);else groups.push({lead:m,members:[]});
  }
  return groups;
+}
+
+/**
+ * Town Star's efficiency needle (docs/TOWNSTAR_RULES.md): the facility its spot slows most (shade, wind shelter or
+ * pollution cutting at least 20%), with the nearest owned spot that runs it at least 15 points faster and the move's
+ * price. null when every facility runs within 20% of its spot's best. The operations card shows it and tests/guide-bot.mjs
+ * presses it, as a player would.
+ */
+export function slowSpot(s){
+ if(typeof s.placementEffects!=='function'||typeof s.canRelocate!=='function')return null;
+ const penalty=(type,x,z)=>{const e=s.placementEffects(type,x,z);return {speed:e.speed,hit:(e.pollution||0)+(e.shade||0)+(e.windBlock||0)};};
+ let worst=null;
+ for(const b of s.buildings){const d=BUILDINGS[b.type];if(!d?.period||b.health<=0||b.enabled===false||b.movingUntil>s.time)continue;
+  const now=penalty(b.type,b.x,b.z);if(!now.hit||now.speed>=.8)continue;if(!worst||now.speed<worst.from)worst={b,from:now.speed};}
+ if(!worst)return null;const {b}=worst,door=s.warehouse&&s.entries(s.warehouse)[0];let best=null;
+ for(const k of s.owned){const [x,z]=k.split(',').map(Number);if(s.at(x,z)||s.roads.has(k))continue;const to=s.placementEffects(b.type,x,z).speed;if(to<worst.from+.15)continue;
+  const far=Math.abs(x-b.x)+Math.abs(z-b.z);if(best&&(far>best.far||far===best.far&&to<=best.to))continue;
+  if(s.canRelocate(b.id,x,z))continue;if(door&&!s.routeTo(door,{x,z,size:1}))continue;best={x,z,to,far};}
+ return best?{building:b,x:best.x,z:best.z,from:worst.from,to:best.to,cost:s.relocationCost(b)}:null;
 }

@@ -12,7 +12,9 @@ import {BUILDINGS,RESOURCES,ACTION_PRICES} from '../src/app/game/simulation.js';
 import {RANKS} from '../src/app/game/world.js';
 import {productionDiagnosis} from '../src/app/game/proximity.js';
 import {RESCUE_PRICES} from '../src/app/game/living-economy.js';
-import {blockHint,contractConflict,contractState,crewHouse,exportBlocked,fullStoreSale,goalAction,nextBuild,plannedNeeds,plantSpot,promotionParts,quickSaleLot,recoveryState,repairPlan,sellableStock,shortfall,tutorialStep} from '../src/app/game/ui-rules.js';
+import {startingProvinces} from '../src/app/game/starting-sites.js';
+import {layoutOf} from '../src/app/game/world-grid.js';
+import {blockHint,contractConflict,contractState,crewHouse,exportBlocked,fullStoreSale,goalAction,nextBuild,plannedNeeds,plantSpot,promotionParts,quickSaleLot,recoveryState,repairPlan,sellableStock,shortfall,slowSpot,tutorialStep} from '../src/app/game/ui-rules.js';
 
 const DAY=80;                // game seconds per day (simulation.js get day)
 const TARGET=7;              // rank index 7 = 8단계 지역 공급자
@@ -22,7 +24,12 @@ const LIMIT_DAYS=45;         // a dead end: not there by then
 const STAGE_DAYS=25;         // a dead end: one rank this long (the audit's player sat at 2단계 for 44 days)
 const STUCK_DAYS=1.5;        // the same stall on top of the card may not stay longer
 const REPEAT_FAILS=12;       // the same button failing again and again with nothing changing
-const STARTS=[{nation:'estern'},{nation:'silvaen'},{nation:'kardum'}].slice(0,+(process.env.TG_GUIDE_SITES||3));
+// The three default starts first, then every other playable nation's default start and one start of each ecology the
+// first three do not cover (coast, marsh, snow, basin), so a dead end on one kind of land shows up here.
+const pick=(nation,ecology)=>startingProvinces(nation).find(p=>layoutOf(p.id)?.ecology===ecology)?.id;
+const STARTS=[{nation:'estern'},{nation:'silvaen'},{nation:'kardum'},{nation:'miel'},{nation:'rivente'},{nation:'arsel'},{nation:'broden'},{nation:'neiren'},
+ {nation:'estern',provinceId:pick('estern','coast')},{nation:'estern',provinceId:pick('estern','marsh')},{nation:'arsel',provinceId:pick('arsel','snow')},{nation:'arsel',provinceId:pick('arsel','basin')}]
+ .slice(0,+(process.env.TG_GUIDE_SITES||12));
 
 function play(start){
  const c=new Campaign(start),log=[],ranks=[{rank:c.rank,day:0}],stalls=[],fails=new Map(),cool=new Map();
@@ -79,7 +86,9 @@ function play(start){
    else if(diag?.tool&&ready('diag:'+diag.tool,90))place(diag.tool);
   }
   if(repairPlan(sim).list.length>1&&sim.money>=repairPlan(sim).cheapest&&ready('repairAll',20))act('모두 수리',()=>sim.repairAll());
-  const next=nextBuild(sim);if(next&&ready('next:'+next.type,30))place(next.type);
+  // The card's slow-spot row (ui-rules slowSpot): move the facility its spot slows most.
+ const slow=slowSpot(sim);if(slow&&ready('slow:'+slow.building.id,120)&&sim.money>=slow.cost+60)act(BUILDINGS[slow.building.type].name+' 자리 옮기기',()=>sim.relocate(slow.building.id,slow.x,slow.z));
+ const next=nextBuild(sim);if(next&&ready('next:'+next.type,30))place(next.type);
   if(contractState(sim).ready&&!contractConflict(sim))act('납품',()=>sim.fulfill());
   for(const part of promotionParts(sim,sim.promotion()).filter(v=>!v.done))goal(part.key);
   if(sim.money<60)money();
@@ -97,7 +106,7 @@ function play(start){
 const results=STARTS.map(play);
 for(const r of results)console.log(JSON.stringify({start:r.start,reached:RANKS[r.rank]?.name,day:r.day,ranks:r.ranks.map(v=>(v.rank+1)+'단계@'+v.day+'일'),stalls:r.stalls,worstFail:r.worstFail,money:r.money,open:r.open}));
 let bad=0;
-for(const r of results){const name=r.start.nation;
+for(const r of results){const name=r.start.nation+(r.start.provinceId?'/'+r.start.provinceId:'');
  const gaps=r.ranks.slice(1).map((v,i)=>({rank:v.rank+1,days:+(v.day-r.ranks[i].day).toFixed(2)}));
  const checks=[
   ['reaches 8단계 within '+LIMIT_DAYS+' days',r.rank>=TARGET&&r.day<=LIMIT_DAYS,{rank:r.rank+1,day:r.day,open:r.open,buildings:r.buildings,tail:r.tail}],

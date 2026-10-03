@@ -19,6 +19,8 @@ export const WATER_RING=[0,2,1],OPEN_WATER=3;
  *  (three neighbours). At the first cap of 50% a clustered raw field out-earned the processing plant it feeds per tile
  *  (balance-report C12, docs/BALANCE_PATCH_20260928.md 17-3). */
 export const CLUSTER_STEP=.1,CLUSTER_MAX=3;
+/** Each point of shade, wind shelter or pollution multiplies the time by this on a current map (placementEffects). */
+export const PENALTY_STEP=1.2,PENALTY_FLOOR=.25;
 /** Extraction sites (every raw producer outside the farm group: wells, lumber camps, quarries, pits, mines, pumps) share
  *  the trees, rock, ore or ground water around them, so a cluster of them gains at most 10% (one neighbour). With the
  *  30% cap a full cluster of lumber camps and iron mines let charcoal steel, planks and steel gears fall under 1.15 times
@@ -66,7 +68,12 @@ export function placementEffects(sim,type,x,z){
  // A solar panel loses 20% per step of MOUNTAIN shade only (G1-E2, docs/BALANCE_PATCH_20260928.md 19): it stands among
  // tall factories that block the wind turbine. Salt slows an irrigated crop 15% a step and speeds a salt pan 20% a
  // step; a flooded mine runs at 70%; pasture feeds a herd 10% a point up to 40%.
- const speed=(sensitive?Math.max(.4,1-pollution*.1-(crop?shade*.1+salt*.15:0)):1)*(wind?Math.max(.4,1-windBlock*.2):1)*(type==='solarpanel'?Math.max(.4,1-Math.min(3,mountain)*.2):1)
+ // Town Star doubles a facility's time for every point of shade, wind shelter or pollution (docs/TOWNSTAR_RULES.md). A map
+ // with land.ecology plays a softer version: each point multiplies the time by PENALTY_STEP (1.2), down to a quarter of the
+ // speed, and never cuts less than the old rule did (wind keeps its 20% a point); an older save keeps the old 10%/20%-a-point
+ // cut, as it keeps its other terrain rules. A steeper step cost the reference bot more than a day before 임차 사업주.
+ const steep=(n,old)=>Math.min(old,Math.max(PENALTY_FLOOR,1/PENALTY_STEP**n));
+ const speed=(sensitive?modern?steep(pollution+(crop?shade:0),Math.max(.4,1-pollution*.1-(crop?shade*.1:0)))*(crop?Math.max(.4,1-salt*.15):1):Math.max(.4,1-pollution*.1-(crop?shade*.1+salt*.15:0)):1)*(wind?modern?steep(windBlock,Math.max(.4,1-windBlock*.2)):Math.max(.4,1-windBlock*.2):1)*(type==='solarpanel'?Math.max(.4,1-Math.min(3,mountain)*.2):1)
   *(type==='saltfield'?1+salt*.2:1)*(flooded?.7:1)*(HERDS.includes(type)?1+Math.min(.4,graze*.1):1)/(1-cluster*CLUSTER_STEP);
  const blocked=type==='apiary'&&!clover?'야생 클로버 필요':null;
  return {water,waterScore,waterNeed:need,irrigator,pollution,shade,mountain,windBlock,salt,flooded,graze,clover,cluster,serves,blocked,modern,road,speed,sources};
@@ -81,11 +88,11 @@ export function slowNotes(type,e,panel=false){
  const d=BUILDINGS[type],crop=!!d?.irrigable,out=[];
  const sensitive=crop||['stable','dock','henhouse','sheeppen','milkbarn','duckhouse','apiary'].includes(type);
  // In the facility panel a rule that applies is always listed with its scale ("바람막이 0/3"); the preview lists only hits.
- const add=(name,value,max,cut)=>{if(value>0||panel)out.push({text:name+' '+value+(panel?'/'+max:'')+(value>0?' · 생산 -'+Math.min(60,value*cut)+'%':''),tone:value>0?'negative':''});};
+ const add=(name,value,max,cut)=>{const old=Math.min(60,value*(cut==='solar'?20:cut)),pct=e.modern&&cut!=='solar'?Math.max(old,Math.round((1-Math.max(PENALTY_FLOOR,1/PENALTY_STEP**value))*100)):old;if(value>0||panel)out.push({text:name+' '+value+(panel?'/'+max:'')+(value>0?' · 생산 -'+pct+'%':''),tone:value>0?'negative':''});};
  if(sensitive)add('오염',e.pollution||0,6,10);
  if(crop)add((e.shade&&e.mountain>=e.shade?'산 ':'')+'그늘',e.shade||0,3,10);
  if(WIND.includes(type))add((e.windBlock&&e.mountain>=e.windBlock?'산 ':'')+'바람막이',e.windBlock||0,3,20);
- if(type==='solarpanel')add('산 그늘',Math.min(3,e.mountain||0),3,20);
+ if(type==='solarpanel')add('산 그늘',Math.min(3,e.mountain||0),3,'solar');
  return out;
 }
 /** Short notes on the rules that act on this facility at this spot, for the placement preview and the facility panel. */
