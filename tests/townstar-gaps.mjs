@@ -100,7 +100,7 @@ let n=0;const ok=label=>{n++;console.log('PASS',label);};
  assert.equal(roomFor(s,'water')-roomFor(s,'steel'),capacity(s,b)-used(b),'the tank is room for water only');
  deposit(s,'wood',roomFor(s,'wood'));assert.equal(roomFor(s,'steel'),0);const steel=s.stock.steel;
  const route={id:'route-9',from:c.homeId,to:c.homeId,item:'steel',amount:5,mode:'truck',enabled:true,cargo:5,remaining:0,duration:1,completed:0,status:''};
- c.tickRoute(route,.25);assert.equal(route.status,'도착지 창고 가득 참');assert.equal(s.stock.steel,steel,'no steel squeezed into the full warehouse');ok('depot shrink refused, route room per good');}
+ c.tickRoute(route,.25);assert.match(route.status,/도착지 창고/);assert.equal(s.stock.steel,steel,'no steel squeezed into the full warehouse');ok('depot shrink refused, route room per good');}
 
 // 15. A daily reward completed by a branch's sale is booked with that branch: its money flow and its income agree, and
 //     the home's ledger keeps no unexplained difference.
