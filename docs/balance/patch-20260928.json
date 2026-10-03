@@ -6322,5 +6322,121 @@
    },
    "unit": "8단계 도달 게임일(1일=80게임초)"
   }
+ },
+ "townstar20261003": {
+  "note": "타운스타 대조 반영. 정본은 코드이고 BALANCE_PATCH_20260928.md 22절이 같은 내용이다.",
+  "upkeep": {
+   "earlyFrom": 6,
+   "early": 0.015,
+   "fromRank": 13,
+   "facility": 0.03,
+   "idle": 0.25,
+   "unpaidSpeed": 0.75
+  },
+  "clearing": {
+   "from": 4,
+   "tree": 8,
+   "rock": 20
+  },
+  "placement": {
+   "step": 1.2,
+   "floor": 0.25,
+   "neverMilderThanOld": true,
+   "slowSpot": {
+    "below": 0.8,
+    "gain": 0.15
+   }
+  },
+  "league": {
+   "starsPer10G": 1,
+   "contractStars": 1.5,
+   "weekDays": 7,
+   "prize": [
+    5,
+    3,
+    2,
+    1,
+    0.5,
+    0,
+    0,
+    0
+   ],
+   "prizeBase": 100,
+   "prizePerRank": 60,
+   "daily": {
+    "share": 0.8,
+    "growth": 1.08,
+    "min": 30,
+    "payPerStar": 1
+   },
+   "rivalPace": [
+    0.65,
+    1.31
+   ],
+   "gift": {
+    "wait": 30,
+    "perRelation": 40,
+    "max": 3,
+    "thanks": [
+     60,
+     75,
+     90
+    ],
+    "thanksBase": 150,
+    "thanksPerRank": 50
+   },
+   "seasons": [
+    "spring 봄 꽃 축제",
+    "summer 여름 항구 축제",
+    "autumn 가을 수확제",
+    "winter 겨울 등불제"
+   ]
+  },
+  "haulGear": [
+   {
+    "id": "handcart",
+    "rank": 3,
+    "money": 400,
+    "items": {
+     "plank": 12
+    },
+    "load": 4
+   },
+   {
+    "id": "wagon",
+    "rank": 9,
+    "money": 1800,
+    "items": {
+     "plank": 20,
+     "brick": 10
+    },
+    "load": 5
+   }
+  ],
+  "stockCaps": [
+   0,
+   50,
+   100,
+   200,
+   400
+  ],
+  "storeModes": {
+   "crops": 1440,
+   "materials": 1440,
+   "water": 2400,
+   "fuel": 720,
+   "default": 240
+  },
+  "landSales": {
+   "oilSeep": 400,
+   "reeds": 60
+  },
+  "offline": {
+   "minRealSeconds": 60,
+   "maxRealSeconds": 1800,
+   "speed": 4,
+   "events": "시작하지 않음"
+  },
+  "contractImport": "납품 품목을 만들고 있는데 모자라고 자금이 수입가의 3배 + 300G 이상이면 계약 목표 버튼이 나머지 수입을 안내한다"
  }
 }
