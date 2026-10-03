@@ -126,7 +126,7 @@ export function tickNetworks(s,dt){
    s.logisticsStats.direct=(s.logisticsStats.direct||0)+n;s.logisticsStats.delivered=(s.logisticsStats.delivered||0)+n;
    recordNetworkTransfer(s,net,from,to,item,n);};
   for(const to of sinks)for(const from of sources)move(from,to,Math.min(spare(from),want(to)));
-  for(const store of localStores){for(const from of sources)move(from,store,Math.min(spare(from),Math.floor(freeSpace(s,store))));
+  for(const store of localStores){for(const from of sources)move(from,store,Math.min(spare(from),Math.floor(freeSpace(s,store,item))));
    for(const to of sinks)move(store,to,Math.min(Math.floor(storeStock(s,store,item)),want(to)));}
  }
 }

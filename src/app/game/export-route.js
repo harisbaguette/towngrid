@@ -147,7 +147,7 @@ export function dispatchShipment(s,item,amount,revenue,auto,extra={}){
  if(!vehicle)return fleet(s).every(v=>v.busy)?'운송 수단이 모두 운행 중입니다':'연료 부족 · 시장에서 연료를 수입하세요';
  const candidates=stores(s).map(b=>({b,route:storeRoute(s,b,terminal)})).filter(v=>v.route).sort((a,b)=>a.route.length-b.route.length);
  const pickups=[];let left=amount,route=[],store=null;
- if(importing){const dest=candidates.find(v=>freeSpace(s,v.b)>=amount);if(!dest)return '수입품을 받을 연결된 창고의 공간이 부족합니다';store=dest.b;route=dest.route;}
+ if(importing){const dest=candidates.find(v=>freeSpace(s,v.b,item)>=amount);if(!dest)return '수입품을 받을 연결된 창고의 공간이 부족합니다';store=dest.b;route=dest.route;}
  else{
   for(const v of candidates){const n=Math.min(left,Math.floor(storeStock(s,v.b,item)));if(n<=0)continue;
    if(!route.length){route=v.route.slice(0,1);store=v.b;}

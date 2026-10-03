@@ -19,9 +19,14 @@ export function canEnter(s,race,b){
  if(!b||isStore(b))return true;const crew=crewFor(s,b.type);if(crew&&crewOf(race)!==crew)return false;
  return !(BUILDINGS[b.type].skilled&&RACES[race]?.hauler);
 }
+/** Goods one resident carries: 3, one more per hauling gear tier (HAUL_GEAR). */
+export const HAUL_GEAR=[{id:'handcart',name:'손수레',rank:3,money:400,items:{plank:12},load:4},{id:'wagon',name:'짐마차',rank:9,money:1800,items:{plank:20,brick:10},load:5}];
+export const haulLoad=s=>HAUL_GEAR[(s.haulGear||0)-1]?.load||3;
+/** The stock cap the player set for a good (0 or none = no cap). */
+export const atStockCap=(s,item)=>s.stockCap?.[item]>0&&(s.stock[item]||0)>=s.stockCap[item];
 export function assignJob(s,w){
  if(!stores(s).length)return;
- const capacity=(s.automatic?6:3)*(RACES[w.race]?.hauler?2:1), jobs=[];
+ const capacity=haulLoad(s)*(s.automatic?2:1)*(RACES[w.race]?.hauler?2:1), jobs=[];
  for(const b of s.buildings){
   if(b.health<=0||isStore(b)||b.movingUntil>s.time)continue;
   const allowed=canEnter(s,w.race,b);
@@ -36,17 +41,18 @@ export function assignJob(s,w){
   }
   const item=s.recipeOf(b).output;
   if(allowed&&RESOURCES[item]){
-   const output=b.out-reserved(s,item,b.id);
-   for(const store of nearbyStores(s,b)){
-    const space=freeSpace(s,store);
+   // A good at the stock cap the player set stays at the facility (Town Star's keep-amount, docs/TOWNSTAR_RULES.md).
+   const output=atStockCap(s,item)?0:b.out-reserved(s,item,b.id);
+   for(const store of nearbyStores(s,b,item)){
+    const space=freeSpace(s,store,item);
     if(output>0&&space>0)jobs.push({source:b,target:store,item,amount:Math.min(capacity,output,space),priority:output>=8?38:18,score:distance(w,b)+distance(b,store),age:b.age,kind:'pickup'});
    }
   }
  }
  for(const source of stores(s).filter(b=>b.drain))for(const [item,n]of Object.entries(source.inventory||{})){
   if(n<=0)continue;
-  for(const target of nearbyStores(s,source).filter(b=>b!==source&&!b.drain)){
-   const amount=Math.min(capacity,storeStock(s,source,item),freeSpace(s,target));
+  for(const target of nearbyStores(s,source,item).filter(b=>b!==source&&!b.drain)){
+   const amount=Math.min(capacity,storeStock(s,source,item),freeSpace(s,target,item));
    if(amount>0)jobs.push({source,target,item,amount,priority:45,score:distance(w,source)+distance(source,target),age:0,kind:'pickup',building:source.id||target.id});
   }
  }

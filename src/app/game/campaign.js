@@ -7,7 +7,7 @@ import {defaultStartingProvince,startingProvince} from './starting-sites.js';
 import {expansionOffer,SITE_MATERIALS} from './site-expansion.js';
 // Running transit facilities of a site: the smallest travel-time factor they offer (M5), 1 when none run.
 const transitFactor=sim=>Math.min(1,...sim.buildings.filter(b=>BUILDINGS[b.type].output==='transit'&&b.health>0&&b.enabled!==false&&b.activeUntil>sim.time).map(b=>BUILDINGS[b.type].transitFactor||1));
-const SHARED=['money','debt','family','rank','contracts','contractReadyAt','totalRevenue','produced','sold','emergencyUsed','rescueQuest','charter'];
+const SHARED=['money','debt','family','rank','contracts','contractReadyAt','totalRevenue','produced','sold','emergencyUsed','rescueQuest','charter','haulGear'];
 const ok=()=>({ok:true});const fail=error=>({ok:false,error});
 // Council, diplomacy and freight prices (docs/BALANCE_PATCH_20260928.md 15). The rules and the buttons both read these (A2-L1).
 // perRank: one act becomes available at each rank from `from`, unused ones carry over (A2-U3). welfare: per site, once a day (A2-U1).
@@ -24,7 +24,10 @@ export const COUNCIL={
 };
 // Daily running costs from 법인 대표 on (A2-M1): facilities pay a share of their build cost (a switched-off one a quarter of
 // that), every branch site a governance fee that grows with the stage, and each guard unit its pay.
-export const UPKEEP={fromRank:13,facility:.03,idle:.25,sitePerStage:15};
+// Facility wages from the first day (Town Star charges every facility's wage whether it works or not, docs/TOWNSTAR_RULES.md):
+// 1.5% of the build cost a day from 등록 사업주 (the first stage where money piles up, guide-bot 2026-10-03), 3% from
+// 법인 대표, a quarter for a facility switched off. Before 등록 사업주 the start money and the ransom debt are the pressure.
+export const UPKEEP={earlyFrom:6,fromRank:13,facility:.03,early:.015,idle:.25,sitePerStage:15};
 // A running airdock anywhere flies emerging-state orders: their payment rises by this factor (A2-F1).
 export const AIR_FREIGHT=1.2;
 /** "1,200G · 강철 4 · 자동차 1" for a price {money, items}. */
@@ -101,9 +104,9 @@ export class Campaign{
  /** Damage, raids and unrest drivers of one site, for the site list (C1, A2-U2). */
  siteStatus(site){const s=site.sim,causes=this.unrestCauses(site);return {broken:s.buildings.filter(b=>b.health<=0).length,damaged:s.buildings.filter(b=>b.health>0&&b.health<100).length,raid:!!(s.raid&&!s.raid.finished),causes,trend:causes.reduce((n,v)=>n+v.delta,0)};}
  /** Daily running costs (A2-M1). */
- upkeep(){if(this.rank<UPKEEP.fromRank)return {facilities:0,sites:0,guards:this.defense*COUNCIL.defense.upkeep,total:this.defense*COUNCIL.defense.upkeep};
-  let facilities=0;for(const site of this.sites)for(const b of site.sim.buildings){const d=BUILDINGS[b.type];if(d.home||d.tile||d.terrain||b.type==='warehouse'||b.health<=0)continue;facilities+=d.cost*UPKEEP.facility*(b.enabled===false?UPKEEP.idle:1);}
-  facilities=Math.round(facilities);const sites=(this.sites.length-1)*UPKEEP.sitePerStage*Math.max(1,this.stage),guards=this.defense*COUNCIL.defense.upkeep;return {facilities,sites,guards,total:facilities+sites+guards};}
+ upkeep(){const early=this.rank<UPKEEP.fromRank,rate=this.rank<UPKEEP.earlyFrom?0:early?UPKEEP.early:UPKEEP.facility;
+  let facilities=0;for(const site of this.sites)for(const b of site.sim.buildings){const d=BUILDINGS[b.type];if(d.home||d.tile||d.terrain||b.type==='warehouse'||b.health<=0)continue;facilities+=d.cost*rate*(b.enabled===false?UPKEEP.idle:1);}
+  facilities=Math.round(facilities);const sites=early?0:(this.sites.length-1)*UPKEEP.sitePerStage*Math.max(1,this.stage),guards=this.defense*COUNCIL.defense.upkeep;return {facilities,sites,guards,total:facilities+sites+guards};}
  worldDay(){let average=0;
   for(const site of this.sites){site.unrest=Math.max(0,Math.min(100,site.unrest+this.unrestCauses(site).reduce((n,v)=>n+v.delta,0)));average+=site.unrest;if(this.stage>=22&&site.unrest>=85&&site.id!==this.homeId&&site.territory){site.territory=false;site.unrest=55;this.spawnState(site.nation,site.name+' 자치국');this.log(site.name+'이 독립했습니다. 사업장은 남지만 현지 세금이 다시 부과됩니다.');}}
   this.support=Math.max(10,Math.min(95,100-average/this.sites.length-20));const dividend=this.dividend(),cost=this.upkeep().total,budget=this.home.sim.budget;this.treasury.money+=dividend-cost;if(budget){budget.income+=dividend;budget.expenses+=cost;}
@@ -172,5 +175,7 @@ export class Campaign{
   const top=(list,prefix)=>Math.max(0,...list.map(v=>+String(v.id).slice(prefix.length)||0));
   this.nextSite=Math.max(+this.nextSite||1,top(this.sites,'site-')+1);this.nextRoute=Math.max(+this.nextRoute||1,top(this.routes,'route-')+1);this.nextState=Math.max(+this.nextState||1,top(this.newStates,'new-')+1);
   // A save that reached the last rank before completion records existed gets one from its current state.
-  if(this.rank===RANKS.length-1&&!this.completion)this.completion={...this.record(),restored:true};}
+  if(this.rank===RANKS.length-1&&!this.completion)this.completion={...this.record(),restored:true};
+  // An order a save kept from before the skip rule, for a base good nothing makes, is drawn again (simulation.js contractStale).
+  if(this.active.contractStale())delete this.treasury.contractOrder;}
 }

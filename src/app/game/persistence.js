@@ -3,6 +3,7 @@ import {BUILDINGS,RESOURCES,N,homeCapacity,unpackTiles,GOOD_EVENTS} from './simu
 import {NATIONS,RANKS,RACES} from './world.js';
 import {MAX_EXPORT_CARTS,VEHICLES} from './export-route.js';
 import {validLayout} from './world-grid.js';
+import {STORE_MODES} from './storage.js';
 export const SAVE_KEY='first-land-v1';
 export const RECOVERY_KEY=SAVE_KEY+'-recovery';
 export const BACKUP_KEY=SAVE_KEY+'-backup';
@@ -45,6 +46,7 @@ function validateSimulation(s){
  if(!['river','coast','highland'].includes(s.region)||s.land!==undefined&&!validLayout(s.land))fail();
  numericFields(s,['time','nextEvent','nextId','seed','raidCount','eventCount','contracts','contractReadyAt','expansions','totalRevenue','wardUntil','healthUntil','outageUntil','strikeUntil','sanctionUntil','harvestUntil','merchantUntil','batteryCharge','diseaseUntil']);
  numericFields(s,['lastRecoveryDay'],-1e12);flags(s,['family','protected','emergencyUsed','starterDrain']);
+ if(s.stockCap!==undefined)resourceMap(s.stockCap);if(s.haulGear!==undefined&&(!Number.isInteger(s.haulGear)||s.haulGear<0||s.haulGear>2))fail();
  if(s.budget){if(typeof s.budget!=='object')fail();numericFields(s.budget,['day','income','expenses','lastIncome','lastExpenses']);}
  if(s.autoSell)for(const[k,v]of Object.entries(s.autoSell))if(!ref(RESOURCES,k)||typeof v!=='boolean')fail();
  if(s.pendingEvent&&(!events.includes(s.pendingEvent.type)||!number(s.pendingEvent.at)))fail();
@@ -52,13 +54,13 @@ function validateSimulation(s){
  for(const b of s.buildings){if(!ref(BUILDINGS,b.type)||!Number.isInteger(b.id)||ids.has(b.id)||!Number.isInteger(b.x)||!Number.isInteger(b.z)||b.x<0||b.x>=N||b.z<0||b.z>=N||!number(b.health,0,100)||!number(b.out)||!number(b.progress,0,1.01)||!b.inputs)fail();ids.add(b.id);const k=`${b.x},${b.z}`;if(occupied.has(k))fail();occupied.add(k);for(const[r,n]of Object.entries(b.inputs))if(!ref(RESOURCES,r)||!number(n))fail();}
  // A chosen product must be one of the facility's recipes; the running batch lists real resources.
  for(const b of s.buildings){if(b.recipe!==undefined&&!BUILDINGS[b.type].recipes?.some(r=>r.id===b.recipe))fail();if(b.batch!==undefined)resourceMap(b.batch);}
- for(const b of s.buildings){if(b.level!==undefined&&(!Number.isInteger(b.level)||b.level<1||b.level>3))fail();if(b.race&&!ref(RACES,b.race))fail();numericFields(b,['activeUntil','age','animationTime','cycles','refundUntil','movingUntil']);numericFields(b,['priority'],0,2);flags(b,['enabled','working','specialized','armorUsed','drain']);if(b.status!==undefined&&!label(b.status,300))fail();
+ for(const b of s.buildings){if(b.level!==undefined&&(!Number.isInteger(b.level)||b.level<1||b.level>3))fail();if(b.race&&!ref(RACES,b.race))fail();numericFields(b,['activeUntil','age','animationTime','cycles','refundUntil','movingUntil','clearing']);numericFields(b,['priority'],0,2);flags(b,['enabled','working','specialized','armorUsed','drain']);if(b.status!==undefined&&!label(b.status,300))fail();
   // What a paid build cleared from its tile, put back if it is cancelled in full (simulation.js build / demolish).
   const c=b.cleared;if(c!==undefined&&(!record(c)||!['tree','rock','sapling'].includes(c.nature)||!number(c.remaining,-100,1e6)||c.growAt!==undefined&&!number(c.growAt)))fail();}
  if(s.storageVersion!==undefined){
   if(s.storageVersion!==1)fail();resourceMap(s.starterInventory);
   const total={...s.starterInventory};
-  for(const b of s.buildings){if(b.inventory!==undefined){if(!['warehouse','depot'].includes(b.type))fail();resourceMap(b.inventory);for(const [id,n]of Object.entries(b.inventory))total[id]=(total[id]||0)+n;}}
+  for(const b of s.buildings){if(b.mode!==undefined&&(b.type!=='depot'||!Object.hasOwn(STORE_MODES,b.mode)))fail();if(b.inventory!==undefined){if(!['warehouse','depot'].includes(b.type))fail();resourceMap(b.inventory);for(const [id,n]of Object.entries(b.inventory))total[id]=(total[id]||0)+n;}}
   for(const id of Object.keys(RESOURCES))if(Math.abs((total[id]||0)-(s.stock[id]||0))>1e-6)fail();
  }
  if(s.nextId!==undefined&&(!Number.isInteger(s.nextId)||[...ids].some(id=>id>=s.nextId)))fail();
@@ -93,7 +95,7 @@ export function validateSave(data){
  for(const key of ['newStates','factions','investments','recognition','history'])if(!Array.isArray(data[key]))fail();
  if(data.newStates.length>1000||data.factions.length>100||data.investments.length>10000||data.history.length>1000)fail();
  numericFields(data,['nextSite','nextRoute','nextState','deliveries','lastWorldDay','welfareDay']);
- flags(data.treasury,['family','emergencyUsed']);numericFields(data.treasury,['contracts','contractReadyAt','totalRevenue']);numericFields(data.treasury,['lastRecoveryDay'],-1e12);if(!charter(data.treasury.charter)||!order(data.treasury.contractOrder))fail();
+ flags(data.treasury,['family','emergencyUsed']);if(data.treasury.haulGear!==undefined&&(!Number.isInteger(data.treasury.haulGear)||data.treasury.haulGear<0||data.treasury.haulGear>2))fail();numericFields(data.treasury,['contracts','contractReadyAt','totalRevenue']);numericFields(data.treasury,['lastRecoveryDay'],-1e12);if(!charter(data.treasury.charter)||!order(data.treasury.contractOrder))fail();
  const stateIds=new Set();for(const state of data.newStates){if(!state||!label(state.id,100)||stateIds.has(state.id)||!label(state.name,2000)||!ref(NATIONS,state.rootNation||state.parent)||!number(state.wealth,-1e12)||!number(state.industry,1,12))fail();stateIds.add(state.id);numericFields(state,['age','day','trades','lastTradeDay']);numericFields(state,['unrest','relation'],0,105);flags(state,['pact','dissolved']);
   if(state.parent!==undefined&&!label(state.parent,100)||state.capitalProvince!==undefined&&!provinceRef(state.capitalProvince)||state.provinceIds!==undefined&&(!Array.isArray(state.provinceIds)||!state.provinceIds.every(provinceRef))||state.point!==undefined&&(!Array.isArray(state.point)||state.point.length!==2||!state.point.every(v=>number(v,-1e6,1e6))))fail();}
  const factionIds=new Set();for(const f of data.factions){if(!f||!ref(NATIONS,f.id)||factionIds.has(f.id)||!number(f.wealth,-1e12)||!number(f.industry,1,12)||!number(f.unrest,-1e12)||!number(f.enterprise)||!number(f.age))fail();factionIds.add(f.id);}

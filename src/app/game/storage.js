@@ -3,16 +3,25 @@ import {RESOURCES} from './simulation.js';
 export const STARTER_CAPACITY=160, WAREHOUSE_CAPACITY=960, DEPOT_CAPACITY=240;
 export const isStore=b=>b?.type==='warehouse'||b?.type==='depot'||b?.type==='starter';
 export const used=store=>Object.values(store.inventory||{}).reduce((n,v)=>n+v,0);
-export const capacity=(s,b)=>b.type==='starter'?STARTER_CAPACITY:b.type==='depot'?DEPOT_CAPACITY:WAREHOUSE_CAPACITY+(s.rank>=1?120:0);
+/** A materials depot set to one kind of goods, like Town Star's silo, wood shed, water tower and fuel storage
+ *  (docs/TOWNSTAR_RULES.md): it takes only those goods and holds several times as many on its one tile. */
+export const STORE_MODES={
+ crops:{name:'작물 전용',short:'사일로',capacity:1440,items:['grain','cotton','herb','sugarcane','grapered','grapewhite','cocoa','strawberry','mint','pumpkin','salt','feed']},
+ materials:{name:'자재 전용',short:'자재 야적장',capacity:1440,items:['wood','plank','oakwood','stone','clay','sand','limestone','brick']},
+ water:{name:'물 전용',short:'물 탱크',capacity:2400,items:['water']},
+ fuel:{name:'연료 전용',short:'연료 저장소',capacity:720,items:['fuel','oil','jetfuel','coal']},
+};
+export const accepts=(b,item)=>item===undefined||!b?.mode||!!STORE_MODES[b.mode]?.items.includes(item);
+export const capacity=(s,b)=>b.type==='starter'?STARTER_CAPACITY:b.type==='depot'?STORE_MODES[b.mode]?.capacity||DEPOT_CAPACITY:WAREHOUSE_CAPACITY+(s.rank>=1?120:0);
 export function stores(s,active=true){
  const all=[s.starterStore,...s.buildings.filter(isStore)].filter(Boolean);
  return active?all.filter(b=>b.health>0&&b.enabled!==false&&!(b.movingUntil>s.time)):all;
 }
-export const freeSpace=(s,b)=>b.drain?0:Math.max(0,capacity(s,b)-used(b)-s.workers.reduce((n,w)=>n+(w.task?.targetStore===b.id?w.task.amount:0),0)-s.shipments.reduce((n,sh)=>n+(sh.kind==='import'&&sh.storeId===b.id?sh.amount:0),0));
+export const freeSpace=(s,b,item)=>b.drain||!accepts(b,item)?0:Math.max(0,capacity(s,b)-used(b)-s.workers.reduce((n,w)=>n+(w.task?.targetStore===b.id?w.task.amount:0),0)-s.shipments.reduce((n,sh)=>n+(sh.kind==='import'&&sh.storeId===b.id?sh.amount:0),0));
 export const storeById=(s,id)=>id===0?s.starterStore:s.buildings.find(b=>b.id===id&&isStore(b));
 export const storeStock=(s,b,item)=>Math.max(0,(b.inventory?.[item]||0)-s.workers.reduce((n,w)=>n+(w.task?.sourceStore===b.id&&!w.task.carried&&w.task.item===item?w.task.amount:0),0));
 const distance=(a,b)=>Math.abs(a.x-b.x)+Math.abs(a.z-b.z);
-export function nearbyStores(s,point){return stores(s).sort((a,b)=>distance(a,point)-distance(b,point));}
+export function nearbyStores(s,point,item){return stores(s).filter(b=>accepts(b,item)).sort((a,b)=>distance(a,point)-distance(b,point));}
 // stock remains the public aggregate used by recipes, construction, the ledger and old saves.
 // Its setters account for all existing callers; physical transfers specify a store explicitly.
 export function initStorage(s,saved){
@@ -31,7 +40,7 @@ export function initStorage(s,saved){
 }
 export function deposit(s,item,amount,preferred=null){
  if(!(amount>0))return;let left=amount;
- const list=preferred?[preferred]:nearbyStores(s,s.warehouse||s.starterStore);
+ const list=preferred?[preferred]:nearbyStores(s,s.warehouse||s.starterStore,item);
  for(const b of list){b.inventory??={};const n=preferred?left:Math.min(left,Math.max(0,capacity(s,b)-used(b)));b.inventory[item]=(b.inventory[item]||0)+n;left-=n;if(left<=0)break;}
  // Refunds and legacy over-capacity stock are kept, never discarded.
  if(left>0){const b=preferred||s.warehouse||s.starterStore;b.inventory??={};b.inventory[item]=(b.inventory[item]||0)+left;}
@@ -44,4 +53,4 @@ export function withdraw(s,item,amount,preferred=null){
  s.inventoryTotals[item]=Math.max(0,(s.inventoryTotals[item]||0)-(amount-left));return amount-left;
 }
 export function removeStore(s,b){for(const[item,n]of Object.entries(b.inventory||{})){withdraw(s,item,n,b);deposit(s,item,n,s.starterStore);}b.inventory={};}
-export function storageSummary(s,b){return {used:used(b),capacity:capacity(s,b),items:Object.entries(b.inventory||{}).filter(([,n])=>n>0)};}
+export function storageSummary(s,b){return {used:used(b),capacity:capacity(s,b),mode:b.mode||null,items:Object.entries(b.inventory||{}).filter(([,n])=>n>0)};}
