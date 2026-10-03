@@ -1,0 +1,30 @@
+/* Town Star layer panels (game/TownStarPanels.tsx): daily goal, festival, league, gifts, hauling gear and stock caps. */
+.league-panel,.haul-panel { display:flex; flex-direction:column; gap:10px; }
+.league-card { display:flex; flex-direction:column; gap:7px; padding:10px 12px; border:1px solid var(--ui-rule); border-radius:5px; background:var(--ui-paper-deep); color:var(--ui-ink); }
+.league-card header { display:flex; align-items:center; gap:7px; }
+.league-card header svg { color:var(--ui-forest); flex:none; }
+.league-card header strong { font-size:14px; }
+.league-card header span { margin-left:auto; font-size:12px; color:var(--ui-muted); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.league-card small { font-size:12px; color:var(--ui-muted); line-height:1.45; }
+.league-card.daily header span { color:var(--ui-forest); font-weight:700; }
+.season-goods { display:flex; flex-wrap:wrap; gap:6px; }
+.season-goods span { display:inline-flex; align-items:center; gap:4px; padding:2px 7px; border:1px solid var(--ui-rule); border-radius:4px; background:var(--ui-paper); font-size:12px; }
+.season-goods b { color:var(--ui-forest); }
+.league-table { width:100%; border-collapse:collapse; font-size:13px; font-variant-numeric:tabular-nums; }
+.league-table th { text-align:left; font-size:11px; color:var(--ui-muted); font-weight:600; padding:3px 4px; border-bottom:1px solid var(--ui-rule); }
+.league-table td { padding:4px; border-bottom:1px solid var(--ui-rule); }
+.league-table td:nth-child(n+3),.league-table th:nth-child(n+3) { text-align:right; }
+.league-table tr.player td { background:var(--ui-gold-light); font-weight:700; }
+.gift-form { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto; gap:6px; align-items:center; }
+.gift-form select,.cap-list select { min-width:0; height:32px; padding:0 6px; border:1px solid var(--ui-outline); border-radius:4px; background:var(--ui-paper); color:var(--ui-ink); font-size:13px; }
+@media (max-width:480px) { .gift-form { grid-template-columns:1fr; } }
+.gear-steps { display:flex; flex-direction:column; gap:4px; margin:0; padding:0; list-style:none; }
+.gear-steps li { display:flex; flex-direction:column; padding:5px 8px; border:1px dashed var(--ui-rule); border-radius:4px; }
+.gear-steps li.owned { border-style:solid; border-color:var(--ui-forest); }
+.gear-steps li.owned b::after { content:' · 보유'; color:var(--ui-forest); font-weight:600; }
+.cap-list { display:flex; flex-direction:column; gap:4px; max-height:15rem; overflow:auto; }
+.cap-list label { display:grid; grid-template-columns:18px minmax(0,1fr) 7.5em; align-items:center; gap:6px; font-size:13px; }
+.slow-spot { display:flex; align-items:center; gap:8px; width:100%; padding:7px 9px; border:1px solid var(--ui-gold); border-radius:5px; background:var(--ui-gold-light); color:var(--ui-ink); text-align:left; font-size:12px; }
+.slow-spot strong { display:block; font-size:13px; }
+.land-sale { margin-top:6px; }
+.store-mode { display:flex; align-items:center; gap:6px; margin:4px 0; font-size:12px; }

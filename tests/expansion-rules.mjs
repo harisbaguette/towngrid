@@ -183,7 +183,7 @@ assert.ok(s.build('pond',q.x+2,q.z,true).ok);assert.equal(s.placementEffects('su
 for(const id of ['pond','pasture','clover']){const d=BUILDINGS[id];assert.ok(!/아직/.test(d.description),id+' card is current');assert.ok(d.description.includes('40%'));}
 assert.ok(BUILDINGS.apiary.description.includes('야생 클로버'));assert.ok(!/강 옆이어도/.test(BUILDINGS.saltfield.description));
 {const s=site(s=>s.tiles.some(isFresh));const w=s.tiles.find(t=>t.terrain==='water'&&s.ownedAt(t.x,t.z));assert.equal(s.canBuild('pond',w.x,w.z,true),'물 위에는 건설할 수 없습니다','a pond is dug in dry land');
- const q=quiet(s);const rich=s.money;assert.ok(s.build('pond',q.x,q.z).ok);assert.equal(rich-s.money,s.buildCost('pond'));s.nextEvent=1e9;run(s,35);/* past the early-demolition grace */const kept=s.money;assert.ok(s.demolish(q.x,q.z).ok);assert.equal(s.money-kept,Math.floor(BUILDINGS.pond.cost*.4));ok.push('terrain cards and refunds');}
+ const q=quiet(s);const rich=s.money,fee=s.clearCost(q.x,q.z,'pond');assert.ok(s.build('pond',q.x,q.z).ok);assert.equal(rich-s.money,s.buildCost('pond')+fee,'build cost and the clearing fee of a tree or rock (simulation.js clearCost)');s.nextEvent=1e9;run(s,35);/* past the early-demolition grace */const kept=s.money;assert.ok(s.demolish(q.x,q.z).ok);assert.equal(s.money-kept,Math.floor(BUILDINGS.pond.cost*.4));ok.push('terrain cards and refunds');}
 
 // 9. Saves. A new-rule save reloads with every facility's effects unchanged; the saves from before 2026-09-28 (no land)
 //    keep the old rule for every building, run, and save again.

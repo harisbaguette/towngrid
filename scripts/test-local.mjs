@@ -32,6 +32,8 @@ const suites = [
   // A screen-only player from a new game to 8단계 (player audit K-01..K-04 and the dead ends the guide bot found).
   'tests/fix-20260930/goal-actions.mjs',
   'tests/guide-bot.mjs',
+  // The Town Star layer (docs/TOWNSTAR_RULES.md 2026-10-03): fees, caps, gear, depots, wages, league, gifts, land sale, offline.
+  'tests/townstar-gaps.mjs',
   'tests/balance-20260928.mjs',
   'tests/second-pass-20260928.mjs',
   'tests/expansion-chains.mjs',

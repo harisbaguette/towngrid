@@ -9,7 +9,7 @@ import {CHARTERS} from './progression';
 import {RESCUE_PRICES} from './living-economy';
 import {productionDiagnosis} from './proximity';
 import {unlockRank} from './world';
-import {blockHint,contractConflict,contractState,crewHouse,exportBlocked,fleetState,fullStoreSale,goalAction,nextBuild,plannedNeeds,shortfall,objectOf,outputOf,plantSpot,promotionParts,quickSaleLot,recoveryState,repairPlan,sellableStock,subjectOf} from './ui-rules';
+import {blockHint,contractConflict,contractState,crewHouse,exportBlocked,fleetState,fullStoreSale,goalAction,nextBuild,plannedNeeds,shortfall,objectOf,outputOf,plantSpot,promotionParts,quickSaleLot,recoveryState,repairPlan,sellableStock,slowSpot,subjectOf} from './ui-rules';
 
 const B:any=BUILDINGS,R:any=RESOURCES;
 const VEHICLE_ICONS:Record<string,typeof Truck>={wagon:Caravan,raft:Sailboat,truck:Truck,steamer:Ship};
@@ -69,7 +69,7 @@ export function Operations({sim:s,onAction,onFocus,onGoals,onTool,onMarket,onWor
  const unmet=parts.filter((v:any)=>!v.done).filter((v:any,i:number,all:any[])=>{const a=goalAction(s,v.key);return a&&all.findIndex((w:any)=>goalAction(s,w.key)?.label===a.label)===i;});
  // K-03: the rule's own check locks the button and its sentence shows in place.
  const sanitizeWhy=s.health.infection>0&&typeof s.sanitizeShort==='function'?s.sanitizeShort():null;
- const repairs=repairPlan(s),conflict=contractConflict(s),sale=falling?sellableStock(s,plannedNeeds(s,next)):null;
+ const slow=slowSpot(s),repairs=repairPlan(s),conflict=contractConflict(s),sale=falling?sellableStock(s,plannedNeeds(s,next)):null;
  // J4: a depleted gatherer or a full store keeps its fix buttons even when another stall is shown first.
  const second=failures.find((b:any)=>b!==urgent&&b.health>=100&&['자원 고갈','창고 가득 참'].includes(b.status));
  const conflictText=conflict&&('납품하면 승급 목표 '+R[conflict.goal].name+(conflict.goal===conflict.item?' 판매분':'의 재료 '+subjectOf(R[conflict.item].name))+' '+conflict.short+'개 모자랍니다');
@@ -83,6 +83,7 @@ export function Operations({sim:s,onAction,onFocus,onGoals,onTool,onMarket,onWor
  :!next&&<div className="network-ok"><Check size={16}/>생산망 연결됨<span><Truck size={14}/>{s.workers.filter((w:any)=>w.task).length}명 운반</span></div>}
  {second&&!exported&&<div className="bottleneck-block secondary"><button className="bottleneck" onClick={()=>onFocus(second.id)}><TriangleAlert size={15}/><span><strong>{B[second.type].name} · {second.status}</strong></span><ArrowRight size={14}/></button><FixActions sim={s} b={second} onAction={onAction} onTool={onTool} onMarket={onMarket} onFocus={onFocus} repairs={repairs}/></div>}
  {repairs.list.length>1&&<div className="repair-all"><Button size="sm" disabled={s.money<repairs.cheapest} title={s.money<repairs.total?'자금이 닿는 만큼 싼 곳부터 고칩니다':undefined} onClick={()=>onAction(s.repairAll(),'build')}><Wrench size={14}/>모두 수리 · {repairs.list.length}곳 · 합계 {repairs.total.toLocaleString('ko-KR')}G</Button><ShortFunds sim={s} need={repairs.total} onAction={onAction} onMarket={onMarket}/></div>}
+ {slow&&!exported&&<button className="slow-spot" onClick={()=>onAction(s.relocate(slow.building.id,slow.x,slow.z),'build')} aria-label={B[slow.building.type].name+' 자리 옮기기'}><Wrench size={15}/><span><strong>{B[slow.building.type].name} · 생산 효율 {Math.round(slow.from*100)}%</strong><small>그늘·바람막이·오염이 적은 {slow.x+1}, {slow.z+1}로 옮기면 {Math.round(slow.to*100)}% · 이전 {slow.cost}G</small></span><ArrowRight size={14}/></button>}
  {next&&<><button className="next-build" onClick={()=>onTool(next.type)} aria-label={next.name+' 짓기 · '+next.chain}><Hammer size={16}/><span><strong>{next.name} 짓기</strong><small>{next.chain}</small></span><ArrowRight size={15}/></button>{/* K-05: what the suggested building still lacks and where to get it */}<div className="next-build-short"><CostShort sim={s} price={{money:s.buildCost(next.type),items:B[next.type].materials||{}}} onAction={onAction} onMarket={onMarket}/></div></>}
  {sale&&sale.value>0&&<button className="sell-hint" onClick={onMarket} aria-label={'자금이 줄고 있습니다 · 팔 수 있는 재고 '+sale.value.toLocaleString('ko-KR')+'G어치 · 시장 열기'}><Coins size={16}/><span><strong>팔 수 있는 재고 {sale.value.toLocaleString('ko-KR')}G어치</strong><small>자금이 줄고 있습니다 · {sale.items.slice(0,3).map((v:any)=>R[v.id].name+' '+v.n).join(' · ')}</small></span><ArrowRight size={15}/></button>}
  <div className="quick-contract"><Package size={18}/><div><strong>{R[c.item]?.name} 납품</strong><span>{deal.have} / {c.amount} · {c.reward}G</span></div><Button size="sm" disabled={!deal.ready} title={conflictText||deal.note||undefined} onClick={()=>onAction(s.fulfill())}>{deal.label}</Button></div>

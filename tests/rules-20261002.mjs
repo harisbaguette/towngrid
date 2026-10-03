@@ -74,8 +74,8 @@ const calm=c=>{for(const v of c.sites){v.sim.nextEvent=1e12;v.sim.pendingEvent=n
  const books=()=>Math.round(c.sites.reduce((n,v,i)=>n+v.sim.ownMoney()-own0[i],0));assert.equal(books(),Math.round(c.treasury.money-m0));
  for(const v of c.sites)v.sim.nextEvent=v.sim.time+5;run(c,200);assert.equal(books(),Math.round(c.treasury.money-m0),'books add up over days and events');
  // a paid action on the branch is the branch's; a council act and a freight fee belong to no site and land with the home
- const home=c.home.sim,f0=s.books.flow,h0=home.ownMoney(),t=s.tiles.find(t=>s.canBuild('road',t.x,t.z)===null);assert.ok(s.build('road',t.x,t.z).ok);
- assert.equal(s.books.flow-f0,-s.buildCost('road'));assert.equal(home.ownMoney(),h0);
+ const home=c.home.sim,f0=s.books.flow,h0=home.ownMoney(),t=s.tiles.find(t=>s.canBuild('road',t.x,t.z)===null),fee=s.clearCost(t.x,t.z,'road');assert.ok(s.build('road',t.x,t.z).ok);
+ assert.equal(s.books.flow-f0,-s.buildCost('road')-fee,'the build and its clearing fee (simulation.js clearCost)');assert.equal(home.ownMoney(),h0);
  s.stock.bread+=99;const g0=home.ownMoney(),b0=s.books.flow,w=c.council('welfare');assert.ok(w.ok,w.error);
  assert.equal(Math.round(home.ownMoney()-g0),-c.councilPrice('welfare').money);assert.equal(s.books.flow,b0,'paid on the branch screen, booked with the home');}
 {const c=load(13);calm(c);c.active.paused=false;const s=c.active;const d0=s.day;while(s.day===d0)c.tick(.25);

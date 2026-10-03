@@ -1,0 +1,124 @@
+{
+ "overrides": [
+  "league.total/daily (view only)",
+  "a depot for the storage mode",
+  "savedAt 40 minutes back for the offline summary"
+ ],
+ "sizes": {
+  "1366x768": {
+   "league": {
+    "week": 1,
+    "rivals": 7,
+    "goal": 30
+   },
+   "leagueView": {
+    "cards": 4,
+    "rows": 8,
+    "player": true,
+    "gift": true
+   },
+   "leagueLayout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   },
+   "gift": {
+    "sent": true
+   },
+   "haulView": {
+    "gear": 2,
+    "caps": 16
+   },
+   "haulLayout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   },
+   "cap": {
+    "label": "물",
+    "caps": {
+     "water": 100
+    }
+   },
+   "depot": {
+    "id": 5,
+    "x": 5,
+    "z": 12
+   },
+   "depotNote": "opened through the scene selection if the page exposes it",
+   "slow": {
+    "type": "dock",
+    "from": 33,
+    "to": 69
+   },
+   "slowRow": 1
+  },
+  "390x844": {
+   "league": {
+    "week": 1,
+    "rivals": 7,
+    "goal": 30
+   },
+   "leagueView": {
+    "cards": 4,
+    "rows": 8,
+    "player": true,
+    "gift": true
+   },
+   "leagueLayout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   },
+   "gift": {
+    "sent": true
+   },
+   "haulView": {
+    "gear": 2,
+    "caps": 16
+   },
+   "haulLayout": {
+    "covered": [],
+    "offscreen": [],
+    "clipped": [],
+    "tinyTargets": [],
+    "smallText": []
+   },
+   "cap": {
+    "label": "물",
+    "caps": {
+     "water": 100
+    }
+   },
+   "depot": {
+    "id": 5,
+    "x": 5,
+    "z": 12
+   },
+   "depotNote": "opened through the scene selection if the page exposes it",
+   "slow": {
+    "type": "dock",
+    "from": 33,
+    "to": 69
+   },
+   "slowRow": 1
+  }
+ },
+ "offline": {
+  "saved": true,
+  "toast": "자리를 비운 동안(최대 30분) 마을이 11.3일 일했습니다 · 판매 0G · 생산 0개",
+  "day": 12
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}
