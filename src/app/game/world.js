@@ -94,7 +94,7 @@ export const RANKS=[
  ['준자유민',160,[['sold:bread',10,'빵 판매'],['debtFree',1,'몸값 채무 청산']],['herbgarden','clinic','weaver']],
  ['임차 사업주',250,[['family',1,'가족 구출'],['produced:herb',8,'약초 생산']],['depot']],
  ['등록 사업주',300,[['produced:cloth',8,'직물 생산'],['revenue',8000,'누적 판매 수입']],['henhouse','marketplace']],
- ['지역 공급자',350,[['produced:egg',20,'달걀 생산'],['contracts',6,'납품 계약']],['confectionery','reservoir']],
+ ['지역 공급자',350,[['produced:egg',12,'달걀 생산'],['contracts',6,'납품 계약']],['confectionery','reservoir']],
  ['제조 허가업자',400,[['produced:cake',10,'케이크 생산'],['contracts',8,'납품 계약']],['kiln','stable']],
  ['지역 납품업자',500,[['produced:brick',14,'벽돌 생산'],['revenue',23000,'교역 수입']],['tailor','glassworks']],
  ['공인 계약업자',600,[['produced:workwear',8,'작업복 생산'],['produced:glass',8,'유리 생산'],['contracts',10,'납품 계약']],['watermill','dwarfhouse','spirithouse']],

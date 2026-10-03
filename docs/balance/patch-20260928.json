@@ -942,7 +942,7 @@
     "requirements": [
      [
       "produced:egg",
-      20,
+      12,
       "달걀 생산"
      ],
      [
@@ -6295,5 +6295,32 @@
    "scope": "단계 진입 이후 창고·시설 간 주민 및 관·컨베이어 운반"
   },
   "autoSalePriority": "출하 금액 내림차순"
+ },
+ "balance20261003": {
+  "note": "첫 1시간 막힘 보정. 정본은 코드(simulation.js contractItem, world.js RANKS)이고 BALANCE_PATCH_20260928.md 21절이 같은 내용이다.",
+  "contractBase": "어느 거점에도 그 품목을 만드는 시설이 없는 기본 품목은, 만드는 시설이 있는 다른 기본 품목이 있을 때 건너뛴다. 그런 품목이 없으면 기본 목록 전체를 돈다. 확장 품목 규칙은 그대로다. 만드는 시설이 원료가 없어 멈춰 있으면 계약 목표 버튼이 원료 공급 시설을 안내한다.",
+  "ranks": [
+   {
+    "id": 7,
+    "name": "지역 공급자",
+    "requirement": "produced:egg",
+    "before": 20,
+    "after": 12,
+    "reason": "1~10단계 생산 조건은 시설 4~5회분인데 달걀 20은 양계장 10회분이었다"
+   }
+  ],
+  "guideBot": {
+   "before": {
+    "estern": 22.53,
+    "silvaen": 38.48,
+    "kardum": 24.75
+   },
+   "after": {
+    "estern": 20.08,
+    "silvaen": 21.6,
+    "kardum": 22.1
+   },
+   "unit": "8단계 도달 게임일(1일=80게임초)"
+  }
  }
 }

@@ -71,6 +71,8 @@ export function goalAction(s,key){
   // The open order's good: deliver it, or build what makes it, or import it when this land cannot make it
   // (tests/guide-bot.mjs: 훈제 생선 20 ordered, nothing here made it, and the only button was a greyed 납품 for five days).
   const c=typeof s.contract==='function'?s.contract():null,ready=typeof s.contractStatus!=='function'||contractState(s).ready;
+  // A maker that stands but waits for a material nothing here makes (a smokehouse with no fishery) gets its supplier.
+  const fix=!ready&&c?.item&&Math.floor(s.availableStock?.(c.item)||0)<c.amount?starved(c.item):null;if(fix)return fix;
   if(ready||!c?.item||s.buildings.some(b=>b.health>0&&outputOf(s,b)===c.item)||Math.floor(s.availableStock?.(c.item)||0)>=c.amount)return {kind:'contract',label:'납품'};
   return build(maker(c.item),BUILDINGS[maker(c.item)]?.name+' 짓기 · 납품 '+RESOURCES[c.item].name)||{kind:'market',label:RESOURCES[c.item].name+' 수입',item:c.item,amount:c.amount};
  }

@@ -510,7 +510,9 @@ export class Simulation{
   *  is set to an optional product, and the open order used to change with it, so a product switch re-rolled the order). */
  contractItem(){
   const holder=this.campaign?.treasury||this,open=holder.contractOrder;if(open?.n===this.contracts&&RESOURCES[open.item])return open.item;
-  const [,base,extra]=CONTRACT_POOLS.find(([below])=>this.rank<below),sims=this.campaign?.sites?.map(v=>v.sim).filter(Boolean),made=new Set((sims?.length?sims:[this]).flatMap(s=>(s.buildings||[]).map(b=>s.recipeOf(b)?.output))),pool=[...base,...extra.filter(item=>made.has(item))];
+  const [,base,extra]=CONTRACT_POOLS.find(([below])=>this.rank<below),sims=this.campaign?.sites?.map(v=>v.sim).filter(Boolean),made=new Set((sims?.length?sims:[this]).flatMap(s=>(s.buildings||[]).map(b=>s.recipeOf(b)?.output))),ours=base.filter(item=>made.has(item)),pool=[...(ours.length?ours:base),...extra.filter(item=>made.has(item))];
+  // A base good no site makes yet is skipped while another base good is made: an order for 20 smoked fish with no dock
+  // used to hold the next rank for 18 days (guide-bot silvaen, 2026-10-03); the rank requirements already open new chains.
   const item=pool[this.contracts%pool.length];holder.contractOrder={n:this.contracts,item};return item;
  }
  contract(){const item=this.contractItem(),price=RESOURCES[item].price,full=item==='airship'?1:price>=1000?2:price>=150?6:12+Math.min(this.contracts*2,16);
