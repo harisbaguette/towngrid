@@ -41,7 +41,7 @@ let n=0;const ok=label=>{n++;console.log('PASS',label);};
 
 // 5. A depot set to one kind of goods holds only those, several times as many; it refuses a switch while holding others.
 {const c=new Campaign({nation:'estern'}),s=c.active;c.treasury.rank=6;const [x,z]=freeTile(s,'depot');const id=s.build('depot',x,z,true).id,b=s.buildings.find(v=>v.id===id);
- assert.equal(capacity(s,b),240);for(const [mode,m] of Object.entries(STORE_MODES)){assert.ok(s.setStoreMode(id,mode).ok);assert.equal(capacity(s,b),m.capacity);assert.equal(freeSpace(s,b,'bread'),0);assert.ok(freeSpace(s,b,m.items[0])>0);}
+ const plain=capacity(s,b);for(const [mode,m] of Object.entries(STORE_MODES)){assert.ok(s.setStoreMode(id,mode).ok);assert.equal(capacity(s,b),Math.max(plain,m.capacity));assert.equal(freeSpace(s,b,'bread'),0);assert.ok(freeSpace(s,b,m.items[0])>0);}
  assert.ok(s.setStoreMode(id,'water').ok);deposit(s,'water',5,b);assert.ok(!s.setStoreMode(id,'fuel').ok);assert.equal(roundTrip(c).active.buildings.find(v=>v.id===id).mode,'water');ok('depot storage modes');}
 
 // 6. Facility wages: none before 등록 사업주, 1.5% of build cost a day from there, 3% from 법인 대표, a quarter if switched off.

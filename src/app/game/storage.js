@@ -12,7 +12,9 @@ export const STORE_MODES={
  fuel:{name:'연료 전용',short:'연료 저장소',capacity:720,items:['fuel','oil','jetfuel','coal']},
 };
 export const accepts=(b,item)=>item===undefined||!b?.mode||!!STORE_MODES[b.mode]?.items.includes(item);
-export const capacity=(s,b)=>b.type==='starter'?STARTER_CAPACITY:b.type==='depot'?STORE_MODES[b.mode]?.capacity||DEPOT_CAPACITY:WAREHOUSE_CAPACITY+(s.rank>=1?120:0);
+/** A dedicated depot never holds less than an ordinary one (modeCapacity), whatever DEPOT_CAPACITY is set to. */
+export const modeCapacity=b=>Math.max(DEPOT_CAPACITY,STORE_MODES[b.mode]?.capacity||0);
+export const capacity=(s,b)=>b.type==='starter'?STARTER_CAPACITY:b.type==='depot'?modeCapacity(b):WAREHOUSE_CAPACITY+(s.rank>=1?120:0);
 export function stores(s,active=true){
  const all=[s.starterStore,...s.buildings.filter(isStore)].filter(Boolean);
  return active?all.filter(b=>b.health>0&&b.enabled!==false&&!(b.movingUntil>s.time)):all;
