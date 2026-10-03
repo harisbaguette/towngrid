@@ -6324,7 +6324,7 @@
   }
  },
  "townstar20261003": {
-  "note": "타운스타 대조 반영. 정본은 코드이고 BALANCE_PATCH_20260928.md 22절이 같은 내용이다.",
+  "note": "타운스타 대조 반영. 정본은 코드이고 BALANCE_PATCH_20260928.md 24절이 같은 내용이다.",
   "upkeep": {
    "earlyFrom": 6,
    "early": 0.015,

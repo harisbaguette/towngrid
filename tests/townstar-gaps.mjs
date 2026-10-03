@@ -1,4 +1,4 @@
-// The Town Star layer of 2026-10-03 (docs/TOWNSTAR_RULES.md, docs/BALANCE_PATCH_20260928.md 22): every rule through the
+// The Town Star layer of 2026-10-03 (docs/TOWNSTAR_RULES.md, docs/BALANCE_PATCH_20260928.md 24): every rule through the
 // same functions the screens and bots call, with a save round trip for each piece of new state.
 import assert from 'node:assert/strict';
 import {Campaign,UPKEEP} from '../src/app/game/campaign.js';
