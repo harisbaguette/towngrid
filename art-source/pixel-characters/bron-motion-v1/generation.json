@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "references": [
+    "art-source/pixel-characters/roster-v4/bron.png",
+    "art-source/pixel-characters/roster-v4/bron/SW.png",
+    "art-source/pixel-characters/roster-v4/bron/NW.png"
+  ],
+  "brief": "Bron retains ginger tied-back hair and beard, navy rolled-sleeve shirt, brown leather apron, gloves and boots. Six equal columns, two rows of complete pixel-art figures, front-left and back-left isometric views. Same single two-handed short steel smith hammer throughout. Ready; windup over shoulder; overhead anticipation; planted full-body downward impact; low follow-through; recovery. Consistent anatomy and ground anchor, transparent background, no shadow or detached effects. Preserve the existing identity. Each pose changes body volume and foreshortening instead of rotating a rigid cutout.",
+  "packing": "manifest.json gives per-pose crop boxes and reviewed ground centers. Each cel uses the same extraction scale and display scale. The largest connected figure excludes neighbors crossing the sheet gutters. Two opposite views are mirrored. Work reuses a shorter range of the hammer pose set."
+}

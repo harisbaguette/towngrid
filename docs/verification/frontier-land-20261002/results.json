@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "restrictions": 108,
+  "biomePlots": {
+    "snow": "broden-1",
+    "meadow": "broden-2",
+    "forest": "broden-plot-31-6",
+    "basin": "tavira-5",
+    "desert": "urkan-0",
+    "coast": "estern-2",
+    "marsh": "estern-plot-12-9",
+    "volcanic": "fizden-4"
+  },
+  "claims": [
+    "silvaen-1",
+    "silvaen-plot-6-10"
+  ],
+  "errors": [],
+  "failed": []
+}

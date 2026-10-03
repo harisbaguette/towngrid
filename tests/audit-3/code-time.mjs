@@ -1,6 +1,8 @@
 // Audit 3 (G3, code): the real-time clock (game-time.js BASE_TIME_SCALE) against the texts and timers written in game
 // seconds, and the batched ticking of sites off screen (campaign.js tick).  node tests/audit-3/code-time.mjs
+import fs from 'node:fs';
 import {load,calm,expectBug,finish} from '../audit-2/_fixture.mjs';
+import {SAPLING_GROW} from '../../src/app/game/economy.js';
 import {advanceGame,realSeconds} from '../../src/app/game/game-time.js';
 import {BUILDINGS,Simulation} from '../../src/app/game/simulation.js';
 import {blockHint} from '../../src/app/game/ui-rules.js';
@@ -11,9 +13,11 @@ import * as visuals from '../../src/app/game/production-visuals.js';
  const text=speed=>visuals.describeFacility?visuals.describeFacility('windpump',at(speed)):BUILDINGS.windpump.description;
  const rows=[1,4].map(speed=>({speed,shown:+(text(speed).match(/(\d+)초간/)?.[1]??NaN),real:realSeconds(60,{speed})}));/* TIMED.irrigation = 60 game s */
  expectBug('G3-07 windpump text quotes a watering window that is not the real one',rows.some(r=>r.shown!==r.real),{rows,text:text(1).slice(0,40)});
- /* Game.tsx facility advice: blockHint(b.status) - no simulation, so no speed */
- const n=+(blockHint('자원 고갈').match(/(\d+)초 뒤 자람/)?.[1]??NaN),rows2=[1,2,4].map(speed=>({speed,shown:n,real:realSeconds(160,{speed})}));/* economy.js plant: growAt=time+160 */
- expectBug('G3-08 depleted-gatherer advice quotes a sapling growth time that is not the real one at the current speed',rows2.some(r=>r.shown!==r.real),{rows:rows2});}
+ /* Game.tsx facility advice. Updated 2026-10-02 (R team): the screen now passes the simulation (blockHint(b.status,s)),
+    so the probe reads the advice the way the screen does at each speed and checks that the displayed call passes it. */
+ const tsx=fs.readFileSync(new URL('../../src/app/game/Game.tsx',import.meta.url),'utf8'),shownCall=/facility-advice[^\n]*blockHint\(b\.status,s\)/.test(tsx);
+ const rows2=[1,2,4].map(speed=>({speed,shown:+(blockHint('자원 고갈',at(speed)).match(/(\d+)초 뒤 자람/)?.[1]??NaN),real:realSeconds(SAPLING_GROW,{speed})}));/* economy.js plant: growAt=time+SAPLING_GROW */
+ expectBug('G3-08 depleted-gatherer advice quotes a sapling growth time that is not the real one at the current speed',!shownCall||rows2.some(r=>r.shown!==r.real),{rows:rows2,screenPassesSimulation:shownCall});}
 // (2) Sites off screen tick in 0.25 s batches: their clocks and output must match the site on screen.
 {const mk=()=>{const c=load(31);calm(c);c.active.paused=false;for(const x of c.sites)x.sim.speed=1;return c;};
  const a=mk(),b=mk();b.switchSite('site-2');b.active.paused=false;

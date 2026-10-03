@@ -1,3 +1,4 @@
+import {isStore,freeSpace,storeStock,deposit,withdraw} from './storage.js';
 // Export terminals, pipe and conveyor networks, and the local power grid (infrastructure.js holds the
 // definitions). Every site keeps the west gate as a small built-in road terminal; the other terminals
 // are buildings whose placement ties them to the export road, a railway, an airport or the water.
@@ -68,7 +69,7 @@ export function terminalsOf(s){
   // Road hubs load onto the land route and share its lot; ships, trains, planes and snowmobiles carry their own.
   const capacity=T.via==='road'||T.via==='paved'?Math.min(T.capacity,landCap):T.capacity;
   const price=T.price??(T.water?water?.price??ROUTE_KINDS[T.water].price:land.price);
-  const error=b.health<=0?'파손됨':b.enabled===false?'운영 중지':placementError(s,b.type,b.x,b.z)||(goals.length?null:'출입구가 막혔습니다');
+  const error=b.movingUntil>s.time?'이전 중':b.health<=0?'파손됨':b.enabled===false?'운영 중지':placementError(s,b.type,b.x,b.z)||(goals.length?null:'출입구가 막혔습니다');
   list.push({id:'b:'+b.id,type:b.type,building:b.id,name:BUILDINGS[b.type].name,...along(water||land),capacity,price:+price.toFixed(3),usable:!error,error,goals});
  }
  s.terminalRevision=s.revision;return s.terminalList=list;
@@ -113,20 +114,20 @@ function pending(s,b,item){return s.workers.reduce((n,w)=>n+(w.task?.targetId===
 export function tickNetworks(s,dt){
  s.networkTimer=(s.networkTimer||0)+dt;if(s.networkTimer<1)return;s.networkTimer=0;
  for(const net of networks(s))for(const item of net.carries){
-  const members=net.members.filter(alive),store=members.find(b=>b===s.warehouse);
-  const sources=members.filter(b=>b!==store&&s.recipeOf(b).output===item);
-  const sinks=members.filter(b=>b!==store&&s.effectiveInputs(b)[item]);
+  const members=net.members.filter(b=>alive(b)&&!(b.movingUntil>s.time)),localStores=members.filter(isStore);
+  const sources=members.filter(b=>!isStore(b)&&s.recipeOf(b).output===item);
+  const sinks=members.filter(b=>!isStore(b)&&s.effectiveInputs(b)[item]);
   const want=b=>Math.max(0,s.effectiveInputs(b)[item]*2-(b.inputs[item]||0)-pending(s,b,item));
   const spare=b=>Math.max(0,Math.floor(b.out-reserved(s,item,b.id)));
   let budget=NETWORK_RATE;
   const move=(from,to,n)=>{n=Math.min(n,budget);if(n<=0)return;budget-=n;
-   if(from===store)s.stock[item]-=n;else from.out-=n;
-   if(to===store)s.stock[item]+=n;else to.inputs[item]=(to.inputs[item]||0)+n;
-   s.logisticsStats.direct=(s.logisticsStats.direct||0)+n;
+   if(isStore(from))withdraw(s,item,n,from);else from.out-=n;
+   if(isStore(to))deposit(s,item,n,to);else to.inputs[item]=(to.inputs[item]||0)+n;
+   s.logisticsStats.direct=(s.logisticsStats.direct||0)+n;s.logisticsStats.delivered=(s.logisticsStats.delivered||0)+n;
    recordNetworkTransfer(s,net,from,to,item,n);};
   for(const to of sinks)for(const from of sources)move(from,to,Math.min(spare(from),want(to)));
-  if(store){for(const from of sources)move(from,store,Math.min(spare(from),Math.floor(s.storageCapacity-s.stock[item])));
-   for(const to of sinks)move(store,to,Math.min(Math.floor(available(s,item)),want(to)));}
+  for(const store of localStores){for(const from of sources)move(from,store,Math.min(spare(from),Math.floor(freeSpace(s,store))));
+   for(const to of sinks)move(store,to,Math.min(Math.floor(storeStock(s,store,item)),want(to)));}
  }
 }
 
@@ -136,8 +137,8 @@ export const POWER_REACH=6;
 const reach=(a,b)=>Math.max(Math.abs(a.x-b.x),Math.abs(a.z-b.z))<=POWER_REACH;
 export function powerNodes(s){
  if(s.gridTime===s.time&&s.gridRevision===s.revision)return s.gridNodes;
- const outage=s.outageUntil>s.time,nodes=s.buildings.filter(b=>alive(b)&&(outage?b.type==='battery'&&s.batteryCharge>0:BUILDINGS[b.type].output==='power'&&b.activeUntil>s.time));
- const subs=s.buildings.filter(b=>alive(b)&&b.type==='substation');
+ const outage=s.outageUntil>s.time,nodes=s.buildings.filter(b=>alive(b)&&!(b.movingUntil>s.time)&&(outage?b.type==='battery'&&s.batteryCharge>0:BUILDINGS[b.type].output==='power'&&b.activeUntil>s.time));
+ const subs=s.buildings.filter(b=>alive(b)&&!(b.movingUntil>s.time)&&b.type==='substation');
  for(let grew=true;grew;){grew=false;for(const sub of subs)if(!nodes.includes(sub)&&nodes.some(n=>reach(n,sub))){nodes.push(sub);grew=true;}}
  s.gridTime=s.time;s.gridRevision=s.revision;return s.gridNodes=nodes;
 }

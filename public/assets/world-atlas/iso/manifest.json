@@ -1,0 +1,672 @@
+{
+  "version": 5,
+  "projection": "orthographic-isometric",
+  "elevation": 35.264389682754654,
+  "views": [
+    "SE",
+    "NE",
+    "NW",
+    "SW"
+  ],
+  "cell": 160,
+  "sources": [
+    {
+      "path": "art-source/world-atlas/isometric-v5/woodland.png",
+      "hash": "5e59bd060be843e9044a5d4de790fb25e2f70dcab7e3b12cfd1fb3e4919ff3b1"
+    },
+    {
+      "path": "art-source/world-atlas/isometric-v5/mountains.png",
+      "hash": "57e6bd3baae761c4b7bea9f1510e7e4cb84dc317da39390b2f95973d985b733f"
+    },
+    {
+      "path": "art-source/world-atlas/isometric-v5/habitats.png",
+      "hash": "c2ab80f624d8ee14db2418fcd2c674fad3d245a985919a4709829fa588fed086"
+    },
+    {
+      "path": "art-source/world-atlas/isometric-v5/settlements.png",
+      "hash": "587d5b4cddfd2940d2aa57e6c87d5c726c69a809186129a147efb71ae24a424f"
+    }
+  ],
+  "sprites": [
+    {
+      "name": "woodland",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/woodland-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "b61c144ba35cde9a5cc6d0ca63d68a35c481434a288b04d361fa1d369a7e137f"
+    },
+    {
+      "name": "woodland",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/woodland-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "9c52d71d69583bd5f58a3e91550aa2eea1f6131f05536877041fadca01197ce1"
+    },
+    {
+      "name": "woodland",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/woodland-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "8bc3b9377edb8332cc45894835c19b16847f7dcc54a05d15a7a127059454aeeb"
+    },
+    {
+      "name": "woodland",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/woodland-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "028769575ee7732e472ef47562473909deeba72e72d5ed4a95e5972b5d473a99"
+    },
+    {
+      "name": "pines",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/pines-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "d23b042427d32dd33f5531756f289f463ee36ad92a2aed3d8a9fdbcfee4962e7"
+    },
+    {
+      "name": "pines",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/pines-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "213f17e6293287fcf07a7ebe41b069c32007c5a8d4f8baa9d33c989ab2f0fd59"
+    },
+    {
+      "name": "pines",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/pines-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "418b389be95b7e4abce61e0cec9205fa73ead4a0c8203b13f0f3bee3894bb375"
+    },
+    {
+      "name": "pines",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/pines-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "ae14f96d953600e6b626137a4b0b3072464a787534460e405364001b171710b6"
+    },
+    {
+      "name": "grove",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/grove-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "d9dd6b7aa77434e3ddb02920e1419e3335e354dd5b4455144efdb87f9f13c68d"
+    },
+    {
+      "name": "grove",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/grove-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "34dd614fb422cedee23c342e1f33827760601d8094707cba42bc67e5cff60738"
+    },
+    {
+      "name": "grove",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/grove-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "c6870495d719a97e6af1eb562394fb63a91f5273acd695e25b338a483caa97a3"
+    },
+    {
+      "name": "grove",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/grove-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "8972cdb339742ac825715b59dee35cf448bf0dba4d57675371d7abc66756e36c"
+    },
+    {
+      "name": "elderwood",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/elderwood-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "76a43f7c09c209f9747bd356bb8489e97c1065829f7d5a58fe76705707f900d2"
+    },
+    {
+      "name": "elderwood",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/elderwood-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "9759078a75a9917572ece0844ce4b29627661276089938bdeb641c9b101e7288"
+    },
+    {
+      "name": "elderwood",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/elderwood-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "1156ce5fc13059f13d979b653d81a27142a6acee23076ed05cd66ec3958bbb89"
+    },
+    {
+      "name": "elderwood",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/elderwood-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "bc0ecb44ede60a76b073876efae08e1ab7f36f8c9c977fd9aa85fe2d10234d61"
+    },
+    {
+      "name": "peak",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/peak-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "952b7a646584ed3d51679b08f00e8313fcf48f1e3be3a69d602580586042df78"
+    },
+    {
+      "name": "peak",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/peak-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "eb0ef0f43639a31922ff44c37c72cde68dd9bfd43d045cc78ec1772a7d578115"
+    },
+    {
+      "name": "peak",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/peak-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "22b5a4e7aba8ab9b9afc5c411c5a207be50bfee881c11b4f0a33698fbafc44d9"
+    },
+    {
+      "name": "peak",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/peak-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "c22647a3517a07f63d7b95e62e3b0e7c35476463ef6abffdc1224c5638914427"
+    },
+    {
+      "name": "ridge",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/ridge-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "38be2ac294e1bae94aad604f1b17de620faa7d1cf7d91d8751244c59a5a74f44"
+    },
+    {
+      "name": "ridge",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/ridge-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "2005d25a6f8aa22fe147982a71374f7299dee703962f55f66eb89bd4d378e7d4"
+    },
+    {
+      "name": "ridge",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/ridge-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "05f53a3d4053ae253aacb22faeca117d61a38511ead456672396478d2f4412c1"
+    },
+    {
+      "name": "ridge",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/ridge-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "21696153f391d75dc492299999220c47fc65c527e36e2a670921b74337ce7121"
+    },
+    {
+      "name": "crags",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/crags-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "48173123e107be9ed1a226719a96cc060deb2723db565d0d5f19b83e72733e76"
+    },
+    {
+      "name": "crags",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/crags-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "f8c96443e04b0e8eec43c4ee6048136e8635bdb0d2d348a1acce9c6ca40ebb60"
+    },
+    {
+      "name": "crags",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/crags-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "089c0dbca8b2876be2670b24876a97fed99c715041deac63ccbd4164f811ef2b"
+    },
+    {
+      "name": "crags",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/crags-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "630f271d1c51ca39eb8b6a09abc5ab666929426ba5a6dc8cfb6f30d9b0d11c57"
+    },
+    {
+      "name": "snowpeak",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/snowpeak-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "0fcbce9bf0a83381058c1a4eb5226bf77aa14875e52a16805723b977971b1c8a"
+    },
+    {
+      "name": "snowpeak",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/snowpeak-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "929c7c355e8856a0c82d34ac839761b3ac0093de0e710535945eccf4ebb49898"
+    },
+    {
+      "name": "snowpeak",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/snowpeak-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "a38ea298959676133db8e7648c5faa5a473db194eca35c6d43e149ceee17c0e7"
+    },
+    {
+      "name": "snowpeak",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/snowpeak-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "1ea57d22c57023fbfb1d625726663b2e3bca0ada3a3ce415dd5dfb8106d1612c"
+    },
+    {
+      "name": "dunes",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/dunes-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "2deb24690ee2e948d6c73d326178315b629eb175ad212156ed1b99cd5adae328"
+    },
+    {
+      "name": "dunes",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/dunes-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "31dc7873c4655515bdb4dd97f43f48b6469da19effecbacd2a46e8789a34ca94"
+    },
+    {
+      "name": "dunes",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/dunes-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "487b9ac4d22163331a6211640d944f2676f76f1cc8331ef0b77af90806afbd40"
+    },
+    {
+      "name": "dunes",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/dunes-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "101d6cd0eb909a21660f77d1ea5a725b2d40a5772b92206fce2fb68c39215f47"
+    },
+    {
+      "name": "oasis",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/oasis-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "606112292c7b11f8aafef4aec665f93302565c55a28ca342a8f8bac564230694"
+    },
+    {
+      "name": "oasis",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/oasis-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "de55e3cbc7da9a68cfafc6649dd417de2824a362c8e9a2937b3334d23a938b98"
+    },
+    {
+      "name": "oasis",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/oasis-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "821a9abd0e144b21aff538e3e69054547efef9dfe904a00eddc1f18c0556adeb"
+    },
+    {
+      "name": "oasis",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/oasis-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "e03a6ddb78318673d9e845b385ee1b95f4a468e10f338964fc95fa6c973fb7ce"
+    },
+    {
+      "name": "reeds",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/reeds-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "8d0ac221246a9cdf0076f3a1dcb2160e7f0919bca39525b75140c954e1d6b554"
+    },
+    {
+      "name": "reeds",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/reeds-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "635e158b3bc75f82711bbec26500e6f56e655249b92e0d9488ad4ecfadb0930d"
+    },
+    {
+      "name": "reeds",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/reeds-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "30e32efa2e43b7b77ab82387dfcdbe34efe82c81e902bcb058247fb515d1f7a6"
+    },
+    {
+      "name": "reeds",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/reeds-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "9bfd7edba816ecf987a7586dce94fd4d46d58fff96c835febe1a8dc13c69bc7f"
+    },
+    {
+      "name": "volcano",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/volcano-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "2f78d3f7d20d7f3cbbe60fc6fa3fd06d57488f859b2ded7864d77448dc6e556a"
+    },
+    {
+      "name": "volcano",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/volcano-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "a336da0e338217a23d4c9fa556c8fafde89bb195ecc9fcd87617169437b5779a"
+    },
+    {
+      "name": "volcano",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/volcano-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "7cfe8d94e0a30b446bbdf714139a0bf00a595473b29509772102227a9d651876"
+    },
+    {
+      "name": "volcano",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/volcano-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "f2a721ab1510d9d9180005616199d957dd572889cc968f9983bf782761979408"
+    },
+    {
+      "name": "capital",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/capital-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "1b13b703ded6610d0ca112653e179cf9eb61eaa43be6255c5095f2de62f27c81"
+    },
+    {
+      "name": "capital",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/capital-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "9470a438c076b1235ee62bff5edf113cc9378fb59c7a4e4d2feb11d7ec3a42a4"
+    },
+    {
+      "name": "capital",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/capital-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "760370c310f0df32b759b1f66457af643eca5925f9d7835f9d253e263caf39c3"
+    },
+    {
+      "name": "capital",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/capital-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "8544031307a638df3e76ca27162960ab6aef16cef4960016a62194235e12ef53"
+    },
+    {
+      "name": "frontier",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/frontier-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "581a221da60a2686c1d25929d7a812faca645905592b66e6095ee374b19e321f"
+    },
+    {
+      "name": "frontier",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/frontier-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "0dc1253e06f7176614dda75151dfb328a703f80befa8a52ea55cf3cc308ef682"
+    },
+    {
+      "name": "frontier",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/frontier-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "a67e0eb99770cb1315f35ec8d7e6f80558108a6a26d9143803ba3d6f21c73789"
+    },
+    {
+      "name": "frontier",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/frontier-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "e625577f37c67eb2e4855028d1f5be3f742d9c64e756a54ced772c95e788487c"
+    },
+    {
+      "name": "settlement",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/settlement-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "1d69bae978135a63dc6da95feb66ed905064e161497aab0895a6f65f3d12eff8"
+    },
+    {
+      "name": "settlement",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/settlement-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "e5eac22c40952c42822bc3f7eb6e264a6f9b870adaa7954eaa9a5d45fb952fbd"
+    },
+    {
+      "name": "settlement",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/settlement-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "9c5f19eb774985ad98803f2f361ae329018ec6f51bfdc2d5c7c2b9ab58215b21"
+    },
+    {
+      "name": "settlement",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/settlement-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "ac75dd6ef871aee3157883ea947a82f04c8491b9ac9ab6a592db3caa17f19dd7"
+    },
+    {
+      "name": "hostile",
+      "quarter": 0,
+      "path": "public/assets/world-atlas/iso/hostile-0.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "416d27842790b664c45fb8b1b2c482344312c7150465149463e29373b6b497d9"
+    },
+    {
+      "name": "hostile",
+      "quarter": 1,
+      "path": "public/assets/world-atlas/iso/hostile-1.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "03cf978932d498ecbb9a8010187908046219834df72ccb1f235540fe1f4e97f1"
+    },
+    {
+      "name": "hostile",
+      "quarter": 2,
+      "path": "public/assets/world-atlas/iso/hostile-2.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "55b943887c663d722c0fd981422fda4a3ef8586914d1dfa8059bc3cf4844f2d8"
+    },
+    {
+      "name": "hostile",
+      "quarter": 3,
+      "path": "public/assets/world-atlas/iso/hostile-3.png",
+      "anchor": [
+        0.5,
+        0.82
+      ],
+      "hash": "3797f566d79d1d9938d476078e1dbd938fc9207cc7122d6641279066d99fd463"
+    }
+  ]
+}

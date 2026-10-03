@@ -13,7 +13,7 @@ import {FILES} from '../src/app/game/audio.js';
 import {INFRA_BUILDINGS} from '../src/app/game/infrastructure.js';
 // So did the 2026-09-29 and 2026-09-30 expansion chains (tests/expansion-chains.mjs checks those).
 import {EXPANSION_RESOURCES,EXPANSION_BUILDINGS,EXPANSION2_RESOURCES,EXPANSION2_BUILDINGS} from '../src/app/game/industry.js';
-const later=t=>INFRA_BUILDINGS[t]||EXPANSION_BUILDINGS[t]||EXPANSION2_BUILDINGS[t];
+const later=t=>t==='distillery'||INFRA_BUILDINGS[t]||EXPANSION_BUILDINGS[t]||EXPANSION2_BUILDINGS[t];
 const run=(s,t)=>{for(let i=0;i<t*4;i++)s.tick(.25);};
 const town=(region='river')=>{const s=new Simulation(region);s.nextEvent=1e9;s.autoSell={};s.money=1e6;s.debt=0;for(const r of Object.keys(RESOURCES))s.stock[r]=50;s.build('warehouse',11,12);s.build('house',11,14);return s;};
 const patch=JSON.parse(fs.readFileSync(new URL('../docs/balance/patch-20260928.json',import.meta.url),'utf8'));
@@ -43,8 +43,8 @@ assert.equal(Object.keys(RESOURCES).filter(r=>!EXPANSION_RESOURCES[r]&&!EXPANSIO
 // M6 marketplace speeds price recovery; M8 the exchange adds two export carts and saves still validate.
 {const s=town();s.market.pressure.wood=50;run(s,10);const plain=s.market.pressure.wood;const m=town();m.rank=6;m.build('marketplace',13,12);m.market.pressure.wood=50;run(m,10);assert.ok(m.market.pressure.wood<plain);
  const e=town();e.rank=31;e.stock.wood=300;const t=e.tiles.find(t=>e.canBuild('exchange',t.x,t.z,true)===null);e.build('exchange',t.x,t.z,true);// Second pass: the exchange's two extra vehicles are fuel vehicles (docs/BALANCE_PATCH_20260928.md 12-4), so they run only on spare fuel.
- const fuel=e.stock.fuel;e.stock.fuel=0;assert.equal(e.exportStatus().carts,3,'without fuel only the free three run');e.stock.fuel=fuel;
- assert.equal(e.exportStatus().carts,7);for(let i=0;i<7;i++)assert.ok(e.sell('wood',1).ok);assert.equal(e.sell('wood',1).ok,false);assert.equal(e.stock.fuel,fuel-4,'each fuel vehicle burns one fuel');assert.equal(decodeSave(encodeSave(e.save())).shipments.length,7);}
+ const fuel=e.stock.fuel;e.stock.fuel=0;assert.equal(e.exportStatus().carts,0,'every vehicle needs fuel');e.stock.fuel=fuel;
+ assert.equal(e.exportStatus().carts,5);for(let i=0;i<5;i++)assert.ok(e.sell('wood',1).ok);assert.equal(e.sell('wood',1).ok,false);assert.equal(e.stock.fuel,fuel-5*e.exportStatus().fuelPerTrip,'every trip burns distance-based fuel');assert.equal(decodeSave(encodeSave(e.save())).shipments.length,5);}
 // M7 a parliament in any site lowers every site's unrest by 2 a day.
 {const c=new Campaign({demo:true});const [a]=c.sites.map(v=>v.sim);for(const site of c.sites){site.unrest=50;}c.worldDay();const base=c.sites.map(v=>v.unrest);for(const site of c.sites)site.unrest=50;a.build('parliament',6,18,true);c.worldDay();c.sites.forEach((v,i)=>assert.equal(v.unrest,base[i]-2));}
 // M10 crews and M11 sounds.
@@ -53,7 +53,8 @@ assert.deepEqual(Object.keys(BUILDINGS).filter(t=>!FILES[t]),[],'every facility 
 
 // Constants: upgrades need bricks at 2→3, repairs scale with cost, land cost grows, new-game auto-sale, clinic herbs.
 {const s=town();s.rank=8;const b=s.buildings.find(b=>b.type==='house');s.stock.wood=10;assert.ok(s.upgrade(b.id).ok);s.stock.brick=0;assert.equal(s.upgrade(b.id).ok,false);s.stock.brick=3;assert.ok(s.upgrade(b.id).ok);
- const yard={type:'shipyard',health:0};assert.equal(s.repairCost(yard),900);assert.equal(s.repairCost({type:'well',health:50}),25);
+ // A full repair is at most half the price since G1-T2b (2026-10-02): a 60G well at half health 15G (was 25G), 100G and up unchanged.
+ const yard={type:'shipyard',health:0};assert.equal(s.repairCost(yard),900);assert.equal(s.repairCost({type:'well',health:50}),15);assert.equal(s.repairCost({type:'quarry',health:50}),25);
  s.expansions=10;s.rank=0;assert.equal(s.expansionCost(),2580);
  assert.deepEqual(new Simulation().autoSell,{bread:true,cake:true,smokedfish:true,fish:false,gear:false});}
 {const s=town();s.rank=4;s.build('clinic',13,12);s.health.infection=50;s.health.nextCare=0;s.stock.herb=5;s.stock.water=5;run(s,1);assert.equal(s.stock.herb,4,'the clinic treats with herbs');}
@@ -73,7 +74,7 @@ assert.equal(typeof new Simulation().emergency,'undefined');
 
 // Saves written before the patch still load, run and re-save (version 8, RANKS length 33).
 {const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/save-before-20260928.json',import.meta.url),'utf8'));
- for(const key of ['demo','early']){const c=new Campaign({saved:decodeSave(fixture[key])});for(let i=0;i<4*120;i++)c.tick(.25);const again=decodeSave(encodeSave(c.save()));assert.ok(again.sites.every(v=>v.simulation.version===8));
+ for(const key of ['demo','early']){const c=new Campaign({saved:decodeSave(fixture[key])});for(let i=0;i<4*120;i++)c.tick(.25);const again=decodeSave(encodeSave(c.save()));assert.ok(again.sites.every(v=>v.simulation.version===9));
   const s=c.home.sim;assert.ok(Object.keys(RESOURCES).every(r=>Number.isFinite(s.stock[r])),'new resources start at zero');
-  if(key==='early'){assert.equal(s.exportStatus().connected,false,'an old building on the choke tile stays');assert.equal(s.autoSell.fish,true,'old auto-sale settings are kept');s.stock.fish=100;const n0=s.notices.length;for(let i=0;i<40;i++)c.tick(.25);assert.equal(s.notices.slice(n0).filter(n=>n.text.startsWith('자동 판매 멈춤')).length,1,'a blocked auto-sale warns once');}}}
+  if(key==='early'){assert.equal(s.exportStatus().connected,true,'the mini store still reaches the gate even when the old warehouse is blocked');assert.equal(s.autoSell.fish,true,'old auto-sale settings are kept');s.stock.fish=100;s.stock.fuel=0;s.autoSellBlocked=null;const n0=s.notices.length;for(let i=0;i<40;i++)c.tick(.25);assert.equal(s.notices.slice(n0).filter(n=>n.text.startsWith('자동 판매 멈춤')).length,1,'a blocked auto-sale warns once');}}}
 console.log('PASS balance patch 2026-09-28: data, M1~M11, constants, contracts, storm, raid trial, advice, sapling, old saves');

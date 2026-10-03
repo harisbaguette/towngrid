@@ -34,8 +34,11 @@ out.J2 = { firstContract: await page.locator('.tutorial-card button', { hasText:
 await page.locator('.tutorial-card button', { hasText: '납품' }).click().catch(() => {}); await settle(page, 900);
 Object.assign(out.J2, { step: await page.locator('.tutorial-card strong').first().innerText(), text: await page.locator('.tutorial-card p').first().innerText(), wait: await boxes(page, '.tutorial-wait button') });
 await shot(page, 'a-J2-tutorial-waiting.png', { clip: { x: 1080, y: 150, width: 286, height: 330 } });
-await page.locator('.tutorial-wait button', { hasText: '4배' }).click(); await settle(page, 300);
-out.J2.speedAfter = await sim(page, () => window.tgScene.sim.speed);
+// 563bcc9 replaced the waiting card's 4배 button with 주택 하나 더 (speed stays on the HUD time buttons): check that action.
+await page.locator('.tutorial-wait button', { hasText: '주택 하나 더' }).click(); await settle(page, 300);
+out.J2.toolAfter = await sim(page, () => window.tgScene.mode);
+if (out.J2.toolAfter !== 'house') throw new Error('J2 waiting action did not pick the house tool: ' + out.J2.toolAfter);
+await page.keyboard.press('Escape'); await settle(page, 300);
 
 // B14: surroundings card open -> Escape closes it.
 await sim(page, () => { window.tgScene.sim.speed = 1; window.tgScene.sim.paused = true; });

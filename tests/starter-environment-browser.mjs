@@ -108,9 +108,13 @@ try {
  assert.ok(runtime.ghosts.every(g => g.row === g.view && g.sprite));assert.equal(runtime.renderingPreservesSave, true);
  for (const resource of ['water', 'grain', 'wood', 'plank']) assert.ok(runtime.produced[resource] > 0);
  assert.ok(runtime.deliveries > 0);
+ // Marker diet (B13): with 시설 이름 표시 on every facility has a marker, but close ones merge into one marker with "+N".
+ // So: every production badge shows its building's real output, and the markers plus their merged counts cover every building.
+ await page.getByRole('button',{name:'건설 목록 열기'}).click();await page.getByRole('button',{name:'시설 이름 표시'}).click();await page.getByRole('button',{name:'건설 목록 닫기'}).click();
  await page.waitForFunction(() => {
-  const badges=[...document.querySelectorAll('.facility-marker.production')];
-  return badges.length===5&&badges.every(el=>{
+  const markers=[...document.querySelectorAll('.facility-marker')],badges=markers.filter(el=>el.classList.contains('production'));
+  const covered=markers.reduce((n,el)=>n+1+(+(el.querySelector('.marker-more')?.textContent.replace('+','')||0)),0);
+  return badges.length>=1&&covered===window.starterScene.sim.buildings.length&&badges.every(el=>{
    const b=window.starterScene.sim.buildings.find(b=>String(b.id)===el.dataset.buildingId);
    return Number(el.dataset.output)===b.out&&getComputedStyle(el.querySelector('span')).display!=='none';
   });

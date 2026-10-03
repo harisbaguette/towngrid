@@ -30,6 +30,8 @@
 
 캐릭터 관절 마감은 51종에 반영했다. 관절 틈·겹침, 장갑·손 조각, 꼬리·날개 분리와 쓰러짐 무릎을 보완했다. [수정 전후와 검증](verification/character-finish-20260929/README.md)에서 확인한다. 원화 부위를 관절로 움직여 구운 프레임이며, 전 프레임을 새로 손작화한 방식은 아니다.
 
+브론의 작업·공격은 이미지 모델로 만든 망치 자세를 사용한다. 작업은 어깨 높이에서, 공격은 머리 위에서 내려친다. 걷기·운반은 발 디딤에 맞춘 관절 동작이며, 두 반대 방향은 좌우 반전이다. [브론 동작 비교](http://localhost:5173/character-preview/bron-motion/)에서 이전 동작과 비교할 수 있다. 원화·자세별 발 기준점은 `art-source/pixel-characters/bron-motion-v1/`, 보행 설정은 `roster-v4/bron/rig.json`에 있다. 재생성은 `python scripts/roster_rig.py bron`이다.
+
 사막 유정·습지 나루터·화산 고원 대장간·설원 배송·해안 어업은 일상 그림에 추가했다. 세계 지도 지형과 거점 표식도 전용 픽셀 원화로 교체했다. 지도 원본은 `art-source/world-atlas/`, 재패킹은 `node scripts/pack-world-atlas.mjs`다. 기능 버튼의 선 아이콘은 유지한다.
 
 ## 확장 시설·상품과 목축

@@ -1,0 +1,26 @@
+{
+  "start": {
+    "mode": null,
+    "buildings": 0,
+    "workers": 0,
+    "parked": 3,
+    "connected": true
+  },
+  "depart": {
+    "money": 1300,
+    "wood": 49,
+    "loaded": true,
+    "revenue": 10
+  },
+  "saved": {
+    "buildings": [
+      "house",
+      "well"
+    ],
+    "workers": 1,
+    "parked": 3,
+    "staff": 0
+  },
+  "errors": [],
+  "failed": []
+}

@@ -4,7 +4,7 @@ import {pathToFileURL} from 'node:url';
 import {NATIONS} from '../src/app/game/world.js';
 import {PROVINCES} from '../src/app/game/territory.js';
 import {WORLD_CELLS,layoutOf} from '../src/app/game/world-grid.js';
-import {defaultStartingProvince} from '../src/app/game/starting-sites.js';
+import {defaultStartingProvince,startingProvinces} from '../src/app/game/starting-sites.js';
 import {decodeSave} from '../src/app/game/persistence.js';
 
 const {chromium}=await import(pathToFileURL(process.argv[2]).href);
@@ -18,7 +18,7 @@ page.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text());});
 const shot=name=>page.screenshot({path:out+'/'+name+'.png'});
 const clickCell=async cell=>{
  await page.getByRole('button',{name:'대륙 전체',exact:true}).click();
- const point=await page.locator('.world-atlas').evaluate((el,[cx,cz])=>{
+ const point=await page.locator('.atlas-ground').evaluate((el,[cx,cz])=>{
   const p=new DOMPoint((cx+.5)*26,(cz+.5)*26).matrixTransform(el.getScreenCTM());return {x:p.x,y:p.y};
  },cell);
  await page.mouse.click(point.x,point.y);
@@ -43,7 +43,7 @@ try{
   if(!n.playable){assert.ok(await page.locator('.start-button').isDisabled());continue;}
   const p=defaultStartingProvince(nation);
   assert.equal(await page.locator('#start-province').inputValue(),p.id);
-  assert.equal(await page.locator('#start-province option:not([disabled])').count(),5);
+  assert.equal(await page.locator('#start-province option:not([disabled])').count(),startingProvinces(nation).length);
   assert.ok((await page.locator('.realm-start small').innerText()).includes(p.name));
  }
  await page.locator('#realm').selectOption('estern');

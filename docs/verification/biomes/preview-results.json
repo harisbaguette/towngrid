@@ -12,21 +12,21 @@
   ],
   "production": {
     "webgl-snow": {
-      "stone": 54,
-      "water": 46,
+      "water": 58,
+      "stone": 56,
       "wood": 66,
       "iron": 80,
-      "coal": 72,
-      "grain": 27
+      "grain": 48,
+      "coal": 72
     },
     "webgl-meadow": {
-      "water": 74,
+      "water": 76,
       "wood": 66,
       "stone": 40,
       "grain": 57
     },
     "webgl-forest": {
-      "water": 74,
+      "water": 78,
       "wood": 66,
       "stone": 40,
       "grain": 57,
@@ -34,57 +34,57 @@
     },
     "webgl-basin": {
       "water": 60,
-      "stone": 56,
+      "stone": 58,
       "wood": 66,
-      "iron": 80,
-      "grain": 48,
+      "iron": 84,
+      "grain": 45,
       "coal": 72
     },
     "webgl-desert": {
-      "stone": 48,
+      "water": 50,
+      "stone": 50,
       "wood": 66,
-      "water": 30,
-      "grain": 42,
-      "oil": 44
+      "grain": 63,
+      "oil": 48
     },
     "webgl-coast": {
       "water": 72,
       "wood": 66,
       "stone": 40,
-      "grain": 54,
+      "grain": 57,
       "fish": 45
     },
     "webgl-marsh": {
-      "water": 84,
+      "water": 86,
       "wood": 66,
-      "stone": 36,
+      "stone": 38,
       "grain": 54,
       "fish": 45
     },
     "webgl-volcanic": {
+      "stone": 60,
+      "water": 56,
+      "wood": 66,
+      "iron": 80,
+      "grain": 42,
+      "coal": 72
+    },
+    "canvas-snow": {
+      "water": 58,
       "stone": 56,
-      "water": 54,
       "wood": 66,
       "iron": 80,
       "grain": 48,
       "coal": 72
     },
-    "canvas-snow": {
-      "stone": 54,
-      "water": 46,
-      "wood": 66,
-      "iron": 80,
-      "coal": 72,
-      "grain": 27
-    },
     "canvas-meadow": {
-      "water": 74,
+      "water": 76,
       "wood": 66,
       "stone": 40,
       "grain": 57
     },
     "canvas-forest": {
-      "water": 74,
+      "water": 78,
       "wood": 66,
       "stone": 40,
       "grain": 57,
@@ -92,39 +92,39 @@
     },
     "canvas-basin": {
       "water": 60,
-      "stone": 56,
+      "stone": 58,
       "wood": 66,
-      "iron": 80,
-      "grain": 48,
+      "iron": 84,
+      "grain": 45,
       "coal": 72
     },
     "canvas-desert": {
-      "stone": 48,
+      "water": 50,
+      "stone": 50,
       "wood": 66,
-      "water": 30,
-      "grain": 42,
-      "oil": 44
+      "grain": 63,
+      "oil": 48
     },
     "canvas-coast": {
       "water": 72,
       "wood": 66,
       "stone": 40,
-      "grain": 54,
+      "grain": 57,
       "fish": 45
     },
     "canvas-marsh": {
-      "water": 84,
+      "water": 86,
       "wood": 66,
-      "stone": 36,
+      "stone": 38,
       "grain": 54,
       "fish": 45
     },
     "canvas-volcanic": {
-      "stone": 56,
-      "water": 54,
+      "stone": 60,
+      "water": 56,
       "wood": 66,
       "iron": 80,
-      "grain": 48,
+      "grain": 42,
       "coal": 72
     }
   },

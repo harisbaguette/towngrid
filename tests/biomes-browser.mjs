@@ -19,7 +19,7 @@ try{
   for(const preset of ['snow','meadow','forest','basin','desert','coast','marsh','volcanic']){
    await page.locator('#preset').selectOption(preset);
    for(let view=0;view<4;view++){
-    const data=await page.evaluate(view=>{const g=window.biomePreview.game;g.setQuarterView(view);g.scene.updateMatrixWorld(true);g.camera.updateMatrixWorld();g.renderer.render(g.scene,g.camera);const props=[...g.nature,...g.decorations,...g.scenery.group.children.filter(m=>m.userData.mapSide)].filter(m=>m.userData.pixelProp);return {view:g.viewIndex,ecology:g.sim.layout.ecology,renderer:g.renderer.isSoftware?'canvas':'webgl',props:props.every(m=>!!m.userData.image&&m.userData.direction===(view-(m.userData.oriented?Math.round(m.rotation.y/(Math.PI/2)):0)+4)%4),ground:g.terrain.children.some(m=>m.userData.environmentId==='biomeGround'&&!!m.userData.image),buildings:[...g.models.values()].every(m=>!!m.userData.image)};},view);
+    const data=await page.evaluate(view=>{const g=window.biomePreview.game;g.setQuarterView(view);g.scene.updateMatrixWorld(true);g.camera.updateMatrixWorld();g.renderer.render(g.scene,g.camera);const props=[...g.nature,...g.decorations,...g.scenery.group.children.filter(m=>m.userData.mapSide)].filter(m=>m.userData.pixelProp);return {view:g.viewIndex,ecology:g.sim.layout.ecology,renderer:g.renderer.isSoftware?'canvas':'webgl',props:props.every(m=>!!m.userData.image&&m.userData.direction===(view-(m.userData.oriented?Math.round(m.rotation.y/(Math.PI/2)):0)+4)%4),ground:!!g.scenery.group.getObjectByName('landscape-ground')?.userData.image,buildings:[...g.models.values()].every(m=>!!m.userData.image)};},view);
     assert.equal(data.renderer,renderer);assert.equal(data.ecology,preset);assert.equal(data.view,view);assert.ok(data.props&&data.ground&&data.buildings,JSON.stringify(data));
     if(view===0||preset==='snow')await shot(preset+'-'+view+'-'+renderer);
    }
@@ -33,8 +33,11 @@ try{
  }
  if(!previewOnly){
  console.log('Checking normal game UI');
- await page.goto(origin);await page.locator('canvas[role="application"]').waitFor({state:'attached',timeout:120000});await page.getByRole('button',{name:'화면을 눌러 시작',exact:true}).click();
- assert.ok(await page.getByRole('link',{name:'지형 8종 테스트',exact:true}).isVisible());await page.getByRole('button',{name:'새 게임',exact:true}).click();
+ await page.goto(origin);await page.locator('canvas[role="application"]').waitFor({state:'attached',timeout:120000});
+ // The title is server-rendered and a click before hydration is lost; the title -> home step also plays a short transition.
+ // Click until the home menu is there, then wait for the link instead of sampling it at once.
+ for(let i=0;i<40&&!(await page.getByRole('button',{name:'새 게임',exact:true}).count());i++){await page.getByRole('button',{name:'화면을 눌러 시작',exact:true}).click({timeout:2000}).catch(()=>{});await page.waitForTimeout(500);}
+ await page.getByRole('link',{name:'지형 8종 테스트',exact:true}).waitFor({state:'visible',timeout:15000});await page.getByRole('button',{name:'새 게임',exact:true}).click();
  await page.locator('#realm').selectOption('elune');assert.equal(await page.locator('#start-province').inputValue(),'elune-5');assert.match(await page.locator('.realm-sheet .biome-summary').textContent(),/비옥한 평야/);await shot('world-map-start');
  await page.getByRole('button',{name:'이 땅에서 시작',exact:true}).click();await page.getByRole('button',{name:'일시정지',exact:true}).waitFor({timeout:120000});await page.getByRole('button',{name:'일시정지',exact:true}).click();
  await page.keyboard.press('Escape');await page.getByRole('button',{name:'주변 지형',exact:true}).click();assert.match(await page.locator('.map-edges .biome-summary').textContent(),/비옥한 평야/);await shot('game-start');

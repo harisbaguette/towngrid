@@ -11,7 +11,8 @@ try{
  await page.goto(process.env.TOWNGRID_URL||'http://localhost:5173');
  await page.locator('canvas[role="application"]').waitFor({state:'attached',timeout:120000});console.log('Game initialized');
  await page.getByRole('button',{name:'화면을 눌러 시작',exact:true}).waitFor({timeout:120000});await page.getByRole('button',{name:'화면을 눌러 시작',exact:true}).click();
- if(!(await page.locator('.home-extras[open]').count()))await page.locator('.home-extras > summary').click();
+ // The 체험·점검 group is open by default; wait for the home menu to render before checking, so a still-mounting group is not toggled shut.
+ await page.locator('.home-extras').waitFor({timeout:120000});if(!(await page.locator('.home-extras[open]').count()))await page.locator('.home-extras > summary').click();
  await page.getByRole('button',{name:'초반 마을 테스트',exact:true}).waitFor({timeout:120000});assert.equal(await page.getByRole('link',{name:'일러스트 테스트',exact:true}).count(),1);
  console.log('Home ready');
  await page.evaluate(async()=>{

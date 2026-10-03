@@ -9,7 +9,7 @@ import {NATIONS} from '../src/app/game/world.js';
 import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
 import {edgeScenery} from '../src/app/game/map-edges.js';
 
-const playable=new Set(PROVINCES.filter(p=>NATIONS[p.nation].playable).map(p=>layoutOf(p.id).ecology));
+const playable=new Set(PROVINCES.filter(p=>!p.nation||NATIONS[p.nation].playable).map(p=>layoutOf(p.id).ecology));
 assert.deepEqual([...playable].sort(),Object.keys(BIOMES).sort(),'All eight biomes must be reachable in playable countries');
 const sims={};
 for(const [id,province] of Object.entries(BIOME_EXAMPLES)){

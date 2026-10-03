@@ -1,0 +1,44 @@
+{
+  "revisions": [
+    {
+      "id": "03",
+      "prompt": "Edit this existing TownGrid layout concept with ONE very small correction only. Keep every screen layout, map pixel, UI panel, type style, resource, camera, framing, and color exactly as is. In the lower-right '선택한 시설' panel there is an erroneous second label '채석장' above the little sawmill picture at the left. Remove just that erroneous '채석장' text so that this panel has only the correct building name '제재소'. Leave the rest of that picture, title, status '생산 중', recipe, meter, inventory, button and ALL other parts absolutely unchanged. This is a minimal text cleanup, no redraw of layout. Exact same 16:9 aspect ratio and bounds."
+    },
+    {
+      "id": "05",
+      "prompt": "Edit this existing TownGrid layout concept with ONE precise contextual selection correction only. The floating '제재소' information card correctly belongs to the sawmill, which is the ORANGE SAW MACHINE on the diagonal dirt road just left and slightly above the blue-roofed warehouse near the middle of the map (the building about x=48%, y=43% of the image). Currently the card's white connector and blue/white ground selection brackets erroneously point to and outline the WELL (round blue water basin about x=56%, y=51%). Remove the connector and selection brackets from the well. Instead draw the same subtle blue-white selection outline around the square footprint of the actual orange saw machine, and route a thin unobtrusive white/teal leader from that sawmill to the left edge of the existing '제재소' floating card. Keep the card at exactly its existing position, keep both buildings and entire map art at exactly their existing positions. Keep every other pixel, label, UI, number, palette, border and screen framing unchanged. This is a minimal pointer correction. Exact same 16:9 aspect and bounds."
+    }
+  ],
+  "outputs": [
+    {
+      "id": "01",
+      "title": "하단 통합형",
+      "file": "01-bottom-dock.png",
+      "source": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0ffd3-0c1b-7ff2-bc33-ad05d441c4f4\\exec-7e1b89d9-5ba8-490e-a96c-6201703a8b9f.png"
+    },
+    {
+      "id": "02",
+      "title": "좌측 건설형",
+      "file": "02-left-build.png",
+      "source": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0ffd3-0c1b-7ff2-bc33-ad05d441c4f4\\exec-cfba60e2-694c-4c77-8adb-59221f979615.png"
+    },
+    {
+      "id": "03",
+      "title": "우측 통합형",
+      "file": "03-right-console.png",
+      "source": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0ffd3-0c1b-7ff2-bc33-ad05d441c4f4\\exec-b00687ce-11b4-4e37-9621-3f5a36c5e84c.png"
+    },
+    {
+      "id": "04",
+      "title": "양쪽 분리형",
+      "file": "04-split-sides.png",
+      "source": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0ffd3-0c1b-7ff2-bc33-ad05d441c4f4\\exec-0b257feb-4c5a-413a-9a1a-d292797d8db9.png"
+    },
+    {
+      "id": "05",
+      "title": "맵 집중형",
+      "file": "05-map-first.png",
+      "source": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0ffd3-0c1b-7ff2-bc33-ad05d441c4f4\\exec-2cd87999-e6bc-465b-a33c-71a7d20437bc.png"
+    }
+  ]
+}

@@ -37,8 +37,11 @@ const starter=()=>{const c=new Campaign(),s=home(c);s.nextEvent=1e9;s.build('war
  expectBug('R1-product-picker',bad.length>0,{multiProduct:Object.keys(BUILDINGS).filter(t=>BUILDINGS[t].recipes?.length>1),bad});}
 
 // F1: the fleet line counts every vehicle slot, and the fuel note shows only while every fuel-free vehicle is out and fuel is short.
+// Updated 2026-10-02 (R team, player audit K-07): fuel vehicles join the fleet only once fuel can be had (export-route.js
+// fuelInReach: a facility of the rank makes fuel, or some is in stock), so a starting town with its carts out is told to
+// wait, not that fuel is short. The fuel note is checked at the rank that opens the refinery.
 {const s=starter();s.stock.wood=200;s.stock.fuel=0;s.reserves.fuel=0;/* stock set directly */const idle=fleetState(s);
- const sales=[1,2,3].map(()=>s.sell('wood',1));const out=fleetState(s);s.stock.fuel=10;const fuelled=fleetState(s);
- expectBug('F1-fleet-line',!idle||idle.busy!==0||idle.fuelNote!==''||out.busy!==3||!out.fuelNote||fuelled.fuelNote!=='',{idle,sales,out:{busy:out.busy,total:out.total,fuelNote:out.fuelNote},withFuel:fuelled.fuelNote});}
+ const sales=[1,2,3].map(()=>s.sell('wood',1));const out=fleetState(s);s.rank=unlockRank('refinery');/* rank set directly */const short=fleetState(s);s.stock.fuel=10;const fuelled=fleetState(s);
+ expectBug('F1-fleet-line',!idle||idle.busy!==0||idle.fuelNote!==''||out.busy!==3||out.fuelNote!==''||!short.fuelNote||fuelled.fuelNote!=='',{idle,sales,out:{busy:out.busy,total:out.total,fuelNote:out.fuelNote},refineryRank:{total:short.total,fuelNote:short.fuelNote},withFuel:fuelled.fuelNote});}
 
 finish('next-build');

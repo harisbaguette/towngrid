@@ -1,0 +1,770 @@
+{
+ "screens": [
+  "01-components",
+  "02-dialog",
+  "03-components-mobile",
+  "04-home",
+  "05-settings",
+  "06-world",
+  "07-world-mobile",
+  "08-game",
+  "09-construction",
+  "10-facility",
+  "11-market",
+  "12-residents",
+  "13-promotion",
+  "14-campaign",
+  "15-transport",
+  "16-council",
+  "17-emerging",
+  "game-1440x960",
+  "build-1440x960",
+  "game-1024x768",
+  "build-1024x768",
+  "game-390x844",
+  "build-390x844",
+  "game-360x740",
+  "build-360x740",
+  "game-844x390",
+  "build-844x390"
+ ],
+ "controls": [
+  {
+   "name": "1440x960",
+   "buttons": [
+    {
+     "name": "주민",
+     "reachable": true,
+     "rect": [
+      1233,
+      28,
+      58,
+      38
+     ]
+    },
+    {
+     "name": "소리 끄기",
+     "reachable": true,
+     "rect": [
+      1296,
+      28,
+      38,
+      38
+     ]
+    },
+    {
+     "name": "도움말",
+     "reachable": true,
+     "rect": [
+      1339,
+      28,
+      38,
+      38
+     ]
+    },
+    {
+     "name": "게임 설정",
+     "reachable": true,
+     "rect": [
+      1382,
+      28,
+      38,
+      38
+     ]
+    },
+    {
+     "name": "세계 지도",
+     "reachable": true,
+     "rect": [
+      20,
+      20,
+      254,
+      52
+     ]
+    },
+    {
+     "name": "주변 지형",
+     "reachable": true,
+     "rect": [
+      20,
+      894,
+      97,
+      42
+     ]
+    },
+    {
+     "name": "왼쪽 90도 회전",
+     "reachable": true,
+     "rect": [
+      1247,
+      898,
+      31,
+      32
+     ]
+    },
+    {
+     "name": "오른쪽 90도 회전",
+     "reachable": true,
+     "rect": [
+      1281,
+      898,
+      31,
+      32
+     ]
+    },
+    {
+     "name": "확대",
+     "reachable": true,
+     "rect": [
+      1315,
+      898,
+      31,
+      32
+     ]
+    },
+    {
+     "name": "축소",
+     "reachable": true,
+     "rect": [
+      1349,
+      898,
+      31,
+      32
+     ]
+    },
+    {
+     "name": "지도 중앙",
+     "reachable": true,
+     "rect": [
+      1383,
+      898,
+      31,
+      32
+     ]
+    },
+    {
+     "name": "시장",
+     "reachable": true,
+     "rect": [
+      506,
+      884,
+      98,
+      48
+     ]
+    },
+    {
+     "name": "건설 목록 열기",
+     "reachable": true,
+     "rect": [
+      609,
+      884,
+      120,
+      48
+     ]
+    },
+    {
+     "name": "영토 확장",
+     "reachable": true,
+     "rect": [
+      734,
+      884,
+      98,
+      48
+     ]
+    },
+    {
+     "name": "거점·세계 지도",
+     "reachable": true,
+     "rect": [
+      837,
+      884,
+      98,
+      48
+     ]
+    }
+   ]
+  },
+  {
+   "name": "1024x768",
+   "buttons": [
+    {
+     "name": "주민",
+     "reachable": true,
+     "rect": [
+      866,
+      22,
+      58,
+      38
+     ]
+    },
+    {
+     "name": "소리 끄기",
+     "reachable": true,
+     "rect": [
+      929,
+      22,
+      38,
+      38
+     ]
+    },
+    {
+     "name": "게임 설정",
+     "reachable": true,
+     "rect": [
+      972,
+      22,
+      38,
+      38
+     ]
+    },
+    {
+     "name": "세계 지도",
+     "reachable": true,
+     "rect": [
+      14,
+      14,
+      215,
+      52
+     ]
+    },
+    {
+     "name": "주변 지형",
+     "reachable": true,
+     "rect": [
+      14,
+      702,
+      97,
+      42
+     ]
+    },
+    {
+     "name": "왼쪽 90도 회전",
+     "reachable": true,
+     "rect": [
+      864,
+      706,
+      28,
+      32
+     ]
+    },
+    {
+     "name": "오른쪽 90도 회전",
+     "reachable": true,
+     "rect": [
+      892,
+      706,
+      28,
+      32
+     ]
+    },
+    {
+     "name": "확대",
+     "reachable": true,
+     "rect": [
+      920,
+      706,
+      28,
+      32
+     ]
+    },
+    {
+     "name": "축소",
+     "reachable": true,
+     "rect": [
+      948,
+      706,
+      28,
+      32
+     ]
+    },
+    {
+     "name": "지도 중앙",
+     "reachable": true,
+     "rect": [
+      976,
+      706,
+      28,
+      32
+     ]
+    },
+    {
+     "name": "시장",
+     "reachable": true,
+     "rect": [
+      338,
+      692,
+      77,
+      48
+     ]
+    },
+    {
+     "name": "건설 목록 열기",
+     "reachable": true,
+     "rect": [
+      419,
+      692,
+      106,
+      48
+     ]
+    },
+    {
+     "name": "영토 확장",
+     "reachable": true,
+     "rect": [
+      529,
+      692,
+      77,
+      48
+     ]
+    },
+    {
+     "name": "거점·세계 지도",
+     "reachable": true,
+     "rect": [
+      610,
+      692,
+      77,
+      48
+     ]
+    }
+   ]
+  },
+  {
+   "name": "390x844",
+   "buttons": [
+    {
+     "name": "주민",
+     "reachable": true,
+     "rect": [
+      249,
+      14,
+      51,
+      36
+     ]
+    },
+    {
+     "name": "소리 끄기",
+     "reachable": true,
+     "rect": [
+      305,
+      14,
+      35,
+      36
+     ]
+    },
+    {
+     "name": "게임 설정",
+     "reachable": true,
+     "rect": [
+      345,
+      14,
+      35,
+      36
+     ]
+    },
+    {
+     "name": "세계 지도",
+     "reachable": true,
+     "rect": [
+      10,
+      10,
+      239,
+      45
+     ]
+    },
+    {
+     "name": "주변 지형",
+     "reachable": true,
+     "rect": [
+      10,
+      727,
+      85,
+      36
+     ]
+    },
+    {
+     "name": "왼쪽 90도 회전",
+     "reachable": true,
+     "rect": [
+      226,
+      729,
+      30,
+      30
+     ]
+    },
+    {
+     "name": "오른쪽 90도 회전",
+     "reachable": true,
+     "rect": [
+      256,
+      729,
+      30,
+      30
+     ]
+    },
+    {
+     "name": "확대",
+     "reachable": true,
+     "rect": [
+      286,
+      729,
+      30,
+      30
+     ]
+    },
+    {
+     "name": "축소",
+     "reachable": true,
+     "rect": [
+      316,
+      729,
+      30,
+      30
+     ]
+    },
+    {
+     "name": "지도 중앙",
+     "reachable": true,
+     "rect": [
+      346,
+      729,
+      30,
+      30
+     ]
+    },
+    {
+     "name": "시장",
+     "reachable": true,
+     "rect": [
+      17,
+      779,
+      85,
+      46
+     ]
+    },
+    {
+     "name": "건설 목록 열기",
+     "reachable": true,
+     "rect": [
+      107,
+      779,
+      85,
+      46
+     ]
+    },
+    {
+     "name": "영토 확장",
+     "reachable": true,
+     "rect": [
+      198,
+      779,
+      85,
+      46
+     ]
+    },
+    {
+     "name": "거점·세계 지도",
+     "reachable": true,
+     "rect": [
+      288,
+      779,
+      85,
+      46
+     ]
+    }
+   ]
+  },
+  {
+   "name": "360x740",
+   "buttons": [
+    {
+     "name": "주민",
+     "reachable": true,
+     "rect": [
+      219,
+      14,
+      51,
+      36
+     ]
+    },
+    {
+     "name": "소리 끄기",
+     "reachable": true,
+     "rect": [
+      275,
+      14,
+      35,
+      36
+     ]
+    },
+    {
+     "name": "게임 설정",
+     "reachable": true,
+     "rect": [
+      315,
+      14,
+      35,
+      36
+     ]
+    },
+    {
+     "name": "세계 지도",
+     "reachable": true,
+     "rect": [
+      10,
+      10,
+      209,
+      45
+     ]
+    },
+    {
+     "name": "주변 지형",
+     "reachable": true,
+     "rect": [
+      10,
+      623,
+      85,
+      36
+     ]
+    },
+    {
+     "name": "왼쪽 90도 회전",
+     "reachable": true,
+     "rect": [
+      196,
+      625,
+      30,
+      30
+     ]
+    },
+    {
+     "name": "오른쪽 90도 회전",
+     "reachable": true,
+     "rect": [
+      226,
+      625,
+      30,
+      30
+     ]
+    },
+    {
+     "name": "확대",
+     "reachable": true,
+     "rect": [
+      256,
+      625,
+      30,
+      30
+     ]
+    },
+    {
+     "name": "축소",
+     "reachable": true,
+     "rect": [
+      286,
+      625,
+      30,
+      30
+     ]
+    },
+    {
+     "name": "지도 중앙",
+     "reachable": true,
+     "rect": [
+      316,
+      625,
+      30,
+      30
+     ]
+    },
+    {
+     "name": "시장",
+     "reachable": true,
+     "rect": [
+      17,
+      675,
+      78,
+      46
+     ]
+    },
+    {
+     "name": "건설 목록 열기",
+     "reachable": true,
+     "rect": [
+      100,
+      675,
+      78,
+      46
+     ]
+    },
+    {
+     "name": "영토 확장",
+     "reachable": true,
+     "rect": [
+      183,
+      675,
+      78,
+      46
+     ]
+    },
+    {
+     "name": "거점·세계 지도",
+     "reachable": true,
+     "rect": [
+      265,
+      675,
+      78,
+      46
+     ]
+    }
+   ]
+  },
+  {
+   "name": "844x390",
+   "buttons": [
+    {
+     "name": "주민",
+     "reachable": true,
+     "rect": [
+      686,
+      13,
+      58,
+      38
+     ]
+    },
+    {
+     "name": "소리 끄기",
+     "reachable": true,
+     "rect": [
+      749,
+      13,
+      38,
+      38
+     ]
+    },
+    {
+     "name": "게임 설정",
+     "reachable": true,
+     "rect": [
+      792,
+      13,
+      38,
+      38
+     ]
+    },
+    {
+     "name": "세계 지도",
+     "reachable": true,
+     "rect": [
+      14,
+      12,
+      215,
+      52
+     ]
+    },
+    {
+     "name": "주변 지형",
+     "reachable": true,
+     "rect": [
+      14,
+      331,
+      97,
+      42
+     ]
+    },
+    {
+     "name": "왼쪽 90도 회전",
+     "reachable": true,
+     "rect": [
+      684,
+      335,
+      28,
+      32
+     ]
+    },
+    {
+     "name": "오른쪽 90도 회전",
+     "reachable": true,
+     "rect": [
+      712,
+      335,
+      28,
+      32
+     ]
+    },
+    {
+     "name": "확대",
+     "reachable": true,
+     "rect": [
+      740,
+      335,
+      28,
+      32
+     ]
+    },
+    {
+     "name": "축소",
+     "reachable": true,
+     "rect": [
+      768,
+      335,
+      28,
+      32
+     ]
+    },
+    {
+     "name": "지도 중앙",
+     "reachable": true,
+     "rect": [
+      796,
+      335,
+      28,
+      32
+     ]
+    },
+    {
+     "name": "시장",
+     "reachable": true,
+     "rect": [
+      248,
+      322,
+      77,
+      48
+     ]
+    },
+    {
+     "name": "건설 목록 열기",
+     "reachable": true,
+     "rect": [
+      329,
+      322,
+      106,
+      48
+     ]
+    },
+    {
+     "name": "영토 확장",
+     "reachable": true,
+     "rect": [
+      439,
+      322,
+      77,
+      48
+     ]
+    },
+    {
+     "name": "거점·세계 지도",
+     "reachable": true,
+     "rect": [
+      520,
+      322,
+      77,
+      48
+     ]
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "failedRequests": []
+}

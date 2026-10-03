@@ -1,5 +1,5 @@
 import {remainingSeconds} from './game-time.js';
-import {RESOURCES, BUILDINGS, MERCHANT_PRICE} from './simulation.js';
+import {RESOURCES, BUILDINGS, MERCHANT_PRICE, SANITATION} from './simulation.js';
 import {NATIONS} from './world.js';
 import {tradeConnection} from './trade-terminals.js';
 export function marketFactor(s,item,extra=0){
@@ -28,35 +28,43 @@ export function tickEconomy(s,dt){
  s.diseaseUntil=h.infection>0?s.time+80:0;
  if(!h.infection){h.recoveries=(h.recoveries||0)+1;s.notify('감염이 진정되었습니다. 의료 물자를 비축하세요.','success');s.sound('heal');}
 }
+/** Why sanitation cannot be bought now, or null (K-03): the price and what of it is short ("방역 35G · 물 8 · 목재 3 · 목재
+ *  3개 부족"), the same text the button shows and the action refuses with. */
+export function sanitationShort(s){return s.priceShort(SANITATION,'방역 ');}
 export function sanitation(s){
- const short=s.moneyShort?.(35,'방역 ');if(short)return {ok:false,error:short};if(s.availableStock('water')<8||s.availableStock('wood')<3)return {ok:false,error:'방역: 35G · 물 8 · 목재 3개'};
- s.money-=35;s.stock.water-=8;s.stock.wood-=3;s.health.sanitationUntil=s.time+65;s.health.infection=Math.max(0,s.health.infection-12);s.sound('heal');return {ok:true};
+ const error=sanitationShort(s);if(error)return {ok:false,error};
+ s.money-=SANITATION.money;for(const[r,n]of Object.entries(SANITATION.items))s.stock[r]-=n;s.health.sanitationUntil=s.time+65;s.health.infection=Math.max(0,s.health.infection-12);s.sound('heal');return {ok:true};
 }
 
+/** The family rescue's price per step (the river detour at step 3 instead of the checkpoint fee). */
+export const RESCUE_PRICES=[{money:75},{money:125},{items:{wood:12,grain:12}},{money:160},{items:{grain:8}}],RIVER_DETOUR={items:{grain:16}};
+const RESCUE_WHAT=['연락책 접촉 ','통행 문서 ','수레 준비 ','검문소 통과 ','가족 맞이하기 '];
+/** Why the next rescue step cannot be taken now, or null (K-03): the condition not yet met, else what of its price is short. */
+export function rescueShort(s,choice='checkpoint'){
+ const q=s.rescueQuest;if(s.family||q.step>=5)return '가족이 이미 합류했습니다';
+ if(q.step===3&&choice==='river')return s.priceShort(RIVER_DETOUR,'강변 우회 ');
+ if(q.step===0&&s.contracts<2)return '영주 납품 '+s.contracts+'/2건 · 납품을 더 완료하세요';
+ if(q.step===1&&s.debt>500)return '채무 '+Math.ceil(s.debt)+'G · 500G 이하로 갚으세요';
+ if(q.step===4&&q.remaining>0)return '가족이 귀환 중입니다 · '+remainingSeconds(q.remaining,s)+'초 뒤 도착';
+ if(q.step===4&&!s.buildings.some(b=>BUILDINGS[b.type].home&&b.health>0))return '가족이 머물 주택이 필요합니다';
+ return s.priceShort(RESCUE_PRICES[q.step],RESCUE_WHAT[q.step]);
+}
 export function rescueInfo(s){
- const q=s.rescueQuest;
+ const q=s.rescueQuest,ready=q.step<5&&!rescueShort(s);
  const steps=[
-  {title:'소식을 찾다',text:'영주 납품 두 건을 완료해 국경 연락책을 만납니다.',label:'연락책 접촉 · 75G',ready:s.contracts>=2&&s.money>=75},
-  {title:'통행 협상',text:'채무를 절반 이하로 줄이고 통행 문서를 구합니다.',label:'통행 문서 · 125G',ready:s.debt<=500&&s.money>=125},
-  {title:'귀환 수레',text:'가족을 태울 수레와 여정을 버틸 식량을 준비합니다.',label:'수레 준비 · 목재 12 · 밀 12',ready:s.availableStock('wood')>=12&&s.availableStock('grain')>=12},
-  {title:'검문소 우회',text:'검문소 비용을 내거나 식량을 더 싣고 긴 강변 길로 돌아갑니다.',label:'검문소 통과 · 160G',ready:s.money>=160},
-  {title:'집으로 오는 길',text:q.remaining>0?'가족이 귀환 중입니다. 마을의 식량과 안전을 지키세요.':'가족이 머물 주택과 밀 8개를 준비하세요.',label:q.remaining>0?remainingSeconds(q.remaining,s)+'초 뒤 도착':'가족 맞이하기 · 밀 8',ready:q.remaining<=0&&s.buildings.some(b=>BUILDINGS[b.type].home&&b.health>0)&&s.availableStock('grain')>=8},
+  {title:'소식을 찾다',text:'영주 납품 두 건을 완료해 국경 연락책을 만납니다.',label:'연락책 접촉 · 75G',ready},
+  {title:'통행 협상',text:'채무를 절반 이하로 줄이고 통행 문서를 구합니다.',label:'통행 문서 · 125G',ready},
+  {title:'귀환 수레',text:'가족을 태울 수레와 여정을 버틸 식량을 준비합니다.',label:'수레 준비 · 목재 12 · 밀 12',ready},
+  {title:'검문소 우회',text:'검문소 비용을 내거나 식량을 더 싣고 긴 강변 길로 돌아갑니다.',label:'검문소 통과 · 160G',ready},
+  {title:'집으로 오는 길',text:q.remaining>0?'가족이 귀환 중입니다. 마을의 식량과 안전을 지키세요.':'가족이 머물 주택과 밀 8개를 준비하세요.',label:q.remaining>0?remainingSeconds(q.remaining,s)+'초 뒤 도착':'가족 맞이하기 · 밀 8',ready},
   {title:'다시 함께',text:'가족이 마을에 정착했습니다. 하루 채무 이자가 20% 줄어듭니다.',label:'합류 완료',ready:false}
  ];return {...steps[Math.min(q.step,5)],step:q.step};
 }
 export function advanceRescue(s,choice='checkpoint'){
- const q=s.rescueQuest,info=rescueInfo(s);if(s.family)return {ok:false,error:'가족이 이미 합류했습니다'};
- if(q.step===3&&choice==='river'){
-  if(s.availableStock('grain')<16)return {ok:false,error:'강변 우회에는 밀 16개가 필요합니다'};
-  s.stock.grain-=16;q.route='river';q.remaining=100;
- }else{
-  if(!info.ready)return {ok:false,error:info.text};
-  if(q.step===0)s.money-=75;
-  if(q.step===1)s.money-=125;
-  if(q.step===2){s.stock.wood-=12;s.stock.grain-=12;}
-  if(q.step===3){s.money-=160;q.route='checkpoint';q.remaining=45;}
-  if(q.step===4){s.stock.grain-=8;s.family=true;s.notify('가족이 집으로 돌아왔습니다.','success');s.sound('victory');}
- }
+ const q=s.rescueQuest,error=rescueShort(s,choice);if(error)return {ok:false,error};
+ const river=q.step===3&&choice==='river',price=river?RIVER_DETOUR:RESCUE_PRICES[q.step];s.money-=price.money||0;for(const[r,n]of Object.entries(price.items||{}))s.stock[r]-=n;
+ if(river){q.route='river';q.remaining=100;}else if(q.step===3){q.route='checkpoint';q.remaining=45;}
+ if(q.step===4){s.family=true;s.notify('가족이 집으로 돌아왔습니다.','success');s.sound('victory');}
  q.step++;s.sound('delivery');return {ok:true};
 }
 export function tickRescue(s,dt){

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {Simulation,RESOURCES} from '../src/app/game/simulation.js';
 import {Campaign} from '../src/app/game/campaign.js';
 import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
-import {PROVINCES} from '../src/app/game/territory.js';
+import {PROVINCES,WORLD_PLOTS} from '../src/app/game/territory.js';
 import {NATIONS} from '../src/app/game/world.js';
 import {TRADE_CONNECTIONS} from '../src/app/game/trade-routes.js';
 import {provinceZone} from '../src/app/game/infrastructure.js';
@@ -23,22 +23,22 @@ for(const p of PROVINCES){
 }
 // No two provinces share a site square.
 assert.equal(new Set(PROVINCES.map(p=>layoutOf(p.id).cell.join(','))).size,PROVINCES.length,'one site square per province');
-assert.equal(WORLD_CELLS.filter(c=>c.site).length,PROVINCES.length);
+assert.equal(WORLD_CELLS.filter(c=>c.site).length,WORLD_PLOTS.length);
 const count=kind=>PROVINCES.filter(p=>Object.values(layoutOf(p.id).edges).includes(kind)).length;
 for(const kind of ['coast','river','lake','canal','stream','mountain','forest','ice','desert'])assert.ok(count(kind)>0,'some site borders '+kind);
 // Every nation's capital plays like its nation (coast, river or highland), as before the grid.
 for(const [id,n] of Object.entries(NATIONS))assert.equal(regionOf(layoutOf(id+'-0')),n.region,id+' capital plays like its nation');
 // The map is built for play: seas are gulfs and an inland sea, not an empty ocean, and every one of the
-// eight ecologies can be started by a playable nation.
+// eight ecologies can be reached in a playable nation or by settling unclaimed land.
 {const sea=WATERWAYS.filter(w=>w.kind==='coast').reduce((n,w)=>n+w.cells.length,0);assert.ok(sea/(COLS*ROWS)<.2,'sea under a fifth of the map');
- const eco=new Set(PROVINCES.filter(p=>NATIONS[p.nation].playable).map(p=>ecologyOf(layoutOf(p.id))));
+ const eco=new Set(PROVINCES.filter(p=>!p.nation||NATIONS[p.nation]?.playable).map(p=>ecologyOf(layoutOf(p.id))));
  for(const e of ['meadow','forest','coast','marsh','basin','volcanic','snow','desert'])assert.ok(eco.has(e),'a playable site in '+e);
  assert.ok(PROVINCES.some(p=>TRADE_CONNECTIONS[p.id].some(o=>o.kind==='ferry')),'some site on a ferry route');}
 
 // A new site takes its province's map: the start land and the export road stay dry, the water on a side
 // is that side's kind, and a port stands only on its own kind of water.
 const site=(provinceId,nation=provinceId.split('-')[0])=>{const s=new Simulation(NATIONS[nation].region,null,{nation,provinceId});s.nextEvent=1e9;s.money=1e7;s.debt=0;s.rank=32;for(const r of Object.keys(RESOURCES))s.stock[r]=200;return s;};
-const seaSite=PROVINCES.find(p=>NATIONS[p.nation].playable&&Object.values(layoutOf(p.id).edges).includes('coast'));
+const seaSite=PROVINCES.find(p=>NATIONS[p.nation]?.playable&&Object.values(layoutOf(p.id).edges).includes('coast'));
 {const s=site(seaSite.id);assert.equal(s.provinceId,seaSite.id);assert.equal(s.region,'coast');
  for(const t of s.tiles){
   assert.equal(t.water,waterAt(s.layout,t.x,t.z));assert.equal(t.terrain==='water',!!t.water);
@@ -55,7 +55,7 @@ const seaSite=PROVINCES.find(p=>NATIONS[p.nation].playable&&Object.values(layout
  const bad=s.save();bad.land={...bad.land,edges:{...bad.land.edges,n:'lava'}};assert.throws(()=>encodeSave(bad));}
 
 // Mountain, ice and desert sides lay their ground; a mountain side allows conveyors.
-{const p=PROVINCES.find(p=>NATIONS[p.nation].playable&&layoutOf(p.id).edges.n==='mountain');const s=site(p.id);
+{const p=PROVINCES.find(p=>NATIONS[p.nation]?.playable&&layoutOf(p.id).edges.n==='mountain');const s=site(p.id);
  assert.ok(provinceZone(s).mountain);assert.equal(groundOf(s.layout,12,0),'mountain');assert.equal(s.tile(12,0).ground,'mountain');assert.equal(s.tile(12,12).ground,layoutOf(p.id).biome==='ice'?'ice':layoutOf(p.id).biome==='desert'?'sand':'plain');}
 {const p=PROVINCES.find(p=>layoutOf(p.id).biome==='plain'&&!Object.values(layoutOf(p.id).edges).includes('mountain'));assert.equal(provinceZone(site(p.id,'estern')).mountain,false);}
 

@@ -1,8 +1,9 @@
+@layer game-base {
 /* Main play surface. Visual values live in design-tokens.css. */
 body { color:var(--ui-ink); }
 button { transition:background .12s, border-color .12s, transform .12s; }
 button:focus-visible,select:focus-visible { outline:3px solid var(--ui-gold); outline-offset:3px; }
-button:active:not(:disabled) { transform:translateY(1px); }
+button:active:not(:disabled) { }
 .panel { background:var(--ui-paper); border:1px solid var(--ui-outline); border-radius:var(--ui-radius); box-shadow:var(--ui-panel-shadow); backdrop-filter:none; }
 .game-shell { --hud-gap:20px; --hud-top:92px; --hud-bottom:100px; }
 .is-playing .vignette { box-shadow:inset 0 0 120px #203c2617; }
@@ -22,7 +23,7 @@ button:active:not(:disabled) { transform:translateY(1px); }
 .is-playing .icon-btn { width:38px; height:38px; border:1px solid var(--ui-outline); border-radius:5px; color:var(--ui-ink); background:var(--ui-paper); box-shadow:0 2px 0 #263f3555; }
 .is-playing .icon-btn:hover { background:var(--ui-gold-light); }
 .is-playing .resident-access { display:flex; gap:5px; width:auto; min-width:58px; padding:0 9px; font-weight:800; }
-.is-playing .world-access { position:absolute; inset:20px auto auto 20px; display:flex; align-items:center; gap:10px; width:254px; height:52px; padding:0 12px 0 0; border:1px solid var(--ui-outline)!important; border-radius:6px; background:var(--ui-forest)!important; color:var(--ui-paper)!important; box-shadow:var(--ui-shadow); }
+.is-playing .world-access { position:absolute; inset:20px auto auto 20px; display:flex; align-items:center; gap:10px; width:254px; height:52px; padding:0 12px 0 0; border:1px solid var(--ui-outline); border-radius:6px; background:var(--ui-forest); color:var(--ui-paper); box-shadow:var(--ui-shadow); }
 .settlement-portrait { align-self:end; width:54px; height:61px; object-fit:cover; object-position:50% 4%; border-radius:4px 0 0 4px; image-rendering:pixelated; }
 .is-playing .world-access>span { display:flex; flex-direction:column; text-align:left; flex:1; min-width:0; gap:3px; font-size:14px; }
 .is-playing .world-access strong { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:15px; }
@@ -61,7 +62,7 @@ button:active:not(:disabled) { transform:translateY(1px); }
 .next-build { background:var(--ui-gold-light); }
 .is-playing .demo-badge { top:130px; left:22px; font-size:11px; text-shadow:0 1px 1px #f8f4df; color:#314838; gap:7px; }
 .demo-badge>span { display:none; }.demo-badge button { font-size:11px; }
-.is-playing .pause-label { top:100px; background:var(--ui-forest); color:var(--ui-paper); border-radius:4px; font-size:12px; padding:7px 12px; }
+.is-playing .pause-label { top:100px; z-index:4; background:var(--ui-forest); color:var(--ui-paper); border-radius:4px; font-size:12px; padding:7px 12px; } /* above the facility markers (z 3) */
 
 /* A fixed command row keeps expansion one click away. */
 .is-playing .town-actions { position:absolute; z-index:12; bottom:20px; left:50%; right:auto; transform:translateX(-50%); display:flex; align-items:center; gap:5px; background:var(--ui-forest-dark); padding:6px; border:1px solid var(--ui-outline); border-radius:7px; box-shadow:var(--ui-shadow); }
@@ -125,7 +126,7 @@ button:active:not(:disabled) { transform:translateY(1px); }
 .facility-details summary { color:var(--ui-ink); }
 .is-playing .tile-panel { left:50%; right:auto; bottom:var(--hud-bottom); transform:translateX(-50%); width:300px; max-width:calc(100vw - 100px); background:var(--ui-paper); border:1px solid var(--ui-outline); border-radius:6px; box-shadow:var(--ui-panel-shadow); padding:14px; }
 .is-playing .tile-panel>strong { font-size:15px; color:var(--ui-ink); background:none; padding:0; margin-bottom:10px; }
-.is-playing .tile-build { background:var(--ui-forest)!important; color:var(--ui-paper)!important; border-radius:4px!important; width:100%; height:36px!important; font-size:13px!important; margin-bottom:8px; }
+.is-playing .tile-build { background:var(--ui-forest); color:var(--ui-paper); border-radius:4px; width:100%; height:36px!important; font-size:13px; margin-bottom:8px; }
 .is-playing .soil-legend { top:auto; bottom:var(--hud-bottom); left:76px; background:var(--ui-paper); }
 .is-playing .facility-marker { height:27px; min-width:26px; padding:3px 5px 5px; background:var(--ui-paper); color:var(--ui-ink); border:1px solid var(--ui-outline); border-radius:3px; box-shadow:0 2px 0 #31473455; }
 .is-playing .facility-marker span { font-size:11px; }
@@ -138,7 +139,7 @@ button:active:not(:disabled) { transform:translateY(1px); }
 
 /* Shared menus: the same cloth, metal edges and readable controls. */
 [data-slot=dialog-overlay] { background:#142a23aa; backdrop-filter:none; }
-.game-dialog,.town-dialog { width:min(590px,94vw)!important; max-width:590px!important; max-height:calc(100dvh - 40px)!important; padding:20px!important; background:var(--ui-paper)!important; background-image:none!important; color:var(--ui-ink); border:1px solid var(--ui-outline)!important; border-radius:7px!important; box-shadow:0 4px 0 var(--ui-forest-dark),0 20px 70px #132a2366!important; gap:12px; }
+.game-dialog,.town-dialog { width:min(590px,94vw)!important; max-width:590px!important; max-height:calc(100dvh - 40px)!important; padding:20px!important; background:var(--ui-paper); background-image:none; color:var(--ui-ink); border:1px solid var(--ui-outline); border-radius:7px; box-shadow:0 4px 0 var(--ui-forest-dark),0 20px 70px #132a2366; gap:12px; }
 .game-dialog::before,.game-dialog::after,.game-dialog [data-slot=dialog-title]::after { display:none; }
 .game-dialog [data-slot=dialog-title] { display:flex; align-items:center; gap:10px; min-height:44px; padding:0 32px 13px 0; margin:0 0 4px; background:none; border:0; border-bottom:1px solid var(--ui-rule); border-radius:0; box-shadow:none; color:var(--ui-ink); font-family:inherit; font-size:23px; letter-spacing:-.5px; text-shadow:none; }
 .title-seal { display:grid; place-items:center; width:34px; height:34px; background:var(--ui-sage); border-radius:4px; color:var(--ui-forest); }.title-seal svg { width:20px; height:20px; }
@@ -161,7 +162,7 @@ button:active:not(:disabled) { transform:translateY(1px); }
 .market-row { border-color:var(--ui-rule); }.market-row button { background:var(--ui-sage); color:var(--ui-ink); border-color:var(--ui-rule); }
 .story-goals button,.save-download { background:var(--ui-forest); }
 .town-dialog .rank-track { display:none; }
-.game-toast { background:var(--ui-paper)!important; color:var(--ui-ink)!important; border:1px solid var(--ui-rule)!important; border-radius:5px!important; box-shadow:var(--ui-shadow)!important; }
+.game-toast { background:var(--ui-paper); color:var(--ui-ink); border:1px solid var(--ui-rule); border-radius:5px; box-shadow:var(--ui-shadow); }
 .audio-slider input { accent-color:var(--ui-forest); }
 .recipe span { background:var(--ui-paper-deep); color:var(--ui-ink); }
 .resident-profile-info>strong,.pixel-resident-list .resident-choice strong { color:var(--ui-ink); }
@@ -240,7 +241,7 @@ button:active:not(:disabled) { transform:translateY(1px); }
 .realm-edges { margin:0; border-top:1px solid var(--ui-rule); }.realm-edges summary { display:flex; justify-content:space-between; align-items:center; list-style:none; min-height:35px; font-size:12px; color:var(--ui-ink); cursor:pointer; }.realm-edges[open] summary>svg { transform:rotate(180deg); }.realm-edges .map-edge-list { padding-bottom:10px; }
 .origin-details,.world-test-options { border-top:1px solid var(--ui-rule); margin:0; font-size:11px; color:var(--ui-muted); }.origin-details summary,.world-test-options summary { padding:10px 0; cursor:pointer; }.origin-chain { margin:5px 0 12px; }
 .world-secondary { display:flex; gap:6px; flex-wrap:wrap; margin:0 0 10px; }.world-secondary button,.world-secondary a { color:var(--ui-forest); font-size:11px; min-height:30px; border:1px solid var(--ui-rule); padding:5px 7px; border-radius:3px; text-decoration:none; }
-.realm-start { padding:14px 18px 12px; flex:none; background:var(--ui-paper); border-top:1px solid var(--ui-rule); }.world-map-screen .realm-card .start-button { width:100%; min-height:45px; height:45px!important; border:1px solid var(--ui-outline)!important; background:var(--ui-forest)!important; color:var(--ui-paper)!important; border-radius:4px!important; box-shadow:0 3px 0 var(--ui-forest-dark)!important; padding:0 14px!important; font-size:14px!important; }.realm-start>small { display:block; text-align:center; font-size:10px; margin-top:11px; color:var(--ui-muted); }
+.realm-start { padding:14px 18px 12px; flex:none; background:var(--ui-paper); border-top:1px solid var(--ui-rule); }.world-map-screen .realm-card .start-button { width:100%; min-height:45px; height:45px!important; border:1px solid var(--ui-outline); background:var(--ui-forest); color:var(--ui-paper); border-radius:4px; box-shadow:0 3px 0 var(--ui-forest-dark); padding:0 14px!important; font-size:14px; }.realm-start>small { display:block; text-align:center; font-size:10px; margin-top:11px; color:var(--ui-muted); }
 
 /* Tablet and phone keep the world visible and controls in predictable rows. */
 @media (max-width:1100px) {
@@ -496,3 +497,56 @@ button:active:not(:disabled) { transform:translateY(1px); }
 .finale-stats dt { font-size:11px; color:var(--ui-muted); }
 .finale-stats dd { margin:2px 0 0; font-size:18px; font-weight:700; color:var(--ui-ink); font-variant-numeric:tabular-nums; }
 @media (prefers-reduced-motion:reduce) { .promotion-seal { animation:none; } }
+
+/* Site attention flags in the campaign site list (CampaignWorld SiteFlags). */
+.site-flags { display:flex; flex-wrap:wrap; gap:4px; width:100%; margin:4px 0 0; padding:0; list-style:none; }
+.site-flags li { display:inline-flex; align-items:center; gap:3px; padding:2px 6px; border:1px solid var(--ui-rule); border-radius:3px; background:var(--ui-paper); color:var(--ui-ink); font-size:11px; line-height:1.4; }
+.site-flags li.raid,.site-flags li.broken { border-color:var(--ui-danger); background:var(--ui-danger); color:var(--ui-paper); }
+.site-flags li.damaged,.site-flags li.blocked { border-color:var(--ui-danger); color:var(--ui-danger); }
+.site-flags li.cause svg { color:var(--ui-danger); }
+/* Continental records after 패권국 (QualityPanels LegacyGoals, G3-13). */
+.legacy-goals { width:100%; padding:10px 12px; border:1px solid var(--ui-rule); border-radius:5px; background:var(--ui-paper-deep); color:var(--ui-ink); text-align:left; }
+.legacy-goals header { display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:6px; }
+.legacy-goals header strong { font-size:14px; }
+.legacy-goals header b { font-size:20px; color:var(--ui-forest); font-variant-numeric:tabular-nums; }
+.legacy-goals header b small { font-size:12px; margin-left:2px; }
+.legacy-goals ul { display:flex; flex-direction:column; gap:6px; margin:0; padding:0; list-style:none; }
+.legacy-goals li { display:grid; grid-template-columns:28px minmax(0,1fr) 10.5em; align-items:center; gap:8px; } /* fixed number column: every bar the same length */
+.legacy-goals .legacy-level { display:grid; place-items:center; width:28px; height:28px; border-radius:50%; background:var(--ui-forest); color:var(--ui-paper); font-weight:700; font-size:13px; font-variant-numeric:tabular-nums; }
+.legacy-goals li strong { display:block; font-size:13px; }
+.legacy-goals li small { display:block; font-size:11px; color:var(--ui-muted); }
+.legacy-goals li i { display:block; height:5px; margin-top:3px; border-radius:3px; background:var(--ui-rule); overflow:hidden; }
+.legacy-goals li i em { display:block; height:100%; background:var(--ui-gold); }
+.legacy-goals li>b { font-size:12px; font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap; }
+.legacy-goals li>b small { display:inline; color:var(--ui-muted); }
+.legacy-goals.compact li small { display:none; }
+.legacy-goals.compact li>b small { display:inline; }
+@media (max-width:420px) { .legacy-goals li { grid-template-columns:24px minmax(0,1fr); } .legacy-goals li>b { grid-column:2; text-align:left; } }
+.ledger-scope { display:flex; gap:0; margin:0 0 8px; border:1px solid var(--ui-outline); border-radius:4px; overflow:hidden; width:max-content; max-width:100%; }
+.ledger-scope button { min-height:36px; padding:6px 12px; border:0; background:var(--ui-paper); color:var(--ui-ink); font-size:13px; }
+.ledger-scope button+button { border-left:1px solid var(--ui-outline); }
+.ledger-scope button[aria-pressed=true] { background:var(--ui-forest); color:var(--ui-paper); }
+/* A notice can name dozens of goods (storage overflow late in the game): keep a toast to three lines so it never covers
+   the map; the full text stays in the ledger news list. */
+.game-toast [data-title] { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+/* Why an upgrade or specialisation is locked (rules' upgradeShort / specializeShort). */
+.action-short { display:block; margin-top:4px; font-size:12px; line-height:1.4; color:var(--ui-danger); }
+/* K-09: on phones the operations card folds to one 44px line (the top issue) so the town stays visible. */
+.operations-card .ops-fold { display:flex; align-items:center; justify-content:space-between; gap:6px; width:100%; min-height:44px; padding:6px 10px; border:0; border-bottom:1px solid var(--ui-rule); background:transparent; color:var(--ui-ink); font-size:12px; font-weight:700; text-align:left; }
+.operations-card .ops-fold>span { display:flex; align-items:center; gap:5px; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.operations-card .ops-fold>span.alert { color:var(--ui-danger); }
+.operations-card.folded>:not(.ops-fold) { display:none!important; }
+.operations-card.folded .ops-fold { border-bottom:0; }
+/* K-01: one button per unmet promotion condition, under the goal line and in the rank dialog rows. */
+.goal-row { display:flex; flex-direction:column; }
+.goal-actions { display:flex; flex-wrap:wrap; gap:4px; padding:0 10px 10px; }
+.goal-actions:empty { display:none; }
+.goal-action { min-height:36px; font-size:12px; }
+.promotion-box .goal-action { margin-left:auto; }
+.bottleneck-block.secondary .bottleneck { padding-block:6px; }
+.cost-short { margin-top:4px; }
+.promotion-box>div { flex-wrap:wrap; align-items:center; }
+.goal-action[data-slot=button] { border-color:var(--ui-outline); background:var(--ui-paper); color:var(--ui-forest); font-weight:700; }
+.next-build-short:empty { display:none; }
+.next-build-short { padding:0 10px 8px; }
+}

@@ -1,3 +1,4 @@
+@layer game-base {
 .front-screen{position:absolute;inset:0;z-index:12;overflow:hidden;background:#052c32;color:#fff3d2;isolation:isolate}
 .screen-scenery{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2;user-select:none;image-rendering:pixelated}
 .screen-scene{position:absolute;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
@@ -104,3 +105,4 @@
  .home-art-caption{bottom:18px;font-size:11px;padding:6px 10px}
 }
 @media(prefers-reduced-motion:reduce){.screen-transition{animation:none}}
+}

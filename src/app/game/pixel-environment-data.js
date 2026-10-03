@@ -10,6 +10,7 @@ import {MOTION_ASSETS} from './pixel-motion-data.js';
 import {FARM_MOTION_ASSETS} from './pixel-farm-motion.js';
 export const ENVIRONMENT_CELL = 192;
 export const ENVIRONMENT_ASSETS = {
+ distillery:{building:true,sheet:'/assets/pixel-environment/distillery.png',frames:1,directions:4,anchor:[.5,.69],size:1.4},
  ...MOTION_ASSETS,
  ...FARM_MOTION_ASSETS,
  ...Object.fromEntries(Object.entries(NEW_VEHICLE_SIZES).map(([id,size])=>[id,{scenery:true,sheet:`/assets/pixel-environment/${id}.png`,frames:1,directions:4,anchor:VEHICLE_ANCHORS[id]||[.5,181/192],size}])),

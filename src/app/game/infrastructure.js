@@ -48,11 +48,14 @@ export function groundAt(s,x,z){
 export const GROUND_NAMES={mountain:'산',ice:'얼음',sand:'모래',plain:'평지',water:'물'};
 const MINES=['quarry','ironmine','coalpit','coppermine'];
 /** Production factor of the ground under a building: dry sand and ice slow farms and wells, a
- *  mountain helps mines, sand helps oil and sand pits. */
+ *  mountain helps mines, sand helps oil and sand pits. On a map with an ecology (land.ecology) the biome's own
+ *  fertility and moisture already hold the dry sand and the frozen soil (biome-terrain.js), so the farm and well
+ *  penalty is not applied a second time (G1-S1, S2: snow and desert starts took twice as long to the first promotion
+ *  as a meadow); maps without an ecology keep it. */
 export function groundFactor(s,type,x,z,irrigable){
- const g=groundAt(s,x,z);
- if(g==='sand')return irrigable?.7:type==='well'?.6:['oilpump','sandpit'].includes(type)?1.25:1;
- if(g==='ice')return irrigable?.6:type==='well'?.8:1;
+ const g=groundAt(s,x,z),once=!!s.layout?.ecology;
+ if(g==='sand')return irrigable?(once?1:.7):type==='well'?(once?1:.6):['oilpump','sandpit'].includes(type)?1.25:1;
+ if(g==='ice')return once?1:irrigable?.6:type==='well'?.8:1;
  if(g==='mountain')return MINES.includes(type)?1.25:1;
  return 1;
 }

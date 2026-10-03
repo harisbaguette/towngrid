@@ -1,4 +1,5 @@
 import {CAPITALS} from './world-map.js';
+import {WORLD_REALMS} from './world-politics.js';
 export const BRAND={name:'타운그리드',latin:'TOWNGRID',world:'이르데아'};
 export const RACES={
  human:{name:'인간',color:'#467eab',roof:'#b95432',wall:'#f0dfba',trim:'#77573c',characters:['Worker_Male','Worker_Female','Chef_Female','Knight_Male'],style:'목조 골조 · 기와지붕'},
@@ -74,7 +75,16 @@ for(let i=0;i<nationRows.length;i++){
  const overlord=['발테론 제국','카르제온 연방','아스테라 패권국'][c],point=ATLAS_POINTS[i];
  NATIONS[id]={faction:factionOf(race),playable:playableRace(race),sovereign:['아우렐 독립왕국','네레이드 독립연방','솔름 독립공국'][c],capitalDomain:(old.capital||name.split(' ')[0])+' 수도직할령',manor:(old.fief||name.split(' ')[0])+' 개척장',dependency:'종속 공국',sale:1,production:{},...old,...p,id,name,race,region,continent:'irdea',overlord,policy:p.name,effect:p.effect,color:RACES[race].color,point,fief:old.fief||name.split(' ')[0]+' 자치주',district:old.capital?old.capital+' 개발구':name.split(' ')[0]+' 산업구',capital:old.capital||name.split(' ')[0],lore:overlord+'의 통제를 받는 종속국. 지방 개발구의 빈 땅을 임차해 사업을 시작합니다.',population:{[race]:65,human:race==='human'?65:20,other:15}};
 }
-// Rank table from the 2026-09-28 balance patch: each rank asks for the output of the facility the previous rank opened.
+// Retain historical definitions for save validation, while new games and diplomacy enumerate 14 countries.
+export const LEGACY_NATION_IDS=nationRows.map(([id])=>id);
+for(const id of LEGACY_NATION_IDS){
+ const realm=WORLD_REALMS[id];
+ if(realm)Object.assign(NATIONS[id],realm,{lore:realm.tier==='major'?'넓은 영토를 가진 국가. 수도 밖의 빈 땅에서 사업을 시작합니다.':'강과 산, 항구를 중심으로 자리 잡은 작은 국가. 한정된 땅에서 교역과 산업을 키웁니다.'});
+ else Object.defineProperty(NATIONS,id,{enumerable:false});
+}
+// Rank table from the 2026-09-28 balance patch: many ranks ask for the output of the facility the previous rank opened.
+// Since 2026-10-02 (docs/BALANCE_PATCH_20260928.md 19-5) about twenty of the 32 promotions end on another act (revenue,
+// freight, rail, the lord's orders, investment, a repelled raid, emerging-state trade) instead of "make N of the newest".
 // The quarry is in no unlock list, so it is a starting facility. Length 33 is part of the save format.
 export const RANKS=[
  ['농노',0,[],[]],
@@ -86,14 +96,14 @@ export const RANKS=[
  ['등록 사업주',300,[['produced:cloth',8,'직물 생산'],['revenue',8000,'누적 판매 수입']],['henhouse','marketplace']],
  ['지역 공급자',350,[['produced:egg',20,'달걀 생산'],['contracts',6,'납품 계약']],['confectionery','reservoir']],
  ['제조 허가업자',400,[['produced:cake',10,'케이크 생산'],['contracts',8,'납품 계약']],['kiln','stable']],
- ['지역 납품업자',500,[['produced:brick',20,'벽돌 생산'],['revenue',16000,'교역 수입']],['tailor','glassworks']],
+ ['지역 납품업자',500,[['produced:brick',14,'벽돌 생산'],['revenue',23000,'교역 수입']],['tailor','glassworks']],
  ['공인 계약업자',600,[['produced:workwear',8,'작업복 생산'],['produced:glass',8,'유리 생산'],['contracts',10,'납품 계약']],['watermill','dwarfhouse','spirithouse']],
  ['개척 사업자',700,[['workers',28,'주민']],['generator','workshop']],
  ['동력 제조업자',850,[['power',1,'동력 가동'],['produced:gear',8,'부품 생산']],['windturbine','logistics']],
  ['법인 대표',1200,[['automatic',1,'자동 물류 가동'],['revenue',47000,'교역 수입']],['ironmine','coalpit','titanhouse','centaurhouse']],
  ['중공업 사업자',1500,[['produced:iron',16,'철광석 생산'],['produced:coal',16,'석탄 생산'],['workers',40,'주민']],['smelter','steamworks','wardpost']],
  ['에너지 사업자',2200,[['produced:steel',18,'강철 생산'],['debtFree',1,'채무 청산']],['oilpump','refinery','coppermine']],
- ['산업단지 운영자',2800,[['produced:fuel',12,'연료 생산'],['produced:copper',16,'구리광석 생산'],['sites',2,'운영 거점']],['chemical','manaextractor','wiremill']],
+ ['산업단지 운영자',2800,[['produced:fuel',12,'연료 생산'],['produced:copper',12,'구리광석 생산'],['deliveries',3,'지역 간 운송']],['chemical','manaextractor','wiremill']],
  ['정밀 제조업자',3400,[['produced:polymer',18,'합성 소재 생산'],['produced:wire',12,'전선 생산'],['produced:mana',8,'마력 결정 생산']],['electronics','magetower','cementworks']],
  ['광역 투자자',4000,[['produced:circuit',12,'회로 생산'],['produced:concrete',12,'콘크리트 생산'],['deliveries',10,'지역 간 운송']],['station','rail','cannery']],
  ['자동차 제조사',4800,[['railRoutes',1,'철도 운송망'],['produced:canned',12,'통조림 생산']],['automotive']],
@@ -101,13 +111,13 @@ export const RANKS=[
  ['기반시설 운영자',7000,[['sites',3,'운영 거점'],['railRoutes',2,'철도 운송망']],['arcanepower','battery','leyrelay']],
  ['개발구 운영권자',8000,[['revenue',280000,'교역 수입'],['deliveries',55,'지역 간 운송']],['bank','barracks']],
  ['치안권 보유자',9500,[['defense',1,'경비대 편성'],['produced:medicine',90,'의약품 생산']],['fortress','lampworks']],
- ['재정 운영권자',11000,[['investment',2,'산업 투자'],['produced:lamp',24,'마력등 생산'],['contracts',27,'납품 계약']],['engineworks']],
- ['자치구 대표',12500,[['sites',4,'운영 거점'],['support',65,'주민 지지'],['contracts',30,'납품 계약']],['mithrilforge']],
- ['자치정부 수장',14000,[['defense',4,'경비대 편성'],['railRoutes',3,'철도 운송망'],['produced:mithril',10,'미스릴 강 생산']],['parliament']],
+ ['재정 운영권자',11000,[['investment',3,'산업 투자'],['produced:lamp',10,'마력등 생산'],['contracts',27,'납품 계약']],['engineworks']],
+ ['자치구 대표',12500,[['sites',4,'운영 거점'],['support',65,'주민 지지'],['contracts',29,'납품 계약']],['mithrilforge']],
+ ['자치정부 수장',14000,[['defense',4,'경비대 편성'],['railRoutes',3,'철도 운송망'],['produced:mithril',5,'미스릴 강 생산']],['parliament']],
  ['독립 선언국',16000,[['recognition',2,'외교 지지국'],['support',70,'주민 지지'],['building:parliament',1,'의사당 건립']],['shipyard']],
- ['승인 독립국',19000,[['recognition',3,'외교 지지국'],['produced:airship',3,'비공정 건조'],['deliveries',190,'지역 간 운송']],['airdock']],
- ['지역 강국',28000,[['sites',5,'운영 거점'],['investment',4,'산업 투자'],['building:fortress',2,'방위 요새'],['revenue',700000,'교역 수입']],['blastfurnace']],
- ['다지역 연방',38000,[['territories',3,'자치권 확보 지역'],['support',75,'주민 지지'],['deliveries',230,'지역 간 운송']],['assemblyline']],
+ ['승인 독립국',19000,[['recognition',3,'외교 지지국'],['produced:airship',2,'비공정 건조'],['deliveries',170,'지역 간 운송']],['airdock']],
+ ['지역 강국',28000,[['sites',5,'운영 거점'],['investment',5,'산업 투자'],['building:fortress',2,'방위 요새'],['revenue',700000,'교역 수입']],['blastfurnace']],
+ ['다지역 연방',38000,[['territories',3,'자치권 확보 지역'],['support',75,'주민 지지'],['deliveries',215,'지역 간 운송']],['assemblyline']],
  ['열강',56000,[['sites',6,'운영 거점'],['recognition',6,'외교 지지국'],['produced:airship',14,'비공정 건조']],['exchange']],
  ['패권국',70000,[['territories',5,'자치권 확보 지역'],['revenue',1100000,'교역 수입'],['defense',10,'방위대 편성'],['produced:car',120,'자동차 생산']],[]]
 ].map(([name,fee,requirements,unlocks],id)=>({id,name,fee,requirements,unlocks}));

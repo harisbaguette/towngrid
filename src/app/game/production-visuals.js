@@ -26,7 +26,7 @@ export function productionVisualState(type, building = {}, sim) {
  const made = building.type && typeof sim?.recipeOf === 'function' ? sim.recipeOf(building) : def;
  const progress = Math.min(1, Math.max(0, building.progress || 0));
  const count = Math.max(0, Math.floor(building.out || 0));
- const enabled = building.enabled !== false && !(building.health <= 0);
+ const enabled = building.enabled !== false && !(building.health <= 0) && !(building.movingUntil > (sim?.time || 0));
  const service = SERVICE_OUTPUTS[made.output];
  const left = service ? Math.max(0, (building.activeUntil || 0) - (sim?.time || 0)) : 0;
  // A live simulation answers per building (local grid, trade-terminals.js); a plain context only has a global flag.

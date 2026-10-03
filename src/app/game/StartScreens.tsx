@@ -11,8 +11,8 @@ const castNames = Object.fromEntries(Object.values(RESIDENT_LOOKS).flat().map(pe
 
 function SceneImage({ src, className = '', fallback = SCREEN_BACKGROUNDS.loading }: { src: string; className?: string; fallback?: string }) {
   const imageRef = useRef<HTMLImageElement>(null);
-  return <div className="screen-scene"><img key={src} ref={imageRef} className={'screen-scenery ' + className} src={src} alt="" draggable={false}
-    onError={event => { const image = event.currentTarget; if (!image.dataset.fallback) { image.dataset.fallback = 'true'; image.src = fallback; } else image.style.opacity = '0'; }} /><ScreenMotion key={src} imageRef={imageRef} src={src} /></div>;
+  return <div className="screen-scene"><img key={'image:' + src} ref={imageRef} className={'screen-scenery ' + className} src={src} alt="" draggable={false}
+    onError={event => { const image = event.currentTarget; if (!image.dataset.fallback) { image.dataset.fallback = 'true'; image.src = fallback; } else image.style.opacity = '0'; }} /><ScreenMotion key={'motion:' + src} imageRef={imageRef} src={src} /></div>;
 }
 
 export function ArtworkGallery({ onBack, initialId, onArtChange }: { onBack: () => void; initialId?: string; onArtChange?: (src: string) => void }) {

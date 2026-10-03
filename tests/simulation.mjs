@@ -24,3 +24,5 @@ console.log(JSON.stringify({result:'PASS',breadSold:s.sold.bread,money:Math.floo
 
 // Rule fixes of the 2026-09-29 audits live in their own file and run with this suite.
 await import('./rules-20260929.mjs');
+// Save, home-province, site-book and button-gate fixes of the 2026-10-02 code audit (G3).
+await import('./rules-20261002.mjs');

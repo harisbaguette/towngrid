@@ -41,6 +41,11 @@
     "**/*.mts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "work",
+    "outputs",
+    "dist",
+    "graft",
+    ".wrangler"
   ]
 }

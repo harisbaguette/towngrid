@@ -47,10 +47,10 @@ assert.deepEqual(Object.fromEntries(Object.entries(INFRA_BUILDINGS).filter(([,d]
  const paved=place(s,'pavedhub',8,12);const [gate,a,b]=s.tradeTerminals();
  assert.deepEqual([gate.capacity,a.capacity,b.capacity],[10,10,30]);assert.equal(s.tradeConnection().building,paved.id);assert.equal(ship(s),30);
  // A choice holds, survives save/load, and falls back when the terminal is gone.
- assert.ok(s.chooseTradeRoute('b:'+hub.id).ok);assert.equal(ship(s),10);
+ run(s,90);assert.ok(s.chooseTradeRoute('b:'+hub.id).ok);assert.equal(ship(s),10);
  const back=new Simulation('river',decodeSave(encodeSave(s.save())));assert.equal(back.tradeConnection().building,hub.id);assert.ok(back.paved.has('8,11'));
  assert.equal(s.chooseTradeRoute('b:9999').ok,false);
- s.demolish(8,10);assert.equal(s.tradeConnection().building,paved.id,'a demolished choice falls back');
+ run(s,90);assert.ok(s.demolish(8,10).ok);assert.equal(s.tradeConnection().building,paved.id,'a demolished choice falls back');
  paved.health=0;s.revision++;assert.equal(s.tradeConnection().id,'gate','a broken terminal is skipped');
  assert.match(s.chooseTradeRoute('b:'+paved.id).error,/파손됨/);}
 
@@ -79,7 +79,7 @@ assert.deepEqual(Object.fromEntries(Object.entries(INFRA_BUILDINGS).filter(([,d]
  place(s,'conveyor',12,14);assert.ok(s.conveyors.has('12,14'));}
 
 // Pipes move water from a well into the warehouse without residents; demolishing a pipe keeps the ground.
-{const s=town();s.workers=[];s.stock.water=0;const well=place(s,'well',9,14);place(s,'pipe',10,14);place(s,'pipe',10,13);place(s,'pipe',10,12);
+{const s=town();s.workers=[];const well=place(s,'well',9,14);place(s,'pipe',10,14);place(s,'pipe',10,13);place(s,'pipe',10,12);for(const r of Object.keys(RESOURCES))s.stock[r]=0;
  well.out=6;s.revision++;run(s,3);assert.ok(s.stock.water>=3,'water reached the warehouse through the pipe');assert.ok(s.logisticsStats.direct>=3);
  assert.equal(s.canBuild('road',10,13),'관을 먼저 철거하세요');s.demolish(10,13);assert.ok(!s.pipes.has('10,13'));
  const back=new Simulation('river',decodeSave(encodeSave(s.save())));assert.deepEqual([...back.pipes].sort(),['10,12','10,14']);}

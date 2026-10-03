@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>타운그리드 · 화면 배치 시안</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#e5e5d9;color:#19383b;font:15px/1.55 "Malgun Gothic","Noto Sans KR",sans-serif}
+header{background:#153d42;color:#fff5df;padding:24px max(20px,calc((100vw - 1520px)/2));border-bottom:4px solid #92aaa5}
+h1{font-size:25px;letter-spacing:-.7px;margin:0 0 4px}header p{margin:0;color:#d0e1d8;font-size:13px}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}button,a{font:inherit}button{cursor:pointer;color:#fff5df;background:#235f63;border:2px solid #92aaa5;border-radius:3px;padding:9px 15px;font-weight:700;box-shadow:0 3px #0c292f}
+button:hover{background:#397d7e}button[aria-pressed=true]{color:#251d12;background:#ee701b;border-color:#ffc27d}
+button:focus-visible,a:focus-visible{outline:3px solid #ee701b;outline-offset:4px}
+main{max-width:1560px;margin:auto;padding:24px 20px 40px}.overview{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+figure{margin:0;background:#f1eddf;border:2px solid #235f63;box-shadow:0 4px #92aaa5;border-radius:3px;overflow:hidden}
+.thumb{display:block;width:100%;padding:0;border:0;border-radius:0;background:#153d42;box-shadow:none;position:relative}
+.thumb:hover img{filter:brightness(1.06)}.thumb img{display:block;width:100%;height:auto}
+figcaption{padding:14px 16px}h2{font-size:19px;margin:0 0 5px;line-height:1.4}figcaption p{margin:3px 0;font-size:13px}.tradeoff{color:#566b69}
+.number{display:inline-block;color:#fff5df;background:#235f63;font-size:12px;padding:2px 7px;vertical-align:3px;margin-right:8px}
+.recommend{font-size:11px;color:#7b370d;border:1px solid #ee701b;padding:2px 5px;margin-left:7px;vertical-align:3px}
+.detail{display:grid;gap:16px}.detail[hidden],.overview[hidden]{display:none}.detail-head{display:flex;gap:20px;align-items:start;justify-content:space-between}
+.detail-head p{margin:4px 0}.detail-head a{white-space:nowrap;padding:8px 12px;background:#235f63;color:#fff5df;text-decoration:none;border:2px solid #153d42;border-radius:3px}
+.detail>img{width:100%;height:auto;border:2px solid #235f63;box-shadow:0 4px #92aaa5;background:#153d42}
+.tip{font-size:12px;color:#566b69;margin:18px 0 0}.recommend-note{border-left:4px solid #ee701b;background:#f1eddf;padding:12px 16px;margin:24px 0 0;max-width:850px}
+@media(max-width:760px){header{padding:20px 14px}h1{font-size:21px}main{padding:18px 12px}.overview{grid-template-columns:1fr;gap:18px}nav{gap:7px}button{font-size:13px;padding:8px 10px}.detail-head{flex-direction:column;gap:10px}}
+@media(prefers-reduced-motion:no-preference){button{transition:background 110ms}img{transition:filter 110ms}}
+</style>
+</head>
+<body>
+<header>
+<h1>타운그리드 · 화면 배치 시안</h1>
+<p>산업 제어반 스타일 · 건설 목록을 펼친 상태 · 이미지 시안</p>
+<nav aria-label="배치 시안 선택"></nav>
+</header>
+<main>
+<div class="overview" id="overview"></div>
+<section class="detail" id="detail" hidden aria-label="선택한 배치 시안">
+<div class="detail-head"><div><h2 id="detail-title"></h2><p id="detail-summary"></p><p id="detail-tradeoff" class="tradeoff"></p></div><a id="original" target="_blank" rel="noopener">원본 크게 보기 ↗</a></div>
+<img id="large" alt="">
+<p class="tip">상단 번호 또는 키보드 ← →로 전환합니다. 이미지의 수치와 시설 그림은 배치 비교용 예시입니다.</p>
+</section>
+<p class="recommend-note"><strong>추천: 1번 하단 통합형.</strong> 건설과 시설 조작을 한곳에 모으면서 지도의 가로 폭을 넓게 쓸 수 있습니다. 화면 위에 겹치는 창을 줄이고 싶다면 3번을 비교해 보세요.</p>
+</main>
+<script>
+const concepts=[{"id":"01","name":"하단 통합형","file":"01-bottom-dock.png","summary":"건설 목록과 시설 정보를 하단 한 줄에 모음","tradeoff":"가로 시야가 넓고 조작 위치가 일정하지만 지도 아래쪽이 줄어듭니다."},{"id":"02","name":"좌측 건설형","file":"02-left-build.png","summary":"건설 목록은 왼쪽, 시설 정보는 오른쪽 아래","tradeoff":"건물을 찾기 쉽고 세로 시야가 넓지만 지도의 가로 폭이 줄어듭니다."},{"id":"03","name":"우측 통합형","file":"03-right-console.png","summary":"건설·시설·목표를 오른쪽 관제창에 집중","tradeoff":"창이 흩어지지 않고 지도가 깔끔하지만 오른쪽 패널의 정보 밀도가 높습니다."},{"id":"04","name":"양쪽 분리형","file":"04-split-sides.png","summary":"왼쪽은 건설, 오른쪽은 시설 운영","tradeoff":"건설과 생산 상태를 함께 보기 좋고, 넓은 모니터에 적합합니다."},{"id":"05","name":"맵 집중형","file":"05-map-first.png","summary":"평소에는 지도 중심, 필요한 창만 작게 펼침","tradeoff":"마을을 가장 넓게 볼 수 있지만 상세 정보는 눌러서 열어야 합니다."}];
+let selected=null;
+const nav=document.querySelector('nav'),overview=document.getElementById('overview'),detail=document.getElementById('detail');
+function navButton(label,id){const b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.choice=id??'all';b.setAttribute('aria-pressed','false');b.onclick=()=>select(id);nav.append(b);}
+navButton('전체 비교',null);
+concepts.forEach((c,i)=>{
+ navButton(Number(c.id)+' '+c.name,c.id);
+ const figure=document.createElement('figure');
+ const trigger=document.createElement('button');trigger.className='thumb';trigger.type='button';trigger.setAttribute('aria-label',Number(c.id)+'번 '+c.name+' 크게 보기');trigger.onclick=()=>select(c.id);
+ const img=document.createElement('img');img.src=c.file;img.alt=c.name+' 게임 화면 배치';img.width=1672;img.height=941;img.loading=i>1?'lazy':'eager';trigger.append(img);figure.append(trigger);
+ const caption=document.createElement('figcaption'),h=document.createElement('h2'),n=document.createElement('span');n.className='number';n.textContent=c.id;h.append(n,c.name);
+ if(i===0){const rec=document.createElement('span');rec.className='recommend';rec.textContent='추천';h.append(rec);}
+ const summary=document.createElement('p');summary.textContent=c.summary;const trade=document.createElement('p');trade.className='tradeoff';trade.textContent=c.tradeoff;caption.append(h,summary,trade);figure.append(caption);overview.append(figure);
+});
+function select(id){
+ const c=concepts.find(c=>c.id===id);selected=c?c.id:null;
+ overview.hidden=!!c;detail.hidden=!c;
+ nav.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.choice===(selected??'all'))));
+ if(c){document.getElementById('detail-title').textContent=Number(c.id)+'. '+c.name;document.getElementById('detail-summary').textContent=c.summary;document.getElementById('detail-tradeoff').textContent=c.tradeoff;const img=document.getElementById('large');img.src=c.file;img.alt=c.name+' 게임 화면 배치';document.getElementById('original').href=c.file;}
+ history.replaceState(null,'',selected?'#'+selected:location.pathname);
+}
+document.addEventListener('keydown',e=>{if(!selected||!['ArrowLeft','ArrowRight'].includes(e.key)||e.altKey||e.ctrlKey||e.metaKey)return;e.preventDefault();const index=concepts.findIndex(c=>c.id===selected);select(concepts[(index+(e.key==='ArrowRight'?1:4))%5].id);});
+select(location.hash.slice(1));
+</script>
+</body>
+</html>
+

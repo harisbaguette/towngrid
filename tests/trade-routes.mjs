@@ -2,23 +2,23 @@ import assert from 'node:assert/strict';
 import {Simulation} from '../src/app/game/simulation.js';
 import {Campaign} from '../src/app/game/campaign.js';
 import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
-import {PROVINCES} from '../src/app/game/territory.js';
+import {PROVINCES,WORLD_PLOTS} from '../src/app/game/territory.js';
 import {NATIONS} from '../src/app/game/world.js';
 import {ROUTE_KINDS,MAJOR_ROUTES,WATERWAYS,TRADE_CONNECTIONS,TRADE_LINKS} from '../src/app/game/trade-routes.js';
 const run=(s,t)=>{for(let i=0;i<t*4;i++)s.tick(.25);};
 const LAND=['silk','paved','rural','mountain'],WATER=['coast','river','lake','canal','stream','ferry'];
 // The first land connection of a province is the one its gate uses.
-const provinceWith=kind=>PROVINCES.find(p=>NATIONS[p.nation].playable&&TRADE_CONNECTIONS[p.id].find(o=>ROUTE_KINDS[o.kind].scale!=='port')?.kind===kind);
+const provinceWith=kind=>PROVINCES.find(p=>NATIONS[p.nation]?.playable&&TRADE_CONNECTIONS[p.id].find(o=>ROUTE_KINDS[o.kind].scale!=='port')?.kind===kind);
 // A lone site placed in any province, selling through the given kind of land route: the smallest
 // stand-in for the campaign record a real site gets.
-const fresh=kind=>{const province=provinceWith(kind);assert.ok(province,'a playable province reaches '+kind);const s=new Simulation('river',null,{nation:province.nation});s.campaign={sites:[{id:'t',provinceId:province.id}],homeId:'t',support:50,metric:()=>0,onPromotion(){}};s.siteId='t';s.nextEvent=1e9;s.autoSell={};s.build('warehouse',10,12);assert.equal(s.tradeConnection().kind,TRADE_CONNECTIONS[province.id].find(o=>ROUTE_KINDS[o.kind].scale!=='port').kind);return s;};
+const fresh=kind=>{const province=provinceWith(kind);assert.ok(province,'a playable province reaches '+kind);const s=new Simulation('river',null,{nation:province.nation});s.campaign={sites:[{id:'t',provinceId:province.id,sim:s}],homeId:'t',newStates:[],support:50,metric:()=>0,onPromotion(){}};s.siteId='t';s.nextEvent=1e9;s.autoSell={};s.build('warehouse',10,12);assert.equal(s.tradeConnection().kind,TRADE_CONNECTIONS[province.id].find(o=>ROUTE_KINDS[o.kind].scale!=='port').kind);return s;};
 const inside=(p,poly)=>{let c=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const [xi,yi]=poly[i],[xj,yj]=poly[j];if((yi>p[1])!==(yj>p[1])&&p[0]<(xj-xi)*(p[1]-yi)/(yj-yi)+xi)c=!c;}return c;};
 
 // Port sizes follow the water they stand on.
 assert.deepEqual(Object.fromEntries(WATER.map(k=>[k,ROUTE_KINDS[k].capacity])),{coast:200,river:100,lake:100,canal:30,stream:30,ferry:10});
 // Every province has a land connection (two where roads cross) and may add each kind of water it touches.
 const all=Object.values(TRADE_CONNECTIONS).flat();
-assert.equal(Object.keys(TRADE_CONNECTIONS).length,PROVINCES.length);
+assert.equal(Object.keys(TRADE_CONNECTIONS).length,WORLD_PLOTS.length);
 for(const p of PROVINCES){const list=TRADE_CONNECTIONS[p.id];assert.ok(list.some(o=>LAND.includes(o.kind)),p.id+' has a land route');assert.equal(new Set(list.map(o=>o.kind)).size,list.length,p.id+' lists each kind once');}
 for(const kind of Object.keys(ROUTE_KINDS))assert.ok(all.some(o=>o.kind===kind),kind+' is used somewhere');
 for(const o of all){assert.equal(o.capacity,ROUTE_KINDS[o.kind].capacity);assert.ok(o.line.length>=2,'the atlas can highlight '+o.id);assert.equal(o.scale==='minor',o.id.startsWith('minor:'));}

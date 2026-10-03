@@ -28,7 +28,8 @@ function storms(withClover){
  for(let i=0;i<240;i++)s.tick(.25);
  const fx=t=>{const b=get(t);return placementEffects(s,t,b.x,b.z);};
  const detail={built,statuses:Object.fromEntries(['clover','pond','pasture','apiary','field','sheeppen'].map(t=>[t,get(t)?.status])),apiaryHoney:s.produced.honey||0,fieldWaterFromTwoBrokenPonds:fx('field').waterScore+'/'+fx('field').waterNeed,fieldStillHaulsWater:!!s.effectiveInputs(get('field')).water,sheepGrazeFromBrokenPasture:fx('sheeppen').graze,repairCost:{clover:s.repairCost(get('clover')),pond:s.repairCost(get('pond')),pasture:s.repairCost(get('pasture'))},buildCost:{clover:BUILDINGS.clover.cost,pond:BUILDINGS.pond.cost,pasture:BUILDINGS.pasture.cost}};
- expectBug('G1-T2 a broken pond, pasture or clover still waters, grazes and feeds bees while it asks for a repair that costs more than a new clover or pasture',get('clover').status==='수리 필요'&&(s.produced.honey||0)>0&&!s.effectiveInputs(get('field')).water&&fx('sheeppen').graze>0&&s.repairCost(get('clover'))>BUILDINGS.clover.cost,detail);}
+ expectBug('G1-T2 a broken pond, pasture or clover still waters, grazes and feeds bees while it shows 수리 필요',get('clover').status==='수리 필요'&&((s.produced.honey||0)>0||!s.effectiveInputs(get('field')).water||fx('sheeppen').graze>0),detail);
+ expectBug('G1-T2b [R simulation.js repairCost/storm targets] repairing a terrain facility costs more than building a new one (clover 25G, pasture 40G)',['clover','pasture','pond'].some(t=>s.repairCost(get(t))>BUILDINGS[t].cost),detail.repairCost);}
 
 // T3 old maps (no land.ecology) keep the old rules; the showcase tour (산업도시 둘러보기, Campaign demo) is one of them, so the
 // herd water, pond flooding, salt and clustering the cards describe do nothing there.
@@ -41,8 +42,10 @@ function storms(withClover){
  expectBug('G1-T3 the showcase tour runs on an old-rule map: herd water, pond flooding and clustering described on the cards do nothing there',!terrainRules(s)&&!!s.effectiveInputs(sheep).water&&!m.flooded,detail);}
 
 // T4 the harvest good event speeds every farm-group facility, including the feed mill, which is a processing plant.
+// Judged not a defect (2026-10-02): the feed mill sits in the farm tab the notice names, and boosting it with the fields
+// and herds keeps the grain -> feed -> herd chain in step during the 80 s. Kept as a control.
 {const s=new Simulation('river',null,{nation:'estern',provinceId:'estern-5'});s.nextEvent=1e12;s.rank=13;s.money=1e5;for(const r of Object.keys(RESOURCES))s.stock[r]=80;
- s.build('warehouse',11,12);s.build('feedmill',9,12);s.build('mill',13,12);const fm=s.buildings.find(b=>b.type==='feedmill'),ml=s.buildings.find(b=>b.type==='mill');
- const before=[s.speedOf(fm),s.speedOf(ml)];s.harvestUntil=s.time+80;const after=[s.speedOf(fm),s.speedOf(ml)];
- expectBug('G1-T4 the harvest event (농장 생산 +50%) also speeds the feed mill, a grain-processing plant, but not the flour mill',after[0]/before[0]>1.4&&Math.abs(after[1]/before[1]-1)<1e-9,{feedmill:{group:BUILDINGS.feedmill.group,ratio:+(after[0]/before[0]).toFixed(2)},mill:{group:BUILDINGS.mill.group,ratio:+(after[1]/before[1]).toFixed(2)},boost:HARVEST_BOOST});}
+ s.build('warehouse',11,12);s.build('feedmill',9,12);s.build('mill',13,12);s.build('sheeppen',9,14);s.build('field',13,14);const get=t=>s.buildings.find(b=>b.type===t),list=['feedmill','mill','sheeppen','field'];
+ const before=list.map(t=>s.speedOf(get(t))),boosted=(s.harvestUntil=s.time+80,list.map(t=>s.speedOf(get(t)))),ratio=list.map((t,i)=>+(boosted[i]/before[i]).toFixed(2));
+ expectBug('[control] G1-T4 the harvest event speeds a link of the farm chain (field, feed mill, herd) but not the next one, putting the chain out of step',new Set([ratio[0],ratio[2],ratio[3]]).size>1,{ratio:Object.fromEntries(list.map((t,i)=>[t+'('+BUILDINGS[t].group+')',ratio[i]])),boost:HARVEST_BOOST});}
 finish('g1-terrain-rules');

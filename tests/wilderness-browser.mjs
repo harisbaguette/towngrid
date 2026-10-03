@@ -1,0 +1,51 @@
+import assert from 'node:assert/strict';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {pathToFileURL} from 'node:url';
+import {WORLD_PLOTS} from '../src/app/game/territory.js';
+import {UNCLAIMED_CELLS} from '../src/app/game/atlas-geometry.js';
+const {chromium}=await import(pathToFileURL(process.argv[2]).href);
+const browser=await chromium.launch({headless:true,executablePath:process.argv[3],args:['--enable-unsafe-swiftshader']});
+const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'}),page=await context.newPage(),errors=[],failed=[];
+const origin=process.env.TOWNGRID_URL||'http://localhost:5173',out='docs/verification/wilderness-20261002';await mkdir(out,{recursive:true});
+page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400)failed.push(r.url());});
+for(const [routePath,fixture] of [['starting','starting-map'],['campaign','wilderness-map']])await page.route('**/__test-wilderness-'+routePath,route=>route.fulfill({contentType:'text/html',body:'<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><div id="root"></div><script type="module">import * as RefreshRuntime from "/@react-refresh";RefreshRuntime.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>type=>type;</script><script type="module" src="/tests/fixtures/'+fixture+'.tsx"></script></body></html>'}));
+const shot=name=>page.screenshot({path:out+'/'+name+'.png'});
+const waitArt=()=>page.evaluate(async()=>{await Promise.all([...new Set([...document.querySelectorAll('.atlas-objects image')].map(el=>el.getAttribute('href')))].map(src=>new Promise((resolve,reject)=>{const img=new Image();img.onload=resolve;img.onerror=reject;img.src=src;})));});
+const clickPlot=async p=>{const point=await page.locator('.atlas-ground').evaluate((el,cell)=>{const p=new DOMPoint((cell[0]+.5)*26,(cell[1]+.5)*26).matrixTransform(el.getScreenCTM());return {x:p.x,y:p.y};},p.cell);await page.mouse.click(point.x,point.y);};
+try{
+ await page.goto(origin+'/__test-wilderness-starting');await page.locator('.world-atlas').waitFor();await waitArt();
+ const wild=WORLD_PLOTS.find(p=>p.nation===null&&p.cell[0]>28&&p.cell[0]<40&&p.cell[1]>15&&p.cell[1]<24);
+ assert.ok(wild);assert.equal(await page.locator('.atlas-wilderness').getAttribute('data-unclaimed-cells'),String(UNCLAIMED_CELLS.length));
+ assert.equal(await page.locator('.country-borders [data-country]').count(),14);assert.equal(await page.locator('.atlas-site image').count(),19);
+ await shot('01-continent');await clickPlot(wild);
+ assert.equal(await page.locator('.atlas-cell-readout').getAttribute('data-sovereign'),'unclaimed');
+ assert.equal(await page.locator('.atlas-cell-readout').getAttribute('data-development'),'undeveloped');
+ assert.ok(await page.getByRole('button',{name:'무주지 · 성장 후 개척',exact:true}).isDisabled());
+ assert.equal(await page.locator('.local-map-preview').getAttribute('data-province'),wild.id);
+ await page.getByRole('button',{name:'주변 확대',exact:true}).click();await waitArt();await shot('02-unclaimed');
+ for(let q=0;q<4;q++){
+  await clickPlot(wild);assert.equal(await page.locator('.atlas-cell-readout').getAttribute('data-sovereign'),'unclaimed');
+  assert.equal(await page.locator('.atlas-site[data-province="'+wild.id+'"]').count(),0);
+  await page.getByRole('button',{name:'세계 지도 오른쪽으로 90도 회전',exact:true}).click();
+ }
+ await page.locator('#start-province').selectOption('estern-3');await waitArt();
+ assert.equal(await page.locator('.atlas-cell-readout').getAttribute('data-sovereign'),'estern');
+ assert.equal(await page.locator('.atlas-cell-readout').getAttribute('data-development'),'undeveloped');
+ assert.equal(await page.locator('.atlas-site[data-province="estern-3"]').count(),0);
+ assert.ok(await page.getByRole('button',{name:'이 땅에서 시작',exact:true}).isEnabled());await shot('03-national-undeveloped');
+ await page.setViewportSize({width:390,height:844});await page.getByRole('button',{name:'대륙 전체',exact:true}).click();await shot('04-mobile');assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ assert.equal(await page.evaluate(()=>localStorage.getItem('first-land-v1')),null);
+ await page.setViewportSize({width:1440,height:1000});await page.goto(origin+'/__test-wilderness-campaign');await page.locator('.campaign-world-layout').waitFor();
+ await page.getByLabel('세계 지도 국가').selectOption('unclaimed');await page.getByLabel('진출할 거점 부지').selectOption(wild.id);await waitArt();
+ assert.equal(await page.locator('.expansion-offer').getAttribute('data-status'),'available');await shot('05-wilderness-offer');
+ await page.getByRole('button',{name:'이 땅을 내 영지로 확보',exact:true}).click();
+ assert.equal(await page.locator('.expansion-offer').getAttribute('data-status'),'owned');
+ assert.equal(await page.locator('[data-outpost="'+wild.id+'"]').count(),1);assert.equal(await page.locator('.atlas-site[data-province="'+wild.id+'"]').count(),0);
+ assert.equal(await page.evaluate(id=>window.wildernessCampaign.sites.find(s=>s.provinceId===id).sim.buildings.length,wild.id),0);
+ assert.equal(await page.locator('.atlas-cell-readout').getAttribute('data-owner'),'player');assert.equal(await page.locator('.atlas-frontier-land').getAttribute('data-cells'),'1');await shot('06-empty-outpost');
+ await page.evaluate(id=>{const c=window.wildernessCampaign,s=c.sites.find(s=>s.provinceId===id);s.sim.build('warehouse',10,12,true);window.refreshWilderness();},wild.id);await waitArt();
+ assert.equal(await page.locator('.atlas-site[data-province="'+wild.id+'"]').getAttribute('data-status'),'owned');
+ assert.equal(await page.locator('.atlas-cell-readout').getAttribute('data-development'),'settlement');await shot('07-developed-outpost');
+ await page.getByRole('button',{name:'이 거점으로 이동',exact:true}).click();assert.equal(await page.evaluate(()=>window.wildernessCampaign.active.provinceId),wild.id);
+ assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);await writeFile(out+'/results.json',JSON.stringify({passed:true,unclaimedCells:UNCLAIMED_CELLS.length,unclaimedPlot:wild.id,errors,failed},null,2));console.log('Wilderness browser PASS');
+}catch(e){await shot('failure').catch(()=>{});throw e;}finally{await browser.close();}

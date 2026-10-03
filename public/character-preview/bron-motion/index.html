@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>브론 동작 비교 · TownGrid</title>
+ <link rel="stylesheet" href="../roster.css">
+ <style>
+  main{max-width:1120px}.toolbar{margin:18px 0}header p{max-width:55em}
+  .boards{display:grid;grid-template-columns:1fr 1fr;gap:16px}.boards section{margin:0;min-width:0}
+  canvas{display:block;width:100%;height:auto;background:#e9efe3;image-rendering:pixelated}
+  .controls{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:18px 0}
+  #timeline{width:min(360px,70vw)}.legend{font-size:14px;color:#435c52}
+  @media(max-width:700px){.boards{grid-template-columns:1fr}}
+ </style>
+</head>
+<body><main>
+ <header><a href="../?character=bron">← 주민 보기</a><h1>브론 동작 비교</h1>
+ <p>네 방향의 걷기·운반·작업·공격을 비교합니다. 멈춘 뒤 재생 위치를 옮겨 자세를 확인할 수 있습니다.</p></header>
+ <nav class="toolbar" aria-label="동작 선택">
+  <button data-action="walk" aria-pressed="true">걷기</button><button data-action="carry" aria-pressed="false">운반</button>
+  <button data-action="work" aria-pressed="false">작업</button><button data-action="attack" aria-pressed="false">공격</button>
+ </nav>
+ <div class="controls">
+  <button id="play">일시정지</button>
+  <label>크기 <select id="size"><option value=".55">작게</option><option value="1" selected>원본 크기</option><option value="1.65">확대</option></select></label>
+  <label>속도 <select id="speed"><option value=".5">0.5×</option><option value="1" selected>1×</option></select></label>
+  <label><input type="checkbox" id="travel" checked> 이동하며 보기</label>
+ </div>
+ <div class="boards">
+  <section><h2>이전</h2><canvas id="before" width="520" height="550" aria-label="이전 브론 네 방향 동작"></canvas></section>
+  <section><h2>수정</h2><canvas id="after" width="520" height="550" aria-label="수정한 브론 네 방향 동작"></canvas></section>
+ </div>
+ <div class="controls"><label for="timeline">재생 위치</label><input id="timeline" type="range" min="0" max="119" value="0"><output id="phase">0%</output></div>
+ <p class="legend">걷기·운반은 같은 이동 거리, 작업·공격은 각 동작의 실제 재생 속도로 표시합니다. 반대편 두 방향은 좌우 반전입니다.</p>
+ <p id="status" role="status">불러오는 중…</p>
+</main><script type="module" src="compare.js"></script></body>
+</html>

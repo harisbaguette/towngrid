@@ -43,7 +43,7 @@ for (const vp of sizes) {
     await page.waitForTimeout(500);
     await shot(page, `${tag}-01-home.png`);
     r.home.layout = await audit(page, '.home-screen');
-    r.home.extrasOpen = await page.locator('.home-extras[open]').count() > 0;
+    await page.locator('.home-extras').waitFor(); r.home.extrasOpen = await page.locator('.home-extras[open]').count() > 0;
     r.home.art = await page.locator('.home-screen').getAttribute('data-art');
 
     // ---------- Gallery ----------
@@ -240,7 +240,7 @@ for (const vp of sizes) {
       const M = r.motion = {};
       await page.goto(process.env.TOWNGRID_URL || 'http://localhost:5173');
       await toHome(page);
-      if (!(await page.locator('.home-extras[open]').count())) await page.locator('.home-extras summary').click();
+      await page.locator('.home-extras').waitFor(); if (!(await page.locator('.home-extras[open]').count())) await page.locator('.home-extras summary').click();
       const d0 = Date.now(); await page.getByRole('button', { name: '산업도시 둘러보기' }).click();
       await waitSim(page, () => window.tgScene?.sim?.buildings.length > 3 && !document.querySelector('.screen-loading'), null, 120000);
       M.demoMs = Date.now() - d0;

@@ -20,6 +20,7 @@ const goods = (name,frame,size,pos,motion='still',show='work') => ({name,frame,s
 const lamp = pos => tool('lamp',.11,pos,'still','supply');
 const steam = pos => tool('steam',.20,pos,'steam','work');
 export const INDUSTRY_PROFILES = {
+ distillery:{parts:[steam([[97,32],[95,38],[100,44],[95,44]])],outputSize:.18,outputPos:[[84,153],[103,153],[122,144]]},
  quarry: {parts:[tool('pick',.34,[92,106],'strike')],outputPos:[[77,155],[96,165],[118,155]]},
  mill: {parts:[tool('sails',.70,[96,46],'spin')],outputSize:.23},
  bakery: {parts:[tool('fire',.20,[[65,133],[130,132],[131,133],[130,133]],'flicker','work'),steam([[112,31],[68,31],[119,31],[118,31]])]},

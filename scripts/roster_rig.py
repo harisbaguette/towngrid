@@ -45,6 +45,8 @@ def prepare(source,view,spec):
     core|=fixed
     roots=[arm[0] for arm in view['arms']]
     head=(Y<min(p[1] for p in roots)-2)|((Y<min(p[1] for p in roots)+5)&(X>min(p[0] for p in roots)+5)&(X<max(p[0] for p in roots)-5))
+    if view.get('headPolygon'):
+        head=poly_mask(view['headPolygon'])
     core|=head
     if spec.get('hairColor'):
         rgba=np.array(image)
@@ -62,7 +64,7 @@ def prepare(source,view,spec):
         for limb in view.get(kind,[]):
             points=np.array(limb,float)
             distance=np.minimum(segment_distance(*points[:2]),segment_distance(*points[1:]))
-            distance[Y<points[0,1]-3]=1000
+            distance[Y<points[0,1]-(spec.get('shoulderCap',3) if kind=='arms' else 3)]=1000
             candidates.append((kind,points,distance))
     distances=np.stack([item[2] for item in candidates])
     owners=np.argmin(distances,axis=0)
@@ -83,8 +85,10 @@ def prepare(source,view,spec):
         upper=masked(image,owned&(split<=2));lower=masked(image,owned&(split>=-2))
         entry={'joints':points,'upper':upper,'lower':lower}
         if kind=='legs':
-            entry['foot']=masked(lower,Y>=c[1]-2)
-            entry['lower']=masked(lower,Y<=c[1]+1)
+            foot_top=view.get('footTop',[])
+            top=foot_top[len(result['legs'])] if foot_top else c[1]-2
+            entry['foot']=masked(lower,Y>=top)
+            entry['lower']=masked(lower,Y<=top+3)
         result[kind].append(entry)
     if spec['kind']=='spirit':
         tail=tail_region
@@ -158,6 +162,9 @@ def remove_specks(image,protected_top):
 
 
 def render(rig,action,phase,spec,crate,tool):
+    if spec.get('motionProfile') and action in ['walk','carry']:
+        from bron_motion import render_locomotion
+        return render_locomotion(rig.get('locomotionRig',rig),action,phase,spec,crate)
     layer=Image.new('RGBA',(128,128));f=rig['forward']
     style=spec.get('workStyle','labor')
     moving=action in ['walk','carry'];cargo=action in ['carry','pickup'] or action=='work' and style=='carrier';handling=action=='pickup'
@@ -217,8 +224,13 @@ def render(rig,action,phase,spec,crate,tool):
 def pack_roster_rig(spec_path,output='public/assets/pixel-characters'):
     path=Path(spec_path);spec=json.loads(path.read_text(encoding='utf-8'));source=path.parent
     rigs=[prepare(source,v,spec) for v in spec['views']]
+    for rig,view,override in zip(rigs,spec['views'],spec.get('motionProfile',{}).get('views',[])):
+        rig['locomotionRig']=prepare(source,{**view,**override},spec)
     props=Image.open('art-source/pixel-characters/prototypes/mira-v3/portrait-props.png')
     crate=prop_image(props,[882,256,1254,670],(23,23));tool=prop_image(props,[978,704,1168,1225],(8,24))
+    if spec.get('motionProfile',{}).get('crateSize'):
+        size=spec['motionProfile']['crateSize']
+        crate=crate.resize((size,size),Image.Resampling.NEAREST)
     if spec.get('toolFile'):tool=clean(Image.open(Path(spec.get('toolRoot',ROOT))/spec['toolFile']))
     columns=[];clips={}
     for action,count in COUNTS.items():
@@ -263,6 +275,9 @@ def pack_roster_rig(spec_path,output='public/assets/pixel-characters'):
     # Work and combat share the same complete sleeve masks and joint mapping.
     action_rigs=[prepare(source,v,{**spec,'partRadius':24}) for v in spec['views']]
     atlas,meta=append_actions(atlas,meta,action_rigs,spec)
+    if spec.get('authoredMotion'):
+        from bron_motion import apply_hammer_cels
+        atlas,meta=apply_hammer_cels(atlas,meta,spec['authoredMotion'])
     atlas.save(target/'sprites.png',optimize=True)
     (target/'frames.json').write_text(json.dumps(meta,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     proof=[]

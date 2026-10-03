@@ -2,8 +2,8 @@ import { factionOf } from './world.js';
 import { residentLook } from './resident-roster.js';
 import { productionVisualState } from './production-visuals.js';
 
-// Facility staff are automatic, attached to a workplace, and do not consume
-// a housing/transport slot. Production remains the simulation's authority.
+// Workplace identities for art previews. The game scene and resident list use
+// the simulation's housed workers, without spawning these decorative people.
 const profession=(name,human,elf)=>({name,human,elf});
 export const PROFESSIONS={
  baker:profession('제빵사',['human','hana'],['elf','lien']),
@@ -27,6 +27,7 @@ export const PROFESSIONS={
  aviator:profession('조종사',['human','iris'],['elf','aira']),
 };
 export const FACILITY_PROFESSIONS={
+ distillery:'engineer',
  warehouse:'carrier',depot:'carrier',logistics:'carrier',station:'rail',airdock:'aviator',
  well:'farmer',field:'farmer',cottonfield:'farmer',herbgarden:'farmer',reservoir:'farmer',
  stable:'rancher',henhouse:'rancher',dock:'fisher',

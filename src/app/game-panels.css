@@ -1,3 +1,4 @@
+@layer game-base {
 /* Supporting layouts for residents, facility controls, trade and goals. */
 .bottleneck{display:flex;align-items:center;gap:9px;width:100%;padding:11px;text-align:left;background:#fbedd0;border-bottom:1px solid #dec991;color:#6d542d}
 .bottleneck>svg{flex-shrink:0}.bottleneck span{flex:1}.bottleneck strong,.bottleneck small{display:block}.bottleneck strong{font-size:14px}.bottleneck small{margin-top:4px;font-size:12px;line-height:1.5}
@@ -5,7 +6,7 @@
 .quick-contract{display:flex;align-items:center;gap:9px;padding:11px}.quick-contract>div{flex:1}.quick-contract strong,.quick-contract span{display:block;font-size:14px}.quick-contract span{font-size:12px;margin-top:2px}.quick-contract button{background:var(--ui-forest);color:white;border:1px solid var(--ui-outline);min-height:36px}
 .promotion-ready{display:flex;align-items:center;justify-content:center;gap:8px;background:#f1d686;width:100%;padding:8px;font-weight:700;font-size:13px}
 .health-alert{position:absolute;right:31px;top:210px;z-index:8;display:flex;gap:8px;align-items:center;max-width:280px;padding:10px;background:#f4e5dd;border:1px solid #dcaa94;color:#854f3b}.health-alert>div{flex:1}.health-alert strong,.health-alert span{display:block}.health-alert strong{font-size:14px}.health-alert span{font-size:12px;margin-top:3px}.health-alert button{padding:7px 9px;background:#a6604d;color:white;border-radius:3px}
-.facility-marker.fault{background:#fff0cb!important;border-color:#bd863b!important;color:#6f4c22!important;min-width:0;box-shadow:0 2px 8px #4b381633}.facility-marker.fault span{display:inline!important;font-size:12px}.facility-marker.fault i{background:#deae54}
+.facility-marker.fault{background:#fff0cb;border-color:#bd863b;color:#6f4c22;min-width:0;box-shadow:0 2px 8px #4b381633}.facility-marker.fault span{display:inline!important;font-size:12px}.facility-marker.fault i{background:#deae54}
 .delivery-status{display:flex;align-items:center;gap:7px;font-size:13px;padding:7px 0;color:var(--ui-muted)}
 .rescue-chapter{margin-top:17px;padding:15px;border:1px solid #aac5cf;background:#fff8e9}.chapter-heading{display:flex;align-items:center;gap:8px;margin-bottom:11px}.chapter-heading span{margin-left:auto;font-size:13px}.rescue-chapter h3{margin-top:12px;font-size:18px}.rescue-chapter p{font-size:14px;line-height:1.7;margin:5px 0 12px}.rescue-actions{display:flex;flex-wrap:wrap;gap:8px}.rescue-chapter>small{display:block;margin-top:10px}
 .charter-panel{margin-top:18px;padding:14px;border:1px dashed #7ca2b8}.charter-panel p{font-size:14px;line-height:1.6;margin:7px 0 10px}.charter-panel>div{display:grid;grid-template-columns:1fr;gap:7px}.charter-panel button{display:flex;justify-content:space-between;gap:15px;padding:11px;height:auto;white-space:normal}.charter-panel small{font-size:12px;line-height:1.6}.promotion-trial{display:flex;flex-wrap:wrap;gap:7px}.promotion-trial small{width:100%;font-size:13px;color:#52738a}.market-low{color:#a96042;font-style:normal}.market-high{color:#2f705f;font-style:normal}.new-state-label text{font-size:10px;fill:#4c4432;paint-order:stroke;stroke:#fff1d3;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
@@ -32,8 +33,8 @@
 .facility-card .recipe span{display:flex;gap:4px;align-items:center;padding:0 3px;background:none;border:0;color:var(--ui-ink);font-size:14px}
 .facility-card .recipe .missing{color:#ae7039}
 .facility-card .recipe b{margin-left:4px;font-weight:850}
-.facility-card .production-progress{height:7px!important;padding:0;border:0;background:#dfe8d8!important}
-.facility-card .production-progress>div{background:#66ad67!important}
+.facility-card .production-progress{height:7px;padding:0;border:0;background:#dfe8d8}
+.facility-card .production-progress>div{background:#66ad67}
 .facility-advice{display:flex;gap:6px;align-items:start;margin:6px 0;padding:7px 8px;background:#f7eac1;border-radius:6px;color:#7a5a2c;font-size:13px;line-height:1.45}
 .facility-advice svg{flex-shrink:0;margin-top:2px}
 .facility-quick-actions{display:flex;align-items:center;gap:6px;margin:5px 0 7px}
@@ -41,7 +42,7 @@
 .facility-staff .pixel-character{width:54px;height:54px;flex-shrink:0}
 .facility-staff span strong,.facility-staff span small{display:block}
 .facility-staff strong{font-size:13px}.facility-staff small{font-size:12px;color:#47707a}
-.facility-quick-actions button{height:32px!important;min-height:32px;font-size:13px;border-radius:7px!important}
+.facility-quick-actions button{height:32px!important;min-height:32px;font-size:13px;border-radius:7px}
 .facility-durability{margin-left:auto;font-size:12px;color:#718579}
 .facility-card [data-slot=button]{background:var(--ui-forest);color:#fff;border:1px solid var(--ui-outline);box-shadow:0 2px 0 #c2d7d6;font-weight:700}
 .facility-details{border-top:1px solid #cad9cf;margin:0 -13px;padding:0 13px}
@@ -180,6 +181,7 @@
 /* Export fleet: one icon per vehicle slot, filled while out; fuel vehicles carry a gold underline. */
 .fleet-line{display:flex;align-items:center;gap:7px;padding:6px 9px;font-size:12px;font-weight:700;color:#3f6b35;border-top:1px solid #d5e4cf}
 .fleet-line.fuel-short{color:#8a5a2b;background:#fff4d9}
+.fleet-detail{flex-basis:100%;font-size:11px;font-weight:500;line-height:1.5;white-space:normal}
 .fleet-icons{display:flex;gap:3px}
 .fleet-icons i{display:grid;place-items:center;width:21px;height:21px;border-radius:5px;background:#eef3ee;color:#9db2a5;border-bottom:2px solid transparent}
 .fleet-icons i.busy{background:var(--ui-forest);color:#fff}
@@ -198,3 +200,8 @@
 .game-dialog [data-slot=switch]::after{content:'';position:absolute;inset:-11px -6px}
 /* Phone: the map-edge button sits at the same bottom-left spot as the facility card and the tile panel; it yields to them. */
 @media(max-width:700px){.is-playing.facility-open .map-edges,.is-playing:has(.tile-panel) .map-edges{display:none}}
+}
+
+.storage-list{display:grid;gap:6px;margin:10px 0}.storage-card{border:1px solid #c8b990;border-radius:7px;padding:8px;background:#f7f0dc}.storage-card summary{display:flex;justify-content:space-between;gap:10px;cursor:pointer;font-size:12px}.storage-card small{display:block;font-size:11px;margin:7px 0;color:#675b43}.storage-items{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}.storage-items span{display:inline-flex;align-items:center;gap:3px;font-size:12px}.shipping-list{display:grid;gap:6px;margin:10px 0}.shipping-list>div{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:12px}.shipping-list b{margin-left:auto}
+
+.storage-discard{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:8px}.storage-discard select{min-width:110px;max-width:100%;padding:5px;border:1px solid var(--border);border-radius:4px;background:var(--background);color:inherit}

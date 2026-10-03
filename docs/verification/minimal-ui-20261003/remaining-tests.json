@@ -1,0 +1,190 @@
+[
+  {
+    "suite": "tests/trade-routes.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/trade-terminals.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/world-grid.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/atlas-geometry.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/starting-sites.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/world-atlas.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/continuous-map.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/world-realms.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/wilderness.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/frontier-land.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/atlas-isometric.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/map-edges.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/biomes.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/residents.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/facility-staff.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/character-movement.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/character-motion.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/bron-motion.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/sprite-grounding.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/campaign.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/balance-20260928.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/second-pass-20260928.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/expansion-chains.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/expansion-rules.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/expansion-new-browser.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/release.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/pixel-environment.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/pixel-industry.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/pixel-world.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/building-art-guard.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/art-completion.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/environment-motion.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/farm-art.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/farm-motion.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/quarter-camera.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/screen-art.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/screen-motion.mjs",
+    "status": 0
+  },
+  {
+    "suite": "scripts/check-pixel-characters.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/audit/export-chokepoint.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/audit/raid-gated-trial.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/audit/events-early.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/audit/progression-and-docs.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/audit/stock-ledger.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/audit/save-edges.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/audit/debt-spiral.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/audit/branch-site.mjs",
+    "status": 0
+  },
+  {
+    "suite": "tests/audit/sapling-timer.mjs",
+    "status": 0
+  }
+]

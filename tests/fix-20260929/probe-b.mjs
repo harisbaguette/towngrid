@@ -59,7 +59,7 @@ out.J3.damagedAfter = await sim(page, () => window.tgScene.sim.buildings.filter(
 out.overrides.push('J5: one facility health 30, money 20 (then -300), game paused during the check');
 const hurt = await sim(page, () => { const s = window.tgScene.sim, b = s.buildings.find(v => v.type !== 'warehouse' && v.type !== 'house'); b.health = 30; s.money = 20; s.paused = true; /* paused: an export arriving would refill the purse mid-check */ return { id: b.id, x: b.x, z: b.z, cost: s.repairCost(b) }; });
 // Open its card the way the operations card offers: the stalled facility's row focuses it.
-await settle(page, 600); await page.locator('.operations-card .bottleneck').click();
+await settle(page, 600); await page.locator('.operations-card .bottleneck').first().click();
 await page.locator('.facility-card').waitFor({ timeout: 5000 }).catch(async () => { await clickTile(page, hurt.x, hurt.z); });
 await settle(page, 500);
 out.J5 = { card: await page.locator('.facility-card h2').innerText().catch(() => null) };

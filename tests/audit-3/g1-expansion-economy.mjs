@@ -29,22 +29,31 @@ for(const L of [I.EXPANSION_RECIPES,I.EXPANSION2_RECIPES])for(const [t,list] of 
 const processing=r=>r.inputs!=='—'&&r.inputs!=='물 1';
 const table=rows.filter(r=>expNames.has(r.name)&&processing(r)).map(r=>{const pool=rows.filter(o=>!expNames.has(o.name)&&processing(o)&&o.rank<=r.rank).map(o=>o.tile).sort((a,b)=>b-a);
  return {rank:r.rank,line:r.name,perTile:r.tile,bestOpen:pool[0],medianOpen:pool[Math.floor(pool.length/2)],beatenBy:pool.filter(v=>v>r.tile).length+'/'+pool.length,atFloor:+(r.tile/(pool[0]*.5)).toFixed(2)};});
-const below=table.filter(r=>r.perTile<r.medianOpen);
 if(process.argv.includes('--table'))for(const r of table)console.log('E1 '+JSON.stringify(r));
-expectBug('G1-E1 most expansion processing lines earn less per tile than the median existing line open at the same rank',rows.length>50&&below.length>=table.length/2,{balanceReportExit:rep.status,below:below.length,of:table.length,worst:[...below].sort((a,b)=>a.perTile/a.bestOpen-b.perTile/b.bestOpen).slice(0,8).map(r=>r.rank+' '+r.line+' '+r.perTile+' vs best '+r.bestOpen+' ('+r.beatenBy+')'),stillBelowEvenIfBestLineSellsAtMarketFloor:table.filter(r=>r.atFloor<1).map(r=>r.line+' '+r.atFloor)});
+// The goods a player sells are the final ones; an intermediate (sugar, barrel, batter...) is judged through them. A final
+// good of the expansion that earns under 0.8 of the median existing line of its rank is a chain nobody runs for money.
+const finals=table.filter(r=>{const l=[...Object.entries(BUILDINGS)].flatMap(([t,d])=>(d.recipes||[]).map((x,i)=>({name:i?d.name+' · '+x.name:d.name,out:x.output}))).find(v=>v.name===r.line);return l&&RESOURCES[l.out]?.final;});
+const weak=finals.filter(r=>r.perTile<r.medianOpen*.8),dominant=finals.filter(r=>r.perTile>r.bestOpen);
+expectBug('G1-E1 expansion final goods earn under 0.8 of the median existing line of their rank per tile (a chain nobody runs for money)',rows.length>50&&weak.length>0,{balanceReportExit:rep.status,finals:finals.length,weak:weak.map(r=>r.rank+' '+r.line+' '+r.perTile+' vs median '+r.medianOpen),all:finals.map(r=>r.rank+' '+r.line+' '+r.perTile+'/'+r.medianOpen)});
+expectBug('[control] G1-E1b an expansion final good out-earns the best existing line of its rank (would make the base chain obsolete)',dominant.length>0,{dominant:dominant.map(r=>r.line+' '+r.perTile+' > '+r.bestOpen)});
 
-// E2 solar panel against the wind turbine: same output (power, a grid node with the same reach), same height/mountain rule.
-{let same=0,worse=0,spots=0;const s=new Simulation('river',null,{nation:'kardum',provinceId:'kardum-3'});
- const up=(p,m)=>Math.min(1,60/(p/m));// a timed output keeps power 60 game s per cycle; a longer cycle leaves a gap
- for(const t of s.tiles){if(t.terrain==='water')continue;spots++;const a=placementEffects(s,'windturbine',t.x,t.z).speed,b=placementEffects(s,'solarpanel',t.x,t.z).speed;if(Math.abs(a-b)<1e-9)same++;if(up(BUILDINGS.solarpanel.period,b)<up(BUILDINGS.windturbine.period,a)-1e-9)worse++;}
- // Real ticks at a mountain foot (shelter 3): the share of time the grid has power. Stock and land set directly for the test.
- const uptime=type=>{const c=new Simulation('river',null,{nation:'kardum',provinceId:'kardum-3'});c.nextEvent=1e12;c.money=1e6;c.rank=23;for(const r of Object.keys(RESOURCES))c.stock[r]=200;
+// E2 solar panel against the wind turbine. Power is on/off within reach of a running plant, so a plant matters only by
+// cost, inputs and gaps: a timed output keeps power 60 game s per cycle and a cycle longer than that leaves a gap.
+// Before the fix the turbine (24 s, never over 60 s even at 40% speed) had no gap anywhere and the solar panel, slowed by
+// the same heights, was a costlier, later copy. Now the turbine gaps under shelter 3 and the panel reads mountain shade only.
+{const up=(p,m)=>Math.min(1,60/(p/m));
+ // Real ticks: the share of time the grid has power with one plant beside a height-3 smelter and one at a mountain foot.
+ const uptime=(type,where)=>{const c=new Simulation('river',null,{nation:'kardum',provinceId:'kardum-3'});c.nextEvent=1e12;c.money=1e6;c.rank=23;for(const r of Object.keys(RESOURCES))c.stock[r]=200;/* stock, land and rank set directly */
   for(let x=0;x<24;x++)for(let z=0;z<24;z++)c.owned.add(x+','+z);c.build('warehouse',11,12);c.build('house',11,14);
-  const spot=c.tiles.find(t=>t.terrain!=='water'&&!t.nature&&placementEffects(c,type,t.x,t.z).windBlock===3&&c.build(type,t.x,t.z).ok);if(!spot)return null;
-  let on=0,n=0;for(let i=0;i<2400;i++){c.tick(.25);if(i>400){n++;if(c.power)on++;}}return +(on/n).toFixed(3);};
- const cost=t=>({build:BUILDINGS[t].cost,materials:BUILDINGS[t].materials,period:BUILDINGS[t].period,rank:unlockRank(t),upkeepPerDay:+(BUILDINGS[t].cost*.03).toFixed(1)});
- const detail={spots,sameSpeedSpots:same,spotsWhereSolarHasGapsAndTurbineNot:worse,powerUptimeAtShelter3:{windturbine:uptime('windturbine'),solarpanel:uptime('solarpanel')},windturbine:cost('windturbine'),solarpanel:cost('solarpanel')};
- expectBug('G1-E2 solar panel is a costlier, later wind turbine: same power, same shelter rule, never better anywhere',same===spots&&BUILDINGS.solarpanel.cost>BUILDINGS.windturbine.cost&&unlockRank('solarpanel')>unlockRank('windturbine'),detail);}
+  let spot;if(where==='factory'){const f=c.tiles.find(t=>t.terrain!=='water'&&!t.nature&&!placementEffects(c,'smelter',t.x,t.z).mountain&&c.build('smelter',t.x,t.z).ok);const sm=f&&c.at(f.x,f.z);if(sm)sm.enabled=false;spot=sm&&c.tiles.find(t=>Math.max(Math.abs(t.x-sm.x),Math.abs(t.z-sm.z))===1&&t.terrain!=='water'&&!t.nature&&!placementEffects(c,type,t.x,t.z).mountain&&c.build(type,t.x,t.z).ok);}
+  else spot=c.tiles.find(t=>t.terrain!=='water'&&!t.nature&&placementEffects(c,type,t.x,t.z).mountain>=3&&c.build(type,t.x,t.z).ok);
+  if(!spot)return null;let on=0,n=0;for(let i=0;i<2400;i++){c.tick(.25);if(i>400){n++;if(c.power)on++;}}return +(on/n).toFixed(3);};
+ const s=new Simulation('river',null,{nation:'kardum',provinceId:'kardum-3'});let solarBetter=0,windBetter=0,spots=0;
+ for(const t of s.tiles){if(t.terrain==='water')continue;spots++;const a=up(BUILDINGS.windturbine.period,placementEffects(s,'windturbine',t.x,t.z).speed),b=up(BUILDINGS.solarpanel.period,placementEffects(s,'solarpanel',t.x,t.z).speed);if(b>a+1e-9)solarBetter++;if(a>b+1e-9)windBetter++;}
+ const cost=t=>({build:BUILDINGS[t].cost,period:BUILDINGS[t].period,rank:unlockRank(t),upkeepPerDay:+(BUILDINGS[t].cost*.03).toFixed(1)});
+ const detail={uptime:{besideTallFactory:{windturbine:uptime('windturbine','factory'),solarpanel:uptime('solarpanel','factory')},mountainFoot:{windturbine:uptime('windturbine','mountain'),solarpanel:uptime('solarpanel','mountain')}},emptyMapSpots:{spots,solarBetter,windBetter},windturbine:cost('windturbine'),solarpanel:cost('solarpanel')};
+ const f=detail.uptime.besideTallFactory;
+ expectBug('G1-E2 the solar panel is never better than the cheaper, earlier wind turbine (same power, never fewer gaps)',!(f.solarpanel>f.windturbine),detail);}
 
 // E3 contract pools: an optional item is ordered only while a facility makes it, so an item listed in a band where no rank of
 // the band can make it yet is never ordered there.
@@ -58,7 +67,7 @@ expectBug('G1-E1 most expansion processing lines earn less per tile than the med
 {const s=new Simulation('river',null,{nation:'estern',provinceId:'estern-5'});s.nextEvent=1e12;s.rank=5;s.contracts=5;s.money=1e5;for(const r of Object.keys(RESOURCES))s.stock[r]=60;
  s.build('warehouse',11,12);const a=s.build('bakery',9,12).id,b=s.build('bakery',13,12).id;
  const seen=[s.contract().item+' '+s.contract().amount];s.setRecipe(a,'jam');seen.push(s.contract().item+' '+s.contract().amount);s.setRecipe(b,'baguette');seen.push(s.contract().item+' '+s.contract().amount);s.setRecipe(a,'bread');seen.push(s.contract().item+' '+s.contract().amount);
- expectBug('G1-E4 switching a facility to an optional product changes the open lord order (and lets the player re-roll it)',new Set(seen).size>1,{contractsDone:s.contracts,orderAfterEachSwitch:seen,switches:['start','bakery A → 딸기잼','bakery B → 바게트','bakery A → 빵']});}
+ expectBug('G1-E4 [R simulation.js contract()] switching a facility to an optional product changes the open lord order (and lets the player re-roll it)',new Set(seen).size>1,{contractsDone:s.contracts,orderAfterEachSwitch:seen,switches:['start','bakery A → 딸기잼','bakery B → 바게트','bakery A → 빵']});}
 
 // E5 production hint for an input that only an alternative product makes: it names the facility kind to build, not the
 // product switch, even when that facility already stands. Stock and rank set directly; statuses come from real ticks.
@@ -71,7 +80,10 @@ expectBug('G1-E1 most expansion processing lines earn less per tile than the med
 
 // E6/E7 alternatives that make the default obsolete, or cost more input for the same output and time.
 {const val=o=>Object.entries(o).reduce((n,[k,v])=>n+RESOURCES[k].price*v,0),units=o=>Object.values(o).reduce((x,y)=>x+y,0);
- const better=(a,b)=>a.output===b.output&&a.period<=b.period&&a.amount>=b.amount&&units(a.inputs)<=units(b.inputs)&&val(a.inputs)<=val(b.inputs)&&(a.period<b.period||a.amount>b.amount||units(a.inputs)<units(b.inputs)||val(a.inputs)<val(b.inputs));
+ // An alternative that needs an input kind the other line does not (clay brick: a clay pit; sand glass: a sand pit) is a
+ // trade of land and setup for cheaper input, not an obsolete default, so only same-or-fewer input kinds count.
+ const kinds=(a,b)=>Object.keys(a.inputs||{}).every(k=>k in (b.inputs||{}));
+ const better=(a,b)=>a.output===b.output&&kinds(a,b)&&a.period<=b.period&&a.amount>=b.amount&&units(a.inputs)<=units(b.inputs)&&val(a.inputs)<=val(b.inputs)&&(a.period<b.period||a.amount>b.amount||units(a.inputs)<units(b.inputs)||val(a.inputs)<val(b.inputs));
  const newIds=new Set([...Object.values(I.EXPANSION_RECIPES),...Object.values(I.EXPANSION2_RECIPES)].flat().map(r=>r.id));
  const obsolete=[],costlier=[];for(const d of Object.values(BUILDINGS)){const L=d.recipes||[];for(const a of L)for(const b of L){if(a===b||!newIds.has(a.id))continue;
   if(better(a,b))obsolete.push(d.name+': '+a.name+' > '+b.name+(b===L[0]?' (기본 제품)':''));
@@ -89,5 +101,5 @@ expectBug('G1-E1 most expansion processing lines earn less per tile than the med
   const miss=Object.keys(productsOf(BUILDINGS[n.type])[0].inputs||{}).filter(i=>i!=='water'&&!made.has(i));sweep.push(r+' '+BUILDINGS[n.type].name+(exp.has(n.type)?' (확장)':''));if(exp.has(n.type)&&miss.length)stalled.push(r+' '+n.text+' · 원료 없음: '+miss.map(i=>RESOURCES[i].name).join(','));}
  // The same on the bot's own saves: after it builds the base facility the card names, the card turns to an expansion facility.
  const real=[];for(const r of [8,13]){const c=load(r),s=c.home.sim;for(let k=0;k<4;k++){const n=nextBuild(s);if(!n)break;if(exp.has(n.type)){real.push('rank'+r+' → '+n.text);break;}s.buildings.push({type:n.type,x:-1,z:-1,health:100,id:9e5+k});s.revision++;}}
- expectBug('G1-E8 the next-build card sends the player to an optional expansion facility whose inputs nothing makes yet',stalled.length>0,{stalled,expansionSuggestedAtRanks:sweep.filter(v=>v.endsWith('(확장)')).length+' of '+sweep.length,botSaves:real});}
+ expectBug('G1-E8 [U ui-rules.js nextBuild] the next-build card sends the player to an optional expansion facility whose inputs nothing makes yet',stalled.length>0,{stalled,expansionSuggestedAtRanks:sweep.filter(v=>v.endsWith('(확장)')).length+' of '+sweep.length,botSaves:real});}
 finish('g1-expansion-economy');

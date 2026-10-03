@@ -5,7 +5,7 @@
 // (Town Star's world plots work the same way). The seas, rivers, lakes, canals and streams are read
 // from the same grid, so what the atlas shows, what a side is and where a port trades always agree.
 import {WORLD_MAP,WATERWAY_CHARS,SEAS,FERRIES,MAP_COLS,MAP_ROWS} from './world-map.js';
-import {PROVINCES} from './territory.js';
+import {WORLD_PLOTS} from './territory.js';
 import {BIOMES,ecologyOf} from './biome-data.js';
 
 export const CELL=26,COLS=MAP_COLS,ROWS=MAP_ROWS,MAP=24;
@@ -54,7 +54,7 @@ export function nearestOnLine(p,line){let best={d:Infinity,at:line[0],s:0},s=0;f
 /** How close (atlas px) a province point must be to a small waterway to use it. */
 export const TOUCH={ferry:20};
 
-const PROVINCE_BY_ID=new Map(PROVINCES.map(p=>[p.id,p])),SITE_CELLS=new Map(PROVINCES.map(p=>[p.cell.join(','),p]));
+const PROVINCE_BY_ID=new Map(WORLD_PLOTS.map(p=>[p.id,p])),SITE_CELLS=new Map(WORLD_PLOTS.map(p=>[p.cell.join(','),p]));
 /** Every square of the atlas: {cx, cz, terrain, site} where site is the province whose site it holds. */
 export const WORLD_CELLS=[];
 for(let cz=0;cz<ROWS;cz++)for(let cx=0;cx<COLS;cx++){const site=SITE_CELLS.get(cx+','+cz),terrain=kindOf(WORLD_MAP[cz][cx]);

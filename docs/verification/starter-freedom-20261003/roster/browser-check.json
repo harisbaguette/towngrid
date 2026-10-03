@@ -1,0 +1,454 @@
+{
+  "cast": [
+    {
+      "id": "mira",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 28
+    },
+    {
+      "id": "bron",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "taron",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "silen",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "dew",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "kai",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "fia",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "hana",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "rowan",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "marna",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "ethan",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "vera",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "lien",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "ael",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "elion",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "mist",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "lana",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "eil",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "ravik",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "grum",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "niki",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "sora",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "kael",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "neris",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "dorin",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "elvar",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "serin",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "nara",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "lyra",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "borik",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "oriel",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "garron",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "maren",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "nalia",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "roa",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "cedric",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "bel",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "vian",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "oswin",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "erena",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "dax",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "norin",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "hugo",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "selia",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "otto",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "luth",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "iris",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "aira",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "garen",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "aster",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    },
+    {
+      "id": "terin",
+      "columns": 64,
+      "frames": 256,
+      "portrait": 23
+    }
+  ],
+  "game": {
+    "workers": [
+      {
+        "race": "human",
+        "appearance": "mira",
+        "gender": "female"
+      },
+      {
+        "race": "dwarf",
+        "appearance": "bron",
+        "gender": "male"
+      },
+      {
+        "race": "titan",
+        "appearance": "taron",
+        "gender": "male"
+      },
+      {
+        "race": "human",
+        "appearance": "mira",
+        "gender": "female"
+      },
+      {
+        "race": "human",
+        "appearance": "mira",
+        "gender": "female"
+      },
+      {
+        "race": "dwarf",
+        "appearance": "bron",
+        "gender": "male"
+      },
+      {
+        "race": "dwarf",
+        "appearance": "bron",
+        "gender": "male"
+      },
+      {
+        "race": "titan",
+        "appearance": "taron",
+        "gender": "male"
+      },
+      {
+        "race": "titan",
+        "appearance": "taron",
+        "gender": "male"
+      }
+    ],
+    "staff": [],
+    "scale": [
+      {
+        "race": "human",
+        "height": 1.05
+      },
+      {
+        "race": "dwarf",
+        "height": 0.84
+      },
+      {
+        "race": "titan",
+        "height": 1.5
+      },
+      {
+        "race": "human",
+        "height": 1.05
+      },
+      {
+        "race": "human",
+        "height": 1.05
+      },
+      {
+        "race": "dwarf",
+        "height": 0.84
+      },
+      {
+        "race": "dwarf",
+        "height": 0.84
+      },
+      {
+        "race": "titan",
+        "height": 1.5
+      },
+      {
+        "race": "titan",
+        "height": 1.5
+      }
+    ]
+  },
+  "cpu": {
+    "count": 4,
+    "painted": true
+  },
+  "elf": {
+    "workers": [
+      {
+        "race": "elf",
+        "appearance": "silen",
+        "gender": "female"
+      },
+      {
+        "race": "spirit",
+        "appearance": "dew",
+        "gender": "neutral"
+      },
+      {
+        "race": "centaur",
+        "appearance": "kai",
+        "gender": "male"
+      },
+      {
+        "race": "elf",
+        "appearance": "silen",
+        "gender": "female"
+      },
+      {
+        "race": "elf",
+        "appearance": "silen",
+        "gender": "female"
+      },
+      {
+        "race": "fae",
+        "appearance": "fia",
+        "gender": "female"
+      },
+      {
+        "race": "spirit",
+        "appearance": "dew",
+        "gender": "neutral"
+      },
+      {
+        "race": "centaur",
+        "appearance": "kai",
+        "gender": "male"
+      },
+      {
+        "race": "centaur",
+        "appearance": "kai",
+        "gender": "male"
+      }
+    ],
+    "staff": []
+  },
+  "errors": [],
+  "failed": []
+}

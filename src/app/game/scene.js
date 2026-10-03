@@ -8,7 +8,7 @@ import { createRenderer } from './software-renderer.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { N, BUILDINGS, noise } from './simulation.js';
 import { makeBuildingSafe as makeBuilding, makeTree, makeRock, makeWorker, animateWorker, makeFreightVehicle, makeExportGate } from './models.js';
-import { EXPORT_GATE, shipmentPose } from './export-route.js';
+import { EXPORT_GATE, shipmentPose, parkedVehicles } from './export-route.js';
 import { shipmentVehicle, shipmentLoaded, PORT_VEHICLES } from './vehicle-art.js';
 import {biomeTree,biomeDecoration} from './biome-terrain.js';
 import {biomeOf} from './biome-data.js';
@@ -16,17 +16,16 @@ import { makePixelProp,makeNetworkCargo } from './pixel-environment.js';
 import {logisticsVisualEvents,transferPose} from './logistics-visual-events.js';
 import { makeMapTerrain, CARDINALS } from './pixel-terrain.js';
 import { configureQuarterControls, applyQuarterView, settleQuarterControls, QUARTER_VIEWS } from './quarter-camera.js';
-import { facilityRoster } from './facility-staff.js';
 import { tradeProvince } from './trade-routes.js';
 import { edgePoint } from './world-grid.js';
 import { stationRailPath, railPathPose } from './freight-path.js';
+import {makePlotBoundaries} from './plot-boundaries.js';
 
 function release(root){if(!root)return;root.traverse(n=>{if(n.geometry&&!n.geometry.userData.shared)n.geometry.dispose();if(n.material&&(!n.geometry?.userData.shared||n.userData.ownedMaterial))for(const m of(Array.isArray(n.material)?n.material:[n.material]))if(m&&!m.userData.shared)m.dispose();if(n.userData.pixel||n.userData.pixelEnvironment||n.userData.pixelWater||n.userData.pixelSurface)n.userData.texture.dispose();if(n.isSkinnedMesh)n.skeleton.dispose();if(n.isInstancedMesh)n.dispose();if(n.userData.mixer){n.userData.mixer.stopAllAction();n.userData.mixer.uncacheRoot(n.userData.root);}});}
-// Trees and rocks outside the owned land cannot be harvested yet (J4): they are drawn washed out (half-way to a light
-// grey of their own brightness), so the usable resources inside the border read at a glance. WebGL only.
+// Unclaimed resources receive a light fade; the landscape keeps its natural colour.
 function fadeUnowned(obj){
  const m=obj.userData.sprite?.material;if(!m)return;obj.userData.unowned=true;
- m.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <colorspace_fragment>','#include <colorspace_fragment>\n gl_FragColor.rgb=mix(gl_FragColor.rgb,vec3(dot(gl_FragColor.rgb,vec3(.299,.587,.114)))*.8+.22,.55);');};
+ m.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <colorspace_fragment>','#include <colorspace_fragment>\n gl_FragColor.rgb=mix(gl_FragColor.rgb,vec3(dot(gl_FragColor.rgb,vec3(.299,.587,.114)))*.8+.22,.22);');};
  m.customProgramCacheKey=()=>'pixel-unowned';m.needsUpdate=true;
 }
 export class GameScene{
@@ -78,16 +77,30 @@ export class GameScene{
    const p=this.markerPoint(b,w,h),t='translate('+p.x.toFixed(1)+'px,'+p.y.toFixed(1)+'px) translate(-50%,-100%)',hide=p.x<=60||p.x>=w-60||p.y<=70||p.y>=h-90?'hidden':'';
    if(el.tgTransform!==t){el.tgTransform=t;el.style.transform=t;}if(el.tgHidden!==hide){el.tgHidden=hide;el.style.visibility=hide;}if(!el.dataset.placed)el.dataset.placed='1';}
  }
+ // Before a new town is shown (Game.tsx begin, visitSite, installSave): compile its shaders without blocking
+ // (compileAsync uses KHR_parallel_shader_compile) and upload its textures a few per task, so the first frame does not
+ // stall for 0.5-1 s (round-3 profile: texSubImage2D and getProgramInfoLog in one long task). The loop skips frames
+ // meanwhile; the transition picture stays up until it resolves. CPU renderer: nothing to warm.
+ async warmUp(budget=2500){
+  const r=this.renderer;if(r.isSoftware||!r.compileAsync)return;this.warming=true;const t0=performance.now(),pause=()=>new Promise(res=>setTimeout(res,0));
+  try{
+   this.controls.update();this.camera.updateMatrixWorld();this.syncPeople();this.scene.updateMatrixWorld(true);
+   await Promise.race([r.compileAsync(this.scene,this.camera),new Promise(res=>setTimeout(res,budget))]);
+   const textures=new Set();this.scene.traverse(o=>{for(const m of [o.material].flat())if(m)for(const v of Object.values(m))if(v?.isTexture&&v.image)textures.add(v);});
+   let slice=performance.now();
+   for(const tex of textures){if(performance.now()-t0>budget)break;r.initTexture(tex);if(performance.now()-slice>12){await pause();slice=performance.now();}}
+  }catch(e){console.warn('warmUp skipped',e);}finally{this.warming=false;}
+ }
  setSimulation(sim){this.sim=sim;this.selection=null;this.callbacks.onMarkers?.([]);this.setMode(null);this.lastRevision=-1;this.rebuild();this.resetCamera();}
- resetCamera(){const land=[...this.sim.owned].map(k=>k.split(',').map(Number));const xs=land.map(p=>p[0]),zs=land.map(p=>p[1]);const x=(Math.min(...xs)+Math.max(...xs))/2,z=(Math.min(...zs)+Math.max(...zs))/2;settleQuarterControls(this.controls);this.controls.target.set(x,0,z);this.camera.zoom=this.sim.buildings.length>20?.82:1;this.camera.updateProjectionMatrix();this.setQuarterView(0);}
+ resetCamera(){settleQuarterControls(this.controls);this.controls.target.set(11.5,0,11.5);this.camera.zoom=Math.min((this.camera.right-this.camera.left)/43,(this.camera.top-this.camera.bottom)/28);this.controls.minZoom=Math.min(.18,this.camera.zoom);this.camera.updateProjectionMatrix();this.setQuarterView(0);}
  setQuarterView(view){this.viewIndex=applyQuarterView(this.camera,this.controls,view);this.renderer.cache?.clear();this.renderer.poseCache?.clear();this.renderer.domElement.dataset.cameraView=QUARTER_VIEWS[this.viewIndex];this.renderer.domElement.dataset.cameraQuarter=String(this.viewIndex);this.renderer.domElement.dataset.cameraAzimuth=String(this.controls.getAzimuthalAngle());this.renderer.domElement.dataset.cameraPolar=String(this.controls.getPolarAngle());for(const m of this.models.values())m.userData.animate?.(this.sim.time,m.userData.building,this.sim,this.viewIndex);this.hover=null;this.confirmTile=null;this.hoverLine.visible=false;if(this.ghost){this.ghost.visible=false;this.ghost.userData.animate?.(this.sim.time,{working:false,progress:0,inputs:{}},this.sim,this.viewIndex);}for(const p of [...this.nature,...(this.decorations||[])])p.userData.animate?.(this.sim.time,p.userData.tile,false,this.viewIndex);this.scenery?.animate(this.sim.time,this.viewIndex);this.callbacks.onViewChange?.(QUARTER_VIEWS[this.viewIndex]);}
  focusEdge(side){const [x,z]=edgePoint(side,5,11.5);settleQuarterControls(this.controls);this.controls.target.set(x,0,z);this.camera.zoom=Math.max(.8,this.camera.zoom);this.camera.updateProjectionMatrix();this.setQuarterView(this.viewIndex);}
  rotate(direction){if(Number.isFinite(direction)&&direction!==0)this.setQuarterView(this.viewIndex+Math.sign(direction));}
  setOverlay(value){this.overlay=value;this.rebuild();}
- zoom(by){this.camera.zoom=THREE.MathUtils.clamp(this.camera.zoom*by,.48,3.4);this.camera.updateProjectionMatrix();}
+ zoom(by){this.camera.zoom=THREE.MathUtils.clamp(this.camera.zoom*by,this.controls.minZoom,3.4);this.camera.updateProjectionMatrix();}
  setMode(mode){
   if(mode)this.callbacks.onMarkers?.([]);
-  this.mode=mode;this.confirmTile=null;this.hover=null;if(this.ghost){this.scene.remove(this.ghost);release(this.ghost);this.ghost=null;}
+  this.mode=mode;this.relocatingId=null;if(this.buildGrid)this.buildGrid.visible=!!BUILDINGS[mode];this.confirmTile=null;this.hover=null;if(this.ghost){this.scene.remove(this.ghost);release(this.ghost);this.ghost=null;}
   if(mode&&BUILDINGS[mode]&&!BUILDINGS[mode].tile){
    this.ghost=makeBuilding(mode,this.sim.residentOf(mode)||this.sim.race);this.ghost.name='ghost-'+mode;this.ghost.traverse(n=>{if(n.isMesh||n.isSprite){n.material=(Array.isArray(n.material)?n.material:[n.material]).map(v=>{const m=v.clone();m.onBeforeCompile=v.onBeforeCompile;m.customProgramCacheKey=v.customProgramCacheKey;if(n.isSprite&&n.userData.ownedMaterial)v.dispose();m.userData.shared=false;m.transparent=true;m.opacity=.42;m.alphaTest=.01;m.depthWrite=false;return m;});if(n.material.length===1)n.material=n.material[0];n.userData.ownedMaterial=true;n.castShadow=false;}});
    this.ghost.userData.animate?.(this.sim.time,{working:false,progress:0,inputs:{}},this.sim,this.viewIndex);this.ghost.visible=false;this.scene.add(this.ghost);
@@ -109,7 +122,7 @@ export class GameScene{
   const size=this.mode==='expand'?4:BUILDINGS[this.mode]?.size||this.sim.at(x,z)?.size||1;
   if(this.mode==='expand'){x=Math.floor(x/4)*4;z=Math.floor(z/4)*4;}
   if(this.hover?.x===x&&this.hover?.z===z&&this.hover?.mode===this.mode)return;
-  this.hover={x,z,mode:this.mode};this.scene.remove(this.hoverLine);this.hoverLine.geometry.dispose();this.hoverLine.material.dispose();const error=BUILDINGS[this.mode]?this.sim.canBuild(this.mode,x,z):this.mode==='expand'&&!this.sim.canExpand(x/4,z/4)?'인접한 구역을 선택하세요':null;
+  this.hover={x,z,mode:this.mode};this.scene.remove(this.hoverLine);this.hoverLine.geometry.dispose();this.hoverLine.material.dispose();const error=BUILDINGS[this.mode]?(this.relocatingId?this.sim.canRelocate(this.relocatingId,x,z):this.sim.canBuild(this.mode,x,z)):this.mode==='expand'&&!this.sim.canExpand(x/4,z/4)?'인접한 구역을 선택하세요':null;
   this.hoverLine=this.outline(size,error?'#ed775e':'#f4f7da');this.hoverLine.position.set(x,.06,z);this.scene.add(this.hoverLine);this.hoverLine.visible=true;
   if(this.ghost){this.ghost.position.set(x+(size-1)/2,BUILDINGS[this.mode]?.onWater?-.135:.025,z+(size-1)/2);this.ghost.visible=true;}
   this.callbacks.onHover?.({x,z,error,owned:this.sim.ownedAt(x,z)});
@@ -118,15 +131,18 @@ export class GameScene{
   this.lastPaint=null;
   const previousHealth=this.conditionSimulation===this.sim?new Map([...this.models].map(([id,m])=>[id,m.userData.conditionHealth])):new Map();
   this.conditionSimulation=this.sim;
-  this.staffModels=new Map();
+  this.idleExportCarts=new Map();
   // A cut stump is a short visual effect, never a new save-file terrain type.
   if(this.stumpSimulation!==this.sim){this.stumps=new Map();this.stumpSimulation=this.sim;}
   for(const n of this.nature){const t=n.userData.tile;if(n.userData.wasMature&&t===this.sim.tile(t.x,t.z)&&t.nature===null&&t.remaining<=0&&!this.sim.at(t.x,t.z)&&!this.sim.roads.has(t.x+','+t.z))this.stumps.set(t.x+','+t.z,{x:t.x,z:t.z,scale:n.scale.x,until:this.sim.time+2.4});}
   for(const [key,s]of this.stumps)if(s.until<=this.sim.time||this.sim.tile(s.x,s.z)?.nature||this.sim.at(s.x,s.z)||this.sim.roads.has(key))this.stumps.delete(key);
-  this.renderer.cache?.clear();release(this.world);this.scene.remove(this.world);this.world=new THREE.Group();this.scene.add(this.world);this.models.clear();this.workerModels.clear();this.enemyModels=new Map();this.nature=[];this.dockBoats=[];const sceneryKey=this.sim.region+':'+this.sim.race+':'+tradeProvince(this.sim)+':'+JSON.stringify(this.sim.layout);if(this.sceneryKey!==sceneryKey){if(this.scenery){release(this.scenery.group);this.scene.remove(this.scenery.group);}this.scenery=makeScenery(this.sim.region,this.sim.race,this.sim);this.scene.add(this.scenery.group);this.sceneryKey=sceneryKey;}
+  this.renderer.cache?.clear();release(this.world);this.scene.remove(this.world);this.world=new THREE.Group();this.scene.add(this.world);this.models.clear();this.workerModels.clear();this.enemyModels=new Map();this.nature=[];this.dockBoats=[];const sceneryKey=this.sim.region+':'+this.sim.race+':'+tradeProvince(this.sim)+':'+JSON.stringify(this.sim.layout);if(this.sceneryKey!==sceneryKey){this.renderer.surfacePatterns?.clear();if(this.scenery){release(this.scenery.group);this.scene.remove(this.scenery.group);}this.scenery=makeScenery(this.sim.region,this.sim.race,this.sim);this.scene.add(this.scenery.group);this.sceneryKey=sceneryKey;}
   const sim=this.sim;
-  this.networkCargo=new Map();
+  this.networkCargo=new Map();this.starterCargo=new Map();
   this.terrain=makeMapTerrain(sim,this.overlay);this.world.add(this.terrain);this.water=this.terrain.userData.water;
+  const grid=[];for(let i=0;i<=N;i++){const v=i-.5;grid.push(new THREE.Vector3(v,.035,-.5),new THREE.Vector3(v,.035,N-.5),new THREE.Vector3(-.5,.035,v),new THREE.Vector3(N-.5,.035,v));}
+  this.buildGrid=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(grid),new THREE.LineBasicMaterial({color:'#f5ebc5',transparent:true,opacity:.18}));this.buildGrid.visible=!!BUILDINGS[this.mode];this.world.add(this.buildGrid);
+  this.world.add(makePlotBoundaries());
   this.decorations=[];
   for(const t of sim.tiles){
    const key=t.x+','+t.z;
@@ -159,16 +175,40 @@ export class GameScene{
   this.railPath=stationRailPath(sim);
   this.freight=[];for(const route of sim.campaign?.routes||[]){if(route.from!==sim.siteId&&route.to!==sim.siteId)continue;const m=makeFreightVehicle(route.mode,route.item);this.world.add(m);this.freight.push({m,route});}const gate=makeExportGate();gate.position.set(EXPORT_GATE.x,.01,EXPORT_GATE.z);this.world.add(gate);this.decorations.push(gate);this.exportCarts=new Map();this.drawExpansions();const tileSelection=this.tileSelection;this.select(this.selection);if(tileSelection&&!this.selection)this.selectTile(tileSelection.x,tileSelection.z);this.lastRevision=sim.revision;
  }
+ // Residents follow the simulation every frame; warmUp calls it too, so their character atlases are
+ // uploaded behind the transition picture instead of in the first visible frame.
+ syncPeople(){
+   for(const w of this.sim.workers){let m=this.workerModels.get(w.id);if(!m){m=makeWorker(w.id,w.race||this.sim.race,w.appearance);this.workerModels.set(w.id,m);this.world.add(m);}animateWorker(m,w,this.sim.time,this.camera);m.visible=!w.atHome;}
+   for(const[id,m]of this.workerModels)if(!this.sim.workers.some(w=>w.id===id)){this.world.remove(m);release(m);this.workerModels.delete(id);}
+   this.syncExportVehicles();
+ }
+ syncExportVehicles(){
+  const items=Object.entries(this.sim.starterStore?.inventory||{}).filter(([,n])=>n>0).slice(0,3),ids=new Set(items.map(([id])=>id));
+  for(const [i,[item]]of items.entries()){let m=this.starterCargo.get(item);if(!m){m=makeNetworkCargo(item,'storage');this.starterCargo.set(item,m);this.world.add(m);}m.position.set(7+(i-1)*.22,.18,11.32);m.userData.animate(this.sim.time,null,false,this.viewIndex);}
+  for(const[id,m]of this.starterCargo)if(!ids.has(id)){this.world.remove(m);release(m);this.starterCargo.delete(id);}
+  const idle=parkedVehicles(this.sim),idleIds=new Set(idle.map(v=>v.id));
+  for(const v of idle){
+   const kind=shipmentVehicle({vehicle:v.kind},this.sim,v);let m=this.idleExportCarts.get(v.id);
+   if(m&&m.userData.vehicleKind!==kind){this.world.remove(m);release(m);this.idleExportCarts.delete(v.id);m=null;}
+   if(!m){m=makeFreightVehicle(kind);this.idleExportCarts.set(v.id,m);this.world.add(m);}
+   const stock=Object.entries(this.sim.starterStore?.inventory||{}).find(([,n])=>n>0);m.userData.loaded=!!stock;m.userData.cargoItem=stock?.[0];m.position.set(v.x,v.afloat?-.16:.08,v.z);m.rotation.y=-Math.PI/2;m.userData.animate?.(this.sim.time,null,false,this.viewIndex);
+  }
+  for(const[id,m]of this.idleExportCarts)if(!idleIds.has(id)){this.world.remove(m);release(m);this.idleExportCarts.delete(id);}
+  for(const sh of this.sim.shipments||[]){
+   const p=shipmentPose(sh),kind=shipmentVehicle(sh,this.sim,p);let m=this.exportCarts.get(sh.id);
+   if(m&&m.userData.vehicleKind!==kind){this.world.remove(m);release(m);this.exportCarts.delete(sh.id);m=null;}
+   if(!m){m=makeFreightVehicle(kind,sh.item);this.exportCarts.set(sh.id,m);this.world.add(m);}
+   m.visible=!sh.away;m.userData.loaded=shipmentLoaded(sh);m.userData.cargoItem=sh.item;
+   m.position.set(p.x,kind==='raft'||kind==='steamer'?-.16:.08,p.z);m.rotation.y=Math.atan2(p.dx,p.dz);m.userData.animate?.(this.sim.time,null,false,this.viewIndex);
+  }
+  for(const[id,m]of this.exportCarts)if(!this.sim.shipments.some(sh=>sh.id===id)){this.world.remove(m);release(m);this.exportCarts.delete(id);}
+ }
  loop(now){
-  if(!this.alive)return;if(this.contextLost||this.active===false){this.last=now;this.frame=requestAnimationFrame(this.loop);return;}if(now-this.last<1000/this.maxFps-1){this.frame=requestAnimationFrame(this.loop);return;}const dt=Math.min((now-this.last)/1000,.5);this.last=now;advanceGame(this.sim,dt);
+  if(!this.alive)return;if(this.contextLost||this.active===false||this.warming){this.last=now;this.frame=requestAnimationFrame(this.loop);return;}if(now-this.last<1000/this.maxFps-1){this.frame=requestAnimationFrame(this.loop);return;}const dt=Math.min((now-this.last)/1000,.5);this.last=now;advanceGame(this.sim,dt);
   if(this.lastRevision!==this.sim.revision)this.rebuild();
   this.controls.update();this.camera.updateMatrixWorld();
   for(const [id,m]of this.models){const b=this.sim.buildings.find(v=>v.id===id);if(b){m.userData.animate?.(this.sim.time,b,this.sim,this.viewIndex);m.rotation.z=0;}}
-  for(const w of this.sim.workers){let m=this.workerModels.get(w.id);if(!m){m=makeWorker(w.id,w.race||this.sim.race,w.appearance);this.workerModels.set(w.id,m);this.world.add(m);}animateWorker(m,w,this.sim.time,this.camera);}
-  for(const[id,m]of this.workerModels)if(!this.sim.workers.some(w=>w.id===id)){this.world.remove(m);release(m);this.workerModels.delete(id);}
-  const staff=facilityRoster(this.sim),staffIds=new Set(staff.map(w=>w.id));
-  for(const w of staff){let m=this.staffModels.get(w.id);if(!m){m=makeWorker(w.id,w.race,w.appearance);m.userData.facilityStaff=true;this.staffModels.set(w.id,m);this.world.add(m);}animateWorker(m,w,this.sim.time,this.camera);}
-  for(const[id,m]of this.staffModels)if(!staffIds.has(id)){this.world.remove(m);release(m);this.staffModels.delete(id);}
+  this.syncPeople();
   for(const {boat,b,x,z} of this.dockBoats||[]){boat.position.y=-.16+Math.sin(this.sim.time*.8)*.008;boat.position.z=z+(b.type==='dock'&&b.working&&b.health>0&&b.enabled!==false?Math.sin(b.progress*Math.PI)*.25:0);boat.userData.animate(this.sim.time,null,false,this.viewIndex);}
   this.scenery?.animate(this.sim.time,this.viewIndex);this.callbacks.onAudio?.(this.sim,this.controls.target);
   for(const prop of this.decorations||[])prop.userData.animate?.(this.sim.time,null,false,this.viewIndex);
@@ -181,14 +221,6 @@ export class GameScene{
   for(const enemy of [...(this.sim.attackers||[]),...(this.sim.guards||[])]){let m=this.enemyModels.get(enemy.id);if(!m){m=makeWorker(Number(enemy.id)||0,enemy.race,enemy.appearance);const bar=new THREE.Group();const bg=new THREE.Mesh(new THREE.PlaneGeometry(.5,.065),new THREE.MeshBasicMaterial({color:'#382f35',side:THREE.DoubleSide}));const hp=new THREE.Mesh(new THREE.PlaneGeometry(.46,.035),new THREE.MeshBasicMaterial({color:enemy.guard?'#59baa3':'#eb826c',side:THREE.DoubleSide}));bar.add(bg,hp);bar.position.y=1.45;hp.position.z=.002;bar.userData.fill=hp;m.add(bar);m.userData.hpBar=bar;m.userData.worker=true;this.enemyModels.set(enemy.id,m);this.world.add(m);}animateWorker(m,enemy,this.sim.time,this.camera);if(m.userData.hpBar){m.userData.hpBar.visible=enemy.hp>0;m.userData.hpBar.quaternion.copy(m.quaternion).invert().multiply(this.camera.quaternion);m.userData.hpBar.userData.fill.scale.x=Math.max(.01,(enemy.hp??1)/(enemy.maxHp??1));}}for(const[id,m]of this.enemyModels){if(![...this.sim.attackers,...(this.sim.guards||[])].some(e=>e.id===id)){this.world.remove(m);release(m);this.enemyModels.delete(id);}}
   this.uiAccum+=dt;this.frameSamples=(this.frameSamples||0)+1;this.frameElapsed=(this.frameElapsed||0)+dt;if(this.uiAccum>.4){this.uiAccum=0;this.renderer.domElement.dataset.fps=String(Math.round(this.frameSamples/this.frameElapsed));this.renderer.domElement.dataset.renderer=this.renderer.isSoftware?'canvas':'webgl';this.renderer.domElement.dataset.geometries=String(this.renderer.info?.memory.geometries||(this.renderer.cache?.size||0)+(this.renderer.poseCache?.size||0));this.renderer.domElement.dataset.textures=String(this.renderer.info?.memory.textures||0);this.renderer.domElement.dataset.models=String(this.models.size+this.workerModels.size+this.enemyModels.size);this.renderer.domElement.dataset.gameTime=String(Math.round(this.sim.time*10)/10);this.renderer.domElement.dataset.characterStyle='pixel';this.renderer.domElement.dataset.characterFrames=[...this.workerModels.values()].map(m=>m.userData.direction+':'+m.userData.frame).join(',');this.frameSamples=0;this.frameElapsed=0;this.callbacks.onUpdate?.(this.sim);const w=this.container.clientWidth,h=this.container.clientHeight;this.callbacks.onMarkers?.(this.sim.buildings.filter(b=>!this.mode).map(b=>{const p=this.markerPoint(b,w,h);return {id:b.id,type:b.type,status:b.status,working:b.working,x:p.x,y:p.y};}).filter(m=>m.x>-200&&m.x<w+200&&m.y>-200&&m.y<h+200));}
   if(this.markerLayer)this.placeMarkers();
-  for(const sh of this.sim.shipments||[]){
-   const p=shipmentPose(sh),kind=shipmentVehicle(sh,this.sim,p);let m=this.exportCarts?.get(sh.id);
-   if(m&&m.userData.vehicleKind!==kind){this.world.remove(m);release(m);this.exportCarts.delete(sh.id);m=null;}
-   if(!m){m=makeFreightVehicle(kind,sh.item);this.exportCarts.set(sh.id,m);this.world.add(m);}
-   m.userData.loaded=shipmentLoaded(sh);m.userData.cargoItem=sh.item;
-   m.position.set(p.x,kind==='raft'||kind==='steamer'?-.16:.08,p.z);m.rotation.y=Math.atan2(p.dx,p.dz);m.userData.animate?.(this.sim.time,null,false,this.viewIndex);
-  }
-  for(const[id,m]of this.exportCarts||[])if(!this.sim.shipments?.some(sh=>sh.id===id)){this.world.remove(m);release(m);this.exportCarts.delete(id);}
   for(const {m,route} of this.freight||[]){
    const p=1-route.remaining/route.duration;
    const station=this.sim.buildings.find(b=>b.type==='station')||this.sim.warehouse;

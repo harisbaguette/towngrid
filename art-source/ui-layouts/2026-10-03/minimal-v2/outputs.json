@@ -1,0 +1,23 @@
+[
+  {
+    "id": "01",
+    "name": "기본 화면",
+    "file": "01-default.png",
+    "description": "자원 3개 · 시간 조절 · 시장/건설/세계",
+    "source": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0ffd3-0c1b-7ff2-bc33-ad05d441c4f4\\exec-e4198e59-7d69-4c0a-bfce-1816d8c5e351.png"
+  },
+  {
+    "id": "02",
+    "name": "건설 중",
+    "file": "02-building.png",
+    "description": "건설을 누르면 하단 메뉴가 작은 건물 목록으로 바뀝니다.",
+    "source": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0ffd3-0c1b-7ff2-bc33-ad05d441c4f4\\exec-3dfac3cc-5bd8-4546-942e-c09968eed023.png"
+  },
+  {
+    "id": "03",
+    "name": "시설 선택",
+    "file": "03-facility.png",
+    "description": "시설을 누르면 하단에 생산 상태와 조작만 표시합니다.",
+    "source": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0ffd3-0c1b-7ff2-bc33-ad05d441c4f4\\exec-d62312f6-5eae-488b-a341-4f7e20c7568f.png"
+  }
+]

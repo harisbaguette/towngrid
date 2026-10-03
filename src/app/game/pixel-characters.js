@@ -70,6 +70,7 @@ export function animatePixelCharacter(group, worker, time, camera) {
  u.current=action;u.actionTime=u.motionState.actionAt;u.gaitDistance=distance;
  const atlas = pixelAtlasFrame(direction, frame, metadata);
  u.sprite.center.set(atlas.anchor[0], 1 - atlas.anchor[1]);
+ u.sprite.scale.set(u.pixelHeight * atlas.scale, u.pixelHeight * atlas.scale, 1);
  if (frame !== u.frame || direction !== u.direction || atlas.rows !== u.atlas.rows || atlas.row !== u.atlas.row || atlas.columns !== u.atlas.columns) {
   u.frame = frame; u.direction = direction;
   u.texture.repeat.set(1 / atlas.columns, 1 / atlas.rows);

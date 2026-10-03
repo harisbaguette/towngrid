@@ -26,8 +26,10 @@ const at=(speed)=>({speed});// a stand-in sim for remainingSeconds: only the spe
  const text=typeof visuals.describeFacility==='function'?visuals.describeFacility('windpump',s):BUILDINGS.windpump.description,w=+(/(\d+)초간/.exec(text)||[])[1];
  expectBug('G1-G2 the wind pump card gives its watering window in game seconds (the card timer counts real seconds)',w!==realSeconds(60),{text:text.slice(0,40),realAt1x:realSeconds(60)});
  // The same hint reached through the UI helper that has no simulation (Game.tsx, Operations.tsx: blockHint(status)).
- s.speed=4;const ui=blockHint('자원 고갈'),u=+(/(\d+)초 뒤 자람/.exec(ui)||[])[1];
- expectBug('G1-G3 the facility-card hint (blockHint, no simulation) shows the 1x sapling time at every speed',Number.isFinite(u)&&u!==remainingSeconds(sapling,s),{speed:4,shown:u,realAt4x:remainingSeconds(sapling,s)});}
+ // blockHint(status,sim) now takes the simulation; every screen call must pass it (static sweep of src/app).
+ s.speed=4;const ui=blockHint('자원 고갈',s),u=+(/(\d+)초 뒤 자람/.exec(ui)||[])[1];
+ const calls=[];for(const f of fs.readdirSync(new URL('src/app/game/',root)).filter(f=>/\.(tsx|js)$/.test(f)&&f!=='ui-rules.js')){const src=fs.readFileSync(new URL('src/app/game/'+f,root),'utf8');for(const m of src.matchAll(/blockHint\(([^()]*)\)/g))if(!m[1].includes(','))calls.push(f+': blockHint('+m[1]+')');}
+ expectBug('G1-G3 [U Game.tsx·Operations.tsx·CampaignWorld.tsx] a facility-card hint calls blockHint without the simulation, so the sapling time shows the 1x seconds at every speed',calls.length>0||u!==remainingSeconds(sapling,s),{speed:4,shownWithSim:u,realAt4x:remainingSeconds(sapling,s),callsWithoutSim:calls});}
 
 // T2 every "N초" literal in game code that is not produced by the clock helpers (static sweep).
 {const dir=new URL('src/app/game/',root),found=[];

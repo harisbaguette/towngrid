@@ -51,19 +51,19 @@ const multi=Object.keys(BUILDINGS).filter(t=>BUILDINGS[t].recipes?.length>1);ass
 {const s=town();const money=s.money,stone=s.stock.stone,r=s.buy('stone',5);assert.ok(r.ok&&r.incoming);assert.equal(s.money,money-r.cost);assert.equal(s.stock.stone,stone,'nothing arrives at once');
  assert.equal(s.shipments.at(-1).kind,'import');const loaded=reload(s);
  for(const t of [s,loaded]){assert.ok(until(t,()=>!t.shipments.length),'the import comes back');assert.equal(t.stock.stone,stone+5);run(t,10);assert.equal(t.stock.stone,stone+5);}
- const bare=new Simulation('river');assert.match(bare.buy('stone',5).error,/창고/,'an import needs a warehouse to arrive at');}
+ const bare=new Simulation('river');assert.ok(bare.buy('stone',5).ok,'the mini store receives imports without a warehouse');assert.ok(until(bare,()=>!bare.shipments.length));assert.equal(bare.starterStore.inventory.stone,35);}
 
-// 4. Vehicles: two wagons and a raft where water leaves the map, else three wagons; fuel vehicles beyond them.
-{const river=town('river'),high=town('highland');assert.deepEqual(fleet(river).slice(0,FUEL_FREE).map(v=>v.kind),['wagon','wagon','raft']);assert.deepEqual(fleet(high).slice(0,FUEL_FREE).map(v=>v.kind),['wagon','wagon','wagon']);
- const w=waterRoute(river);assert.ok(w,'the river map has a water route');const end=w.at(-1);assert.equal(river.tile(end.x,end.z).terrain,'water');assert.ok(end.x===0||end.z===0||end.x===23||end.z===23,'the raft leaves the map by water');
- const st=river.exportStatus();assert.equal(st.fuelFree,3);assert.equal(st.fuelPerTrip,FUEL_PER_TRIP);assert.ok(st.vehicles.every(v=>VEHICLES[v.kind]&&typeof v.busy==='boolean'));assert.equal(st.fuelReady,false);}
-{const s=town('highland');s.stock.wood=300;s.stock.fuel=0;s.reserves.fuel=0;/* stock set directly */for(let i=0;i<3;i++)assert.ok(s.sell('wood',5).ok);assert.match(s.sell('wood',5).error,/모두 나가/,'without fuel only the free three run');
- s.stock.fuel=10;const lot=s.tradeConnection().capacity;const r=s.sell('wood',200);assert.ok(r.ok);const truck=s.shipments.at(-1);assert.equal(truck.vehicle,'truck');assert.equal(truck.amount,lot*VEHICLES.truck.load,'a truck carries more');assert.equal(s.stock.fuel,10-FUEL_PER_TRIP,'and burns fuel');assert.equal(s.logisticsStats.fuel,FUEL_PER_TRIP);
- s.stock.fuel=5;s.reserves.fuel=5;assert.equal(s.sell('wood',5).ok,false,'fuel held in reserve is not burned');
- // A truck reaches the gate sooner than a wagon on the same road.
- const race=town('highland');race.stock.wood=100;race.stock.fuel=10;race.reserves.fuel=0;for(let i=0;i<4;i++)race.sell('wood',1);const wagon=race.shipments[0],fast=race.shipments[3];assert.equal(fast.vehicle,'truck');const legs={};
- for(let i=0;i<400&&Object.keys(legs).length<2;i++){race.tick(.25);for(const v of [wagon,fast])if(v.phase==='back'&&!legs[v.vehicle])legs[v.vehicle]=race.time;}assert.ok(legs.truck<legs.wagon,'truck '+legs.truck+' < wagon '+legs.wagon);
- assert.equal(decodeSave(encodeSave(s.save())).shipments.filter(v=>v.vehicle==='truck').length,1,'vehicles survive a save');}
+// 4. Every map starts with one fueled truck; later vehicles carry more and run faster.
+{const river=town('river'),high=town('highland');for(const s of [river,high])assert.deepEqual(fleet(s).map(v=>v.kind),['van']);
+ const w=waterRoute(river),end=w.at(-1);assert.equal(river.tile(end.x,end.z).terrain,'water');assert.ok(end.x===0||end.z===0||end.x===23||end.z===23);
+ const st=river.exportStatus();assert.equal(st.fuelFree,0);assert.ok(st.fuelPerTrip>=1);assert.ok(st.fuelReady);}
+{const s=town('highland');s.stock.wood=300;s.stock.fuel=0;s.reserves.fuel=0;assert.match(s.sell('wood',5).error,/연료/);
+ s.stock.fuel=10;assert.ok(s.sell('wood',1).ok);s.rank=14;const lot=s.tradeConnection().capacity,r=s.sell('wood',200);assert.ok(r.ok);
+ const truck=s.shipments.at(-1);assert.equal(truck.vehicle,'truck');assert.equal(truck.amount,lot*VEHICLES.truck.load);assert.equal(s.stock.fuel,10-2*s.exportStatus().fuelPerTrip);
+ s.stock.fuel=5;s.reserves.fuel=5;assert.equal(s.sell('wood',5).ok,false,'reserved fuel is not burned');
+ const race=town('highland');race.rank=14;race.stock.wood=100;race.stock.fuel=10;race.reserves.fuel=0;race.sell('wood',1);race.sell('wood',1);
+ const legs={};for(let i=0;i<400&&Object.keys(legs).length<2;i++){race.tick(.25);for(const v of race.shipments)if(v.phase==='back'&&!legs[v.vehicle])legs[v.vehicle]=race.time;}assert.ok(legs.truck<legs.van);
+ assert.equal(decodeSave(encodeSave(s.save())).shipments.filter(v=>v.vehicle==='truck').length,1);}
 
 // 5. State trade leaves on a vehicle too and is paid on arrival.
 {const c=new Campaign({demo:true}),s=c.active;const state=c.spawnState('estern','시험 공국');assert.ok(state,'a new state to trade with');{state.relation=80;state.wealth=1e6;const o=c.stateOrder(state);s.stock[o.item]=Math.max(s.stock[o.item],o.amount);/* stock set directly */const money=s.money;

@@ -16,7 +16,7 @@ export default function ResidentRoster({ workers, resources }: { workers: any[];
  const identity = pixelIdentity(worker.race, worker.id, worker.appearance);
  const portraitAnimation = pixelMetadata.get(identity.id)?.portraitAnimation;
  const portraitSource = portraitAnimation ? identity.portrait.replace('portrait.png',portraitAnimation.file) : identity.portrait;
- const duty = (w: any) => w.staff ? `${w.workplaceName || ''} · ${w.jobTitle} · ${w.duty}` : w.attacking ? '경비 중' : w.task ? `${resources[w.task.item]?.name || ''} 운반` : '일반 일꾼 · 대기';
+ const duty = (w: any) => w.staff ? `${w.workplaceName || ''} · ${w.jobTitle} · ${w.duty}` : w.attacking ? '경비 중' : w.task ? `${resources[w.task.item]?.name || ''} 운반` : w.atHome ? '집에서 휴식' : w.phase==='home' ? '집으로 돌아가는 중' : '일반 일꾼 · 대기';
  const description = (race: string, gender: string) => (RACES as any)[race].name + (gender === 'neutral' ? '' : ` · ${genderLabel(gender)}`);
  return <>
   <div className="resident-profile">

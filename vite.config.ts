@@ -1,9 +1,11 @@
 import tailwindcss from "@tailwindcss/postcss";
 import vinext from "vinext";
-import { defineConfig } from "vite";
+import { resolve } from "node:path";
+import { defineConfig, normalizePath } from "vite";
 import hostingConfig from "./.openai/hosting.json";
 import { readExecutionProfile } from "./scripts/execution-profile.mjs";
 import { sites } from "./scripts/vite/sites-vite-plugin";
+import { publicDirectoryIndex } from "./scripts/vite/public-directory-index";
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   "00000000-0000-4000-8000-000000000000";
@@ -36,7 +38,10 @@ const localBindingConfig = {
     : [],
 };
 
-export default defineConfig(async () => {
+export default defineConfig(async ({ command }) => {
+  // Portable gameplay has no Workers bindings; use Vinext's Node dev runtime.
+  // Keep the Workers runtime for hosted previews and deployment builds.
+  const useWorkers = managedLinux || command === "build";
   // Use Miniflare's local Request.cf placeholder unless fetching is requested.
   process.env.CLOUDFLARE_CF_FETCH_ENABLED ??= "false";
   process.env.WRANGLER_SEND_METRICS ??= "false";
@@ -49,22 +54,38 @@ export default defineConfig(async () => {
   process.env.MINIFLARE_REGISTRY_PATH ??= ".wrangler/registry";
 
   // Wrangler snapshots its log path while the Cloudflare plugin is imported.
-  const { cloudflare } = await import("@cloudflare/vite-plugin");
-
-  return {
-    css: { postcss: { plugins: [tailwindcss()] } },
-    server: {
-      ...(managedLinux ? { host: "0.0.0.0", allowedHosts: ["terminal.local"] } : {}),
-      ...(isCodexSeatbeltSandbox ? { watch: { useFsEvents: false, usePolling: true } } : {}),
-    },
-    plugins: [
-      vinext(),
-      sites({ mockAuth: !managedLinux }),
-      cloudflare({
+  const workersPlugins = useWorkers
+    ? [(await import("@cloudflare/vite-plugin")).cloudflare({
         viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
         inspectorPort: false,
         config: localBindingConfig,
-      }),
+      })]
+    : [];
+
+  return {
+    ...(!useWorkers ? {
+      environments: {
+        ssr: {
+          resolve: { external: ["lucide-react", "radix-ui", "sonner", "three"] },
+        },
+      },
+    } : {}),
+    css: { postcss: { plugins: [tailwindcss()] } },
+    server: {
+      ...(managedLinux ? { host: "0.0.0.0", allowedHosts: ["terminal.local"] } : {}),
+      watch: {
+        // Source art, reports and local tool environments are not runtime inputs.
+        ignored: ["art-source", "docs", "work", "outputs", "graft", ".sites-runtime",
+          ".kilo", ".pytest_cache", ".ruff_cache", ".wrangler", ".vinext", ".next"]
+          .map((directory) => normalizePath(resolve(directory)) + "/**"),
+        ...(isCodexSeatbeltSandbox ? { useFsEvents: false, usePolling: true } : {}),
+      },
+    },
+    plugins: [
+      ...(!useWorkers ? [publicDirectoryIndex()] : []),
+      vinext(),
+      sites({ mockAuth: !managedLinux }),
+      ...workersPlugins,
     ],
   };
 });

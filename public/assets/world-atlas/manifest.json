@@ -1,7 +1,7 @@
 {
-  "version": 2,
-  "source": "art-source/world-atlas/atlas-source.png",
-  "markerSource": "art-source/world-atlas/markers-source.png",
+  "version": 5,
+  "source": "art-source/world-atlas/realms-v4/sprites-source.png",
+  "markerSource": "art-source/world-atlas/realms-v4/sprites-source.png",
   "width": 3200,
   "height": 1984,
   "cellPixels": 64,
@@ -27,8 +27,14 @@
     "settlement",
     "hostile"
   ],
-  "worldHash": "39dc1c18241bc8e01b7ea0371c1135c484d49b9c9debf441038cfa8c9ed6ddf3",
-  "sourceHash": "3690c27e9787ada8c4340bf8f5398480d974067aabea5b53b7e0ac5c0b46bd8f",
-  "markerSourceHash": "d6784357f79a252e24098cf21e6629bc85ebdb0b5397034abac7982611e74ef1",
-  "terrainBytes": 1308408
+  "worldHash": "440eb55896ab017dc2114b6f7dd052e594938c84149f2d20a94f150d4e5e23f5",
+  "sourceHash": "213dbda1352e3620899e37120abda9baf6c2a66fa5f492caaae20c7f11f5e79f",
+  "markerSourceHash": "213dbda1352e3620899e37120abda9baf6c2a66fa5f492caaae20c7f11f5e79f",
+  "terrainBytes": 2108534,
+  "ground": {
+    "path": "public/assets/world-atlas/ground.webp",
+    "bytes": 1009204,
+    "hash": "67eddb0f1e634687fb3d8021f4949a60f4b1bf56e1644cf74c827a29878311c0"
+  },
+  "directions": "public/assets/world-atlas/iso/manifest.json"
 }

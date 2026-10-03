@@ -7,9 +7,10 @@ import {SAPLING_GROW} from './economy.js';
 export const EMISSIONS={generator:2,steamworks:2,smelter:3,refinery:3,chemical:3,coalpit:2,oilpump:2,automotive:1,kiln:1,glassworks:2,cementworks:2,wiremill:1,mithrilforge:2,blastfurnace:3,shipyard:1,cannery:1};
 export const HEIGHTS={warehouse:2,house:1,dwarfhouse:1,titanhouse:1,spirithouse:1,centaurhouse:1,mill:2,generator:2,workshop:1,logistics:2,smelter:3,refinery:3,chemical:2,magetower:3,manaextractor:2,arcanepower:3,station:2,hospital:2,bank:2,barracks:1,depot:2,windturbine:2,parliament:3,shipyard:3,cementworks:2,fortress:2,airdock:2,exchange:2,blastfurnace:3,watermill:1,marketplace:1};
 // Terrain rules of 2026-09-29 (docs/EXPANSION_20260929.md 3, docs/BALANCE_PATCH_20260928.md 14). A map with
-// land.ecology (every site made since 2026-09-28) plays them; an older map keeps the old rules, as it keeps its
-// old ground. The terrain facilities (pond, pasture, clover) work on every map.
-export const terrainRules=sim=>!!sim.layout?.ecology;
+// land.ecology (every site made since 2026-09-28) plays them; an older save keeps the old rules, as it keeps its
+// old ground. The showcase tour (Campaign demo) is built on the old fixed map but is never saved, so it plays the
+// current rules its facility cards describe (G1-T3). The terrain facilities (pond, pasture, clover) work on every map.
+export const terrainRules=sim=>!!sim.layout?.ecology||!!sim.campaign?.demo;
 export const MINES=['ironmine','coalpit','coppermine','sandpit','shallowmine'],HERDS=['sheeppen','milkbarn'],WIND=['mill','windturbine','windpump'];
 /** Water within two tiles: a touching tile gives 2, the next ring 1. Open water (river, lake, marsh pool) within
  *  two tiles also gives a base of 3, so a wheat field (need 3) is watered exactly where the old rule watered it. */
@@ -28,6 +29,8 @@ export const clusterMax=type=>EXTRACTORS.includes(type)?EXTRACT_MAX:CLUSTER_MAX;
 const MOUNTAIN=[0,3,2,2,1,1],SALT=[0,2,1];
 // Simulation.placementEffects caches this result per spot (simulation.js effectsKey). Any state read here besides building
 // positions and types, roads, fixed terrain and the running state of polluters and irrigators must be added to that key.
+// A terrain facility works while its health is above 0; a building reaching 0 or being repaired bumps the revision, which
+// the key already holds.
 export function placementEffects(sim,type,x,z){
  const d=BUILDINGS[type],modern=terrainRules(sim),crop=!!d?.irrigable,need=modern?d?.waterNeed||0:0;
  let pollution=0,shade=0,windBlock=0,water=0,reservoir=false,ponds=0,waterScore=0,open=false,mountain=0,coast=9,flooded=false,graze=0,clover=0,cluster=0,serves=0,irrigator=null;const sources=[];const irrigates=d?.output==='irrigation';
@@ -36,11 +39,13 @@ export function placementEffects(sim,type,x,z){
   if(b.health>0&&b.enabled!==false&&dirty&&distance<=dirty){pollution+=dirty+1-distance;sources.push({type:b.type,kind:'pollution',distance});}
   if(height&&distance<=height){shade=Math.max(shade,height+1-distance);windBlock=Math.max(windBlock,height+1-distance);}
   // A water tower and a wind pump both water the crops within two tiles while their supply window runs.
-  if(crop&&BUILDINGS[b.type]?.output==='irrigation'&&b.health>0&&b.enabled!==false&&b.activeUntil>sim.time&&distance<=2){reservoir=true;irrigator=irrigator||b.type;}
+  if(crop&&BUILDINGS[b.type]?.output==='irrigation'&&b.health>0&&b.enabled!==false&&!(b.movingUntil>sim.time)&&b.activeUntil>sim.time&&distance<=2){reservoir=true;irrigator=irrigator||b.type;}
   if(distance<=2){
-   if(b.type==='pond'){ponds++;waterScore+=WATER_RING[distance];if(distance===1)flooded=true;}
-   else if(b.type==='pasture')graze+=WATER_RING[distance];
-   else if(b.type==='clover')clover++;
+   // G1-T2: a broken pond, pasture or clover patch shows 수리 필요 like any facility and gives nothing until repaired.
+   const live=b.health>0;
+   if(b.type==='pond'){if(live){ponds++;waterScore+=WATER_RING[distance];if(distance===1)flooded=true;}}
+   else if(b.type==='pasture'){if(live)graze+=WATER_RING[distance];}
+   else if(b.type==='clover'){if(live)clover++;}
    // An irrigator counts the crops its supply window will water (the same crops the reservoir flag above reaches).
    const bd=BUILDINGS[b.type];if(type==='pond'&&(modern?bd.waterNeed:bd.irrigable)||irrigates&&bd.irrigable&&(!modern||bd.waterNeed)||type==='pasture'&&HERDS.includes(b.type)||type==='clover'&&b.type==='apiary')serves++;
   }
@@ -58,16 +63,31 @@ export function placementEffects(sim,type,x,z){
  const salt=modern?SALT[coast]||0:0;flooded=modern&&MINES.includes(type)&&flooded;cluster=modern&&d?.period&&RESOURCES[d.output]?Math.min(clusterMax(type),cluster):0;
  const road=[[1,0],[-1,0],[0,1],[0,-1]].some(([dx,dz])=>sim.roads.has((x+dx)+','+(z+dz)));
  const sensitive=crop||['stable','dock','henhouse','sheeppen','milkbarn','duckhouse','apiary'].includes(type),wind=WIND.includes(type);
- // A solar panel loses 20% per shade step (docs/BALANCE_PATCH_20260928.md 13-2). Salt slows an irrigated crop 15% a
- // step and speeds a salt pan 20% a step; a flooded mine runs at 70%; pasture feeds a herd 10% a point up to 40%.
- const speed=(sensitive?Math.max(.4,1-pollution*.1-(crop?shade*.1+salt*.15:0)):1)*(wind?Math.max(.4,1-windBlock*.2):1)*(type==='solarpanel'?Math.max(.4,1-shade*.2):1)
+ // A solar panel loses 20% per step of MOUNTAIN shade only (G1-E2, docs/BALANCE_PATCH_20260928.md 19): it stands among
+ // tall factories that block the wind turbine. Salt slows an irrigated crop 15% a step and speeds a salt pan 20% a
+ // step; a flooded mine runs at 70%; pasture feeds a herd 10% a point up to 40%.
+ const speed=(sensitive?Math.max(.4,1-pollution*.1-(crop?shade*.1+salt*.15:0)):1)*(wind?Math.max(.4,1-windBlock*.2):1)*(type==='solarpanel'?Math.max(.4,1-Math.min(3,mountain)*.2):1)
   *(type==='saltfield'?1+salt*.2:1)*(flooded?.7:1)*(HERDS.includes(type)?1+Math.min(.4,graze*.1):1)/(1-cluster*CLUSTER_STEP);
  const blocked=type==='apiary'&&!clover?'야생 클로버 필요':null;
  return {water,waterScore,waterNeed:need,irrigator,pollution,shade,mountain,windBlock,salt,flooded,graze,clover,cluster,serves,blocked,modern,road,speed,sources};
 }
 /** The height rule by what it does here: wind facilities lose wind behind a tall building or a mountain, the rest lose
- *  light (both come from the same heights, so the values are equal; only the name differs). */
-export function shelterNote(type,e){const wind=WIND.includes(type),value=wind?e.windBlock:e.shade;return {name:(value&&e.mountain>=value?'산 ':'')+(wind?'바람막이':'그늘'),value};}
+ *  light (both come from the same heights, so the values are equal; only the name differs). A solar panel reads only
+ *  the mountain's shade (G1-E2). */
+export function shelterNote(type,e){if(type==='solarpanel'){const value=Math.min(3,e.mountain||0);return {name:'산 그늘',value};}const wind=WIND.includes(type),value=wind?e.windBlock:e.shade;return {name:(value&&e.mountain>=value?'산 ':'')+(wind?'바람막이':'그늘'),value};}
+/** K-08: pollution, shade, wind shelter and mountain shade only for the facilities whose speed they change (the speed
+ *  formula in placementEffects), worded as the effect: "그늘 2 · 생산 -20%". Empty for a house, a well or a quarry. */
+export function slowNotes(type,e,panel=false){
+ const d=BUILDINGS[type],crop=!!d?.irrigable,out=[];
+ const sensitive=crop||['stable','dock','henhouse','sheeppen','milkbarn','duckhouse','apiary'].includes(type);
+ // In the facility panel a rule that applies is always listed with its scale ("바람막이 0/3"); the preview lists only hits.
+ const add=(name,value,max,cut)=>{if(value>0||panel)out.push({text:name+' '+value+(panel?'/'+max:'')+(value>0?' · 생산 -'+Math.min(60,value*cut)+'%':''),tone:value>0?'negative':''});};
+ if(sensitive)add('오염',e.pollution||0,6,10);
+ if(crop)add((e.shade&&e.mountain>=e.shade?'산 ':'')+'그늘',e.shade||0,3,10);
+ if(WIND.includes(type))add((e.windBlock&&e.mountain>=e.windBlock?'산 ':'')+'바람막이',e.windBlock||0,3,20);
+ if(type==='solarpanel')add('산 그늘',Math.min(3,e.mountain||0),3,20);
+ return out;
+}
 /** Short notes on the rules that act on this facility at this spot, for the placement preview and the facility panel. */
 export function effectNotes(type,e){
  const d=BUILDINGS[type],out=[],crop=!!d?.irrigable,add=(text,tone='')=>out.push({text,tone});
@@ -87,7 +107,7 @@ export function effectNotes(type,e){
 // advice that holds from the first rank; pass the simulation to add facilities that are already unlocked.
 const open=(sim,type)=>!!sim&&sim.rank>=unlockRank(type),obj=w=>w+((w.charCodeAt(w.length-1)-0xac00)%28?'을':'를');
 export function operationHint(status,sim){
- if(status.endsWith(' 대기')&&status!=='운반 대기')return '원료 재고와 창고에서 이 시설까지의 통로를 확인하세요.';
+ if(status.endsWith(' 대기')&&status!=='운반 대기')return '원료가 들어오지 않습니다 · 공급 시설의 생산량과 창고까지의 통로를 확인하세요.';
  if(status.endsWith(' 주민 필요')){const race=Object.keys(RACES).find(r=>status===RACES[r].name+' 주민 필요'),house=Object.keys(BUILDINGS).find(t=>BUILDINGS[t].resident===race);return house?obj(BUILDINGS[house].name)+' 지어 '+RACES[race].name+' 주민을 들이세요. 이 작업장은 '+RACES[race].name+'만 다룹니다.':'이 작업장을 다루는 주민의 주택을 지으세요.';}
  return {'도로 연결 필요':'시설 옆에 흙길을 놓고 창고까지 이어주세요.','출입구 막힘':'시설 옆 한 칸을 비우세요.','창고 경로 막힘':'창고와 이어지는 빈 칸이나 흙길을 만드세요.','전력 부족':'발전 시설에 원료를 공급하거나 발전 시설을 더 지으세요.','전력망 밖 · 변전소 필요':'발전소 여섯 칸 안으로 옮기거나, 발전소와 이 시설 사이에 변전소를 지어 전기를 이어주세요.','운반 대기':'주민 주택을 더 짓거나 개선해 운반할 주민을 늘리고, 창고까지 흙길을 이으세요.'+(open(sim,'logistics')?' 자동 물류센터를 가동하면 운반량이 두 배가 됩니다.':''),'창고 가득 참':'재고를 팔아 창고 자리를 비우세요.'+(open(sim,'depot')?' 자재 보관소를 지으면 보관 한도가 늘어납니다.':''),'수리 필요':'수리하면 생산이 다시 시작됩니다.','야생 클로버 필요':'양봉장 두 칸 안에 야생 클로버를 심으세요.','자원 고갈':'네 칸 안의 내 땅에 남은 자원이 없습니다. 경계 밖 나무·바위는 쓸 수 없습니다. 벌목장은 빈 칸에 묘목(15G · 물 2, '+remainingSeconds(SAPLING_GROW,sim)+'초 뒤 자람)을 심거나 옆 구역을 사서 영토를 넓히고, 채석장은 바위가 남은 곳으로 옮기세요.','가동 중지':'가동 스위치를 켜세요.','창고 필요':'창고를 먼저 지으세요.'}[status]||'';
 }
@@ -108,7 +128,24 @@ export function productionDiagnosis(sim,b,definitions,resources){
  const delivering=sim.workers.filter(w=>w.task?.targetId===b.id&&w.task.item===item);
  if(delivering.length)return {...fallback,text:resources[item].name+'을 주민 '+delivering.length+'명이 운반 중입니다.'};
  const producer=sim.buildings.find(p=>(sim.recipeOf?.(p)||definitions[p.type]).output===item&&p.health>0&&p.enabled!==false);
- if(!producer){const types=Object.keys(definitions).filter(k=>(definitions[k].recipes||[definitions[k]]).some(r=>r.output===item)).sort((a,c)=>unlockRank(a)-unlockRank(c)),type=types.find(k=>unlockRank(k)<=sim.rank);if(!type)return {text:resources[item].name+' 공급 시설이 아직 잠겨 있습니다. 창고 재고나 수입으로 공급하세요.',label:'시장 확인',focus:null,tool:null};return {text:resources[item].name+' 공급 시설이 없습니다.',label:definitions[type].name+' 선택',focus:null,tool:type};}
- if(producer.out===0&&sim.availableStock(item)===0)return {text:definitions[producer.type].name+'의 '+producer.status,label:definitions[producer.type].name+' 확인',focus:producer.id,tool:null};
- return {...fallback,text:resources[item].name+' '+need+'개가 필요합니다. 공급 시설까지 통로를 확인하세요.'};
+ if(!producer){
+  // G1-E5: every product line that makes the item, open once both the facility and the product are unlocked. A default
+  // product means "build one"; an alternative product made by a facility that already stands means "switch it".
+  const lines=Object.keys(definitions).flatMap(k=>(definitions[k].recipes||[definitions[k]]).map((r,i)=>({type:k,recipe:r,alt:i>0,rank:Math.max(unlockRank(k),r.unlock||0)}))).filter(l=>l.recipe.output===item).sort((a,c)=>a.rank-c.rank||+a.alt-+c.alt);
+  const open=lines.filter(l=>l.rank<=sim.rank),name=resources[item].name;
+  if(!open.length)return {text:name+' 공급 시설이 아직 잠겨 있습니다. 창고 재고나 수입으로 공급하세요.',label:'시장 확인',focus:null,tool:null};
+  const own=open.find(l=>!l.alt)||null,switchable=!own&&open.map(l=>({l,p:sim.buildings.find(p=>p!==b&&p.type===l.type&&p.health>0)})).find(v=>v.p);
+  if(switchable){const d=definitions[switchable.l.type].name;return {text:name+' 공급 시설이 없습니다. '+obj(d)+' 「'+switchable.l.recipe.name+'」 제품으로 바꾸거나 한 곳 더 지으세요.',label:d+' 제품 바꾸기',focus:switchable.p.id,tool:null};}
+  const l=own||open[0],d=definitions[l.type].name;
+  return {text:name+' 공급 시설이 없습니다.'+(l.alt?' '+obj(d)+' 지은 뒤 「'+l.recipe.name+'」 제품으로 바꾸세요.':''),label:d+' 선택',focus:null,tool:l.type};
+ }
+ // K-06: tell a missing path from a missing supply. Stock in the store that does not arrive is a path; an empty store
+ // with its makers stalled names the stall; an empty store with every maker running means more users than makers.
+ const name=resources[item].name,pd=definitions[producer.type].name;
+ if(sim.availableStock(item)>=need)return {...fallback,text:'창고에 '+name+'이 있지만 이 시설까지 오지 못합니다. 창고와 이어지는 빈 칸이나 흙길을 확인하세요.'};
+ const makers=sim.buildings.filter(p=>(sim.recipeOf?.(p)||definitions[p.type]).output===item&&p.health>0&&p.enabled!==false);
+ const stalled=makers.find(p=>operationHint(p.status,sim));
+ if(stalled)return {text:pd+' · '+stalled.status+' · '+operationHint(stalled.status,sim),label:pd+' 확인',focus:stalled.id,tool:null};
+ const users=sim.buildings.filter(p=>p.health>0&&p.enabled!==false&&(sim.effectiveInputs?.(p)||{})[item]>0).length;
+ return {text:name+' 생산이 쓰는 곳보다 적습니다 · '+pd+' '+makers.length+'곳이 '+users+'곳에 공급합니다.',label:pd+' 하나 더',focus:null,tool:open(sim,producer.type)?producer.type:null};
 }

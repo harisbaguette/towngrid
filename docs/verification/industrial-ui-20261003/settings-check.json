@@ -1,0 +1,10 @@
+{
+ "before": 0.82,
+ "after": 0.81,
+ "surface": {
+  "height": 40,
+  "background": "rgba(0, 0, 0, 0)",
+  "fill": "81%"
+ },
+ "errors": []
+}

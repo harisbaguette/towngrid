@@ -1,0 +1,31 @@
+{
+  "start": {
+    "mode": null,
+    "buildings": 0,
+    "workers": 0,
+    "parked": 1,
+    "connected": true
+  },
+  "depart": {
+    "money": 1900,
+    "wood": 49,
+    "loaded": true,
+    "revenue": 10
+  },
+  "production": {
+    "water": 27,
+    "made": 18
+  },
+  "saved": {
+    "buildings": [
+      "house",
+      "well",
+      "distillery"
+    ],
+    "workers": 1,
+    "parked": 1,
+    "staff": 0
+  },
+  "errors": [],
+  "failed": []
+}

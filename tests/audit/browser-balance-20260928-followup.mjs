@@ -1,15 +1,19 @@
 import { pathToFileURL } from 'node:url';
 const { chromium } = await import(pathToFileURL(process.argv[2]).href);
-const OUT = process.argv[4];
+const OUT = process.argv[4] || process.env.TG_OUT || 'docs/verification/fix-20260930/followup';
+await (await import('node:fs/promises')).mkdir(OUT, { recursive: true });
 const NL = String.fromCharCode(10);
+// Was pinned to a one-off server on :5181; use the shared dev server like the other probes.
+const ORIGIN = process.env.TOWNGRID_URL || 'http://localhost:5173';
 const browser = await chromium.launch({ headless: true, executablePath: process.argv[3], args: ['--enable-unsafe-swiftshader'] });
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
 await ctx.addInitScript(() => { window.WebSocket = class { constructor() { this.readyState = 0; } addEventListener() {} removeEventListener() {} send() {} close() {} }; });
 const page = await ctx.newPage(); const errs = [];
 page.on('pageerror', e => errs.push(e.message)); page.on('console', m => { if (m.type() === 'error') errs.push(m.text().slice(0, 200)); });
 const R = {};
-const hook = () => page.evaluate(async () => { const { GameScene } = await import('/src/app/game/scene.js'); if (GameScene.prototype.__h) return; const o = GameScene.prototype.setSimulation; GameScene.prototype.setSimulation = function (s) { window.tgScene = this; return o.call(this, s); }; GameScene.prototype.__h = 1; });
-const home = async (name) => { const t = Date.now(); await page.goto('http://localhost:5181'); const title = await page.getByRole('button', { name: '화면을 눌러 시작', exact: true }).waitFor({ timeout: 30000 }).then(() => Date.now() - t).catch(() => null); for (let i = 0; i < 40 && !(await page.getByRole('button', { name }).count()); i++) { await page.getByRole('button', { name: '화면을 눌러 시작', exact: true }).click().catch(() => {}); await page.waitForTimeout(300); } await page.getByRole('button', { name }).first().waitFor(); return { titleMs: title, homeMs: Date.now() - t }; };
+// Hook every loaded copy of scene.js: after a hot update the page runs scene.js?t=..., not the bare URL.
+const hook = () => page.evaluate(async () => { const urls = [...new Set([...performance.getEntriesByType('resource').map(e => e.name).filter(u => /\/app\/game\/scene\.js(\?|$)/.test(u)), '/src/app/game/scene.js'])]; for (const url of urls) { const { GameScene } = await import(url); if (GameScene.prototype.__h) continue; const o = GameScene.prototype.setSimulation; GameScene.prototype.setSimulation = function (s) { window.tgScene = this; return o.call(this, s); }; GameScene.prototype.__h = 1; } });
+const home = async (name) => { const t = Date.now(); await page.goto(ORIGIN); const title = await page.getByRole('button', { name: '화면을 눌러 시작', exact: true }).waitFor({ timeout: 30000 }).then(() => Date.now() - t).catch(() => null); for (let i = 0; i < 40 && !(await page.getByRole('button', { name }).count()); i++) { await page.getByRole('button', { name: '화면을 눌러 시작', exact: true }).click().catch(() => {}); await page.waitForTimeout(300); } await page.getByRole('button', { name }).first().waitFor(); return { titleMs: title, homeMs: Date.now() - t }; };
 R.warmLoad = await home('새 게임'); await hook();
 await page.getByRole('button', { name: '새 게임' }).click();
 await page.getByRole('button', { name: /이 땅에서 시작/ }).click();
@@ -50,7 +54,7 @@ await page.getByRole('button', { name: '시설 정보 닫기' }).click().catch((
 const mctx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2, storageState: await ctx.storageState() });
 await mctx.addInitScript(() => { window.WebSocket = class { constructor() { this.readyState = 0; } addEventListener() {} removeEventListener() {} send() {} close() {} }; });
 const m = await mctx.newPage(); m.on('pageerror', e => errs.push('m:' + e.message));
-await m.goto('http://localhost:5181');
+await m.goto(ORIGIN);
 for (let i = 0; i < 40 && !(await m.getByRole('button', { name: /이어하기/ }).count()); i++) { await m.getByRole('button', { name: '화면을 눌러 시작', exact: true }).tap().catch(() => {}); await m.waitForTimeout(400); }
 await m.getByRole('button', { name: /이어하기/ }).tap();
 await m.getByRole('button', { name: '건설 목록 열기' }).waitFor({ timeout: 60000 });

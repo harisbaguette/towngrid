@@ -1,4 +1,20 @@
 {
+ "worldSettlement": {
+  "domesticStage": 8,
+  "foreignStage": 13,
+  "unclaimedStage": 13,
+  "baseCost": 700,
+  "perAdditionalSite": 250,
+  "materials": {
+   "wood": 24,
+   "stone": 16,
+   "water": 8
+  },
+  "maxSites": 24,
+  "unclaimedSovereign": null,
+  "claimedPlotOwner": "player",
+  "restrictedPlots": 108
+ },
  "meta": {
   "id": "balance-20260928",
   "date": "2026-09-28",
@@ -968,12 +984,12 @@
     "requirements": [
      [
       "produced:brick",
-      20,
+      14,
       "벽돌 생산"
      ],
      [
       "revenue",
-      16000,
+      23000,
       "교역 수입"
      ]
     ],
@@ -1130,13 +1146,13 @@
      ],
      [
       "produced:copper",
-      16,
+      12,
       "구리광석 생산"
      ],
      [
-      "sites",
-      2,
-      "운영 거점"
+      "deliveries",
+      3,
+      "지역 간 운송"
      ]
     ],
     "unlocks": [
@@ -1311,12 +1327,12 @@
     "requirements": [
      [
       "investment",
-      2,
+      3,
       "산업 투자"
      ],
      [
       "produced:lamp",
-      24,
+      10,
       "마력등 생산"
      ],
      [
@@ -1346,7 +1362,7 @@
      ],
      [
       "contracts",
-      30,
+      29,
       "납품 계약"
      ]
     ],
@@ -1371,7 +1387,7 @@
      ],
      [
       "produced:mithril",
-      10,
+      5,
       "미스릴 강 생산"
      ]
     ],
@@ -1416,12 +1432,12 @@
      ],
      [
       "produced:airship",
-      3,
+      2,
       "비공정 건조"
      ],
      [
       "deliveries",
-      190,
+      170,
       "지역 간 운송"
      ]
     ],
@@ -1441,7 +1457,7 @@
      ],
      [
       "investment",
-      4,
+      5,
       "산업 투자"
      ],
      [
@@ -1476,7 +1492,7 @@
      ],
      [
       "deliveries",
-      230,
+      215,
       "지역 간 운송"
      ]
     ],
@@ -1821,7 +1837,7 @@
   "simulation.repairCost": {
    "file": "src/app/game/simulation.js",
    "current": "ceil((100−health)/100 × (드워프 특화 25 : 50)), 최소 5",
-   "next": "ceil((100−health)/100 × max(50, 건설비×0.1) × (드워프 특화 0.5 : 1)), 최소 5",
+   "next": "ceil((100−health)/100 × max(건설비×0.1, min(50, 건설비×0.5)) × (드워프 특화 0.5 : 1)), 최소 5",
    "reason": "폭풍·습격 피해가 후반에도 의미를 갖게 한다. 건설비 500G 이하 시설은 지금과 같다(최대 50G). 비공정 조선소는 최대 900G."
   },
   "simulation.expansionCost": {
@@ -2595,18 +2611,25 @@
      1.32
     ],
     "waitSeconds": 80,
-    "payment": "수출 운송 수단이 터미널에 도착할 때 한 번",
+    "payment": "외부 거래 도시에 도착할 때 한 번",
     "next": "도착 후 CONTRACT_WAIT초 뒤 다음 주문"
    }
   },
   "transport": {
    "contract": "운송(보상은 도착 시)",
    "stateTrade": "운송(대금은 도착 시, 상대국 장부는 출발 시)",
-   "import": "주문 시 결제, 운송 수단이 터미널에서 싣고 창고에 돌아오면 입고",
-   "autoSale": "운송 수단 두 대 이상이 놀고 있을 때만 출하(한 대는 계약·수입·수동 판매용으로 남김)"
+   "import": "주문 시 결제, 외부 도시에서 싣고 지정한 보관 장소로 돌아와 입고",
+   "autoSale": "한 대일 때도 자동 출하. 두 대 이상이면 한 대는 수동 판매·계약·수입용으로 남김"
   },
   "vehicles": {
    "kinds": {
+    "van": {
+     "name": "소형 트럭",
+     "fuel": true,
+     "load": 1,
+     "land": 1.4,
+     "water": 0
+    },
     "wagon": {
      "name": "마차",
      "fuel": false,
@@ -2636,12 +2659,15 @@
      "water": 2.4
     }
    },
-   "fuelFree": 3,
+   "fuelFree": 0,
+   "starterFleet": 1,
+   "startingFuel": 40,
+   "startingExport": "모든 시작 부지에 소형 트럭 1대와 미니 창고 160칸. 생산물·수입품 보관과 수출에 사용한다.",
    "fuelFleet": 2,
-   "fuelPerTrip": 1,
-   "exchange": "대륙 거래소 exportCarts 2 = 연료 차량 상한 +2",
+   "fuelPerTrip": "max(1, ceil(거래 도시 거리 / 12))",
+   "expansion": "가동 터미널마다 트럭 1대, rank 14부터 2대, 대륙 거래소마다 2대 추가",
    "saveCeiling": 7,
-   "spareFuel": "창고 연료 − 최소 보유량(생산 투입 2회분·노선 화물·열린 계약·플레이어 비축)만 태운다"
+   "spareFuel": "운반 예약과 최소 보유량을 제외한 연료만 태운다"
   },
   "recipes": {
    "quarry": [
@@ -3100,8 +3126,8 @@
   ],
   "startMoney": {
    "before": 1100,
-   "after": 1300,
-   "why": "계약 연타로 첫 33초에 들어오던 316G(밀 12·목재 14 즉시 납품)를 시작 자금으로 옮긴다"
+   "after": 1900,
+   "why": "초기 운송 기반과 연료 생산 설비를 마련할 자금"
   },
   "unlocks": {
    "weaver": {
@@ -3219,31 +3245,31 @@
     "chocolate": {
      "name": "초콜릿",
      "color": "#5b3423",
-     "price": 80,
+     "price": 180,
      "final": true
     },
     "jam": {
      "name": "딸기잼",
      "color": "#c7283f",
-     "price": 72,
+     "price": 120,
      "final": true
     },
     "candy": {
      "name": "박하 사탕",
      "color": "#9fe8cf",
-     "price": 50,
+     "price": 70,
      "final": true
     },
     "pie": {
      "name": "호박 파이",
      "color": "#d7913f",
-     "price": 110,
+     "price": 140,
      "final": true
     },
     "lantern": {
      "name": "호박등",
      "color": "#f2a93b",
-     "price": 280,
+     "price": 315,
      "final": true
     },
     "wool": {
@@ -3254,7 +3280,7 @@
     "yarn": {
      "name": "털실",
      "color": "#c98bb7",
-     "price": 78
+     "price": 82
     },
     "milk": {
      "name": "우유",
@@ -3264,7 +3290,7 @@
     "butter": {
      "name": "버터",
      "color": "#f4dc75",
-     "price": 120,
+     "price": 155,
      "final": true
     },
     "honey": {
@@ -3486,7 +3512,7 @@
       "barrel": 1
      },
      "output": "winered",
-     "amount": 2
+     "amount": 3
     },
     "chocolatier": {
      "name": "초콜릿 공방",
@@ -3513,7 +3539,7 @@
       "wood": 6,
       "plank": 2
      },
-     "period": 18,
+     "period": 15,
      "inputs": {
       "feed": 1,
       "water": 1
@@ -3680,13 +3706,13 @@
   },
   "unlocks": {
    "saltfield": 2,
-   "sugarfield": 3,
+   "sugarfield": 2,
    "berryfield": 4,
-   "pumpkinpatch": 5,
+   "pumpkinpatch": 4,
    "pond": 5,
    "feedmill": 6,
    "pasture": 6,
-   "sheeppen": 7,
+   "sheeppen": 6,
    "milkbarn": 7,
    "duckhouse": 8,
    "clayfield": 8,
@@ -3831,8 +3857,8 @@
       "oakwood": 2
      },
      "output": "barrel",
-     "amount": 1,
-     "period": 14,
+     "amount": 2,
+     "period": 20,
      "unlock": 11
     },
     {
@@ -3869,7 +3895,7 @@
       "barrel": 1
      },
      "output": "winewhite",
-     "amount": 2,
+     "amount": 3,
      "period": 28,
      "unlock": 13
     }
@@ -4137,7 +4163,8 @@
    "amount": "비공정 1 · 목록가 1000G 이상 2 · 150G 이상 6 · 그 밖 12+min(계약 수×2,16)"
   },
   "rules": {
-   "solarShade": "태양광 패널 속도 = max(0.4, 1 − 그늘 단계 × 0.2). 그늘은 높은 건물과 산(새 규칙 지도) 중 큰 값",
+   "solarShade": "태양광 패널 속도 = max(0.4, 1 − 산 그늘 단계 × 0.2). 2026-10-02(19절)부터 높은 건물의 그늘은 받지 않고 산 그늘(새 규칙 지도)만 받는다. 이전: 높은 건물과 산 중 큰 값",
+   "terrainFacilityHealth": "2026-10-02(19절): 내구도 0인 연못·목초지·야생 클로버는 수리할 때까지 효과가 없다",
    "sandpitGround": "모래 땅 위 모래 채굴장 ×1.25",
    "clayfield": "강·바다 두 칸 이내(nearWater 2)",
    "livestockPollution": "양 우리·젖소 우리·오리 집·양봉장은 양계장처럼 오염에 약함",
@@ -5535,7 +5562,7 @@
     "baguette": {
      "name": "바게트",
      "color": "#c98a3f",
-     "price": 78,
+     "price": 88,
      "final": true
     },
     "batter": {
@@ -5546,13 +5573,13 @@
     "fancycake": {
      "name": "고급 케이크",
      "color": "#e86f8f",
-     "price": 360,
+     "price": 690,
      "final": true
     },
     "decorcake": {
      "name": "장식 케이크",
      "color": "#8fd8c0",
-     "price": 465,
+     "price": 800,
      "final": true
     },
     "winebottle": {
@@ -5563,7 +5590,7 @@
     "sangria": {
      "name": "상그리아",
      "color": "#c23a4a",
-     "price": 180,
+     "price": 215,
      "final": true
     },
     "honeycomb": {
@@ -5777,7 +5804,7 @@
      },
      "output": "candy",
      "amount": 3,
-     "period": 14,
+     "period": 11,
      "unlock": 11
     }
    ],
@@ -5863,5 +5890,410 @@
    "extractorCap": "채취 시설(농장 밖 원료 시설: 우물·벌목장·채석장·모래 채굴장·점토 채굴장·철광산·탄광·구리 광산·얕은 광산·유정·마력 추출기)은 EXTRACT_MAX 1(최대 −10%). 농장 원료 시설과 가공 시설은 CLUSTER_MAX 3(최대 −30%) 그대로",
    "C13": "원료 시설 전부(물 외 원료 없음)의 주기에 (1 − 0.1 × 그 시설의 모으기 상한)을 곱하고 가공 시설은 기준 속도로 두었을 때, 모든 가공 줄의 타일당 분당 가치가 가장 비싼 원료의 1.15배 이상. 채취 시설도 −30%이면 6줄, −20%이면 3줄(목탄 제련 1.09)이 미달"
   }
+ },
+ "contentAudit20261002": {
+  "date": "2026-10-02",
+  "doc": "docs/BALANCE_PATCH_20260928.md 19절",
+  "probes": "tests/audit-3/g1-*.mjs · node tests/audit-3/run-all.mjs --regression",
+  "expansionValue": {
+   "rule": "C14: 확장 사슬 최종재의 타일당 분당 가치 ≥ 같은 단계 기존 가공 줄(물 외 원료가 있는 줄) 중앙값 × 0.8, ≤ 그 단계 기존 최고값",
+   "priceBefore": {
+    "jam": 72,
+    "baguette": 78,
+    "butter": 120,
+    "pie": 110,
+    "candy": 50,
+    "lantern": 280,
+    "yarn": 78,
+    "sangria": 180,
+    "chocolate": 80,
+    "fancycake": 360,
+    "decorcake": 465
+   },
+   "priceAfter": {
+    "jam": 120,
+    "baguette": 88,
+    "butter": 155,
+    "pie": 140,
+    "candy": 70,
+    "lantern": 315,
+    "yarn": 82,
+    "sangria": 215,
+    "chocolate": 180,
+    "fancycake": 690,
+    "decorcake": 800
+   },
+   "recipes": {
+    "sawmill:barrel": {
+     "before": {
+      "amount": 1,
+      "period": 14
+     },
+     "after": {
+      "amount": 2,
+      "period": 20
+     }
+    },
+    "winery": {
+     "before": {
+      "amount": 2
+     },
+     "after": {
+      "amount": 3
+     }
+    },
+    "winery:winewhite": {
+     "before": {
+      "amount": 2
+     },
+     "after": {
+      "amount": 3
+     }
+    },
+    "sheeppen": {
+     "before": {
+      "period": 18
+     },
+     "after": {
+      "period": 15
+     }
+    },
+    "confectionery:honeycandy": {
+     "before": {
+      "period": 14
+     },
+     "after": {
+      "period": 11
+     }
+    }
+   },
+   "unchanged": "빵·케이크·와인·연료 사슬의 재료와 값(빵 42, 케이크 200, 적포도주 125, 백포도주 130, 오크통 85, 연료 75, 밀가루 23, 달걀 25, 밀 9)"
+  },
+  "contractBands": {
+   "rule": "CONTRACT_POOLS의 확장 품목은 그 구간 안에 만들 수 있어야 주문된다",
+   "unlockBefore": {
+    "sugarfield": 3,
+    "pumpkinpatch": 5,
+    "sheeppen": 7
+   },
+   "unlockAfter": {
+    "sugarfield": 2,
+    "pumpkinpatch": 4,
+    "sheeppen": 6
+   }
+  },
+  "power": {
+   "windturbine": {
+    "periodBefore": 24,
+    "periodAfter": 30,
+    "gap": "바람막이 3단계(속도 40%)에서 주기 75게임초 > 공급 60게임초, 가동률 약 0.79"
+   },
+   "solarpanel": {
+    "shadeBefore": "높은 건물과 산 그늘 중 큰 값",
+    "shadeAfter": "산 그늘만(새 규칙 지도). 높은 공장 옆 가동률 1.00, 산 바로 옆 0.79"
+   },
+   "reason": "전력은 켜짐·꺼짐뿐이고 A2-G2 수리로 풍력이 어디서나 끊기지 않아 태양광(1,600G·23단계)이 풍력(330G·12단계)의 복사본이었다"
+  },
+  "terrain": {
+   "brokenTerrainFacility": "내구도 0인 연못·목초지·야생 클로버는 수리할 때까지 효과 없음",
+   "showcaseRules": "저장하지 않는 산업도시 둘러보기(Campaign demo)는 지금 지형 규칙을 쓴다. 옛 저장은 예전 규칙 그대로",
+   "harvestFeedMill": "결함 아님: 풍년이 밭·사료 공장·가축을 함께 빠르게 해 사슬이 어긋나지 않는다"
+  },
+  "ranks": {
+   "before": {
+    "9": [
+     [
+      "produced:brick",
+      20,
+      "벽돌 생산"
+     ],
+     [
+      "revenue",
+      16000,
+      "교역 수입"
+     ]
+    ],
+    "16": [
+     [
+      "produced:fuel",
+      12,
+      "연료 생산"
+     ],
+     [
+      "produced:copper",
+      16,
+      "구리광석 생산"
+     ],
+     [
+      "sites",
+      2,
+      "운영 거점"
+     ]
+    ],
+    "24": [
+     [
+      "investment",
+      2,
+      "산업 투자"
+     ],
+     [
+      "produced:lamp",
+      24,
+      "마력등 생산"
+     ],
+     [
+      "contracts",
+      27,
+      "납품 계약"
+     ]
+    ],
+    "25": [
+     [
+      "sites",
+      4,
+      "운영 거점"
+     ],
+     [
+      "support",
+      65,
+      "주민 지지"
+     ],
+     [
+      "contracts",
+      30,
+      "납품 계약"
+     ]
+    ],
+    "26": [
+     [
+      "defense",
+      4,
+      "경비대 편성"
+     ],
+     [
+      "railRoutes",
+      3,
+      "철도 운송망"
+     ],
+     [
+      "produced:mithril",
+      10,
+      "미스릴 강 생산"
+     ]
+    ],
+    "28": [
+     [
+      "recognition",
+      3,
+      "외교 지지국"
+     ],
+     [
+      "produced:airship",
+      3,
+      "비공정 건조"
+     ],
+     [
+      "deliveries",
+      190,
+      "지역 간 운송"
+     ]
+    ],
+    "29": [
+     [
+      "sites",
+      5,
+      "운영 거점"
+     ],
+     [
+      "investment",
+      4,
+      "산업 투자"
+     ],
+     [
+      "building:fortress",
+      2,
+      "방위 요새"
+     ],
+     [
+      "revenue",
+      700000,
+      "교역 수입"
+     ]
+    ],
+    "30": [
+     [
+      "territories",
+      3,
+      "자치권 확보 지역"
+     ],
+     [
+      "support",
+      75,
+      "주민 지지"
+     ],
+     [
+      "deliveries",
+      230,
+      "지역 간 운송"
+     ]
+    ]
+   },
+   "after": "ranks.table",
+   "lastGateProduction": {
+    "before": "18/32",
+    "after": "12/32"
+   },
+   "metOnArrival": {
+    "before": "8/77",
+    "after": "5/77"
+   }
+  },
+  "trials": {
+   "perRank": "delivery·direct·defended·trades는 그 단계에 들어선 뒤의 양만 센다(challenge.rank·since·deliveredFrom·directFrom·tradesFrom)",
+   "before": {
+    "2": "delivery 18 (누적)",
+    "9": "direct 12 (누적)",
+    "20": "diversity 7",
+    "23": "defended 1 (누적)",
+    "28": "direct 160 (누적)"
+   },
+   "after": {
+    "2": "delivery 60",
+    "9": "direct 40",
+    "20": "diversity 18",
+    "23": "defended 1 (이 단계)",
+    "26": "trades 4 (신생국 교역, 새 시험)",
+    "28": "direct 360"
+   },
+   "metOnArrivalBefore": "운반 41/18, 직송 683/12·5,643/160, 격퇴 3/1"
+  },
+  "bot": [
+   "다음 단계가 지역 간 운송을 세면 첫 트럭 노선을 목재로 연다(철도 노선이 밀을 나르므로 같은 화물 노선을 피함)",
+   "판매 품목 수 시험이 열려 있으면 아직 팔지 않은 가장 싼 상품을 하나 판다"
+  ],
+  "result": {
+   "days": 56,
+   "realMinutesAt1x": 148,
+   "segmentEnds": [
+    7,
+    18,
+    28,
+    38,
+    48,
+    56
+   ],
+   "segmentTargets": [
+    6,
+    16,
+    27,
+    35,
+    47,
+    60
+   ],
+   "averageIncome": [
+    1256,
+    4080,
+    10003,
+    20970,
+    34990,
+    58784
+   ],
+   "A3PoorDays": "1/38",
+   "A4": {
+    "maxGap": 4,
+    "maxMoney": 115478,
+    "limit": 140000
+   },
+   "investments": 5
+  },
+  "campaign": "G3-12c: 본거점의 자치권 협약은 다른 거점용 단계별 허용량과 무관하게 맺는다(campaign.js council territory)",
+  "handoffs": {
+   "G1-E4": "R simulation.js contract(): 제품을 바꾸면 열린 영주 주문 품목이 바뀐다",
+   "G1-T2b": "R simulation.js: 지형 시설 수리비(최소 50G)가 건설비보다 크다",
+   "G1-E8": "U ui-rules.js nextBuild: 원료 없는 확장 시설을 권한다",
+   "G1-G3": "U 화면: blockHint 호출 일부가 sim을 넘기지 않는다",
+   "G1-S1": "infrastructure.js groundFactor·docs/BIOMES.md: 생태 지형 지도에서 얼음·모래 농작물·우물 이중 감점(튜토리얼 첫 승급 182~191초, 감점 제거 시 119~131초)",
+   "A2-G2 probe": "tests/audit-2/power-plants.mjs: 바람막이 3단계 풍력 끊김은 설계"
+  }
+ },
+ "logistics20261003": {
+  "storage": {
+   "starter": 160,
+   "warehouse": 960,
+   "warehouseRank1Bonus": 120,
+   "depot": 240,
+   "capacity": "한 장소 안의 상품 수량 합계",
+   "inventory": "starterInventory와 건물별 inventory, stock은 합계",
+   "legacy": "기존 총재고를 기존 창고 또는 미니 창고에 보존",
+   "discard": "창고별 예약되지 않은 상품만 폐기 가능"
+  },
+  "journey": {
+   "destination": "세계 격자에서 가장 가까운 개발된 플레이 국가 도시",
+   "distance": "맨해튼 거리",
+   "seconds": "ceil((1 + distance × 0.5) × 수단 배율)",
+   "factors": {
+    "road": 1,
+    "port": 0.8,
+    "rail": 0.65,
+    "air": 0.45
+   }
+  },
+  "relocation": {
+   "cost": "max(5, ceil(건설비 × 0.1))",
+   "seconds": 6,
+   "inventory": "건물 ID·재고·생산 진행 보존"
+  },
+  "distillery": {
+   "name": "소형 증류소",
+   "group": "energy",
+   "size": 1,
+   "cost": 160,
+   "materials": {
+    "wood": 6,
+    "stone": 4
+   },
+   "period": 12,
+   "inputs": {
+    "grain": 2,
+    "wood": 1,
+    "water": 1
+   },
+   "output": "fuel",
+   "amount": 2,
+   "description": "밀과 장작으로 수출용 연료를 만듭니다. 전력 없이 가동하며 초반부터 연료를 자급할 수 있습니다.",
+   "recipes": [
+    {
+     "id": "fuel",
+     "name": "연료",
+     "inputs": {
+      "grain": 2,
+      "wood": 1,
+      "water": 1
+     },
+     "output": "fuel",
+     "amount": 2,
+     "period": 12
+    }
+   ]
+  },
+  "unlocks": {
+   "distillery": 0
+  },
+  "residents": {
+   "spawn": "주택만",
+   "idleHomeAfter": 6
+  },
+  "saveVersion": 9,
+  "storageVersion": 1,
+  "counts": {
+   "resources": 80,
+   "facilities": 112
+  },
+  "promotionTrial28": {
+   "key": "delivery",
+   "target": 1200,
+   "scope": "단계 진입 이후 창고·시설 간 주민 및 관·컨베이어 운반"
+  },
+  "autoSalePriority": "출하 금액 내림차순"
  }
 }

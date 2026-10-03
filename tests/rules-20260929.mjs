@@ -31,7 +31,7 @@ const place=(s,type,free=true)=>{const w=s.warehouse;for(const t of s.tiles.filt
  const same=reload(s);assert.equal(same.nextId,s.nextId);assert.equal(same.nextWorkerId,s.nextWorkerId);}
 // C7: a fuel order leaves on a truck when fuel covers the reserve (which already holds the order) plus one trip.
 {const s=town(18);s.stock.fuel=0;let n=0;while(s.contract().item!=='fuel'&&n<40)s.contracts=++n;const c=s.contract();assert.equal(c.item,'fuel');s.contractReadyAt=0;
- s.stock.fuel=s.minimumStock('fuel')+1;s.stock.plank=60;for(let i=0;i<3;i++)assert.ok(s.sell('plank',5).ok);
+ s.stock.fuel=s.minimumStock('fuel')+1;s.stock.plank=60;
  assert.ok(fleet(s).some(v=>!v.busy&&VEHICLES[v.kind].fuel));assert.equal(spareFuel(s),1);const st=s.contractStatus();assert.equal(st.ready,true,st.error);
  const f=s.stock.fuel;assert.ok(s.fulfill().ok);assert.equal(s.stock.fuel,f-c.amount-1,'the order and one trip of fuel leave');}
 // C8: demolishing mid-cycle returns the batch the cycle consumed.
@@ -58,7 +58,7 @@ const place=(s,type,free=true)=>{const w=s.warehouse;for(const t of s.tiles.filt
 // C4: the cached placement effects always equal a fresh computation, through building, toggling and a reservoir lapsing.
 {const s=town(22);const res=place(s,'reservoir');const field=place(s,'field');const gen=place(s,'generator');const check=()=>{for(const b of s.buildings)assert.deepEqual(s.placementEffects(b.type,b.x,b.z),placementEffects(s,b.type,b.x,b.z),b.type);};
  res.activeUntil=s.time+3;check();run(s,4);check();s.setOperation(gen.id,false);check();s.setOperation(gen.id,true);check();place(s,'smelter');check();s.demolish(field.x,field.z);check();s.roads.add('12,10');check();
- assert.equal(s.warehouse.type,'warehouse');const cap=s.storageCapacity;const d=place(s,'depot');assert.equal(s.storageCapacity,cap+120);d.health=0;assert.equal(s.storageCapacity,cap);}
+ assert.equal(s.warehouse.type,'warehouse');const cap=s.storageCapacity;const d=place(s,'depot');assert.equal(s.storageCapacity,cap+240);d.health=0;assert.equal(s.storageCapacity,cap);}
 // A2-G2: a timed support facility slowed below full speed keeps its effect without gaps once running.
 {const s=town(22);const g=place(s,'generator');g.inputs={wood:80,water:40};s.health.infection=60;let first=null,off=0;for(let i=0;i<2400;i++){s.health.infection=60;s.tick(.25);if(s.power&&first===null)first=i;else if(first!==null&&!s.power)off++;}
  assert.ok(first!==null);assert.equal(off,0);}

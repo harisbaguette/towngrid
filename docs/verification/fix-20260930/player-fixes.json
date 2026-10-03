@@ -1,0 +1,217 @@
+{
+ "sizes": {
+  "1920x1080": {
+   "hostile": {
+    "h2": "적대 세력 · 시작할 수 없는 국가",
+    "section": [
+     "이 나라의 적대 종족"
+    ],
+    "start": "적대 세력 · 시작 불가",
+    "disabled": true
+   },
+   "goalButtons": [
+    "제분소 짓기",
+    "영토 확장 · 180G"
+   ],
+   "toolAfter": "expand",
+   "dialogButtons": [
+    "제분소 짓기",
+    "영토 확장 · 180G"
+   ],
+   "dialogTool": {
+    "mode": "expand",
+    "dialog": false
+   },
+   "sanitize": {
+    "disabled": true,
+    "note": "방역 35G · 물 8 · 목재 3 · 물 8개 · 목재 3개 부족수입"
+   },
+   "j4": {
+    "blocks": [
+     "밀밭 · 물 대기",
+     "벌목장 · 자원 고갈"
+    ],
+    "fixes": [
+     "묘목 심기 · 15G + 물 2",
+     "영토 확장 · 180G"
+    ]
+   },
+   "k2rule": {
+    "last": [
+     8,
+     11
+    ],
+    "error": "수출길을 막는 자리입니다 · 창고에서 수출 관문까지 가는 길이 끊깁니다"
+   },
+   "k2preview": "주민 주택 배치 수출길을 막는 자리입니다 · 창고에서 수출 관문까지 가는 길이 끊깁니다",
+   "k2card": [
+    "벌목장 선택",
+    "주민 주택 선택"
+   ]
+  },
+  "1366x768": {
+   "hostile": {
+    "h2": "적대 세력 · 시작할 수 없는 국가",
+    "section": [
+     "이 나라의 적대 종족"
+    ],
+    "start": "적대 세력 · 시작 불가",
+    "disabled": true
+   },
+   "goalButtons": [
+    "제분소 짓기",
+    "영토 확장 · 180G"
+   ],
+   "toolAfter": "expand",
+   "dialogButtons": [
+    "제분소 짓기",
+    "영토 확장 · 180G"
+   ],
+   "dialogTool": {
+    "mode": "expand",
+    "dialog": false
+   },
+   "sanitize": {
+    "disabled": true,
+    "note": "방역 35G · 물 8 · 목재 3 · 물 8개 · 목재 3개 부족수입"
+   },
+   "j4": {
+    "blocks": [
+     "밀밭 · 물 대기",
+     "벌목장 · 자원 고갈"
+    ],
+    "fixes": [
+     "묘목 심기 · 15G + 물 2",
+     "영토 확장 · 180G"
+    ]
+   },
+   "k2rule": {
+    "last": [
+     8,
+     11
+    ],
+    "error": "수출길을 막는 자리입니다 · 창고에서 수출 관문까지 가는 길이 끊깁니다"
+   },
+   "k2preview": "주민 주택 배치 수출길을 막는 자리입니다 · 창고에서 수출 관문까지 가는 길이 끊깁니다",
+   "k2card": [
+    "벌목장 선택",
+    "주민 주택 선택"
+   ]
+  },
+  "390x844": {
+   "hostile": {
+    "h2": "적대 세력 · 시작할 수 없는 국가",
+    "section": [
+     "이 나라의 적대 종족"
+    ],
+    "start": "적대 세력 · 시작 불가",
+    "disabled": true
+   },
+   "folded": {
+    "h": 46,
+    "w": 175,
+    "cls": "operations-card panel folded"
+   },
+   "goalButtons": [
+    "제분소 짓기",
+    "영토 확장 · 180G"
+   ],
+   "toolAfter": "expand",
+   "dialogButtons": [
+    "제분소 짓기",
+    "영토 확장 · 180G"
+   ],
+   "dialogTool": {
+    "mode": "expand",
+    "dialog": false
+   },
+   "sanitize": {
+    "disabled": true,
+    "note": "방역 35G · 물 8 · 목재 3 · 물 8개 · 목재 3개 부족수입"
+   },
+   "j4": {
+    "blocks": [
+     "밀밭 · 물 대기",
+     "벌목장 · 자원 고갈"
+    ],
+    "fixes": [
+     "묘목 심기 · 15G + 물 2",
+     "영토 확장 · 180G"
+    ]
+   },
+   "k2rule": {
+    "last": [
+     8,
+     11
+    ],
+    "error": "수출길을 막는 자리입니다 · 창고에서 수출 관문까지 가는 길이 끊깁니다"
+   },
+   "k2preview": "주민 주택 배치 수출길을 막는 자리입니다 · 창고에서 수출 관문까지 가는 길이 끊깁니다",
+   "k2card": [
+    "벌목장 선택",
+    "주민 주택 선택"
+   ]
+  },
+  "844x390": {
+   "hostile": {
+    "h2": "적대 세력 · 시작할 수 없는 국가",
+    "section": [
+     "이 나라의 적대 종족"
+    ],
+    "start": "적대 세력 · 시작 불가",
+    "disabled": true
+   },
+   "folded": {
+    "h": 46,
+    "w": 216,
+    "cls": "operations-card panel folded"
+   },
+   "goalButtons": [
+    "제분소 짓기",
+    "영토 확장 · 180G"
+   ],
+   "toolAfter": "expand",
+   "dialogButtons": [
+    "제분소 짓기",
+    "영토 확장 · 180G"
+   ],
+   "dialogTool": {
+    "mode": "expand",
+    "dialog": false
+   },
+   "sanitize": {
+    "disabled": true,
+    "note": "방역 35G · 물 8 · 목재 3 · 물 8개 · 목재 3개 부족수입"
+   },
+   "j4": {
+    "blocks": [
+     "밀밭 · 물 대기",
+     "벌목장 · 자원 고갈"
+    ],
+    "fixes": [
+     "묘목 심기 · 15G + 물 2",
+     "영토 확장 · 180G"
+    ]
+   },
+   "k2rule": {
+    "last": [
+     8,
+     11
+    ],
+    "error": "수출길을 막는 자리입니다 · 창고에서 수출 관문까지 가는 길이 끊깁니다"
+   },
+   "k2preview": "주민 주택 배치 수출길을 막는 자리입니다 · 창고에서 수출 관문까지 가는 길이 끊깁니다",
+   "k2card": [
+    "벌목장 선택",
+    "주민 주택 선택"
+   ]
+  }
+ },
+ "R": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ },
+ "fails": []
+}

@@ -1,3 +1,4 @@
+@layer game-base {
 .atlas-v2 .world-atlas text { letter-spacing:0; font-family:inherit; text-shadow:none; }
 /* The map fills the whole card; controls float on it like a game HUD. */
 .atlas-v2 { position:relative; }
@@ -12,6 +13,10 @@
 .atlas-v2 .atlas-layer.active { background:var(--ui-gold); color:var(--ui-ink); }
 .atlas-v2 .atlas-zoom { right:12px; bottom:12px; border:0; border-radius:8px; box-shadow:0 2px 6px #0f1f1840; }
 .atlas-v2 .atlas-zoom button { width:38px; height:38px; min-height:38px!important; }
+.atlas-v2 .atlas-rotation { position:absolute; z-index:3; top:60px; left:12px; display:flex; align-items:center; gap:2px; padding:3px; border:1px solid #e3d7ad; border-radius:7px; background:#f6f1deeF; color:#365c4b; box-shadow:0 2px 6px #0f1f1833; }
+.atlas-v2 .atlas-rotation button { display:grid; place-items:center; width:33px; height:32px; min-height:32px!important; border:0; border-radius:4px; background:transparent; }
+.atlas-v2 .atlas-rotation button:hover { background:#d9dfc5; }.atlas-v2 .atlas-rotation span { min-width:32px; text-align:center; font-size:11px; font-weight:750; }
+.atlas-isometric .atlas-viewport { background:#72885e; background-image:radial-gradient(ellipse at center,#b1bb8c 0%,#819b6c 64%,#56785d 100%); }
 .atlas-v2 .atlas-dock { position:absolute; z-index:4; left:12px; bottom:12px; width:min(380px,calc(100% - 80px)); border-radius:8px; overflow:hidden; background:var(--ui-paper); box-shadow:0 3px 10px #0f1f184d; }
 .atlas-v2 .atlas-bottom { padding:10px 12px; border:0; }
 .atlas-v2 .atlas-cell-readout strong { font-size:15px; }
@@ -21,6 +26,13 @@
 .atlas-v2 .atlas-legend>span { white-space:nowrap; gap:4px; }
 .atlas-v2 .atlas-legend img { width:22px; height:22px; object-fit:contain; image-rendering:pixelated; }
 .atlas-v2 .atlas-legend em { margin-left:auto; font-style:normal; white-space:nowrap; }
+.atlas-v2 .terrain-block-key { display:inline-grid; place-items:center; width:15px; height:15px; border-radius:2px; color:#fff1cb; background:#47615a; font-size:15px; line-height:1; }
+.atlas-v2 .border-key { display:inline-block; width:20px; height:5px; border:1px solid #fff0c8; background:#295f9b; box-shadow:0 0 0 1px #61705a; }
+.atlas-v2 .wilderness-key { display:inline-block; width:14px; height:10px; background:#a6b48c; border:1px dashed #788064; }
+.atlas-v2 .frontier-key { display:inline-block; width:16px; height:9px; background:#e9b95766; border:2px solid #ffe29a; box-shadow:0 0 0 1px #493c21; }
+.biome-locator { display:flex; align-items:center; gap:10px; margin:12px 0; color:var(--ui-muted); font-size:11px; }
+.biome-locator select { min-width:0; flex:1; min-height:36px; padding:5px 8px; color:var(--ui-ink); background:#faf6e6; border:1px solid var(--ui-rule); border-radius:3px; }
+.atlas-v2 .atlas-screen-label.wilderness text { fill:#5c6547; font-style:italic; stroke:#e8e4c8; }
 .atlas-v2 .atlas-minimap { position:absolute; z-index:3; left:auto; right:12px; top:60px; bottom:auto; width:140px; height:88px; overflow:hidden; border:2px solid #e4d39c; background:#375e52; border-radius:4px; box-shadow:0 2px 6px #0f1f1840; padding:0; }
 .atlas-v2 .atlas-minimap svg { display:block; width:100%; height:100%; }
 /* Place names sit on the land like a printed map; only site names keep a plate. */
@@ -89,4 +101,8 @@
 @media (max-height:600px) and (min-width:701px) {
  .world-map-screen .atlas-v2 .atlas-dock { position:static; width:auto; border-radius:0; box-shadow:none; border-top:1px solid var(--ui-outline); }
  .world-map-screen .atlas-v2 .atlas-legend { display:none; }
+ /* The zoomed-in minimap covered the zoom-in button on 844x390: zoom buttons in a row, smaller minimap. */
+ .atlas-v2 .atlas-zoom { right:8px; bottom:8px; flex-direction:row; }.atlas-v2 .atlas-zoom button { width:36px; height:34px; min-height:34px!important; border-bottom:0; border-right:1px solid var(--ui-rule); }
+ .atlas-v2 .atlas-minimap { top:48px; right:8px; width:96px; height:60px; }
+}
 }

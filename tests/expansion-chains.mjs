@@ -52,7 +52,7 @@ assert.equal(spec2Resources.length,9,'9 resource ids in section 6');assert.equal
 for(const [id,name] of spec2Resources)assert.equal(RESOURCES[id]?.name,name,'resource '+id);
 for(const [id,name] of spec2Buildings)assert.equal(BUILDINGS[id]?.name,name,'facility '+id);
 assert.deepEqual(Object.keys(EXPANSION2_RESOURCES).sort(),spec2Resources.map(v=>v[0]).sort());assert.deepEqual(Object.keys(EXPANSION2_BUILDINGS).sort(),spec2Buildings.map(v=>v[0]).sort());
-assert.equal(Object.keys(RESOURCES).length,80);assert.equal(Object.keys(BUILDINGS).length,111);
+assert.equal(Object.keys(RESOURCES).length,80);assert.equal(Object.keys(BUILDINGS).length,112);
 const NEW_RESOURCES={...EXPANSION_RESOURCES,...EXPANSION2_RESOURCES},NEW_BUILDINGS={...EXPANSION_BUILDINGS,...EXPANSION2_BUILDINGS},NEW_RANKS={...EXPANSION_RANKS,...EXPANSION2_RANKS};
 const NEW_RECIPES=Object.entries(EXPANSION_RECIPES).concat(Object.entries(EXPANSION2_RECIPES));
 for(const [id,r] of Object.entries(NEW_RESOURCES))assert.ok(r.price>0&&/^#[0-9a-f]{6}$/.test(r.color),id+' has a price and an icon colour');
@@ -80,7 +80,7 @@ const patch2=JSON.parse(fs.readFileSync(new URL('../docs/balance/patch-20260928.
 assert.deepEqual(patch2.resources.add,EXPANSION2_RESOURCES);assert.deepEqual(patch2.unlocks,EXPANSION2_RANKS);assert.deepEqual(patch2.recipes,EXPANSION2_RECIPES);
 for(const [id,d] of Object.entries(patch2.buildings.add))for(const [k,v] of Object.entries(d))assert.deepEqual(BUILDINGS[id][k],v,id+'.'+k);
 assert.deepEqual(Object.keys(patch2.buildings.add).sort(),Object.keys(EXPANSION2_BUILDINGS).sort());
-assert.deepEqual([patch2.counts.resources.after,patch2.counts.buildings.after],[Object.keys(RESOURCES).length,Object.keys(BUILDINGS).length]);
+assert.deepEqual([patch2.counts.resources.after,patch2.counts.buildings.after],[Object.keys(RESOURCES).length,Object.keys(BUILDINGS).filter(t=>t!=='distillery').length]);
 
 // 3. Every product line that makes or uses a new resource really turns its inputs into its output.
 const chainLines=lines.filter(({type,r})=>RESOURCES[r.output]&&(NEW_BUILDINGS[type]||NEW_RESOURCES[r.output]||Object.keys(r.inputs).some(k=>NEW_RESOURCES[k])||NEW_RECIPES.some(([t,list])=>t===type&&list.some(v=>v.id===r.id))));
@@ -114,7 +114,7 @@ for(const [type,from,to] of [['bakery','bread','jam'],['sawmill','plank','barrel
 for(const [id,rank] of Object.entries(NEW_RANKS)){const s=town();s.rank=rank-1;const t=s.tiles.find(t=>s.canBuild(id,t.x,t.z,true)===null);assert.ok(t,id+' has a tile');assert.equal(s.canBuild(id,t.x,t.z),RANKS[rank].name+' 승급이 필요합니다',id+' is locked');s.rank=rank;assert.notEqual(s.canBuild(id,t.x,t.z),RANKS[rank].name+' 승급이 필요합니다');}
 for(const [type,list] of NEW_RECIPES)for(const r of list){const s=town(),b=place(s,type);s.rank=r.unlock-1;assert.match(s.setRecipe(b.id,r.id).error,/승급이 필요합니다/,type+':'+r.id+' is locked');s.rank=r.unlock;assert.ok(s.setRecipe(b.id,r.id).ok,type+':'+r.id+' opens');}
 {const s=town();s.rank=2;assert.equal(permitted(s,'sugar'),false);assert.equal(itemGate(s,'sugar',999),RANKS[3].name+' 승급 후');assert.equal(s.buy('sugar',5).ok,false,'sugar cannot be imported before it may be made');
- s.rank=3;assert.equal(permitted(s,'sugar'),true,'an alternative product counts for the market');assert.equal(itemGate(s,'sugar',999),'');assert.ok(s.buy('sugar',5).ok);}
+ s.rank=3;assert.equal(permitted(s,'sugar'),true,'an alternative product counts for the market');assert.equal(itemGate(s,'sugar',999),'');for(const r of Object.keys(RESOURCES))s.stock[r]=r==='fuel'?20:0;assert.ok(s.buy('sugar',5).ok);}
 
 // 6. Terrain facilities are one-tile ground with no production and no staff; demolition refunds 40% and frees the tile.
 for(const id of ['pond','pasture','clover']){const s=town(),b=place(s,id);assert.equal(BUILDINGS[id].period,undefined);assert.equal(facilityStaff(s,b),null);run(s,2);assert.equal(b.status,'정상 운영');
@@ -122,10 +122,12 @@ for(const id of ['pond','pasture','clover']){const s=town(),b=place(s,id);assert
 // Placement rules of the new raw facilities: clay by the water, sand faster on sand ground.
 {const s=town();const far=s.tiles.find(t=>s.ownedAt(t.x,t.z)&&t.terrain!=='water'&&!s.at(t.x,t.z)&&!s.nearWater(t.x,t.z,1,2));assert.equal(s.canBuild('clayfield',far.x,far.z,true),'강이나 바다에서 2칸 이내에 놓으세요');
  const t=s.tiles.find(t=>t.terrain!=='water');const old=t.ground;t.ground='sand';/* ground set directly */assert.equal(s.tileMultiplier('sandpit',t.x,t.z),1.25);t.ground=old;}
-// Solar power runs with no fuel and loses 20% per shade step.
-{const s=town(),b=place(s,'solarpanel');assert.ok(until(s,()=>s.power,60),'the panel powers the town');const before=s.placementEffects('solarpanel',b.x,b.z);assert.equal(before.speed,Math.max(.4,1-before.shade*.2));
+// Solar power runs with no fuel and loses 20% per step of mountain shade only (G1-E2): beside a tall factory it keeps its
+// speed while a wind turbine there is blocked to 40% and, with its 30 s cycle, leaves gaps in the 60 s power window.
+{const s=town(),b=place(s,'solarpanel');assert.ok(until(s,()=>s.power,60),'the panel powers the town');const before=s.placementEffects('solarpanel',b.x,b.z);assert.equal(before.speed,Math.max(.4,1-Math.min(3,before.mountain)*.2));
  for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]])if(s.canBuild('refinery',b.x+dx,b.z+dz,true)===null){s.build('refinery',b.x+dx,b.z+dz,true);break;}/* a tall refinery casts three shade steps */
- const shaded=s.placementEffects('solarpanel',b.x,b.z);assert.equal(shaded.shade,3);assert.equal(shaded.speed,.4,'three shade steps: 40%');assert.ok(shaded.speed<before.speed||before.shade===3);}
+ const shaded=s.placementEffects('solarpanel',b.x,b.z),wind=s.placementEffects('windturbine',b.x,b.z);assert.equal(shaded.shade,3);assert.equal(shaded.speed,before.speed,'a building does not shade the panel');
+ assert.equal(wind.windBlock,3);assert.equal(wind.speed,.4,'the turbine there is blocked to 40%');assert.ok(BUILDINGS.windturbine.period/wind.speed>60&&BUILDINGS.solarpanel.period/shaded.speed<=60,'the turbine leaves power gaps there, the panel does not');}
 // Livestock suffers pollution like the hen house.
 {const s=town(),b=place(s,'sheeppen');for(const [dx,dz] of [[2,0],[-2,0],[0,2],[0,-2]])if(s.canBuild('smelter',b.x+dx,b.z+dz,true)===null){s.build('smelter',b.x+dx,b.z+dz,true);break;}assert.ok(s.placementEffects('sheeppen',b.x,b.z).speed<1,'a smelter nearby slows the sheep pen');}
 
@@ -134,6 +136,9 @@ for(const id of ['pond','pasture','clover']){const s=town(),b=place(s,id);assert
  assert.ok(![...items()].some(i=>NEW_RESOURCES[i]),'no new good without a producer');place(s,'berryfield');assert.ok(items().has('strawberry'),'a strawberry field brings strawberry orders');
  s.rank=5;const oven=place(s,'bakery');assert.ok(!items().has('baguette'));assert.ok(s.setRecipe(oven.id,'baguette').ok);assert.ok(items().has('baguette'),'a bakery set to baguettes brings baguette orders');}
 for(let rank=0;rank<RANKS.length;rank++){const s=new Simulation();s.rank=rank;for(let n=0;n<8;n++){s.contracts=n;assert.ok(!NEW_RESOURCES[s.contract().item],'rank '+rank+' asks only for old goods on a new map');}}
+// G1-E3 (2026-10-02): every optional good of a contract band can be made within that band, or the lord never orders it.
+{let from=0;const firstMake=item=>Math.min(...lines.filter(l=>l.r.output===item).map(l=>Math.max(unlockRank(l.type),l.r.unlock||0)));
+ for(const [below,,extra] of CONTRACT_POOLS){const last=Math.min(below,RANKS.length)-1;for(const item of extra)assert.ok(firstMake(item)<=last,item+' is listed for ranks '+from+'~'+last+' but first made at '+firstMake(item));from=below;}}
 {const s=town();s.rank=32;const b=place(s,'packshop');s.setRecipe(b.id,'giftparcel');let found=false;for(let n=0;n<12&&!found;n++){s.contracts=n;const c=s.contract();if(c.item==='giftparcel'){found=true;assert.equal(c.amount,2,'a costly parcel is ordered two at a time');}}assert.ok(found);}
 
 // 8. Saves: new stock, facilities and recipes survive; saves from before the expansion load with the new goods at zero.
@@ -142,7 +147,7 @@ for(let rank=0;rank<RANKS.length;rank++){const s=new Simulation();s.rank=rank;fo
 {const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/save-before-20260928.json',import.meta.url),'utf8'));
  for(const key of ['demo','early']){const raw=JSON.parse(fixture[key]).game;assert.ok(raw.sites.every(v=>Object.keys(NEW_RESOURCES).every(r=>v.simulation.stock[r]===undefined)),'the fixture predates the new goods');
   const c=new Campaign({saved:decodeSave(fixture[key])});for(const site of c.sites)for(const r of Object.keys(NEW_RESOURCES))assert.equal(site.sim.stock[r],0,key+' '+r+' starts at zero');
-  for(let i=0;i<4*60;i++)c.tick(.25);const again=decodeSave(encodeSave(c.save()));assert.ok(again.sites.every(v=>v.simulation.version===8&&Object.keys(NEW_RESOURCES).every(r=>Number.isFinite(v.simulation.stock[r]))));}}
+  for(let i=0;i<4*60;i++)c.tick(.25);const again=decodeSave(encodeSave(c.save()));assert.ok(again.sites.every(v=>v.simulation.version===9&&Object.keys(NEW_RESOURCES).every(r=>Number.isFinite(v.simulation.stock[r]))));}}
 // Infrastructure and expansion never overlap, and every new facility is in exactly one rank's unlock list.
 assert.ok(Object.keys(NEW_BUILDINGS).every(id=>!INFRA_BUILDINGS[id]&&RANKS.filter(r=>r.unlocks.includes(id)).length===1));
 

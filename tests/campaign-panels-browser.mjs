@@ -8,7 +8,7 @@ for (const vp of [{ width: 1366, height: 768 }, { width: 390, height: 844 }]) {
   const touch = vp.width < 900, page = await open(vp, touch ? { hasTouch: true, isMobile: true, deviceScaleFactor: 2 } : {}), tag = page.tag, r = out.sizes[tag] = {};
   try {
     await toHome(page);
-    if(!(await page.locator('.home-extras[open]').count()))await page.locator('.home-extras > summary').click();
+    await page.locator('.home-extras').waitFor();if(!(await page.locator('.home-extras[open]').count()))await page.locator('.home-extras > summary').click();
     await page.getByRole('button', { name: '산업도시 둘러보기' }).click();
     await waitSim(page, () => window.tgScene?.sim?.buildings.length > 3 && !document.querySelector('.screen-loading'), null, 120000);
     r.injected = await sim(page, () => { const c = window.tgScene.sim.campaign, nation = c.sites[0].nation; for (let i = 0; i < 3; i++) c.spawnState(nation, '북부 자유령'); c.battles.unshift({ day: c.active.day, site: c.sites[0].id, faction: 'orc', damage: 1840, defeated: 3 }, { day: Math.max(1, c.active.day - 2), site: c.sites[0].id, faction: 'demon', damage: 0, defeated: 5 }); return { states: c.newStates.filter(s => !s.dissolved).length, orders: c.stateOrders().length }; });

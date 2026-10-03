@@ -1,0 +1,20 @@
+{
+  "source": "source.png",
+  "directions": [
+    "SE",
+    "NE",
+    "NW",
+    "SW"
+  ],
+  "cell": 192,
+  "anchor": [
+    0.5,
+    0.69
+  ],
+  "footprint": [
+    1,
+    1
+  ],
+  "runtime": "public/assets/pixel-environment/distillery.png",
+  "pack": "node scripts/pack-distillery.mjs"
+}

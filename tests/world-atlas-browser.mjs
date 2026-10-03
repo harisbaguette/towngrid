@@ -4,6 +4,8 @@ import {pathToFileURL} from 'node:url';
 import {Campaign} from '../src/app/game/campaign.js';
 import {PROGRESSION_OFFSET} from '../src/app/game/world.js';
 import {decodeSave,encodeSave} from '../src/app/game/persistence.js';
+import {startingProvinces} from '../src/app/game/starting-sites.js';
+import {WORLD_PLOTS} from '../src/app/game/territory.js';
 
 const {chromium}=await import(pathToFileURL(process.argv[2]).href);
 const browser=await chromium.launch({headless:true,executablePath:process.argv[3],args:['--enable-unsafe-swiftshader']});
@@ -14,7 +16,7 @@ await mkdir(out,{recursive:true});
 page.on('pageerror',e=>{errors.push(e.message);console.error(e.message);});
 page.on('response',r=>{if(r.url().includes('/assets/world-atlas/')&&r.status()>=400)failed.push(r.url());});
 const shot=name=>page.screenshot({path:out+'/'+name+'.png'});
-const view=()=>page.locator('svg.world-atlas').evaluate(el=>el.viewBox.baseVal.width);
+const view=()=>page.locator('svg.world-atlas').evaluate(el=>+el.dataset.worldWidth);
 const labels=()=>page.locator('.atlas-screen-label').evaluateAll(els=>els.map(el=>{const r=el.getBoundingClientRect(),t=el.querySelector('text').getBoundingClientRect();return {id:el.dataset.label,x:r.x,y:r.y,w:r.width,h:r.height,textHeight:t.height};}));
 const noOverlap=async()=>{const list=await labels();for(const [i,a] of list.entries())for(const b of list.slice(i+1))assert.ok(a.x+a.w<=b.x+.5||b.x+b.w<=a.x+.5||a.y+a.h<=b.y+.5||b.y+b.h<=a.y+.5,'Rendered label overlap: '+a.id+' / '+b.id);return list;};
 try{
@@ -25,8 +27,13 @@ try{
  await page.locator('.realm-card .start-button:not(:disabled)').waitFor({timeout:120000});
  await page.waitForFunction(()=>[...document.querySelectorAll('.atlas-legend img')].every(x=>x.complete&&x.naturalWidth));
  await page.locator('#realm').selectOption('estern');
- assert.equal(await page.locator('.atlas-site[data-status="available"]').count(),5);
- assert.equal(await page.locator('.atlas-site[data-province="estern-0"] image').getAttribute('href'),'/assets/world-atlas/capital.png');
+ assert.equal(await page.locator('.country-borders [data-country]').count(),14);
+ assert.equal(await page.locator('.country-borders [data-tier="major"]').count(),4);
+ assert.equal(await page.locator('.country-borders [data-tier="minor"]').count(),10);
+ assert.equal(await page.locator('[data-blocked-terrain]').count(),523);
+ assert.equal(await page.locator('#realm option').count(),14);
+ assert.equal(await page.locator('.atlas-plots [data-plot]').count(),WORLD_PLOTS.filter(p=>p.nation==='estern'&&!p.developed).length);
+ assert.equal(await page.locator('.atlas-site[data-province="estern-0"] image').getAttribute('href'),'/assets/world-atlas/iso/capital-0.png');
  const whole=await noOverlap();
  const terrainElements=await page.locator('.world-terrain *').count();assert.ok(terrainElements<=6);
  await shot('01-continent');
@@ -67,7 +74,8 @@ try{
  // Button actions write one merged save 0.8 s after the last click.
  let saved;for(let i=0;i<50;i++){saved=decodeSave(await page.evaluate(()=>localStorage.getItem('first-land-v1')));if(saved.sites.length===2)break;await page.waitForTimeout(100);}
  assert.equal(saved.sites.length,2);assert.equal(saved.sites[1].provinceId,'estern-3');assert.equal(saved.sites[1].simulation.seed,quote.seed);assert.equal(saved.treasury.money,10000-quote.cost);
- assert.equal(await page.locator('.atlas-site[data-province="estern-3"]').getAttribute('data-status'),'owned');
+ assert.equal(await page.locator('.atlas-outposts [data-outpost="estern-3"]').count(),1);
+ assert.equal(await page.locator('.atlas-site[data-province="estern-3"]').count(),0,'An empty newly acquired plot must not invent buildings');
  await shot('05-owned-settlement');
  await page.getByLabel('세계 지도 국가').selectOption('silvaen');
  assert.equal(await page.locator('.expansion-offer').getAttribute('data-status'),'locked');assert.ok(await page.getByRole('button',{name:'이 땅에 거점 세우기',exact:true}).isDisabled());

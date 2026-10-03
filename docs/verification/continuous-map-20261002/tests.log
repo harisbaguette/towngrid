@@ -1,0 +1,144 @@
+
+[tests/game-time.mjs]
+PASS: half-speed live clock; pause, acceleration, days, events, remote freight, old saves and real-time countdowns
+
+[tests/simulation.mjs]
+{
+  "result": "PASS",
+  "breadSold": 70,
+  "money": 1317,
+  "grainProduced": 204,
+  "workers": 5,
+  "industryParts": 8,
+  "checked": [
+    "food chain and hauling",
+    "profits after wages",
+    "save/load with cargo",
+    "land expansion",
+    "storm and repair",
+    "debt and family",
+    "water proximity rules",
+    "powered industry",
+    "pause"
+  ]
+}
+PASS rules 2026-09-29: raid melee and ids, id counters and nested defaults, fuel contract, demolish batch and grace refund, packed tiles and full storage, effect cache, timed effects, coarse steps, damage and strike, good events, sanction counter, upgrade costs, first order, money errors
+PASS: G3 save fields checked (all saved paths), home province kept, site books, button gates, real-second notices
+
+[tests/export-route.mjs]
+{"result":"PASS","checked":["export road on every region","no warehouse no export","paid on arrival","cart limit","save/load in transit","carts return","road protected","blocked route","old save upgrade","tampered route rejected","starter and showcase villages"]}
+
+[tests/trade-routes.mjs]
+{"result":"PASS","checked":["port sizes by water","a land route in every province","10 route kinds on the map","estuary and upper river ports","no province inside a lake","gate lot by land route","auto lot min(10,cap)","unknown terminal rejected","vanished terminal falls back","tampered choice rejected","old save loads","campaign sites use their province"]}
+
+[tests/trade-terminals.mjs]
+{"result":"PASS","checked":["user lot sizes","gate lot 10","ports on water only","port kind by tile water","river port ships 100","road hub needs joined road","paved hub needs paving","choice save/load/fallback","broken terminal skipped","rail terminal and its price","airport and air terminal","ice snowmobile and polar ports","desert sand","mountain side and conveyor","pipe moves water","power reach and substation","showcase powered","old saves"]}
+
+[tests/world-grid.mjs]
+{"result":"PASS","checked":["one site square per province","sides are neighbour squares","trade water = side water","every terrain on some side","capitals play like their nation","sea under a fifth","all ecologies playable","ferry routes","start land and road dry","port on its own water","layout saved","bad layout rejected","mountain side ground and conveyors","old saves keep region water","bare map legacy","campaign sites on their square"]}
+
+[tests/atlas-geometry.mjs]
+{"tiles":1550,"terrainPaths":10,"reductionPercent":99.4,"countries":30,"provinces":180}
+
+[tests/starting-sites.mjs]
+{"result":"PASS","nations":12,"locations":474,"checks":["noncapital defaults","selected location and terrain","invalid starts rejected","new and legacy saves","distinct expansion sites"]}
+
+[tests/world-atlas.mjs]
+{"result":"PASS","terrainCells":1550,"sprites":16,"terrainBytes":2303502,"checks":["raster matches world","shoreline and river neighbors","fixed type size and nonoverlapping labels","read-only quotes","promotion/material gates","selected plot transaction","preview equals generated tiles","save compatibility"]}
+
+[tests/continuous-map.mjs]
+{"passed":true,"plots":1027,"checks":["every land square","exact neighbors and ports","multiple plots per region","preview and generation","save roundtrip","invalid plot rejection","political ownership","home protection","rendering reads saved terrain"]}
+
+[tests/map-edges.mjs]
+Map edges: four rotated layouts, mountain yield/resources, forest density, sea/freshwater ports/irrigation, matching scenery and save compatibility PASS.
+
+[tests/biomes.mjs]
+Biomes PASS: eight playable profiles, actual resource advantages, oil/oasis, marsh water, matching scenery, deterministic generation and old/new saves.
+
+[tests/residents.mjs]
+RESIDENTS PASS
+
+[tests/facility-staff.mjs]
+Facility staff: fixed housing identities, both factions, all workplaces, state synchronization and save preservation PASS
+
+[tests/character-movement.mjs]
+{
+  "result": "CHARACTER MOVEMENT PASS",
+  "comparisons": [
+    {
+      "fps": 20,
+      "oldDistance": 22.237,
+      "distance": 23.7,
+      "oldLossPercent": 6.173
+    },
+    {
+      "fps": 30,
+      "oldDistance": 23.079,
+      "distance": 23.7,
+      "oldLossPercent": 2.62
+    },
+    {
+      "fps": 60,
+      "oldDistance": 23.079,
+      "distance": 23.7,
+      "oldLossPercent": 2.62
+    },
+    {
+      "fps": 144,
+      "oldDistance": 23.608958,
+      "distance": 23.7,
+      "oldLossPercent": 0.384
+    }
+  ],
+  "cornerTraversal": true,
+  "blockedNodes": true,
+  "logistics": true,
+  "speedChangeWithoutPhaseJump": true
+}
+
+[tests/character-motion.mjs]
+Character motion: 51 rigs × 4 views, moving cargo, handling, planted pivots, damage, CPU defeat and fading shadows PASS
+
+[tests/sprite-grounding.mjs]
+Sprite grounding PASS: 26112 character poses, 16 rail views/headings, connected/curved/disconnected/single rails, inbound travel and save isolation.
+
+[tests/campaign.mjs]
+PASS: 1-tile facilities; seven playable subtypes share modern industries; enemies locked; delayed freight and in-flight save/load; regional inventory conservation; automatic residents; specialties; emerging states; earned status.
+
+[tests/balance-20260928.mjs]
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: rank 9
++ actual - expected
+
+  [
+    [
+      'produced:brick',
++     14,
+-     20,
+      '벽돌 생산'
+    ],
+    [
+      'revenue',
++     23000,
+-     16000,
+      '교역 수입'
+    ]
+  ]
+
+    at file:///C:/Users/ghd12/Desktop/TownGrid/tests/balance-20260928.mjs:26:206
+    at Array.forEach (<anonymous>)
+    at file:///C:/Users/ghd12/Desktop/TownGrid/tests/balance-20260928.mjs:26:49
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:647:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [ [ 'produced:brick', 14, '벽돌 생산' ], [ 'revenue', 23000, '교역 수입' ] ],
+  expected: [ [ 'produced:brick', 20, '벽돌 생산' ], [ 'revenue', 16000, '교역 수입' ] ],
+  operator: 'deepStrictEqual'
+}
+
+Node.js v22.18.0

@@ -18,7 +18,11 @@ import {marketFactor} from '../../src/app/game/living-economy.js';
  expectBug('G3-12b the default start province falls to the first emerging states of its nation while a capital home never does',now.splitsUntilTaken!==null&&legacy.owner==='estern',{now,legacy});}
 // (3) At ranks 25-27 the home autonomy lost this way cannot be bought back: council('territory') is gated by the
 //     per-rank allowance meant for OTHER sites (campaign.js allowance counts only non-home sites, yet still blocks the home).
-{const c=load(26);const h=c.home;c.provinces[h.provinceId].owner='new-1';h.territory=false;/* injected: the split of (2) */
- c.treasury.money=1e6;c.support=90;const r=c.council('territory',c.homeId);
- expectBug('G3-12c at rank 26 the home cannot regain autonomy after the split: refused as "'+(r.error||'')+'"',!r.ok,{rank:c.rank,allowance:c.allowance('territory'),result:r});}
+// Updated with the fix (R team, 2026-10-02): the home autonomy granted at stage 20 is no longer lost (the split skips the
+// home province, and a save where a split had taken it gets province and autonomy back on load, territory.js keepHome),
+// so the probe checks the ways it was lost: emerging states splitting the home nation at rank 26 and the rank-29 save
+// written after such a split. The old probe set the lost state directly, which the rules can no longer reach.
+{const c=load(26);const h=c.home;for(let i=0;i<8;i++)c.spawnState(h.nation,'시험 연방');const split={owner:c.provinces[h.provinceId].owner,territory:h.territory};
+ const late=load(29),lh=late.home,loaded={rank:late.rank,owner:late.provinces[lh.provinceId].owner,territory:lh.territory,market:late.tradeConditions(lh.id).market};
+ expectBug('G3-12c from rank 26 the home loses its autonomy to an emerging state and cannot get it back',split.owner!==h.nation||!split.territory||loaded.owner!==lh.nation||!loaded.territory,{rank:c.rank,afterSplits:split,rank29Save:loaded});}
 finish('code-home-split');

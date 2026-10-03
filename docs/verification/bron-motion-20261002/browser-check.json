@@ -1,0 +1,36 @@
+{
+  "game": {
+    "id": 1,
+    "appearance": "bron"
+  },
+  "camera0": {
+    "action": "attack",
+    "frame": 50,
+    "row": 0,
+    "scale": 1.2708333333333333,
+    "spriteScale": 1.0675
+  },
+  "camera1": {
+    "action": "attack",
+    "frame": 50,
+    "row": 1,
+    "scale": 1.2708333333333333,
+    "spriteScale": 1.0675
+  },
+  "camera2": {
+    "action": "attack",
+    "frame": 50,
+    "row": 2,
+    "scale": 1.2708333333333333,
+    "spriteScale": 1.0675
+  },
+  "camera3": {
+    "action": "attack",
+    "frame": 50,
+    "row": 3,
+    "scale": 1.2708333333333333,
+    "spriteScale": 1.0675
+  },
+  "errors": [],
+  "assetFailures": []
+}

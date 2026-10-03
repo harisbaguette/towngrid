@@ -16,6 +16,7 @@ import { RESOURCES, BUILDINGS, Simulation, CONTRACT_PREMIUM, CONTRACT_WAIT } fro
 import { RANKS, unlockRank } from '../src/app/game/world.js';
 import { COUNCIL } from '../src/app/game/campaign.js';
 import { CLUSTER_STEP, CLUSTER_MAX, EXTRACT_MAX, clusterMax } from '../src/app/game/proximity.js';
+import { EXPANSION_BUILDINGS, EXPANSION2_BUILDINGS, EXPANSION_RECIPES, EXPANSION2_RECIPES } from '../src/app/game/industry.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const args = process.argv.slice(2);
@@ -237,6 +238,18 @@ function clusterPremiums(fast) {
 }
 const clustered = clusterPremiums(l => BUILDINGS[l.id].group === 'farm' && rawLine(l));
 const clusteredAll = clusterPremiums(rawLine);
+// C14 (G1-E1, docs/BALANCE_PATCH_20260928.md 19): a final good of the optional expansion chains earns at least
+// LIMITS.expansionFloor of the median existing processing line open at its rank per tile-minute (else nobody runs the
+// chain for money) and no more than the best of them (else it makes a base chain obsolete).
+const expansionFacility = new Set(Object.keys({ ...EXPANSION_BUILDINGS, ...EXPANSION2_BUILDINGS }));
+const expansionRecipe = new Set([...Object.entries(EXPANSION_RECIPES), ...Object.entries(EXPANSION2_RECIPES)].flatMap(([t, list]) => list.map(r => t + ':' + r.id)));
+const isExpansionLine = e => expansionFacility.has(e.building) || expansionRecipe.has(e.id);
+const median = list => { const s = [...list].sort((a, b) => a - b); return s.length ? s[Math.floor((s.length - 1) / 2)] : NaN; };
+const expansionFinals = economy.filter(e => isExpansionLine(e) && RESOURCES[e.output]?.final).map(e => {
+  const pool = economy.filter(o => !isExpansionLine(o) && o.rank <= e.rank && Object.keys(o.inputs).some(k => k !== 'water')).map(o => o.tileValuePerMin);
+  return { e, ratio: round(e.tileValuePerMin / median(pool), 2), best: Math.max(...pool) };
+});
+LIMITS.expansionFloor = 0.8;
 const clusterCheck = (list, id, name) => ({ id, name, value: list.filter(c => c.premium < LIMITS.premium).map(c => lineName(c.line) + ' ' + c.premium).join(', ') || '전부 충족 · 최저 ' + Math.min(...list.map(c => c.premium)), pass: list.every(c => c.premium >= LIMITS.premium) });
 const checks = [
   { id: 'C1', name: `자원 ${LIMITS.resources}종 이상`, value: Object.keys(RESOURCES).length, pass: Object.keys(RESOURCES).length >= LIMITS.resources },
@@ -252,6 +265,7 @@ const checks = [
   { id: 'C11', name: `${LIMITS.earlyPeriodRank}단계까지 열리는 생산 주기 ${LIMITS.earlyPeriod}게임초 이하 · 가공 깊이별 평균 주기가 깊을수록 김`, value: (earlySlow.map(e => e.name + ' ' + e.period + 's').join(', ') || '초반 전부 충족') + ' · ' + byDepth.map(([d, p]) => d + '단 ' + round(p) + 's').join(' < '), pass: !earlySlow.length && depthRises },
   clusterCheck(clustered, 'C12', `원료 밭을 같은 시설 모으기 최대(시간 -${round(CLUSTER_STEP * CLUSTER_MAX * 100, 0)}%)로 지어도 가공 시설이 타일당 분당 가치 ${LIMITS.premium}배 이상`),
   clusterCheck(clusteredAll, 'C13', `원료 밭(시간 -${round(CLUSTER_STEP * CLUSTER_MAX * 100, 0)}%)과 우물·벌목장·채석장·광산 등 채취 시설(시간 -${round(CLUSTER_STEP * EXTRACT_MAX * 100, 0)}%)을 모두 같은 시설 모으기 최대로 지어도 가공 시설이 타일당 분당 가치 ${LIMITS.premium}배 이상`),
+  { id: 'C14', name: `확장 사슬 최종재의 타일당 분당 가치가 같은 단계 기존 가공 줄 중앙값의 ${LIMITS.expansionFloor}배 이상 · 그 단계 기존 최고값 이하`, value: (expansionFinals.filter(v => v.ratio < LIMITS.expansionFloor || v.e.tileValuePerMin > v.best).map(v => v.e.name + ' ' + v.ratio).join(', ') || expansionFinals.length + '줄 충족') + ' · 최저 ' + Math.min(...expansionFinals.map(v => v.ratio)), pass: expansionFinals.length > 0 && expansionFinals.every(v => v.ratio >= LIMITS.expansionFloor && v.e.tileValuePerMin <= v.best) },
 ];
 
 // ---------- output ----------

@@ -70,6 +70,8 @@ try{
   await page.waitForFunction(view=>[...window.industryScene.models.values()].every(m=>!m.userData.pixelEnvironment||m.userData.direction===view),view);
   await shot('city-'+view);
  }
+ // Marker diet (B13): supply badges of running service buildings show with 시설 이름 표시 on.
+ await page.getByRole('button',{name:'건설 목록 열기'}).click();await page.getByRole('button',{name:'시설 이름 표시'}).click();await page.getByRole('button',{name:'건설 목록 닫기'}).click();await page.waitForTimeout(500);
  const service=await page.locator('.facility-marker[data-production="supplying"]').first();
  assert.ok(await service.count());assert.match(await service.locator('.output-count').textContent(),/초$/);
  await service.click();await page.locator('.facility-card').waitFor();assert.match(await page.locator('.facility-card .recipe').textContent(),/초/);

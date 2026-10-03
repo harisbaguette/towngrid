@@ -1,6 +1,7 @@
 import {biomeOf} from './biome-data.js';
 import {biomeHint} from './biome-terrain.js';
 import {SIDES,SIDE_NAMES,TERRAIN_NAMES,waterAt,groundOf,forestAt,edgePoint} from './world-grid.js';
+import {landscapeHash,landscapeNoise} from './landscape-colors.js';
 
 // These descriptions mirror the local production/placement rules, not the nation's policy.
 export const EDGE_USES={
@@ -25,18 +26,21 @@ export function outsideSide(x,z){
 /** Deterministic side-specific props. Reuses the authored four-direction pixel sprites. */
 export function edgeScenery(layout){
  const ecology=layout.ecology,profile=biomeOf(layout),mountain=ecology==='snow'?'snowMountain':ecology==='volcanic'?'volcanicMountain':'mountain';
- const props=[],add=(id,side,depth,u,scale)=>{const [x,z]=edgePoint(side,depth,u);if(waterAt(layout,Math.round(x),Math.round(z)))return;props.push({id,side,x,z,scale});};
+ const props=[],add=(id,side,depth,u,scale)=>{const [x,z]=edgePoint(side,depth,u);if(waterAt(layout,Math.round(x),Math.round(z))||outsideSide(x,z)!==side)return;props.push({id,side,x,z,scale});};
  for(const {side,kind} of mapEdges(layout)){
-  if(kind==='mountain')for(let i=0;i<6;i++){
-   add(mountain,side,-4-(i%2)*1.4,1+i*4.4,1.6+(i%3)*.2);
-   add('oreRock',side,-1.7,1+i*4.4,1.05);
-   if(i%2===0)add(ecology==='snow'?'snowPine':'pine',side,-8,2+i*4.4,1.05);
+  const seed='nesw'.indexOf(side)*29;
+  if(kind==='mountain')for(let i=0;i<8;i++){
+   const u=-2+i*4.1+landscapeHash(i,seed)*2,depth=-3-landscapeHash(seed,i)*5;
+   add(mountain,side,depth,u,1.05+landscapeHash(i,seed+8)*.6);
+   if(i%2)add('oreRock',side,-1.2-landscapeHash(i,seed+3)*2,u+1,.7+landscapeHash(i,seed+5)*.25);
   }
-  else if(kind==='forest')for(let row=0;row<3;row++)for(let i=0;i<10;i++)add(profile?(ecology==='snow'?'snowPine':ecology==='desert'?'palm':'forestTree'):row===1?'pine':'willow',side,-2-row*2.2,1+i*2.5+(row%2)*.9,1+((i+row)%3)*.13);
-  else if(kind==='ice')for(let i=0;i<6;i++)add(profile?(i%2?'snowPine':'snowMountain'):i%2?'pine':'rock',side,-3-i%2*3,2+i*3.9,.9);
-  else if(kind==='desert')for(let i=0;i<5;i++)add(profile?(i%3?'cactus':'rock'):i%3?'rock':'palm',side,-3-i%2*4,2+i*4.8,.8);
-  else if(['river','lake','canal','stream','coast'].includes(kind))for(let i=0;i<8;i++)add(ecology==='snow'?'snowPine':kind==='coast'||ecology==='desert'?'palm':i%3?'reeds':'willow',side,-1.4,1+i*3.1,kind==='coast'?.8:i%3?1:.85);
-  else for(let i=0;i<5;i++)add(ecology==='snow'?'snowPine':ecology==='desert'?'cactus':ecology==='volcanic'?'oreRock':i%2?'bush':'willow',side,-4-i%2*3,2+i*5,.65);
+  for(let row=0;row<5;row++)for(let i=0;i<18;i++){
+   const h=landscapeHash(i+seed,row),u=-4+i*2+landscapeHash(i,row+seed)*1.3,depth=-1.4-row*1.9-landscapeHash(i+4,row+seed)*1.4;
+   const density=kind==='forest'?.5+landscapeNoise(i/3,row/2)*.35:kind==='plain'?.10:kind==='mountain'?.07:kind==='ice'?.13:kind==='desert'?.07:.12;
+   if(h>density)continue;
+   const id=ecology==='snow'||kind==='ice'?'snowPine':ecology==='desert'||kind==='desert'?'cactus':kind==='coast'?'palm':kind==='mountain'?'pine':kind==='forest'?(profile?'forestTree':i%3?'pine':'willow'):['river','lake','stream','canal'].includes(kind)?i%3?'reeds':'willow':i%3?'bush':'willow';
+   add(id,side,depth,u,(kind==='forest'?.72:.55)+landscapeHash(row+seed,i+8)*.3);
+  }
  }
  return props;
 }

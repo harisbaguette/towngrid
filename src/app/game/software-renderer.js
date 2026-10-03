@@ -61,7 +61,7 @@ export class SoftwareRenderer {
  }
  drawPixelSurface(mesh){
   const u=mesh.userData,image=u.image;if(!image)return;
-  const ctx=this.ctx,cell=image.height,key=u.environmentId+':'+u.frame+':'+u.network;
+  const ctx=this.ctx,cell=image.height,key=u.environmentId.startsWith('landscape-')?image:u.environmentId+':'+u.frame+':'+u.network;
   if(!this.surfacePatterns.has(key)){
    const tile=document.createElement('canvas');tile.width=tile.height=cell;
    const tileCtx=tile.getContext('2d');tileCtx.drawImage(image,u.frame*cell,0,cell,cell,0,0,cell,cell);
@@ -92,7 +92,7 @@ export class SoftwareRenderer {
    }
    // Overlap opaque ground by a subpixel; rotated Canvas rectangles otherwise
    // expose hairline gaps through the sea at their antialiased edges.
-   const cover=u.layer<=3&&u.layer!==2&&!u.cells[i]?.vertical;
+   const cover=u.layer<=3&&u.layer!==2&&!u.cells[i]?.vertical&&!u.environmentId.startsWith('landscape-');
    const padX=cover?Math.min(cell*.045,w/Math.hypot(p[1].x-p[0].x,p[1].y-p[0].y)*.7):0;
    const padY=cover?Math.min(cell*.045,h/Math.hypot(p[3].x-p[0].x,p[3].y-p[0].y)*.7):0;
    ctx.fillStyle=this.surfacePatterns.get(key);ctx.fillRect(-padX,-padY,w+2*padX,h+2*padY);
@@ -133,12 +133,13 @@ export class SoftwareRenderer {
  }
  drawPixelCharacter(root,center){
   const u=root.userData,ctx=this.ctx,image=u.image;if(!image)return;
-  const size=Math.max(1,Math.round(u.pixelHeight*this.pixelsPerWorldUnit));
+  const baseSize=u.pixelHeight*this.pixelsPerWorldUnit;
+  const size=Math.max(1,Math.round(baseSize*(u.atlas.scale||1)));
   const cellWidth=image.width/u.atlas.columns,cellHeight=image.height/u.atlas.rows;
   const position=u.sprite.getWorldPosition(new THREE.Vector3()),anchor=this.project(position.x,position.y,position.z);
   const x=Math.round(anchor.x-size*u.sprite.center.x),y=Math.round(anchor.y-size*(1-u.sprite.center.y));
   ctx.save();ctx.imageSmoothingEnabled=false;ctx.globalAlpha=u.sprite.material.opacity;
-  ctx.fillStyle='#183d3d35';ctx.beginPath();ctx.ellipse(center.x,center.y+1,size*.18,size*.065,0,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#183d3d35';ctx.beginPath();ctx.ellipse(center.x,center.y+1,baseSize*.18,baseSize*.065,0,0,Math.PI*2);ctx.fill();
   if(u.sprite.material.rotation){
    // Authored defeat frames already contain the fallen body. Only rotate
    // legacy sprites, around the same anchor and with the WebGL rotation sign.
@@ -148,8 +149,19 @@ export class SoftwareRenderer {
   ctx.restore();
   const bar=u.hpBar;if(bar?.visible){const width=Math.max(16,size*.48),top=y+size*.05;ctx.fillStyle='#302c35';ctx.fillRect(center.x-width/2,top,width,5);ctx.fillStyle=bar.userData.fill.material.color.getStyle(THREE.SRGBColorSpace);ctx.fillRect(center.x-width/2+1,top+1,(width-2)*bar.userData.fill.scale.x,3);}
  }
+ // J4 in CPU mode: trees and rocks outside the owned land use the WebGL fade (scene.js fadeUnowned) baked into a
+ // washed copy of their atlas, so both renderers show which resources can be harvested.
+ washed(image){
+  this.washedImages??=new WeakMap();let copy=this.washedImages.get(image);if(copy)return copy;
+  const w=image.naturalWidth||image.width,h=image.naturalHeight||image.height;if(!w||!h)return image;
+  copy=document.createElement('canvas');copy.width=w;copy.height=h;const c=copy.getContext('2d');c.drawImage(image,0,0);
+  const data=c.getImageData(0,0,w,h),px=data.data;
+  for(let i=0;i<px.length;i+=4){if(!px[i+3])continue;const r=px[i]/255,g=px[i+1]/255,b=px[i+2]/255,grey=(r*.299+g*.587+b*.114)*.8+.22;
+   px[i]=Math.min(255,(r+(grey-r)*.22)*255);px[i+1]=Math.min(255,(g+(grey-g)*.22)*255);px[i+2]=Math.min(255,(b+(grey-b)*.22)*255);}
+  c.putImageData(data,0,0);this.washedImages.set(image,copy);return copy;
+ }
  drawPixelEnvironment(root,center){
-  const u=root.userData,image=u.image,sprite=u.sprite;if(!image)return;
+  const u=root.userData,sprite=u.sprite,image=u.unowned&&u.image?this.washed(u.image):u.image;if(!image)return;
   const projectPoint=v=>this.project(v.x,v.y,v.z);
   // Layered production art uses the same poses and inventory in both renderers.
   if(u.layers){

@@ -9,6 +9,7 @@ import {Campaign} from '../src/app/game/campaign.js';
 import {Simulation} from '../src/app/game/simulation.js';
 import {PROGRESSION_OFFSET} from '../src/app/game/world.js';
 import {decodeSave,encodeSave} from '../src/app/game/persistence.js';
+import {defaultStartingProvince} from '../src/app/game/starting-sites.js';
 
 const manifest=JSON.parse(readFileSync('public/assets/world-atlas/manifest.json','utf8'));
 assert.equal(manifest.worldHash,createHash('sha256').update(JSON.stringify(WORLD_CELLS)).digest('hex'),'Repack when the real world changes');
@@ -33,12 +34,12 @@ for(const view of [FULL_VIEW,viewAround([650,400],500),viewAround([650,400],208)
   for(const b of labels.slice(i+1))assert.ok(a.box.x+a.box.w<=b.box.x||b.box.x+b.box.w<=a.box.x||a.box.y+a.box.h<=b.box.y||b.box.y+b.box.h<=a.box.y,'No label overlaps');
  }
 }
-const c=new Campaign({nation:'estern'}),target='estern-3';
+const c=new Campaign({nation:'estern'}),target='estern-3',foreign=defaultStartingProvince('silvaen').id;
 const initial=c.save();assert.equal(c.siteOffer('estern',target).status,'locked');
 assert.equal(c.foundSite('estern',undefined,target).ok,false);assert.deepEqual(c.save(),initial);
 c.active.rank=PROGRESSION_OFFSET+8;c.active.money=10000;
 c.active.stock.wood=24;c.active.stock.stone=16;c.active.stock.water=8;
-assert.equal(c.siteOffer('silvaen','silvaen-2').status,'locked','Foreign promotion gate matches button');
+assert.equal(c.siteOffer('silvaen',foreign).status,'locked','Foreign promotion gate matches button');
 const quote=c.siteOffer('estern',target),before=JSON.stringify(c.save());
 const preview=new Simulation('river',null,{nation:'estern',provinceId:target,seed:quote.seed});
 assert.equal(JSON.stringify(c.save()),before,'Quote and preview never mutate campaign');
@@ -50,12 +51,12 @@ assert.deepEqual([...created.sim.roads],[...preview.roads]);assert.deepEqual([..
 assert.equal(c.active.money,10000-quote.cost);assert.equal(c.active.stock.wood,0);
 assert.equal(c.siteOffer('estern',target).status,'owned');
 const snapshot=c.save();assert.equal(c.foundSite('estern',undefined,target).ok,false);assert.deepEqual(c.save(),snapshot);
-assert.equal(c.siteOffer('estern','silvaen-2').ok,false);
+assert.equal(c.siteOffer('estern',foreign).ok,false);
 assert.equal(c.siteOffer('estern','not-a-province').ok,false);
 c.active.rank=PROGRESSION_OFFSET+13;c.active.money=0;
-assert.equal(c.siteOffer('silvaen','silvaen-2').status,'materials');
+assert.equal(c.siteOffer('silvaen',foreign).status,'materials');
 c.active.money=1e5;Object.assign(c.active.stock,{wood:100,stone:100,water:100});
-assert.equal(c.siteOffer('silvaen','silvaen-2').ok,true);
-assert.ok(c.foundSite('silvaen',undefined,'silvaen-2').ok);
+assert.equal(c.siteOffer('silvaen',foreign).ok,true);
+assert.ok(c.foundSite('silvaen',undefined,foreign).ok);
 const save=decodeSave(encodeSave(c.save()));assert.deepEqual(new Campaign({saved:save}).save(),save);
 console.log(JSON.stringify({result:'PASS',terrainCells:WORLD_CELLS.length,sprites:ATLAS_SPRITES.length,terrainBytes:manifest.terrainBytes,checks:['raster matches world','shoreline and river neighbors','fixed type size and nonoverlapping labels','read-only quotes','promotion/material gates','selected plot transaction','preview equals generated tiles','save compatibility']}));

@@ -2,9 +2,10 @@ import assert from 'node:assert/strict';
 import {Campaign} from '../src/app/game/campaign.js';
 import {Simulation} from '../src/app/game/simulation.js';
 import {NATIONS} from '../src/app/game/world.js';
-import {PROVINCES} from '../src/app/game/territory.js';
+import {PROVINCES,WORLD_PLOTS} from '../src/app/game/territory.js';
 import {layoutOf,WATER_KINDS} from '../src/app/game/world-grid.js';
 import {defaultStartingProvince,startingProvinces} from '../src/app/game/starting-sites.js';
+import {restrictionOf} from '../src/app/game/settlement-access.js';
 import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
 
 let nations=0,locations=0;
@@ -14,10 +15,11 @@ for(const [nation,n] of Object.entries(NATIONS)){
  const initial=new Campaign({nation}),def=defaultStartingProvince(nation);
  assert.equal(initial.active.provinceId,def.id);
  assert.equal(def.capital,false);
- assert.equal(def.id,nation+'-5','Default is the outer settlement');
+ const outer=startingProvinces(nation).find(p=>p.id===nation+'-5');
+ assert.equal(def.id,(outer||startingProvinces(nation)[0]).id,'Default uses an available noncapital plot within the current border');
  assert.equal(initial.home.provinceId,def.id,'Atlas and simulation use the same province');
- assert.ok(!initial.hierarchy().some(v=>v.includes('수도직할령')));
- assert.equal(startingProvinces(nation).length,5);
+ assert.notEqual(initial.home.provinceId,nation+'-0','A capital district can contain undeveloped plots outside the capital tile');
+ assert.equal(startingProvinces(nation).length,WORLD_PLOTS.filter(p=>p.nation===nation&&!p.developed&&!restrictionOf(p.id)).length);
  for(const p of startingProvinces(nation)){
   locations++;
   const c=new Campaign({nation,provinceId:p.id});
@@ -53,7 +55,12 @@ for(let i=0;i<5;i++){
 assert.equal(new Set(c.sites.map(s=>s.provinceId)).size,6);
 for(const s of c.sites)assert.equal(s.provinceId,s.sim.provinceId);
 const before=c.save();
-assert.equal(c.foundSite('estern').ok,false);
-assert.deepEqual(c.save(),before,'No money, stock or IDs consumed when no free site remains');
 assert.ok(PROVINCES.some(p=>p.capital&&p.id===c.sites.at(-1).provinceId),'Later expansion can still reach a capital');
+for(let i=6;i<24;i++){
+ c.active.stock.wood=100;c.active.stock.stone=100;c.active.stock.water=100;
+ assert.equal(c.foundSite('estern').ok,true,'Expansion continues into individual plots');
+}
+assert.equal(new Set(c.sites.map(s=>s.provinceId)).size,24);
+const full=c.save();assert.equal(c.foundSite('estern').ok,false);
+assert.deepEqual(c.save(),full,'The existing 24-site limit does not charge resources');
 console.log(JSON.stringify({result:'PASS',nations,locations,checks:['noncapital defaults','selected location and terrain','invalid starts rejected','new and legacy saves','distinct expansion sites']}));

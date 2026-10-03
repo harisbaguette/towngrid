@@ -1,6 +1,6 @@
-import { BUILDINGS, RESOURCES } from './simulation.js';
+import { BUILDINGS, RESOURCES, PLANTING } from './simulation.js';
 import { unlockRank } from './world.js';
-import { dispatchShipment } from './export-route.js';
+import { dispatchShipment,tripFuel,spareFuel } from './export-route.js';
 
 export function reserveFor(sim, item) {
  const production = sim.buildings.filter(b => b.enabled !== false && b.health > 0)
@@ -12,16 +12,17 @@ export function reserveFor(sim, item) {
  return Math.max(sim.reserves?.[item] || 0, production) + freight + (contract.item === item && !sent ? contract.amount : 0);
 }
 
+export const importCost=(sim,item,quantity)=>Math.ceil(RESOURCES[item].price*1.85)*(quantity+(item==='fuel'&&spareFuel(sim)<tripFuel(sim)?tripFuel(sim):0));
+
 export function purchase(sim, item, quantity) {
  if (!RESOURCES[item] || !Number.isInteger(quantity) || quantity < 1 || quantity > 100)
   return {ok:false,error:'1~100개의 수입 수량을 선택하세요'};
  // Any product a facility is permitted to make counts, alternative recipes included.
- if (!Object.entries(BUILDINGS).some(([id, d]) => unlockRank(id) <= sim.rank && (d.recipes || [d]).some(r => r.output === item && (r.unlock || 0) <= sim.rank)))
+ if (item!=='fuel'&&!Object.entries(BUILDINGS).some(([id, d]) => unlockRank(id) <= sim.rank && (d.recipes || [d]).some(r => r.output === item && (r.unlock || 0) <= sim.rank)))
   return {ok:false,error:'생산 허가를 얻은 자원만 수입할 수 있습니다'};
- const incoming = sim.shipments.filter(sh => sh.kind === 'import' && sh.item === item).reduce((n, sh) => n + sh.amount, 0);
- if(sim.stock[item]+incoming+quantity>sim.storageCapacity)return {ok:false,error:'창고가 가득 찹니다. 재고를 팔거나 자재 보관소를 지으세요'};
- if (!sim.warehouse) return {ok:false,error:'창고가 있어야 수입품을 받을 수 있습니다'};
- const cost = Math.ceil(RESOURCES[item].price * 1.85) * quantity;
+ if(sim.storageUsed+sim.shipments.filter(sh=>sh.kind==='import').reduce((n,sh)=>n+sh.amount,0)+quantity>sim.storageCapacity)return {ok:false,error:'창고가 가득 찹니다. 재고를 팔거나 자재 보관소를 지으세요'};
+
+ const cost=importCost(sim,item,quantity);
  const short = sim.moneyShort?.(cost, '수입 비용 '); if (short) return {ok:false,error:short};
  // Imports ride an export vehicle in from the terminal: paid when ordered, stocked when it reaches the warehouse.
  const error = dispatchShipment(sim, item, quantity, 0, false, {kind:'import', cost});
@@ -33,13 +34,16 @@ export function purchase(sim, item, quantity) {
 /** Game seconds a planted sapling takes to grow into a tree. */
 export const SAPLING_GROW = 160;
 
-export function plant(sim, x, z) {
+/** Why a sapling cannot be planted at x,z now, or null (K-03): not an empty owned tile, or what of the price is short. */
+export function plantShort(sim, x, z) {
  const t = sim.tile(x,z);
- if (!t || t.terrain === 'water' || !sim.ownedAt(x,z) || sim.at(x,z) || t.nature || sim.roads.has(`${x},${z}`))
-  return {ok:false,error:'소유한 빈 땅에 묘목을 심으세요'};
- const short = sim.moneyShort?.(15, '조림 비용 '); if (short) return {ok:false,error:short};
- if ((sim.availableStock?.('water') ?? sim.stock.water) < 2) return {ok:false,error:'조림 비용 15G와 물 2개가 필요합니다'};
- sim.money -= 15; sim.stock.water -= 2; t.nature = 'sapling'; t.remaining = 0; t.growAt = sim.time + SAPLING_GROW;
+ if (!t || t.terrain === 'water' || !sim.ownedAt(x,z) || sim.at(x,z) || t.nature || sim.roads.has(`${x},${z}`)) return '소유한 빈 땅에 묘목을 심으세요';
+ return sim.priceShort(PLANTING, '조림 ');
+}
+export function plant(sim, x, z) {
+ const error = plantShort(sim, x, z); if (error) return {ok:false,error};
+ const t = sim.tile(x,z);
+ sim.money -= PLANTING.money; for (const [r,n] of Object.entries(PLANTING.items)) sim.stock[r] -= n; t.nature = 'sapling'; t.remaining = 0; t.growAt = sim.time + SAPLING_GROW;
  sim.revision++; sim.sound('plant'); return {ok:true};
 }
 

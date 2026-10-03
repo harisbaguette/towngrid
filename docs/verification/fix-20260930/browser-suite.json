@@ -1,0 +1,379 @@
+{
+ "at": "2026-10-02T13:45:23.359Z",
+ "count": 62,
+ "pass": 50,
+ "results": [
+  {
+   "test": "tests/art-completion-browser.mjs",
+   "exit": 0,
+   "seconds": 5,
+   "tail": "[{\"mode\":\"webgl\",\"vehicles\":10,\"views\":4,\"buildings\":106,\"icons\":86,\"mobile\":true,\"noSave\":true},{\"mode\":\"canvas\",\"vehicles\":10,\"views\":4,\"buildings\":106,\"icons\":86,\"mobile\":true,\"noSave\":true}]"
+  },
+  {
+   "test": "tests/art-completion-game.mjs",
+   "exit": 0,
+   "seconds": 12,
+   "tail": "Game initialized\nHome ready\nStarter captured\nLive game: HUD, 5 dispatched shipments and motion, four cameras, collapse/repair, pipe/conveyor deliveries, port handling, pause, mobile and no autosave PASS."
+  },
+  {
+   "test": "tests/atlas-isometric-browser.mjs",
+   "exit": 1,
+   "seconds": 109,
+   "tail": "node:internal/modules/run_main:123\r\n    triggerUncaughtException(\r\n    ^\r\n\r\n[RangeError: Array buffer allocation failed]\r\n\r\nNode.js v22.18.0"
+  },
+  {
+   "test": "tests/audio-browser.mjs",
+   "exit": 0,
+   "seconds": 64,
+   "tail": "  \"calm-theme\": 117.2,\n  \"music-town\": 99.2,\n  \"music-harp\": 62.3,\n  \"amb-river\": 52,\n  \"amb-coast\": 44,\n  \"amb-wind\": 6,\n  \"forest-ambience\": 44.7,\n  \"amb-crickets\": 11.5\n },\n \"audioFail\": [],\n \"errors\": []\n}"
+  },
+  {
+   "test": "tests/audit-2/browser-final.mjs",
+   "exit": 0,
+   "seconds": 21,
+   "tail": "   42\n  ],\n  \"toasts\": [],\n  \"hintCovered\": false\n },\n \"R\": {\n  \"errors\": [],\n  \"consoleErrors\": [],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/audit-2/browser-flow.mjs",
+   "exit": 0,
+   "seconds": 357,
+   "tail": "  \"newGameMs\": 1088,\n  \"reload\": {\n   \"titleVisibleMs\": 107,\n   \"homeReadyMs\": 4940,\n   \"titleClicks\": 3\n  },\n  \"continueMs\": 1097\n },\n \"errors\": 0,\n \"consoleErrors\": 0,\n \"failed\": 1\n}"
+  },
+  {
+   "test": "tests/audit-2/browser-misc.mjs",
+   "exit": 0,
+   "seconds": 116,
+   "tail": "    \"y\": 304,\n    \"inView\": true\n   }\n  ]\n },\n \"R\": {\n  \"errors\": [],\n  \"consoleErrors\": [],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/audit-2/browser-perf.mjs",
+   "exit": 0,
+   "seconds": 625,
+   "tail": "  \"82ms 1.6% WebGLRenderer.renderBufferDirect three.module-LOgJmgpk.js:51717\",\n  \"77ms 1.5% updateMatrixWorld three.module-LOgJmgpk.js:10046\",\n  \"61ms 1.2% getParameters three.module-LOgJmgpk.js:46049\",\n  \"51ms 1.0% getProgram three.module-LOgJmgpk.js:52154\",\n  \"49ms 0.9% setProgram three.module-LOgJmgpk.js:52255\",\n  \"44ms 0.8% tick simulation.js:1294\",\n  \"40ms 0.8% projectObject three.module-LOgJmgpk.js:52007\",\n  \"40ms 0.8% refreshMaterialUniforms three.module-LOgJmgpk.js:49981\",\n  \"36ms 0.7% (garbage collector) :0\",\n  \"34ms 0.7% multiplyMatrices three.module-LOgJmgpk.js:8252\"\n ]\n}"
+  },
+  {
+   "test": "tests/audit-2/browser-recheck.mjs",
+   "exit": 0,
+   "seconds": 88,
+   "tail": "   \"time\": [],\n   \"actions\": []\n  },\n  \"tinyTargets\": []\n },\n \"R\": {\n  \"errors\": [],\n  \"consoleErrors\": [],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/audit-2/browser-viewports.mjs",
+   "exit": 0,
+   "seconds": 153,
+   "tail": "   },\n   \"panned\": true,\n   \"pinchZoomed\": true,\n   \"selectedAfterGestures\": false\n  },\n  \"showcase\": {\n   \"hud\": {\n    \"mapVisiblePct\": 64,\n    \"overlaps\": [],\n    \"offscreen\": []\n   },\n   \"layout\": {"
+  },
+  {
+   "test": "tests/audit-3/browser-demo-profile.mjs",
+   "exit": 0,
+   "seconds": 9,
+   "tail": "{\"label\":\"dev\",\"demoMs\":1333,\"longTasks\":[{\"t\":4551,\"d\":110},{\"t\":4335,\"d\":66},{\"t\":4457,\"d\":65}],\"windowMs\":3850}"
+  },
+  {
+   "test": "tests/audit-3/browser-first-ranks.mjs",
+   "exit": null,
+   "seconds": 1500,
+   "tail": "[step] rank 1 at 46s\n[step] rank 2 at 77s\n\n[runner] TIMEOUT 25 min, killed"
+  },
+  {
+   "test": "tests/audit-3/browser-new-screens.mjs",
+   "exit": 0,
+   "seconds": 189,
+   "tail": "[step] 390x844 new game\n[step] 390x844 campaign window\n[step] 390x844 found site\n[step] 844x390 home\n[step] 844x390 gallery\n[step] 844x390 transition\n[step] 844x390 atlas\n[step] 844x390 start sites\n[step] 844x390 new game\n[step] ERROR locator.selectOption: options[0]: expected object, got undefined\n    at C:\\Users\\ghd12\\Desktop\\TownGrid\\work\\u-sandbox\\tests\\audit-3\\browser-new-screens.mjs:151:43\n{\"1920x1080\":{\"error\":\"locator.selectOption: options[0]: expected object, got undefined\\n    at C:\\\\Users\\\\ghd12\\\\Desktop\\\\TownGrid\\\\work\\\\u-sandbox\\\\tests\\\\audit-3\\\\browser-new-screens.mjs:151:43\",\"errorDelta\":0},\"1366x768\":{\"error\":\"locator.selectOption: options[0]: expected object, got undefined\\n    at C:\\\\Users\\\\ghd12\\\\Desktop\\\\TownGrid\\\\work\\\\u-sandbox\\\\tests\\\\audit-3\\\\browser-new-screens.mjs:151:43\",\"errorDelta\":0},\"390x844\":{\"errorDelta\":0},\"844x390\":{\"error\":\"locator.selectOption: options[0]: expected object, got undefined\\n    at C:\\\\Users\\\\ghd12\\\\Desktop\\\\TownGrid\\\\work\\\\u-sandbox\\\\tests\\\\audit-3\\\\browser-new-screens.mjs:151:43\",\"errorDelta\":0}}"
+  },
+  {
+   "test": "tests/audit-3/browser-overlays.mjs",
+   "exit": 0,
+   "seconds": 26,
+   "tail": "{\"390x844\":{\"intro\":null,\"home\":0,\"labels\":0},\"844x390\":{\"intro\":null,\"home\":0,\"labels\":0},\"1366x768\":{\"intro\":null,\"home\":2,\"labels\":0}}"
+  },
+  {
+   "test": "tests/audit/browser-balance-20260928-followup.mjs",
+   "exit": 0,
+   "seconds": 139,
+   "tail": "  {\n   \"name\": \"기초\",\n   \"how\": \"tap\",\n   \"selected\": \"true\",\n   \"rect\": [\n    19,\n    56\n   ]\n  }\n ],\n \"errors\": []\n}"
+  },
+  {
+   "test": "tests/audit/browser-balance-20260928.mjs",
+   "exit": 0,
+   "seconds": 263,
+   "tail": " \"shownInDockAtMax\": 26,\n \"processingCycles\": [\n  \"confectionery:10\",\n  \"weaver:12\",\n  \"kiln:4\",\n  \"cannery:0\",\n  \"shipyard:0\"\n ],\n \"saleMoneyDelta\": 106,\n \"saveOk\": true,\n \"software\": true\n}"
+  },
+  {
+   "test": "tests/audit/browser-first-session.mjs",
+   "exit": 0,
+   "seconds": 137,
+   "tail": "  \"screenshot 03-new-game.png\",\n  \"screenshot 04-after-warehouse.png\",\n  \"screenshot 05-five-buildings.png\",\n  \"screenshot 06a-contract-ready.png\",\n  \"screenshot 06-goals-dialog.png\",\n  \"screenshot 07-rank1-hud.png\",\n  \"screenshot 08-market.png\",\n  \"screenshot 09-unowned-tile.png\",\n  \"screenshot 10-after-first-event.png\",\n  \"screenshot 11-phone-hud.png\"\n ]\n}"
+  },
+  {
+   "test": "tests/audit/browser-ui-2-20260928.mjs",
+   "exit": 0,
+   "seconds": 47,
+   "tail": "    \"offscreen\": [],\n    \"clipped\": []\n   },\n   \"build-중공업\": {\n    \"covered\": [],\n    \"offscreen\": [],\n    \"clipped\": []\n   },\n   \"build-동력·마법\": {\n    \"covered\": [],\n    \"offscreen\": [],\n    \"clip"
+  },
+  {
+   "test": "tests/biomes-browser.mjs",
+   "exit": null,
+   "seconds": 1500,
+   "tail": "Checking webgl biomes\nChecking canvas biomes\n\n[runner] TIMEOUT 25 min, killed"
+  },
+  {
+   "test": "tests/bron-motion-browser.mjs",
+   "exit": 0,
+   "seconds": 11,
+   "tail": "Bron browser: comparison, four facings/cameras, real resident panel, mobile and reduced motion PASS"
+  },
+  {
+   "test": "tests/campaign-panels-browser.mjs",
+   "exit": 0,
+   "seconds": 11,
+   "tail": "{\"overrides\":[\"campaign.spawnState x3\",\"campaign.battles +2\"],\"sizes\":{\"1366x768\":{\"injected\":{\"states\":3,\"orders\":3},\"world\":{\"siteStatus\":2,\"battles\":2},\"orders\":{\"rows\":3,\"width\":1135,\"scrollX\":false,\"headSticky\":\"sticky\"},\"layout\":{\"covered\":[],\"offscreen\":[],\"clipped\":[],\"tinyTargets\":[],\"smallText\":[]},\"councilCards\":[{\"inside\":true,\"overflow\":false},{\"inside\":true,\"overflow\":false},{\"inside\":true,\"overflow\":false}]},\"390x844\":{\"injected\":{\"states\":3,\"orders\":3},\"world\":{\"siteStatus\":2,\"battles\":2},\"orders\":{\"rows\":3,\"width\":337,\"scrollX\":false,\"headSticky\":\"sticky\"},\"layout\":{\"covered\":[],\"offscreen\":[],\"clipped\":[],\"tinyTargets\":[],\"smallText\":[]},\"councilCards\":[{\"inside\":true,\"overflow\":false},{\"inside\":true,\"overflow\":false},{\"inside\":true,\"overflow\":false}]}},\"R\":{\"errors\":[],\"consoleErrors\":[],\"consoleWarnings\":[],\"failedRequests\":[]}}"
+  },
+  {
+   "test": "tests/continuous-map-browser.mjs",
+   "exit": 0,
+   "seconds": 8,
+   "tail": "webgl local views saved\ncanvas local views saved\nContinuous world and local map browser PASS"
+  },
+  {
+   "test": "tests/environment-motion-browser.mjs",
+   "exit": 0,
+   "seconds": 6,
+   "tail": "{\"errors\":[],\"failed\":[],\"modes\":[{\"mode\":\"webgl\",\"facilities\":106,\"vehicles\":10,\"views\":4,\"cranes\":3,\"mobile\":true},{\"mode\":\"canvas\",\"facilities\":106,\"vehicles\":10,\"views\":4,\"cranes\":3,\"mobile\":true}]}"
+  },
+  {
+   "test": "tests/environment-parts-browser.mjs",
+   "exit": 0,
+   "seconds": 2,
+   "tail": "Rotating parts: 4 views × 3 poses × WebGL/CPU PASS."
+  },
+  {
+   "test": "tests/expansion-new-browser.mjs",
+   "exit": 1,
+   "seconds": 39,
+   "tail": "node:internal/modules/run_main:123\r\n    triggerUncaughtException(\r\n    ^\r\n\r\npage.evaluate: Error: 수도권을 제외한 정착 가능한 지역을 선택하세요\r\n    at new Campaign (http://localhost:5173/src/app/game/campaign.js:185:52)\r\n    at eval (eval at evaluate (:302:30), <anonymous>:1:179)\r\n    at async <anonymous>:328:30\r\n    at start (C:\\Users\\ghd12\\Desktop\\TownGrid\\work\\u-sandbox\\tests\\expansion-new-browser.mjs:42:13)\r\n    at async file:///C:/Users/ghd12/Desktop/TownGrid/work/u-sandbox/tests/expansion-new-browser.mjs:92:13\r\n\r\nNode.js v22.18.0"
+  },
+  {
+   "test": "tests/expansion-rules-browser.mjs",
+   "exit": 1,
+   "seconds": 33,
+   "tail": "node:internal/modules/run_main:123\r\n    triggerUncaughtException(\r\n    ^\r\n\r\npage.evaluate: Error: 수도권을 제외한 정착 가능한 지역을 선택하세요\r\n    at new Campaign (http://localhost:5173/src/app/game/campaign.js:185:52)\r\n    at eval (eval at evaluate (:302:30), <anonymous>:1:179)\r\n    at async <anonymous>:328:30\r\n    at start (C:\\Users\\ghd12\\Desktop\\TownGrid\\work\\u-sandbox\\tests\\expansion-rules-browser.mjs:28:13)\r\n    at async file:///C:/Users/ghd12/Desktop/TownGrid/work/u-sandbox/tests/expansion-rules-browser.mjs:74:10\r\n\r\nNode.js v22.18.0"
+  },
+  {
+   "test": "tests/farm-art-browser.mjs",
+   "exit": 0,
+   "seconds": 9,
+   "tail": "Expansion art: 24 facilities × 4 views (WebGL/CPU), 44 UI icons, 106 buildings in the art list, 24/24 new facilities with damage layers."
+  },
+  {
+   "test": "tests/farm-refresh-browser.mjs",
+   "exit": 0,
+   "seconds": 15,
+   "tail": "Farm refresh browser: farmcrops, farmfruits, ranch, farmworks, farmland, farmterrain, farmsupport, both renderers, four views, growth stages, six states, resource icons, animation, pause, disable, mobile and no save passed."
+  },
+  {
+   "test": "tests/fix-20260929/probe-a.mjs",
+   "exit": 0,
+   "seconds": 38,
+   "tail": "   \"총 판매량 0개\",\n   \"영주 납품 0회\"\n  ],\n  \"closed\": true\n },\n \"R\": {\n  \"errors\": [],\n  \"consoleErrors\": [],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/fix-20260929/probe-b.mjs",
+   "exit": 1,
+   "seconds": 30,
+   "tail": "    ^\r\n\r\nlocator.click: Error: strict mode violation: locator('.operations-card .bottleneck') resolved to 2 elements:\r\n    1) <button class=\"bottleneck\">…</button> aka getByRole('button', { name: '우물 · 생산 중 내구도 30% · 속도 70' })\r\n    2) <button class=\"bottleneck\">…</button> aka getByRole('button', { name: '벌목장 · 자원 고갈', exact: true })\r\n\r\nCall log:\r\n\u001b[2m  - waiting for locator('.operations-card .bottleneck')\u001b[22m\r\n\r\n    at C:\\Users\\ghd12\\Desktop\\TownGrid\\work\\u-sandbox\\tests\\fix-20260929\\probe-b.mjs:62:77\r\n\r\nNode.js v22.18.0"
+  },
+  {
+   "test": "tests/fix-20260929/probe-c.mjs",
+   "exit": 0,
+   "seconds": 17,
+   "tail": "  \"soundsOnArrival\": [],\n  \"newWarningHere\": [\n   \"이주민 소식 · 40초 뒤 찾아옵니다.\"\n  ]\n },\n \"R\": {\n  \"errors\": [],\n  \"consoleErrors\": [],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/fix-20260929/probe-d.mjs",
+   "exit": 0,
+   "seconds": 51,
+   "tail": "  \"J8\": {\n   \"dialogOpen\": 1,\n   \"overflowX\": false\n  }\n },\n \"R\": {\n  \"errors\": [],\n  \"consoleErrors\": [],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/fix-20260929/probe-e.mjs",
+   "exit": 0,
+   "seconds": 17,
+   "tail": "   \"dockTop\": 526,\n   \"stackBottom\": 250,\n   \"clear\": true\n  }\n },\n \"R\": {\n  \"errors\": [],\n  \"consoleErrors\": [],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/fix-20260929/probe-markers.mjs",
+   "exit": 0,
+   "seconds": 19,
+   "tail": "    \"+4\",\n    \"+3\"\n   ]\n  }\n },\n \"R\": {\n  \"errors\": [],\n  \"consoleErrors\": [],\n  \"consoleWarnings\": [],\n  \"failedRequests\": []\n }\n}"
+  },
+  {
+   "test": "tests/fix-20260930/browser-player-fixes.mjs",
+   "exit": 1,
+   "seconds": 89,
+   "tail": "[step] PASS 390x844 K-09 phone card folds to one line {\"h\":46,\"w\":175,\"cls\":\"operations-card panel folded\"}\n[step] PASS 390x844 K-01 card shows the 영토 확장 button for 개간지 확장 [\"제분소 짓기\",\"영토 확장 · 180G\"]\n[step] PASS 390x844 K-01 the button opens the expansion tool \"expand\"\n[step] PASS 390x844 K-01 rank dialog row has the same button [\"제분소 짓기\",\"영토 확장 · 180G\"]\n[step] PASS 390x844 K-01 dialog button closes the dialog and opens the tool {\"mode\":\"expand\",\"dialog\":false}\n[step] PASS 390x844 K-03 방역 locks and names what is missing {\"disabled\":true,\"note\":\"방역 35G · 물 8 · 목재 3 · 물 8개 · 목재 3개 부족수입\"}\n[step] PASS 390x844 J4 depleted lumber camp keeps its fix buttons {\"blocks\":[\"밀밭 · 물 대기\",\"벌목장 · 자원 고갈\"],\"fixes\":[\"묘목 심기 · 15G + 물 2\",\"영토 확장 · 180G\"]}\n[step] PASS 844x390 K-11 hostile nation reads as not startable {\"h2\":\"적대 세력 · 시작할 수 없는 국가\",\"section\":[\"이 나라의 적대 종족\"],\"start\":\"적대 세력 · 시작 불가\",\"disabled\":true}\n[step] PASS 844x390 K-01 card shows the 영토 확장 button for 개간지 확장 [\"제분소 짓기\",\"영토 확장 · 180G\"]\n[step] FAIL 844x390 flow \"locator.click: Timeout 30000ms exceeded.\\nCall log:\\n\\u001b[2m  - waiting for locator('.operations-card .goal-action').filter({ hasText: '영토 확장' })\\u001b[22m\\n\\u001b[2m    - locator resolved to <button data-size=\\\"sm\\\" data-kind=\\\"tool\\\" data-slot=\\\"button\\\" data-variant=\\\"outline\\\" class=\\\"inline-flex shrink-0 items-center justify-center text-sm font-medium whitespace-nowrap transition-all outli\n[step] PASS no page errors or console errors {\"e\":[],\"c\":[]}\nFAIL 844x390 flow"
+  },
+  {
+   "test": "tests/fix-20260930/browser-round3-screens.mjs",
+   "exit": 0,
+   "seconds": 72,
+   "tail": "[step] PASS 390x844 site list shows raid, broken, damaged and the unrest cause [\"습격 중\",\"멈춘 시설 1\",\"손상 1\",\"식량 부족 +4\"]\n[step] PASS 390x844 flags stay inside the list 0\n[step] 844x390 home\n[step] PASS 844x390 홈으로 never covers world-map controls []\n[step] PASS 844x390 objective gauge follows the next record {\"label\":\"다음 대륙 기록\",\"value\":75}\n[step] PASS 844x390 goals window lists 5 records inside the dialog {\"goals\":5,\"inside\":true,\"overflowX\":false}\n[step] PASS 844x390 ledger switches between this site and all sites {\"scope\":[{\"text\":\"하벤 외곽 개척지\",\"on\":\"true\"},{\"text\":\"거점 6곳 합계\",\"on\":\"false\"}],\"site\":[\"+4,986G\"],\"all\":[\"+4,934G\"]}\n[step] PASS 844x390 site list shows raid, broken, damaged and the unrest cause [\"습격 중\",\"멈춘 시설 1\",\"손상 1\",\"식량 부족 +4\"]\n[step] PASS 844x390 flags stay inside the list 0\n[step] PASS J4 CPU renderer washes unowned trees and rocks {\"software\":true,\"props\":314,\"unowned\":248,\"washed\":true}\n[step] PASS no page errors, console errors or failed requests {\"e\":[],\"c\":[],\"f\":[]}\nround3 screens PASS"
+  },
+  {
+   "test": "tests/fix-20260930/g3-screens.mjs",
+   "exit": 0,
+   "seconds": 1,
+   "tail": "PASS G3-06b 오늘 지금까지 net counts a negotiation once :: {\"cost\":154,\"shown\":-411,\"truth\":-411}\nPASS Game.tsx today net uses start income and start expenses :: {}\nPASS G3-08 sapling seconds match the speed :: {\"rows\":[{\"speed\":1,\"shown\":320,\"real\":320},{\"speed\":2,\"shown\":160,\"real\":160},{\"speed\":4,\"shown\":80,\"real\":80}]}\nPASS Game.tsx facility advice passes the simulation :: {}\nPASS G3-11 upgrade button disabled exactly when the action refuses :: {\"enabled\":false,\"result\":false,\"available\":1}\nPASS Game.tsx upgrade/specialize use the rules upgradeShort/specializeShort and show the reason :: {}\nPASS market sell buttons use stock free of reservations :: {}\nPASS Game.tsx upgrade/specialize read availableStock :: {}\nPASS G3-13 legacy goals exist after completion :: {\"score\":2}\nPASS G3-13 goals window, finale and campaign window show LegacyGoals :: {}\n\n[g3-screens] all pass"
+  },
+  {
+   "test": "tests/fix-20260930/goal-actions.mjs",
+   "exit": 0,
+   "seconds": 0,
+   "tail": "PASS K-03 plant price matches the rule :: {\"name\":\"plant\",\"exact\":true,\"cuts\":[\"money:refused:1G\",\"water:refused:물 1\"]}\nPASS K-03 every goods-priced button locks on shortfall (sanitize, plant x2, reinforce, mobilize, council x5) :: {}\nPASS K-04 next build has a tile and obtainable inputs (28 suggestions) :: {\"bad\":[]}\nPASS K-05 sell hint leaves planned materials :: {\"next\":\"ironmine\",\"keep\":{\"plank\":14,\"gear\":4,\"wood\":4,\"stone\":1,\"glass\":28},\"over\":[]}\nPASS K-05 operations card passes the plan to the hint :: {}\nPASS K-06 water shortfall names supply, offers one more well :: {\"text\":\"물 생산이 쓰는 곳보다 적습니다 · 우물 1곳이 3곳에 공급합니다.\",\"label\":\"우물 하나 더\",\"focus\":null,\"tool\":\"well\"}\nPASS K-06 stock in the store that does not arrive is the path :: {\"text\":\"창고에 물이 있지만 이 시설까지 오지 못합니다. 창고와 이어지는 빈 칸이나 흙길을 확인하세요.\",\"label\":\"시설 확인\",\"focus\":3,\"tool\":null}\nPASS K-08 no shade/pollution notes on a house, a well or a quarry :: {}\nPASS K-08 a field shows shade as its effect :: [{\"text\":\"오염 2 · 생산 -20%\",\"tone\":\"negative\"},{\"text\":\"그늘 2 · 생산 -20%\",\"tone\":\"negative\"}]\nPASS K-08 preview has no blanket 통로 확보 필요 :: {}\n\n[goal-actions] all pass"
+  },
+  {
+   "test": "tests/fix-20260930/toast-landscape.mjs",
+   "exit": 1,
+   "seconds": 10,
+   "tail": "{\"panel\":null,\"toast\":[584,90,820,166],\"overlap\":false,\"errors\":[],\"consoleErrors\":[]}"
+  },
+  {
+   "test": "tests/freight-path-browser.mjs",
+   "exit": 0,
+   "seconds": 8,
+   "tail": "[{\"mode\":\"webgl\",\"samples\":41,\"views\":4,\"disconnectedHidden\":true},{\"mode\":\"canvas\",\"samples\":41,\"views\":4,\"disconnectedHidden\":true}]"
+  },
+  {
+   "test": "tests/game-time-browser.mjs",
+   "exit": 0,
+   "seconds": 16,
+   "tail": "{\"result\":\"PASS\",\"samples\":[{\"speed\":1,\"real\":4.003,\"acceptedReal\":4.000100000000007,\"game\":2.0000500000000114},{\"speed\":2,\"real\":4.007200000001117,\"acceptedReal\":4.016800000000015,\"game\":4.016800000000034},{\"speed\":4,\"real\":4.005400000000373,\"acceptedReal\":4.000099999999955,\"game\":8.000200000000067}],\"pause\":true,\"camera\":true,\"resume\":true,\"pageErrors\":[]}"
+  },
+  {
+   "test": "tests/layout-fix-browser.mjs",
+   "exit": 0,
+   "seconds": 72,
+   "tail": "  }\n },\n \"R\": {\n  \"errors\": [],\n  \"consoleErrors\": [],\n  \"consoleWarnings\": [],\n  \"failedRequests\": [],\n  \"overrides\": [\n   \"390x844: warehouse via sim.build\"\n  ]\n }\n}"
+  },
+  {
+   "test": "tests/map-edges-browser.mjs",
+   "exit": 0,
+   "seconds": 21,
+   "tail": "Map sides, scenery, actual production, normal game controls, WebGL/CPU and mobile PASS."
+  },
+  {
+   "test": "tests/mira-preview-browser.mjs",
+   "exit": 0,
+   "seconds": 3,
+   "tail": "Mira preview: runtime assets, 7 actions, 4 directions, correct aspect ratio, mobile and browser errors passed."
+  },
+  {
+   "test": "tests/mira-runtime-browser.mjs",
+   "exit": 0,
+   "seconds": 63,
+   "tail": "{\"atlas\":\"8192x512 RGBA\",\"newFrames\":256,\"legacyActionFrames\":0,\"views\":4,\"activity\":{\"seconds\":55.017900000001134,\"frames\":[4,5,6,7,8,9,10,11,12,13,14,15],\"actions\":[\"walk\",\"idle\",\"pickup\",\"carry\",\"drop\"],\"delivered\":112,\"counts\":{\"moving\":9418,\"handling\":3376,\"holding\":52,\"corners\":191},\"mismatches\":[]},\"portrait\":{\"width\":220,\"height\":314},\"uiClips\":11,\"errors\":[],\"failedAssets\":[]}"
+  },
+  {
+   "test": "tests/perf-prod-browser.mjs",
+   "exit": 0,
+   "seconds": 26,
+   "tail": "[step] default-1x {\"frames\":121,\"p50\":16.7,\"p95\":16.8,\"max\":16.9,\"gameFps\":60,\"renderer\":\"webgl\",\"longTasks\":0}\n[step] 4x {\"frames\":121,\"p50\":16.7,\"p95\":16.8,\"max\":16.9,\"gameFps\":60,\"renderer\":\"webgl\",\"longTasks\":0}\n[step] labels-on {\"frames\":121,\"p50\":16.7,\"p95\":16.8,\"max\":16.9,\"gameFps\":60,\"renderer\":\"webgl\",\"longTasks\":0}\n[step] build-dock-open {\"frames\":122,\"p50\":16.7,\"p95\":16.8,\"max\":16.9,\"gameFps\":60,\"renderer\":\"webgl\",\"longTasks\":0}\n{\"label\":\"run\",\"startup\":{\"demoMs\":1212,\"longTasksDemo\":{\"count\":1,\"totalMs\":136}},\"fps\":{\"default-1x\":[121,16.7,16.8],\"4x\":[121,16.7,16.8],\"labels-on\":[121,16.7,16.8],\"dragging\":[121,16.7,16.8],\"build-dock-open\":[122,16.7,16.8]},\"errors\":[],\"consoleErrors\":[]}"
+  },
+  {
+   "test": "tests/pixel-environment-browser.mjs",
+   "exit": 1,
+   "seconds": 6,
+   "tail": "node:internal/modules/run_main:123\r\n    triggerUncaughtException(\r\n    ^\r\n\r\npage.evaluate: TypeError: Cannot read properties of undefined (reading 'userData')\r\n    at eval (eval at evaluate (:302:30), <anonymous>:37:43)\r\n    at async <anonymous>:328:30\r\n    at C:\\Users\\ghd12\\Desktop\\TownGrid\\work\\u-sandbox\\tests\\pixel-environment-browser.mjs:67:29\r\n\r\nNode.js v22.18.0"
+  },
+  {
+   "test": "tests/pixel-industry-browser.mjs",
+   "exit": 0,
+   "seconds": 18,
+   "tail": "35 buildings: six states, four views, WebGL/CPU/mobile, 140 live ghosts, industrial city and supply UI passed."
+  },
+  {
+   "test": "tests/pixel-readability-browser.mjs",
+   "exit": 0,
+   "seconds": 3,
+   "tail": "Pixel readability capture passed: 48/80px comparison, mobile layout, actual square tile outlines in four views, assets and page errors."
+  },
+  {
+   "test": "tests/pixel-world-browser.mjs",
+   "exit": 0,
+   "seconds": 28,
+   "tail": "41 new facilities: six states, four views, WebGL/CPU; five regions, ports, overlays, save invariance and mobile passed."
+  },
+  {
+   "test": "tests/presentation-browser.mjs",
+   "exit": 0,
+   "seconds": 15,
+   "tail": "Checking screen motion\nPASS preview motion, controls, 28 gallery scenes, home/room ambience\nPASS presentation: 31 scenes, moving pixels, pause/reduced motion/hidden tab, scene ambience, UI/keyboard actions, decoded effects, volume/mute."
+  },
+  {
+   "test": "tests/production-visuals-browser.mjs",
+   "exit": 0,
+   "seconds": 3,
+   "tail": "Production visuals: six states, independent working/output, four views, mobile, WebGL and CPU passed."
+  },
+  {
+   "test": "tests/roster-browser.mjs",
+   "exit": 0,
+   "seconds": 11,
+   "tail": "Roster gallery, portraits, 4 views, facility work/stop, resident UI, mobile and CPU PASS"
+  },
+  {
+   "test": "tests/screen-components-browser.mjs",
+   "exit": 0,
+   "seconds": 14,
+   "tail": "    \"세린의 고원 대장간\",\n    \"닥스의 설원 배송\",\n    \"날리아의 어선\",\n    \"베라의 진료소\",\n    \"세드릭의 마력 연구실\",\n    \"아이리스의 비공정\",\n    \"벨의 저녁 시장\",\n    \"카이와 피아의 강가 휴식\"\n  ],\n  \"errors\": [],\n  \"failed\": []\n}"
+  },
+  {
+   "test": "tests/specialists-browser.mjs",
+   "exit": 0,
+   "seconds": 10,
+   "tail": "51 identities, both factions, 4 real scene views, resident UI/mobile, combat and CPU PASS"
+  },
+  {
+   "test": "tests/sprite-grounding-browser.mjs",
+   "exit": 1,
+   "seconds": 6,
+   "tail": "    ^\r\n\r\nAssertionError [ERR_ASSERTION]: CPU and WebGL anchors agree within pixel rounding\r\n    at file:///C:/Users/ghd12/Desktop/TownGrid/work/u-sandbox/tests/sprite-grounding-browser.mjs:95:9 {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '=='\r\n}\r\n\r\nNode.js v22.18.0"
+  },
+  {
+   "test": "tests/start-screens-browser.mjs",
+   "exit": 0,
+   "seconds": 20,
+   "tail": "{\n  \"result\": \"PASS\",\n  \"checked\": [\n    \"title keyboard entry, no-save continue disabled, stable random home, home/settings/world navigation, 24 daily + 4 transition gallery, filters/thumbnails/arrows\",\n    \"actual save import, long-load artwork advances, immediate completion, playable demo, saved game preserved\",\n    \"390px mobile, short landscape, reduced motion\",\n    \"normal motion context-specific transitions, keyboard skip, default home probability branch\",\n    \"no legacy GLB requests throughout home, save import and playable demo\"\n  ],\n  \"errors\": [],\n  \"failed\": []\n}"
+  },
+  {
+   "test": "tests/starter-environment-browser.mjs",
+   "exit": 1,
+   "seconds": 56,
+   "tail": "  }\n}\nnode:internal/modules/run_main:123\r\n    triggerUncaughtException(\r\n    ^\r\n\r\npage.waitForFunction: Timeout 45000ms exceeded.\r\n    at C:\\Users\\ghd12\\Desktop\\TownGrid\\work\\u-sandbox\\tests\\starter-environment-browser.mjs:114:13 {\r\n  name: 'TimeoutError'\r\n}\r\n\r\nNode.js v22.18.0"
+  },
+  {
+   "test": "tests/starting-sites-browser.mjs",
+   "exit": 0,
+   "seconds": 7,
+   "tail": "World ready\nPASS (full game): noncapital selection, blocked terrain, mobile start and saved location"
+  },
+  {
+   "test": "tests/ui-design-browser.mjs",
+   "exit": 0,
+   "seconds": 54,
+   "tail": "page loaded\nworld opened\nworld ready\n{\n  \"atlas\": {\n    \"nodes\": 3056,\n    \"terrainNodes\": 5,\n    \"view\": \"-1.1368683772161603e-13 0 1593.1668811788693 963.7708997168957\"\n  },\n  \"blocked\": [],\n  \"errors\": []\n}"
+  },
+  {
+   "test": "tests/wilderness-browser.mjs",
+   "exit": 134,
+   "seconds": 56,
+   "tail": "----- Native stack trace -----\r\n\r\n 1: 00007FF6571E1427 \r\n 2: 00007FF657144878 \r\n 3: 00007FF657CB63B1 \r\n 4: 00007FF657CA2F36 \r\n 5: 00007FF657AFF870 \r\n 6: 00007FF657AB74CD \r\n 7: 00007FF657B08AB3 \r\n 8: 00007FF657AF893D \r\n 9: 00007FF657AF44F5 \r\n10: 00007FF65747DE2D"
+  },
+  {
+   "test": "tests/world-atlas-browser.mjs",
+   "exit": 0,
+   "seconds": 13,
+   "tail": "{\"passed\":true,\"terrainElements\":5,\"checked\":[\"pixel terrain and marker assets, constant screen text size, label collisions, actual resource preview\",\"mobile pinch, minimap, no accidental selection, no horizontal overflow\",\"real imported campaign, exact selected province and seed, exact price charge, owned marker, foreign promotion lock, mobile settlement visit\"]}"
+  }
+ ]
+}

@@ -7,8 +7,8 @@ export const MODERN_RESOURCES={
 };
 export const MODERN_BUILDINGS={
  reservoir:{name:'급수탑',group:'farm',cost:180,materials:{wood:8,stone:6},period:12,inputs:{water:3},output:'irrigation',amount:1,description:'물 3개로 주변 두 칸 작물의 물 요구량을 모두 채웁니다. 주민의 물 운반을 줄여줍니다.'},
- depot:{name:'자재 보관소',group:'base',cost:220,materials:{plank:6,stone:4},description:'각 자원의 보관 한도를 120개 늘립니다. 여러 곳 건설할 수 있습니다.'},
- windturbine:{name:'풍력 발전기',group:'energy',cost:330,materials:{plank:10,gear:2},period:24,output:'power',amount:1,description:'연료 없이 발전합니다. 주변 높은 건물이나 산이 바람을 가리면 느려집니다.'},
+ depot:{name:'자재 보관소',group:'base',cost:220,materials:{plank:6,stone:4},description:'상품 240개를 보관합니다. 생산 시설 가까이에 두면 주민 운반 거리가 줄어듭니다.'},
+ windturbine:{name:'풍력 발전기',group:'energy',cost:330,materials:{plank:10,gear:2},period:30,output:'power',amount:1,description:'연료 없이 발전합니다. 주변 높은 건물이나 산이 바람을 가리면 느려지고, 제철소 같은 큰 공장이나 산 바로 옆(바람막이 3단계)에서는 전기가 끊기는 때가 생깁니다.'},
  magetower:{name:'마탑',group:'energy',cost:700,materials:{brick:6,steel:4,glass:2,circuit:2},period:28,inputs:{mana:2,circuit:1},output:'ward',amount:1,wardRadius:4.5,description:'마력 결정과 회로로 반경 4.5칸에 결계를 칩니다. 결계 안의 시설은 습격 피해를 받지 않고 들어온 습격자는 약해집니다. 결계가 유지되는 동안 마족의 전력 교란도 막습니다.'},
  steamworks:{name:'증기 기계공장',group:'industry',cost:560,materials:{steel:8,gear:4},period:21,inputs:{steel:1,coal:1,water:1},output:'gear',amount:4,description:'강철·석탄·물을 사용해 증기기관으로 기계 부품을 대량 가공합니다.'},
  leyrelay:{name:'마력 중계소',group:'transport',cost:880,materials:{steel:8,circuit:4},period:25,inputs:{mana:1},output:'transit',amount:1,transitFactor:0.8,power:true,description:'양쪽 거점에서 가동하면 트럭과 철도의 운송 시간이 20% 짧아집니다.'},
@@ -63,8 +63,8 @@ export const MODERN_BUILDINGS={
 // terrain marks a facility that reshapes its tile (pond, pasture, clover) and has no production of its own.
 export const EXPANSION_RESOURCES={
  sugarcane:{name:'사탕수수',color:'#9cc25a',price:10},salt:{name:'소금',color:'#e6ecf1',price:14},grapered:{name:'붉은 포도',color:'#7d2c55',price:16},grapewhite:{name:'흰 포도',color:'#c9d967',price:17},cocoa:{name:'카카오',color:'#86533a',price:18},strawberry:{name:'딸기',color:'#e0434f',price:14},mint:{name:'박하',color:'#56cfa2',price:11},pumpkin:{name:'호박',color:'#e8842c',price:17},oakwood:{name:'참나무 원목',color:'#80603f',price:19},
- sugar:{name:'설탕',color:'#fbf6ea',price:34},winered:{name:'적포도주',color:'#9e2342',price:125,final:true},winewhite:{name:'백포도주',color:'#e8d98a',price:130,final:true},barrel:{name:'오크통',color:'#9a6a3a',price:85},chocolate:{name:'초콜릿',color:'#5b3423',price:80,final:true},jam:{name:'딸기잼',color:'#c7283f',price:72,final:true},candy:{name:'박하 사탕',color:'#9fe8cf',price:50,final:true},pie:{name:'호박 파이',color:'#d7913f',price:110,final:true},lantern:{name:'호박등',color:'#f2a93b',price:280,final:true},
- wool:{name:'양모',color:'#f1ece0',price:46},yarn:{name:'털실',color:'#c98bb7',price:78},milk:{name:'우유',color:'#f6f8fb',price:46},butter:{name:'버터',color:'#f4dc75',price:120,final:true},honey:{name:'꿀',color:'#e9aa1f',price:24},wax:{name:'밀랍',color:'#e8cf8a',price:30},feed:{name:'사료',color:'#a9a15a',price:17},duckegg:{name:'오리알',color:'#bcd9d3',price:44},
+ sugar:{name:'설탕',color:'#fbf6ea',price:34},winered:{name:'적포도주',color:'#9e2342',price:125,final:true},winewhite:{name:'백포도주',color:'#e8d98a',price:130,final:true},barrel:{name:'오크통',color:'#9a6a3a',price:85},chocolate:{name:'초콜릿',color:'#5b3423',price:180,final:true},jam:{name:'딸기잼',color:'#c7283f',price:120,final:true},candy:{name:'박하 사탕',color:'#9fe8cf',price:70,final:true},pie:{name:'호박 파이',color:'#d7913f',price:140,final:true},lantern:{name:'호박등',color:'#f2a93b',price:315,final:true},
+ wool:{name:'양모',color:'#f1ece0',price:46},yarn:{name:'털실',color:'#c98bb7',price:82},milk:{name:'우유',color:'#f6f8fb',price:46},butter:{name:'버터',color:'#f4dc75',price:155,final:true},honey:{name:'꿀',color:'#e9aa1f',price:24},wax:{name:'밀랍',color:'#e8cf8a',price:30},feed:{name:'사료',color:'#a9a15a',price:17},duckegg:{name:'오리알',color:'#bcd9d3',price:44},
  clay:{name:'점토',color:'#b9785a',price:8},sand:{name:'모래',color:'#e2c98f',price:9},limestone:{name:'석회암',color:'#d8d3bf',price:16},chromium:{name:'크롬',color:'#8fa3b8',price:30},bluesteel:{name:'청강',color:'#4f7fb8',price:640,final:true},
  woodbox:{name:'나무 상자',color:'#b88a52',price:30},clothbox:{name:'천 상자',color:'#a88fc9',price:230},foodparcel:{name:'식량 소포',color:'#c79a5b',price:660,final:true},giftparcel:{name:'선물 소포',color:'#d9546c',price:1500,final:true}
 };
@@ -78,9 +78,9 @@ export const EXPANSION_BUILDINGS={
  mintfield:{name:'박하밭',group:'farm',cost:70,materials:{wood:3,plank:1},period:10,inputs:{water:1},output:'mint',amount:2,irrigable:true,waterNeed:3,description:'물 1개로 박하 2개를 기릅니다. '+WATERED(3)+' 제과점에서 박하 사탕을 만듭니다.'},
  pumpkinpatch:{name:'호박밭',group:'farm',cost:70,materials:{wood:4},period:15,inputs:{water:1},output:'pumpkin',amount:2,irrigable:true,waterNeed:5,description:'물 1개로 호박 2개를 기릅니다. '+WATERED(5)+' 빵집의 호박 파이와 벽돌 가마의 호박등에 쓰입니다.'},
  oakfarm:{name:'참나무 농장',group:'farm',cost:110,materials:{wood:6,plank:2},period:20,inputs:{water:1},output:'oakwood',amount:2,irrigable:true,waterNeed:7,description:'물 1개로 참나무 원목 2개를 키웁니다. '+WATERED(7)+' 제재소에서 오크통과 나무 상자를 만듭니다. 주변 나무를 베지 않습니다.'},
- winery:{name:'와이너리',group:'craft',cost:420,materials:{plank:8,brick:4,glass:2},period:28,inputs:{grapered:3,barrel:1},output:'winered',amount:2,description:'붉은 포도 3개와 오크통 1개로 적포도주 2병을 담급니다. 흰 포도를 넣는 백포도주로 바꿀 수 있습니다.'},
+ winery:{name:'와이너리',group:'craft',cost:420,materials:{plank:8,brick:4,glass:2},period:28,inputs:{grapered:3,barrel:1},output:'winered',amount:3,description:'붉은 포도 3개와 오크통 1개로 적포도주 3병을 담급니다. 흰 포도를 넣는 백포도주로 바꿀 수 있습니다.'},
  chocolatier:{name:'초콜릿 공방',group:'craft',cost:480,materials:{plank:6,brick:4,glass:2},period:24,inputs:{cocoa:2,sugar:1},output:'chocolate',amount:2,description:'카카오 2개와 설탕 1개로 초콜릿 2개를 만듭니다.'},
- sheeppen:{name:'양 우리',group:'farm',cost:130,materials:{wood:6,plank:2},period:18,inputs:{feed:1,water:1},output:'wool',amount:2,waterNeed:3,description:'사료 1개와 물 1개를 먹여 양모 2개를 깎습니다. 물 요구량 3을 주변 물로 채우면 물을 나르지 않고, 목초지 옆에서 빨라집니다. 오염에 약합니다. 양모는 방직소에서 털실이 됩니다.'},
+ sheeppen:{name:'양 우리',group:'farm',cost:130,materials:{wood:6,plank:2},period:15,inputs:{feed:1,water:1},output:'wool',amount:2,waterNeed:3,description:'사료 1개와 물 1개를 먹여 양모 2개를 깎습니다. 물 요구량 3을 주변 물로 채우면 물을 나르지 않고, 목초지 옆에서 빨라집니다. 오염에 약합니다. 양모는 방직소에서 털실이 됩니다.'},
  milkbarn:{name:'젖소 우리',group:'farm',cost:170,materials:{plank:6,stone:4},period:18,inputs:{feed:1,water:1},output:'milk',amount:2,waterNeed:4,description:'사료 1개와 물 1개를 먹여 우유 2개를 짭니다. 물 요구량 4를 주변 물로 채우면 물을 나르지 않고, 목초지 옆에서 빨라집니다. 오염에 약합니다. 빵집에서 버터를 만듭니다.'},
  apiary:{name:'양봉장',group:'farm',cost:120,materials:{plank:4},period:10,output:'honey',amount:1,description:'두 칸 안에 야생 클로버가 있어야 원료 없이 꿀 1개를 모읍니다. 밀랍을 모으도록 바꿀 수 있습니다. 오염에 약합니다.'},
  duckhouse:{name:'오리 집',group:'farm',cost:140,materials:{plank:4,stone:2},period:17,inputs:{feed:1,water:1},output:'duckegg',amount:2,waterNeed:2,description:'사료 1개와 물 1개를 먹여 오리알 2개를 얻습니다. 물 요구량 2를 연못이나 강으로 채우면 물을 나르지 않습니다. 오염에 약합니다. 빵집의 호박 파이에 쓰입니다.'},
@@ -88,22 +88,25 @@ export const EXPANSION_BUILDINGS={
  sandpit:{name:'모래 채굴장',group:'base',cost:130,materials:{wood:4,plank:2},period:10,output:'sand',amount:2,description:'모래 2개를 퍼 올립니다. 사막·해안의 모래 땅 위에서는 25% 빠르고, 물가에 붙이면 침수로 30% 느려집니다. 유리 공방의 모래 유리에 쓰입니다.'},
  clayfield:{name:'점토밭',group:'base',cost:90,materials:{wood:4},period:10,output:'clay',amount:2,nearWater:2,description:'강이나 바다에서 두 칸 이내에 지으면 점토 2개를 캡니다. 벽돌 가마가 석재 대신 점토로 벽돌을 굽습니다.'},
  packshop:{name:'포장 공방',group:'craft',cost:900,materials:{plank:10,brick:6,glass:2},period:24,inputs:{woodbox:1,honey:2,jam:1,bread:2},output:'foodparcel',amount:1,description:'나무 상자에 꿀 2·딸기잼 1·빵 2를 담아 식량 소포 1개를 꾸립니다. 천 상자에 케이크·적포도주·호박 파이를 담는 선물 소포로 바꿀 수 있습니다.'},
- solarpanel:{name:'태양광 패널',group:'energy',cost:1600,materials:{steel:4,glass:6,wire:4},period:30,output:'power',amount:1,description:'연료 없이 햇빛으로 전력을 만듭니다. 높은 건물이나 산의 그늘이 지면 한 단계마다 20% 느려집니다(최저 40%).'},
+ solarpanel:{name:'태양광 패널',group:'energy',cost:1600,materials:{steel:4,glass:6,wire:4},period:30,output:'power',amount:1,description:'연료 없이 햇빛으로 전력을 만듭니다. 높은 공장 옆에서도 그대로 돌아 풍력 발전기가 막히는 공장 지대에 맞습니다. 산 그늘만 한 단계마다 20% 느려지고(최저 40%), 산 바로 옆에서는 전기가 끊기는 때가 생깁니다.'},
  pond:{name:'연못',group:'farm',cost:60,materials:{stone:2},terrain:'pond',description:'빈 땅 한 칸을 파서 담수 연못으로 바꿉니다. 맞닿은 칸에 물 2, 두 칸째에 물 1을 주어 작물과 가축의 물 요구량을 채웁니다. 광산 옆에 두면 광산이 침수됩니다. 철거하면 메워서 빈 땅으로 돌아가고 건설비의 40%를 돌려받습니다.'},
  pasture:{name:'목초지',group:'farm',cost:40,materials:{wood:2},terrain:'pasture',description:'빈 땅 한 칸에 풀을 심어 목초지로 바꿉니다. 맞닿은 양 우리·젖소 우리는 20%, 두 칸째는 10% 빨라집니다(합계 최대 40%). 철거하면 빈 땅으로 돌아가고 건설비의 40%를 돌려받습니다.'},
  clover:{name:'야생 클로버',group:'farm',cost:25,materials:{wood:1},terrain:'clover',description:'빈 땅 한 칸에 야생 클로버를 퍼뜨립니다. 두 칸 안의 양봉장은 클로버가 있어야 가동합니다. 철거하면 빈 땅으로 돌아가고 건설비의 40%를 돌려받습니다.'}
 };
 Object.assign(MODERN_RESOURCES,EXPANSION_RESOURCES);Object.assign(MODERN_BUILDINGS,EXPANSION_BUILDINGS);
 // Unlock rank of each new facility: farms early to mid, the costly packing and power late (balance doc 13-3).
-export const EXPANSION_RANKS={saltfield:2,sugarfield:3,berryfield:4,pumpkinpatch:5,pond:5,feedmill:6,pasture:6,sheeppen:7,milkbarn:7,duckhouse:8,clayfield:8,apiary:9,clover:9,mintfield:10,oakfarm:11,vineyard:12,winery:13,sandpit:14,cocoafarm:15,chocolatier:16,packshop:19,solarpanel:23};
+// G1-E3: the sugar cane field, pumpkin patch and sheep pen open in the last rank of the lord's contract band that lists
+// their goods (simulation.js CONTRACT_POOLS: sugar cane before 3, pumpkin before 5, wool before 7); one rank later they
+// were never ordered at all (balance doc 19).
+export const EXPANSION_RANKS={saltfield:2,sugarfield:2,berryfield:4,pumpkinpatch:4,pond:5,feedmill:6,pasture:6,sheeppen:6,milkbarn:7,duckhouse:8,clayfield:8,apiary:9,clover:9,mintfield:10,oakfarm:11,vineyard:12,winery:13,sandpit:14,cocoafarm:15,chocolatier:16,packshop:19,solarpanel:23};
 for(const [type,rank] of Object.entries(EXPANSION_RANKS))RANKS[rank].unlocks.push(type);
 
 // Second expansion 2026-09-30 (docs/EXPANSION_20260929.md 6, balance: docs/BALANCE_PATCH_20260928.md 17). The goods ride
 // on alternative products of existing facilities; the old bread, cake, wine and fuel lines keep their inputs and prices.
 export const EXPANSION2_RESOURCES={
- dough:{name:'빵 반죽',color:'#e9d3a6',price:34},baguette:{name:'바게트',color:'#c98a3f',price:78,final:true},batter:{name:'케이크 반죽',color:'#f3e2b8',price:90},
- fancycake:{name:'고급 케이크',color:'#e86f8f',price:360,final:true},decorcake:{name:'장식 케이크',color:'#8fd8c0',price:465,final:true},
- winebottle:{name:'와인병',color:'#3f7a5a',price:40},sangria:{name:'상그리아',color:'#c23a4a',price:180,final:true},honeycomb:{name:'벌집',color:'#f0b429',price:40},jetfuel:{name:'항공유',color:'#7fb6d9',price:160}
+ dough:{name:'빵 반죽',color:'#e9d3a6',price:34},baguette:{name:'바게트',color:'#c98a3f',price:88,final:true},batter:{name:'케이크 반죽',color:'#f3e2b8',price:90},
+ fancycake:{name:'고급 케이크',color:'#e86f8f',price:690,final:true},decorcake:{name:'장식 케이크',color:'#8fd8c0',price:800,final:true},
+ winebottle:{name:'와인병',color:'#3f7a5a',price:40},sangria:{name:'상그리아',color:'#c23a4a',price:215,final:true},honeycomb:{name:'벌집',color:'#f0b429',price:40},jetfuel:{name:'항공유',color:'#7fb6d9',price:160}
 };
 export const EXPANSION2_BUILDINGS={
  shallowmine:{name:'얕은 광산',group:'industry',cost:220,materials:{wood:6,plank:4},period:16,output:'iron',amount:2,description:'산이나 광맥이 없어도 어디서나 땅을 얕게 파 철광석 2개를 캡니다. 철광산의 절반 속도이며 타일 광물량과 산 지면의 영향을 받지 않습니다. 구리광석을 캐도록 바꿀 수 있고, 물가에 붙이면 침수로 30% 느려집니다.'},
@@ -139,9 +142,9 @@ export const EXPANSION_RECIPES={
  bakery:[{id:'jam',name:'딸기잼',inputs:{strawberry:3,sugar:1},output:'jam',amount:2,period:14,unlock:4},{id:'butter',name:'버터',inputs:{milk:3,salt:1},output:'butter',amount:2,period:13,unlock:7},{id:'pie',name:'호박 파이',inputs:{pumpkin:2,flour:1,duckegg:1},output:'pie',amount:2,period:16,unlock:8}],
  confectionery:[{id:'candy',name:'박하 사탕',inputs:{mint:2,sugar:1},output:'candy',amount:3,period:14,unlock:10}],
  kiln:[{id:'claybrick',name:'점토 벽돌',inputs:{clay:2,wood:1},output:'brick',amount:3,period:12,unlock:8},{id:'lantern',name:'호박등',inputs:{pumpkin:1,wax:1,yarn:1},output:'lantern',amount:1,period:18,unlock:12}],
- sawmill:[{id:'barrel',name:'오크통',inputs:{oakwood:2},output:'barrel',amount:1,period:14,unlock:11},{id:'woodbox',name:'나무 상자',inputs:{oakwood:2},output:'woodbox',amount:3,period:12,unlock:11}],
+ sawmill:[{id:'barrel',name:'오크통',inputs:{oakwood:2},output:'barrel',amount:2,period:20,unlock:11},{id:'woodbox',name:'나무 상자',inputs:{oakwood:2},output:'woodbox',amount:3,period:12,unlock:11}],
  vineyard:[{id:'grapewhite',name:'흰 포도',inputs:{water:1},output:'grapewhite',amount:2,period:14,unlock:12}],
- winery:[{id:'winewhite',name:'백포도주',inputs:{grapewhite:3,barrel:1},output:'winewhite',amount:2,period:28,unlock:13}],
+ winery:[{id:'winewhite',name:'백포도주',inputs:{grapewhite:3,barrel:1},output:'winewhite',amount:3,period:28,unlock:13}],
  apiary:[{id:'wax',name:'밀랍',inputs:{},output:'wax',amount:1,period:14,unlock:9}],
  glassworks:[{id:'sandglass',name:'모래 유리',inputs:{sand:2,wood:1},output:'glass',amount:2,period:14,unlock:14}],
  quarry:[{id:'limestone',name:'석회암',inputs:{},output:'limestone',amount:2,period:12,unlock:15}],
@@ -160,7 +163,9 @@ export const EXPANSION2_RECIPES={
  glassworks:[{id:'winebottle',name:'와인병',inputs:{sand:3},output:'winebottle',amount:2,period:12,unlock:14}],
  winery:[{id:'sangria',name:'상그리아',inputs:{winered:1,strawberry:2,winebottle:1},output:'sangria',amount:2,period:18,unlock:15}],
  apiary:[{id:'honeycomb',name:'벌집',inputs:{},output:'honeycomb',amount:1,period:16,unlock:11}],
- confectionery:[{id:'honeycandy',name:'벌집 박하 사탕',inputs:{mint:2,honeycomb:1},output:'candy',amount:3,period:14,unlock:11}],
+ // G1-E7: honeycomb costs more than sugar, so the honeycomb candy runs faster (11 s against 14 s); it was the same line
+ // at a higher input price.
+ confectionery:[{id:'honeycandy',name:'벌집 박하 사탕',inputs:{mint:2,honeycomb:1},output:'candy',amount:3,period:11,unlock:11}],
  refinery:[{id:'jetfuel',name:'항공유',inputs:{oil:3,water:1},output:'jetfuel',amount:2,period:24,unlock:26}],
  shipyard:[{id:'jetairship',name:'항공유 비공정',inputs:{engine:2,mithril:2,cloth:4,jetfuel:2},output:'airship',amount:1,period:48,unlock:27}],
  shallowmine:[{id:'copper',name:'얕은 구리 광맥',inputs:{},output:'copper',amount:2,period:24,unlock:12}]

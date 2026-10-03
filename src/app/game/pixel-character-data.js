@@ -42,7 +42,7 @@ export function pixelAtlasFrame(direction, frame, metadata) {
  const directions = metadata?.directions || LEGACY_DIRECTIONS;
  const facing = PIXEL_DIRECTIONS[((direction % 4) + 4) % 4];
  const row = Math.max(0, directions.indexOf(facing));
- return { row, rows: directions.length, columns: metadata?.columns?.length || 8, anchor: metadata?.anchors?.[row]?.[frame] || [.5, PIXEL_BASELINE] };
+ return { row, rows: directions.length, columns: metadata?.columns?.length || 8, anchor: metadata?.anchors?.[row]?.[frame] || [.5, PIXEL_BASELINE], scale: metadata?.frameScales?.[frame] || 1 };
 }
 export function pixelAction(worker) {
  if (worker.hp !== undefined && worker.hp <= 0) return 'defeat';

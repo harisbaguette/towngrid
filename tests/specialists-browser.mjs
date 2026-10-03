@@ -28,7 +28,7 @@ try{
  await page.screenshot({path:fileURLToPath(new URL('professions-mobile.png',out))});
  await page.emulateMedia({reducedMotion:'no-preference'});await page.setViewportSize({width:1440,height:1050});
  await page.goto(origin+'/environment-preview.html');
- await page.waitForFunction(()=>window.environmentPreview?.game?.staffModels?.size>10,null,{timeout:120000});
+ await page.waitForFunction(()=>window.environmentPreview?.game?.sim?.buildings.length>0,null,{timeout:120000});
  await page.evaluate(()=>window.environmentPreview.pause());
  report.factions={};
  for(const race of ['human','elf']){
@@ -39,21 +39,22 @@ try{
    await Promise.all((race==='human'?['human','dwarf','titan']:['elf','spirit','centaur','fae']).map(loadAssets));
    const nation=Object.keys(NATIONS).find(id=>NATIONS[id].playable&&factionOf(NATIONS[id].race)===race);
    const sim=createShowcase(nation,race);sim.paused=true;
-   const {FACILITY_PROFESSIONS}=await import('/src/app/game/facility-staff.js');
+   const {FACILITY_PROFESSIONS,facilityRoster}=await import('/src/app/game/facility-staff.js');
    const present=new Set(sim.buildings.map(b=>FACILITY_PROFESSIONS[b.type]));
    for(const [type,job]of Object.entries(FACILITY_PROFESSIONS))if(!present.has(job)){
     const tile=sim.tiles.find(t=>t.x>5&&t.x<20&&t.z>5&&t.z<20&&t.terrain!=='water'&&!sim.at(t.x,t.z)&&!sim.roads.has(t.x+','+t.z));
     if(!tile)throw Error('No space for profession '+job);tile.nature=null;sim.owned.add(tile.x+','+tile.z);
     sim.buildings.push({id:sim.nextId++,type,x:tile.x,z:tile.z,size:1,level:1,race,health:100,enabled:true,inputs:{},out:0,progress:0,working:false,status:'',age:0,priority:1});present.add(job);
    }
-   window.environmentPreview.game.setSimulation(sim);window.environmentPreview.game.camera.zoom=1.2;window.environmentPreview.game.camera.updateProjectionMatrix();
+   window.previewProfessions=facilityRoster(sim);window.environmentPreview.game.setSimulation(sim);window.environmentPreview.game.camera.zoom=1.2;window.environmentPreview.game.camera.updateProjectionMatrix();
   },race);
-  await page.waitForFunction(()=>window.environmentPreview.game.staffModels.size>10&&[...window.environmentPreview.game.staffModels.values()].every(m=>m.userData.atlas.columns===64));
-  report.factions[race]=await page.evaluate(()=>{const g=window.environmentPreview.game;return {staff:[...g.staffModels.values()].map(m=>m.userData.appearance),workers:g.sim.workers.map(w=>({appearance:w.appearance,gender:w.gender,race:w.race}))};});
+  await page.waitForFunction(()=>window.environmentPreview.game.workerModels.size>0&&[...window.environmentPreview.game.workerModels.values()].every(m=>m.userData.atlas.columns===64));
+  report.factions[race]=await page.evaluate(()=>{const g=window.environmentPreview.game;return {staff:window.previewProfessions.map(w=>w.appearance),spawned:g.world.children.filter(m=>m.userData.facilityStaff).length,workers:g.sim.workers.map(w=>({appearance:w.appearance,gender:w.gender,race:w.race}))};});
+  assert.equal(report.factions[race].spawned,0,'workplaces do not add map residents');
   for(const id of race==='human'?['dorin','nara','borik','cedric','bel','dax','garen']:['elvar','lyra','oriel','mist','vian','norin','aster'])assert.ok(report.factions[race].staff.includes(id),id);
   for(let view=0;view<4;view++){
    await page.evaluate(view=>window.environmentPreview.game.setQuarterView(view),view);await page.waitForTimeout(100);
-   assert.ok(await page.evaluate(()=>[...window.environmentPreview.game.staffModels.values()].every(m=>m.userData.texture.repeat.x===1/64&&m.userData.atlas.rows===4)));
+   assert.ok(await page.evaluate(()=>[...window.environmentPreview.game.workerModels.values()].every(m=>m.userData.texture.repeat.x===1/64&&m.userData.atlas.rows===4)));
    await page.screenshot({path:fileURLToPath(new URL('professions-'+race+'-'+view+'.png',out))});
   }
   const saved=await page.evaluate(()=>JSON.stringify(window.environmentPreview.game.sim.save()));
@@ -80,7 +81,7 @@ try{
   const model=createPixelCharacter(guard.id,guard.race,guard.appearance),states=[];
   const snapshot=time=>{animatePixelCharacter(model,guard,time,game.camera);states.push({action:model.userData.current,frame:model.userData.frame,rotation:model.userData.sprite.material.rotation,opacity:model.userData.sprite.material.opacity});};
   snapshot(0);guard.hp=50;snapshot(.1);snapshot(.35);guard.hp=0;snapshot(.4);snapshot(1.15);snapshot(1.8);
-  const canvas=document.createElement('canvas');canvas.width=320;canvas.height=256;const ctx=canvas.getContext('2d');ctx.fillStyle='#dce9df';ctx.fillRect(0,0,320,256);SoftwareRenderer.prototype.drawPixelCharacter.call({ctx,pixelsPerWorldUnit:200},model,{x:160,y:170});window.combatProof=canvas.toDataURL();
+  const canvas=document.createElement('canvas');canvas.width=320;canvas.height=256;const ctx=canvas.getContext('2d');ctx.fillStyle='#dce9df';ctx.fillRect(0,0,320,256);/* 187b773: the sprite anchor goes through renderer.project */SoftwareRenderer.prototype.drawPixelCharacter.call({ctx,pixelsPerWorldUnit:200,project:()=>({x:160,y:170})},model,{x:160,y:170});window.combatProof=canvas.toDataURL();
   return {identity:guard.appearance,states};
  });
  assert.equal(report.combat.identity,'aster');assert.deepEqual(report.combat.states.map(v=>v.action),['attack','hurt','attack','defeat','defeat','defeat']);

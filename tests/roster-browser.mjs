@@ -40,23 +40,22 @@ try{
   for(const url of new Set([...urls,'/src/app/game/scene.js'])){const{GameScene}=await import(url),original=GameScene.prototype.setSimulation;GameScene.prototype.setSimulation=function(sim){window.rosterScene=this;return original.call(this,sim);};}
  });
  await page.getByRole('button',{name:'산업도시 둘러보기',exact:true}).click();
- await page.waitForFunction(()=>window.rosterScene?.staffModels?.size>10,{},{timeout:120000});
+ await page.waitForFunction(()=>window.rosterScene?.workerModels?.size>0,{},{timeout:120000});
  await page.getByRole('button',{name:'일시정지',exact:true}).click();
- report.game=await page.evaluate(()=>{const scene=window.rosterScene;return {workers:scene.sim.workers.map(w=>({race:w.race,appearance:w.appearance,gender:w.gender})),staff:[...scene.staffModels.values()].map(m=>({id:m.userData.appearance,columns:m.userData.atlas.columns})),scale:[...scene.workerModels.values()].map(m=>({race:m.userData.identity.race,height:m.userData.pixelHeight}))};});
+ report.game=await page.evaluate(()=>{const scene=window.rosterScene;return {workers:scene.sim.workers.map(w=>({race:w.race,appearance:w.appearance,gender:w.gender})),staff:scene.world.children.filter(m=>m.userData.facilityStaff).map(m=>m.userData.appearance),scale:[...scene.workerModels.values()].map(m=>({race:m.userData.identity.race,height:m.userData.pixelHeight}))};});
  assert.ok(report.game.workers.every(w=>({human:'female',dwarf:'male',titan:'male'})[w.race]===w.gender));
- assert.ok(report.game.staff.some(w=>w.id==='hana')&&report.game.staff.some(w=>w.id==='marna')&&report.game.staff.some(w=>w.id==='vera'));
- assert.ok(report.game.staff.every(w=>w.columns===64));
+ assert.deepEqual(report.game.staff,[],'facilities do not spawn decorative residents');
  assert.ok(report.game.scale.find(w=>w.race==='titan').height>report.game.scale.find(w=>w.race==='human').height*1.35);
  for(let view=0;view<4;view++){
   await page.evaluate(v=>window.rosterScene.setQuarterView(v),view);
   await page.waitForTimeout(180);
-  const directions=await page.evaluate(()=>[...window.rosterScene.staffModels.values()].map(m=>({row:m.userData.atlas.row,columns:m.userData.atlas.columns,repeat:m.userData.texture.repeat.toArray()})));
+  const directions=await page.evaluate(()=>[...window.rosterScene.workerModels.values()].map(m=>({row:m.userData.atlas.row,columns:m.userData.atlas.columns,repeat:m.userData.texture.repeat.toArray()})));
   assert.ok(directions.every(v=>v.row>=0&&v.row<4&&v.columns===64&&v.repeat[0]===1/64&&v.repeat[1]===.25));
   await page.screenshot({path:fileURLToPath(new URL('game-view-'+view+'.png',out))});
  }
  await page.getByRole('button',{name:'주민',exact:true}).click();
- await page.locator('.resident-choice').filter({hasText:'빵집 · 제빵사'}).first().click();
- assert.match(await page.locator('.resident-illustration').getAttribute('src'),/hana\/portrait-idle\.png$/);
+ await page.locator('.resident-choice').filter({hasText:'미라'}).first().click();
+ assert.match(await page.locator('.resident-illustration').getAttribute('src'),/mira\/portrait-idle\.png$/);
  assert.equal(await page.locator('.resident-actions button').count(),11);
  await page.locator('.resident-actions button').filter({hasText:'작업'}).click();
  await page.screenshot({path:fileURLToPath(new URL('residents-baker.png',out))});
@@ -65,11 +64,11 @@ try{
  await page.screenshot({path:fileURLToPath(new URL('residents-mobile.png',out))});
  await page.keyboard.press('Escape');await page.setViewportSize({width:1440,height:1050});
  const bakeryId=await page.evaluate(()=>{const scene=window.rosterScene,b=scene.sim.buildings.find(b=>b.type==='bakery');scene.focusBuilding(b.id);scene.callbacks.onClick(b.x,b.z);return b.id;});
- await page.locator('.facility-staff').waitFor();
- assert.match(await page.locator('.facility-staff').innerText(),/제빵사 · 하나/);
+ await page.locator('.facility-card').waitFor();
+ assert.equal(await page.locator('.facility-staff').count(),0);
  await page.getByRole('button',{name:'가동 중지',exact:true}).click();
- await page.waitForFunction(id=>window.rosterScene.staffModels.get(-100000-id)?.userData.current==='idle',bakeryId);
- assert.match(await page.locator('.facility-staff').innerText(),/가동 중지/);
+ await page.waitForFunction(id=>window.rosterScene.sim.buildings.find(b=>b.id===id)?.enabled===false,bakeryId);
+ assert.match(await page.locator('.facility-card').innerText(),/가동 중지/);
  await page.screenshot({path:fileURLToPath(new URL('bakery-stopped.png',out))});
  const before=await page.evaluate(()=>JSON.stringify(window.rosterScene.sim.save()));
  await page.evaluate(()=>window.rosterScene.rebuild());
@@ -79,8 +78,9 @@ try{
  report.cpu=await page.evaluate(async()=>{
   const{SoftwareRenderer}=await import('/src/app/game/software-renderer.js');const scene=window.rosterScene;
   const canvas=document.createElement('canvas');canvas.width=800;canvas.height=260;const ctx=canvas.getContext('2d');ctx.fillStyle='#e4eff0';ctx.fillRect(0,0,800,260);
-  const models=[...scene.workerModels.values()].slice(0,3).concat([...scene.staffModels.values()].filter(m=>m.userData.appearance==='hana').slice(0,1));
-  models.forEach((m,i)=>SoftwareRenderer.prototype.drawPixelCharacter.call({ctx,pixelsPerWorldUnit:150},m,{x:100+i*190,y:210}));
+  const models=[...scene.workerModels.values()].slice(0,4);
+  // 187b773: drawPixelCharacter projects the sprite's world anchor through renderer.project; this fake renderer maps it to the slot.
+  models.forEach((m,i)=>{const c={x:100+i*190,y:210};SoftwareRenderer.prototype.drawPixelCharacter.call({ctx,pixelsPerWorldUnit:150,project:()=>c},m,c);});
   window.rosterCpu=canvas.toDataURL();return {count:models.length,painted:ctx.getImageData(0,0,800,260).data.some((v,i)=>i%4===0&&v<100)};
  });assert.ok(report.cpu.count===4&&report.cpu.painted);
  const data=await page.evaluate(()=>window.rosterCpu);await writeFile(new URL('cpu-cast.png',out),Buffer.from(data.split(',')[1],'base64'));
@@ -99,12 +99,12 @@ try{
   const sim=createShowcase(nation,'elf');sim.paused=true;
   window.rosterScene.setSimulation(sim);
  });
- await page.waitForFunction(()=>window.rosterScene.staffModels.size>10&&[...window.rosterScene.staffModels.values(),...window.rosterScene.workerModels.values()].every(m=>m.userData.image?.width>0));
+ await page.waitForFunction(()=>window.rosterScene.workerModels.size>0&&[...window.rosterScene.workerModels.values()].every(m=>m.userData.image?.width>0));
  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
- report.elf=await page.evaluate(()=>{const scene=window.rosterScene;return {workers:scene.sim.workers.map(w=>({race:w.race,appearance:w.appearance,gender:w.gender})),staff:[...scene.staffModels.values()].map(m=>m.userData.appearance)};});
+ report.elf=await page.evaluate(()=>{const scene=window.rosterScene;return {workers:scene.sim.workers.map(w=>({race:w.race,appearance:w.appearance,gender:w.gender})),staff:scene.world.children.filter(m=>m.userData.facilityStaff).map(m=>m.userData.appearance)};});
  assert.ok(report.elf.workers.every(w=>({elf:'female',centaur:'male',fae:'female',spirit:'neutral'})[w.race]===w.gender));
  for(const id of ['silen','kai','fia','dew'])assert.ok(report.elf.workers.some(w=>w.appearance===id),id);
- for(const id of ['lien','ael','elion','mist','lana','eil'])assert.ok(report.elf.staff.includes(id),id);
+ assert.deepEqual(report.elf.staff,[],'elf facilities do not spawn decorative residents');
  await page.screenshot({path:fileURLToPath(new URL('elf-workforce.png',out))});
  report.errors=errors;report.failed=failed;assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);
  await writeFile(new URL('browser-check.json',out),JSON.stringify(report,null,2)+'\n');console.log('Roster gallery, portraits, 4 views, facility work/stop, resident UI, mobile and CPU PASS');

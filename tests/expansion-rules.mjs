@@ -34,8 +34,8 @@ function oldEffects(sim,type,x,z){
 }
 /** A site of the world grid (new rules) whose layout passes `test`, with every tile owned, a warehouse and three houses. */
 function site(test){
- const p=PROVINCES.find(p=>{const s=new Simulation('river',null,{provinceId:p.id,nation:p.nation});return test(s);});assert.ok(p,'a province for the case');
- const s=new Simulation('river',null,{provinceId:p.id,nation:p.nation});s.nextEvent=1e9;s.autoSell={};s.money=1e7;s.debt=0;s.rank=32;
+ const p=PROVINCES.find(p=>{const s=new Simulation('river',null,{provinceId:p.id,nation:p.nation||'estern'});return test(s);});assert.ok(p,'a province for the case');
+ const s=new Simulation('river',null,{provinceId:p.id,nation:p.nation||'estern'});s.nextEvent=1e9;s.autoSell={};s.money=1e7;s.debt=0;s.rank=32;
  for(const t of s.tiles)s.owned.add(t.x+','+t.z);/* land owned directly */
  s.build('warehouse',11,12,true);for(const [x,z] of [[11,14],[9,12],[13,12]])s.build('house',x,z,true);
  for(const b of s.buildings)if(BUILDINGS[b.type].home)b.level=3;s.syncWorkers();for(const r of Object.keys(RESOURCES))s.stock[r]=150;/* stock set directly */
@@ -126,7 +126,7 @@ const ok=[];
 
 // 5a. Tiered water keeps the old wheat rule: on all 180 grid maps, a wheat field (need 3) is watered exactly where the
 //     old rule watered it (fresh water within two tiles), tile by tile.
-{let tiles=0,watered=0;for(const p of PROVINCES){const s=new Simulation('river',null,{provinceId:p.id,nation:p.nation});
+{let tiles=0,watered=0;for(const p of PROVINCES){const s=new Simulation('river',null,{provinceId:p.id,nation:p.nation||'estern'});
   for(const t of s.tiles){if(t.terrain==='water')continue;tiles++;const now=s.placementEffects('field',t.x,t.z),then=oldEffects(s,'field',t.x,t.z);assert.equal(now.water,then.water,p.id+' '+t.x+','+t.z);watered+=now.water;}}
  assert.ok(tiles>90000&&watered>10000);ok.push('wheat parity on '+tiles+' tiles ('+watered+' watered)');}
 // 5b. Each crop has its own demand: touching tiles give 2, the next ring 1, open water within two tiles a base of 3.
@@ -189,12 +189,12 @@ assert.ok(BUILDINGS.apiary.description.includes('야생 클로버'));assert.ok(!
 //    keep the old rule for every building, run, and save again.
 {const s=site(s=>s.tiles.some(isFresh)&&s.tiles.some(isMountain));for(const type of ['field','vineyard','ironmine','sheeppen','apiary','solarpanel','pond','pasture','clover']){const t=quiet(s)||s.tiles.find(t=>dryAt(s,t)&&s.buildings.every(b=>cheb(b,t)>1));s.build(type,t.x,t.z,true);}
  run(s,10);const back=reload(s);for(const b of s.buildings)assert.deepEqual(back.placementEffects(b.type,b.x,b.z),s.placementEffects(b.type,b.x,b.z),b.type+' effects survive a save');
- assert.deepEqual(Object.keys(s.save()).sort(),Object.keys(new Simulation('river').save()).sort(),'no new save keys');assert.ok(s.save().buildings.every(b=>!('cluster' in b)&&!('waterScore' in b)),'effects are not stored on buildings');}
+ const baseline=new Simulation('river');baseline.contract();s.contract();assert.deepEqual(Object.keys(s.save()).sort(),Object.keys(baseline.save()).sort(),'terrain effects add no save keys');assert.ok(s.save().buildings.every(b=>!('cluster' in b)&&!('waterScore' in b)),'effects are not stored on buildings');}
 {const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/save-before-20260928.json',import.meta.url),'utf8'));let checked=0;
  for(const key of ['demo','early']){const c=new Campaign({saved:decodeSave(fixture[key])});
   for(const site of c.sites){const s=site.sim;assert.equal(terrainRules(s),false,key+' is an old map');
    for(const b of s.buildings){const now=s.placementEffects(b.type,b.x,b.z),then=oldEffects(s,b.type,b.x,b.z);for(const k of ['water','pollution','shade','windBlock','speed'])assert.equal(now[k],then[k],key+' '+b.type+' '+k);checked++;}}
-  for(let i=0;i<4*60;i++)c.tick(.25);const again=decodeSave(encodeSave(c.save()));assert.ok(again.sites.every(v=>v.simulation.version===8));}
+  for(let i=0;i<4*60;i++)c.tick(.25);const again=decodeSave(encodeSave(c.save()));assert.ok(again.sites.every(v=>v.simulation.version===9));}
  assert.ok(checked>20);ok.push('old saves: '+checked+' buildings match the old rule');}
 
 // 10. The balance record carries the same numbers as the code.
@@ -281,5 +281,26 @@ const speedOf=(s,b)=>{const period=s.recipeOf?s.recipeOf(b).period:BUILDINGS[b.t
  // The same root: the sapling in the depleted-camp advice grows in real seconds, not game seconds.
  assert.ok(operationHint('자원 고갈',s).includes(realSeconds(SAPLING_GROW,s)+'초 뒤 자람'));s.speed=4;assert.ok(operationHint('자원 고갈',s).includes(realSeconds(SAPLING_GROW,s)+'초 뒤 자람'));assert.ok(blockHint('자원 고갈',s).includes('80초 뒤 자람'),'the facility advice passes the speed');s.speed=1;
  ok.push('irrigator texts: crops in reach, wind shelter, supplier on the field, real-second window, no time when broken');}
+
+// 14. Content audit 2026-10-02 (docs/BALANCE_PATCH_20260928.md 19): broken terrain facilities give nothing, the showcase
+// tour plays the current rules, the solar panel reads mountain shade only and the wind turbine leaves gaps under
+// shelter 3, a starved facility is told to switch a standing facility's product, and side challenges count per rank.
+{const s=site(s=>!!s.layout.ecology),t=quiet(s,t=>s.tiles.some(u=>dryAt(s,u)&&cheb(u,t)===1));s.build('field',t.x,t.z,true);
+ const spots=s.tiles.filter(u=>dryAt(s,u)&&cheb(u,t)===1).slice(0,2);for(const u of spots)s.build('pond',u.x,u.z,true);
+ const before=s.placementEffects('field',t.x,t.z).waterScore;for(const b of s.buildings.filter(b=>b.type==='pond'))b.health=0;s.revision++;/* as a storm leaves them */
+ const broken=s.placementEffects('field',t.x,t.z).waterScore;assert.equal(before,4,'two touching ponds give 4');assert.equal(broken,0,'broken ponds give no water');
+ for(const b of s.buildings.filter(b=>b.type==='pond'))s.repair(b.id);assert.equal(s.placementEffects('field',t.x,t.z).waterScore,4,'repaired ponds water again');
+ const tour=new Campaign({demo:true});assert.equal(terrainRules(tour.home.sim),true,'the unsaved showcase tour plays the current terrain rules');assert.equal(terrainRules(new Simulation('river',null,{land:legacyLayout('river','estern-0')})),false,'an old map keeps the old rules');
+ const p=quiet(s);s.build('smelter',p.x,p.z,true);const n=s.tiles.find(u=>dryAt(s,u)&&cheb(u,p)===1&&nearest(s,u,isMountain)>5);
+ const sun=s.placementEffects('solarpanel',n.x,n.z),wind=s.placementEffects('windturbine',n.x,n.z);assert.equal(sun.shade,3);assert.equal(sun.speed,1,'a smelter does not shade the panel');assert.equal(wind.windBlock,3);
+ assert.ok(BUILDINGS.windturbine.period/wind.speed>60,'the sheltered turbine cycle outlasts its 60 s power window');assert.deepEqual(shelterNote('solarpanel',sun),{name:'산 그늘',value:0});
+ const sawmill=s.build('sawmill',...[s.tiles.find(u=>dryAt(s,u)&&cheb(u,p)>3&&cheb(u,t)>3)].map(u=>[u.x,u.z]).flat(),true);const w=s.tiles.find(u=>dryAt(s,u)&&cheb(u,p)>3&&cheb(u,t)>3);s.build('winery',w.x,w.z,true);
+ const winery=s.at(w.x,w.z);winery.status='오크통 대기';winery.inputs={grapered:3};s.stock.barrel=0;/* grapes loaded, no barrel: set directly */const d=productionDiagnosis(s,winery,BUILDINGS,RESOURCES);
+ assert.equal(d.tool,null);assert.match(d.label,/제재소 제품 바꾸기/);assert.match(d.text,/오크통/);assert.ok(sawmill.ok);
+ ok.push('audit 2026-10-02: broken ponds dry, tour rules, solar mountain shade, sheltered wind gaps, switch-product advice');}
+{const c=new Campaign({nation:'estern',provinceId:'estern-5'}),s=c.active;s.nextEvent=1e9;s.rank=8;/* rank set directly */s.logisticsStats.direct=900;c.tick(.25);
+ const tr=s.promotion().trial;assert.equal(tr.key,'direct');assert.equal(tr.current,0,'hauls before the rank do not count');s.logisticsStats.direct+=40;assert.equal(s.promotion().trial.done,true,'40 new direct hauls complete it');
+ s.rank=22;c.battles=[{day:1,site:'site-1',faction:'orc',damage:0,defeated:3}];s.time=80*5;c.tick(.25);assert.equal(s.promotion().trial.done,false,'a raid repelled in an earlier rank does not count');assert.equal(s.chooseEvent(),'raid','the next home event is the raid it waits for');
+ c.battles.unshift({day:s.day,site:'site-1',faction:'orc',damage:0,defeated:3});assert.equal(s.promotion().trial.done,true);ok.push('side challenges count per rank');}
 
 console.log('PASS expansion rules 5/5, terrain facilities 3/3, shallow mine and wind pump: '+ok.join('; '));

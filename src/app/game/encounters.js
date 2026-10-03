@@ -1,5 +1,5 @@
 import {FACTIONS} from './world.js';
-import {BUILDINGS} from './simulation.js';
+import {BUILDINGS,MOBILIZE} from './simulation.js';
 import {assignResidentAppearance} from './resident-roster.js';
 import {advanceCharacterRoute} from './character-movement.js';
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
@@ -30,11 +30,15 @@ function deployGuards(s){
   const race=s.availableRaces[i%s.availableRaces.length],w=assignResidentAppearance({id:GUARD_ID_BASE+i,race,x:p.x,z:p.z,homeId:base.id,dir:0,walking:false,phase:'idle',task:null,route:[],guard:true,hp:75,maxHp:75,attackAt:0},s.availableRaces);s.guards.push(w);
  }
 }
+/** Why the guard can not be raised now, or null (K-03): no raid, already raised, or what of the price is short. */
+export function mobilizeShort(s){
+ if(!s.raid||s.raid.finished)return '현재 습격이 없습니다';
+ if(s.raid.boosted)return '이번 습격에 경계를 강화했습니다';
+ return s.priceShort(MOBILIZE,'경계 강화 ');
+}
 export function mobilize(s){
- if(!s.raid||s.raid.finished)return {ok:false,error:'현재 습격이 없습니다'};
- if(s.raid.boosted)return {ok:false,error:'이번 습격에 경계를 강화했습니다'};
- const short=s.moneyShort?.(80,'경계 강화 ');if(short)return {ok:false,error:short};if(s.availableStock('grain')<6)return {ok:false,error:'경계 강화: 80G와 밀 6개'};
- s.money-=80;s.stock.grain-=6;s.raid.boostUntil=s.time+65;s.raid.boosted=true;deployGuards(s);s.sound('defend');return {ok:true};
+ const error=mobilizeShort(s);if(error)return {ok:false,error};
+ s.money-=MOBILIZE.money;for(const[r,n]of Object.entries(MOBILIZE.items))s.stock[r]-=n;s.raid.boostUntil=s.time+65;s.raid.boosted=true;deployGuards(s);s.sound('defend');return {ok:true};
 }
 function walk(s,w,target,dt,speed){
  if(!w.route.length||!s.walkable(w.route[0].x,w.route[0].z)){
@@ -54,7 +58,7 @@ export function tickRaid(s,dt){
   let target=guard;
   if(!target){
    target=s.buildings.find(b=>b.id===w.targetId&&b.health>0);
-   if(!target){const targets=s.buildings.filter(b=>b.health>0&&!['field','well'].includes(b.type)&&!BUILDINGS[b.type].home);target=targets.sort((a,b)=>distance(w,a)-(a.type==='warehouse'?2:0)-distance(w,b)+(b.type==='warehouse'?2:0))[0]||s.warehouse;w.targetId=target?.id;w.route=[];}
+   if(!target){/* fields, wells and terrain facilities (pond, pasture, clover: land, G1-T2b) are walked over, not broken */const targets=s.buildings.filter(b=>b.health>0&&!['field','well'].includes(b.type)&&!BUILDINGS[b.type].terrain&&!BUILDINGS[b.type].home);target=targets.sort((a,b)=>distance(w,a)-(a.type==='warehouse'?2:0)-distance(w,b)+(b.type==='warehouse'?2:0))[0]||s.warehouse;w.targetId=target?.id;w.route=[];}
   }
   if(!target)continue;
   const nearby=distance(w,target)<(guard?MELEE:1.2);w.attacking=nearby;

@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "plot": "estern-plot-14-18",
+  "checks": [
+    "four quarter views",
+    "WebGL and Canvas",
+    "rendering preserves save",
+    "exact plot click",
+    "real new town",
+    "mobile fit"
+  ],
+  "errors": [],
+  "failed": []
+}

@@ -23,6 +23,9 @@ for path in sorted(list(ROOT.glob('*/rig.json'))+list(Path('art-source/pixel-cha
         height=int(min(limb[0][1] for limb in spec['views'][row]['arms']))-7
         source=np.array(Image.open(path.parent/spec['views'][row]['image']))[:height]
         mask=source[:,:,3]>0
+        if spec['views'][row].get('headPolygon'):
+            head=Image.new('L',(128,128));ImageDraw.Draw(head).polygon([tuple(p) for p in spec['views'][row]['headPolygon']],fill=255)
+            mask&=np.array(head)[:height]>0
         for extra in spec['views'][row].get('extras',[]):
             excluded=Image.new('L',(128,128));ImageDraw.Draw(excluded).polygon([tuple(p) for p in extra['polygon']],fill=255)
             mask&=np.array(excluded)[:height]==0

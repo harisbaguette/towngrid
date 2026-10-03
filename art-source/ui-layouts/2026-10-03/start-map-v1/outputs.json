@@ -1,0 +1,23 @@
+[
+  {
+    "id": "01",
+    "name": "대륙 탐색",
+    "file": "01-continent.png",
+    "description": "지도가 화면을 채우고 국가·지형 선택은 작은 도구로 묶습니다.",
+    "source": "C:/Users/ghd12/.codex/generated_images/01a0ffd3-0c1b-7ff2-bc33-ad05d441c4f4/exec-99da4e68-323d-420d-b9ed-1f4832bd807e.png"
+  },
+  {
+    "id": "02",
+    "name": "부지 선택",
+    "file": "02-plot.png",
+    "description": "부지를 누르면 이름과 지형만 표시하고, 미리보기로 이어집니다.",
+    "source": "C:/Users/ghd12/.codex/generated_images/01a0ffd3-0c1b-7ff2-bc33-ad05d441c4f4/exec-50d01e17-fa05-4e56-bb98-40ee08e6e02c.png"
+  },
+  {
+    "id": "03",
+    "name": "시작 전 확인",
+    "file": "03-preview.png",
+    "description": "빈 땅과 주변 지형을 크게 확인한 뒤 종족을 고르고 시작합니다.",
+    "source": "C:/Users/ghd12/.codex/generated_images/01a0ffd3-0c1b-7ff2-bc33-ad05d441c4f4/exec-1f938a79-1f13-45ad-b775-5c2af0f0a400.png"
+  }
+]

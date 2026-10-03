@@ -6,6 +6,7 @@ import {waterAt,groundOf,legacyLayout} from './world-grid.js';
 import {biomeSurface} from './biome-terrain.js';
 import {biomeOf} from './biome-data.js';
 import {networkShader} from './pixel-network.js';
+import {makeLandscapeSurface} from './landscape-surface.js';
 
 export const CARDINALS=[[0,-1,1],[1,0,2],[0,1,4],[-1,0,8]];
 export function connectionMask(x,z,has){return CARDINALS.reduce((mask,[dx,dz,bit])=>mask|(has(x+dx,z+dz)?bit:0),0);}
@@ -30,7 +31,9 @@ export function makeSurfaceBatch(id,frame,cells,{layer=2,repeat=[1,1],mask=null,
  const texture=pixelTexture(id),frames=ENVIRONMENT_ASSETS[id].frames;
  texture.repeat.set(1,1);texture.offset.set(0,0);
  const uniform={value:frame};
- const material=new THREE.MeshBasicMaterial({map:texture,transparent:true,alphaTest:.5,toneMapped:false,side:THREE.DoubleSide});
+ // Cutout terrain writes depth before translucent contact shadows. Sorting a
+ // whole terrain batch with the shadows can otherwise erase them on rotation.
+ const material=new THREE.MeshBasicMaterial({map:texture,alphaTest:.5,toneMapped:false,side:THREE.DoubleSide});
  const n=mask===null?null:CARDINALS.map(([, ,bit])=>mask&bit?1:0);
  const roadMask=n?`bool onRoad(vec2 p){return (abs(p.x-.5)<.29&&abs(p.y-.5)<.29)||(${n[0]}>0&&p.y>.5&&abs(p.x-.5)<.29)||(${n[1]}>0&&p.x>.5&&abs(p.y-.5)<.29)||(${n[2]}>0&&p.y<.5&&abs(p.x-.5)<.29)||(${n[3]}>0&&p.x<.5&&abs(p.y-.5)<.29);}`:'';
  material.onBeforeCompile=shader=>{
@@ -68,21 +71,21 @@ export function makeMapTerrain(sim,overlay=''){
   if(!batches.has(key))batches.set(key,{id,frame,cells:[],options});batches.get(key).cells.push(cell);
  };
  for(const t of sim.tiles){
-  const key=t.x+','+t.z,owned=sim.ownedAt(t.x,t.z),cell={x:t.x,z:t.z};
+  const key=t.x+','+t.z,cell={x:t.x,z:t.z};
   if(t.terrain==='water'){
-   add(waterTexture(t.water),0,{...cell,y:-.17},{layer:1,animated:true});continue;
+   if(typeof document==='undefined')add(waterTexture(t.water),0,{...cell,y:-.17},{layer:1,animated:true});continue;
   }
   const coast=CARDINALS.some(([dx,dz])=>sim.tile(t.x+dx,t.z+dz)?.water==='coast');
   const ground=groundAt(sim,t.x,t.z),special=ground==='ice'?0:ground==='mountain'?1:ground==='sand'?2:null;
   const frame=coast?3:sim.region==='highland'?2:0;
-  let tint=owned?'#ffffff':'#d4dcc9';
+  let tint='#ffffff';
   if(overlay&&!sim.roads.has(key)){
    const value=['pollution','shade'].includes(overlay)?sim.placementEffects('field',t.x,t.z)[overlay]*(overlay==='pollution'?100/6:100/3):overlay==='oil'?(t.oil??t.ore):t[overlay]??50;
    tint=new THREE.Color('#90664c').lerp(new THREE.Color(overlay==='fertility'?'#a9cf5e':overlay==='moisture'?'#72bfd7':overlay==='pollution'?'#b36570':overlay==='shade'?'#7186b0':'#d7bd71'),value/100).getStyle();
   }
   const biome=biomeSurface(sim.layout,t.x,t.z,ground);
-  add(biome===null?(special===null?'ground':'infrastructureGround'):'biomeGround',biome??special??frame,{...cell,y:.013,tint},{layer:3});
-  for(const [index,[dx,dz]] of CARDINALS.entries()){
+  if(overlay||typeof document==='undefined')add(biome===null?(special===null?'ground':'infrastructureGround'):'biomeGround',biome??special??frame,{...cell,y:.013,tint},{layer:3});
+  for(const [index,[dx,dz]] of (typeof document==='undefined'?CARDINALS:[]).entries()){
    const adjacent=sim.tile(t.x+dx,t.z+dz),outsideWater=!adjacent&&waterAt(sim.layout,t.x+dx,t.z+dz);
    if(adjacent?.terrain!=='water'&&!outsideWater)continue;
    // Authored earth strata replace the smooth side of the map slab.
@@ -109,6 +112,7 @@ export function makeMapTerrain(sim,overlay=''){
 }
 
 export function makeBackgroundTerrain(region,sim){
+ const continuous=makeLandscapeSurface(sim,region);if(continuous)return continuous;
  const group=new THREE.Group();group.name='pixel-background-terrain';
  // Beyond the map the land goes on as the squares beside it: sea, river, mountain, ice or desert.
  const layout=sim?.layout||legacy(region),FRAMES={ice:0,mountain:1,sand:2},base=FRAMES[layout.biome==='desert'?'sand':layout.biome],profile=biomeOf(layout);

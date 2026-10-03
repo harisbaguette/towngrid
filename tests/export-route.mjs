@@ -1,3 +1,4 @@
+import {withdraw,deposit} from '../src/app/game/storage.js';
 import assert from 'node:assert/strict';
 import {Simulation,createShowcase,unpackTiles} from '../src/app/game/simulation.js';
 import {createStarterShowcase} from '../src/app/game/starter-demo.js';
@@ -9,8 +10,8 @@ const fresh=()=>{const s=new Simulation('river');s.nextEvent=1e9;s.autoSell={};r
 // Every region starts with a clear export road from the west edge into the starting land.
 for(const region of ['river','coast','highland']){const s=new Simulation(region);for(const p of EXPORT_TILES){assert.ok(s.roads.has(p.x+','+p.z),region+' export road '+p.x);assert.equal(s.tile(p.x,p.z).nature,null);assert.notEqual(s.tile(p.x,p.z).terrain,'water');}assert.ok(s.ownedAt(EXPORT_TILES.length,EXPORT_GATE.z),'the road meets owned land');}
 
-// No warehouse, no export.
-const bare=fresh();assert.equal(bare.sell('wood',5).ok,false);assert.equal(bare.stock.wood,50);
+// Starting supplies can be sold from the protected export road before building a warehouse.
+const bare=fresh();assert.equal(bare.sell('wood',5).ok,true);assert.equal(bare.stock.wood,45);
 
 // Goods leave on a cart and are paid for only at the gate.
 const s=fresh();s.build('warehouse',10,12);const money=s.money,wood=s.stock.wood;
@@ -20,9 +21,9 @@ let paid=sale.revenue;for(let i=1;i<EXPORT_CARTS;i++){const r=s.sell('stone',1);
 // A cart that is on the road survives saving and still pays out after loading.
 const loaded=new Simulation(s.region,decodeSave(encodeSave(s.save())));assert.equal(loaded.shipments.length,EXPORT_CARTS);
 // On the river map the third free vehicle is a raft that goes down the river to the map edge, so it takes longer.
-run(s,16);assert.equal(s.money,money+paid,'every vehicle pays its loading price at its terminal');assert.equal(s.sold.wood,5);
-run(loaded,16);assert.equal(loaded.sold.wood,5);assert.ok(loaded.money>money);
-run(s,16);assert.equal(s.shipments.length,0,'vehicles come back and free their slot');assert.ok(s.sell('stone',1).ok);
+run(s,40);assert.equal(s.money,money+paid,'every vehicle pays its loading price at its terminal');assert.equal(s.sold.wood,5);
+run(loaded,40);assert.equal(loaded.sold.wood,5);assert.ok(loaded.money>money);
+run(s,40);assert.equal(s.shipments.length,0,'vehicles come back and free their slot');assert.ok(s.sell('stone',1).ok);
 
 // The export road cannot be demolished or built over.
 assert.equal(s.demolish(3,EXPORT_GATE.z).ok,false);assert.ok(s.roads.has('3,'+EXPORT_GATE.z));
@@ -31,8 +32,8 @@ s.money=5000;assert.ok(s.expand(1,2).ok);assert.match(s.canBuild('house',5,EXPOR
 // A building may not cut the only way out (audit X1); roads may still go there.
 const guard=fresh();guard.build('warehouse',10,12);assert.match(guard.canBuild('house',8,EXPORT_GATE.z,true),/수출길을 막는/);assert.equal(guard.build('house',8,EXPORT_GATE.z,true).ok,false);assert.equal(guard.canBuild('house',9,9,true),null);
 // An older save can still hold a building there: sales stop without losing stock, and auto-sale says so once.
-const oldBlock=guard.save();oldBlock.buildings.push({...structuredClone(oldBlock.buildings[0]),id:oldBlock.nextId++,type:'house',x:8,z:EXPORT_GATE.z});
-const blocked=new Simulation('river',oldBlock);blocked.nextEvent=1e9;blocked.autoSell={};assert.equal(blocked.exportStatus().connected,false);const before=blocked.stock.wood;assert.equal(blocked.sell('wood',5).ok,false);assert.equal(blocked.stock.wood,before);
+for(const [item,n]of Object.entries(guard.starterStore.inventory)){withdraw(guard,item,n,guard.starterStore);deposit(guard,item,n,guard.warehouse);}const oldBlock=guard.save();oldBlock.buildings.push({...structuredClone(oldBlock.buildings[0]),id:oldBlock.nextId++,type:'house',inventory:undefined,x:8,z:EXPORT_GATE.z});
+const blocked=new Simulation('river',oldBlock);blocked.nextEvent=1e9;blocked.autoSell={};assert.equal(blocked.exportStatus().connected,true,'the separate mini store remains connected');const before=blocked.stock.wood;assert.equal(blocked.sell('wood',5).ok,false);assert.equal(blocked.stock.wood,before);
 blocked.stock.wood=200;blocked.autoSell={wood:true};const n0=blocked.notices.length;run(blocked,30);assert.equal(blocked.notices.slice(n0).filter(n=>n.text.startsWith('자동 판매 멈춤')).length,1,'blocked auto-sale warns once');
 blocked.demolish(8,EXPORT_GATE.z);assert.equal(blocked.exportStatus().connected,true);
 
@@ -47,4 +48,4 @@ const bad=s.save();bad.shipments=[{id:1,item:'wood',amount:5,revenue:40,route:[{
 // Prebuilt villages keep working and can reach the gate.
 const starter=createStarterShowcase();assert.equal(starter.exportStatus().connected,true);run(starter,120);assert.ok((starter.sold.grain||0)+(starter.sold.plank||0)>0,'starter village exports goods');
 assert.equal(createShowcase().exportStatus().connected,true);
-console.log(JSON.stringify({result:'PASS',checked:['export road on every region','no warehouse no export','paid on arrival','cart limit','save/load in transit','carts return','road protected','blocked route','old save upgrade','tampered route rejected','starter and showcase villages']}));
+console.log(JSON.stringify({result:'PASS',checked:['export road on every region','starting supplies export without warehouse','paid on arrival','cart limit','save/load in transit','carts return','road protected','blocked route','old save upgrade','tampered route rejected','starter and showcase villages']}));

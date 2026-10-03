@@ -9,7 +9,7 @@ const labels = async page => { await page.getByRole('button', { name: '건설 �
 const offset = page => page.evaluate(() => new Promise(res => requestAnimationFrame(() => { const g = window.tgScene, w = g.container.clientWidth, h = g.container.clientHeight, list = []; for (const el of document.querySelectorAll('.facility-marker')) { const b = g.sim.buildings.find(v => v.id === +el.dataset.buildingId); if (!b || getComputedStyle(el).visibility === 'hidden') continue; const p = g.markerPoint(b, w, h), r = el.getBoundingClientRect(); list.push(Math.round(Math.hypot(r.left + r.width / 2 - p.x, r.bottom - p.y))); } res({ n: list.length, max: Math.max(0, ...list) }); })));
 for (const vp of [{ width: 1366, height: 768 }, { width: 844, height: 390, isMobile: true, hasTouch: true }]) {
   const { width, height, ...extra } = vp, tag = width + 'x' + height, page = await open({ width, height }, extra);
-  await toHome(page); if (!(await page.locator('.home-extras[open]').count())) await page.locator('.home-extras summary').click(); await demo(page); await sim(page, () => { window.tgScene.sim.paused = true; }); await settle(page, 1200);
+  await toHome(page); await page.locator('.home-extras').waitFor(); if (!(await page.locator('.home-extras[open]').count())) await page.locator('.home-extras summary').click(); await demo(page); await sim(page, () => { window.tgScene.sim.paused = true; }); await settle(page, 1200);
   out[tag] = { minimal: await pairs(page) }; await shot(page, 'm-B13-markers-' + tag + '.png');
   await labels(page); out[tag].labels = await pairs(page); await shot(page, 'm-B13-markers-labels-' + tag + '.png');
   if (width === 1366) {

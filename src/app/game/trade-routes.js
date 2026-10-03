@@ -2,7 +2,7 @@
 // leads to one) and through each kind of water it touches: sea coast, river, lake, canal, stream
 // or small waterway. Which of these a site can build export terminals and ports for, and the lot and
 // price they give, is decided in trade-terminals.js.
-import {PROVINCES} from './territory.js';
+import {PROVINCES,WORLD_PLOTS} from './territory.js';
 import {WATERWAYS,TOUCH,WATER_KINDS,SIDES,nearestOnLine,layoutOf,waterwayAt} from './world-grid.js';
 export {WATERWAYS};
 
@@ -51,10 +51,10 @@ function connectionsOf(p){
  for(const r of water){const {w}=r;if(options.some(o=>o.kind===w.kind))continue;const terrain=terrainAt(w,r);options.push({id:w.id,kind:w.kind,terrain,name:portName(w,terrain),joins:w.joins||w.name,line:w.lane||w.line,from:p.point,to:r.at,price:ROUTE_KINDS[w.kind].price});}
  return options.map(o=>({...o,scale:ROUTE_KINDS[o.kind].scale,capacity:ROUTE_KINDS[o.kind].capacity,price:+o.price.toFixed(3)})).sort((a,b)=>b.capacity*b.price-a.capacity*a.price);
 }
-export const TRADE_CONNECTIONS=Object.fromEntries(PROVINCES.map(p=>[p.id,connectionsOf(p)]));
+export const TRADE_CONNECTIONS=Object.fromEntries(WORLD_PLOTS.map(p=>[p.id,connectionsOf(p)]));
 /** Links drawn on the atlas from a province to the road or water it uses. A coastal province is
  *  its own sea port, so coast links are left out. */
-export const TRADE_LINKS=Object.values(TRADE_CONNECTIONS).flat().filter(o=>o.kind!=='coast'&&Math.hypot(o.from[0]-o.to[0],o.from[1]-o.to[1])>=6);
+export const TRADE_LINKS=PROVINCES.flatMap(p=>TRADE_CONNECTIONS[p.id]).filter(o=>o.kind!=='coast'&&Math.hypot(o.from[0]-o.to[0],o.from[1]-o.to[1])>=6);
 
 export const tradeProvince=s=>{const id=s.campaign?.sites?.find(v=>v.id===s.siteId)?.provinceId||s.layout?.province;return TRADE_CONNECTIONS[id]?id:(s.nation||'estern')+'-0';};
 export const tradeOptions=s=>TRADE_CONNECTIONS[tradeProvince(s)];
