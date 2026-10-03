@@ -6436,8 +6436,9 @@
   "offline": {
    "minRealSeconds": 60,
    "maxRealSeconds": 1800,
-   "speed": 4,
-   "events": "시작하지 않음"
+   "speed": 16,
+   "events": "시작하지 않음",
+   "budgetMs": 2000
   },
   "contractImport": "납품 품목을 만들고 있는데 모자라고 자금이 수입가의 3배 + 300G 이상이면 계약 목표 버튼이 나머지 수입을 안내한다",
   "relocation": "나무·바위 칸으로 이전하면 부지 정리비를 더 내고 목재·석재 2개를 얻는다",

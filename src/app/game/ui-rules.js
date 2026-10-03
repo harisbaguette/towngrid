@@ -476,9 +476,11 @@ function findSlowSpot(s){
  spots.sort((p,q)=>p.far-q.far||q.to-p.to);
  // canRelocate's tile check (canBuild with the facility off its tile) for the whole list under one lift.
  const list=s.buildings;let open=[];s.buildings=list.filter(v=>v!==b);s.revision++;
- try{open=spots.filter(p=>!s.canBuild(b.type,p.x,p.z,true));}finally{s.buildings=list;s.revision++;}
- const door=s.warehouse&&s.entries(s.warehouse)[0],best=open.find(p=>!door||s.routeTo(door,{x:p.x,z:p.z,size:1}));
- return best?{building:b,x:best.x,z:best.z,from,to:best.to}:null;
+ const door=s.warehouse&&s.entries(s.warehouse)[0];let best=null,honest=0;
+ // The speed shown is the one the facility will have there, judged with it off its old tile: next to its old place it no
+ // longer clusters with itself. A spot that gains nothing that way is not offered.
+ try{open=spots.filter(p=>!s.canBuild(b.type,p.x,p.z,true));for(const p of open){if(door&&!s.routeTo(door,{x:p.x,z:p.z,size:1}))continue;const to=s.placementEffects(b.type,p.x,p.z).speed;if(to<from+.05)continue;best=p;honest=to;break;}}finally{s.buildings=list;s.revision++;}
+ return best?{building:b,x:best.x,z:best.z,from,to:honest}:null;
 }
 
 /** A depleted lumber camp or quarry: the nearest owned spot with trees or rock left within four tiles it can move to, or

@@ -79,7 +79,7 @@ let n=0;const ok=label=>{n++;console.log('PASS',label);};
 {const c=new Campaign({nation:'estern'}),s=c.active;assert.ok(s.layout.ecology);s.money+=3000;const [x,z]=freeTile(s,'field');s.build('field',x,z,true);
  const near=[[x+1,z],[x-1,z],[x,z+1],[x,z-1]].find(([a,b])=>!s.canBuild('warehouse',a,b,true));assert.ok(near);s.build('warehouse',...near,true);
  const e=s.placementEffects('field',x,z);assert.ok(e.shade>=2);assert.ok(e.speed<=Math.min(1/PENALTY_STEP**e.shade,1-e.shade*.1)+1e-9);
- const slow=slowSpot(s);assert.ok(slow,'a shaded field is offered a better spot');assert.ok(slow.to>=slow.from+.15);assert.ok(s.relocate(slow.building.id,slow.x,slow.z).ok);ok('placement penalty and slow spot');}
+ const slow=slowSpot(s);assert.ok(slow,'a shaded field is offered a better spot');assert.ok(slow.to>=slow.from+.15);assert.ok(s.relocate(slow.building.id,slow.x,slow.z).ok);s.revision++;assert.ok(Math.abs(s.placementEffects('field',slow.x,slow.z).speed-slow.to)<1e-9,'the speed shown is the speed it gets there');ok('placement penalty and slow spot');}
 
 // 12. A lord's order made here but eaten by the chain: with money to spare the card offers to import the rest.
 {const c=new Campaign({nation:'estern'}),s=c.active;c.treasury.contracts=3;c.treasury.contractReadyAt=0;s.money=20000;const [x,z]=freeTile(s,'field');s.build('field',x,z,true);
@@ -133,4 +133,8 @@ let n=0;const ok=label=>{n++;console.log('PASS',label);};
 // 19. A lumber camp with no tree left in reach is offered the nearest owned spot with trees, and the move works.
 {const c=new Campaign({nation:'estern'}),s=c.active;s.money+=2000;const [x,z]=freeTile(s,'lumber',null);const id=s.build('lumber',x,z,true).id,b=s.buildings.find(v=>v.id===id);
  for(const t of s.tiles)if(t.nature==='tree'&&Math.abs(t.x-x)<=4&&Math.abs(t.z-z)<=4){t.nature=null;t.remaining=0;}s.revision++;const m=depletedMove(s,b);assert.ok(m,'a spot with trees');assert.ok(s.relocate(id,m.x,m.z).ok);assert.ok(s.closestNatural(b,'tree'));ok('depleted gatherer move');}
+
+// 20. A compute budget stops a long catch-up early; the event delay given back is the time not run.
+{const c=new Campaign({nation:'estern'}),s=c.active;s.paused=true;const ev=s.nextEvent;let calls=0;const r=catchUp(c,OFFLINE.maxReal,50,()=>(calls++)*10);
+ assert.ok(r.limited);assert.ok(r.game>0&&r.game<OFFLINE.maxReal*.5);assert.ok(Math.abs(s.nextEvent-(ev+r.game))<1e-6,'events wait only for the time actually run');assert.equal(s.paused,true);ok('offline compute budget');}
 console.log('\n[townstar-gaps] '+n+' checks pass');
