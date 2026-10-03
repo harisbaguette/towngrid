@@ -5,6 +5,7 @@ import {createStarterShowcase} from './starter-demo.js';
 import {dispatchShipment,spareFuel,shipmentError,fuelHold,FUEL_PER_TRIP} from './export-route.js';
 import {defaultStartingProvince,startingProvince} from './starting-sites.js';
 import {expansionOffer,SITE_MATERIALS} from './site-expansion.js';
+import {newLeague,ensureLeague,leagueDay,sendGift} from './league.js';
 // Running transit facilities of a site: the smallest travel-time factor they offer (M5), 1 when none run.
 const transitFactor=sim=>Math.min(1,...sim.buildings.filter(b=>BUILDINGS[b.type].output==='transit'&&b.health>0&&b.enabled!==false&&b.activeUntil>sim.time).map(b=>BUILDINGS[b.type].transitFactor||1));
 const SHARED=['money','debt','family','rank','contracts','contractReadyAt','totalRevenue','produced','sold','emergencyUsed','rescueQuest','charter','haulGear'];
@@ -53,7 +54,7 @@ export class Campaign{
   const sim=saved?new Simulation(saved.region,saved):starter?createStarterShowcase(nation,race):demo?createShowcase(nation,race):new Simulation(NATIONS[nation].region,null,{nation,race,provinceId:start.id});
   this.lastWorldDay=sim.day;for(const k of SHARED)this.treasury[k]=structuredClone(sim[k]);this.homeId='site-1';this.activeId=this.homeId;this.nextSite=2;
   this.attach({id:this.homeId,name:start?.name||NATIONS[sim.nation].district,nation:sim.nation,territory:false,unrest:15,sim});
-  if(demo){this.support=74;this.defense=2;this.addDemoBranch();}initializeTerritory(this);
+  if(demo){this.support=74;this.defense=2;this.addDemoBranch();}initializeTerritory(this);this.league=newLeague(this);
  }
  tradeConditions(siteId){return tradeConditions(this,siteId);}
  get active(){return this.sites.find(s=>s.id===this.activeId)?.sim||this.sites[0].sim;}
@@ -107,11 +108,14 @@ export class Campaign{
  upkeep(){const early=this.rank<UPKEEP.fromRank,rate=this.rank<UPKEEP.earlyFrom?0:early?UPKEEP.early:UPKEEP.facility;
   let facilities=0;for(const site of this.sites)for(const b of site.sim.buildings){const d=BUILDINGS[b.type];if(d.home||d.tile||d.terrain||b.type==='warehouse'||b.health<=0)continue;facilities+=d.cost*rate*(b.enabled===false?UPKEEP.idle:1);}
   facilities=Math.round(facilities);const sites=early?0:(this.sites.length-1)*UPKEEP.sitePerStage*Math.max(1,this.stage),guards=this.defense*COUNCIL.defense.upkeep;return {facilities,sites,guards,total:facilities+sites+guards};}
+ /** Send one good to a neighbouring nation (league.js sendGift). */
+ giftNeighbor(nation,item){return sendGift(this,nation,item);}
  worldDay(){let average=0;
   for(const site of this.sites){site.unrest=Math.max(0,Math.min(100,site.unrest+this.unrestCauses(site).reduce((n,v)=>n+v.delta,0)));average+=site.unrest;if(this.stage>=22&&site.unrest>=85&&site.id!==this.homeId&&site.territory){site.territory=false;site.unrest=55;this.spawnState(site.nation,site.name+' 자치국');this.log(site.name+'이 독립했습니다. 사업장은 남지만 현지 세금이 다시 부과됩니다.');}}
   this.support=Math.max(10,Math.min(95,100-average/this.sites.length-20));const dividend=this.dividend(),cost=this.upkeep().total,budget=this.home.sim.budget;this.treasury.money+=dividend-cost;if(budget){budget.income+=dividend;budget.expenses+=cost;}
   for(const f of this.factions){f.age++;const roll=noise(f.age+f.wealth,f.industry+this.lastWorldDay);f.wealth+=80+f.industry*25-(f.unrest>65?120:0);f.enterprise+=35+roll*50;if(f.enterprise>800){f.enterprise=0;f.industry=Math.min(12,f.industry+1);f.unrest+=4;}f.unrest+=roll>.5?3:-1;if(f.unrest>=78&&f.wealth>3000){f.unrest=32;f.wealth-=1000;this.spawnState(f.id,NATIONS[f.id].capital+' 신연방');}}
   for(const state of [...this.newStates]){if(state.dissolved)continue;state.age=(state.age||0)+1;state.wealth+=70+state.industry*16;state.unrest=Math.max(0,Math.min(100,(state.unrest??30)+(noise(state.age,state.industry+this.lastWorldDay)>.55?4:-1)-(state.pact?2:0)));if(state.age%6===0){state.industry=Math.min(12,state.industry+1);state.unrest+=5;}if(state.age>12&&state.unrest>=82&&state.wealth>1800&&!state.pact){state.unrest=30;state.wealth-=800;this.spawnState(state.id,NATIONS[state.rootNation||state.parent].capital+' 자유공국');}}
+  leagueDay(this);
  }
  spawnState(parent,name){const ancestor=this.newStates.find(v=>v.id===parent);const rootNation=ancestor?.rootNation||parent;const state={id:'new-'+this.nextState++,name:name+' '+(this.nextState-1),parent,rootNation,day:this.lastWorldDay,wealth:1000,industry:1,age:0,unrest:30,relation:25,pact:false,trades:0};if(!splitTerritory(this,parent,state))return null;this.newStates.push(state);if(this.newStates.length>180){const old=this.newStates.find(v=>!v.pact&&!this.recognition.includes(v.id)&&!Object.values(this.provinces).some(p=>p.owner===v.id));if(old)this.newStates=this.newStates.filter(v=>v!==old);}this.log(name+' 독립 · '+(ancestor?.name||NATIONS[rootNation]?.name||'기존 국가')+'에서 분리되었습니다.');return state;}
  dividend(){return this.investments.reduce((total,i)=>{const states=this.newStates.filter(v=>v.rootNation===i.nation&&!v.dissolved);const stability=states.length?states.reduce((n,v)=>n+(v.pact?1.3:v.unrest>65?.5:1),0)/states.length:1;return total+Math.round((i.stake?i.stake*COUNCIL.invest.yield:COUNCIL.invest.legacy)*stability);},0);}
@@ -169,13 +173,15 @@ export class Campaign{
   if(province&&sovereignOf(province.id,this.provinces)===null)return ['무주지',n.name+' 소속 개척단',site.name,RANKS[this.rank].name];
   const above=this.stage>=22?['독립국 '+BRAND.name,'외교 승인 '+this.recognition.length+'개국',domain,n.fief]:[n.overlord+' 영향권',n.sovereign,n.name,n.dependency,domain,n.fief,n.district,n.manor];
   return [...above.filter(v=>v!==site.name),site.name,RANKS[this.rank].name];}
- save(){return {campaignVersion:1,provinces:structuredClone(this.provinces),battles:structuredClone(this.battles),relations:structuredClone(this.relations),nextState:this.nextState,treasury:structuredClone(this.treasury),homeId:this.homeId,activeId:this.activeId,nextSite:this.nextSite,nextRoute:this.nextRoute,deliveries:this.deliveries,defense:this.defense,investments:structuredClone(this.investments),recognition:[...this.recognition],support:this.support,history:structuredClone(this.history),newStates:structuredClone(this.newStates),factions:structuredClone(this.factions),lastWorldDay:this.lastWorldDay,routes:structuredClone(this.routes),welfareDay:this.welfareDay,completion:structuredClone(this.completion),sites:this.sites.map(({sim,...site})=>({...site,simulation:sim.save()}))};}
- restore(data){for(const k of ['provinces','battles','relations','nextState','treasury','homeId','activeId','nextSite','nextRoute','deliveries','defense','investments','recognition','support','history','newStates','factions','lastWorldDay','routes','welfareDay','completion'])if(data[k]!==undefined)this[k]=structuredClone(data[k]);for(const site of data.sites){const {simulation,...meta}=site;this.treasury.charter??=null;this.treasury.rescueQuest??={step:this.treasury.family?5:0,remaining:0,route:null};this.attach({...meta,sim:new Simulation(simulation.region,simulation,{provinceId:meta.provinceId})});}if(!this.sites.length)throw new Error('저장된 거점이 없습니다');for(const state of this.newStates){state.rootNation??=state.parent;state.relation??=25;state.unrest??=30;state.age??=0;state.trades??=0;}initializeTerritory(this);if(!data.provinces)for(const state of this.newStates)splitTerritory(this,state.parent,state);
+ save(){return {campaignVersion:1,provinces:structuredClone(this.provinces),battles:structuredClone(this.battles),relations:structuredClone(this.relations),nextState:this.nextState,treasury:structuredClone(this.treasury),homeId:this.homeId,activeId:this.activeId,nextSite:this.nextSite,nextRoute:this.nextRoute,deliveries:this.deliveries,defense:this.defense,investments:structuredClone(this.investments),recognition:[...this.recognition],support:this.support,history:structuredClone(this.history),newStates:structuredClone(this.newStates),factions:structuredClone(this.factions),lastWorldDay:this.lastWorldDay,routes:structuredClone(this.routes),welfareDay:this.welfareDay,completion:structuredClone(this.completion),league:structuredClone(this.league),sites:this.sites.map(({sim,...site})=>({...site,simulation:sim.save()}))};}
+ restore(data){for(const k of ['provinces','battles','relations','nextState','treasury','homeId','activeId','nextSite','nextRoute','deliveries','defense','investments','recognition','support','history','newStates','factions','lastWorldDay','routes','welfareDay','completion','league'])if(data[k]!==undefined)this[k]=structuredClone(data[k]);for(const site of data.sites){const {simulation,...meta}=site;this.treasury.charter??=null;this.treasury.rescueQuest??={step:this.treasury.family?5:0,remaining:0,route:null};this.attach({...meta,sim:new Simulation(simulation.region,simulation,{provinceId:meta.provinceId})});}if(!this.sites.length)throw new Error('저장된 거점이 없습니다');for(const state of this.newStates){state.rootNation??=state.parent;state.relation??=25;state.unrest??=30;state.age??=0;state.trades??=0;}initializeTerritory(this);if(!data.provinces)for(const state of this.newStates)splitTerritory(this,state.parent,state);
   // Id counters never fall to a number already in use (an edited or damaged save would otherwise reuse a site/route/state id).
   const top=(list,prefix)=>Math.max(0,...list.map(v=>+String(v.id).slice(prefix.length)||0));
   this.nextSite=Math.max(+this.nextSite||1,top(this.sites,'site-')+1);this.nextRoute=Math.max(+this.nextRoute||1,top(this.routes,'route-')+1);this.nextState=Math.max(+this.nextState||1,top(this.newStates,'new-')+1);
   // A save that reached the last rank before completion records existed gets one from its current state.
   if(this.rank===RANKS.length-1&&!this.completion)this.completion={...this.record(),restored:true};
   // An order a save kept from before the skip rule, for a base good nothing makes, is drawn again (simulation.js contractStale).
-  if(this.active.contractStale())delete this.treasury.contractOrder;}
+  if(this.active.contractStale())delete this.treasury.contractOrder;
+  // A save from before the league starts one; a saved one gets any part it lacks (league.js ensureLeague).
+  ensureLeague(this);}
 }

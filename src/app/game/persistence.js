@@ -64,7 +64,7 @@ function validateSimulation(s){
   for(const id of Object.keys(RESOURCES))if(Math.abs((total[id]||0)-(s.stock[id]||0))>1e-6)fail();
  }
  if(s.nextId!==undefined&&(!Number.isInteger(s.nextId)||[...ids].some(id=>id>=s.nextId)))fail();
- for(const key of ['roads','rails','paved','pipes','conveyors'])if(s[key]&&(!Array.isArray(s[key])||!s[key].every(point)))fail();
+ for(const key of ['roads','rails','paved','pipes','conveyors','soldLand'])if(s[key]&&(!Array.isArray(s[key])||!s[key].every(point)))fail();
  if(s.shipments!==undefined&&(!Array.isArray(s.shipments)||s.shipments.length>MAX_EXPORT_CARTS))fail();for(const sh of s.shipments||[]){if(!sh||!Number.isInteger(sh.id)||!ref(RESOURCES,sh.item)||!Number.isInteger(sh.amount)||!number(sh.amount,1,1e6)||!number(sh.revenue)||!route(sh.route)||!sh.route.length||!number(sh.progress,0,sh.route.length-1)||!['out','back'].includes(sh.phase))fail();flags(sh,['auto','portLoaded','portUnloaded']);if(sh.kind!==undefined&&!['contract','state','import'].includes(sh.kind)||sh.vehicle!==undefined&&!ref(VEHICLES,sh.vehicle)||sh.label!==undefined&&!label(sh.label,2000))fail();numericFields(sh,['cost','duration','remaining','distance','fuel','portIndex']);
  if(![undefined,null,'out','back'].includes(sh.away)||sh.destination!==undefined&&!label(sh.destination,200)||sh.storeId!==undefined&&sh.storeId!==0&&!s.buildings.some(b=>b.id===sh.storeId&&['warehouse','depot'].includes(b.type)))fail();
  if(sh.portIndex!==undefined&&(!Number.isInteger(sh.portIndex)||sh.portIndex>=sh.route.length))fail();
@@ -109,6 +109,13 @@ export function validateSave(data){
  if(data.provinces){if(!record(data.provinces))fail();for(const[id,v]of Object.entries(data.provinces))if(!PROVINCE.has(id)||!record(v)||(v.owner!==null||PROVINCE.get(id).nation!==null)&&!ref(NATIONS,v.owner)&&!stateIds.has(v.owner))fail();}
  if(data.recognition.some(id=>!ref(NATIONS,id)&&!stateIds.has(id)))fail();
  if(data.relations)for(const[id,v]of Object.entries(data.relations))if(!ref(NATIONS,id)||!number(v,-100,100))fail();
+ // The league (league.js): stars, rival houses, the week's results, the daily goal and gift bookkeeping.
+ if(data.league!==undefined&&data.league!==null){const l=data.league;if(!record(l))fail();numericFields(l,['week','stars','total','dayStars']);
+  if(l.recent!==undefined&&(!Array.isArray(l.recent)||l.recent.length>10||!l.recent.every(v=>number(v))))fail();
+  if(l.rivals!==undefined&&(!Array.isArray(l.rivals)||l.rivals.length>20||!l.rivals.every(r=>record(r)&&ref(NATIONS,r.id)&&label(r.name,100)&&number(r.pace,0,10)&&number(r.score))))fail();
+  if(l.history!==undefined&&(!Array.isArray(l.history)||l.history.length>50||!l.history.every(h=>record(h)&&['week','place','stars','prize'].every(k=>number(h[k])))))fail();
+  if(l.daily!==undefined){if(!record(l.daily))fail();numericFields(l.daily,['day','goal','from','met','streak']);flags(l.daily,['done']);}
+  if(l.gifts!==undefined){if(!record(l.gifts))fail();numericFields(l.gifts,['at','count'],-1e12);if(l.gifts.thanked!==undefined&&(!record(l.gifts.thanked)||!Object.values(l.gifts.thanked).every(v=>v===true)))fail();}}
  const ids=new Set();for(const s of data.sites){if(typeof s.id!=='string'||ids.has(s.id)||!ref(NATIONS,s.nation))fail();ids.add(s.id);validateSimulation(s.simulation);}
  // A site's province is one of its own nation's; two sites on one province (saves from before provinces) are moved apart
  // on load (territory.js claimProvinces), not refused (G3-03).

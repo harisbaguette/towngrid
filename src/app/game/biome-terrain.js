@@ -46,6 +46,8 @@ export function biomeTree(layout,t){
 export function biomeDecoration(layout,t){
  if(!biomeOf(layout))return null;
  const n=biomeHash(t.x+5,t.z);
+ // A feature sold off (land-sale.js) is gone; a sold seep keeps no cactus either.
+ if(t.sold)return null;
  if(layout.ecology==='desert'){if(t.oil>=85&&n>.60)return 'oilSeep';if(!t.oasis&&n>.93)return 'cactus';}
  if(layout.ecology==='snow')return null;
  if(layout.ecology==='marsh'&&n>.68)return 'reeds';

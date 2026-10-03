@@ -3,6 +3,7 @@ import {tradeJourney} from './trade-journey.js';
 import {RESOURCES,BUILDINGS,N,CONTRACT_WAIT} from './simulation.js';
 import {activeTerminal,tradeCapacity,terminalsOf} from './trade-terminals.js';
 import {recordTerminalTransfer} from './logistics-visual-events.js';
+import {awardStars} from './league.js';
 // Every map has a fixed export road from the west edge to the starting land.
 // Sold goods leave the warehouse on a vehicle and are paid for when it reaches the trading city.
 // Imports ride the same vehicles the other way, and the lord's contracts and state orders go out on them too.
@@ -182,7 +183,7 @@ export function shipmentPose(sh){
 // holds either the unpaid or the paid shipment). An import is loaded there and unloaded at the warehouse on return.
 function arrive(s,sh){
  const end=sh.route[sh.route.length-1];if(sh.kind==='import'){s.sound('pickup',end.x,end.z);return;}
- s.money+=sh.revenue;s.budget.income+=sh.revenue;s.totalRevenue+=sh.revenue;s.sold[sh.item]=(s.sold[sh.item]||0)+sh.amount;
+ s.money+=sh.revenue;s.budget.income+=sh.revenue;s.totalRevenue+=sh.revenue;s.sold[sh.item]=(s.sold[sh.item]||0)+sh.amount;awardStars(s,sh);
  if(sh.kind==='contract'){s.contracts++;s.contractReadyAt=s.time+CONTRACT_WAIT;s.sound('contract',end.x,end.z);s.notify('영주 납품 완료 · '+RESOURCES[sh.item].name+' '+sh.amount+'개 · +'+sh.revenue+'G · 다음 주문은 하루 뒤','success');return;}
  s.sound('sell',end.x,end.z);if(!sh.auto)s.notify((sh.label?sh.label+' · ':'')+RESOURCES[sh.item].name+' '+sh.amount+'개 '+(sh.kind==='state'?'교역':'수출')+' 완료 · +'+sh.revenue+'G','success');
 }

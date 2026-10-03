@@ -2,12 +2,14 @@ import {remainingSeconds} from './game-time.js';
 import {RESOURCES, BUILDINGS, MERCHANT_PRICE, SANITATION} from './simulation.js';
 import {NATIONS} from './world.js';
 import {tradeConnection} from './trade-terminals.js';
+import {seasonFactor} from './league.js';
 export function marketFactor(s,item,extra=0){
  const demand=1+Math.sin(Math.floor(s.day/3)*1.71+Object.keys(RESOURCES).indexOf(item)*.83)*.12;
  const pressure=(s.market.pressure[item]||0)+extra;
  const policy=NATIONS[s.nation].sale*(item==='fish'?(NATIONS[s.nation].fishSale||1):1);
  const border=s.campaign?.tradeConditions?.(s.siteId)?.market??1;
- return Math.max(.5,Math.min(1.3,demand-pressure*.009))*policy*border*(s.sanctionUntil>s.time?.75:1)*(s.merchantUntil>s.time?MERCHANT_PRICE:1);
+ // The festival of the league week lifts its goods (league.js SEASONS).
+ return Math.max(.5,Math.min(1.3,demand-pressure*.009))*seasonFactor(s,item)*policy*border*(s.sanctionUntil>s.time?.75:1)*(s.merchantUntil>s.time?MERCHANT_PRICE:1);
 }
 // The trade route a site sells through adds its own premium or middleman cut (trade-routes.js).
 export function saleQuote(s,item,amount=1){let total=0;for(let i=0;i<amount;i++)total+=RESOURCES[item].price*marketFactor(s,item,i);return Math.round(total*tradeConnection(s).price);}
