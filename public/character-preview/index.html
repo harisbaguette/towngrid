@@ -1,17 +1,18 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>주민과 건물 전용 인력 · TownGrid</title><link rel="stylesheet" href="roster.css"></head>
 <body><main>
-<header><a href="/">← 게임으로</a><h1>주민과 건물 전용 인력</h1><p>집에서 나오는 일반 일꾼과 작업장에서 만나는 전문가</p><a href="bron-motion/">브론 동작 전후 비교 →</a></header>
+<header><a href="/">← 게임으로</a><h1>주민과 건물 전용 인력</h1><p>집에서 나오는 일반 일꾼과 작업장에서 만나는 전문가</p><a href="bron-motion/">브론 동작 전후 비교 →</a><p><a href="authored-motion/">미라 신규 보행 검수 →</a></p></header>
 <section aria-labelledby="homes-heading"><h2 id="homes-heading">일반 일꾼 · 게임 속 크기 비교</h2><div class="canvas-scroll"><canvas id="homes" width="1050" height="255" aria-label="일곱 종족의 일반 일꾼 체형 비교"></canvas></div></section>
 <section class="detail" aria-label="선택한 캐릭터">
  <div class="portrait"><h2 id="name"></h2><p id="role"></p><picture><source id="still" media="(prefers-reduced-motion: reduce)"><img id="portrait" width="220" height="314" alt=""></picture></div>
  <div class="motion"><div class="toolbar" role="group" aria-label="동작 선택"><button data-action="idle">대기</button><button data-action="walk" aria-pressed="true">걷기</button><button data-action="carry">운반</button><button data-action="work">작업</button><button data-action="pickup">들기</button><button data-action="drop">놓기</button><button data-action="greet">인사</button></div>
  <div class="toolbar" role="group" aria-label="전투와 회전"><button data-action="attack">공격</button><button data-action="hurt">피격</button><button data-action="defeat">쓰러짐</button><button data-action="turn">회전</button></div>
  <canvas id="stage" width="900" height="330" aria-label="네 방향 동작 비교"></canvas>
- <div class="controls"><button id="play">일시정지</button><label>속도 <select id="speed"><option value=".5">0.5×</option><option value="1" selected>1×</option></select></label><label><input id="travel" type="checkbox" checked> 이동하며 보기</label></div>
+ <div class="controls"><button id="play">일시정지</button><button id="previous" aria-label="이전 프레임">◀</button><button id="next" aria-label="다음 프레임">▶</button><output id="frame"></output><label>재생 <select id="speed"><option value=".25">0.25×</option><option value=".5">0.5×</option><option value="1" selected>1×</option></select></label><label>이동 <select id="surface"><option value="ground">맨땅</option><option value="road">흙길</option><option value="paved">포장도로</option><option value="upgraded">포장도로·운송 강화</option></select></label><label><input id="travel" type="checkbox" checked> 지면 이동 표시</label></div>
  <p id="status" role="status">캐릭터를 불러오는 중입니다.</p></div>
 </section>
 <nav class="filters" aria-label="캐릭터 분류"><button data-filter="all" aria-pressed="true">전체</button><button data-filter="home">일반 일꾼</button><button data-filter="staff">건물 전용 인력</button><button data-filter="enemy">적대 세력</button></nav>
 <div id="cast" class="cast"></div>
 <footer>반대편 두 방향은 좌우 반전입니다. 회전은 발을 디딘 뒤 다음 쿼터뷰로 전환합니다. 단발 동작은 버튼을 다시 누르면 재생됩니다.</footer>
-</main><script type="module" src="roster.js"></script></body></html>
+</main><script type="module" src="roster.js"></script><script type="module" src="/preview-audio.js"></script>
+</body></html>

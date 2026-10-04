@@ -1,0 +1,13 @@
+{
+  "revision": "continuous-action-poses-3",
+  "method": "original-texture-joint-rig",
+  "clips": {
+    "work": { "start": 28, "count": 20, "fps": 30, "loop": true },
+    "idle": { "start": 128, "count": 8, "fps": 4, "loop": true },
+    "greet": { "start": 136, "count": 12, "fps": 24, "loop": false },
+    "hurt": { "start": 148, "count": 8, "fps": 40, "loop": false },
+    "defeat": { "start": 156, "count": 16, "fps": 20, "loop": false },
+    "turn": { "start": 172, "count": 8, "fps": 40, "loop": false },
+    "attack": { "start": 180, "count": 12, "fps": 24, "loop": true }
+  }
+}

@@ -21,23 +21,25 @@ footer{margin-top:20px;font-size:12px;color:#64746b;display:flex;justify-content
 </style>
 </head>
 <body><main>
-<header><div><h1>시작 지역 선택</h1><p>대륙 탐색 → 부지 선택 → 시작 전 확인</p></div><nav aria-label="시안 화면"></nav></header>
-<figure><img id="preview" src="start-map-v1/01-continent.png" width="1672" height="941" alt="대륙 탐색 시안"><figcaption><span id="description"></span><a id="original" href="start-map-v1/01-continent.png" target="_blank" rel="noopener">크게 보기 ↗</a></figcaption></figure>
+<header><div><h1>시작 지역 선택</h1><p>나라 선택 → 부지 선택 → 시작 전 확인</p></div><nav aria-label="시안 화면"></nav></header>
+<figure><img id="preview" src="start-map-v3/01-country-balanced.png" width="1672" height="941" alt="나라 선택 시안"><figcaption><span id="description"></span><a id="original" href="start-map-v3/01-country-balanced.png" target="_blank" rel="noopener">크게 보기 ↗</a></figcaption></figure>
 <div class="notes">
-<p><strong>지도부터 넓게</strong>국가와 지형은 작은 선택 도구로 묶고, 상세 정보는 부지를 고른 뒤 표시합니다.</p>
-<p><strong>선택한 땅만 간단히</strong>하단 한 줄에서 부지 이름과 주변 지형을 확인합니다. 정책과 세부 수치는 자세히에서 봅니다.</p>
+<p><strong>나라 안에도 다양한 지형</strong>평야·숲·구릉·담수를 조합합니다. 사막에는 건조 초지와 오아시스, 산악에는 계곡과 경작지를 둡니다. 실제 자원 균형은 게임 데이터로 확인합니다.</p>
+<p><strong>외곽까지 이어지는 풍경</strong>선택 영역 밖에도 지형을 그립니다. 카메라는 바깥 지형의 끝이 드러나기 전에 멈추며, 외곽 풍경은 선택할 수 없습니다.</p>
 <p><strong>빈 땅을 보고 시작</strong>24 × 24 부지와 주변 숲·하천을 크게 봅니다. 함께할 종족을 고르고 시작합니다.</p>
 </div>
-<footer><span>배치 검토용 이미지 시안 · 지형 그림은 실제 생성 결과와 다를 수 있습니다.</span><a href="index.html">플레이 화면 시안</a></footer>
+<footer><span>지도 구성·UI 검토용 이미지 시안 · 실제 게임 데이터에 적용하기 전입니다.</span><span><a href="start-map-v2/01-country.png" target="_blank" rel="noopener">직전 시안</a> · <a href="index.html">플레이 화면 시안</a></span></footer>
 </main><script>
 const states=[
-{id:'01',name:'대륙 탐색',file:'01-continent.png',description:'지도가 화면을 채우고 국가·지형 선택은 작은 도구로 묶습니다.'},
-{id:'02',name:'부지 선택',file:'02-plot.png',description:'부지를 누르면 이름과 지형만 표시하고, 미리보기로 이어집니다.'},
-{id:'03',name:'시작 전 확인',file:'03-preview.png',description:'빈 땅과 주변 지형을 크게 확인한 뒤 종족을 고르고 시작합니다.'}
+{id:'01',name:'1 · 나라 선택',file:'start-map-v3/01-country-balanced.png',description:'나라별로 평야·숲·구릉·담수를 조합하고, 특화 지형은 자연스럽게 이어집니다.'},
+{id:'02',name:'2 · 부지 선택',file:'start-map-v1/02-plot.png',description:'부지를 누르면 이름과 지형만 표시하고, 미리보기로 이어집니다.'},
+{id:'03',name:'3 · 시작 전 확인',file:'start-map-v1/03-preview.png',description:'빈 땅과 주변 지형을 크게 확인한 뒤 종족을 고르고 시작합니다.'},
+{id:'04',name:'외곽 확인',file:'start-map-v3/04-edge-treatment.png',description:'카메라를 지도 끝으로 옮긴 상태의 연출 시안입니다. 외곽에는 선택할 수 없는 풍경이 이어집니다.'}
 ];
 let active=0;const nav=document.querySelector('nav');
 states.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.textContent=s.name;b.onclick=()=>select(i);b.setAttribute('aria-pressed','false');nav.append(b);});
-function select(i){active=i;const s=states[i],file='start-map-v1/'+s.file;document.getElementById('preview').src=file;document.getElementById('preview').alt=s.name+' 시안';document.getElementById('description').textContent=s.description;document.getElementById('original').href=file;nav.querySelectorAll('button').forEach((b,n)=>b.setAttribute('aria-pressed',String(n===i)));history.replaceState(null,'','#'+s.id);}
+function select(i){active=i;const s=states[i],file=s.file;document.getElementById('preview').src=file;document.getElementById('preview').alt=s.name+' 시안';document.getElementById('description').textContent=s.description;document.getElementById('original').href=file;nav.querySelectorAll('button').forEach((b,n)=>b.setAttribute('aria-pressed',String(n===i)));history.replaceState(null,'','#'+s.id);}
 document.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key)||e.altKey||e.ctrlKey||e.metaKey)return;e.preventDefault();select((active+(e.key==='ArrowRight'?1:states.length-1))%states.length);});
 const initial=states.findIndex(s=>s.id===location.hash.slice(1));select(initial<0?0:initial);
-</script></body></html>
+</script><script type="module" src="/preview-audio.js"></script>
+</body></html>

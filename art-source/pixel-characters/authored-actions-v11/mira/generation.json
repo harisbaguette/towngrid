@@ -1,0 +1,67 @@
+{
+  "character": "mira",
+  "medium": "2D illustrated sprite cels",
+  "records": [
+    {
+      "file": "walk-SW-keys.png",
+      "sha256": "db8c3da0ed47d96549b595b2c2220a4326c9738bd9527ac3f300e6f0e4e35d76",
+      "action": "walk",
+      "direction": "SW",
+      "drawings": 8,
+      "tool": "image_gen",
+      "references": [
+        "public/character-preview/authored-motion/mira/poses.png (v9 at generation time)",
+        "art-source/pixel-characters/prototypes/mira-v3/turnaround.png"
+      ],
+      "status": "incomplete-visual-review",
+      "runtimeApproved": false
+    },
+    {
+      "file": "walk-NW-keys.png",
+      "sha256": "598f23d3b4b7826da1f0659f8e745017ae2b1c24add397011cde24ed14faef72",
+      "action": "walk",
+      "direction": "NW",
+      "drawings": 8,
+      "tool": "image_gen",
+      "references": [
+        "art-source/pixel-characters/authored-actions-v9/mira/walk-NW-guide.png",
+        "art-source\\pixel-characters\\authored-actions-v11\\mira\\reference-NW.png"
+      ],
+      "status": "incomplete-visual-review",
+      "runtimeApproved": false
+    },
+    {
+      "file": "carry-SW-keys.png",
+      "sha256": "af3c1edd092f13217bf40ec75a032b233e22ce976d93ab4b87b692efdc114f07",
+      "action": "carry",
+      "direction": "SW",
+      "drawings": 8,
+      "tool": "image_gen",
+      "references": [
+        "art-source\\pixel-characters\\authored-actions-v11\\mira\\walk-SW-keys.png"
+      ],
+      "status": "incomplete-visual-review",
+      "runtimeApproved": false
+    },
+    {
+      "file": "carry-NW-keys.png",
+      "sha256": "36f1ab72b823a706a421d8f0ed52245fe7fecb56dcdc712985e99cb402e9c2e0",
+      "action": "carry",
+      "direction": "NW",
+      "drawings": 8,
+      "tool": "image_gen",
+      "references": [
+        "art-source\\pixel-characters\\authored-actions-v11\\mira\\walk-NW-keys.png",
+        "art-source\\pixel-characters\\authored-actions-v11\\mira\\carry-SW-keys.png"
+      ],
+      "status": "incomplete-visual-review",
+      "runtimeApproved": false
+    }
+  ],
+  "remaining": [
+    "Arm swing and body-volume continuity",
+    "Individual planted-foot tracking and registration",
+    "Authored in-betweens and start/stop/turn/handling transitions",
+    "Normal-speed visual approval in actual terrain"
+  ]
+}

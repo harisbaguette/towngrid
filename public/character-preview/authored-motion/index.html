@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>미라 원화·동작 확인 · TownGrid</title>
+ <link rel="stylesheet" href="../roster.css">
+ <style>
+  main{max-width:1120px}.boards{display:grid;grid-template-columns:1fr 1fr;gap:16px}.boards section{min-width:0;margin:0}
+  canvas{display:block;width:100%;height:auto;image-rendering:pixelated;background:#e8eee2}
+  .reference{display:flex;gap:24px;align-items:center;margin:16px 0}.reference img{width:126px;height:180px;object-fit:contain;image-rendering:pixelated}
+  .controls{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:18px 0}
+  #timeline{width:min(360px,65vw)}.notice{border-left:4px solid #947a39;padding:10px 14px;background:#f6f0df;color:#483b20}
+  button,select,input{accent-color:#315b48}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #315b48;outline-offset:3px}
+  @media(max-width:700px){.boards{grid-template-columns:1fr}.reference{gap:14px}.reference img{width:98px;height:140px}}
+ </style>
+</head>
+<body><main>
+ <header><a href="../?character=mira">← 주민 보기</a><h1>미라 원화·동작 확인</h1>
+ <div class="reference"><img src="/assets/pixel-characters/mira/portrait.png" alt="미라의 기존 기준 일러스트"><div><h2>기존 일러스트 기준</h2><p>얼굴·체형·의상·픽셀 화풍을 유지하며 동작을 보완합니다.</p></div></div>
+ <p class="notice">오른쪽은 새로 그린 걷기·운반 초안입니다. 팔의 반대 운동·디딤·자세 연결이 미완성이며, 게임 적용 전 검수 중입니다.</p></header>
+ <div class="controls">
+  <button id="play">일시정지</button>
+  <label>방향 <select id="direction"></select></label>
+  <label>동작 <select id="action"><option value="walk">걷기</option><option value="carry">운반</option></select></label>
+  <label>크기 <select id="size"><option value="1">원본 크기</option><option value="1.8" selected>확대</option><option value="2.4">크게 확대</option></select></label>
+  <label>속도 <select id="speed"><option value=".25">0.25×</option><option value=".5">0.5×</option><option value="1" selected>1×</option></select></label>
+  <label><input id="travel" type="checkbox" checked> 지면 이동</label>
+ </div>
+ <div class="boards">
+  <section><h2>현재 게임 동작</h2><canvas id="before" width="520" height="360" aria-label="현재 게임의 미라 동작"></canvas></section>
+  <section><h2>새 2D 동작 초안 · 미완료</h2><canvas id="after" width="520" height="360" aria-label="새 2D 걷기와 운반 초안"></canvas></section>
+ </div>
+ <div class="controls"><button id="previous" aria-label="이전 자세">←</button><button id="next" aria-label="다음 자세">→</button>
+  <label for="timeline">재생 위치</label><input id="timeline" type="range" min="0" max="999" value="0"><output id="phase"></output>
+ </div>
+ <section><h2>네 방향 같은 시점</h2><canvas id="views" width="1040" height="260" aria-label="SW NW NE SE 동시 재생"></canvas></section>
+ <p>걷기·운반의 SW/NW 원화 32자세와 SE/NE 좌우 반전을 비교합니다. 현재 자세 사이의 중간 작화와 출발·정지·회전·상하차 연결이 남아 있습니다.</p>
+ <p id="status" role="status">불러오는 중…</p>
+</main><script type="module" src="compare.js"></script><script type="module" src="/preview-audio.js"></script></body>
+</html>

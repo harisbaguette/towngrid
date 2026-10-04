@@ -7252,10 +7252,10 @@
     "resourceGoods": {
       "source": "completion-v8/resourceGoods-source.png",
       "grid": [
-        80,
+        82,
         1
       ],
-      "columns": 80,
+      "columns": 82,
       "opaqueTile": true,
       "anchor": [
         0.5,
@@ -7581,6 +7581,14 @@
         "jetfuel": [
           "farmGoods2",
           8
+        ],
+        "petroleum": [
+          "industrialGoods",
+          8
+        ],
+        "processwater": [
+          "productionParts",
+          0
         ]
       }
     },

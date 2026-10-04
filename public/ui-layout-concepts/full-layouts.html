@@ -66,6 +66,7 @@ function select(id){
 document.addEventListener('keydown',e=>{if(!selected||!['ArrowLeft','ArrowRight'].includes(e.key)||e.altKey||e.ctrlKey||e.metaKey)return;e.preventDefault();const index=concepts.findIndex(c=>c.id===selected);select(concepts[(index+(e.key==='ArrowRight'?1:4))%5].id);});
 select(location.hash.slice(1));
 </script>
+<script type="module" src="/preview-audio.js"></script>
 </body>
 </html>
 

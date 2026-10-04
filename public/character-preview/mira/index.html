@@ -36,7 +36,7 @@
           <label class="check"><input id="view-all" type="checkbox" checked> 네 방향 함께</label>
         </div>
         <div class="stage-wrap"><canvas id="stage" width="900" height="420" aria-label="미라의 동작 재생 화면"></canvas><p id="loading" role="status">시안을 불러오는 중입니다.</p></div>
-        <p id="action-description">좌우 발이 교대하는 12프레임 보행</p>
+        <p id="action-description">발바닥 접지를 맞춘 32프레임 보행</p>
         <div class="transport">
           <button id="play" type="button" aria-label="일시정지">일시정지</button>
           <button id="step" type="button">한 프레임씩</button>
@@ -52,5 +52,6 @@
     <footer><strong>미라 1명 시험 적용</strong><p>게임에서 쓰는 그림과 동작을 그대로 보여줍니다. 머리·몸통은 같은 원화를 유지하며 팔·다리 관절이 움직입니다. 대기·걷기·운반·작업·상자 들기와 놓기·인사를 네 방향으로 확인할 수 있습니다.</p><p>반대편 두 방향은 좌우 반전입니다. 공격은 도구 작업 동작을 공유하며, 전용 피격·사망 그림은 아직 없습니다.</p><a href="/">게임에서 테스트</a><a href="/assets/pixel-characters/mira/walk-preview.gif" target="_blank" rel="noopener">네 방향 보행 GIF</a></footer>
   </main>
   <script src="preview.js"></script>
+<script type="module" src="/preview-audio.js"></script>
 </body>
 </html>

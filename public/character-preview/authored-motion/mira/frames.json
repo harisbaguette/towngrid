@@ -1,0 +1,867 @@
+{
+  "id": "mira",
+  "revision": "mira-authored-walk-carry-review-2",
+  "status": "visual-review-incomplete",
+  "runtimeApproved": false,
+  "cell": 128,
+  "anchor": [
+    64,
+    108
+  ],
+  "strideLength": 0.5,
+  "directions": [
+    "SW",
+    "NW",
+    "NE",
+    "SE"
+  ],
+  "mirroredDirections": {
+    "SE": "SW",
+    "NE": "NW"
+  },
+  "clips": {
+    "walk": {
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "fps": 10,
+      "strideLength": 0.5
+    },
+    "carry": {
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "fps": 10,
+      "strideLength": 0.5
+    }
+  },
+  "remaining": [
+    "Arm swing and body-volume continuity",
+    "Individual planted-foot tracking and registration",
+    "Authored in-betweens and start/stop/turn/handling transitions",
+    "Normal-speed visual approval in actual terrain"
+  ],
+  "drawings": [
+    {
+      "action": "walk",
+      "direction": "SW",
+      "index": 0,
+      "file": "walk-SW-keys.png",
+      "sourceHash": "db8c3da0ed47d96549b595b2c2220a4326c9738bd9527ac3f300e6f0e4e35d76",
+      "sourceBox": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        41,
+        15,
+        89,
+        113
+      ],
+      "packedHash": "88fc761750f2552ca3dd913dd51998bc886d896870431bf05acf8718e83e03da"
+    },
+    {
+      "action": "walk",
+      "direction": "SW",
+      "index": 1,
+      "file": "walk-SW-keys.png",
+      "sourceHash": "db8c3da0ed47d96549b595b2c2220a4326c9738bd9527ac3f300e6f0e4e35d76",
+      "sourceBox": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        47,
+        16,
+        89,
+        113
+      ],
+      "packedHash": "38bfb525344ea2b1ebf316b588b631a7614f6a66e3d8e8e1264dfa373eec69eb"
+    },
+    {
+      "action": "walk",
+      "direction": "SW",
+      "index": 2,
+      "file": "walk-SW-keys.png",
+      "sourceHash": "db8c3da0ed47d96549b595b2c2220a4326c9738bd9527ac3f300e6f0e4e35d76",
+      "sourceBox": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        48,
+        15,
+        86,
+        113
+      ],
+      "packedHash": "39f77be1b3f95c9867fd156ce5bc099dceba4bfbf8bd73eac1f70a495086a057"
+    },
+    {
+      "action": "walk",
+      "direction": "SW",
+      "index": 3,
+      "file": "walk-SW-keys.png",
+      "sourceHash": "db8c3da0ed47d96549b595b2c2220a4326c9738bd9527ac3f300e6f0e4e35d76",
+      "sourceBox": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        46,
+        15,
+        89,
+        114
+      ],
+      "packedHash": "9afd537547199a6e40fb54db5bc485ad31caa86f1096d8c0757b0110c3735647"
+    },
+    {
+      "action": "walk",
+      "direction": "SW",
+      "index": 4,
+      "file": "walk-SW-keys.png",
+      "sourceHash": "db8c3da0ed47d96549b595b2c2220a4326c9738bd9527ac3f300e6f0e4e35d76",
+      "sourceBox": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        46,
+        15,
+        89,
+        114
+      ],
+      "packedHash": "171b6b2ffb501afd879c259dc08b59d159b0dd2a6781e57a8f6cd60414273ca9"
+    },
+    {
+      "action": "walk",
+      "direction": "SW",
+      "index": 5,
+      "file": "walk-SW-keys.png",
+      "sourceHash": "db8c3da0ed47d96549b595b2c2220a4326c9738bd9527ac3f300e6f0e4e35d76",
+      "sourceBox": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        43,
+        15,
+        89,
+        114
+      ],
+      "packedHash": "3b8a9657a8457251e0a86d79ed53dd135c19d27d33c5264d5eb7a6e7e38f28f3"
+    },
+    {
+      "action": "walk",
+      "direction": "SW",
+      "index": 6,
+      "file": "walk-SW-keys.png",
+      "sourceHash": "db8c3da0ed47d96549b595b2c2220a4326c9738bd9527ac3f300e6f0e4e35d76",
+      "sourceBox": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        47,
+        15,
+        86,
+        113
+      ],
+      "packedHash": "f76fe86a3f8e783e130d13a7f60cffbdbf5d6ba45a407cf88255717057ff1570"
+    },
+    {
+      "action": "walk",
+      "direction": "SW",
+      "index": 7,
+      "file": "walk-SW-keys.png",
+      "sourceHash": "db8c3da0ed47d96549b595b2c2220a4326c9738bd9527ac3f300e6f0e4e35d76",
+      "sourceBox": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        42,
+        15,
+        88,
+        110
+      ],
+      "packedHash": "04d0a22ee267e2c1b2d465b96b5d683da9553fd8fd7a6f4a154056342ee4bebd"
+    },
+    {
+      "action": "walk",
+      "direction": "NW",
+      "index": 0,
+      "file": "walk-NW-keys.png",
+      "sourceHash": "598f23d3b4b7826da1f0659f8e745017ae2b1c24add397011cde24ed14faef72",
+      "sourceBox": [
+        0,
+        0,
+        384,
+        512
+      ],
+      "origin": [
+        194,
+        447
+      ],
+      "scale": 0.251,
+      "bbox": [
+        38,
+        21,
+        81,
+        119
+      ],
+      "packedHash": "c0413d47e579bd6deb11d46c42c008ff829428d98d4c9e04426974367ae7c9dd"
+    },
+    {
+      "action": "walk",
+      "direction": "NW",
+      "index": 1,
+      "file": "walk-NW-keys.png",
+      "sourceHash": "598f23d3b4b7826da1f0659f8e745017ae2b1c24add397011cde24ed14faef72",
+      "sourceBox": [
+        384,
+        0,
+        768,
+        512
+      ],
+      "origin": [
+        194,
+        447
+      ],
+      "scale": 0.251,
+      "bbox": [
+        43,
+        21,
+        82,
+        119
+      ],
+      "packedHash": "4d0c9a59495462ad84b057e820ee8d7f90494e92127dd144e37e370c79308a03"
+    },
+    {
+      "action": "walk",
+      "direction": "NW",
+      "index": 2,
+      "file": "walk-NW-keys.png",
+      "sourceHash": "598f23d3b4b7826da1f0659f8e745017ae2b1c24add397011cde24ed14faef72",
+      "sourceBox": [
+        768,
+        0,
+        1152,
+        512
+      ],
+      "origin": [
+        194,
+        447
+      ],
+      "scale": 0.251,
+      "bbox": [
+        48,
+        21,
+        82,
+        117
+      ],
+      "packedHash": "6b43a866e937f5c032662e8a962c60143cafddb991feefc2517328b8011cf141"
+    },
+    {
+      "action": "walk",
+      "direction": "NW",
+      "index": 3,
+      "file": "walk-NW-keys.png",
+      "sourceHash": "598f23d3b4b7826da1f0659f8e745017ae2b1c24add397011cde24ed14faef72",
+      "sourceBox": [
+        1152,
+        0,
+        1536,
+        512
+      ],
+      "origin": [
+        194,
+        447
+      ],
+      "scale": 0.251,
+      "bbox": [
+        44,
+        21,
+        82,
+        119
+      ],
+      "packedHash": "4305f3f11ff2f87e3a0f09250265766e5ddc4a0b53b29742fa8f527e075c5678"
+    },
+    {
+      "action": "walk",
+      "direction": "NW",
+      "index": 4,
+      "file": "walk-NW-keys.png",
+      "sourceHash": "598f23d3b4b7826da1f0659f8e745017ae2b1c24add397011cde24ed14faef72",
+      "sourceBox": [
+        0,
+        512,
+        384,
+        1024
+      ],
+      "origin": [
+        194,
+        415
+      ],
+      "scale": 0.251,
+      "bbox": [
+        38,
+        21,
+        82,
+        118
+      ],
+      "packedHash": "474455e4a83f2334bda8bb3a34d539978448bbad119f082bdd9dd6e60267f9b1"
+    },
+    {
+      "action": "walk",
+      "direction": "NW",
+      "index": 5,
+      "file": "walk-NW-keys.png",
+      "sourceHash": "598f23d3b4b7826da1f0659f8e745017ae2b1c24add397011cde24ed14faef72",
+      "sourceBox": [
+        384,
+        512,
+        768,
+        1024
+      ],
+      "origin": [
+        194,
+        415
+      ],
+      "scale": 0.251,
+      "bbox": [
+        42,
+        20,
+        87,
+        116
+      ],
+      "packedHash": "481f0aa903c11196b0bef193d6695345b2f3171056fa72c6204a7acb425c2cc8"
+    },
+    {
+      "action": "walk",
+      "direction": "NW",
+      "index": 6,
+      "file": "walk-NW-keys.png",
+      "sourceHash": "598f23d3b4b7826da1f0659f8e745017ae2b1c24add397011cde24ed14faef72",
+      "sourceBox": [
+        768,
+        512,
+        1152,
+        1024
+      ],
+      "origin": [
+        194,
+        415
+      ],
+      "scale": 0.251,
+      "bbox": [
+        48,
+        20,
+        82,
+        115
+      ],
+      "packedHash": "0a1000aaba3b3490ce17c89da20d22e3959e7d98c32c7dcec4cfe1c1432f302e"
+    },
+    {
+      "action": "walk",
+      "direction": "NW",
+      "index": 7,
+      "file": "walk-NW-keys.png",
+      "sourceHash": "598f23d3b4b7826da1f0659f8e745017ae2b1c24add397011cde24ed14faef72",
+      "sourceBox": [
+        1152,
+        512,
+        1536,
+        1024
+      ],
+      "origin": [
+        194,
+        415
+      ],
+      "scale": 0.251,
+      "bbox": [
+        44,
+        20,
+        81,
+        121
+      ],
+      "packedHash": "0836c3116037a8d5a78ac7eb13f22ce14ed9f291a8bcc27b37489e012f9dcd41"
+    },
+    {
+      "action": "carry",
+      "direction": "SW",
+      "index": 0,
+      "file": "carry-SW-keys.png",
+      "sourceHash": "af3c1edd092f13217bf40ec75a032b233e22ce976d93ab4b87b692efdc114f07",
+      "sourceBox": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        42,
+        15,
+        87,
+        114
+      ],
+      "packedHash": "170c8d81915462cb221fa6196224da498fb84455c9cd8ef0defa3f3d1922cec6"
+    },
+    {
+      "action": "carry",
+      "direction": "SW",
+      "index": 1,
+      "file": "carry-SW-keys.png",
+      "sourceHash": "af3c1edd092f13217bf40ec75a032b233e22ce976d93ab4b87b692efdc114f07",
+      "sourceBox": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        43,
+        15,
+        87,
+        114
+      ],
+      "packedHash": "065180b004b22d73f5f3e649591ca16cdffaa2cb004ffe7b27bda03d35ca77ec"
+    },
+    {
+      "action": "carry",
+      "direction": "SW",
+      "index": 2,
+      "file": "carry-SW-keys.png",
+      "sourceHash": "af3c1edd092f13217bf40ec75a032b233e22ce976d93ab4b87b692efdc114f07",
+      "sourceBox": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        43,
+        15,
+        87,
+        114
+      ],
+      "packedHash": "dbd07862f994bff3bf3226edfae97532b087f73ea7fba49512a6c51c68a3b40f"
+    },
+    {
+      "action": "carry",
+      "direction": "SW",
+      "index": 3,
+      "file": "carry-SW-keys.png",
+      "sourceHash": "af3c1edd092f13217bf40ec75a032b233e22ce976d93ab4b87b692efdc114f07",
+      "sourceBox": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        43,
+        15,
+        87,
+        116
+      ],
+      "packedHash": "f196c4942e679193a9ea24dcd4463c92509dc565653258b9ee64a304ca3dfdfe"
+    },
+    {
+      "action": "carry",
+      "direction": "SW",
+      "index": 4,
+      "file": "carry-SW-keys.png",
+      "sourceHash": "af3c1edd092f13217bf40ec75a032b233e22ce976d93ab4b87b692efdc114f07",
+      "sourceBox": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        43,
+        15,
+        87,
+        115
+      ],
+      "packedHash": "c0d9bde842f388acad393a06b5953abe274801885882318f6a602ed57ad76b6f"
+    },
+    {
+      "action": "carry",
+      "direction": "SW",
+      "index": 5,
+      "file": "carry-SW-keys.png",
+      "sourceHash": "af3c1edd092f13217bf40ec75a032b233e22ce976d93ab4b87b692efdc114f07",
+      "sourceBox": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        43,
+        15,
+        87,
+        114
+      ],
+      "packedHash": "c28b425903b858ebc8a586fd8ad09e47299edd5ca4b4f19e236a7fcdc91fbe7d"
+    },
+    {
+      "action": "carry",
+      "direction": "SW",
+      "index": 6,
+      "file": "carry-SW-keys.png",
+      "sourceHash": "af3c1edd092f13217bf40ec75a032b233e22ce976d93ab4b87b692efdc114f07",
+      "sourceBox": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        43,
+        15,
+        87,
+        115
+      ],
+      "packedHash": "04923f4bb03f9cd3a132806da2da0c605517613aa20946954063df7f8f822703"
+    },
+    {
+      "action": "carry",
+      "direction": "SW",
+      "index": 7,
+      "file": "carry-SW-keys.png",
+      "sourceHash": "af3c1edd092f13217bf40ec75a032b233e22ce976d93ab4b87b692efdc114f07",
+      "sourceBox": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "origin": [
+        215,
+        389
+      ],
+      "scale": 0.267,
+      "bbox": [
+        41,
+        15,
+        87,
+        111
+      ],
+      "packedHash": "2b088e67429f4ae63438743e38a0f1bf2014a08e74cb303052ab93c3ae705413"
+    },
+    {
+      "action": "carry",
+      "direction": "NW",
+      "index": 0,
+      "file": "carry-NW-keys.png",
+      "sourceHash": "36f1ab72b823a706a421d8f0ed52245fe7fecb56dcdc712985e99cb402e9c2e0",
+      "sourceBox": [
+        0,
+        0,
+        384,
+        512
+      ],
+      "origin": [
+        194,
+        416
+      ],
+      "scale": 0.251,
+      "bbox": [
+        36,
+        20,
+        82,
+        119
+      ],
+      "packedHash": "8d1e007e635c1d689b61c2e041fdd41157012884a0a884128be67c69e8142db8"
+    },
+    {
+      "action": "carry",
+      "direction": "NW",
+      "index": 1,
+      "file": "carry-NW-keys.png",
+      "sourceHash": "36f1ab72b823a706a421d8f0ed52245fe7fecb56dcdc712985e99cb402e9c2e0",
+      "sourceBox": [
+        384,
+        0,
+        768,
+        512
+      ],
+      "origin": [
+        194,
+        416
+      ],
+      "scale": 0.251,
+      "bbox": [
+        36,
+        20,
+        82,
+        119
+      ],
+      "packedHash": "5a92eabfcfe6e85eebdae3fb9125ac45105b956b596a8aba214f87d56f5faadf"
+    },
+    {
+      "action": "carry",
+      "direction": "NW",
+      "index": 2,
+      "file": "carry-NW-keys.png",
+      "sourceHash": "36f1ab72b823a706a421d8f0ed52245fe7fecb56dcdc712985e99cb402e9c2e0",
+      "sourceBox": [
+        768,
+        0,
+        1152,
+        512
+      ],
+      "origin": [
+        194,
+        416
+      ],
+      "scale": 0.251,
+      "bbox": [
+        36,
+        20,
+        82,
+        117
+      ],
+      "packedHash": "156e21ae209e3ac7294ef992de73584dad6bc4dcd3531db92dfb29411398ed36"
+    },
+    {
+      "action": "carry",
+      "direction": "NW",
+      "index": 3,
+      "file": "carry-NW-keys.png",
+      "sourceHash": "36f1ab72b823a706a421d8f0ed52245fe7fecb56dcdc712985e99cb402e9c2e0",
+      "sourceBox": [
+        1152,
+        0,
+        1536,
+        512
+      ],
+      "origin": [
+        194,
+        416
+      ],
+      "scale": 0.251,
+      "bbox": [
+        36,
+        20,
+        82,
+        119
+      ],
+      "packedHash": "dcd37bcb82cdc795087f5d48c44ced53fc5fabf8c979d651ee6a86a9cb740030"
+    },
+    {
+      "action": "carry",
+      "direction": "NW",
+      "index": 4,
+      "file": "carry-NW-keys.png",
+      "sourceHash": "36f1ab72b823a706a421d8f0ed52245fe7fecb56dcdc712985e99cb402e9c2e0",
+      "sourceBox": [
+        0,
+        512,
+        384,
+        1024
+      ],
+      "origin": [
+        194,
+        384
+      ],
+      "scale": 0.251,
+      "bbox": [
+        36,
+        20,
+        82,
+        118
+      ],
+      "packedHash": "dae7c0873adbc506356a1d154796aad2e31b459b097d0f367b8f6b1c278041b6"
+    },
+    {
+      "action": "carry",
+      "direction": "NW",
+      "index": 5,
+      "file": "carry-NW-keys.png",
+      "sourceHash": "36f1ab72b823a706a421d8f0ed52245fe7fecb56dcdc712985e99cb402e9c2e0",
+      "sourceBox": [
+        384,
+        512,
+        768,
+        1024
+      ],
+      "origin": [
+        194,
+        384
+      ],
+      "scale": 0.251,
+      "bbox": [
+        36,
+        20,
+        88,
+        117
+      ],
+      "packedHash": "c4a822da572294a5527724adeed27949129c56b939cfb6174280edd56a229a8c"
+    },
+    {
+      "action": "carry",
+      "direction": "NW",
+      "index": 6,
+      "file": "carry-NW-keys.png",
+      "sourceHash": "36f1ab72b823a706a421d8f0ed52245fe7fecb56dcdc712985e99cb402e9c2e0",
+      "sourceBox": [
+        768,
+        512,
+        1152,
+        1024
+      ],
+      "origin": [
+        194,
+        384
+      ],
+      "scale": 0.251,
+      "bbox": [
+        36,
+        20,
+        82,
+        116
+      ],
+      "packedHash": "034bcf244028179c2cfc3493cd147606c34da7b632c5c772d9da41916387f547"
+    },
+    {
+      "action": "carry",
+      "direction": "NW",
+      "index": 7,
+      "file": "carry-NW-keys.png",
+      "sourceHash": "36f1ab72b823a706a421d8f0ed52245fe7fecb56dcdc712985e99cb402e9c2e0",
+      "sourceBox": [
+        1152,
+        512,
+        1536,
+        1024
+      ],
+      "origin": [
+        194,
+        384
+      ],
+      "scale": 0.251,
+      "bbox": [
+        36,
+        20,
+        82,
+        121
+      ],
+      "packedHash": "26630e47b0f8bda59bb70ad1311a908e8134dc43622ba57175b70aa80a189aa7"
+    }
+  ],
+  "source": "art-source/pixel-characters/authored-actions-v11/mira/review.json",
+  "sourceHash": "ed1f9423cf9bf6d531a40e5d959d12ab2aee0b1db5e2668a8da6683decb06ec4",
+  "atlasColumns": 16,
+  "atlasRows": 4,
+  "sourceDrawings": 32,
+  "uniqueDrawings": 32,
+  "method": "whole-authored-cels-uniform-registration"
+}

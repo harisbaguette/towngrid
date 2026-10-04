@@ -170,6 +170,195 @@
       "loop": true,
       "rmsDb": -33.0,
       "peak": 0.0843
+    },
+    {
+      "name": "action-build",
+      "seconds": 0.65,
+      "loop": false,
+      "rmsDb": -24.01,
+      "peak": 0.627
+    },
+    {
+      "name": "action-repair",
+      "seconds": 0.65,
+      "loop": false,
+      "rmsDb": -26.85,
+      "peak": 0.7002
+    },
+    {
+      "name": "action-demolish",
+      "seconds": 0.95,
+      "loop": false,
+      "rmsDb": -23.94,
+      "peak": 0.75
+    },
+    {
+      "name": "action-plant",
+      "seconds": 0.5,
+      "loop": false,
+      "rmsDb": -26.35,
+      "peak": 0.6585
+    },
+    {
+      "name": "action-upgrade",
+      "seconds": 0.65,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.2585
+    },
+    {
+      "name": "action-expand",
+      "seconds": 0.75,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.2632
+    },
+    {
+      "name": "action-heal",
+      "seconds": 0.65,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.2486
+    },
+    {
+      "name": "action-invalid",
+      "seconds": 0.55,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.2708
+    },
+    {
+      "name": "event-defend",
+      "seconds": 0.65,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.2394
+    },
+    {
+      "name": "event-retreat",
+      "seconds": 0.65,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.2512
+    },
+    {
+      "name": "event-victory",
+      "seconds": 0.75,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.2431
+    },
+    {
+      "name": "event-illness",
+      "seconds": 0.55,
+      "loop": false,
+      "rmsDb": -24.01,
+      "peak": 0.241
+    },
+    {
+      "name": "event-strike",
+      "seconds": 0.65,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.2254
+    },
+    {
+      "name": "event-sanction",
+      "seconds": 0.65,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.2439
+    },
+    {
+      "name": "map-world",
+      "seconds": 0.65,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.2713
+    },
+    {
+      "name": "map-plot",
+      "seconds": 0.55,
+      "loop": false,
+      "rmsDb": -24.01,
+      "peak": 0.2782
+    },
+    {
+      "name": "map-enter",
+      "seconds": 0.75,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.2593
+    },
+    {
+      "name": "event-raid",
+      "seconds": 1.5,
+      "loop": false,
+      "rmsDb": -24.0,
+      "peak": 0.1955
+    },
+    {
+      "name": "event-impact",
+      "seconds": 0.28,
+      "loop": false,
+      "rmsDb": -26.05,
+      "peak": 0.5119
+    },
+    {
+      "name": "event-defeat",
+      "seconds": 0.4,
+      "loop": false,
+      "rmsDb": -25.52,
+      "peak": 0.4578
+    },
+    {
+      "name": "event-thunder",
+      "seconds": 2.4,
+      "loop": false,
+      "rmsDb": -25.02,
+      "peak": 0.4851
+    },
+    {
+      "name": "event-mana",
+      "seconds": 1.2,
+      "loop": false,
+      "rmsDb": -26.0,
+      "peak": 0.1679
+    },
+    {
+      "name": "ui-transition",
+      "seconds": 0.4,
+      "loop": false,
+      "rmsDb": -29.0,
+      "peak": 0.1818
+    },
+    {
+      "name": "vehicle-ship",
+      "seconds": 1.25,
+      "loop": false,
+      "rmsDb": -28.16,
+      "peak": 0.1699
+    },
+    {
+      "name": "vehicle-train",
+      "seconds": 1.25,
+      "loop": false,
+      "rmsDb": -28.12,
+      "peak": 0.352
+    },
+    {
+      "name": "vehicle-air",
+      "seconds": 1.25,
+      "loop": false,
+      "rmsDb": -29.12,
+      "peak": 0.1578
+    },
+    {
+      "name": "amb-rain",
+      "seconds": 16.0,
+      "loop": true,
+      "rmsDb": -29.0,
+      "peak": 0.1921
     }
   ]
 }

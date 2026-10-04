@@ -1,0 +1,30 @@
+{
+  "status": "rejected-for-runtime",
+  "character": "mira",
+  "action": "walk",
+  "direction": "SW",
+  "candidates": [
+    {
+      "file": "walk-SW-candidate.png",
+      "reason": "Arm counter-swing is absent; per-cell registration is inconsistent."
+    },
+    {
+      "file": "walk-SW-arms.png",
+      "reason": "Contact correction causes body displacement; arms and pose continuity still need work."
+    },
+    {
+      "file": "walk-16-request.png",
+      "reason": "Requested 16 frames; output has 15 figures and repeated leading-leg poses."
+    },
+    {
+      "file": "walk-first-half.png",
+      "reason": "Supporting leg changes within the intended same-leg stance."
+    },
+    {
+      "file": "walk-color-guide.png",
+      "reason": "Guide colors retained; contact registration and body alignment remain inconsistent."
+    }
+  ],
+  "runtimeApplied": false,
+  "qualityComplete": false
+}

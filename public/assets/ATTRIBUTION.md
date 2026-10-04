@@ -1,6 +1,6 @@
 # Asset credits
 
-The 24 UI, transport, animal and ambience sounds listed in `audio/presentation-sounds.json` are original procedural synthesis. Rebuild the OGG/MP3 pairs with `scripts/build-presentation-audio.py`; they contain no third-party recordings.
+The 51 UI, action, event, transport, animal and ambience sounds listed in `audio/presentation-sounds.json` are original procedural synthesis. Rebuild the OGG/MP3 pairs with `scripts/build-presentation-audio.py`; they contain no third-party recordings.
 
 `pixel-environment/solarpanel`, `chocolatier`, `packshop`, `sheeppen`, `milkbarn`, `duckhouse`, `farmSheep`, `farmCow`, `farmDuck`, `farmBee`, and the wool/wax resource cutouts use OpenAI image generation with this project's pixel artwork as references. Sources and packing instructions are in `art-source/pixel-environment/farm-v11/`. Animal poses are generated sprite frames; travel paths and animation playback are code-driven.
 
@@ -40,7 +40,11 @@ License records are in `characters/LICENSE-*.txt`. The centaur still uses the pr
 
 24 additional imported GLBs are listed in `refresh-manifest.json`, with creator sources, hashes, animation clips and CC0 licenses in `REFRESH_CREDITS.md` / `licenses/`. The files include Kenney Factory, Commercial, Watercraft and Train assets; Quaternius Farm Buildings, Horse and Robot. Hospital and bank use adapted commercial storefronts with project role indicators.
 
-Background music is **calm theme** by pebonius; ambient music is **Forest Ambience** by TinyWorlds. Both creator-posted CC0 sources are listed in `audio/music-sources.json`. Original audio remains unchanged; extra MP3/OGG counterparts are codec transcodes. Music crossfades at replay. Generated tones remain as loading fallbacks and action accents. No source user-interface artwork was redistributed; the supplied reference's palette, ribbons and cards were implemented as CSS components.
+The 51 active TownGrid compositions and their individual authors, source links, licenses and modifications are listed in [audio/LICENSE.txt](audio/LICENSE.txt) and `audio/music-sources.json`. The game also displays these credits in Settings → Asset credits. Runtime music uses two-pass normalization to −20 LUFS and −2 dBTP, OGG/MP3 conversion and playback crossfades. Original audio and manifests are in `art-source/audio/bright-town/` and `art-source/audio/world-score/`.
+
+Additional syncopika compositions: [happy tune](https://opengameart.org/content/happy-tune), [happy bgm 090719](https://opengameart.org/content/happy-bgm-090719), [step step step](https://opengameart.org/content/step-step-step-happy-piano-bgm), [fun bgm 022824](https://opengameart.org/content/fun-bgm-022824) under CC BY 3.0, and [adventure bgm idea](https://opengameart.org/content/adventure-bgm-idea) under CC BY 4.0. Juhani Junkala / SubspaceAudio JRPG and Sparklin Labs / Pixel-boy Superpowers selections use CC0 1.0. The silent tail of `score-biome-marsh` is trimmed at 67.3 seconds. Recover originals with `python scripts/fetch-world-score.py`; rebuild with `python scripts/pack-town-music.py`.
+
+**Forest Ambience** by TinyWorlds is a CC0 environment recording. The archived **calm theme** by pebonius, **Town 3** by Alex McCulloch, and **A New Town** by cynicmusic are no longer in the playlist. Their original credits and per-file sources remain in `audio/music-sources.json`. Generated tones remain as loading fallbacks and action accents. No source user-interface artwork was redistributed; the supplied reference's palette, ribbons and cards were implemented as CSS components.
 
 ## World terrain illustration (2026-09-26)
 `world/irdea-terrain.webp`: generated for ERDYNTH with OpenAI image generation, informed by user-provided visual references. Decorative terrain under the exact interactive country geometry; no text or baked UI. Not drawn since the 2026-09-28 grid map redesign; kept for the art archive.

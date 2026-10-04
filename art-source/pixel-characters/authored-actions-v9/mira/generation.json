@@ -1,0 +1,75 @@
+{
+  "generator": "image_gen.imagegen",
+  "transparentBackground": true,
+  "sourceFrames": [
+    {
+      "file": "walk-SW-01.png",
+      "reference": "walk-SW-pose-1-guide.png",
+      "prompt": "Edit this EXACT single pixel-art animation cel as a professional sprite animator's cleanup pass. Keep the character, camera, body scale and the exact positions of head, shoulders, hips, knees, hands and feet. This is one CONTACT pose, not a sequence. The screen-left leg extends FORWARD down-left, its heel contacting the floor at x190 y460. The screen-right leg trails BACK with the boot at x300 y421. Do NOT switch these legs. The screen-right arm should swing forward towards x235 y320 opposite its rearward leg; the screen-left arm swings back beside the torso. Correct the ugly ankle/boot distortion by redrawing the boots naturally in perspective: BOTH boot toes face down-left, including the rear boot which is leaving on its toe. Ensure the left-front leg is almost straight, rear knee slightly bent. Same brown ponytail, cream shirt, teal short jacket, gloves, short dark shorts and brown work boots. Pixel-art clusters, crisp outline. No smooth illustration, no blur, no character redesign, no new equipment. Maintain the exact 512x512 framing and original transparency. Only one full-body sprite, no labels, no grid, no floor, no shadow.",
+      "original": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-b0869185-5958-4fb0-b20f-0abf782484ff.png"
+    },
+    {
+      "file": "walk-SW-05.png",
+      "reference": "walk-SW-pose-5-guide.png",
+      "prompt": "Clean up this EXACT single pixel-art animation cel, preserving its exact pose, proportions, character identity and limb positions. Front-left three-quarter isometric camera, facing down-left. The NEAR leg (emerging from the screen-right shorts opening) crosses IN FRONT OF the other thigh and reaches down-left for heel contact. Its boot is the lowest boot, in front. The FAR leg (screen-left shorts opening) extends backward up-right and is partly hidden by the near thigh; its rear boot leaves the floor on the toe. BOTH boots' toes point down-left. Crucially keep this crossed-leg contact silhouette from the image, NOT a wide open sideways stride. The far arm swings forward in front of the cream shirt, near arm swings back behind the toolbelt. Redraw distorted boots and joints into solid anatomically plausible pixel art, but maintain the exact screen position and size of the head and hips. Same brown ponytail, short teal work jacket, cream high-neck top, shorts, gloves and boots; gold sleeve patch. Crisp clustered pixels, stable outline, no blur, no gradient. ONE full-body character, centered in the same square canvas with the same empty margins. Preserve transparency; absolutely no background, ground, shadow, labels or other figures.",
+      "original": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-8eb4526a-796d-4b7a-aa5e-7fe243d1771c.png"
+    },
+    {
+      "file": "walk-SW-02.png",
+      "reference": "walk-SW-pose-2-guide.png",
+      "prompt": "Clean up this EXACT single pixel-art animation cel as a professional sprite animator. Preserve exact character identity, camera angle, body scale, head and pelvis positions, and the limb arrangement of the reference. This is ONE DOWN/weight-acceptance pose. Screen-left FAR leg is supporting her weight, knee slightly bends and its boot sole is planted flat at the guide position. Screen-right NEAR leg lifts behind, knee bent, boot leaving the ground. Body slightly lower. Near/right arm swings forward across the waist; far/left arm swings back and is partly behind the torso. All boot toes point down-left in the same isometric orientation as her face. Correct the deformed boots and disconnected-looking joints by redrawing solid anatomically coherent limbs. Smooth heel-to-toe action with believable knees and constant leg lengths. Same brown ponytail, teal cropped jacket with gold sleeve patch, cream high-neck shirt, dark shorts, brown gloves, toolbelt and boots. Same amount of crisp pixel detail as the reference, never blurry or painterly. Full figure with exact original framing and empty margins. Transparent background, no shadow, no ground, no other figures, no text. Do not replace this pose with a generic walking illustration.",
+      "original": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-ff83491c-86a8-4372-b00f-a9fecd9f7303.png"
+    },
+    {
+      "file": "walk-SW-03.png",
+      "reference": "walk-SW-pose-3-guide.png",
+      "prompt": "Clean up this EXACT single pixel-art animation cel as a professional sprite animator. Preserve exact character identity, camera angle, body scale, head and pelvis positions, and the limb arrangement of the reference. This is ONE PASSING pose. Screen-left FAR leg supports her weight directly below the hips. Screen-right NEAR knee bends and swings forward past the supporting knee, its boot clearly lifted a little off the ground (not both feet planted). Both arms pass beside the hips. Body rises a little, no high-knee march. All boot toes point down-left in the same isometric orientation as her face. Correct the deformed boots and disconnected-looking joints by redrawing solid anatomically coherent limbs. Smooth heel-to-toe action with believable knees and constant leg lengths. Same brown ponytail, teal cropped jacket with gold sleeve patch, cream high-neck shirt, dark shorts, brown gloves, toolbelt and boots. Same amount of crisp pixel detail as the reference, never blurry or painterly. Full figure with exact original framing and empty margins. Transparent background, no shadow, no ground, no other figures, no text. Do not replace this pose with a generic walking illustration.",
+      "original": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-b385bb5f-1802-468a-8105-b5802745687b.png"
+    },
+    {
+      "file": "walk-SW-04.png",
+      "reference": "walk-SW-pose-4-guide.png",
+      "prompt": "Clean up this EXACT single pixel-art animation cel as a professional sprite animator. Preserve exact character identity, camera angle, body scale, head and pelvis positions, and the limb arrangement of the reference. This is ONE PUSH-OFF pose. Screen-left FAR leg is behind the hips with heel lifted and toe supporting at the rear; screen-right NEAR leg is reaching forward across in front of it for the next heel contact, foot just above the floor. Far arm is moving forward, near arm moving backward. Preserve the exact crossed thigh occlusion of the guide. All boot toes point down-left in the same isometric orientation as her face. Correct the deformed boots and disconnected-looking joints by redrawing solid anatomically coherent limbs. Smooth heel-to-toe action with believable knees and constant leg lengths. Same brown ponytail, teal cropped jacket with gold sleeve patch, cream high-neck shirt, dark shorts, brown gloves, toolbelt and boots. Same amount of crisp pixel detail as the reference, never blurry or painterly. Full figure with exact original framing and empty margins. Transparent background, no shadow, no ground, no other figures, no text. Do not replace this pose with a generic walking illustration.",
+      "original": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-c2e0a43f-aa04-4ada-bf56-93aa387c44c6.png"
+    },
+    {
+      "file": "walk-SW-06.png",
+      "reference": "walk-SW-pose-6-guide.png",
+      "prompt": "Clean up this EXACT single pixel-art animation cel as a professional sprite animator. Preserve exact character identity, camera angle, body scale, head and pelvis positions, and the limb arrangement of the reference. This is ONE DOWN/weight-acceptance pose. The screen-right NEAR leg crosses in FRONT of the other thigh and supports the weight on a flat boot beneath/forward of the body. It must remain the supporting leg. The screen-left FAR leg bends behind, its boot clearly lifted off the ground. Body slightly lower. Far arm swings forward across the waist; near arm swings back behind the toolbelt. All boot toes point down-left in the same isometric orientation as her face. Correct deformed boots and joints by redrawing solid anatomically coherent limbs. Believable knees and constant leg lengths. Same brown ponytail, teal cropped jacket with gold sleeve patch, cream high-neck shirt, dark shorts, brown gloves, toolbelt and boots. Same crisp pixel detail as reference, never blurry or painterly. One full figure with exact original framing and empty margins. Transparent background, no shadow, no ground, no other figures, no text. Do not substitute a generic walking pose.",
+      "original": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-ae99ae70-1d3c-4d57-8349-96520a1730b2.png"
+    },
+    {
+      "file": "walk-SW-07.png",
+      "reference": "walk-SW-pose-7-guide.png",
+      "prompt": "Clean up this EXACT single pixel-art animation cel as a professional sprite animator. Preserve exact character identity, camera angle, body scale, head and pelvis positions, and the limb arrangement of the reference. This is ONE PASSING pose. Screen-right NEAR leg supports the body with its boot planted beneath the hips. Screen-left FAR knee bends forward past the supporting knee and its boot is clearly lifted a little off the ground. The near thigh stays in front at the overlap, the FAR shin and boot swing ahead down-left. Arms pass alongside hips, body slightly rises. Do not draw two planted feet. All boot toes point down-left in the same isometric orientation as her face. Correct deformed boots and joints by redrawing solid anatomically coherent limbs. Believable knees and constant leg lengths. Same brown ponytail, teal cropped jacket with gold sleeve patch, cream high-neck shirt, dark shorts, brown gloves, toolbelt and boots. Same crisp pixel detail as reference, never blurry or painterly. One full figure with exact original framing and empty margins. Transparent background, no shadow, no ground, no other figures, no text. Do not substitute a generic walking pose.",
+      "original": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-72de9c53-e8a1-4bba-a62a-3f270e4ca7dd.png"
+    },
+    {
+      "file": "walk-SW-08.png",
+      "reference": "walk-SW-pose-8-guide.png",
+      "prompt": "Clean up this EXACT single pixel-art animation cel, keeping its character identity, camera angle, body scale, head/pelvis positions and limb layout. This is the late PUSH-OFF pose of a walk. NEAR leg (from screen-right hip) extends behind the body, heel raised, rear boot toes contact the floor. FAR leg (from screen-left hip) extends forward down-left, knee nearly straight, boot is about to land on heel, slightly above the ground. Keep both legs visibly separated as in the guide. The NEAR/right arm swings forward across the lower cream shirt, FAR/left arm swings backward behind the torso. BOTH boots point down-left, not backwards, natural heel/toe shape. Redraw the distorted boots/joints into coherent crisp pixel-art, preserving limb lengths. Brown ponytail, short teal jacket with gold sleeve patch, cream shirt, dark shorts, brown gloves/toolbelt/work boots. ONE figure, same square framing and empty margins, transparent background, no ground, shadow, labels or extra figures. No blur or painterly rendering.",
+      "original": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-5f66f734-ec8d-4dd8-aba5-80b34bb6ee2c.png"
+    },
+    {
+      "file": "walk-SW-01-arm-fix.png",
+      "reference": "walk-SW-01.png",
+      "prompt": "Make one precise animation correction to this pixel-art character. PRESERVE all pixels/positions of her head, face, hair, torso, hips, shorts, legs and boots. Change ONLY the arm poses to create a clear counter-swing: the NEAR arm on the RIGHT of the image with the gold sleeve patch bends forward and inward across her abdomen, its brown gloved hand in front of her cream shirt just ABOVE THE BELT BUCKLE at center-left. The FAR arm on the LEFT of the image swings BACKWARD and becomes mostly hidden behind her left torso edge; only a small glove edge can show beside her left hip. The left-front leg stays exactly where it is. Do not move the feet or shift body. Preserve pixel-art style, same square framing, identity, scale and transparent background. One figure only, no text.",
+      "original": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-b5211aa1-a5b3-43de-b0c0-45477952a92c.png"
+    },
+    {
+      "file": "walk-SW-08-arm-fix.png",
+      "reference": "walk-SW-08.png",
+      "prompt": "Precise localized cleanup of this pixel-art sprite. Preserve the entire head, face, hair, torso, hips, legs, boots and all their positions exactly. There is a confusing hanging arm/hand on the far RIGHT behind the character, beside the toolbelt. REMOVE that rear hanging arm/hand. Keep the NEAR bent arm that comes from the gold-patched right sleeve and crosses in front of the belly, keeping its gloved fist over the belt buckle. The FAR arm should be occluded behind the torso, at most a small brown glove edge behind the left hip. Exactly two anatomical arms, no extra elbow or hand. Keep everything else unchanged, including pose, pixel clusters, image size, clear transparent background and empty margins. Single sprite, no labels.",
+      "original": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-5330438c-5014-4002-bf81-bd6b0b9f8a80.png"
+    }
+  ],
+  "guideSource": {
+    "atlas": "public/assets/pixel-characters/mira/sprites.png",
+    "metadata": "public/assets/pixel-characters/mira/frames.json",
+    "exporter": "work/export-mira-motion-guides.mjs"
+  },
+  "rejectedSheet": {
+    "file": "walk-SW-sheet-candidate.png",
+    "reason": "Repeated leading-leg poses; not a complete alternating walk cycle."
+  }
+}

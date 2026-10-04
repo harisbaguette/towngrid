@@ -1,0 +1,33 @@
+{
+  "sourceHash": "597d7ae5590c80ec2119f94165fcbec33892ab6041f777503075dc727f10e96b",
+  "components": {
+    "button-teal": {
+      "left": 56,
+      "top": 160,
+      "width": 657,
+      "height": 177,
+      "slice": 42
+    },
+    "button-orange": {
+      "left": 824,
+      "top": 160,
+      "width": 657,
+      "height": 177,
+      "slice": 42
+    },
+    "panel-teal": {
+      "left": 28,
+      "top": 480,
+      "width": 713,
+      "height": 424,
+      "slice": 48
+    },
+    "panel-paper": {
+      "left": 796,
+      "top": 480,
+      "width": 713,
+      "height": 424,
+      "slice": 48
+    }
+  }
+}

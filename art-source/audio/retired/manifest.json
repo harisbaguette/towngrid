@@ -1,0 +1,85 @@
+{
+  "tracks": [
+    {
+      "file": "music-explore-dcd7fa1f6365.ogg",
+      "title": "Pushing ahead",
+      "author": "Centurion_of_war",
+      "source": "https://opengameart.org/content/pushing-ahead",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "dcd7fa1f6365c3b8113bb72c8f7c43eee9f253c726f99d223e9d0f860ae12d91"
+    },
+    {
+      "file": "score-biome-meadow-8e299f53f1ed.ogg",
+      "title": "Rpg Battle System — Theme 7",
+      "author": "Sparklin Labs / Pixel-boy",
+      "source": "https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/rpg-battle-system/music/theme-7.ogg",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "8e299f53f1eda51caf1aded6fda91985982b5d213c2cb9c4ec94e976293e04f5"
+    },
+    {
+      "file": "score-biome-volcanic-f957434432f4.ogg",
+      "title": "Action1 - Encounter With The Witches",
+      "author": "Juhani Junkala / SubspaceAudio",
+      "source": "https://opengameart.org/content/jrpg-pack-5-action",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "f957434432f49f5cc0a4d81351304d7daa646af5bcbeaccc29d47224cd40fb8f"
+    },
+    {
+      "file": "score-goals-d928cb7e0c0a.ogg",
+      "title": "Rpg Battle System — Theme 10",
+      "author": "Sparklin Labs / Pixel-boy",
+      "source": "https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/rpg-battle-system/music/theme-10.ogg",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "d928cb7e0c0a6369ab77ffb7a40656364de8b714ac7be50a747c18ba15cecb81"
+    },
+    {
+      "file": "score-nation-miel-57cefd68c0be.ogg",
+      "title": "Medieval Fantasy — Theme 1",
+      "author": "Sparklin Labs / Pixel-boy",
+      "source": "https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/medieval-fantasy/music/theme-1.ogg",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "57cefd68c0be300c769f4262172f03b82189f7dc424fa1f66d26bde4e0785797"
+    },
+    {
+      "file": "score-nation-neiren-a2e58baa88a2.ogg",
+      "title": "Rpg Battle System — Theme 2",
+      "author": "Sparklin Labs / Pixel-boy",
+      "source": "https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/rpg-battle-system/music/theme-2.ogg",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "a2e58baa88a237b6ee188120b8add396769b15512286d7840cef2d9dc11d8a6e"
+    },
+    {
+      "file": "score-nation-savera-ce3219b2e56b.ogg",
+      "title": "Rpg Battle System — Theme 1",
+      "author": "Sparklin Labs / Pixel-boy",
+      "source": "https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/rpg-battle-system/music/theme-1.ogg",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "ce3219b2e56b4c5123f0aa73c1902733de387d1c8a6eaf88aa466b648d7ab4a4"
+    },
+    {
+      "file": "score-operations-16200b1a8f1d.ogg",
+      "title": "Ninja Adventure — Theme 12",
+      "author": "Sparklin Labs / Pixel-boy",
+      "source": "https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-12.ogg",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "16200b1a8f1d17aa45cf92b12db9c56bf03257dde1285435dbb1857edd5350f2"
+    },
+    {
+      "file": "score-title-c8a94e9bc928.ogg",
+      "title": "Happy moments (1.4)",
+      "author": "Centurion_of_war",
+      "source": "https://opengameart.org/content/happy-moments",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "c8a94e9bc928e6701784c6533a467392f7fee7490c53c65766401a71e5d5b496"
+    }
+  ]
+}

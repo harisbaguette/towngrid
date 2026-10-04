@@ -1,0 +1,9 @@
+{
+  "status": "draft-not-in-game",
+  "files": [
+    "carry-SW.png",
+    "walk-NW.png",
+    "walk-SW.png"
+  ],
+  "review": "Full-direction/action replacement is unfinished. Alternating contacts, pose continuity and arm swing require further authored corrections. These sheets are not approved runtime animations."
+}

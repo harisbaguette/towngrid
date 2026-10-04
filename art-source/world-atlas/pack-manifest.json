@@ -27,14 +27,36 @@
     "settlement",
     "hostile"
   ],
-  "worldHash": "440eb55896ab017dc2114b6f7dd052e594938c84149f2d20a94f150d4e5e23f5",
+  "worldHash": "5f989a3853aaec2d4d4d8b2bb56d173f5da28084c851a6a7b5dddf22edf9c336",
   "sourceHash": "213dbda1352e3620899e37120abda9baf6c2a66fa5f492caaae20c7f11f5e79f",
   "markerSourceHash": "213dbda1352e3620899e37120abda9baf6c2a66fa5f492caaae20c7f11f5e79f",
-  "terrainBytes": 2108534,
+  "terrainBytes": 6498492,
   "ground": {
     "path": "public/assets/world-atlas/ground.webp",
-    "bytes": 1009204,
-    "hash": "67eddb0f1e634687fb3d8021f4949a60f4b1bf56e1644cf74c827a29878311c0"
+    "bytes": 3265924,
+    "hash": "b1c6874adf37d87600ef69a6c860b60c22070c1418587f343c78b5548c954bb7"
   },
-  "directions": "public/assets/world-atlas/iso/manifest.json"
+  "directions": "public/assets/world-atlas/iso/manifest.json",
+  "outskirts": {
+    "path": "public/assets/world-atlas/outskirts.webp",
+    "bounds": {
+      "x": -3328,
+      "y": -3328,
+      "width": 7956,
+      "height": 7462
+    },
+    "cellPixels": 8,
+    "selectable": false
+  },
+  "surrounds": {
+    "path": "public/assets/world-atlas/surrounds.webp",
+    "bounds": {
+      "x": -416,
+      "y": -416,
+      "width": 2132,
+      "height": 1638
+    },
+    "cellPixels": 32,
+    "selectable": false
+  }
 }

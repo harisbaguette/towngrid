@@ -1,0 +1,139 @@
+{
+  "runtimeApproved": false,
+  "status": "rejected-sequence-quality",
+  "generations": [
+    {
+      "direction": "SW",
+      "group": 1,
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-ad5954fd-cf00-4838-a58d-ea66625fe2f4.png",
+      "prompt": "Paint the EIGHT simplified figures in reference 1 as the illustrated character from reference 2. EXACT pose transfer, one character per corresponding cell, 4 columns × 2 rows, transparent background. These are poses 0 to 7 of a continuous 32-frame walk: ONLY this short section, NOT a whole walk cycle. Match ALL eight diagrams literally: same hands, elbows, hips, knees, boot positions and relative movements, but original character proportions and design. Dark foot dots mean planted soles. Red and blue in the diagrams are opposite anatomical sides, not outfit colors; remove the diagrams and colors. The character in reference 2 is ONLY the face, costume and art-style reference; do not copy its pose into other cells.\nMira: brown ponytail, teal short jacket and hair tie, gold circular sleeve badge, cream shirt and cuffs, dark shorts, brown gloves, boots, belt pouch. Hand-drawn 2D pixel illustration, crisp outlines and flat pixel clusters, original charm preserved, no 3D rendering. Front SW quarter view facing down-left, fixed 35.264 degree overhead camera. Opposite arms and legs, slight pelvis/chest counterturn, no exaggerated marching knees. Each body fully inside equal cell. Fixed root position and identical body/head scale across all cells, generous padding. Subtle small increments following these diagrams closely. No text, grid, drop shadow, motion blur or duplicated identical drawings.",
+      "file": "walk-SW-dense-1.png",
+      "sourceHash": "737d878a7e83f34db514e2f1c3bcb393915479edb231731aa0f50a68a91a3c10",
+      "references": [
+        "walk-SW-guide-1.png",
+        "SW-appearance.png"
+      ],
+      "referenceHashes": {
+        "walk-SW-guide-1.png": "19d58554db8807b6be4fd501fbfbb23aa31792b4ccce6ba260b55e82d1253f01",
+        "SW-appearance.png": "89e261949c1c23afb8533cdb3f2472f56301845c7a298a18447b6aa9c04a5ec6"
+      }
+    },
+    {
+      "direction": "SW",
+      "group": 2,
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-048c1199-b4b3-477b-8ec3-e3c993aeb6c4.png",
+      "prompt": "Paint the EIGHT simplified figures in reference 1 as the illustrated character from reference 2. EXACT pose transfer, one character per corresponding cell, 4 columns × 2 rows, transparent background. These are poses 8 to 15 of a continuous 32-frame walk: ONLY this short section, NOT a whole walk cycle. Match ALL eight diagrams literally: same hands, elbows, hips, knees, boot positions and relative movements, but original character proportions and design. Dark foot dots mean planted soles. Red and blue in the diagrams are opposite anatomical sides, not outfit colors; remove the diagrams and colors. The character in reference 2 is ONLY the face, costume and art-style reference; do not copy its pose into other cells.\nMira: brown ponytail, teal short jacket and hair tie, gold circular sleeve badge, cream shirt and cuffs, dark shorts, brown gloves, boots, belt pouch. Hand-drawn 2D pixel illustration, crisp outlines and flat pixel clusters, original charm preserved, no 3D rendering. Front SW quarter view facing down-left, fixed 35.264 degree overhead camera. Opposite arms and legs, slight pelvis/chest counterturn, no exaggerated marching knees. Each body fully inside equal cell. Fixed root position and identical body/head scale across all cells, generous padding. Subtle small increments following these diagrams closely. No text, grid, drop shadow, motion blur or duplicated identical drawings.",
+      "file": "walk-SW-dense-2.png",
+      "sourceHash": "75c3ecb02869fd340229ffedd2675ab78b4d3a9b657fb238bcf1975e4ce7c88c",
+      "references": [
+        "walk-SW-guide-2.png",
+        "SW-appearance.png"
+      ],
+      "referenceHashes": {
+        "walk-SW-guide-2.png": "c32205efc093f000738b69280112fe4302b530cb4f03f30586fd0fd20b08a7c1",
+        "SW-appearance.png": "89e261949c1c23afb8533cdb3f2472f56301845c7a298a18447b6aa9c04a5ec6"
+      }
+    },
+    {
+      "direction": "SW",
+      "group": 3,
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-2347457d-285c-4f2a-ae25-80a91e47e59a.png",
+      "prompt": "Paint the EIGHT simplified figures in reference 1 as the illustrated character from reference 2. EXACT pose transfer, one character per corresponding cell, 4 columns × 2 rows, transparent background. These are poses 16 to 23 of a continuous 32-frame walk: ONLY this short section, NOT a whole walk cycle. Match ALL eight diagrams literally: same hands, elbows, hips, knees, boot positions and relative movements, but original character proportions and design. Dark foot dots mean planted soles. Red and blue in the diagrams are opposite anatomical sides, not outfit colors; remove the diagrams and colors. The character in reference 2 is ONLY the face, costume and art-style reference; do not copy its pose into other cells.\nMira: brown ponytail, teal short jacket and hair tie, gold circular sleeve badge, cream shirt and cuffs, dark shorts, brown gloves, boots, belt pouch. Hand-drawn 2D pixel illustration, crisp outlines and flat pixel clusters, original charm preserved, no 3D rendering. Front SW quarter view facing down-left, fixed 35.264 degree overhead camera. Opposite arms and legs, slight pelvis/chest counterturn, no exaggerated marching knees. Each body fully inside equal cell. Fixed root position and identical body/head scale across all cells, generous padding. Subtle small increments following these diagrams closely. No text, grid, drop shadow, motion blur or duplicated identical drawings.",
+      "file": "walk-SW-dense-3.png",
+      "sourceHash": "ba1370a77d51368072ea9739856fee7a744358a05693940db296cae4e22d810f",
+      "references": [
+        "walk-SW-guide-3.png",
+        "SW-appearance.png"
+      ],
+      "referenceHashes": {
+        "walk-SW-guide-3.png": "22507f1a9f2cdb63cefde2bfd58cb9deec1c74e278cfeaf85e0f415005473f75",
+        "SW-appearance.png": "89e261949c1c23afb8533cdb3f2472f56301845c7a298a18447b6aa9c04a5ec6"
+      }
+    },
+    {
+      "direction": "SW",
+      "group": 4,
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-99ffabf2-d94a-4f28-b3d6-b24d691508b3.png",
+      "prompt": "Paint the EIGHT simplified figures in reference 1 as the illustrated character from reference 2. EXACT pose transfer, one character per corresponding cell, 4 columns × 2 rows, transparent background. These are poses 24 to 31 of a continuous 32-frame walk: ONLY this short section, NOT a whole walk cycle. Match ALL eight diagrams literally: same hands, elbows, hips, knees, boot positions and relative movements, but original character proportions and design. Dark foot dots mean planted soles. Red and blue in the diagrams are opposite anatomical sides, not outfit colors; remove the diagrams and colors. The character in reference 2 is ONLY the face, costume and art-style reference; do not copy its pose into other cells.\nMira: brown ponytail, teal short jacket and hair tie, gold circular sleeve badge, cream shirt and cuffs, dark shorts, brown gloves, boots, belt pouch. Hand-drawn 2D pixel illustration, crisp outlines and flat pixel clusters, original charm preserved, no 3D rendering. Front SW quarter view facing down-left, fixed 35.264 degree overhead camera. Opposite arms and legs, slight pelvis/chest counterturn, no exaggerated marching knees. Each body fully inside equal cell. Fixed root position and identical body/head scale across all cells, generous padding. Subtle small increments following these diagrams closely. No text, grid, drop shadow, motion blur or duplicated identical drawings.",
+      "file": "walk-SW-dense-4.png",
+      "sourceHash": "37012a35fe593625524185614ef1d4fd8f1d44a5304fb1a03607a03f172ac3ff",
+      "references": [
+        "walk-SW-guide-4.png",
+        "SW-appearance.png"
+      ],
+      "referenceHashes": {
+        "walk-SW-guide-4.png": "baf37a1497210183d30aaf1940a99eeac29b8c5045d2b734ee5d4e738df64bf8",
+        "SW-appearance.png": "89e261949c1c23afb8533cdb3f2472f56301845c7a298a18447b6aa9c04a5ec6"
+      }
+    },
+    {
+      "direction": "NW",
+      "group": 1,
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-03b7fee1-cfbf-4840-9d8d-8412d93640b7.png",
+      "prompt": "Paint the EIGHT simplified figures in reference 1 as the illustrated character from reference 2. EXACT pose transfer, one character per corresponding cell, 4 columns × 2 rows, transparent background. These are poses 0 to 7 of a continuous 32-frame walk: ONLY this short section, NOT a whole walk cycle. Match ALL eight diagrams literally: same hands, elbows, hips, knees, boot positions and relative movements, but original character proportions and design. Dark foot dots mean planted soles. Red and blue in the diagrams are opposite anatomical sides, not outfit colors; remove the diagrams and colors. The character in reference 2 is ONLY the face, costume and art-style reference; do not copy its pose into other cells.\nMira: brown ponytail, teal short jacket and hair tie, gold circular sleeve badge, cream shirt and cuffs, dark shorts, brown gloves, boots, belt pouch. Hand-drawn 2D pixel illustration, crisp outlines and flat pixel clusters, original charm preserved, no 3D rendering. Rear NW quarter view facing up-left, fixed 35.264 degree overhead camera. Opposite arms and legs, slight pelvis/chest counterturn, no exaggerated marching knees. Each body fully inside equal cell. Fixed root position and identical body/head scale across all cells, generous padding. Subtle small increments following these diagrams closely. No text, grid, drop shadow, motion blur or duplicated identical drawings.",
+      "file": "walk-NW-dense-1.png",
+      "sourceHash": "a173e253d3abddc197a20a3fdbb557c8d44e98eef8b6e54344b675b5d7439682",
+      "references": [
+        "walk-NW-guide-1.png",
+        "NW-appearance.png"
+      ],
+      "referenceHashes": {
+        "walk-NW-guide-1.png": "b0f32d7fafbda83e3147fa92cf94eb8b38551251e6ace51fc1dd9f5d411bf29f",
+        "NW-appearance.png": "a66ad843af4b0062a2ad6c86a9e8db10a5e8b4c6d2699a9454769594ca2ae1b2"
+      }
+    },
+    {
+      "direction": "NW",
+      "group": 2,
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-78b3ad06-0432-4499-966d-0667f3c07046.png",
+      "prompt": "Paint the EIGHT simplified figures in reference 1 as the illustrated character from reference 2. EXACT pose transfer, one character per corresponding cell, 4 columns × 2 rows, transparent background. These are poses 8 to 15 of a continuous 32-frame walk: ONLY this short section, NOT a whole walk cycle. Match ALL eight diagrams literally: same hands, elbows, hips, knees, boot positions and relative movements, but original character proportions and design. Dark foot dots mean planted soles. Red and blue in the diagrams are opposite anatomical sides, not outfit colors; remove the diagrams and colors. The character in reference 2 is ONLY the face, costume and art-style reference; do not copy its pose into other cells.\nMira: brown ponytail, teal short jacket and hair tie, gold circular sleeve badge, cream shirt and cuffs, dark shorts, brown gloves, boots, belt pouch. Hand-drawn 2D pixel illustration, crisp outlines and flat pixel clusters, original charm preserved, no 3D rendering. Rear NW quarter view facing up-left, fixed 35.264 degree overhead camera. Opposite arms and legs, slight pelvis/chest counterturn, no exaggerated marching knees. Each body fully inside equal cell. Fixed root position and identical body/head scale across all cells, generous padding. Subtle small increments following these diagrams closely. No text, grid, drop shadow, motion blur or duplicated identical drawings.",
+      "file": "walk-NW-dense-2.png",
+      "sourceHash": "5b0ea491c15a73a4896dde6865300381874e6388d151b554e6f1b726d25110c1",
+      "references": [
+        "walk-NW-guide-2.png",
+        "NW-appearance.png"
+      ],
+      "referenceHashes": {
+        "walk-NW-guide-2.png": "956f3d9571acdf1168cc0519115903ff7155b4747b6430792c8ea3a5dc92d42f",
+        "NW-appearance.png": "a66ad843af4b0062a2ad6c86a9e8db10a5e8b4c6d2699a9454769594ca2ae1b2"
+      }
+    },
+    {
+      "direction": "NW",
+      "group": 3,
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-64b8b994-84b1-41a8-9b2e-69a01f76a3d6.png",
+      "prompt": "Paint the EIGHT simplified figures in reference 1 as the illustrated character from reference 2. EXACT pose transfer, one character per corresponding cell, 4 columns × 2 rows, transparent background. These are poses 16 to 23 of a continuous 32-frame walk: ONLY this short section, NOT a whole walk cycle. Match ALL eight diagrams literally: same hands, elbows, hips, knees, boot positions and relative movements, but original character proportions and design. Dark foot dots mean planted soles. Red and blue in the diagrams are opposite anatomical sides, not outfit colors; remove the diagrams and colors. The character in reference 2 is ONLY the face, costume and art-style reference; do not copy its pose into other cells.\nMira: brown ponytail, teal short jacket and hair tie, gold circular sleeve badge, cream shirt and cuffs, dark shorts, brown gloves, boots, belt pouch. Hand-drawn 2D pixel illustration, crisp outlines and flat pixel clusters, original charm preserved, no 3D rendering. Rear NW quarter view facing up-left, fixed 35.264 degree overhead camera. Opposite arms and legs, slight pelvis/chest counterturn, no exaggerated marching knees. Each body fully inside equal cell. Fixed root position and identical body/head scale across all cells, generous padding. Subtle small increments following these diagrams closely. No text, grid, drop shadow, motion blur or duplicated identical drawings.",
+      "file": "walk-NW-dense-3.png",
+      "sourceHash": "539f64d01953e75233d5fb2eb130f10d360b0280f683fe3ef4d3ca2d33af06b1",
+      "references": [
+        "walk-NW-guide-3.png",
+        "NW-appearance.png"
+      ],
+      "referenceHashes": {
+        "walk-NW-guide-3.png": "ea8707e598a5f18554891d5d49b4e35e83a2f274236779f4e92c63c46590f4b9",
+        "NW-appearance.png": "a66ad843af4b0062a2ad6c86a9e8db10a5e8b4c6d2699a9454769594ca2ae1b2"
+      }
+    },
+    {
+      "direction": "NW",
+      "group": 4,
+      "path": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-2e03b098-13c5-403e-860c-ae84484e989c.png",
+      "prompt": "Paint the EIGHT simplified figures in reference 1 as the illustrated character from reference 2. EXACT pose transfer, one character per corresponding cell, 4 columns × 2 rows, transparent background. These are poses 24 to 31 of a continuous 32-frame walk: ONLY this short section, NOT a whole walk cycle. Match ALL eight diagrams literally: same hands, elbows, hips, knees, boot positions and relative movements, but original character proportions and design. Dark foot dots mean planted soles. Red and blue in the diagrams are opposite anatomical sides, not outfit colors; remove the diagrams and colors. The character in reference 2 is ONLY the face, costume and art-style reference; do not copy its pose into other cells.\nMira: brown ponytail, teal short jacket and hair tie, gold circular sleeve badge, cream shirt and cuffs, dark shorts, brown gloves, boots, belt pouch. Hand-drawn 2D pixel illustration, crisp outlines and flat pixel clusters, original charm preserved, no 3D rendering. Rear NW quarter view facing up-left, fixed 35.264 degree overhead camera. Opposite arms and legs, slight pelvis/chest counterturn, no exaggerated marching knees. Each body fully inside equal cell. Fixed root position and identical body/head scale across all cells, generous padding. Subtle small increments following these diagrams closely. No text, grid, drop shadow, motion blur or duplicated identical drawings.",
+      "file": "walk-NW-dense-4.png",
+      "sourceHash": "f59b1b24897414e0c09f5f35a9f5d31c64bb16ac114dc5388e6ef0b13b1646ae",
+      "references": [
+        "walk-NW-guide-4.png",
+        "NW-appearance.png"
+      ],
+      "referenceHashes": {
+        "walk-NW-guide-4.png": "d1cbbe4c8ae9101ac9d92a080944c19a87b2dfe3fa278b515b7526af9023a1d4",
+        "NW-appearance.png": "a66ad843af4b0062a2ad6c86a9e8db10a5e8b4c6d2699a9454769594ca2ae1b2"
+      }
+    }
+  ],
+  "remaining": [
+    "SW sleeve and glove shapes change across consecutive poses",
+    "Root, proportions and sole placement change between groups",
+    "Continuous contact and walk-to-idle/carry transitions are not established"
+  ]
+}

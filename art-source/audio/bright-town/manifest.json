@@ -1,0 +1,64 @@
+{
+  "tracks": [
+    {
+      "id": "music-morning",
+      "original": "happy-bgm.wav",
+      "title": "happy bgm (piano,violin,flute,drums)",
+      "author": "syncopika",
+      "source": "https://opengameart.org/content/happy-bgm-pianoviolinflutedrums",
+      "download": "https://opengameart.org/sites/default/files/080415pianobgm3popver.wav",
+      "license": "CC-BY-3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/",
+      "retrieved": "2026-10-03",
+      "sha256": "4d9a61fd43197c2bbc811f8b120377917fc50b813149ea4e191aefcc229c4998"
+    },
+    {
+      "id": "music-bustling",
+      "original": "bustling-city.wav",
+      "title": "Bustling City",
+      "author": "Bryan Wysopal",
+      "source": "https://opengameart.org/content/bustling-city",
+      "download": "https://opengameart.org/sites/default/files/Bustling%20City%202.wav",
+      "license": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "retrieved": "2026-10-03",
+      "sha256": "f11598cef84be1ad44453d8268c7b9fc2a24afdba4c6868d7c775e43f4828271"
+    },
+    {
+      "title": "adventure bgm idea",
+      "author": "syncopika",
+      "source": "https://opengameart.org/content/adventure-bgm-idea",
+      "download": "https://opengameart.org/sites/default/files/081917funmarchingbgm.ogg",
+      "license": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "id": "music-explore",
+      "original": "music-explore.ogg",
+      "retrieved": "2026-10-04",
+      "sha256": "654bd940e91750bd0762742ecae5518e0d5f56fcdb890385a9118642b16f9c14"
+    },
+    {
+      "id": "music-industry",
+      "original": "sideways-city-loop.wav",
+      "title": "Sideways City",
+      "author": "Zane Little Music",
+      "source": "https://opengameart.org/content/sideways-city",
+      "download": "https://opengameart.org/sites/default/files/sideways_city_loop.wav",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved": "2026-10-04",
+      "sha256": "549309746ba2609d7d91d19f5757de6c86a987017e7d0f54aa2a97cb88f8521c"
+    },
+    {
+      "id": "music-danger",
+      "original": "march.ogg",
+      "title": "The Enemy Marches",
+      "author": "Peter Eastman",
+      "source": "https://opengameart.org/content/the-enemy-marches",
+      "download": "https://opengameart.org/sites/default/files/March.ogg",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/",
+      "retrieved": "2026-10-04",
+      "sha256": "90797fe2ea0b2d3511f8829f84ce3a3c514342bd237d86b0c3ab7ce1fb33ec87"
+    }
+  ]
+}

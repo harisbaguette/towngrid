@@ -21,7 +21,7 @@
 	@KenneyNL
 
 ------------------------------------------------------------
-Additional audio (added 2026-09-28) - all CC0 1.0 (public domain)
+Additional audio listed in this section (added 2026-09-28) - CC0 1.0 (public domain)
 http://creativecommons.org/publicdomain/zero/1.0/
 Per-file source URL, author, modifications, size and SHA-256: music-sources.json
 Rebuild recipe: scripts/build-audio-assets.py
@@ -49,3 +49,267 @@ amb-wind
 amb-crickets
   Wolfgang_ - Crickets Ambient Noise - loopable - https://opengameart.org/content/crickets-ambient-noise-loopable
 calm-theme (pebonius) and forest-ambience (TinyWorlds): see music-sources.json.
+
+------------------------------------------------------------
+TownGrid active music (51 distinct compositions)
+
+happy bgm (piano,violin,flute,drums) — syncopika
+  Source: https://opengameart.org/content/happy-bgm-pianoviolinflutedrums
+  License: CC-BY-3.0 — https://creativecommons.org/licenses/by/3.0/
+  Files: music-morning.ogg / music-morning.mp3
+
+Bustling City — Bryan Wysopal
+  Source: https://opengameart.org/content/bustling-city
+  License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+  Files: music-bustling.ogg / music-bustling.mp3
+
+adventure bgm idea — syncopika
+  Source: https://opengameart.org/content/adventure-bgm-idea
+  License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+  Files: music-explore.ogg / music-explore.mp3
+
+Sideways City — Zane Little Music
+  Source: https://opengameart.org/content/sideways-city
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: music-industry.ogg / music-industry.mp3
+
+The Enemy Marches — Peter Eastman
+  Source: https://opengameart.org/content/the-enemy-marches
+  License: CC BY 3.0 — https://creativecommons.org/licenses/by/3.0/
+  Files: music-danger.ogg / music-danger.mp3
+
+Town1 - Home Town — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-2-towns
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-nation-estern.ogg / score-nation-estern.mp3
+
+Exploration1 - Grasslands — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-1-exploration
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-nation-arsel.ogg / score-nation-arsel.mp3
+
+Exploration3 - Tha'el Mines — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-1-exploration
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-nation-kardum.ogg / score-nation-kardum.mp3
+
+Town3 - Sunshine Coast — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-2-towns
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-nation-lumea.ogg / score-nation-lumea.mp3
+
+Town4 - Bazaar — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-2-towns
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-nation-rivente.ogg / score-nation-rivente.mp3
+
+Exploration2 - Military Base — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-1-exploration
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-nation-broden.ogg / score-nation-broden.mp3
+
+Exploration6 - Tropical Island — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-1-exploration
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-nation-pelara.ogg / score-nation-pelara.mp3
+
+Calm6 - Innocence — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-4-calm
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-biome-snow.ogg / score-biome-snow.mp3
+
+Calm4 - Sand Castles — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-4-calm
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-biome-coast.ogg / score-biome-coast.mp3
+
+Exploration5 - Sneaking Around — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-1-exploration
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-biome-volcanic.ogg / score-biome-volcanic.mp3
+
+Calm3 - Peaceful Days — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-4-calm
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-gallery.ogg / score-gallery.mp3
+
+Calm2 - Childhood Friends — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-4-calm
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-settings.ogg / score-settings.mp3
+
+Calm5 - Summer Memories — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-4-calm
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-help.ogg / score-help.mp3
+
+Action3 - Preparing For Battle — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-5-action
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-trials.ogg / score-trials.mp3
+
+Rpg Battle System — Theme 3 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/rpg-battle-system/music/theme-3.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-nation-nezar.ogg / score-nation-nezar.mp3
+
+Rpg Battle System — Theme 6 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/rpg-battle-system/music/theme-6.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-nation-orbel.ogg / score-nation-orbel.mp3
+
+Medieval Fantasy — Theme 2 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/medieval-fantasy/music/theme-2.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-nation-silvaen.ogg / score-nation-silvaen.mp3
+
+Calm1 - A Place I Call Home — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-4-calm
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-nation-miel.ogg / score-nation-miel.mp3
+
+Town2 - Where Time Stands Still — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-2-towns
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-nation-neiren.ogg / score-nation-neiren.mp3
+
+Rpg Battle System — Theme 8 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/rpg-battle-system/music/theme-8.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-nation-zail.ogg / score-nation-zail.mp3
+
+Exploration4 - Prairie Nights — Juhani Junkala / SubspaceAudio
+  Source: https://opengameart.org/content/jrpg-pack-1-exploration
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-nation-savera.ogg / score-nation-savera.mp3
+
+happy bgm 090719 — syncopika
+  Source: https://opengameart.org/content/happy-bgm-090719
+  License: CC-BY-3.0 — https://creativecommons.org/licenses/by/3.0/
+  Files: score-biome-meadow.ogg / score-biome-meadow.mp3
+
+Medieval Fantasy — Theme 5 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/medieval-fantasy/music/theme-5.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-biome-forest.ogg / score-biome-forest.mp3
+
+Ninja Adventure — Theme 3 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-3.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-biome-basin.ogg / score-biome-basin.mp3
+
+Ninja Adventure — Theme 5 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-5.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-biome-desert.ogg / score-biome-desert.mp3
+
+Ninja Adventure — Theme 11 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-11.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-biome-marsh.ogg / score-biome-marsh.mp3
+
+Ninja Adventure — Theme 9 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-9.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-loading.ogg / score-loading.mp3
+
+Ninja Adventure — Theme 1 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-1.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-menu.ogg / score-menu.mp3
+
+Ninja Adventure — Theme 4 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-4.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-credits.ogg / score-credits.mp3
+
+Medieval Fantasy — Theme 3 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/medieval-fantasy/music/theme-3.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-residents.ogg / score-residents.mp3
+
+Ninja Adventure — Theme 2 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-2.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-ledger.ogg / score-ledger.mp3
+
+fun bgm 022824 — syncopika
+  Source: https://opengameart.org/content/fun-bgm-022824
+  License: CC-BY-3.0 — https://creativecommons.org/licenses/by/3.0/
+  Files: score-operations.ogg / score-operations.mp3
+
+Ninja Adventure — Theme 13 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-13.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-map-tools.ogg / score-map-tools.mp3
+
+Ninja Adventure — Theme 14 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-14.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-terrain.ogg / score-terrain.mp3
+
+Ninja Adventure — Theme 15 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-15.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-facility.ogg / score-facility.mp3
+
+Medieval Fantasy — Theme 6 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/medieval-fantasy/music/theme-6.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-diplomacy.ogg / score-diplomacy.mp3
+
+step step step — syncopika
+  Source: https://opengameart.org/content/step-step-step-happy-piano-bgm
+  License: CC-BY-3.0 — https://creativecommons.org/licenses/by/3.0/
+  Files: score-goals.ogg / score-goals.mp3
+
+Ninja Adventure — Theme 18 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-18.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-league.ogg / score-league.mp3
+
+Ninja Adventure — Theme 7 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-7.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-haul.ogg / score-haul.mp3
+
+Ninja Adventure — Theme 8 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-8.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-build.ogg / score-build.mp3
+
+Rpg Battle System — Theme 4 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/rpg-battle-system/music/theme-4.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-promoted.ogg / score-promoted.mp3
+
+Rpg Battle System — Theme 16 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/rpg-battle-system/music/theme-16.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-finale.ogg / score-finale.mp3
+
+Ninja Adventure — Theme 10 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-10.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-error.ogg / score-error.mp3
+
+Ninja Adventure — Theme 16 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/ninja-adventure/musics/theme-16.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-confirm.ogg / score-confirm.mp3
+
+Prehistoric Platformer — Theme 1 — Sparklin Labs / Pixel-boy
+  Source: https://github.com/sparklinlabs/superpowers-asset-packs/blob/e8674a03ab4456802f71f848c4df79eccca23f7a/prehistoric-platformer/music/theme-1.ogg
+  License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+  Files: score-wilderness.ogg / score-wilderness.mp3
+
+happy tune — syncopika
+  Source: https://opengameart.org/content/happy-tune
+  License: CC-BY-3.0 — https://creativecommons.org/licenses/by/3.0/
+  Files: score-title.ogg / score-title.mp3
+
+Modifications: two-pass normalization to -20 LUFS and -2 dBTP; OGG/MP3 conversion; playback crossfades.
+score-biome-marsh: silent tail trimmed at 67.3 seconds; original preserved.
+Sources, original hashes and per-file modifications: music-sources.json.
+Recover: python scripts/fetch-world-score.py
+Rebuild: python scripts/pack-town-music.py

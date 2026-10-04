@@ -1,0 +1,37 @@
+{
+  "runtimeApproved": false,
+  "records": [
+    {
+      "index": 0,
+      "source": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-27faeeec-0144-45f5-a65e-e3007a030263.png",
+      "file": "walk-SW-between-01.png",
+      "prompt": "Draw exactly ONE new 2D animation in-between cel of this exact illustrated character. Image 1 is the PREVIOUS key pose, image 2 is the NEXT key pose. The new drawing is temporally halfway between them, not a copy of either endpoint. Preserve the exact isometric SW-facing view, original head/face/hair/costume/boots and body proportions. Keep the composition and uniform size matched to both reference canvases, full body with clear margins. Carefully in-between the leg silhouette and the corresponding opposite arm swing, knees, elbows, wrist and ponytail overlap. The planted boot stays on the ground and the other boot travels halfway along its swing arc. This is a calm natural walk; no leaping, tiptoe dance, crossing arms or extra limbs. The drawings are high-quality hand-painted pixel illustration sprites, NOT a 3D model. Transparent background, no shadow, no letters, no labels. Only the single interpolating full-body DRAWING, newly drawn contours, not motion blur or blended double exposures. This is interval 1 in an eight-key complete walking loop.",
+      "status": "not-in-packed-review",
+      "reason": "Motion phase and arm continuity not established"
+    },
+    {
+      "index": 1,
+      "source": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-bde02d27-10d8-43cb-873d-96cea96258f0.png",
+      "file": "walk-SW-between-02.png",
+      "prompt": "Draw exactly ONE new 2D animation in-between cel of this exact illustrated character. Image 1 is the PREVIOUS key pose, image 2 is the NEXT key pose. The new drawing is temporally halfway between them, not a copy of either endpoint. Preserve the exact isometric SW-facing view, original head/face/hair/costume/boots and body proportions. Keep the composition and uniform size matched to both reference canvases, full body with clear margins. Carefully in-between the leg silhouette and the corresponding opposite arm swing, knees, elbows, wrist and ponytail overlap. The planted boot stays on the ground and the other boot travels halfway along its swing arc. This is a calm natural walk; no leaping, tiptoe dance, crossing arms or extra limbs. The drawings are high-quality hand-painted pixel illustration sprites, NOT a 3D model. Transparent background, no shadow, no letters, no labels. Only the single interpolating full-body DRAWING, newly drawn contours, not motion blur or blended double exposures. This is interval 2 in an eight-key complete walking loop.",
+      "status": "not-in-packed-review",
+      "reason": "Motion phase and arm continuity not established"
+    },
+    {
+      "index": 2,
+      "source": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-9fea6f23-fa9b-42e3-9a5f-539bddb90394.png",
+      "file": "walk-SW-between-03.png",
+      "prompt": "Draw exactly ONE new 2D animation in-between cel of this exact illustrated character. Image 1 is the PREVIOUS key pose, image 2 is the NEXT key pose. The new drawing is temporally halfway between them, not a copy of either endpoint. Preserve the exact isometric SW-facing view, original head/face/hair/costume/boots and body proportions. Keep the composition and uniform size matched to both reference canvases, full body with clear margins. Carefully in-between the leg silhouette and the corresponding opposite arm swing, knees, elbows, wrist and ponytail overlap. The planted boot stays on the ground and the other boot travels halfway along its swing arc. This is a calm natural walk; no leaping, tiptoe dance, crossing arms or extra limbs. The drawings are high-quality hand-painted pixel illustration sprites, NOT a 3D model. Transparent background, no shadow, no letters, no labels. Only the single interpolating full-body DRAWING, newly drawn contours, not motion blur or blended double exposures. This is interval 3 in an eight-key complete walking loop.",
+      "status": "not-in-packed-review",
+      "reason": "Motion phase and arm continuity not established"
+    },
+    {
+      "index": 3,
+      "source": "C:\\Users\\ghd12\\.codex\\generated_images\\01a0fc4a-9830-77d0-92d7-71da779b65c0\\exec-60a6b1a0-5e24-405f-a704-3e38eb9320a0.png",
+      "file": "walk-SW-between-04.png",
+      "prompt": "Draw exactly ONE new 2D animation in-between cel of this exact illustrated character. Image 1 is the PREVIOUS key pose, image 2 is the NEXT key pose. The new drawing is temporally halfway between them, not a copy of either endpoint. Preserve the exact isometric SW-facing view, original head/face/hair/costume/boots and body proportions. Keep the composition and uniform size matched to both reference canvases, full body with clear margins. Carefully in-between the leg silhouette and the corresponding opposite arm swing, knees, elbows, wrist and ponytail overlap. The planted boot stays on the ground and the other boot travels halfway along its swing arc. This is a calm natural walk; no leaping, tiptoe dance, crossing arms or extra limbs. The drawings are high-quality hand-painted pixel illustration sprites, NOT a 3D model. Transparent background, no shadow, no letters, no labels. Only the single interpolating full-body DRAWING, newly drawn contours, not motion blur or blended double exposures. This is interval 4 in an eight-key complete walking loop.",
+      "status": "not-in-packed-review",
+      "reason": "Motion phase and arm continuity not established"
+    }
+  ]
+}

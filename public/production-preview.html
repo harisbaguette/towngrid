@@ -61,6 +61,7 @@ document.querySelectorAll('[data-state]').forEach(button=>button.onclick=()=>{st
 document.querySelector('#view').onchange=e=>{view=+e.target.value;render();};
 document.querySelector('#size').onchange=e=>{scale=+e.target.value;render();};
 document.querySelector('#pause').onclick=e=>{paused=!paused;e.target.textContent=paused?'동작 재개':'동작 멈추기';e.target.setAttribute('aria-pressed',String(paused));};
-window.productionPreview={items,render,setTime:t=>{time=t;render();}};
+window.productionPreview={items,state:()=>({state,time,paused}),render,setTime:t=>{time=t;render();}};
 function loop(now){if(now-last>=1000/16){if(!paused&&(state==='working'||state==='working-ready'))time+=Math.min(.15,(now-last)/1000);last=now;render();}requestAnimationFrame(loop);}render();requestAnimationFrame(loop);
-</script></body></html>
+</script><script type="module" src="/preview-audio.js"></script>
+</body></html>

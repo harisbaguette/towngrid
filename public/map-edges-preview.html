@@ -38,4 +38,5 @@ document.querySelector('#preset').onchange=reset;document.querySelector('#left')
 document.querySelector('#play').onclick=e=>{game.sim.paused=!game.sim.paused;e.target.textContent=game.sim.paused?'생산 시작':'일시정지';};
 addEventListener('keydown',e=>{if(/select|input/i.test(e.target.tagName))return;if(e.key.toLowerCase()==='q')game.rotate(-1);if(e.key.toLowerCase()==='e')game.rotate(1);});
 reset();window.edgePreview={game,reset,center};
-</script></body></html>
+</script><script type="module" src="/preview-audio.js"></script>
+</body></html>

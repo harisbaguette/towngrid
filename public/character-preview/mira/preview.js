@@ -10,8 +10,8 @@
   const [meta, atlas] = await Promise.all([fetch(base+'frames.json').then(r=>r.json()), load(base+'sprites.png')]);
   $('portrait').src=base+(meta.portraitAnimation?.file || 'portrait.png');
   const colors = { SW: [-.70710678,.40824829], NW: [-.70710678,-.40824829], NE: [.70710678,-.40824829], SE: [.70710678,.40824829] };
-  const cell=meta.cell[0], baseline=meta.anchors[0][0][1]*cell;
-  const descriptions={walk:'좌우 발이 교대하는 12프레임 보행',carry:'같은 보행 주기로 상자 운반',idle:'동일한 체형을 유지하는 대기',rotation:'Q·E로 네 방향 전환',work:'도구를 들고 내리는 작업',greet:'팔을 들어 인사',cargo:'무릎을 굽혀 상자를 들고 내려놓기'};
+  const cell=meta.cell[0], columns=meta.atlasColumns||meta.columns.length;
+  const descriptions={walk:'발바닥 접지를 맞춘 32프레임 보행',carry:'같은 보행 주기로 상자 운반',idle:'동일한 체형을 유지하는 대기',rotation:'Q·E로 네 방향 전환',work:'도구를 들고 내리는 작업',greet:'팔을 들어 인사',cargo:'무릎을 굽혀 상자를 들고 내려놓기'};
   function clip() {
    if(state.action==='rotation')return {frames:[0,0,0,0],fps:2};
    if(state.action==='cargo')return {frames:[...meta.clips.pickup.frames,...meta.clips.drop.frames],fps:10};
@@ -20,7 +20,8 @@
   function index() {const c=clip();return Math.floor(state.elapsed*c.fps)%c.frames.length;}
   function drawSprite(context,col,row,x,y,scale) {
    context.imageSmoothingEnabled=false;
-   context.drawImage(atlas,col*cell,row*cell,cell,cell,x-cell/2*scale,y-baseline*scale,cell*scale,cell*scale);
+   const anchor=meta.anchors[row][col],size=cell*scale*(meta.frameScales?.[col]||1);
+   context.drawImage(atlas,(col%columns)*cell,(row+Math.floor(col/columns)*4)*cell,cell,cell,x-anchor[0]*size,y-anchor[1]*size,size,size);
   }
   function thumbnails() {
    $('frames').replaceChildren();

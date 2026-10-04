@@ -1,0 +1,53 @@
+[
+  {
+    "pack": "jrpg-pack-1-exploration",
+    "source": "https://opengameart.org/content/jrpg-pack-1-exploration",
+    "download": "https://opengameart.org/sites/default/files/JRPG%20Music%20Pack%20%231%20%5BExploration%5D%20by%20Juhani%20Junkala.zip",
+    "archive": "jrpg-pack-1-exploration.zip",
+    "files": [
+      "Exploration1 - Grasslands.ogg",
+      "Exploration2 - Military Base.ogg",
+      "Exploration3 - Tha'el Mines.ogg",
+      "Exploration4 - Prairie Nights.ogg",
+      "Exploration5 - Sneaking Around.ogg",
+      "Exploration6 - Tropical Island.ogg"
+    ]
+  },
+  {
+    "pack": "jrpg-pack-2-towns",
+    "source": "https://opengameart.org/content/jrpg-pack-2-towns",
+    "download": "https://opengameart.org/sites/default/files/JRPG%20Music%20Pack%20%232%20%5BTowns%5D%20by%20Juhani%20Junkala.zip",
+    "archive": "jrpg-pack-2-towns.zip",
+    "files": [
+      "Town3 - Sunshine Coast.ogg",
+      "Town4 - Bazaar.ogg",
+      "Town1 - Home Town.ogg",
+      "Town2 - Where Time Stands Still.ogg"
+    ]
+  },
+  {
+    "pack": "jrpg-pack-4-calm",
+    "source": "https://opengameart.org/content/jrpg-pack-4-calm",
+    "download": "https://opengameart.org/sites/default/files/JRPG%20Music%20Pack%20%234%20%5BCalm%5D%20by%20Juhani%20Junkala_0.zip",
+    "archive": "jrpg-pack-4-calm.zip",
+    "files": [
+      "Calm1 - A Place I Call Home.ogg",
+      "Calm2 - Childhood Friends.ogg",
+      "Calm3 - Peaceful Days.ogg",
+      "Calm4 - Sand Castles.ogg",
+      "Calm5 - Summer Memories.ogg",
+      "Calm6 - Innocence.ogg"
+    ]
+  },
+  {
+    "pack": "jrpg-pack-5-action",
+    "source": "https://opengameart.org/content/jrpg-pack-5-action",
+    "download": "https://opengameart.org/sites/default/files/JRPG%20Music%20Pack%20%235%20%5BAction%5D%20by%20Juhani%20Junkala.zip",
+    "archive": "jrpg-pack-5-action.zip",
+    "files": [
+      "Action1 - Encounter With The Witches.ogg",
+      "Action2 - Army Approaching.ogg",
+      "Action3 - Preparing For Battle.ogg"
+    ]
+  }
+]

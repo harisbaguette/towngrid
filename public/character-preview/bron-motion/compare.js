@@ -29,7 +29,7 @@ function drawOne(ctx,asset){
   ctx.strokeStyle='#bdcbb5';ctx.beginPath();ctx.moveTo(x-58,y);ctx.lineTo(x,y-33);ctx.lineTo(x+58,y);ctx.lineTo(x,y+33);ctx.closePath();ctx.stroke();
   ctx.fillStyle='#43584323';ctx.beginPath();ctx.ellipse(...ground,17*state.scale,6*state.scale,0,0,Math.PI*2);ctx.fill();
   const size=128*state.scale*pose.scale;
-  ctx.drawImage(atlas,frame*128,pose.row*128,128,128,Math.round(ground[0]-pose.anchor[0]*size),Math.round(ground[1]-pose.anchor[1]*size),size,size);
+  ctx.drawImage(atlas,(frame%(meta.atlasColumns||meta.columns.length))*128,(pose.row+Math.floor(frame/(meta.atlasColumns||meta.columns.length))*4)*128,128,128,Math.round(ground[0]-pose.anchor[0]*size),Math.round(ground[1]-pose.anchor[1]*size),size,size);
   ctx.fillStyle='#405744';ctx.fillText(['↙ 앞·왼쪽','↖ 뒤·왼쪽','↗ 뒤·오른쪽','↘ 앞·오른쪽'][direction],x,y+47);
  }
 }

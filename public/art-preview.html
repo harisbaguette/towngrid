@@ -50,5 +50,6 @@ $('repair').onclick=()=>{$('health').value='100';draw();};
 function rotate(delta){view=(view+delta+4)%4;draw();}$('left').onclick=()=>rotate(-1);$('right').onclick=()=>rotate(1);
 addEventListener('keydown',e=>{if(/select|input/i.test(e.target.tagName))return;if(e.key.toLowerCase()==='q')rotate(-1);if(e.key.toLowerCase()==='e')rotate(1);});
 let effects=false;function tick(now){clock+=Math.min(.1,(now-last)/1000);last=now;const active=$('category').value==='handling'||$('category').value==='vehicles'&&$('motion').checked||entries.some(e=>e.model.userData.conditionEffectUntil>clock||e.model.userData.repairProgress!==null&&e.model.userData.repairProgress!==undefined);if(active||effects)draw();effects=active;requestAnimationFrame(tick);}reset();requestAnimationFrame(tick);
-window.artPreview={get entries(){return entries;},get view(){return view;},rotate,draw,renderer,setTime:t=>{clock=t;draw();}};
-</script></body></html>
+window.artPreview={time:()=>clock,get entries(){return entries;},get view(){return view;},rotate,draw,renderer,setTime:t=>{clock=t;draw();}};
+</script><script type="module" src="/preview-audio.js"></script>
+</body></html>

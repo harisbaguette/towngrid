@@ -189,5 +189,34 @@
   ],
   "toolFile": "tools/crystal.png",
   "workStyle": "mage",
-  "profession": "mage"
+  "profession": "mage",
+  "contactMotion": {
+    "revision": "cast-heel-toe-4",
+    "samples": 32,
+    "mode": "hover",
+    "stance": 0.55,
+    "footLift": 3.5,
+    "views": [
+      {
+        "origin": [
+          62.0,
+          115.0
+        ],
+        "soles": [],
+        "bootContacts": [],
+        "footHalfWidth": 0,
+        "lengths": []
+      },
+      {
+        "origin": [
+          65.5,
+          115.0
+        ],
+        "soles": [],
+        "bootContacts": [],
+        "footHalfWidth": 0,
+        "lengths": []
+      }
+    ]
+  }
 }

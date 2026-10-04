@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>타운그리드 · 지형 둘러보기</title>
+<style>
+*{box-sizing:border-box}body{margin:0;height:100dvh;display:flex;flex-direction:column;background:#c7d6bd;color:#f2f3dc;font:14px/1.45 system-ui,sans-serif}header{z-index:2;background:#163f42;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 16px;border-bottom:2px solid #93aa91}h1{font-size:17px;margin:0 auto 0 0}button,select,a{font:inherit}button,select{min-height:40px;border:1px solid #769688;border-radius:3px;background:#f2efd8;color:#163f42;padding:7px 10px;cursor:pointer}a{color:inherit}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #edb855;outline-offset:2px}main{position:relative;flex:1;min-height:0}#map{position:absolute;inset:0}canvas{display:block;image-rendering:pixelated}aside{position:absolute;bottom:16px;left:16px;max-width:calc(100% - 32px);padding:12px 16px;background:#163f42ed;border:1px solid #89a391;pointer-events:none}p{margin:4px 0 0;color:#d2dfbd;font-size:12px}@media(max-width:650px){header{gap:6px;padding:8px}h1{width:100%;font-size:16px}button,select{padding:5px 8px}aside{left:10px;bottom:10px;padding:8px 12px}}
+</style></head><body>
+<header><h1>지형 둘러보기</h1><select id="landform" aria-label="지형 선택"></select><button id="rotate">↻ 90°</button><button id="zoom">주변까지 보기</button><button id="grid" aria-pressed="false">24×24 경계</button><a id="renderer" href="?renderer=canvas">Canvas 비교</a><a href="/">게임으로</a></header>
+<main><div id="map"></div><aside><strong id="name">지형 불러오는 중</strong><p id="description"></p><p>실제 월드의 지형 · 드래그 이동 / 휠 확대 · 저장하지 않음</p></aside></main>
+<script type="module" src="/src/app/game/landforms-preview.js"></script><script type="module" src="/preview-audio.js"></script>
+</body></html>

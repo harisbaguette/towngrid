@@ -1,11 +1,12 @@
 {
   "id": "bron",
+  "handlingMotion": "art-source/pixel-characters/bron-handling-v3/rig.json",
   "revision": "roster-professions-1",
   "kind": "biped",
   "race": "dwarf",
   "worldHeight": 0.84,
   "baseline": 108,
-  "strideLength": 0.24,
+  "strideLength": 0.38,
   "gait": {
     "stance": 0.55,
     "pelvisHeight": 29.700063131246033,
@@ -462,108 +463,7 @@
   "toolFile": "tools/wrench.png",
   "workStyle": "labor",
   "profession": null,
-  "motionProfile": {
-    "revision": "bron-planted-walk-2",
-    "walkDrop": 1.5,
-    "walkBounce": 0.8,
-    "carryDrop": 2.0,
-    "carryBounce": 0.5,
-    "armSwing": 5.5,
-    "crateSize": 29,
-    "views": [
-      {
-        "legs": [
-          [
-            [
-              54,
-              81
-            ],
-            [
-              52,
-              88
-            ],
-            [
-              49,
-              95
-            ]
-          ],
-          [
-            [
-              72,
-              89
-            ],
-            [
-              75,
-              96
-            ],
-            [
-              76,
-              103
-            ]
-          ]
-        ],
-        "footTop": [
-          92,
-          98
-        ]
-      },
-      {
-        "legs": [
-          [
-            [
-              73,
-              82
-            ],
-            [
-              77,
-              91
-            ],
-            [
-              78,
-              98
-            ]
-          ],
-          [
-            [
-              57,
-              89
-            ],
-            [
-              54,
-              97
-            ],
-            [
-              52,
-              103
-            ]
-          ]
-        ],
-        "footTop": [
-          95,
-          98
-        ]
-      }
-    ],
-    "gait": {
-      "stance": 0.55,
-      "pelvisHeight": 29.700063131246033,
-      "hipHalfWidth": 12.020815280171307,
-      "footHalfWidth": 8.17415439051649,
-      "thigh": 13.8,
-      "shin": 13.2,
-      "footLift": 7.0
-    },
-    "legLengths": [
-      [
-        10.5,
-        10.5
-      ],
-      [
-        11.5,
-        11.5
-      ]
-    ]
-  },
   "authoredMotion": "art-source/pixel-characters/bron-motion-v1/manifest.json",
-  "shoulderCap": 12
+  "shoulderCap": 12,
+  "authoredLocomotion": "art-source/pixel-characters/bron-locomotion-v2/manifest.json"
 }

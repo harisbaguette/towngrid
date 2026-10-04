@@ -41,5 +41,6 @@ function reset(){game.setSimulation(fixture());pose();game.controls.target.set(1
 document.querySelector('#region').onchange=reset;document.querySelector('#layout').onchange=reset;document.querySelector('#state').onchange=()=>{pose();game.lastPaint=null;};
 document.querySelector('#left').onclick=()=>game.rotate(-1);document.querySelector('#right').onclick=()=>game.rotate(1);document.querySelector('#closer').onclick=()=>game.zoom(1.3);document.querySelector('#farther').onclick=()=>game.zoom(1/1.3);document.querySelector('#pause').onclick=e=>{running=!running;e.target.textContent=running?'동작 멈추기':'동작 재개';};
 addEventListener('keydown',e=>{if(/select|input/i.test(e.target.tagName))return;if(e.key.toLowerCase()==='q')game.rotate(-1);if(e.key.toLowerCase()==='e')game.rotate(1);});
-function loop(now){if(running){clock+=Math.min(.1,(now-last)/1000);pose();}last=now;requestAnimationFrame(loop);}reset();requestAnimationFrame(loop);window.environmentPreview={game,reset,pose,setTime:t=>{clock=t;pose();game.lastPaint=null;},pause:()=>{running=false;}};
-</script></body></html>
+function loop(now){if(running){clock+=Math.min(.1,(now-last)/1000);pose();}last=now;requestAnimationFrame(loop);}reset();requestAnimationFrame(loop);window.environmentPreview={isRunning:()=>running,game,reset,pose,setTime:t=>{clock=t;pose();game.lastPaint=null;},pause:()=>{running=false;}};
+</script><script type="module" src="/preview-audio.js"></script>
+</body></html>

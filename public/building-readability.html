@@ -18,5 +18,6 @@
  const buildings=[['warehouse','창고'],['house','주민 주택'],['well','우물'],['field','밀밭'],['lumber','벌목장'],['sawmill','제재소']];
  document.querySelector('#buildings').innerHTML=buildings.map(([id,name])=>`<article><h2>${name}</h2><div class="pair"><div class="sample"><img src="/assets/pixel-environment/detailed-v1/${id}-icon.png" alt="${name} 수정 전"><span>수정 전</span></div><div class="sample"><img src="/assets/pixel-environment/${id}-icon.png" alt="${name} 수정 후"><span>수정 후</span></div></div></article>`).join('');
  document.querySelectorAll('[data-size]').forEach(button=>button.onclick=()=>{document.documentElement.style.setProperty('--sprite-size',button.dataset.size+'px');document.querySelectorAll('[data-size]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));});
-</script></body>
+</script><script type="module" src="/preview-audio.js"></script>
+</body>
 </html>

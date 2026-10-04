@@ -27,13 +27,14 @@
  millScene.add(mill);
  const millRenderer=new SoftwareRenderer({alpha:true});millRenderer.setSize(336,292);millRenderer.domElement.id='sawmill';millRenderer.domElement.setAttribute('aria-label','제재소 애니메이션');document.querySelector('#sawmill').replaceWith(millRenderer.domElement);
  const images={},state={sawmill:'working',oak:'idle',water:'flow'},frames={sawmill:0,oak:0,water:0};
+ window.pixelEnvironmentPreview={state,focus:'sawmill',time:()=>performance.now()/1000};
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  if(reduced){state.sawmill='idle';state.water='still';}
  document.querySelectorAll('.controls').forEach(group=>{
   const id=group.dataset.target;
   group.querySelectorAll('button').forEach(button=>{
    button.setAttribute('aria-pressed',String(button.dataset.state===state[id]));
-   button.onclick=()=>{state[id]=button.dataset.state;group.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));};
+   button.onclick=()=>{window.pixelEnvironmentPreview.focus=id;state[id]=button.dataset.state;group.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));};
   });
  });
  Promise.all(['sawmill','oak','water'].map(id=>new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>{images[id]=img;resolve()};img.onerror=reject;img.src='/assets/pixel-environment/'+id+'.png'}))).then(()=>requestAnimationFrame(draw)).catch(()=>document.querySelector('#load-error').textContent='이미지를 불러오지 못했습니다. 개발 서버가 실행 중인지 확인해 주세요.');
@@ -56,4 +57,5 @@
   }
   requestAnimationFrame(draw);
  }
-</script></body></html>
+</script><script type="module" src="/preview-audio.js"></script>
+</body></html>

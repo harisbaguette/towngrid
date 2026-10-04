@@ -1,0 +1,212 @@
+{
+  "id": "mira",
+  "revision": "mira-authored-walk-carry-review-2",
+  "status": "visual-review-incomplete",
+  "runtimeApproved": false,
+  "cell": 128,
+  "anchor": [
+    64,
+    108
+  ],
+  "strideLength": 0.5,
+  "directions": [
+    "SW",
+    "NW",
+    "NE",
+    "SE"
+  ],
+  "mirroredDirections": {
+    "SE": "SW",
+    "NE": "NW"
+  },
+  "clips": {
+    "walk": {
+      "count": 8,
+      "fps": 10,
+      "strideLength": 0.5,
+      "sources": {
+        "SW": {
+          "file": "walk-SW-keys.png",
+          "grid": [
+            4,
+            2
+          ],
+          "scale": 0.267,
+          "origins": [
+            [
+              215,
+              389
+            ],
+            [
+              215,
+              389
+            ],
+            [
+              215,
+              389
+            ],
+            [
+              215,
+              389
+            ],
+            [
+              215,
+              389
+            ],
+            [
+              215,
+              389
+            ],
+            [
+              215,
+              389
+            ],
+            [
+              215,
+              389
+            ]
+          ]
+        },
+        "NW": {
+          "file": "walk-NW-keys.png",
+          "grid": [
+            4,
+            2
+          ],
+          "scale": 0.251,
+          "origins": [
+            [
+              194,
+              447
+            ],
+            [
+              194,
+              447
+            ],
+            [
+              194,
+              447
+            ],
+            [
+              194,
+              447
+            ],
+            [
+              194,
+              415
+            ],
+            [
+              194,
+              415
+            ],
+            [
+              194,
+              415
+            ],
+            [
+              194,
+              415
+            ]
+          ]
+        }
+      }
+    },
+    "carry": {
+      "count": 8,
+      "fps": 10,
+      "strideLength": 0.5,
+      "sources": {
+        "SW": {
+          "file": "carry-SW-keys.png",
+          "grid": [
+            4,
+            2
+          ],
+          "scale": 0.267,
+          "origins": [
+            [
+              215,
+              389
+            ],
+            [
+              215,
+              389
+            ],
+            [
+              215,
+              389
+            ],
+            [
+              215,
+              389
+            ],
+            [
+              215,
+              389
+            ],
+            [
+              215,
+              389
+            ],
+            [
+              215,
+              389
+            ],
+            [
+              215,
+              389
+            ]
+          ]
+        },
+        "NW": {
+          "file": "carry-NW-keys.png",
+          "grid": [
+            4,
+            2
+          ],
+          "scale": 0.251,
+          "origins": [
+            [
+              194,
+              416
+            ],
+            [
+              194,
+              416
+            ],
+            [
+              194,
+              416
+            ],
+            [
+              194,
+              416
+            ],
+            [
+              194,
+              384
+            ],
+            [
+              194,
+              384
+            ],
+            [
+              194,
+              384
+            ],
+            [
+              194,
+              384
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "remaining": [
+    "Arm swing and body-volume continuity",
+    "Individual planted-foot tracking and registration",
+    "Authored in-betweens and start/stop/turn/handling transitions",
+    "Normal-speed visual approval in actual terrain"
+  ]
+}

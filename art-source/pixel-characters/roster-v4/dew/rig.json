@@ -233,5 +233,34 @@
   ],
   "toolFile": "tools/crystal.png",
   "workStyle": "labor",
-  "profession": null
+  "profession": null,
+  "contactMotion": {
+    "revision": "cast-heel-toe-4",
+    "samples": 32,
+    "mode": "hover",
+    "stance": 0.55,
+    "footLift": 3.5,
+    "views": [
+      {
+        "origin": [
+          61.0,
+          115.0
+        ],
+        "soles": [],
+        "bootContacts": [],
+        "footHalfWidth": 0,
+        "lengths": []
+      },
+      {
+        "origin": [
+          64.0,
+          115.0
+        ],
+        "soles": [],
+        "bootContacts": [],
+        "footHalfWidth": 0,
+        "lengths": []
+      }
+    ]
+  }
 }

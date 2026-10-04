@@ -1,0 +1,10 @@
+{
+  "reference": "../03-industrial-controls.png",
+  "source": "source.png",
+  "components": {
+    "button-teal": { "left": 56, "top": 160, "width": 657, "height": 177, "slice": 42 },
+    "button-orange": { "left": 824, "top": 160, "width": 657, "height": 177, "slice": 42 },
+    "panel-teal": { "left": 28, "top": 480, "width": 713, "height": 424, "slice": 48 },
+    "panel-paper": { "left": 796, "top": 480, "width": 713, "height": 424, "slice": 48 }
+  }
+}

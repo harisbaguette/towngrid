@@ -1,0 +1,30 @@
+{
+  "id": "mira",
+  "action": "walk",
+  "revision": "mira-authored-walk-review-1",
+  "status": "visual-review",
+  "runtimeApproved": false,
+  "cell": 128,
+  "anchor": [65.5, 109],
+  "sourceOrigin": [0.5, 0.890625],
+  "strideLength": 0.5,
+  "fps": 10,
+  "directions": ["SW", "SE"],
+  "mirroredDirections": {"SE": "SW"},
+  "frames": [
+    {"file": "walk-SW-01-arm-fix.png", "phase": 0, "support": "far", "pose": "contact"},
+    {"file": "walk-SW-02.png", "phase": 0.125, "support": "far", "pose": "down"},
+    {"file": "walk-SW-03.png", "phase": 0.25, "support": "far", "pose": "passing"},
+    {"file": "walk-SW-04.png", "phase": 0.375, "support": "far", "pose": "push-off"},
+    {"file": "walk-SW-05.png", "phase": 0.5, "support": "near", "pose": "contact"},
+    {"file": "walk-SW-06.png", "phase": 0.625, "support": "near", "pose": "down"},
+    {"file": "walk-SW-07.png", "phase": 0.75, "support": "near", "pose": "passing"},
+    {"file": "walk-SW-08-arm-fix.png", "phase": 0.875, "support": "near", "pose": "push-off"}
+  ],
+  "remaining": [
+    "Foot-contact registration and continuous playback review",
+    "Arm/boot consistency across the loop",
+    "NW and mirrored NE artwork",
+    "Carry artwork and starts/stops/handling transitions"
+  ]
+}

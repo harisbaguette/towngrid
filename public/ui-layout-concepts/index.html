@@ -39,5 +39,6 @@ function select(i){active=i;const s=states[i],file='minimal-v2/'+s.file;document
 document.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key)||e.altKey||e.ctrlKey||e.metaKey)return;e.preventDefault();select((active+(e.key==='ArrowRight'?1:states.length-1))%states.length);});
 const initial=states.findIndex(s=>s.id===location.hash.slice(1));select(initial<0?0:initial);
 </script>
+<script type="module" src="/preview-audio.js"></script>
 </body>
 </html>
