@@ -6,7 +6,8 @@ import { WORK_ART, TRANSITION_ART, HOME_ART_KEY } from '../src/app/game/screen-a
 const { chromium } = await import(process.argv[2] ? pathToFileURL(process.argv[2]).href : 'playwright');
 const browser = await chromium.launch({ headless: true, ...(process.argv[3] ? { executablePath: process.argv[3] } : {}), args: ['--enable-unsafe-swiftshader'] });
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
-const output = new URL('../docs/verification/daily-screens/', import.meta.url);
+const output = process.env.TG_OUT ? pathToFileURL(process.env.TG_OUT.replace(/\\/g, '/') + '/') : new URL('../docs/verification/daily-screens/', import.meta.url);
+await page.addInitScript(() => { window.WebSocket = class { addEventListener() {} removeEventListener() {} send() {} close() {} }; });
 await mkdir(output, { recursive: true });
 const errors = [], failed = [], requests = [], checked = [];
 page.on('pageerror', error => errors.push(error.message));

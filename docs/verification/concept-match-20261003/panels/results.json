@@ -1,0 +1,951 @@
+{
+ "screens": [
+  {
+   "name": "market-1440x900",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 18,
+   "scrollHeight": 1306
+  },
+  {
+   "name": "import-1440x900",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 14,
+   "scrollHeight": 1220
+  },
+  {
+   "name": "transport-1440x900",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 11,
+   "scrollHeight": 1843
+  },
+  {
+   "name": "settings-1440x900",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 10,
+   "scrollHeight": 814
+  },
+  {
+   "name": "save-1440x900",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 8,
+   "scrollHeight": 646
+  },
+  {
+   "name": "goals-1440x900",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 7,
+   "scrollHeight": 714
+  },
+  {
+   "name": "story-1440x900",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 4,
+   "scrollHeight": 622
+  },
+  {
+   "name": "residents-1440x900",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 7,
+   "scrollHeight": 674
+  },
+  {
+   "name": "world-1440x900",
+   "overflow": false,
+   "width": [
+    1130,
+    1130
+   ],
+   "outside": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "covered": [],
+   "tiny": [],
+   "shown": 18,
+   "scrollHeight": 746
+  },
+  {
+   "name": "world-detail-1440x900",
+   "overflow": false,
+   "width": [
+    1130,
+    1130
+   ],
+   "outside": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "covered": [],
+   "tiny": [],
+   "shown": 17,
+   "scrollHeight": 746
+  },
+  {
+   "name": "운송망-1440x900",
+   "overflow": false,
+   "width": [
+    1130,
+    1130
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 9,
+   "scrollHeight": 383
+  },
+  {
+   "name": "운영과 외교-1440x900",
+   "overflow": false,
+   "width": [
+    1130,
+    1130
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 7,
+   "scrollHeight": 875
+  },
+  {
+   "name": "신생 국가-1440x900",
+   "overflow": false,
+   "width": [
+    1130,
+    1130
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 4,
+   "scrollHeight": 314
+  },
+  {
+   "name": "market-1024x768",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 14,
+   "scrollHeight": 1306
+  },
+  {
+   "name": "import-1024x768",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 12,
+   "scrollHeight": 1220
+  },
+  {
+   "name": "transport-1024x768",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 7,
+   "scrollHeight": 1843
+  },
+  {
+   "name": "settings-1024x768",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 6,
+   "scrollHeight": 814
+  },
+  {
+   "name": "save-1024x768",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 8,
+   "scrollHeight": 646
+  },
+  {
+   "name": "goals-1024x768",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 7,
+   "scrollHeight": 714
+  },
+  {
+   "name": "story-1024x768",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 4,
+   "scrollHeight": 622
+  },
+  {
+   "name": "residents-1024x768",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 7,
+   "scrollHeight": 674
+  },
+  {
+   "name": "world-1024x768",
+   "overflow": false,
+   "width": [
+    933,
+    933
+   ],
+   "outside": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "covered": [],
+   "tiny": [],
+   "shown": 18,
+   "scrollHeight": 660
+  },
+  {
+   "name": "world-detail-1024x768",
+   "overflow": false,
+   "width": [
+    933,
+    933
+   ],
+   "outside": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "covered": [],
+   "tiny": [],
+   "shown": 16,
+   "scrollHeight": 660
+  },
+  {
+   "name": "운송망-1024x768",
+   "overflow": false,
+   "width": [
+    933,
+    933
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 9,
+   "scrollHeight": 383
+  },
+  {
+   "name": "운영과 외교-1024x768",
+   "overflow": false,
+   "width": [
+    933,
+    933
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 6,
+   "scrollHeight": 877
+  },
+  {
+   "name": "신생 국가-1024x768",
+   "overflow": false,
+   "width": [
+    933,
+    933
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 4,
+   "scrollHeight": 314
+  },
+  {
+   "name": "market-390x844",
+   "overflow": false,
+   "width": [
+    329,
+    329
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 17,
+   "scrollHeight": 1296
+  },
+  {
+   "name": "import-390x844",
+   "overflow": false,
+   "width": [
+    329,
+    329
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 14,
+   "scrollHeight": 1209
+  },
+  {
+   "name": "transport-390x844",
+   "overflow": false,
+   "width": [
+    329,
+    329
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 9,
+   "scrollHeight": 1854
+  },
+  {
+   "name": "settings-390x844",
+   "overflow": false,
+   "width": [
+    329,
+    329
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 9,
+   "scrollHeight": 837
+  },
+  {
+   "name": "save-390x844",
+   "overflow": false,
+   "width": [
+    329,
+    329
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 8,
+   "scrollHeight": 719
+  },
+  {
+   "name": "goals-390x844",
+   "overflow": false,
+   "width": [
+    329,
+    329
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 7,
+   "scrollHeight": 714
+  },
+  {
+   "name": "story-390x844",
+   "overflow": false,
+   "width": [
+    329,
+    329
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 4,
+   "scrollHeight": 614
+  },
+  {
+   "name": "residents-390x844",
+   "overflow": false,
+   "width": [
+    329,
+    329
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 6,
+   "scrollHeight": 925
+  },
+  {
+   "name": "world-390x844",
+   "overflow": false,
+   "width": [
+    332,
+    332
+   ],
+   "outside": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "covered": [],
+   "tiny": [],
+   "shown": 16,
+   "scrollHeight": 905
+  },
+  {
+   "name": "world-detail-390x844",
+   "overflow": false,
+   "width": [
+    332,
+    332
+   ],
+   "outside": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "covered": [],
+   "tiny": [],
+   "shown": 4,
+   "scrollHeight": 1755
+  },
+  {
+   "name": "운송망-390x844",
+   "overflow": false,
+   "width": [
+    332,
+    332
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 9,
+   "scrollHeight": 505
+  },
+  {
+   "name": "운영과 외교-390x844",
+   "overflow": false,
+   "width": [
+    332,
+    332
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 5,
+   "scrollHeight": 1329
+  },
+  {
+   "name": "신생 국가-390x844",
+   "overflow": false,
+   "width": [
+    332,
+    332
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 4,
+   "scrollHeight": 314
+  },
+  {
+   "name": "market-360x740",
+   "overflow": false,
+   "width": [
+    300,
+    300
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 14,
+   "scrollHeight": 1296
+  },
+  {
+   "name": "import-360x740",
+   "overflow": false,
+   "width": [
+    300,
+    300
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 12,
+   "scrollHeight": 1209
+  },
+  {
+   "name": "transport-360x740",
+   "overflow": false,
+   "width": [
+    300,
+    300
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 7,
+   "scrollHeight": 1854
+  },
+  {
+   "name": "settings-360x740",
+   "overflow": false,
+   "width": [
+    300,
+    300
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 6,
+   "scrollHeight": 860
+  },
+  {
+   "name": "save-360x740",
+   "overflow": false,
+   "width": [
+    300,
+    300
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 7,
+   "scrollHeight": 719
+  },
+  {
+   "name": "goals-360x740",
+   "overflow": false,
+   "width": [
+    300,
+    300
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 6,
+   "scrollHeight": 714
+  },
+  {
+   "name": "story-360x740",
+   "overflow": false,
+   "width": [
+    300,
+    300
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 4,
+   "scrollHeight": 614
+  },
+  {
+   "name": "residents-360x740",
+   "overflow": false,
+   "width": [
+    300,
+    300
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 4,
+   "scrollHeight": 925
+  },
+  {
+   "name": "world-360x740",
+   "overflow": false,
+   "width": [
+    302,
+    302
+   ],
+   "outside": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "covered": [],
+   "tiny": [],
+   "shown": 15,
+   "scrollHeight": 861
+  },
+  {
+   "name": "world-detail-360x740",
+   "overflow": false,
+   "width": [
+    302,
+    302
+   ],
+   "outside": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "covered": [],
+   "tiny": [],
+   "shown": 3,
+   "scrollHeight": 1706
+  },
+  {
+   "name": "운송망-360x740",
+   "overflow": false,
+   "width": [
+    302,
+    302
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 9,
+   "scrollHeight": 505
+  },
+  {
+   "name": "운영과 외교-360x740",
+   "overflow": false,
+   "width": [
+    302,
+    302
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 5,
+   "scrollHeight": 1333
+  },
+  {
+   "name": "신생 국가-360x740",
+   "overflow": false,
+   "width": [
+    302,
+    302
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 4,
+   "scrollHeight": 314
+  },
+  {
+   "name": "market-844x390",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 7,
+   "scrollHeight": 1306
+  },
+  {
+   "name": "import-844x390",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 6,
+   "scrollHeight": 1220
+  },
+  {
+   "name": "transport-844x390",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 3,
+   "scrollHeight": 1843
+  },
+  {
+   "name": "settings-844x390",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 2,
+   "scrollHeight": 814
+  },
+  {
+   "name": "save-844x390",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 4,
+   "scrollHeight": 646
+  },
+  {
+   "name": "goals-844x390",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 3,
+   "scrollHeight": 714
+  },
+  {
+   "name": "story-844x390",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 3,
+   "scrollHeight": 622
+  },
+  {
+   "name": "residents-844x390",
+   "overflow": false,
+   "width": [
+    540,
+    540
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 0,
+   "scrollHeight": 674
+  },
+  {
+   "name": "world-844x390",
+   "overflow": false,
+   "width": [
+    760,
+    760
+   ],
+   "outside": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "covered": [],
+   "tiny": [],
+   "shown": 11,
+   "scrollHeight": 501
+  },
+  {
+   "name": "world-detail-844x390",
+   "overflow": false,
+   "width": [
+    760,
+    760
+   ],
+   "outside": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+   ],
+   "covered": [],
+   "tiny": [],
+   "shown": 11,
+   "scrollHeight": 501
+  },
+  {
+   "name": "운송망-844x390",
+   "overflow": false,
+   "width": [
+    760,
+    760
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 9,
+   "scrollHeight": 406
+  },
+  {
+   "name": "운영과 외교-844x390",
+   "overflow": false,
+   "width": [
+    760,
+    760
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 5,
+   "scrollHeight": 877
+  },
+  {
+   "name": "신생 국가-844x390",
+   "overflow": false,
+   "width": [
+    760,
+    760
+   ],
+   "outside": [],
+   "covered": [],
+   "tiny": [],
+   "shown": 4,
+   "scrollHeight": 314
+  }
+ ],
+ "checks": [
+  "Search, empty results, real 3-item sale, fuel import, auto-sale reserve",
+  "Audio/quality controls and valid save export",
+  "Five viewport sizes; market, transport, settings, save, goals, story, residents, atlas, preview, freight and diplomacy; controls reachable without overlap"
+ ],
+ "result": "PASS",
+ "browser": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

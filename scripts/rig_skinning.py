@@ -51,7 +51,7 @@ def limb_layers(limb, root, joint, end, foot_matrix=None):
         vertices = np.array([center + side*width*n for center, n in zip(centers, normals) for side in [-1, 1]])
         limb['_skin'] = images, vertices, width, before, after
     images, source, width, before, after = limb['_skin']
-    end_axis = unit(foot_matrix @ source_second) if foot_matrix is not None else source_second if fixed_foot else second
+    end_axis = source_second if fixed_foot else second
     centers = [root-first*before, root, joint, end, end+end_axis*after]
     normals = [normal(first), normal(first), joint_normal(first, second), normal(end_axis), normal(end_axis)]
     target = np.array([center + side*width*n for center, n in zip(centers, normals) for side in [-1, 1]])
@@ -88,11 +88,12 @@ def limb_layers(limb, root, joint, end, foot_matrix=None):
         output = np.zeros_like(image)
         output[visible] = image[source_y[visible], source_x[visible]]
         outputs.append(Image.fromarray(output))
-    if foot_matrix is not None and fixed_foot:
-        # The boot is a rigid piece. Bending the shin must never stretch its
-        # sole or pinch it into the knee. Match the ankle with an overlap.
-        inverse = np.linalg.inv(foot_matrix)
-        translation = c - inverse @ end
-        outputs[-1] = limb['foot'].transform((size, height), Image.Transform.AFFINE,
-            (*inverse[0], translation[0], *inverse[1], translation[1]), Image.Resampling.NEAREST)
+    if limb.get('rigidFoot') and fixed_foot:
+        # The sole is a rigid piece of the source painting. The calf overlaps
+        # it at the ankle, but never shears the boot through the knee mesh.
+        matrix=np.array(foot_matrix) if foot_matrix is not None else np.eye(2)
+        inverse=np.linalg.inv(matrix)
+        origin=c-inverse@end
+        outputs[-1]=limb['foot'].transform(limb['foot'].size,Image.Transform.AFFINE,
+            (*inverse[0],origin[0],*inverse[1],origin[1]),Image.Resampling.NEAREST)
     return outputs

@@ -15,9 +15,10 @@ export function ecologyOf(layout){
  if(layout.biome==='ice')return 'snow';if(layout.biome==='desert')return 'desert';
  const e=Object.values(layout.edges),mountains=e.filter(k=>k==='mountain').length,[x,z]=layout.cell||[0,0];
  if(mountains>=2)return (x+z)%5===0?'volcanic':'basin';
+ if(mountains===1&&(x+z)%3!==0)return 'basin';
  if(e.includes('coast'))return 'coast';
- if(layout.biome==='forest'||e.filter(k=>k==='forest').length>=2)return 'forest';
- if(e.filter(k=>['river','lake','stream','canal'].includes(k)).length>=2&&(e.includes('lake')||(x+z)%4===0))return 'marsh';
+ if(layout.biome==='forest')return 'forest';
+ if(e.filter(k=>['river','lake','stream','canal'].includes(k)).length>=1&&(e.includes('lake')||(x+z)%4===0))return 'marsh';
  return 'meadow';
 }
 export const biomeOf=layout=>Object.hasOwn(BIOMES,layout?.ecology)?BIOMES[layout.ecology]:null;

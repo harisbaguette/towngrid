@@ -1,0 +1,127 @@
+[
+  {
+    "id": "save_rejects_retiring_residents_over_100",
+    "reproduced": false,
+    "before": {
+      "workers": 105,
+      "capacity": 105
+    },
+    "after": {
+      "workers": 104,
+      "capacity": 102,
+      "retiring": 2
+    },
+    "error": null
+  },
+  {
+    "id": "overlapping_power_radii_leave_usable_supply_idle",
+    "reproduced": false,
+    "supply": 12,
+    "demand": 9,
+    "groups": [
+      {
+        "supply": 6,
+        "demand": 6,
+        "used": 6
+      },
+      {
+        "supply": 6,
+        "demand": 3,
+        "used": 3
+      }
+    ],
+    "consumers": [
+      {
+        "id": 3,
+        "powered": true,
+        "distanceA": 4,
+        "distanceB": 6
+      },
+      {
+        "id": 4,
+        "powered": true,
+        "distanceA": 5,
+        "distanceB": 5
+      },
+      {
+        "id": 5,
+        "powered": true,
+        "distanceA": 6,
+        "distanceB": 4
+      }
+    ]
+  },
+  {
+    "id": "disconnected_battery_charges",
+    "reproduced": false,
+    "connected": false,
+    "charge": 0,
+    "distance": 15
+  },
+  {
+    "id": "moving_generator_still_charges_battery",
+    "reproduced": false,
+    "globalPower": false,
+    "nodes": 0,
+    "before": 0,
+    "after": 0,
+    "status": "이전 중"
+  },
+  {
+    "id": "storage_policy_block_misdiagnosed",
+    "reproduced": false,
+    "output": 10,
+    "status": "보관 제한 · 판재",
+    "totalSpace": 160,
+    "plankSpace": 0,
+    "idleResidents": 1,
+    "diagnosis": {
+      "text": "입고 거부 때문에 판재 입고가 막혔습니다. 시장의 보관 설정을 수정하세요.",
+      "label": "시설 확인",
+      "focus": 2,
+      "tool": null,
+      "action": "storage",
+      "storeId": 0
+    }
+  },
+  {
+    "id": "partial_contract_hides_fuel_error",
+    "reproduced": false,
+    "logic": {
+      "ready": false,
+      "wait": 0,
+      "inTransit": false,
+      "error": "연료 부족 · 이번 왕복에 1개 필요 · 시장에서 연료를 수입하세요"
+    },
+    "ui": {
+      "contract": {
+        "item": "grain",
+        "amount": 14,
+        "reward": 151
+      },
+      "have": 10,
+      "ready": false,
+      "label": "납품",
+      "note": "연료 부족 · 이번 왕복에 1개 필요 · 시장에서 연료를 수입하세요"
+    }
+  },
+  {
+    "id": "diplomatic_order_sent_to_unrelated_market",
+    "reproduced": false,
+    "state": "new-1",
+    "capital": "arsel-2",
+    "capitalCell": [
+      44,
+      9
+    ],
+    "shipmentLabel": "Audit state 1",
+    "destination": "arsel-2",
+    "destinationOwner": "new-1",
+    "end": [
+      44,
+      9
+    ],
+    "fuel": 4,
+    "duration": 24
+  }
+]

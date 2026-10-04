@@ -4,10 +4,12 @@
 // The state lives on the campaign (Campaign.league) and is saved with it; a lone Simulation (tests, previews) has none.
 import {RESOURCES} from './simulation.js';
 import {NATIONS} from './world.js';
+import {scoreFactor} from './competition-rules.js';
+import {rivalDay} from './rival-economy.js';
 
 export const WEEK_DAYS=7;
 /** Stars a sold unit earns: about one per 10G of list price, at least one. A lord's order earns half again. */
-export const starsOf=(item,amount)=>Math.max(1,Math.ceil((RESOURCES[item]?.price||0)/10))*amount;
+export const starsOf=(item,amount,day=null)=>Math.max(1,Math.ceil((RESOURCES[item]?.price||0)/10))*amount*(day===null?1:scoreFactor(item,day));
 export const CONTRACT_STARS=1.5;
 /** Prize for the week's place (1st..8th) times the prize base of the rank (LEAGUE_BASE + per rank). */
 export const LEAGUE_PRIZE=[5,3,2,1,.5,0,0,0],LEAGUE_BASE=100,LEAGUE_PER_RANK=60;
@@ -26,7 +28,6 @@ export const SEASONS=[
 ];
 export const seasonOf=day=>SEASONS[Math.floor(Math.max(0,day-1)/WEEK_DAYS)%SEASONS.length];
 export const seasonFactor=(s,item)=>seasonOf(s.campaign?.lastWorldDay??s.day).goods[item]||1;
-const noise=(a,b)=>{const v=Math.sin(a*91.7+b*47.3+11)*43758.5453;return v-Math.floor(v);};
 
 export function newLeague(campaign){
  const own=campaign?.sites?.[0]?.nation;
@@ -42,7 +43,7 @@ export function ensureLeague(campaign){
 /** A sale or a lord's order reached its buyer (export-route.js arrive): count its stars. */
 export function awardStars(s,sh){
  const c=s.campaign;if(!c?.league||!RESOURCES[sh.item]||sh.kind==='import')return 0;
- const n=Math.round(starsOf(sh.item,sh.amount)*(sh.kind==='contract'?CONTRACT_STARS:1));addStars(c,n,s);return n;
+ const n=Math.round(starsOf(sh.item,sh.amount,c.lastWorldDay)*(sh.kind==='contract'?CONTRACT_STARS:1));addStars(c,n,s);return n;
 }
 /** Count stars; a daily reward they complete is booked as income of `site`, the site whose step moved the money (its
  *  books.flow measures that step, simulation.js BOOKED), or of the home site when no site step runs (a gift). */
@@ -55,9 +56,7 @@ export function standings(c){const l=c.league;if(!l)return [];return [{id:'playe
 /** A world day passed (Campaign.worldDay): rivals score, the daily goal resets, and every seventh day the week closes. */
 export function leagueDay(c){
  const l=ensureLeague(c);l.recent=[...l.recent,l.dayStars].slice(-3);
- // Each rival scores about what the player averaged over the last days, times its pace (0.65..1.31) and the day's luck.
- const avg=l.recent.reduce((n,v)=>n+v,0)/l.recent.length;
- for(const [i,r] of l.rivals.entries())r.score+=Math.max(10,avg)*r.pace*(.75+noise(i+1,c.lastWorldDay)*.5);
+ for(const [i,r] of l.rivals.entries())rivalDay(r,i,c.lastWorldDay-1);
  l.dayStars=0;if(!l.daily.done)l.daily.streak=0;
  l.daily={...l.daily,day:c.lastWorldDay,from:l.total,done:false};l.daily.goal=dailyGoal(l);
  if((c.lastWorldDay-1)%WEEK_DAYS===0){

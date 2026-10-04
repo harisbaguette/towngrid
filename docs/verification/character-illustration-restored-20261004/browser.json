@@ -1,0 +1,26 @@
+{
+  "count": 8,
+  "views": [
+    {
+      "direction": "SW",
+      "distinct": 8
+    },
+    {
+      "direction": "SE",
+      "distinct": 8
+    }
+  ],
+  "method": "whole-authored-cels-uniform-registration",
+  "runtimeSource": "art-source/pixel-characters/prototypes/mira-v3/runtime-pack.json",
+  "notice": "오른쪽은 기존 2D 걷기 초안입니다. 팔·몸통·자세 연결이 미완성이며, 개선 완료본이 아닙니다.",
+  "retiredRequests": [],
+  "errors": [],
+  "runtimeHashes": {
+    "public/assets/pixel-characters/mira/sprites.png": "0af4dd97322d429e861873cc70947d7405abfce8db5b953649ac6bde29eb4be0",
+    "public/assets/pixel-characters/mira/frames.json": "5877bada9f4447c1470915cc2ae0e3bda7d238fdf58ab5997545668e6c2a9e9e",
+    "public/assets/pixel-characters/mira/portrait.png": "f9b3841454a422c4df3f97aa7cd21bdde3781a95da599a3ccc18cbc482698fc1"
+  },
+  "runtimePreserved": true,
+  "mobile": "passed",
+  "reducedMotion": "passed"
+}

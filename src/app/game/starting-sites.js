@@ -10,5 +10,5 @@ const STARTS=new Map(Object.keys(NATIONS).map(nation=>[nation,WORLD_PLOTS.filter
  return terrain!=='mountain'&&!WATER_KINDS.includes(terrain);
 })]));
 export const startingProvinces=nation=>STARTS.get(nation)||[];
-export const defaultStartingProvince=nation=>startingProvinces(nation).find(p=>p.id===nation+'-5')||startingProvinces(nation)[0]||null;
+export const defaultStartingProvince=nation=>startingProvinces(nation).find(p=>p.id===(nation==='estern'?'estern-3':nation+'-5'))||startingProvinces(nation)[0]||null;
 export const startingProvince=(nation,id)=>startingProvinces(nation).find(p=>p.id===id)||null;

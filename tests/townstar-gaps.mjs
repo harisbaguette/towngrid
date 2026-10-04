@@ -8,7 +8,7 @@ import {capacity,freeSpace,deposit,STORE_MODES,roomFor,used} from '../src/app/ga
 import {HAUL_GEAR,haulLoad} from '../src/app/game/logistics.js';
 import {starsOf,seasonOf,SEASONS,WEEK_DAYS,DAILY,GIFT,standings} from '../src/app/game/league.js';
 import {LAND_SALES} from '../src/app/game/land-sale.js';
-import {awaySeconds,catchUp,OFFLINE} from '../src/app/game/offline.js';
+import {checkpointOffline,catchUpOffline,cancelOffline,OFFLINE_LIMIT_SECONDS} from '../src/app/game/offline-progress.js';
 import {PENALTY_STEP} from '../src/app/game/proximity.js';
 import {slowSpot,goalAction,fullStoreSale,outputOf,depletedMove} from '../src/app/game/ui-rules.js';
 import {WORLD_PLOTS} from '../src/app/game/territory.js';
@@ -70,9 +70,10 @@ let n=0;const ok=label=>{n++;console.log('PASS',label);};
   if(done)break;}
  assert.ok(done,'a start with a sellable feature');ok('land sale');}
 
-// 10. Offline: up to half an hour of real time runs with no event starting, then the clock speed and pause come back.
-{const c=new Campaign({nation:'estern'}),s=c.active;s.paused=true;const raw=encodeSave(c.save());assert.ok(Math.abs(awaySeconds(raw,Date.now()+120000)-120)<3);
- const t=s.time,ev=s.nextEvent,r=catchUp(c,OFFLINE.maxReal*3);assert.ok(r.capped);assert.ok(Math.abs(s.time-t-r.game)<1);assert.ok(s.nextEvent>=ev+r.game);assert.equal(s.paused,true);assert.equal(s.speed,1);assert.equal(catchUp(c,10),null);ok('offline catch-up');}
+// 10. Only opted-in, running towns catch up, at most ten real minutes; return paused.
+{const c=new Campaign({nation:'estern'}),s=c.active;s.nextEvent=1e12;s.paused=false;c.offline.enabled=true;checkpointOffline(c,100000);
+ const t=s.time,ev=s.nextEvent,r=await catchUpOffline(c,100000+OFFLINE_LIMIT_SECONDS*3000,async()=>{});assert.ok(r.capped);assert.ok(s.time-t>0&&s.time-t<=OFFLINE_LIMIT_SECONDS*.5);assert.equal(r.seconds,(s.time-t)*2);assert.equal(s.nextEvent,ev);assert.equal(s.paused,true);assert.equal(s.speed,1);
+ assert.equal((await catchUpOffline(c,100000+OFFLINE_LIMIT_SECONDS*4000)).seconds,0);ok('offline catch-up');}
 
 // 11. Placement: each point of shade, wind shelter or pollution multiplies the time by PENALTY_STEP on a current map, never
 //     milder than the old cut; the operations card names the slowest spot and a faster place to move it to.
@@ -85,13 +86,12 @@ let n=0;const ok=label=>{n++;console.log('PASS',label);};
 {const c=new Campaign({nation:'estern'}),s=c.active;c.treasury.contracts=3;c.treasury.contractReadyAt=0;s.money=20000;const [x,z]=freeTile(s,'field');s.build('field',x,z,true);
  const order=s.contract();s.stock[order.item]=0;assert.equal(order.item,'grain','the only base good made here');const a=goalAction(s,'contracts');assert.equal(a.kind,'market');assert.equal(a.item,'grain');ok('contract import offer');}
 
-// 13. Review 2026-10-03. An event announced when the town was saved stays announced through the catch-up (resolving it
-//     re-armed the next event, and storms and raids ran while away), and every site gets its own speed back.
+// 13. An announced event stops catch-up immediately. Each site's speed is restored.
 {const c=new Campaign({nation:'estern'}),s=c.active;c.treasury.rank=12;s.nextEvent=s.time;s.paused=false;for(let i=0;i<8&&!s.pendingEvent;i++)c.tick(.25);
- assert.ok(s.pendingEvent,'an event is announced');const type=s.pendingEvent.type,events=s.eventCount;const r=catchUp(c,OFFLINE.maxReal);
- assert.equal(s.eventCount,events,'no event resolved while away');assert.equal(s.pendingEvent?.type,type);assert.ok(s.pendingEvent.at>s.time);
+ assert.ok(s.pendingEvent);const event=structuredClone(s.pendingEvent),events=s.eventCount;c.offline.enabled=true;checkpointOffline(c,100000);const r=await catchUpOffline(c,200000);
+ assert.equal(r.seconds,0);assert.match(r.stop,/사건/);assert.equal(s.eventCount,events);assert.deepEqual(s.pendingEvent,event);
  const h=new Campaign({nation:'estern'});h.treasury.rank=15;h.active.money+=50000;for(const [k,v] of Object.entries({wood:200,stone:200,plank:100,brick:100,steel:100}))h.active.stock[k]+=v;
- assert.ok(h.foundSite('estern').ok);catchUp(h,600);assert.deepEqual(h.sites.map(v=>v.sim.speed),[1,1],'branches back to their speed');ok('offline keeps an announced event and the speeds '+Math.round(r.game));}
+ assert.ok(h.foundSite('estern').ok);h.offline.enabled=true;h.active.speed=4;h.sites[1].sim.speed=2;checkpointOffline(h,100000);await catchUpOffline(h,110000,async()=>{});assert.deepEqual(h.sites.map(v=>v.sim.speed),[4,2]);ok('offline keeps announced event and site speeds');}
 
 // 14. A dedicated depot keeps what it holds when switched (a full water tank back to every good is refused), and a
 //     freight route counts only the room that takes its good.
@@ -134,7 +134,8 @@ let n=0;const ok=label=>{n++;console.log('PASS',label);};
 {const c=new Campaign({nation:'estern'}),s=c.active;s.money+=2000;const [x,z]=freeTile(s,'lumber',null);const id=s.build('lumber',x,z,true).id,b=s.buildings.find(v=>v.id===id);
  for(const t of s.tiles)if(t.nature==='tree'&&Math.abs(t.x-x)<=4&&Math.abs(t.z-z)<=4){t.nature=null;t.remaining=0;}s.revision++;const m=depletedMove(s,b);assert.ok(m,'a spot with trees');assert.ok(s.relocate(id,m.x,m.z).ok);assert.ok(s.closestNatural(b,'tree'));ok('depleted gatherer move');}
 
-// 20. A compute budget stops a long catch-up early; the event delay given back is the time not run.
-{const c=new Campaign({nation:'estern'}),s=c.active;s.paused=true;const ev=s.nextEvent;let calls=0;const r=catchUp(c,OFFLINE.maxReal,50,()=>(calls++)*10);
- assert.ok(r.limited);assert.ok(r.game>0&&r.game<OFFLINE.maxReal*.5);assert.ok(Math.abs(s.nextEvent-(ev+r.game))<1e-6,'events wait only for the time actually run');assert.equal(s.paused,true);ok('offline compute budget');}
+// 20. Hiding the tab again cancels the yielded calculation without moving event deadlines.
+{const c=new Campaign({nation:'estern'}),s=c.active;s.nextEvent=1e12;c.offline.enabled=true;checkpointOffline(c,100000);const ev=s.nextEvent;
+ const r=await catchUpOffline(c,100000+OFFLINE_LIMIT_SECONDS*1000,async()=>cancelOffline(c));
+ assert.ok(r.seconds>0&&r.seconds<OFFLINE_LIMIT_SECONDS);assert.match(r.stop,/중단/);assert.equal(s.nextEvent,ev);assert.equal(s.paused,true);ok('offline cancellation');}
 console.log('\n[townstar-gaps] '+n+' checks pass');

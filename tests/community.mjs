@@ -1,0 +1,41 @@
+import assert from 'node:assert/strict';
+import {createServer} from 'node:http';
+import {createCommunity} from '../server/community.mjs';
+import {Campaign} from '../src/app/game/campaign.js';
+import {encodeSave} from '../src/app/game/persistence.js';
+import {createIndustryTrial} from '../src/app/game/industry-trials.js';
+import {validReplay,verifyTrialReplay} from '../src/app/game/trial-replay.js';
+const origin='http://localhost:5173',service=createCommunity({database:':memory:',origin}),server=createServer(service.handler);
+await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base='http://127.0.0.1:'+server.address().port+'/api/community';
+function client(){let cookie='';return async(path,method='GET',data,options={})=>{const r=await fetch(base+path,{method,headers:{...(method==='GET'?{}:{origin,'X-TownGrid':'1','Content-Type':'application/json'}),...(cookie?{cookie}:{}),...options},...(data===undefined?{}:{body:JSON.stringify(data)})});if(r.headers.get('set-cookie'))cookie=r.headers.get('set-cookie').split(';')[0];return {status:r.status,data:await r.json()};};}
+const alice=client(),bob=client(),guest=client();
+try{
+ assert.equal((await guest('/session')).data.user,null);
+ assert.equal((await guest('/save')).status,401);
+ assert.equal((await guest('/register','POST',{name:'   ',password:'a secure test password'})).status,400);
+ assert.equal((await guest('/register','POST',{name:'forged',password:'a secure test password'},{origin:'https://attacker.example'})).status,403);
+ const a=await alice('/register','POST',{name:'Alice-test',password:'strong test password A'}),b=await bob('/register','POST',{name:'Bob-test',password:'strong test password B'});assert.equal(a.status,201);assert.equal(b.status,201);
+ assert.equal((await alice('/session')).data.user.name,'Alice-test');
+ const raw=encodeSave(new Campaign().save());assert.equal((await alice('/save','PUT',{revision:0,raw})).status,200);
+ assert.equal((await alice('/save','PUT',{revision:0,raw})).status,409,'stale clients cannot overwrite a newer save');
+ assert.equal((await bob('/save')).data.save,null,'saves are private');
+ assert.equal((await alice('/save','PUT',{revision:1,raw:'{}'})).status,400);
+ const group=await alice('/guild','POST',{name:'Test Co-op'});assert.equal(group.status,201);
+ assert.equal((await bob('/guild/join','POST',{invite:group.data.guild.invite})).status,200);assert.equal((await alice('/guild')).data.members.length,2);
+ const c=createIndustryTrial('practice-v2-0');while(c.trial.status==='playing')c.tick(.25);const replay=structuredClone(c.trial.replay);
+ assert.ok(validReplay(replay));assert.equal(verifyTrialReplay(replay).score,0);
+ const extra=createIndustryTrial('practice-v2-0');assert.equal(extra.foundSite('estern').ok,false);assert.ok(extra.giftNeighbor('estern','wood').ok);assert.ok(extra.active.fulfill().ok);while(extra.trial.status==='playing')extra.tick(.25);assert.equal(verifyTrialReplay(extra.trial.replay).score,extra.trial.score,'ordinary contract and gift actions are replayable');
+ const malformed=c.save();malformed.trial.replay.commands='bad';assert.throws(()=>encodeSave(malformed));
+ assert.equal(validReplay({...replay,commands:[['build',['field',10,10,true]]]}),false,'no free construction');
+ assert.equal(validReplay({...replay,commands:[['restore',[{}]]]}),false,'no arbitrary method invocation');
+ assert.equal(validReplay({...replay,commands:[['controls',{constructor:true},{}]]}),false,'no prototype control keys');
+ assert.throws(()=>verifyTrialReplay({...replay,commands:[['wait',10000]]}),/제한 시간/);
+ const result=await alice('/scores','POST',{replay,score:99999999});assert.equal(result.status,200);assert.equal(result.data.result.score,0,'server recomputes score');
+ assert.equal((await bob('/scores','POST',{replay,score:99999999})).status,200);
+ const board=await guest('/leaderboard?round=practice-v2-0');assert.equal(board.data.players.length,2);assert.equal(board.data.teams[0].members,2);assert.equal(board.data.teams[0].score,0);
+ assert.equal((await bob('/guild','DELETE',{})).status,403);
+ assert.equal((await bob('/guild/leave','POST',{})).status,200);
+ const newDevice=client();assert.equal((await newDevice('/login','POST',{name:'Alice-test',password:'strong test password A'})).status,200);assert.equal((await newDevice('/save')).data.save.raw,raw);
+ const recover=client();assert.equal((await recover('/recover','POST',{name:'Alice-test',password:'replacement password AA',recovery:a.data.recovery})).status,200);assert.equal((await alice('/save')).status,401,'recovery revokes previous sessions');assert.equal((await recover('/save')).status,200);
+ console.log('PASS community: accounts, origin checks, recovery, private saves, version conflicts, replay validation, player/team leaderboards, invitations');
+}finally{await new Promise(resolve=>server.close(resolve));service.close();}

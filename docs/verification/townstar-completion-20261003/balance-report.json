@@ -1,0 +1,5752 @@
+{
+ "source": "code",
+ "pacing": {
+  "baseTimeScale": 0.5,
+  "dayRealSeconds": 160
+ },
+ "counts": {
+  "resources": 80,
+  "buildings": 112,
+  "producers": 59,
+  "alternatives": 45,
+  "recipeFacilities": 25,
+  "ranks": 33
+ },
+ "startSet": [
+  "warehouse",
+  "road",
+  "well",
+  "field",
+  "lumber",
+  "quarry",
+  "house",
+  "dock"
+ ],
+ "economy": [
+  {
+   "id": "distillery",
+   "building": "distillery",
+   "recipe": "fuel",
+   "alt": false,
+   "name": "소형 증류소",
+   "group": "energy",
+   "rank": 0,
+   "period": 60,
+   "realPeriod": 120,
+   "depth": 2,
+   "inputs": {
+    "grain": 6,
+    "wood": 3,
+    "water": 2
+   },
+   "output": "fuel",
+   "amount": 1,
+   "outPerMin": 37.5,
+   "inPerMin": 43.5,
+   "netPerMin": -6,
+   "netPerSec": -0.1,
+   "buildValue": 254,
+   "paybackMin": -42.3,
+   "tileValuePerMin": 21.6,
+   "premium": 0.21,
+   "margin": 0.86
+  },
+  {
+   "id": "dock",
+   "building": "dock",
+   "recipe": "fish",
+   "alt": false,
+   "name": "어항",
+   "group": "farm",
+   "rank": 0,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 0,
+   "inputs": {},
+   "output": "fish",
+   "amount": 3,
+   "outPerMin": 90,
+   "inPerMin": 0,
+   "netPerMin": 90,
+   "netPerSec": 1.5,
+   "buildValue": 270,
+   "paybackMin": 3,
+   "tileValuePerMin": 90,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "field",
+   "building": "field",
+   "recipe": "grain",
+   "alt": false,
+   "name": "밀밭",
+   "group": "farm",
+   "rank": 0,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "grain",
+   "amount": 3,
+   "outPerMin": 67.5,
+   "inPerMin": 7.5,
+   "netPerMin": 60,
+   "netPerSec": 1,
+   "buildValue": 45,
+   "paybackMin": 0.8,
+   "tileValuePerMin": 54,
+   "premium": 1.8,
+   "margin": 9
+  },
+  {
+   "id": "lumber",
+   "building": "lumber",
+   "recipe": "wood",
+   "alt": false,
+   "name": "벌목장",
+   "group": "base",
+   "rank": 0,
+   "period": 8,
+   "realPeriod": 16,
+   "depth": 0,
+   "inputs": {},
+   "output": "wood",
+   "amount": 3,
+   "outPerMin": 101.3,
+   "inPerMin": 0,
+   "netPerMin": 101.3,
+   "netPerSec": 1.69,
+   "buildValue": 126,
+   "paybackMin": 1.2,
+   "tileValuePerMin": 101.3,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "quarry",
+   "building": "quarry",
+   "recipe": "stone",
+   "alt": false,
+   "name": "채석장",
+   "group": "base",
+   "rank": 0,
+   "period": 9,
+   "realPeriod": 18,
+   "depth": 0,
+   "inputs": {},
+   "output": "stone",
+   "amount": 2,
+   "outPerMin": 66.7,
+   "inPerMin": 0,
+   "netPerMin": 66.7,
+   "netPerSec": 1.11,
+   "buildValue": 145,
+   "paybackMin": 2.2,
+   "tileValuePerMin": 66.7,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "well",
+   "building": "well",
+   "recipe": "water",
+   "alt": false,
+   "name": "우물",
+   "group": "base",
+   "rank": 0,
+   "period": 6,
+   "realPeriod": 12,
+   "depth": 0,
+   "inputs": {},
+   "output": "water",
+   "amount": 2,
+   "outPerMin": 30,
+   "inPerMin": 0,
+   "netPerMin": 30,
+   "netPerSec": 0.5,
+   "buildValue": 100,
+   "paybackMin": 3.3,
+   "tileValuePerMin": 30,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "sawmill",
+   "building": "sawmill",
+   "recipe": "plank",
+   "alt": false,
+   "name": "제재소",
+   "group": "craft",
+   "rank": 1,
+   "period": 10,
+   "realPeriod": 20,
+   "depth": 1,
+   "inputs": {
+    "wood": 2
+   },
+   "output": "plank",
+   "amount": 3,
+   "outPerMin": 225,
+   "inPerMin": 54,
+   "netPerMin": 171,
+   "netPerSec": 2.85,
+   "buildValue": 252,
+   "paybackMin": 1.5,
+   "tileValuePerMin": 146.7,
+   "premium": 1.45,
+   "margin": 4.17
+  },
+  {
+   "id": "mill",
+   "building": "mill",
+   "recipe": "flour",
+   "alt": false,
+   "name": "제분소",
+   "group": "craft",
+   "rank": 2,
+   "period": 10,
+   "realPeriod": 20,
+   "depth": 2,
+   "inputs": {
+    "grain": 3
+   },
+   "output": "flour",
+   "amount": 3,
+   "outPerMin": 207,
+   "inPerMin": 81,
+   "netPerMin": 126,
+   "netPerSec": 2.1,
+   "buildValue": 300,
+   "paybackMin": 2.4,
+   "tileValuePerMin": 82.8,
+   "premium": 1.53,
+   "margin": 2.56
+  },
+  {
+   "id": "saltfield",
+   "building": "saltfield",
+   "recipe": "salt",
+   "alt": false,
+   "name": "소금밭",
+   "group": "farm",
+   "rank": 2,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "salt",
+   "amount": 2,
+   "outPerMin": 70,
+   "inPerMin": 7.5,
+   "netPerMin": 62.5,
+   "netPerSec": 1.04,
+   "buildValue": 93,
+   "paybackMin": 1.5,
+   "tileValuePerMin": 56,
+   "premium": 1.87,
+   "margin": 9.33
+  },
+  {
+   "id": "smokehouse",
+   "building": "smokehouse",
+   "recipe": "smokedfish",
+   "alt": false,
+   "name": "훈제장",
+   "group": "craft",
+   "rank": 2,
+   "period": 10,
+   "realPeriod": 20,
+   "depth": 1,
+   "inputs": {
+    "fish": 2,
+    "wood": 1
+   },
+   "output": "smokedfish",
+   "amount": 2,
+   "outPerMin": 306,
+   "inPerMin": 99,
+   "netPerMin": 207,
+   "netPerSec": 3.45,
+   "buildValue": 214,
+   "paybackMin": 1,
+   "tileValuePerMin": 148.1,
+   "premium": 1.46,
+   "margin": 3.09
+  },
+  {
+   "id": "smokehouse:saltfish",
+   "building": "smokehouse",
+   "recipe": "saltfish",
+   "alt": true,
+   "name": "훈제장 · 소금 절임",
+   "group": "craft",
+   "rank": 2,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 2,
+   "inputs": {
+    "fish": 2,
+    "salt": 1
+   },
+   "output": "smokedfish",
+   "amount": 3,
+   "outPerMin": 382.5,
+   "inPerMin": 95,
+   "netPerMin": 287.5,
+   "netPerSec": 4.79,
+   "buildValue": 214,
+   "paybackMin": 0.7,
+   "tileValuePerMin": 166.9,
+   "premium": 1.85,
+   "margin": 4.03
+  },
+  {
+   "id": "sugarfield",
+   "building": "sugarfield",
+   "recipe": "sugarcane",
+   "alt": false,
+   "name": "사탕수수밭",
+   "group": "farm",
+   "rank": 2,
+   "period": 14,
+   "realPeriod": 28,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "sugarcane",
+   "amount": 3,
+   "outPerMin": 64.3,
+   "inPerMin": 6.4,
+   "netPerMin": 57.9,
+   "netPerSec": 0.96,
+   "buildValue": 87,
+   "paybackMin": 1.5,
+   "tileValuePerMin": 52.9,
+   "premium": 1.76,
+   "margin": 10
+  },
+  {
+   "id": "bakery",
+   "building": "bakery",
+   "recipe": "bread",
+   "alt": false,
+   "name": "빵집",
+   "group": "craft",
+   "rank": 3,
+   "period": 13,
+   "realPeriod": 26,
+   "depth": 3,
+   "inputs": {
+    "flour": 2,
+    "water": 1,
+    "wood": 1
+   },
+   "output": "bread",
+   "amount": 5,
+   "outPerMin": 484.6,
+   "inPerMin": 133.8,
+   "netPerMin": 350.8,
+   "netPerSec": 5.85,
+   "buildValue": 332,
+   "paybackMin": 0.9,
+   "tileValuePerMin": 178.3,
+   "premium": 1.76,
+   "margin": 3.62
+  },
+  {
+   "id": "cottonfield",
+   "building": "cottonfield",
+   "recipe": "cotton",
+   "alt": false,
+   "name": "목화밭",
+   "group": "farm",
+   "rank": 3,
+   "period": 9,
+   "realPeriod": 18,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "cotton",
+   "amount": 2,
+   "outPerMin": 86.7,
+   "inPerMin": 10,
+   "netPerMin": 76.7,
+   "netPerSec": 1.28,
+   "buildValue": 82,
+   "paybackMin": 1.1,
+   "tileValuePerMin": 65,
+   "premium": 2.17,
+   "margin": 8.67
+  },
+  {
+   "id": "mill:sugar",
+   "building": "mill",
+   "recipe": "sugar",
+   "alt": true,
+   "name": "제분소 · 설탕",
+   "group": "craft",
+   "rank": 3,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 2,
+   "inputs": {
+    "sugarcane": 3
+   },
+   "output": "sugar",
+   "amount": 2,
+   "outPerMin": 170,
+   "inPerMin": 75,
+   "netPerMin": 95,
+   "netPerSec": 1.58,
+   "buildValue": 300,
+   "paybackMin": 3.2,
+   "tileValuePerMin": 70.3,
+   "premium": 1.33,
+   "margin": 2.27
+  },
+  {
+   "id": "bakery:jam",
+   "building": "bakery",
+   "recipe": "jam",
+   "alt": true,
+   "name": "빵집 · 딸기잼",
+   "group": "craft",
+   "rank": 4,
+   "period": 14,
+   "realPeriod": 28,
+   "depth": 3,
+   "inputs": {
+    "strawberry": 3,
+    "sugar": 1
+   },
+   "output": "jam",
+   "amount": 2,
+   "outPerMin": 514.3,
+   "inPerMin": 162.9,
+   "netPerMin": 351.4,
+   "netPerSec": 5.86,
+   "buildValue": 332,
+   "paybackMin": 0.9,
+   "tileValuePerMin": 141.2,
+   "premium": 2.01,
+   "margin": 3.16
+  },
+  {
+   "id": "berryfield",
+   "building": "berryfield",
+   "recipe": "strawberry",
+   "alt": false,
+   "name": "딸기밭",
+   "group": "farm",
+   "rank": 4,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "strawberry",
+   "amount": 2,
+   "outPerMin": 70,
+   "inPerMin": 7.5,
+   "netPerMin": 62.5,
+   "netPerSec": 1.04,
+   "buildValue": 92,
+   "paybackMin": 1.5,
+   "tileValuePerMin": 56,
+   "premium": 1.87,
+   "margin": 9.33
+  },
+  {
+   "id": "herbgarden",
+   "building": "herbgarden",
+   "recipe": "herb",
+   "alt": false,
+   "name": "약초원",
+   "group": "farm",
+   "rank": 4,
+   "period": 8,
+   "realPeriod": 16,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "herb",
+   "amount": 1,
+   "outPerMin": 75,
+   "inPerMin": 11.3,
+   "netPerMin": 63.8,
+   "netPerSec": 1.06,
+   "buildValue": 106,
+   "paybackMin": 1.7,
+   "tileValuePerMin": 54.5,
+   "premium": 1.82,
+   "margin": 6.67
+  },
+  {
+   "id": "oilpump",
+   "building": "oilpump",
+   "recipe": "oil",
+   "alt": false,
+   "name": "유정",
+   "group": "energy",
+   "rank": 4,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 0,
+   "inputs": {},
+   "output": "oil",
+   "amount": 3,
+   "outPerMin": 135,
+   "inPerMin": 0,
+   "netPerMin": 135,
+   "netPerSec": 2.25,
+   "buildValue": 680,
+   "paybackMin": 5,
+   "tileValuePerMin": 135,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "pumpkinpatch",
+   "building": "pumpkinpatch",
+   "recipe": "pumpkin",
+   "alt": false,
+   "name": "호박밭",
+   "group": "farm",
+   "rank": 4,
+   "period": 15,
+   "realPeriod": 30,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "pumpkin",
+   "amount": 2,
+   "outPerMin": 68,
+   "inPerMin": 6,
+   "netPerMin": 62,
+   "netPerSec": 1.03,
+   "buildValue": 106,
+   "paybackMin": 1.7,
+   "tileValuePerMin": 56.7,
+   "premium": 1.89,
+   "margin": 11.33
+  },
+  {
+   "id": "weaver",
+   "building": "weaver",
+   "recipe": "cloth",
+   "alt": false,
+   "name": "방직소",
+   "group": "craft",
+   "rank": 4,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 2,
+   "inputs": {
+    "cotton": 3
+   },
+   "output": "cloth",
+   "amount": 2,
+   "outPerMin": 395,
+   "inPerMin": 97.5,
+   "netPerMin": 297.5,
+   "netPerSec": 4.96,
+   "buildValue": 280,
+   "paybackMin": 0.9,
+   "tileValuePerMin": 158,
+   "premium": 2.43,
+   "margin": 4.05
+  },
+  {
+   "id": "bakery:baguette",
+   "building": "bakery",
+   "recipe": "baguette",
+   "alt": true,
+   "name": "빵집 · 바게트",
+   "group": "craft",
+   "rank": 5,
+   "period": 14,
+   "realPeriod": 28,
+   "depth": 4,
+   "inputs": {
+    "dough": 2,
+    "wood": 1
+   },
+   "output": "baguette",
+   "amount": 2,
+   "outPerMin": 377.1,
+   "inPerMin": 165,
+   "netPerMin": 212.1,
+   "netPerSec": 3.54,
+   "buildValue": 332,
+   "paybackMin": 1.6,
+   "tileValuePerMin": 144.9,
+   "premium": 1.4,
+   "margin": 2.29
+  },
+  {
+   "id": "bakery:dough",
+   "building": "bakery",
+   "recipe": "dough",
+   "alt": true,
+   "name": "빵집 · 빵 반죽",
+   "group": "craft",
+   "rank": 5,
+   "period": 10,
+   "realPeriod": 20,
+   "depth": 3,
+   "inputs": {
+    "flour": 2,
+    "water": 1
+   },
+   "output": "dough",
+   "amount": 3,
+   "outPerMin": 306,
+   "inPerMin": 147,
+   "netPerMin": 159,
+   "netPerSec": 2.65,
+   "buildValue": 332,
+   "paybackMin": 2.1,
+   "tileValuePerMin": 103.1,
+   "premium": 1.25,
+   "margin": 2.08
+  },
+  {
+   "id": "refinery",
+   "building": "refinery",
+   "recipe": "fuel",
+   "alt": false,
+   "name": "정유소",
+   "group": "energy",
+   "rank": 5,
+   "period": 14,
+   "realPeriod": 28,
+   "depth": 1,
+   "inputs": {
+    "oil": 3,
+    "water": 1
+   },
+   "output": "fuel",
+   "amount": 3,
+   "outPerMin": 482.1,
+   "inPerMin": 122.1,
+   "netPerMin": 360,
+   "netPerSec": 6,
+   "buildValue": 1420,
+   "paybackMin": 3.9,
+   "tileValuePerMin": 232.8,
+   "premium": 1.72,
+   "margin": 3.95
+  },
+  {
+   "id": "feedmill",
+   "building": "feedmill",
+   "recipe": "feed",
+   "alt": false,
+   "name": "사료 공장",
+   "group": "farm",
+   "rank": 6,
+   "period": 10,
+   "realPeriod": 20,
+   "depth": 2,
+   "inputs": {
+    "grain": 2
+   },
+   "output": "feed",
+   "amount": 3,
+   "outPerMin": 153,
+   "inPerMin": 54,
+   "netPerMin": 99,
+   "netPerSec": 1.65,
+   "buildValue": 244,
+   "paybackMin": 2.5,
+   "tileValuePerMin": 76.5,
+   "premium": 1.42,
+   "margin": 2.83
+  },
+  {
+   "id": "henhouse",
+   "building": "henhouse",
+   "recipe": "egg",
+   "alt": false,
+   "name": "양계장",
+   "group": "farm",
+   "rank": 6,
+   "period": 11,
+   "realPeriod": 22,
+   "depth": 2,
+   "inputs": {
+    "grain": 1,
+    "water": 1
+   },
+   "output": "egg",
+   "amount": 2,
+   "outPerMin": 136.4,
+   "inPerMin": 32.7,
+   "netPerMin": 103.6,
+   "netPerSec": 1.73,
+   "buildValue": 240,
+   "paybackMin": 2.3,
+   "tileValuePerMin": 78.9,
+   "premium": 1.46,
+   "margin": 4.17
+  },
+  {
+   "id": "sheeppen",
+   "building": "sheeppen",
+   "recipe": "wool",
+   "alt": false,
+   "name": "양 우리",
+   "group": "farm",
+   "rank": 6,
+   "period": 15,
+   "realPeriod": 30,
+   "depth": 3,
+   "inputs": {
+    "feed": 1,
+    "water": 1
+   },
+   "output": "wool",
+   "amount": 2,
+   "outPerMin": 184,
+   "inPerMin": 40,
+   "netPerMin": 144,
+   "netPerSec": 2.4,
+   "buildValue": 234,
+   "paybackMin": 1.6,
+   "tileValuePerMin": 111.9,
+   "premium": 1.46,
+   "margin": 4.6
+  },
+  {
+   "id": "bakery:butter",
+   "building": "bakery",
+   "recipe": "butter",
+   "alt": true,
+   "name": "빵집 · 버터",
+   "group": "craft",
+   "rank": 7,
+   "period": 13,
+   "realPeriod": 26,
+   "depth": 4,
+   "inputs": {
+    "milk": 3,
+    "salt": 1
+   },
+   "output": "butter",
+   "amount": 2,
+   "outPerMin": 715.4,
+   "inPerMin": 350.8,
+   "netPerMin": 364.6,
+   "netPerSec": 6.08,
+   "buildValue": 332,
+   "paybackMin": 0.9,
+   "tileValuePerMin": 150,
+   "premium": 1.5,
+   "margin": 2.04
+  },
+  {
+   "id": "bakery:cake",
+   "building": "bakery",
+   "recipe": "cake",
+   "alt": true,
+   "name": "빵집 · 달걀 적은 케이크",
+   "group": "craft",
+   "rank": 7,
+   "period": 18,
+   "realPeriod": 36,
+   "depth": 3,
+   "inputs": {
+    "flour": 3,
+    "egg": 1
+   },
+   "output": "cake",
+   "amount": 2,
+   "outPerMin": 666.7,
+   "inPerMin": 156.7,
+   "netPerMin": 510,
+   "netPerSec": 8.5,
+   "buildValue": 332,
+   "paybackMin": 0.7,
+   "tileValuePerMin": 228.6,
+   "premium": 2.76,
+   "margin": 4.26
+  },
+  {
+   "id": "confectionery",
+   "building": "confectionery",
+   "recipe": "cake",
+   "alt": false,
+   "name": "제과점",
+   "group": "craft",
+   "rank": 7,
+   "period": 16,
+   "realPeriod": 32,
+   "depth": 3,
+   "inputs": {
+    "flour": 2,
+    "egg": 2
+   },
+   "output": "cake",
+   "amount": 2,
+   "outPerMin": 750,
+   "inPerMin": 180,
+   "netPerMin": 570,
+   "netPerSec": 9.5,
+   "buildValue": 425,
+   "paybackMin": 0.7,
+   "tileValuePerMin": 232.3,
+   "premium": 2.81,
+   "margin": 4.17
+  },
+  {
+   "id": "milkbarn",
+   "building": "milkbarn",
+   "recipe": "milk",
+   "alt": false,
+   "name": "젖소 우리",
+   "group": "farm",
+   "rank": 7,
+   "period": 18,
+   "realPeriod": 36,
+   "depth": 3,
+   "inputs": {
+    "feed": 1,
+    "water": 1
+   },
+   "output": "milk",
+   "amount": 2,
+   "outPerMin": 153.3,
+   "inPerMin": 33.3,
+   "netPerMin": 120,
+   "netPerSec": 2,
+   "buildValue": 360,
+   "paybackMin": 3,
+   "tileValuePerMin": 99.8,
+   "premium": 1.3,
+   "margin": 4.6
+  },
+  {
+   "id": "weaver:yarn",
+   "building": "weaver",
+   "recipe": "yarn",
+   "alt": true,
+   "name": "방직소 · 털실",
+   "group": "craft",
+   "rank": 7,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 4,
+   "inputs": {
+    "wool": 2
+   },
+   "output": "yarn",
+   "amount": 2,
+   "outPerMin": 410,
+   "inPerMin": 230,
+   "netPerMin": 180,
+   "netPerSec": 3,
+   "buildValue": 280,
+   "paybackMin": 1.6,
+   "tileValuePerMin": 134.2,
+   "premium": 1.2,
+   "margin": 1.78
+  },
+  {
+   "id": "bakery:pie",
+   "building": "bakery",
+   "recipe": "pie",
+   "alt": true,
+   "name": "빵집 · 호박 파이",
+   "group": "craft",
+   "rank": 8,
+   "period": 16,
+   "realPeriod": 32,
+   "depth": 4,
+   "inputs": {
+    "pumpkin": 2,
+    "flour": 1,
+    "duckegg": 1
+   },
+   "output": "pie",
+   "amount": 2,
+   "outPerMin": 525,
+   "inPerMin": 189.4,
+   "netPerMin": 335.6,
+   "netPerSec": 5.59,
+   "buildValue": 332,
+   "paybackMin": 1,
+   "tileValuePerMin": 150.9,
+   "premium": 1.52,
+   "margin": 2.77
+  },
+  {
+   "id": "clayfield",
+   "building": "clayfield",
+   "recipe": "clay",
+   "alt": false,
+   "name": "점토밭",
+   "group": "base",
+   "rank": 8,
+   "period": 10,
+   "realPeriod": 20,
+   "depth": 0,
+   "inputs": {},
+   "output": "clay",
+   "amount": 2,
+   "outPerMin": 48,
+   "inPerMin": 0,
+   "netPerMin": 48,
+   "netPerSec": 0.8,
+   "buildValue": 126,
+   "paybackMin": 2.6,
+   "tileValuePerMin": 48,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "duckhouse",
+   "building": "duckhouse",
+   "recipe": "duckegg",
+   "alt": false,
+   "name": "오리 집",
+   "group": "farm",
+   "rank": 8,
+   "period": 17,
+   "realPeriod": 34,
+   "depth": 3,
+   "inputs": {
+    "feed": 1,
+    "water": 1
+   },
+   "output": "duckegg",
+   "amount": 2,
+   "outPerMin": 155.3,
+   "inPerMin": 35.3,
+   "netPerMin": 120,
+   "netPerSec": 2,
+   "buildValue": 260,
+   "paybackMin": 2.2,
+   "tileValuePerMin": 99,
+   "premium": 1.29,
+   "margin": 4.4
+  },
+  {
+   "id": "kiln",
+   "building": "kiln",
+   "recipe": "brick",
+   "alt": false,
+   "name": "벽돌 가마",
+   "group": "craft",
+   "rank": 8,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 1,
+   "inputs": {
+    "stone": 2,
+    "wood": 1
+   },
+   "output": "brick",
+   "amount": 3,
+   "outPerMin": 307.5,
+   "inPerMin": 72.5,
+   "netPerMin": 235,
+   "netPerSec": 3.92,
+   "buildValue": 316,
+   "paybackMin": 1.3,
+   "tileValuePerMin": 155.9,
+   "premium": 1.54,
+   "margin": 4.24
+  },
+  {
+   "id": "kiln:claybrick",
+   "building": "kiln",
+   "recipe": "claybrick",
+   "alt": true,
+   "name": "벽돌 가마 · 점토 벽돌",
+   "group": "craft",
+   "rank": 8,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 1,
+   "inputs": {
+    "clay": 2,
+    "wood": 1
+   },
+   "output": "brick",
+   "amount": 3,
+   "outPerMin": 307.5,
+   "inPerMin": 62.5,
+   "netPerMin": 245,
+   "netPerSec": 4.08,
+   "buildValue": 316,
+   "paybackMin": 1.3,
+   "tileValuePerMin": 149.6,
+   "premium": 1.48,
+   "margin": 4.92
+  },
+  {
+   "id": "apiary",
+   "building": "apiary",
+   "recipe": "honey",
+   "alt": false,
+   "name": "양봉장",
+   "group": "farm",
+   "rank": 9,
+   "period": 10,
+   "realPeriod": 20,
+   "depth": 0,
+   "inputs": {},
+   "output": "honey",
+   "amount": 1,
+   "outPerMin": 72,
+   "inPerMin": 0,
+   "netPerMin": 72,
+   "netPerSec": 1.2,
+   "buildValue": 220,
+   "paybackMin": 3.1,
+   "tileValuePerMin": 72,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "apiary:wax",
+   "building": "apiary",
+   "recipe": "wax",
+   "alt": true,
+   "name": "양봉장 · 밀랍",
+   "group": "farm",
+   "rank": 9,
+   "period": 14,
+   "realPeriod": 28,
+   "depth": 0,
+   "inputs": {},
+   "output": "wax",
+   "amount": 1,
+   "outPerMin": 64.3,
+   "inPerMin": 0,
+   "netPerMin": 64.3,
+   "netPerSec": 1.07,
+   "buildValue": 220,
+   "paybackMin": 3.4,
+   "tileValuePerMin": 64.3,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "glassworks",
+   "building": "glassworks",
+   "recipe": "glass",
+   "alt": false,
+   "name": "유리 공방",
+   "group": "craft",
+   "rank": 9,
+   "period": 14,
+   "realPeriod": 28,
+   "depth": 1,
+   "inputs": {
+    "stone": 2,
+    "wood": 2
+   },
+   "output": "glass",
+   "amount": 2,
+   "outPerMin": 377.1,
+   "inPerMin": 81.4,
+   "netPerMin": 295.7,
+   "netPerSec": 4.93,
+   "buildValue": 686,
+   "paybackMin": 2.3,
+   "tileValuePerMin": 186.4,
+   "premium": 1.84,
+   "margin": 4.63
+  },
+  {
+   "id": "kiln:glass",
+   "building": "kiln",
+   "recipe": "glass",
+   "alt": true,
+   "name": "벽돌 가마 · 가마 유리",
+   "group": "craft",
+   "rank": 9,
+   "period": 20,
+   "realPeriod": 40,
+   "depth": 1,
+   "inputs": {
+    "stone": 3,
+    "wood": 1
+   },
+   "output": "glass",
+   "amount": 2,
+   "outPerMin": 264,
+   "inPerMin": 58.5,
+   "netPerMin": 205.5,
+   "netPerSec": 3.43,
+   "buildValue": 316,
+   "paybackMin": 1.5,
+   "tileValuePerMin": 146,
+   "premium": 1.44,
+   "margin": 4.51
+  },
+  {
+   "id": "tailor",
+   "building": "tailor",
+   "recipe": "workwear",
+   "alt": false,
+   "name": "봉제소",
+   "group": "craft",
+   "rank": 9,
+   "period": 16,
+   "realPeriod": 32,
+   "depth": 3,
+   "inputs": {
+    "cloth": 3
+   },
+   "output": "workwear",
+   "amount": 2,
+   "outPerMin": 881.3,
+   "inPerMin": 444.4,
+   "netPerMin": 436.9,
+   "netPerSec": 7.28,
+   "buildValue": 634,
+   "paybackMin": 1.5,
+   "tileValuePerMin": 231.1,
+   "premium": 1.46,
+   "margin": 1.98
+  },
+  {
+   "id": "confectionery:candy",
+   "building": "confectionery",
+   "recipe": "candy",
+   "alt": true,
+   "name": "제과점 · 박하 사탕",
+   "group": "craft",
+   "rank": 10,
+   "period": 14,
+   "realPeriod": 28,
+   "depth": 3,
+   "inputs": {
+    "mint": 2,
+    "sugar": 1
+   },
+   "output": "candy",
+   "amount": 3,
+   "outPerMin": 450,
+   "inPerMin": 120,
+   "netPerMin": 330,
+   "netPerSec": 5.5,
+   "buildValue": 425,
+   "paybackMin": 1.3,
+   "tileValuePerMin": 151.8,
+   "premium": 2.16,
+   "margin": 3.75
+  },
+  {
+   "id": "mintfield",
+   "building": "mintfield",
+   "recipe": "mint",
+   "alt": false,
+   "name": "박하밭",
+   "group": "farm",
+   "rank": 10,
+   "period": 10,
+   "realPeriod": 20,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "mint",
+   "amount": 2,
+   "outPerMin": 66,
+   "inPerMin": 9,
+   "netPerMin": 57,
+   "netPerSec": 0.95,
+   "buildValue": 122,
+   "paybackMin": 2.1,
+   "tileValuePerMin": 50.8,
+   "premium": 1.69,
+   "margin": 7.33
+  },
+  {
+   "id": "apiary:honeycomb",
+   "building": "apiary",
+   "recipe": "honeycomb",
+   "alt": true,
+   "name": "양봉장 · 벌집",
+   "group": "farm",
+   "rank": 11,
+   "period": 16,
+   "realPeriod": 32,
+   "depth": 0,
+   "inputs": {},
+   "output": "honeycomb",
+   "amount": 1,
+   "outPerMin": 75,
+   "inPerMin": 0,
+   "netPerMin": 75,
+   "netPerSec": 1.25,
+   "buildValue": 220,
+   "paybackMin": 2.9,
+   "tileValuePerMin": 75,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "confectionery:honeycandy",
+   "building": "confectionery",
+   "recipe": "honeycandy",
+   "alt": true,
+   "name": "제과점 · 벌집 박하 사탕",
+   "group": "craft",
+   "rank": 11,
+   "period": 11,
+   "realPeriod": 22,
+   "depth": 2,
+   "inputs": {
+    "mint": 2,
+    "honeycomb": 1
+   },
+   "output": "candy",
+   "amount": 3,
+   "outPerMin": 572.7,
+   "inPerMin": 169.1,
+   "netPerMin": 403.6,
+   "netPerSec": 6.73,
+   "buildValue": 425,
+   "paybackMin": 1.1,
+   "tileValuePerMin": 157.5,
+   "premium": 2.1,
+   "margin": 3.39
+  },
+  {
+   "id": "oakfarm",
+   "building": "oakfarm",
+   "recipe": "oakwood",
+   "alt": false,
+   "name": "참나무 농장",
+   "group": "farm",
+   "rank": 11,
+   "period": 20,
+   "realPeriod": 40,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "oakwood",
+   "amount": 2,
+   "outPerMin": 57,
+   "inPerMin": 4.5,
+   "netPerMin": 52.5,
+   "netPerSec": 0.88,
+   "buildValue": 214,
+   "paybackMin": 4.1,
+   "tileValuePerMin": 49.6,
+   "premium": 1.65,
+   "margin": 12.67
+  },
+  {
+   "id": "sawmill:barrel",
+   "building": "sawmill",
+   "recipe": "barrel",
+   "alt": true,
+   "name": "제재소 · 오크통",
+   "group": "craft",
+   "rank": 11,
+   "period": 20,
+   "realPeriod": 40,
+   "depth": 2,
+   "inputs": {
+    "oakwood": 2
+   },
+   "output": "barrel",
+   "amount": 2,
+   "outPerMin": 255,
+   "inPerMin": 57,
+   "netPerMin": 198,
+   "netPerSec": 3.3,
+   "buildValue": 252,
+   "paybackMin": 1.3,
+   "tileValuePerMin": 118.6,
+   "premium": 2.39,
+   "margin": 4.47
+  },
+  {
+   "id": "sawmill:woodbox",
+   "building": "sawmill",
+   "recipe": "woodbox",
+   "alt": true,
+   "name": "제재소 · 나무 상자",
+   "group": "craft",
+   "rank": 11,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 2,
+   "inputs": {
+    "oakwood": 2
+   },
+   "output": "woodbox",
+   "amount": 3,
+   "outPerMin": 225,
+   "inPerMin": 95,
+   "netPerMin": 130,
+   "netPerSec": 2.17,
+   "buildValue": 252,
+   "paybackMin": 1.9,
+   "tileValuePerMin": 77.1,
+   "premium": 1.56,
+   "margin": 2.37
+  },
+  {
+   "id": "workshop",
+   "building": "workshop",
+   "recipe": "gear",
+   "alt": false,
+   "name": "기계 공장",
+   "group": "industry",
+   "rank": 11,
+   "period": 22,
+   "realPeriod": 44,
+   "depth": 2,
+   "inputs": {
+    "plank": 2,
+    "stone": 2
+   },
+   "output": "gear",
+   "amount": 2,
+   "outPerMin": 327.3,
+   "inPerMin": 95.5,
+   "netPerMin": 231.8,
+   "netPerSec": 3.86,
+   "buildValue": 560,
+   "paybackMin": 2.4,
+   "tileValuePerMin": 174.7,
+   "premium": 1.19,
+   "margin": 3.43
+  },
+  {
+   "id": "kiln:lantern",
+   "building": "kiln",
+   "recipe": "lantern",
+   "alt": true,
+   "name": "벽돌 가마 · 호박등",
+   "group": "craft",
+   "rank": 12,
+   "period": 18,
+   "realPeriod": 36,
+   "depth": 5,
+   "inputs": {
+    "pumpkin": 1,
+    "wax": 1,
+    "yarn": 1
+   },
+   "output": "lantern",
+   "amount": 1,
+   "outPerMin": 525,
+   "inPerMin": 215,
+   "netPerMin": 310,
+   "netPerSec": 5.17,
+   "buildValue": 316,
+   "paybackMin": 1,
+   "tileValuePerMin": 159.3,
+   "premium": 1.19,
+   "margin": 2.44
+  },
+  {
+   "id": "shallowmine",
+   "building": "shallowmine",
+   "recipe": "iron",
+   "alt": false,
+   "name": "얕은 광산",
+   "group": "industry",
+   "rank": 12,
+   "period": 16,
+   "realPeriod": 32,
+   "depth": 0,
+   "inputs": {},
+   "output": "iron",
+   "amount": 2,
+   "outPerMin": 52.5,
+   "inPerMin": 0,
+   "netPerMin": 52.5,
+   "netPerSec": 0.88,
+   "buildValue": 374,
+   "paybackMin": 7.1,
+   "tileValuePerMin": 52.5,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "shallowmine:copper",
+   "building": "shallowmine",
+   "recipe": "copper",
+   "alt": true,
+   "name": "얕은 광산 · 얕은 구리 광맥",
+   "group": "industry",
+   "rank": 12,
+   "period": 24,
+   "realPeriod": 48,
+   "depth": 0,
+   "inputs": {},
+   "output": "copper",
+   "amount": 2,
+   "outPerMin": 47.5,
+   "inPerMin": 0,
+   "netPerMin": 47.5,
+   "netPerSec": 0.79,
+   "buildValue": 374,
+   "paybackMin": 7.9,
+   "tileValuePerMin": 47.5,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "vineyard",
+   "building": "vineyard",
+   "recipe": "grapered",
+   "alt": false,
+   "name": "포도밭",
+   "group": "farm",
+   "rank": 12,
+   "period": 14,
+   "realPeriod": 28,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "grapered",
+   "amount": 2,
+   "outPerMin": 68.6,
+   "inPerMin": 6.4,
+   "netPerMin": 62.1,
+   "netPerSec": 1.04,
+   "buildValue": 176,
+   "paybackMin": 2.8,
+   "tileValuePerMin": 56.5,
+   "premium": 1.88,
+   "margin": 10.67
+  },
+  {
+   "id": "vineyard:grapewhite",
+   "building": "vineyard",
+   "recipe": "grapewhite",
+   "alt": true,
+   "name": "포도밭 · 흰 포도",
+   "group": "farm",
+   "rank": 12,
+   "period": 14,
+   "realPeriod": 28,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "grapewhite",
+   "amount": 2,
+   "outPerMin": 72.9,
+   "inPerMin": 6.4,
+   "netPerMin": 66.4,
+   "netPerSec": 1.11,
+   "buildValue": 176,
+   "paybackMin": 2.6,
+   "tileValuePerMin": 60,
+   "premium": 2,
+   "margin": 11.33
+  },
+  {
+   "id": "coalpit",
+   "building": "coalpit",
+   "recipe": "coal",
+   "alt": false,
+   "name": "탄광",
+   "group": "industry",
+   "rank": 13,
+   "period": 17,
+   "realPeriod": 34,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "coal",
+   "amount": 4,
+   "outPerMin": 84.7,
+   "inPerMin": 5.3,
+   "netPerMin": 79.4,
+   "netPerSec": 1.32,
+   "buildValue": 720,
+   "paybackMin": 9.1,
+   "tileValuePerMin": 72,
+   "premium": 2.4,
+   "margin": 16
+  },
+  {
+   "id": "glassworks:coalglass",
+   "building": "glassworks",
+   "recipe": "coalglass",
+   "alt": true,
+   "name": "유리 공방 · 석탄 유리",
+   "group": "craft",
+   "rank": 13,
+   "period": 20,
+   "realPeriod": 40,
+   "depth": 2,
+   "inputs": {
+    "stone": 2,
+    "coal": 1
+   },
+   "output": "glass",
+   "amount": 3,
+   "outPerMin": 396,
+   "inPerMin": 48,
+   "netPerMin": 348,
+   "netPerSec": 5.8,
+   "buildValue": 686,
+   "paybackMin": 2,
+   "tileValuePerMin": 232.9,
+   "premium": 3.24,
+   "margin": 8.25
+  },
+  {
+   "id": "ironmine",
+   "building": "ironmine",
+   "recipe": "iron",
+   "alt": false,
+   "name": "철광산",
+   "group": "industry",
+   "rank": 13,
+   "period": 16,
+   "realPeriod": 32,
+   "depth": 0,
+   "inputs": {},
+   "output": "iron",
+   "amount": 4,
+   "outPerMin": 105,
+   "inPerMin": 0,
+   "netPerMin": 105,
+   "netPerSec": 1.75,
+   "buildValue": 820,
+   "paybackMin": 7.8,
+   "tileValuePerMin": 105,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "winery",
+   "building": "winery",
+   "recipe": "winered",
+   "alt": false,
+   "name": "와이너리",
+   "group": "craft",
+   "rank": 13,
+   "period": 28,
+   "realPeriod": 56,
+   "depth": 3,
+   "inputs": {
+    "grapered": 3,
+    "barrel": 1
+   },
+   "output": "winered",
+   "amount": 3,
+   "outPerMin": 401.8,
+   "inPerMin": 142.5,
+   "netPerMin": 259.3,
+   "netPerSec": 4.32,
+   "buildValue": 960,
+   "paybackMin": 3.7,
+   "tileValuePerMin": 150,
+   "premium": 1.26,
+   "margin": 2.82
+  },
+  {
+   "id": "winery:winewhite",
+   "building": "winery",
+   "recipe": "winewhite",
+   "alt": true,
+   "name": "와이너리 · 백포도주",
+   "group": "craft",
+   "rank": 13,
+   "period": 28,
+   "realPeriod": 56,
+   "depth": 3,
+   "inputs": {
+    "grapewhite": 3,
+    "barrel": 1
+   },
+   "output": "winewhite",
+   "amount": 3,
+   "outPerMin": 417.9,
+   "inPerMin": 145.7,
+   "netPerMin": 272.1,
+   "netPerSec": 4.54,
+   "buildValue": 960,
+   "paybackMin": 3.5,
+   "tileValuePerMin": 156,
+   "premium": 1.32,
+   "margin": 2.87
+  },
+  {
+   "id": "glassworks:sandglass",
+   "building": "glassworks",
+   "recipe": "sandglass",
+   "alt": true,
+   "name": "유리 공방 · 모래 유리",
+   "group": "craft",
+   "rank": 14,
+   "period": 14,
+   "realPeriod": 28,
+   "depth": 1,
+   "inputs": {
+    "sand": 2,
+    "wood": 1
+   },
+   "output": "glass",
+   "amount": 2,
+   "outPerMin": 377.1,
+   "inPerMin": 57.9,
+   "netPerMin": 319.3,
+   "netPerSec": 5.32,
+   "buildValue": 686,
+   "paybackMin": 2.1,
+   "tileValuePerMin": 198,
+   "premium": 1.96,
+   "margin": 6.52
+  },
+  {
+   "id": "glassworks:winebottle",
+   "building": "glassworks",
+   "recipe": "winebottle",
+   "alt": true,
+   "name": "유리 공방 · 와인병",
+   "group": "craft",
+   "rank": 14,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 1,
+   "inputs": {
+    "sand": 3
+   },
+   "output": "winebottle",
+   "amount": 2,
+   "outPerMin": 200,
+   "inPerMin": 67.5,
+   "netPerMin": 132.5,
+   "netPerSec": 2.21,
+   "buildValue": 686,
+   "paybackMin": 5.2,
+   "tileValuePerMin": 88.9,
+   "premium": 1.65,
+   "margin": 2.96
+  },
+  {
+   "id": "ironmine:copper",
+   "building": "ironmine",
+   "recipe": "copper",
+   "alt": true,
+   "name": "철광산 · 구리 광맥",
+   "group": "industry",
+   "rank": 14,
+   "period": 18,
+   "realPeriod": 36,
+   "depth": 0,
+   "inputs": {},
+   "output": "copper",
+   "amount": 3,
+   "outPerMin": 95,
+   "inPerMin": 0,
+   "netPerMin": 95,
+   "netPerSec": 1.58,
+   "buildValue": 820,
+   "paybackMin": 8.6,
+   "tileValuePerMin": 95,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "quarry:copper",
+   "building": "quarry",
+   "recipe": "copper",
+   "alt": true,
+   "name": "채석장 · 구리 광맥 선광",
+   "group": "base",
+   "rank": 14,
+   "period": 16,
+   "realPeriod": 32,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "copper",
+   "amount": 3,
+   "outPerMin": 106.9,
+   "inPerMin": 5.6,
+   "netPerMin": 101.3,
+   "netPerSec": 1.69,
+   "buildValue": 145,
+   "paybackMin": 1.4,
+   "tileValuePerMin": 90,
+   "premium": 3,
+   "margin": 19
+  },
+  {
+   "id": "sandpit",
+   "building": "sandpit",
+   "recipe": "sand",
+   "alt": false,
+   "name": "모래 채굴장",
+   "group": "base",
+   "rank": 14,
+   "period": 10,
+   "realPeriod": 20,
+   "depth": 0,
+   "inputs": {},
+   "output": "sand",
+   "amount": 2,
+   "outPerMin": 54,
+   "inPerMin": 0,
+   "netPerMin": 54,
+   "netPerSec": 0.9,
+   "buildValue": 216,
+   "paybackMin": 4,
+   "tileValuePerMin": 54,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "smelter",
+   "building": "smelter",
+   "recipe": "steel",
+   "alt": false,
+   "name": "제철소",
+   "group": "industry",
+   "rank": 14,
+   "period": 23,
+   "realPeriod": 46,
+   "depth": 2,
+   "inputs": {
+    "iron": 3,
+    "coal": 2
+   },
+   "output": "steel",
+   "amount": 3,
+   "outPerMin": 410.9,
+   "inPerMin": 86.1,
+   "netPerMin": 324.8,
+   "netPerSec": 5.41,
+   "buildValue": 1500,
+   "paybackMin": 4.6,
+   "tileValuePerMin": 210,
+   "premium": 2,
+   "margin": 4.77
+  },
+  {
+   "id": "smelter:charcoalsteel",
+   "building": "smelter",
+   "recipe": "charcoalsteel",
+   "alt": true,
+   "name": "제철소 · 목탄 제련",
+   "group": "industry",
+   "rank": 14,
+   "period": 26,
+   "realPeriod": 52,
+   "depth": 1,
+   "inputs": {
+    "iron": 3,
+    "wood": 4
+   },
+   "output": "steel",
+   "amount": 2,
+   "outPerMin": 242.3,
+   "inPerMin": 90,
+   "netPerMin": 152.3,
+   "netPerSec": 2.54,
+   "buildValue": 1500,
+   "paybackMin": 9.8,
+   "tileValuePerMin": 129.5,
+   "premium": 1.23,
+   "margin": 2.69
+  },
+  {
+   "id": "steamworks",
+   "building": "steamworks",
+   "recipe": "gear",
+   "alt": false,
+   "name": "증기 기계공장",
+   "group": "industry",
+   "rank": 14,
+   "period": 21,
+   "realPeriod": 42,
+   "depth": 2,
+   "inputs": {
+    "steel": 1,
+    "coal": 1,
+    "water": 1
+   },
+   "output": "gear",
+   "amount": 4,
+   "outPerMin": 685.7,
+   "inPerMin": 171.4,
+   "netPerMin": 514.3,
+   "netPerSec": 8.57,
+   "buildValue": 1880,
+   "paybackMin": 3.7,
+   "tileValuePerMin": 360,
+   "premium": 1.26,
+   "margin": 4
+  },
+  {
+   "id": "workshop:steelgear",
+   "building": "workshop",
+   "recipe": "steelgear",
+   "alt": true,
+   "name": "기계 공장 · 강철 부품",
+   "group": "industry",
+   "rank": 14,
+   "period": 15,
+   "realPeriod": 30,
+   "depth": 2,
+   "inputs": {
+    "steel": 1,
+    "plank": 1
+   },
+   "output": "gear",
+   "amount": 3,
+   "outPerMin": 720,
+   "inPerMin": 260,
+   "netPerMin": 460,
+   "netPerSec": 7.67,
+   "buildValue": 560,
+   "paybackMin": 1.2,
+   "tileValuePerMin": 347.1,
+   "premium": 1.21,
+   "margin": 2.77
+  },
+  {
+   "id": "cocoafarm",
+   "building": "cocoafarm",
+   "recipe": "cocoa",
+   "alt": false,
+   "name": "카카오 농장",
+   "group": "farm",
+   "rank": 15,
+   "period": 15,
+   "realPeriod": 30,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "cocoa",
+   "amount": 2,
+   "outPerMin": 72,
+   "inPerMin": 6,
+   "netPerMin": 66,
+   "netPerSec": 1.1,
+   "buildValue": 322,
+   "paybackMin": 4.9,
+   "tileValuePerMin": 60,
+   "premium": 2,
+   "margin": 12
+  },
+  {
+   "id": "coppermine",
+   "building": "coppermine",
+   "recipe": "copper",
+   "alt": false,
+   "name": "구리 광산",
+   "group": "industry",
+   "rank": 15,
+   "period": 18,
+   "realPeriod": 36,
+   "depth": 0,
+   "inputs": {},
+   "output": "copper",
+   "amount": 3,
+   "outPerMin": 95,
+   "inPerMin": 0,
+   "netPerMin": 95,
+   "netPerSec": 1.58,
+   "buildValue": 886,
+   "paybackMin": 9.3,
+   "tileValuePerMin": 95,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "quarry:limestone",
+   "building": "quarry",
+   "recipe": "limestone",
+   "alt": true,
+   "name": "채석장 · 석회암",
+   "group": "base",
+   "rank": 15,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 0,
+   "inputs": {},
+   "output": "limestone",
+   "amount": 2,
+   "outPerMin": 80,
+   "inPerMin": 0,
+   "netPerMin": 80,
+   "netPerSec": 1.33,
+   "buildValue": 145,
+   "paybackMin": 1.8,
+   "tileValuePerMin": 80,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "winery:sangria",
+   "building": "winery",
+   "recipe": "sangria",
+   "alt": true,
+   "name": "와이너리 · 상그리아",
+   "group": "craft",
+   "rank": 15,
+   "period": 18,
+   "realPeriod": 36,
+   "depth": 4,
+   "inputs": {
+    "winered": 1,
+    "strawberry": 2,
+    "winebottle": 1
+   },
+   "output": "sangria",
+   "amount": 2,
+   "outPerMin": 716.7,
+   "inPerMin": 321.7,
+   "netPerMin": 395,
+   "netPerSec": 6.58,
+   "buildValue": 960,
+   "paybackMin": 2.4,
+   "tileValuePerMin": 180.4,
+   "premium": 1.2,
+   "margin": 2.23
+  },
+  {
+   "id": "bakery:batter",
+   "building": "bakery",
+   "recipe": "batter",
+   "alt": true,
+   "name": "빵집 · 케이크 반죽",
+   "group": "craft",
+   "rank": 16,
+   "period": 12,
+   "realPeriod": 24,
+   "depth": 3,
+   "inputs": {
+    "flour": 2,
+    "egg": 1,
+    "sugar": 1
+   },
+   "output": "batter",
+   "amount": 2,
+   "outPerMin": 450,
+   "inPerMin": 262.5,
+   "netPerMin": 187.5,
+   "netPerSec": 3.13,
+   "buildValue": 332,
+   "paybackMin": 1.8,
+   "tileValuePerMin": 102.5,
+   "premium": 1.24,
+   "margin": 1.71
+  },
+  {
+   "id": "chemical",
+   "building": "chemical",
+   "recipe": "polymer",
+   "alt": false,
+   "name": "화학 공장",
+   "group": "industry",
+   "rank": 16,
+   "period": 23,
+   "realPeriod": 46,
+   "depth": 1,
+   "inputs": {
+    "oil": 2,
+    "water": 1
+   },
+   "output": "polymer",
+   "amount": 3,
+   "outPerMin": 371.7,
+   "inPerMin": 50.9,
+   "netPerMin": 320.9,
+   "netPerSec": 5.35,
+   "buildValue": 2320,
+   "paybackMin": 7.2,
+   "tileValuePerMin": 251.5,
+   "premium": 1.86,
+   "margin": 7.31
+  },
+  {
+   "id": "chemical:coalfuel",
+   "building": "chemical",
+   "recipe": "coalfuel",
+   "alt": true,
+   "name": "화학 공장 · 석탄 액화",
+   "group": "industry",
+   "rank": 16,
+   "period": 24,
+   "realPeriod": 48,
+   "depth": 2,
+   "inputs": {
+    "coal": 3,
+    "water": 2
+   },
+   "output": "fuel",
+   "amount": 3,
+   "outPerMin": 281.3,
+   "inPerMin": 52.5,
+   "netPerMin": 228.8,
+   "netPerSec": 3.81,
+   "buildValue": 2320,
+   "paybackMin": 10.1,
+   "tileValuePerMin": 150,
+   "premium": 2.08,
+   "margin": 5.36
+  },
+  {
+   "id": "chocolatier",
+   "building": "chocolatier",
+   "recipe": "chocolate",
+   "alt": false,
+   "name": "초콜릿 공방",
+   "group": "craft",
+   "rank": 16,
+   "period": 24,
+   "realPeriod": 48,
+   "depth": 3,
+   "inputs": {
+    "cocoa": 2,
+    "sugar": 1
+   },
+   "output": "chocolate",
+   "amount": 2,
+   "outPerMin": 450,
+   "inPerMin": 87.5,
+   "netPerMin": 362.5,
+   "netPerSec": 6.04,
+   "buildValue": 970,
+   "paybackMin": 2.7,
+   "tileValuePerMin": 191.2,
+   "premium": 2.72,
+   "margin": 5.14
+  },
+  {
+   "id": "chocolatier:fancycake",
+   "building": "chocolatier",
+   "recipe": "fancycake",
+   "alt": true,
+   "name": "초콜릿 공방 · 고급 케이크",
+   "group": "craft",
+   "rank": 16,
+   "period": 20,
+   "realPeriod": 40,
+   "depth": 4,
+   "inputs": {
+    "batter": 1,
+    "chocolate": 1,
+    "strawberry": 2
+   },
+   "output": "fancycake",
+   "amount": 1,
+   "outPerMin": 1035,
+   "inPerMin": 447,
+   "netPerMin": 588,
+   "netPerSec": 9.8,
+   "buildValue": 970,
+   "paybackMin": 1.6,
+   "tileValuePerMin": 231.1,
+   "premium": 1.21,
+   "margin": 2.32
+  },
+  {
+   "id": "manaextractor",
+   "building": "manaextractor",
+   "recipe": "mana",
+   "alt": false,
+   "name": "마력 추출소",
+   "group": "energy",
+   "rank": 16,
+   "period": 21,
+   "realPeriod": 42,
+   "depth": 1,
+   "inputs": {
+    "water": 1
+   },
+   "output": "mana",
+   "amount": 2,
+   "outPerMin": 165.7,
+   "inPerMin": 4.3,
+   "netPerMin": 161.4,
+   "netPerSec": 2.69,
+   "buildValue": 1200,
+   "paybackMin": 7.4,
+   "tileValuePerMin": 145,
+   "premium": 4.83,
+   "margin": 38.67
+  },
+  {
+   "id": "refinery:polymer",
+   "building": "refinery",
+   "recipe": "polymer",
+   "alt": true,
+   "name": "정유소 · 무수 합성 소재",
+   "group": "energy",
+   "rank": 16,
+   "period": 26,
+   "realPeriod": 52,
+   "depth": 1,
+   "inputs": {
+    "oil": 3
+   },
+   "output": "polymer",
+   "amount": 3,
+   "outPerMin": 328.8,
+   "inPerMin": 62.3,
+   "netPerMin": 266.5,
+   "netPerSec": 4.44,
+   "buildValue": 1420,
+   "paybackMin": 5.3,
+   "tileValuePerMin": 225,
+   "premium": 1.67,
+   "margin": 5.28
+  },
+  {
+   "id": "steamworks:wire",
+   "building": "steamworks",
+   "recipe": "wire",
+   "alt": true,
+   "name": "증기 기계공장 · 증기 인발 전선",
+   "group": "industry",
+   "rank": 16,
+   "period": 30,
+   "realPeriod": 60,
+   "depth": 2,
+   "inputs": {
+    "copper": 2,
+    "coal": 1,
+    "water": 1
+   },
+   "output": "wire",
+   "amount": 4,
+   "outPerMin": 360,
+   "inPerMin": 53,
+   "netPerMin": 307,
+   "netPerSec": 5.12,
+   "buildValue": 1880,
+   "paybackMin": 6.1,
+   "tileValuePerMin": 216,
+   "premium": 2.27,
+   "margin": 6.79
+  },
+  {
+   "id": "wiremill",
+   "building": "wiremill",
+   "recipe": "wire",
+   "alt": false,
+   "name": "전선 공장",
+   "group": "industry",
+   "rank": 16,
+   "period": 20,
+   "realPeriod": 40,
+   "depth": 2,
+   "inputs": {
+    "copper": 2,
+    "coal": 1
+   },
+   "output": "wire",
+   "amount": 3,
+   "outPerMin": 405,
+   "inPerMin": 75,
+   "netPerMin": 330,
+   "netPerSec": 5.5,
+   "buildValue": 2006,
+   "paybackMin": 6.1,
+   "tileValuePerMin": 218.9,
+   "premium": 2.3,
+   "margin": 5.4
+  },
+  {
+   "id": "cementworks",
+   "building": "cementworks",
+   "recipe": "concrete",
+   "alt": false,
+   "name": "시멘트 공장",
+   "group": "industry",
+   "rank": 17,
+   "period": 24,
+   "realPeriod": 48,
+   "depth": 2,
+   "inputs": {
+    "stone": 3,
+    "coal": 1,
+    "water": 1
+   },
+   "output": "concrete",
+   "amount": 3,
+   "outPerMin": 393.8,
+   "inPerMin": 56.3,
+   "netPerMin": 337.5,
+   "netPerSec": 5.63,
+   "buildValue": 1948,
+   "paybackMin": 5.8,
+   "tileValuePerMin": 207.7,
+   "premium": 2.88,
+   "margin": 7
+  },
+  {
+   "id": "cementworks:brick",
+   "building": "cementworks",
+   "recipe": "brick",
+   "alt": true,
+   "name": "시멘트 공장 · 대량 벽돌",
+   "group": "industry",
+   "rank": 17,
+   "period": 20,
+   "realPeriod": 40,
+   "depth": 2,
+   "inputs": {
+    "stone": 3,
+    "coal": 1
+   },
+   "output": "brick",
+   "amount": 5,
+   "outPerMin": 307.5,
+   "inPerMin": 63,
+   "netPerMin": 244.5,
+   "netPerSec": 4.08,
+   "buildValue": 1948,
+   "paybackMin": 8,
+   "tileValuePerMin": 159.7,
+   "premium": 2.22,
+   "margin": 4.88
+  },
+  {
+   "id": "cementworks:limeconcrete",
+   "building": "cementworks",
+   "recipe": "limeconcrete",
+   "alt": true,
+   "name": "시멘트 공장 · 석회 콘크리트",
+   "group": "industry",
+   "rank": 17,
+   "period": 22,
+   "realPeriod": 44,
+   "depth": 2,
+   "inputs": {
+    "limestone": 2,
+    "coal": 1,
+    "water": 1
+   },
+   "output": "concrete",
+   "amount": 3,
+   "outPerMin": 429.5,
+   "inPerMin": 64.1,
+   "netPerMin": 365.5,
+   "netPerSec": 6.09,
+   "buildValue": 1948,
+   "paybackMin": 5.3,
+   "tileValuePerMin": 225,
+   "premium": 2.81,
+   "margin": 6.7
+  },
+  {
+   "id": "electronics",
+   "building": "electronics",
+   "recipe": "circuit",
+   "alt": false,
+   "name": "전자 공장",
+   "group": "advanced",
+   "rank": 17,
+   "period": 26,
+   "realPeriod": 52,
+   "depth": 3,
+   "inputs": {
+    "wire": 2,
+    "mana": 1
+   },
+   "output": "circuit",
+   "amount": 2,
+   "outPerMin": 819.2,
+   "inPerMin": 274.6,
+   "netPerMin": 544.6,
+   "netPerSec": 9.08,
+   "buildValue": 3062,
+   "paybackMin": 5.6,
+   "tileValuePerMin": 339.9,
+   "premium": 1.55,
+   "margin": 2.98
+  },
+  {
+   "id": "cannery",
+   "building": "cannery",
+   "recipe": "canned",
+   "alt": false,
+   "name": "통조림 공장",
+   "group": "industry",
+   "rank": 18,
+   "period": 22,
+   "realPeriod": 44,
+   "depth": 2,
+   "inputs": {
+    "smokedfish": 2,
+    "steel": 1
+   },
+   "output": "canned",
+   "amount": 4,
+   "outPerMin": 1009.1,
+   "inPerMin": 282.3,
+   "netPerMin": 726.8,
+   "netPerSec": 12.11,
+   "buildValue": 2546,
+   "paybackMin": 3.5,
+   "tileValuePerMin": 432.5,
+   "premium": 1.51,
+   "margin": 3.57
+  },
+  {
+   "id": "chocolatier:decorcake",
+   "building": "chocolatier",
+   "recipe": "decorcake",
+   "alt": true,
+   "name": "초콜릿 공방 · 장식 케이크",
+   "group": "craft",
+   "rank": 18,
+   "period": 22,
+   "realPeriod": 44,
+   "depth": 4,
+   "inputs": {
+    "batter": 1,
+    "chocolate": 1,
+    "candy": 2
+   },
+   "output": "decorcake",
+   "amount": 1,
+   "outPerMin": 1090.9,
+   "inPerMin": 559.1,
+   "netPerMin": 531.8,
+   "netPerSec": 8.86,
+   "buildValue": 970,
+   "paybackMin": 1.8,
+   "tileValuePerMin": 232.4,
+   "premium": 1.22,
+   "margin": 1.95
+  },
+  {
+   "id": "tailor:clothbox",
+   "building": "tailor",
+   "recipe": "clothbox",
+   "alt": true,
+   "name": "봉제소 · 천 상자",
+   "group": "craft",
+   "rank": 18,
+   "period": 18,
+   "realPeriod": 36,
+   "depth": 3,
+   "inputs": {
+    "woodbox": 1,
+    "cloth": 2,
+    "wax": 1
+   },
+   "output": "clothbox",
+   "amount": 2,
+   "outPerMin": 766.7,
+   "inPerMin": 363.3,
+   "netPerMin": 403.3,
+   "netPerSec": 6.72,
+   "buildValue": 634,
+   "paybackMin": 1.6,
+   "tileValuePerMin": 187.3,
+   "premium": 1.19,
+   "margin": 2.11
+  },
+  {
+   "id": "automotive",
+   "building": "automotive",
+   "recipe": "car",
+   "alt": false,
+   "name": "자동차 공장",
+   "group": "advanced",
+   "rank": 19,
+   "period": 34,
+   "realPeriod": 68,
+   "depth": 4,
+   "inputs": {
+    "steel": 2,
+    "gear": 2,
+    "circuit": 1,
+    "polymer": 2,
+    "glass": 1
+   },
+   "output": "car",
+   "amount": 1,
+   "outPerMin": 1941.2,
+   "inPerMin": 955.6,
+   "netPerMin": 985.6,
+   "netPerSec": 16.43,
+   "buildValue": 6640,
+   "paybackMin": 6.7,
+   "tileValuePerMin": 467,
+   "premium": 1.3,
+   "margin": 2.03
+  },
+  {
+   "id": "packshop",
+   "building": "packshop",
+   "recipe": "foodparcel",
+   "alt": false,
+   "name": "포장 공방",
+   "group": "craft",
+   "rank": 19,
+   "period": 24,
+   "realPeriod": 48,
+   "depth": 4,
+   "inputs": {
+    "woodbox": 1,
+    "honey": 2,
+    "jam": 1,
+    "bread": 2
+   },
+   "output": "foodparcel",
+   "amount": 1,
+   "outPerMin": 825,
+   "inPerMin": 352.5,
+   "netPerMin": 472.5,
+   "netPerSec": 7.88,
+   "buildValue": 1572,
+   "paybackMin": 3.3,
+   "tileValuePerMin": 207.8,
+   "premium": 1.17,
+   "margin": 2.34
+  },
+  {
+   "id": "ironmine:chromium",
+   "building": "ironmine",
+   "recipe": "chromium",
+   "alt": true,
+   "name": "철광산 · 크롬 광맥",
+   "group": "industry",
+   "rank": 20,
+   "period": 18,
+   "realPeriod": 36,
+   "depth": 0,
+   "inputs": {},
+   "output": "chromium",
+   "amount": 2,
+   "outPerMin": 100,
+   "inPerMin": 0,
+   "netPerMin": 100,
+   "netPerSec": 1.67,
+   "buildValue": 820,
+   "paybackMin": 8.2,
+   "tileValuePerMin": 100,
+   "premium": null,
+   "margin": null
+  },
+  {
+   "id": "laboratory",
+   "building": "laboratory",
+   "recipe": "medicine",
+   "alt": false,
+   "name": "제약 공장",
+   "group": "advanced",
+   "rank": 20,
+   "period": 30,
+   "realPeriod": 60,
+   "depth": 2,
+   "inputs": {
+    "water": 1,
+    "herb": 2,
+    "polymer": 1,
+    "glass": 1
+   },
+   "output": "medicine",
+   "amount": 3,
+   "outPerMin": 1050,
+   "inPerMin": 226,
+   "netPerMin": 824,
+   "netPerSec": 13.73,
+   "buildValue": 3837,
+   "paybackMin": 4.7,
+   "tileValuePerMin": 405.6,
+   "premium": 1.61,
+   "margin": 4.65
+  },
+  {
+   "id": "laboratory:herbal",
+   "building": "laboratory",
+   "recipe": "herbal",
+   "alt": true,
+   "name": "제약 공장 · 약초 제제",
+   "group": "advanced",
+   "rank": 20,
+   "period": 26,
+   "realPeriod": 52,
+   "depth": 2,
+   "inputs": {
+    "herb": 3,
+    "water": 1,
+    "glass": 1
+   },
+   "output": "medicine",
+   "amount": 2,
+   "outPerMin": 807.7,
+   "inPerMin": 174.2,
+   "netPerMin": 633.5,
+   "netPerSec": 10.56,
+   "buildValue": 3837,
+   "paybackMin": 6.1,
+   "tileValuePerMin": 286.4,
+   "premium": 1.23,
+   "margin": 4.64
+  },
+  {
+   "id": "refinery:jetfuel",
+   "building": "refinery",
+   "recipe": "jetfuel",
+   "alt": true,
+   "name": "정유소 · 항공유",
+   "group": "energy",
+   "rank": 21,
+   "period": 24,
+   "realPeriod": 48,
+   "depth": 1,
+   "inputs": {
+    "oil": 3,
+    "water": 1
+   },
+   "output": "jetfuel",
+   "amount": 2,
+   "outPerMin": 400,
+   "inPerMin": 71.3,
+   "netPerMin": 328.8,
+   "netPerSec": 5.48,
+   "buildValue": 1420,
+   "paybackMin": 4.3,
+   "tileValuePerMin": 246.2,
+   "premium": 1.82,
+   "margin": 5.61
+  },
+  {
+   "id": "packshop:giftparcel",
+   "building": "packshop",
+   "recipe": "giftparcel",
+   "alt": true,
+   "name": "포장 공방 · 선물 소포",
+   "group": "craft",
+   "rank": 22,
+   "period": 30,
+   "realPeriod": 60,
+   "depth": 5,
+   "inputs": {
+    "clothbox": 1,
+    "cake": 1,
+    "winered": 1,
+    "pie": 1
+   },
+   "output": "giftparcel",
+   "amount": 1,
+   "outPerMin": 1500,
+   "inPerMin": 695,
+   "netPerMin": 805,
+   "netPerSec": 13.42,
+   "buildValue": 1572,
+   "paybackMin": 2,
+   "tileValuePerMin": 309.3,
+   "premium": 1.33,
+   "margin": 2.16
+  },
+  {
+   "id": "lampworks",
+   "building": "lampworks",
+   "recipe": "lamp",
+   "alt": false,
+   "name": "마력등 공방",
+   "group": "advanced",
+   "rank": 23,
+   "period": 29,
+   "realPeriod": 58,
+   "depth": 3,
+   "inputs": {
+    "glass": 1,
+    "wire": 1,
+    "mana": 1
+   },
+   "output": "lamp",
+   "amount": 2,
+   "outPerMin": 827.6,
+   "inPerMin": 244.1,
+   "netPerMin": 583.4,
+   "netPerSec": 9.72,
+   "buildValue": 4178,
+   "paybackMin": 7.2,
+   "tileValuePerMin": 371.1,
+   "premium": 1.59,
+   "margin": 3.39
+  },
+  {
+   "id": "engineworks",
+   "building": "engineworks",
+   "recipe": "engine",
+   "alt": false,
+   "name": "마력 기관 공장",
+   "group": "advanced",
+   "rank": 24,
+   "period": 33,
+   "realPeriod": 66,
+   "depth": 3,
+   "inputs": {
+    "gear": 2,
+    "wire": 2,
+    "mana": 1
+   },
+   "output": "engine",
+   "amount": 1,
+   "outPerMin": 1636.4,
+   "inPerMin": 434.5,
+   "netPerMin": 1201.8,
+   "netPerSec": 20.03,
+   "buildValue": 6735,
+   "paybackMin": 5.6,
+   "tileValuePerMin": 602.2,
+   "premium": 1.67,
+   "margin": 3.77
+  },
+  {
+   "id": "smelter:bluesteel",
+   "building": "smelter",
+   "recipe": "bluesteel",
+   "alt": true,
+   "name": "제철소 · 청강",
+   "group": "industry",
+   "rank": 24,
+   "period": 26,
+   "realPeriod": 52,
+   "depth": 2,
+   "inputs": {
+    "steel": 2,
+    "chromium": 1
+   },
+   "output": "bluesteel",
+   "amount": 1,
+   "outPerMin": 738.5,
+   "inPerMin": 276.9,
+   "netPerMin": 461.5,
+   "netPerSec": 7.69,
+   "buildValue": 1500,
+   "paybackMin": 3.3,
+   "tileValuePerMin": 336.8,
+   "premium": 1.18,
+   "margin": 2.67
+  },
+  {
+   "id": "mithrilforge",
+   "building": "mithrilforge",
+   "recipe": "mithril",
+   "alt": false,
+   "name": "미스릴 정련소",
+   "group": "advanced",
+   "rank": 25,
+   "period": 32,
+   "realPeriod": 64,
+   "depth": 2,
+   "inputs": {
+    "steel": 2,
+    "mana": 2
+   },
+   "output": "mithril",
+   "amount": 1,
+   "outPerMin": 1181.3,
+   "inPerMin": 305.6,
+   "netPerMin": 875.6,
+   "netPerSec": 14.59,
+   "buildValue": 7190,
+   "paybackMin": 8.2,
+   "tileValuePerMin": 484.6,
+   "premium": 1.69,
+   "margin": 3.87
+  },
+  {
+   "id": "shipyard",
+   "building": "shipyard",
+   "recipe": "airship",
+   "alt": false,
+   "name": "비공정 조선소",
+   "group": "advanced",
+   "rank": 27,
+   "period": 60,
+   "realPeriod": 120,
+   "depth": 4,
+   "inputs": {
+    "engine": 2,
+    "mithril": 2,
+    "cloth": 4,
+    "fuel": 2
+   },
+   "output": "airship",
+   "amount": 1,
+   "outPerMin": 6000,
+   "inPerMin": 3293,
+   "netPerMin": 2707,
+   "netPerSec": 45.12,
+   "buildValue": 16720,
+   "paybackMin": 6.2,
+   "tileValuePerMin": 758.4,
+   "premium": 1.26,
+   "margin": 1.82
+  },
+  {
+   "id": "shipyard:jetairship",
+   "building": "shipyard",
+   "recipe": "jetairship",
+   "alt": true,
+   "name": "비공정 조선소 · 항공유 비공정",
+   "group": "advanced",
+   "rank": 27,
+   "period": 48,
+   "realPeriod": 96,
+   "depth": 4,
+   "inputs": {
+    "engine": 2,
+    "mithril": 2,
+    "cloth": 4,
+    "jetfuel": 2
+   },
+   "output": "airship",
+   "amount": 1,
+   "outPerMin": 7500,
+   "inPerMin": 4222.5,
+   "netPerMin": 3277.5,
+   "netPerSec": 54.63,
+   "buildValue": 16720,
+   "paybackMin": 5.1,
+   "tileValuePerMin": 746.4,
+   "premium": 1.24,
+   "margin": 1.78
+  },
+  {
+   "id": "blastfurnace",
+   "building": "blastfurnace",
+   "recipe": "steel",
+   "alt": false,
+   "name": "용광로",
+   "group": "industry",
+   "rank": 29,
+   "period": 36,
+   "realPeriod": 72,
+   "depth": 2,
+   "inputs": {
+    "iron": 5,
+    "coal": 2
+   },
+   "output": "steel",
+   "amount": 6,
+   "outPerMin": 525,
+   "inPerMin": 78.3,
+   "netPerMin": 446.7,
+   "netPerSec": 7.44,
+   "buildValue": 4970,
+   "paybackMin": 11.1,
+   "tileValuePerMin": 286.4,
+   "premium": 2.73,
+   "margin": 6.7
+  },
+  {
+   "id": "assemblyline",
+   "building": "assemblyline",
+   "recipe": "car",
+   "alt": false,
+   "name": "자동 조립 공장",
+   "group": "advanced",
+   "rank": 30,
+   "period": 45,
+   "realPeriod": 90,
+   "depth": 4,
+   "inputs": {
+    "steel": 3,
+    "gear": 3,
+    "circuit": 2,
+    "polymer": 3,
+    "glass": 2
+   },
+   "output": "car",
+   "amount": 2,
+   "outPerMin": 2933.3,
+   "inPerMin": 1230.7,
+   "netPerMin": 1702.7,
+   "netPerSec": 28.38,
+   "buildValue": 13940,
+   "paybackMin": 8.2,
+   "tileValuePerMin": 580.6,
+   "premium": 1.61,
+   "margin": 2.38
+  }
+ ],
+ "support": [
+  {
+   "id": "house",
+   "name": "주민 주택",
+   "group": "home",
+   "rank": 0,
+   "effect": "home",
+   "inputs": {},
+   "buildValue": 106
+  },
+  {
+   "id": "road",
+   "name": "흙길",
+   "group": "base",
+   "rank": 0,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 4
+  },
+  {
+   "id": "roadhub",
+   "name": "도로 물류 집하지",
+   "group": "transport",
+   "rank": 0,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 174
+  },
+  {
+   "id": "snowmobile",
+   "name": "스노모빌 집하지",
+   "group": "transport",
+   "rank": 0,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 272
+  },
+  {
+   "id": "warehouse",
+   "name": "창고",
+   "group": "base",
+   "rank": 0,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 134
+  },
+  {
+   "id": "ferrydock",
+   "name": "작은 수로 나룻터",
+   "group": "transport",
+   "rank": 1,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 222
+  },
+  {
+   "id": "polarferry",
+   "name": "작은 극지 수로 나룻터",
+   "group": "transport",
+   "rank": 1,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 222
+  },
+  {
+   "id": "canaldock",
+   "name": "운하 선착장",
+   "group": "transport",
+   "rank": 4,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 640
+  },
+  {
+   "id": "clinic",
+   "name": "진료소",
+   "group": "industry",
+   "rank": 4,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 430
+  },
+  {
+   "id": "polarport",
+   "name": "극지 항",
+   "group": "transport",
+   "rank": 4,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 1030
+  },
+  {
+   "id": "streamdock",
+   "name": "하천 선착장",
+   "group": "transport",
+   "rank": 4,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 640
+  },
+  {
+   "id": "windturbine",
+   "name": "풍력 발전기",
+   "group": "energy",
+   "rank": 4,
+   "effect": "power",
+   "inputs": {},
+   "buildValue": 640
+  },
+  {
+   "id": "depot",
+   "name": "자재 보관소",
+   "group": "base",
+   "rank": 5,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 410
+  },
+  {
+   "id": "pond",
+   "name": "연못",
+   "group": "farm",
+   "rank": 5,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 80
+  },
+  {
+   "id": "marketplace",
+   "name": "장터",
+   "group": "civic",
+   "rank": 6,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 560
+  },
+  {
+   "id": "pasture",
+   "name": "목초지",
+   "group": "farm",
+   "rank": 6,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 58
+  },
+  {
+   "id": "pavedhub",
+   "name": "포장 도로 물류센터",
+   "group": "transport",
+   "rank": 6,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 900
+  },
+  {
+   "id": "pavedroad",
+   "name": "포장 도로",
+   "group": "transport",
+   "rank": 6,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 22
+  },
+  {
+   "id": "reservoir",
+   "name": "급수탑",
+   "group": "farm",
+   "rank": 7,
+   "effect": "irrigation",
+   "inputs": {
+    "water": 3
+   },
+   "buildValue": 312
+  },
+  {
+   "id": "stable",
+   "name": "말 축사",
+   "group": "farm",
+   "rank": 8,
+   "effect": "horse",
+   "inputs": {
+    "grain": 1,
+    "water": 1
+   },
+   "buildValue": 250
+  },
+  {
+   "id": "clover",
+   "name": "야생 클로버",
+   "group": "farm",
+   "rank": 9,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 34
+  },
+  {
+   "id": "lakeport",
+   "name": "호수 항",
+   "group": "transport",
+   "rank": 9,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 1670
+  },
+  {
+   "id": "riverport",
+   "name": "강 항구",
+   "group": "transport",
+   "rank": 9,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 1670
+  },
+  {
+   "id": "dwarfhouse",
+   "name": "드워프 주택",
+   "group": "home",
+   "rank": 10,
+   "effect": "home",
+   "inputs": {},
+   "buildValue": 255
+  },
+  {
+   "id": "spirithouse",
+   "name": "정령 거처",
+   "group": "home",
+   "rank": 10,
+   "effect": "home",
+   "inputs": {},
+   "buildValue": 255
+  },
+  {
+   "id": "watermill",
+   "name": "물레방아",
+   "group": "energy",
+   "rank": 10,
+   "effect": "power",
+   "inputs": {},
+   "buildValue": 560
+  },
+  {
+   "id": "windpump",
+   "name": "풍력 양수기",
+   "group": "farm",
+   "rank": 10,
+   "effect": "irrigation",
+   "inputs": {},
+   "buildValue": 430
+  },
+  {
+   "id": "coastport",
+   "name": "바다 연안항",
+   "group": "transport",
+   "rank": 11,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 3580
+  },
+  {
+   "id": "generator",
+   "name": "증기 발전소",
+   "group": "industry",
+   "rank": 11,
+   "effect": "power",
+   "inputs": {
+    "wood": 2,
+    "water": 1
+   },
+   "buildValue": 560
+  },
+  {
+   "id": "pipe",
+   "name": "송유·송수관",
+   "group": "energy",
+   "rank": 11,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 51
+  },
+  {
+   "id": "substation",
+   "name": "변전소",
+   "group": "energy",
+   "rank": 11,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 790
+  },
+  {
+   "id": "logistics",
+   "name": "자동 물류센터",
+   "group": "industry",
+   "rank": 12,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 1080
+  },
+  {
+   "id": "centaurhouse",
+   "name": "켄타로스 주택",
+   "group": "home",
+   "rank": 13,
+   "effect": "home",
+   "inputs": {},
+   "buildValue": 460
+  },
+  {
+   "id": "conveyor",
+   "name": "광물 컨베이어",
+   "group": "industry",
+   "rank": 13,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 41
+  },
+  {
+   "id": "titanhouse",
+   "name": "티탄 주택",
+   "group": "home",
+   "rank": 13,
+   "effect": "home",
+   "inputs": {},
+   "buildValue": 460
+  },
+  {
+   "id": "wardpost",
+   "name": "결계 초소",
+   "group": "civic",
+   "rank": 14,
+   "effect": "ward",
+   "inputs": {
+    "herb": 2
+   },
+   "buildValue": 796
+  },
+  {
+   "id": "magetower",
+   "name": "마탑",
+   "group": "energy",
+   "rank": 17,
+   "effect": "ward",
+   "inputs": {
+    "mana": 2,
+    "circuit": 1
+   },
+   "buildValue": 2252
+  },
+  {
+   "id": "rail",
+   "name": "철도",
+   "group": "transport",
+   "rank": 18,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 117
+  },
+  {
+   "id": "railterminal",
+   "name": "철도 터미널",
+   "group": "transport",
+   "rank": 18,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 3978
+  },
+  {
+   "id": "station",
+   "name": "화물역",
+   "group": "transport",
+   "rank": 18,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 3350
+  },
+  {
+   "id": "hospital",
+   "name": "종합 병원",
+   "group": "civic",
+   "rank": 20,
+   "effect": "health",
+   "inputs": {
+    "medicine": 1,
+    "water": 2
+   },
+   "buildValue": 3847
+  },
+  {
+   "id": "airport",
+   "name": "공항",
+   "group": "transport",
+   "rank": 21,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 8310
+  },
+  {
+   "id": "airterminal",
+   "name": "공항 터미널",
+   "group": "transport",
+   "rank": 21,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 4970
+  },
+  {
+   "id": "arcanepower",
+   "name": "마력 발전소",
+   "group": "energy",
+   "rank": 21,
+   "effect": "power",
+   "inputs": {
+    "mana": 1,
+    "water": 1
+   },
+   "buildValue": 4165
+  },
+  {
+   "id": "battery",
+   "name": "축전 시설",
+   "group": "energy",
+   "rank": 21,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 3635
+  },
+  {
+   "id": "leyrelay",
+   "name": "마력 중계소",
+   "group": "transport",
+   "rank": 21,
+   "effect": "transit",
+   "inputs": {
+    "mana": 1
+   },
+   "buildValue": 3140
+  },
+  {
+   "id": "bank",
+   "name": "투자 사무소",
+   "group": "civic",
+   "rank": 22,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 3054
+  },
+  {
+   "id": "barracks",
+   "name": "경비대 본부",
+   "group": "civic",
+   "rank": 22,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 3730
+  },
+  {
+   "id": "fortress",
+   "name": "방위 요새",
+   "group": "civic",
+   "rank": 23,
+   "effect": "ward",
+   "inputs": {
+    "canned": 1,
+    "concrete": 1
+   },
+   "buildValue": 4180
+  },
+  {
+   "id": "solarpanel",
+   "name": "태양광 패널",
+   "group": "energy",
+   "rank": 23,
+   "effect": "power",
+   "inputs": {},
+   "buildValue": 2908
+  },
+  {
+   "id": "parliament",
+   "name": "의사당",
+   "group": "civic",
+   "rank": 26,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 9388
+  },
+  {
+   "id": "airdock",
+   "name": "비공정 선착장",
+   "group": "transport",
+   "rank": 28,
+   "effect": "transit",
+   "inputs": {
+    "fuel": 2
+   },
+   "buildValue": 10070
+  },
+  {
+   "id": "exchange",
+   "name": "대륙 거래소",
+   "group": "civic",
+   "rank": 31,
+   "effect": "support",
+   "inputs": {},
+   "buildValue": 12098
+  }
+ ],
+ "sinks": [
+  {
+   "id": "wood",
+   "name": "목재",
+   "price": 9,
+   "producers": [
+    "lumber"
+   ],
+   "inputs": [
+    "distillery",
+    "sawmill",
+    "bakery",
+    "generator",
+    "smelter",
+    "smokehouse",
+    "kiln",
+    "glassworks"
+   ],
+   "materials": [
+    "distillery",
+    "warehouse",
+    "lumber",
+    "quarry",
+    "stable",
+    "house",
+    "sawmill",
+    "mill",
+    "bakery",
+    "dock",
+    "reservoir",
+    "cottonfield",
+    "herbgarden",
+    "smokehouse",
+    "kiln",
+    "sugarfield",
+    "saltfield",
+    "vineyard",
+    "berryfield",
+    "mintfield",
+    "pumpkinpatch",
+    "oakfarm",
+    "sheeppen",
+    "feedmill",
+    "sandpit",
+    "clayfield",
+    "pasture",
+    "clover",
+    "shallowmine",
+    "roadhub",
+    "snowmobile",
+    "ferrydock",
+    "polarferry"
+   ],
+   "code": [
+    "upgrade"
+   ],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 101.3
+  },
+  {
+   "id": "stone",
+   "name": "석재",
+   "price": 10,
+   "producers": [
+    "quarry"
+   ],
+   "inputs": [
+    "workshop",
+    "kiln",
+    "glassworks",
+    "cementworks"
+   ],
+   "materials": [
+    "distillery",
+    "well",
+    "house",
+    "dwarfhouse",
+    "titanhouse",
+    "spirithouse",
+    "centaurhouse",
+    "sawmill",
+    "mill",
+    "bakery",
+    "generator",
+    "workshop",
+    "clinic",
+    "reservoir",
+    "depot",
+    "windturbine",
+    "smelter",
+    "oilpump",
+    "refinery",
+    "manaextractor",
+    "henhouse",
+    "smokehouse",
+    "weaver",
+    "confectionery",
+    "kiln",
+    "watermill",
+    "marketplace",
+    "saltfield",
+    "milkbarn",
+    "duckhouse",
+    "feedmill",
+    "pond",
+    "windpump",
+    "pavedroad",
+    "pavedhub",
+    "canaldock",
+    "streamdock",
+    "riverport",
+    "lakeport",
+    "coastport",
+    "polarport"
+   ],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 66.7
+  },
+  {
+   "id": "water",
+   "name": "물",
+   "price": 3,
+   "producers": [
+    "well"
+   ],
+   "inputs": [
+    "distillery",
+    "field",
+    "quarry",
+    "stable",
+    "bakery",
+    "generator",
+    "reservoir",
+    "steamworks",
+    "coalpit",
+    "refinery",
+    "chemical",
+    "manaextractor",
+    "laboratory",
+    "hospital",
+    "arcanepower",
+    "cottonfield",
+    "herbgarden",
+    "henhouse",
+    "cementworks",
+    "sugarfield",
+    "saltfield",
+    "vineyard",
+    "cocoafarm",
+    "berryfield",
+    "mintfield",
+    "pumpkinpatch",
+    "oakfarm",
+    "sheeppen",
+    "milkbarn",
+    "duckhouse"
+   ],
+   "materials": [],
+   "code": [
+    "living-economy"
+   ],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 30
+  },
+  {
+   "id": "grain",
+   "name": "밀",
+   "price": 9,
+   "producers": [
+    "field"
+   ],
+   "inputs": [
+    "distillery",
+    "stable",
+    "mill",
+    "henhouse",
+    "feedmill"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 54
+  },
+  {
+   "id": "plank",
+   "name": "판재",
+   "price": 25,
+   "producers": [
+    "sawmill"
+   ],
+   "inputs": [
+    "workshop"
+   ],
+   "materials": [
+    "dwarfhouse",
+    "titanhouse",
+    "spirithouse",
+    "centaurhouse",
+    "generator",
+    "workshop",
+    "logistics",
+    "clinic",
+    "depot",
+    "windturbine",
+    "ironmine",
+    "coalpit",
+    "oilpump",
+    "refinery",
+    "henhouse",
+    "weaver",
+    "confectionery",
+    "tailor",
+    "glassworks",
+    "watermill",
+    "marketplace",
+    "wardpost",
+    "vineyard",
+    "cocoafarm",
+    "mintfield",
+    "oakfarm",
+    "winery",
+    "chocolatier",
+    "sheeppen",
+    "milkbarn",
+    "apiary",
+    "duckhouse",
+    "sandpit",
+    "packshop",
+    "shallowmine",
+    "windpump",
+    "pavedhub",
+    "canaldock",
+    "streamdock",
+    "riverport",
+    "lakeport",
+    "coastport",
+    "polarport",
+    "substation",
+    "conveyor"
+   ],
+   "code": [
+    "simulation",
+    "upgrade"
+   ],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 146.7
+  },
+  {
+   "id": "flour",
+   "name": "밀가루",
+   "price": 23,
+   "producers": [
+    "mill"
+   ],
+   "inputs": [
+    "bakery",
+    "confectionery"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 82.8
+  },
+  {
+   "id": "bread",
+   "name": "빵",
+   "price": 42,
+   "producers": [
+    "bakery"
+   ],
+   "inputs": [
+    "packshop"
+   ],
+   "materials": [],
+   "code": [
+    "campaign"
+   ],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 178.3
+  },
+  {
+   "id": "fish",
+   "name": "생선",
+   "price": 12,
+   "producers": [
+    "dock"
+   ],
+   "inputs": [
+    "smokehouse"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 90
+  },
+  {
+   "id": "gear",
+   "name": "기계 부품",
+   "price": 120,
+   "producers": [
+    "workshop",
+    "steamworks"
+   ],
+   "inputs": [
+    "automotive",
+    "engineworks",
+    "assemblyline"
+   ],
+   "materials": [
+    "titanhouse",
+    "centaurhouse",
+    "logistics",
+    "steamworks",
+    "ironmine",
+    "coalpit",
+    "smelter",
+    "chemical",
+    "manaextractor",
+    "electronics",
+    "automotive",
+    "station",
+    "bank",
+    "barracks",
+    "coppermine",
+    "wiremill",
+    "cannery",
+    "coastport",
+    "substation"
+   ],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 360
+  },
+  {
+   "id": "iron",
+   "name": "철광석",
+   "price": 14,
+   "producers": [
+    "ironmine",
+    "shallowmine"
+   ],
+   "inputs": [
+    "smelter",
+    "blastfurnace"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 105
+  },
+  {
+   "id": "coal",
+   "name": "석탄",
+   "price": 12,
+   "producers": [
+    "coalpit"
+   ],
+   "inputs": [
+    "steamworks",
+    "smelter",
+    "chemical",
+    "glassworks",
+    "wiremill",
+    "cementworks",
+    "blastfurnace"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 72
+  },
+  {
+   "id": "steel",
+   "name": "강철",
+   "price": 105,
+   "producers": [
+    "smelter",
+    "blastfurnace"
+   ],
+   "inputs": [
+    "workshop",
+    "steamworks",
+    "smelter",
+    "automotive",
+    "cannery",
+    "mithrilforge",
+    "assemblyline"
+   ],
+   "materials": [
+    "magetower",
+    "steamworks",
+    "leyrelay",
+    "chemical",
+    "electronics",
+    "automotive",
+    "laboratory",
+    "arcanepower",
+    "battery",
+    "station",
+    "rail",
+    "barracks",
+    "wiremill",
+    "cementworks",
+    "cannery",
+    "lampworks",
+    "engineworks",
+    "mithrilforge",
+    "blastfurnace",
+    "assemblyline",
+    "fortress",
+    "airdock",
+    "solarpanel",
+    "railterminal",
+    "airport",
+    "airterminal"
+   ],
+   "code": [
+    "campaign"
+   ],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 286.4
+  },
+  {
+   "id": "oil",
+   "name": "원유",
+   "price": 18,
+   "producers": [
+    "oilpump"
+   ],
+   "inputs": [
+    "refinery",
+    "chemical"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 135
+  },
+  {
+   "id": "fuel",
+   "name": "연료",
+   "price": 75,
+   "producers": [
+    "distillery",
+    "refinery",
+    "chemical"
+   ],
+   "inputs": [
+    "shipyard",
+    "airdock"
+   ],
+   "materials": [],
+   "code": [
+    "campaign"
+   ],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 232.8
+  },
+  {
+   "id": "polymer",
+   "name": "합성 소재",
+   "price": 95,
+   "producers": [
+    "refinery",
+    "chemical"
+   ],
+   "inputs": [
+    "automotive",
+    "laboratory",
+    "assemblyline"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 251.5
+  },
+  {
+   "id": "mana",
+   "name": "마력 결정",
+   "price": 58,
+   "producers": [
+    "manaextractor"
+   ],
+   "inputs": [
+    "magetower",
+    "leyrelay",
+    "electronics",
+    "arcanepower",
+    "lampworks",
+    "engineworks",
+    "mithrilforge"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 145
+  },
+  {
+   "id": "circuit",
+   "name": "회로",
+   "price": 355,
+   "producers": [
+    "electronics"
+   ],
+   "inputs": [
+    "magetower",
+    "automotive",
+    "assemblyline"
+   ],
+   "materials": [
+    "magetower",
+    "leyrelay",
+    "automotive",
+    "laboratory",
+    "hospital",
+    "arcanepower",
+    "battery",
+    "engineworks",
+    "mithrilforge",
+    "shipyard",
+    "assemblyline",
+    "airterminal"
+   ],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 339.9
+  },
+  {
+   "id": "car",
+   "name": "자동차",
+   "price": 2200,
+   "producers": [
+    "automotive",
+    "assemblyline"
+   ],
+   "inputs": [],
+   "materials": [],
+   "code": [
+    "campaign"
+   ],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 580.6
+  },
+  {
+   "id": "medicine",
+   "name": "의약품",
+   "price": 350,
+   "producers": [
+    "laboratory"
+   ],
+   "inputs": [
+    "hospital"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 405.6
+  },
+  {
+   "id": "cotton",
+   "name": "목화",
+   "price": 13,
+   "producers": [
+    "cottonfield"
+   ],
+   "inputs": [
+    "weaver"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 65
+  },
+  {
+   "id": "herb",
+   "name": "약초",
+   "price": 20,
+   "producers": [
+    "herbgarden"
+   ],
+   "inputs": [
+    "laboratory",
+    "wardpost"
+   ],
+   "materials": [],
+   "code": [
+    "living-economy"
+   ],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 54.5
+  },
+  {
+   "id": "egg",
+   "name": "달걀",
+   "price": 25,
+   "producers": [
+    "henhouse"
+   ],
+   "inputs": [
+    "bakery",
+    "confectionery"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 78.9
+  },
+  {
+   "id": "smokedfish",
+   "name": "훈제 생선",
+   "price": 51,
+   "producers": [
+    "smokehouse"
+   ],
+   "inputs": [
+    "cannery"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 166.9
+  },
+  {
+   "id": "cloth",
+   "name": "직물",
+   "price": 79,
+   "producers": [
+    "weaver"
+   ],
+   "inputs": [
+    "tailor",
+    "shipyard"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 158
+  },
+  {
+   "id": "cake",
+   "name": "케이크",
+   "price": 200,
+   "producers": [
+    "bakery",
+    "confectionery"
+   ],
+   "inputs": [
+    "packshop"
+   ],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 232.3
+  },
+  {
+   "id": "brick",
+   "name": "벽돌",
+   "price": 41,
+   "producers": [
+    "kiln",
+    "cementworks"
+   ],
+   "inputs": [],
+   "materials": [
+    "magetower",
+    "tailor",
+    "glassworks",
+    "coppermine",
+    "wiremill",
+    "cementworks",
+    "wardpost",
+    "cocoafarm",
+    "winery",
+    "chocolatier",
+    "packshop",
+    "railterminal",
+    "pipe"
+   ],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": true,
+   "tileValuePerMin": 159.7
+  },
+  {
+   "id": "workwear",
+   "name": "작업복",
+   "price": 235,
+   "producers": [
+    "tailor"
+   ],
+   "inputs": [],
+   "materials": [],
+   "code": [
+    "campaign"
+   ],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 231.1
+  },
+  {
+   "id": "glass",
+   "name": "유리",
+   "price": 88,
+   "producers": [
+    "kiln",
+    "glassworks"
+   ],
+   "inputs": [
+    "automotive",
+    "laboratory",
+    "lampworks",
+    "assemblyline"
+   ],
+   "materials": [
+    "magetower",
+    "electronics",
+    "laboratory",
+    "hospital",
+    "bank",
+    "cannery",
+    "lampworks",
+    "parliament",
+    "exchange",
+    "winery",
+    "chocolatier",
+    "packshop",
+    "solarpanel"
+   ],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 232.9
+  },
+  {
+   "id": "copper",
+   "name": "구리광석",
+   "price": 19,
+   "producers": [
+    "quarry",
+    "ironmine",
+    "coppermine",
+    "shallowmine"
+   ],
+   "inputs": [
+    "steamworks",
+    "wiremill"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 95
+  },
+  {
+   "id": "wire",
+   "name": "구리 전선",
+   "price": 90,
+   "producers": [
+    "steamworks",
+    "wiremill"
+   ],
+   "inputs": [
+    "electronics",
+    "lampworks",
+    "engineworks"
+   ],
+   "materials": [
+    "arcanepower",
+    "battery",
+    "solarpanel"
+   ],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 218.9
+  },
+  {
+   "id": "concrete",
+   "name": "콘크리트",
+   "price": 105,
+   "producers": [
+    "cementworks"
+   ],
+   "inputs": [
+    "fortress"
+   ],
+   "materials": [
+    "hospital",
+    "station",
+    "bank",
+    "barracks",
+    "lampworks",
+    "engineworks",
+    "mithrilforge",
+    "shipyard",
+    "blastfurnace",
+    "assemblyline",
+    "fortress",
+    "parliament",
+    "airdock",
+    "exchange",
+    "airport",
+    "airterminal"
+   ],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 225
+  },
+  {
+   "id": "canned",
+   "name": "통조림",
+   "price": 185,
+   "producers": [
+    "cannery"
+   ],
+   "inputs": [
+    "fortress"
+   ],
+   "materials": [],
+   "code": [
+    "campaign"
+   ],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 432.5
+  },
+  {
+   "id": "lamp",
+   "name": "마력등",
+   "price": 400,
+   "producers": [
+    "lampworks"
+   ],
+   "inputs": [],
+   "materials": [
+    "parliament"
+   ],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 371.1
+  },
+  {
+   "id": "engine",
+   "name": "마력 기관",
+   "price": 1800,
+   "producers": [
+    "engineworks"
+   ],
+   "inputs": [
+    "shipyard"
+   ],
+   "materials": [
+    "airdock"
+   ],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 602.2
+  },
+  {
+   "id": "mithril",
+   "name": "미스릴 강",
+   "price": 1260,
+   "producers": [
+    "mithrilforge"
+   ],
+   "inputs": [
+    "shipyard"
+   ],
+   "materials": [
+    "shipyard",
+    "exchange"
+   ],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 484.6
+  },
+  {
+   "id": "airship",
+   "name": "비공정",
+   "price": 12000,
+   "producers": [
+    "shipyard"
+   ],
+   "inputs": [],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 758.4
+  },
+  {
+   "id": "sugarcane",
+   "name": "사탕수수",
+   "price": 10,
+   "producers": [
+    "sugarfield"
+   ],
+   "inputs": [
+    "mill"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 52.9
+  },
+  {
+   "id": "salt",
+   "name": "소금",
+   "price": 14,
+   "producers": [
+    "saltfield"
+   ],
+   "inputs": [
+    "bakery",
+    "smokehouse"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 56
+  },
+  {
+   "id": "grapered",
+   "name": "붉은 포도",
+   "price": 16,
+   "producers": [
+    "vineyard"
+   ],
+   "inputs": [
+    "winery"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 56.5
+  },
+  {
+   "id": "grapewhite",
+   "name": "흰 포도",
+   "price": 17,
+   "producers": [
+    "vineyard"
+   ],
+   "inputs": [
+    "winery"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 60
+  },
+  {
+   "id": "cocoa",
+   "name": "카카오",
+   "price": 18,
+   "producers": [
+    "cocoafarm"
+   ],
+   "inputs": [
+    "chocolatier"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 60
+  },
+  {
+   "id": "strawberry",
+   "name": "딸기",
+   "price": 14,
+   "producers": [
+    "berryfield"
+   ],
+   "inputs": [
+    "bakery",
+    "winery",
+    "chocolatier"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 56
+  },
+  {
+   "id": "mint",
+   "name": "박하",
+   "price": 11,
+   "producers": [
+    "mintfield"
+   ],
+   "inputs": [
+    "confectionery"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 50.8
+  },
+  {
+   "id": "pumpkin",
+   "name": "호박",
+   "price": 17,
+   "producers": [
+    "pumpkinpatch"
+   ],
+   "inputs": [
+    "bakery",
+    "kiln"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 56.7
+  },
+  {
+   "id": "oakwood",
+   "name": "참나무 원목",
+   "price": 19,
+   "producers": [
+    "oakfarm"
+   ],
+   "inputs": [
+    "sawmill"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 49.6
+  },
+  {
+   "id": "sugar",
+   "name": "설탕",
+   "price": 34,
+   "producers": [
+    "mill"
+   ],
+   "inputs": [
+    "bakery",
+    "confectionery",
+    "chocolatier"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 70.3
+  },
+  {
+   "id": "winered",
+   "name": "적포도주",
+   "price": 125,
+   "producers": [
+    "winery"
+   ],
+   "inputs": [
+    "winery",
+    "packshop"
+   ],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 150
+  },
+  {
+   "id": "winewhite",
+   "name": "백포도주",
+   "price": 130,
+   "producers": [
+    "winery"
+   ],
+   "inputs": [],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 156
+  },
+  {
+   "id": "barrel",
+   "name": "오크통",
+   "price": 85,
+   "producers": [
+    "sawmill"
+   ],
+   "inputs": [
+    "winery"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 118.6
+  },
+  {
+   "id": "chocolate",
+   "name": "초콜릿",
+   "price": 180,
+   "producers": [
+    "chocolatier"
+   ],
+   "inputs": [
+    "chocolatier"
+   ],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 191.2
+  },
+  {
+   "id": "jam",
+   "name": "딸기잼",
+   "price": 120,
+   "producers": [
+    "bakery"
+   ],
+   "inputs": [
+    "packshop"
+   ],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 141.2
+  },
+  {
+   "id": "candy",
+   "name": "박하 사탕",
+   "price": 70,
+   "producers": [
+    "confectionery"
+   ],
+   "inputs": [
+    "chocolatier"
+   ],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 157.5
+  },
+  {
+   "id": "pie",
+   "name": "호박 파이",
+   "price": 140,
+   "producers": [
+    "bakery"
+   ],
+   "inputs": [
+    "packshop"
+   ],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 150.9
+  },
+  {
+   "id": "lantern",
+   "name": "호박등",
+   "price": 315,
+   "producers": [
+    "kiln"
+   ],
+   "inputs": [],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 159.3
+  },
+  {
+   "id": "wool",
+   "name": "양모",
+   "price": 46,
+   "producers": [
+    "sheeppen"
+   ],
+   "inputs": [
+    "weaver"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 111.9
+  },
+  {
+   "id": "yarn",
+   "name": "털실",
+   "price": 82,
+   "producers": [
+    "weaver"
+   ],
+   "inputs": [
+    "kiln"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 134.2
+  },
+  {
+   "id": "milk",
+   "name": "우유",
+   "price": 46,
+   "producers": [
+    "milkbarn"
+   ],
+   "inputs": [
+    "bakery"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 99.8
+  },
+  {
+   "id": "butter",
+   "name": "버터",
+   "price": 155,
+   "producers": [
+    "bakery"
+   ],
+   "inputs": [],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 150
+  },
+  {
+   "id": "honey",
+   "name": "꿀",
+   "price": 24,
+   "producers": [
+    "apiary"
+   ],
+   "inputs": [
+    "packshop"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 72
+  },
+  {
+   "id": "wax",
+   "name": "밀랍",
+   "price": 30,
+   "producers": [
+    "apiary"
+   ],
+   "inputs": [
+    "kiln",
+    "tailor"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 64.3
+  },
+  {
+   "id": "feed",
+   "name": "사료",
+   "price": 17,
+   "producers": [
+    "feedmill"
+   ],
+   "inputs": [
+    "sheeppen",
+    "milkbarn",
+    "duckhouse"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 76.5
+  },
+  {
+   "id": "duckegg",
+   "name": "오리알",
+   "price": 44,
+   "producers": [
+    "duckhouse"
+   ],
+   "inputs": [
+    "bakery"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 99
+  },
+  {
+   "id": "clay",
+   "name": "점토",
+   "price": 8,
+   "producers": [
+    "clayfield"
+   ],
+   "inputs": [
+    "kiln"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 48
+  },
+  {
+   "id": "sand",
+   "name": "모래",
+   "price": 9,
+   "producers": [
+    "sandpit"
+   ],
+   "inputs": [
+    "glassworks"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 54
+  },
+  {
+   "id": "limestone",
+   "name": "석회암",
+   "price": 16,
+   "producers": [
+    "quarry"
+   ],
+   "inputs": [
+    "cementworks"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 80
+  },
+  {
+   "id": "chromium",
+   "name": "크롬",
+   "price": 30,
+   "producers": [
+    "ironmine"
+   ],
+   "inputs": [
+    "smelter"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 100
+  },
+  {
+   "id": "bluesteel",
+   "name": "청강",
+   "price": 640,
+   "producers": [
+    "smelter"
+   ],
+   "inputs": [],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 336.8
+  },
+  {
+   "id": "woodbox",
+   "name": "나무 상자",
+   "price": 30,
+   "producers": [
+    "sawmill"
+   ],
+   "inputs": [
+    "tailor",
+    "packshop"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 77.1
+  },
+  {
+   "id": "clothbox",
+   "name": "천 상자",
+   "price": 230,
+   "producers": [
+    "tailor"
+   ],
+   "inputs": [
+    "packshop"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 187.3
+  },
+  {
+   "id": "foodparcel",
+   "name": "식량 소포",
+   "price": 660,
+   "producers": [
+    "packshop"
+   ],
+   "inputs": [],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 207.8
+  },
+  {
+   "id": "giftparcel",
+   "name": "선물 소포",
+   "price": 1500,
+   "producers": [
+    "packshop"
+   ],
+   "inputs": [],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 309.3
+  },
+  {
+   "id": "dough",
+   "name": "빵 반죽",
+   "price": 34,
+   "producers": [
+    "bakery"
+   ],
+   "inputs": [
+    "bakery"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 103.1
+  },
+  {
+   "id": "baguette",
+   "name": "바게트",
+   "price": 88,
+   "producers": [
+    "bakery"
+   ],
+   "inputs": [],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 144.9
+  },
+  {
+   "id": "batter",
+   "name": "케이크 반죽",
+   "price": 90,
+   "producers": [
+    "bakery"
+   ],
+   "inputs": [
+    "chocolatier"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 102.5
+  },
+  {
+   "id": "fancycake",
+   "name": "고급 케이크",
+   "price": 690,
+   "producers": [
+    "chocolatier"
+   ],
+   "inputs": [],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 231.1
+  },
+  {
+   "id": "decorcake",
+   "name": "장식 케이크",
+   "price": 800,
+   "producers": [
+    "chocolatier"
+   ],
+   "inputs": [],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 232.4
+  },
+  {
+   "id": "winebottle",
+   "name": "와인병",
+   "price": 40,
+   "producers": [
+    "glassworks"
+   ],
+   "inputs": [
+    "winery"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 88.9
+  },
+  {
+   "id": "sangria",
+   "name": "상그리아",
+   "price": 215,
+   "producers": [
+    "winery"
+   ],
+   "inputs": [],
+   "materials": [],
+   "code": [],
+   "final": true,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 180.4
+  },
+  {
+   "id": "honeycomb",
+   "name": "벌집",
+   "price": 40,
+   "producers": [
+    "apiary"
+   ],
+   "inputs": [
+    "confectionery"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 75
+  },
+  {
+   "id": "jetfuel",
+   "name": "항공유",
+   "price": 160,
+   "producers": [
+    "refinery"
+   ],
+   "inputs": [
+    "shipyard"
+   ],
+   "materials": [],
+   "code": [],
+   "final": false,
+   "orphan": false,
+   "thin": false,
+   "tileValuePerMin": 246.2
+  }
+ ],
+ "ladder": [
+  {
+   "id": 0,
+   "name": "농노",
+   "fee": 0,
+   "requirements": [],
+   "unlocks": [
+    "도로 물류 집하지",
+    "스노모빌 집하지",
+    "소형 증류소"
+   ]
+  },
+  {
+   "id": 1,
+   "name": "등록 농노",
+   "fee": 35,
+   "requirements": [
+    "물 생산 12",
+    "밀 생산 12"
+   ],
+   "unlocks": [
+    "제재소",
+    "작은 수로 나룻터",
+    "작은 극지 수로 나룻터"
+   ]
+  },
+  {
+   "id": 2,
+   "name": "개간 농노",
+   "fee": 60,
+   "requirements": [
+    "판재 생산 12",
+    "영주 납품 2"
+   ],
+   "unlocks": [
+    "제분소",
+    "훈제장",
+    "소금밭",
+    "사탕수수밭"
+   ]
+  },
+  {
+   "id": 3,
+   "name": "계약 농노",
+   "fee": 100,
+   "requirements": [
+    "밀가루 생산 12",
+    "개간지 확장 1"
+   ],
+   "unlocks": [
+    "빵집",
+    "목화밭"
+   ]
+  },
+  {
+   "id": 4,
+   "name": "준자유민",
+   "fee": 160,
+   "requirements": [
+    "빵 판매 10",
+    "몸값 채무 청산 1"
+   ],
+   "unlocks": [
+    "약초원",
+    "진료소",
+    "방직소",
+    "풍력 발전기",
+    "유정",
+    "운하 선착장",
+    "하천 선착장",
+    "극지 항",
+    "딸기밭",
+    "호박밭"
+   ]
+  },
+  {
+   "id": 5,
+   "name": "임차 사업주",
+   "fee": 250,
+   "requirements": [
+    "가족 구출 1",
+    "약초 생산 8"
+   ],
+   "unlocks": [
+    "자재 보관소",
+    "정유소",
+    "연못"
+   ]
+  },
+  {
+   "id": 6,
+   "name": "등록 사업주",
+   "fee": 300,
+   "requirements": [
+    "직물 생산 8",
+    "누적 판매 수입 8000"
+   ],
+   "unlocks": [
+    "양계장",
+    "장터",
+    "포장 도로",
+    "포장 도로 물류센터",
+    "사료 공장",
+    "목초지",
+    "양 우리"
+   ]
+  },
+  {
+   "id": 7,
+   "name": "지역 공급자",
+   "fee": 350,
+   "requirements": [
+    "달걀 생산 12",
+    "납품 계약 6"
+   ],
+   "unlocks": [
+    "제과점",
+    "급수탑",
+    "젖소 우리"
+   ]
+  },
+  {
+   "id": 8,
+   "name": "제조 허가업자",
+   "fee": 400,
+   "requirements": [
+    "케이크 생산 10",
+    "납품 계약 8"
+   ],
+   "unlocks": [
+    "벽돌 가마",
+    "말 축사",
+    "오리 집",
+    "점토밭"
+   ]
+  },
+  {
+   "id": 9,
+   "name": "지역 납품업자",
+   "fee": 500,
+   "requirements": [
+    "벽돌 생산 14",
+    "교역 수입 23000"
+   ],
+   "unlocks": [
+    "봉제소",
+    "유리 공방",
+    "강 항구",
+    "호수 항",
+    "양봉장",
+    "야생 클로버"
+   ]
+  },
+  {
+   "id": 10,
+   "name": "공인 계약업자",
+   "fee": 600,
+   "requirements": [
+    "작업복 생산 8",
+    "유리 생산 8",
+    "납품 계약 10"
+   ],
+   "unlocks": [
+    "물레방아",
+    "드워프 주택",
+    "정령 거처",
+    "박하밭",
+    "풍력 양수기"
+   ]
+  },
+  {
+   "id": 11,
+   "name": "개척 사업자",
+   "fee": 700,
+   "requirements": [
+    "주민 28"
+   ],
+   "unlocks": [
+    "증기 발전소",
+    "기계 공장",
+    "바다 연안항",
+    "송유·송수관",
+    "변전소",
+    "참나무 농장"
+   ]
+  },
+  {
+   "id": 12,
+   "name": "동력 제조업자",
+   "fee": 850,
+   "requirements": [
+    "동력 가동 1",
+    "부품 생산 8"
+   ],
+   "unlocks": [
+    "자동 물류센터",
+    "포도밭",
+    "얕은 광산"
+   ]
+  },
+  {
+   "id": 13,
+   "name": "법인 대표",
+   "fee": 1200,
+   "requirements": [
+    "자동 물류 가동 1",
+    "교역 수입 47000"
+   ],
+   "unlocks": [
+    "철광산",
+    "탄광",
+    "티탄 주택",
+    "켄타로스 주택",
+    "광물 컨베이어",
+    "와이너리"
+   ]
+  },
+  {
+   "id": 14,
+   "name": "중공업 사업자",
+   "fee": 1500,
+   "requirements": [
+    "철광석 생산 16",
+    "석탄 생산 16",
+    "주민 40"
+   ],
+   "unlocks": [
+    "제철소",
+    "증기 기계공장",
+    "결계 초소",
+    "모래 채굴장"
+   ]
+  },
+  {
+   "id": 15,
+   "name": "에너지 사업자",
+   "fee": 2200,
+   "requirements": [
+    "강철 생산 18",
+    "채무 청산 1"
+   ],
+   "unlocks": [
+    "구리 광산",
+    "카카오 농장"
+   ]
+  },
+  {
+   "id": 16,
+   "name": "산업단지 운영자",
+   "fee": 2800,
+   "requirements": [
+    "연료 생산 12",
+    "구리광석 생산 12",
+    "지역 간 운송 3"
+   ],
+   "unlocks": [
+    "화학 공장",
+    "마력 추출소",
+    "전선 공장",
+    "초콜릿 공방"
+   ]
+  },
+  {
+   "id": 17,
+   "name": "정밀 제조업자",
+   "fee": 3400,
+   "requirements": [
+    "합성 소재 생산 18",
+    "전선 생산 12",
+    "마력 결정 생산 8"
+   ],
+   "unlocks": [
+    "전자 공장",
+    "마탑",
+    "시멘트 공장"
+   ]
+  },
+  {
+   "id": 18,
+   "name": "광역 투자자",
+   "fee": 4000,
+   "requirements": [
+    "회로 생산 12",
+    "콘크리트 생산 12",
+    "지역 간 운송 10"
+   ],
+   "unlocks": [
+    "화물역",
+    "철도",
+    "통조림 공장",
+    "철도 터미널"
+   ]
+  },
+  {
+   "id": 19,
+   "name": "자동차 제조사",
+   "fee": 4800,
+   "requirements": [
+    "철도 운송망 1",
+    "통조림 생산 12"
+   ],
+   "unlocks": [
+    "자동차 공장",
+    "포장 공방"
+   ]
+  },
+  {
+   "id": 20,
+   "name": "기술 기업군",
+   "fee": 6000,
+   "requirements": [
+    "자동차 생산 6",
+    "납품 계약 19"
+   ],
+   "unlocks": [
+    "제약 공장",
+    "종합 병원"
+   ]
+  },
+  {
+   "id": 21,
+   "name": "기반시설 운영자",
+   "fee": 7000,
+   "requirements": [
+    "운영 거점 3",
+    "철도 운송망 2"
+   ],
+   "unlocks": [
+    "마력 발전소",
+    "축전 시설",
+    "마력 중계소",
+    "공항",
+    "공항 터미널"
+   ]
+  },
+  {
+   "id": 22,
+   "name": "개발구 운영권자",
+   "fee": 8000,
+   "requirements": [
+    "교역 수입 280000",
+    "지역 간 운송 55"
+   ],
+   "unlocks": [
+    "투자 사무소",
+    "경비대 본부"
+   ]
+  },
+  {
+   "id": 23,
+   "name": "치안권 보유자",
+   "fee": 9500,
+   "requirements": [
+    "경비대 편성 1",
+    "의약품 생산 90"
+   ],
+   "unlocks": [
+    "방위 요새",
+    "마력등 공방",
+    "태양광 패널"
+   ]
+  },
+  {
+   "id": 24,
+   "name": "재정 운영권자",
+   "fee": 11000,
+   "requirements": [
+    "산업 투자 3",
+    "마력등 생산 10",
+    "납품 계약 27"
+   ],
+   "unlocks": [
+    "마력 기관 공장"
+   ]
+  },
+  {
+   "id": 25,
+   "name": "자치구 대표",
+   "fee": 12500,
+   "requirements": [
+    "운영 거점 4",
+    "주민 지지 65",
+    "납품 계약 29"
+   ],
+   "unlocks": [
+    "미스릴 정련소"
+   ]
+  },
+  {
+   "id": 26,
+   "name": "자치정부 수장",
+   "fee": 14000,
+   "requirements": [
+    "경비대 편성 4",
+    "철도 운송망 3",
+    "미스릴 강 생산 5"
+   ],
+   "unlocks": [
+    "의사당"
+   ]
+  },
+  {
+   "id": 27,
+   "name": "독립 선언국",
+   "fee": 16000,
+   "requirements": [
+    "외교 지지국 2",
+    "주민 지지 70",
+    "의사당 건립 1"
+   ],
+   "unlocks": [
+    "비공정 조선소"
+   ]
+  },
+  {
+   "id": 28,
+   "name": "승인 독립국",
+   "fee": 19000,
+   "requirements": [
+    "외교 지지국 3",
+    "비공정 건조 2",
+    "지역 간 운송 170"
+   ],
+   "unlocks": [
+    "비공정 선착장"
+   ]
+  },
+  {
+   "id": 29,
+   "name": "지역 강국",
+   "fee": 28000,
+   "requirements": [
+    "운영 거점 5",
+    "산업 투자 5",
+    "방위 요새 2",
+    "교역 수입 700000"
+   ],
+   "unlocks": [
+    "용광로"
+   ]
+  },
+  {
+   "id": 30,
+   "name": "다지역 연방",
+   "fee": 38000,
+   "requirements": [
+    "자치권 확보 지역 3",
+    "주민 지지 75",
+    "지역 간 운송 215"
+   ],
+   "unlocks": [
+    "자동 조립 공장"
+   ]
+  },
+  {
+   "id": 31,
+   "name": "열강",
+   "fee": 56000,
+   "requirements": [
+    "운영 거점 6",
+    "외교 지지국 6",
+    "비공정 건조 14"
+   ],
+   "unlocks": [
+    "대륙 거래소"
+   ]
+  },
+  {
+   "id": 32,
+   "name": "패권국",
+   "fee": 70000,
+   "requirements": [
+    "자치권 확보 지역 5",
+    "교역 수입 1100000",
+    "방위대 편성 10",
+    "자동차 생산 120"
+   ],
+   "unlocks": []
+  }
+ ],
+ "emptyRanks": [
+  32
+ ],
+ "unlockRanks": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31
+ ],
+ "problems": [],
+ "checks": [
+  {
+   "id": "C1",
+   "name": "자원 32종 이상",
+   "value": 80,
+   "pass": true
+  },
+  {
+   "id": "C2",
+   "name": "시설 60종 이상",
+   "value": 112,
+   "pass": true
+  },
+  {
+   "id": "C3",
+   "name": "판매 외 소비처가 없는 고아 자원 0",
+   "value": "없음",
+   "pass": true
+  },
+  {
+   "id": "C4",
+   "name": "0~6단계 해금 공백 1단계 이하",
+   "value": "최장 공백 0단계",
+   "pass": true
+  },
+  {
+   "id": "C5",
+   "name": "23단계 이후 해금 존재",
+   "value": "11종",
+   "pass": true
+  },
+  {
+   "id": "C6",
+   "name": "가공 시설이 원료 사슬보다 타일당 분당 가치 1.15배 이상",
+   "value": "전부 충족",
+   "pass": true
+  },
+  {
+   "id": "C7",
+   "name": "가공 시설 산출가/투입가 1.25배 이상",
+   "value": "전부 충족",
+   "pass": true
+  },
+  {
+   "id": "C8",
+   "name": "해금 순서 모순 없음(요구 실적·투입·자재·계약·대안 제품)",
+   "value": "없음",
+   "pass": true
+  },
+  {
+   "id": "C9",
+   "name": "대안 제품 시설 10곳 이상 · 모든 대안이 다른 사슬을 공급하거나 다른 원료를 씀 · 같은 단계에 더 적은 원료로 같거나 빠르게 만드는 줄이 없음",
+   "value": "25곳 · 모두 구별됨 · 밀리는 대안 없음",
+   "pass": true
+  },
+  {
+   "id": "C10",
+   "name": "계약 보상 목록가의 1.35배 이하 · 다음 계약 대기 60초 이상",
+   "value": "최대 1.32배 · 80초",
+   "pass": true
+  },
+  {
+   "id": "C11",
+   "name": "6단계까지 열리는 생산 주기 15게임초 이하 · 가공 깊이별 평균 주기가 깊을수록 김",
+   "value": "초반 전부 충족 · 0단 11.5s < 1단 13.8s < 2단 21s < 3단 21.4s < 4단 40.8s",
+   "pass": true
+  },
+  {
+   "id": "C12",
+   "name": "원료 밭을 같은 시설 모으기 최대(시간 -30%)로 지어도 가공 시설이 타일당 분당 가치 1.15배 이상",
+   "value": "전부 충족 · 최저 1.16",
+   "pass": true
+  },
+  {
+   "id": "C13",
+   "name": "원료 밭(시간 -30%)과 우물·벌목장·채석장·광산 등 채취 시설(시간 -10%)을 모두 같은 시설 모으기 최대로 지어도 가공 시설이 타일당 분당 가치 1.15배 이상",
+   "value": "전부 충족 · 최저 1.16",
+   "pass": true
+  },
+  {
+   "id": "C14",
+   "name": "확장 사슬 최종재의 타일당 분당 가치가 같은 단계 기존 가공 줄 중앙값의 0.8배 이상 · 그 단계 기존 최고값 이하",
+   "value": "17줄 충족 · 최저 0.95",
+   "pass": true
+  },
+  {
+   "id": "C15",
+   "name": "비상 증류소: 한 곳·개선 불가·원가 손실·정유소 처리량의 10% 이하",
+   "value": "증류 1 / 정유 12.9개/게임분",
+   "pass": true
+  }
+ ],
+ "clusterPremium": {
+  "fields": {
+   "quarry:copper": 3,
+   "sawmill": 1.45,
+   "sawmill:barrel": 2.06,
+   "sawmill:woodbox": 1.39,
+   "mill": 1.36,
+   "mill:sugar": 1.17,
+   "bakery": 1.89,
+   "bakery:cake": 2.57,
+   "bakery:jam": 2.01,
+   "bakery:butter": 1.53,
+   "bakery:pie": 1.66,
+   "bakery:dough": 1.16,
+   "bakery:baguette": 1.35,
+   "bakery:batter": 1.17,
+   "workshop": 1.19,
+   "workshop:steelgear": 1.21,
+   "steamworks": 1.26,
+   "steamworks:wire": 2.27,
+   "coalpit": 2.4,
+   "smelter": 2,
+   "smelter:charcoalsteel": 1.23,
+   "smelter:bluesteel": 1.18,
+   "refinery": 1.72,
+   "refinery:polymer": 1.67,
+   "refinery:jetfuel": 1.82,
+   "chemical": 1.86,
+   "chemical:coalfuel": 2.08,
+   "manaextractor": 4.83,
+   "electronics": 1.55,
+   "automotive": 1.3,
+   "laboratory": 1.72,
+   "laboratory:herbal": 1.36,
+   "henhouse": 1.19,
+   "smokehouse": 1.3,
+   "smokehouse:saltfish": 1.53,
+   "weaver": 2.18,
+   "weaver:yarn": 1.19,
+   "confectionery": 2.58,
+   "confectionery:candy": 2.1,
+   "confectionery:honeycandy": 1.83,
+   "kiln": 1.54,
+   "kiln:glass": 1.44,
+   "kiln:claybrick": 1.48,
+   "kiln:lantern": 1.31,
+   "tailor": 1.41,
+   "tailor:clothbox": 1.19,
+   "glassworks": 1.84,
+   "glassworks:coalglass": 3.24,
+   "glassworks:sandglass": 1.96,
+   "glassworks:winebottle": 1.65,
+   "wiremill": 2.3,
+   "cementworks": 2.88,
+   "cementworks:brick": 2.22,
+   "cementworks:limeconcrete": 2.81,
+   "cannery": 1.6,
+   "lampworks": 1.59,
+   "engineworks": 1.67,
+   "mithrilforge": 1.69,
+   "shipyard": 1.28,
+   "shipyard:jetairship": 1.26,
+   "blastfurnace": 2.73,
+   "assemblyline": 1.61,
+   "winery": 1.24,
+   "winery:winewhite": 1.29,
+   "winery:sangria": 1.16,
+   "chocolatier": 2.63,
+   "chocolatier:fancycake": 1.19,
+   "chocolatier:decorcake": 1.2,
+   "sheeppen": 1.33,
+   "milkbarn": 1.18,
+   "duckhouse": 1.17,
+   "feedmill": 1.22,
+   "packshop": 1.25,
+   "packshop:giftparcel": 1.36
+  },
+  "all": {
+   "sawmill": 1.35,
+   "sawmill:barrel": 2.04,
+   "sawmill:woodbox": 1.38,
+   "mill": 1.34,
+   "mill:sugar": 1.16,
+   "bakery": 1.74,
+   "bakery:cake": 2.56,
+   "bakery:jam": 2.02,
+   "bakery:butter": 1.53,
+   "bakery:pie": 1.66,
+   "bakery:dough": 1.17,
+   "bakery:baguette": 1.35,
+   "bakery:batter": 1.17,
+   "workshop": 1.18,
+   "workshop:steelgear": 1.18,
+   "steamworks": 1.24,
+   "steamworks:wire": 2.13,
+   "smelter": 1.89,
+   "smelter:charcoalsteel": 1.16,
+   "smelter:bluesteel": 1.16,
+   "refinery": 1.64,
+   "refinery:polymer": 1.55,
+   "refinery:jetfuel": 1.71,
+   "chemical": 1.73,
+   "chemical:coalfuel": 1.97,
+   "electronics": 1.54,
+   "automotive": 1.29,
+   "laboratory": 1.7,
+   "laboratory:herbal": 1.34,
+   "henhouse": 1.18,
+   "smokehouse": 1.32,
+   "smokehouse:saltfish": 1.54,
+   "weaver": 2.14,
+   "weaver:yarn": 1.18,
+   "confectionery": 2.58,
+   "confectionery:candy": 2.1,
+   "confectionery:honeycandy": 1.84,
+   "kiln": 1.46,
+   "kiln:glass": 1.36,
+   "kiln:claybrick": 1.4,
+   "kiln:lantern": 1.31,
+   "tailor": 1.4,
+   "tailor:clothbox": 1.18,
+   "glassworks": 1.74,
+   "glassworks:coalglass": 3.04,
+   "glassworks:sandglass": 1.85,
+   "glassworks:winebottle": 1.57,
+   "wiremill": 2.17,
+   "cementworks": 2.72,
+   "cementworks:brick": 2.1,
+   "cementworks:limeconcrete": 2.66,
+   "cannery": 1.54,
+   "lampworks": 1.58,
+   "engineworks": 1.67,
+   "mithrilforge": 1.69,
+   "shipyard": 1.28,
+   "shipyard:jetairship": 1.26,
+   "blastfurnace": 2.57,
+   "assemblyline": 1.61,
+   "winery": 1.24,
+   "winery:winewhite": 1.29,
+   "winery:sangria": 1.17,
+   "chocolatier": 2.62,
+   "chocolatier:fancycake": 1.19,
+   "chocolatier:decorcake": 1.2,
+   "sheeppen": 1.34,
+   "milkbarn": 1.18,
+   "duckhouse": 1.18,
+   "feedmill": 1.2,
+   "packshop": 1.23,
+   "packshop:giftparcel": 1.36
+  }
+ }
+}

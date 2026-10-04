@@ -1,3 +1,5 @@
+import {outputStorageIssue} from './storage.js';
+import {outputItems} from './facility-inventory.js';
 import {BUILDINGS,RESOURCES,damageFactor} from './simulation.js';
 import {RACES,unlockRank} from './world.js';
 import {remainingSeconds} from './game-time.js';
@@ -117,14 +119,25 @@ export function effectNotes(type,e){
 // advice that holds from the first rank; pass the simulation to add facilities that are already unlocked.
 const open=(sim,type)=>!!sim&&sim.rank>=unlockRank(type),obj=w=>w+((w.charCodeAt(w.length-1)-0xac00)%28?'을':'를');
 export function operationHint(status,sim){
+ if(status.startsWith('보관 제한'))return '이 품목을 받을 창고가 없습니다 · 시장의 보관 설정에서 입고 상한·예약 공간·출고 전용을 확인하세요.';
  if(status.endsWith(' 대기')&&status!=='운반 대기')return '원료가 들어오지 않습니다 · 공급 시설의 생산량과 창고까지의 통로를 확인하세요.';
  if(status.endsWith(' 주민 필요')){const race=Object.keys(RACES).find(r=>status===RACES[r].name+' 주민 필요'),house=Object.keys(BUILDINGS).find(t=>BUILDINGS[t].resident===race);return house?obj(BUILDINGS[house].name)+' 지어 '+RACES[race].name+' 주민을 들이세요. 이 작업장은 '+RACES[race].name+'만 다룹니다.':'이 작업장을 다루는 주민의 주택을 지으세요.';}
+ if(status.startsWith('전력 용량 부족'))return '발전소를 증설·업그레이드하거나 작업 순서로 우선 공급 시설을 정하세요.';
  return {'도로 연결 필요':'시설 옆에 흙길을 놓고 창고까지 이어주세요.','출입구 막힘':'시설 옆 한 칸을 비우세요.','창고 경로 막힘':'창고와 이어지는 빈 칸이나 흙길을 만드세요.','전력 부족':'발전 시설에 원료를 공급하거나 발전 시설을 더 지으세요.','전력망 밖 · 변전소 필요':'발전소 여섯 칸 안으로 옮기거나, 발전소와 이 시설 사이에 변전소를 지어 전기를 이어주세요.','운반 대기':'주민 주택을 더 짓거나 개선해 운반할 주민을 늘리고, 창고까지 흙길을 이으세요.'+(open(sim,'logistics')?' 자동 물류센터를 가동하면 운반량이 두 배가 됩니다.':''),'창고 가득 참':'재고를 팔아 창고 자리를 비우세요.'+(open(sim,'depot')?' 자재 보관소를 지으면 보관 한도가 늘어납니다.':''),'수리 필요':'수리하면 생산이 다시 시작됩니다.','야생 클로버 필요':'양봉장 두 칸 안에 야생 클로버를 심으세요.','자원 고갈':'네 칸 안의 내 땅에 남은 자원이 없습니다. 경계 밖 나무·바위는 쓸 수 없습니다. 벌목장은 빈 칸에 묘목(15G · 물 2, '+remainingSeconds(SAPLING_GROW,sim)+'초 뒤 자람)을 심거나 옆 구역을 사서 영토를 넓히고, 채석장은 바위가 남은 곳으로 옮기세요.','가동 중지':'가동 스위치를 켜세요.','창고 필요':'창고를 먼저 지으세요.'}[status]||'';
 }
 
 export function productionDiagnosis(sim,b,definitions,resources){
  const fallback={text:operationHint(b.status,sim),label:'시설 확인',focus:b.id,tool:null};
+ if(b.status.startsWith('보관 제한')){const issues=outputItems(sim,b).map(([item])=>outputStorageIssue(sim,b,item)),issue=issues.find(v=>v?.status===b.status)||issues.find(v=>v?.item),item=issue?.item||(sim.recipeOf(b)||{}).output;return {...fallback,text:(issue?.reason||'보관 규칙')+' 때문에 '+(resources[item]?.name||'생산품')+' 입고가 막혔습니다. 시장의 보관 설정을 수정하세요.',action:'storage',storeId:issue?.storeId};}
  if(b.health<100){const slow=damageFactor(b.health);return {...fallback,text:'내구도 '+Math.round(b.health)+'%'+(slow<1&&b.health>0?' · 속도 '+Math.round(slow*100)+'%':'')+' · 수리비 '+sim.repairCost(b)+'G'};}
+ if(b.status==='도로 연결 필요'){const placement=[[1,0],[-1,0],[0,1],[0,-1]].map(([x,z])=>({x:b.x+x,z:b.z+z})).find(p=>!sim.canBuild('road',p.x,p.z,true));return {...fallback,label:'시설 옆 흙길 선택',tool:placement?'road':null,placement};}
+ if(b.status.startsWith('전력 용량 부족')){const type=['windturbine','generator','watermill','arcanepower'].find(t=>open(sim,t)&&sim.tiles.some(p=>Math.max(Math.abs(p.x-b.x),Math.abs(p.z-b.z))<=6&&!sim.canBuild(t,p.x,p.z)));return {...fallback,text:'이 전력망의 발전량이 부족합니다. 발전소를 업그레이드하거나 증설하고, 작업 순서로 우선 공급 시설을 정하세요.',label:'발전소 증설',tool:type||null};}
+ if(b.status==='전력 부족'||b.status==='전력망 밖 · 변전소 필요'){
+  const near=sim.buildings.find(p=>definitions[p.type].output==='power'&&p.health>0&&p.enabled!==false&&Math.max(Math.abs(p.x-b.x),Math.abs(p.z-b.z))<=6);
+  if(near)return {...fallback,text:definitions[near.type].name+'의 전력 공급을 기다립니다. '+(near.status||''),focus:near.id};
+  const power=Object.keys(definitions).filter(t=>definitions[t].output==='power'&&open(sim,t)).sort((a,c)=>definitions[a].cost-definitions[c].cost);
+  for(const type of power){const placement=sim.tiles.filter(p=>Math.max(Math.abs(p.x-b.x),Math.abs(p.z-b.z))<=6&&!sim.canBuild(type,p.x,p.z,true)).sort((a,c)=>Math.abs(a.x-b.x)+Math.abs(a.z-b.z)-Math.abs(c.x-b.x)-Math.abs(c.z-b.z))[0];if(placement)return {...fallback,text:'시설에서 여섯 칸 안에 '+obj(definitions[type].name)+' 지어 전기를 공급하세요.',label:definitions[type].name+' 선택',tool:type,placement:{x:placement.x,z:placement.z}};}
+ }
  // J4: a depleted lumber camp or quarry names the two ways out, planting inside the border and buying the next block.
  if(b.status==='자원 고갈'){const tree=definitions[b.type]?.natural==='tree';return {text:(tree?'네 칸 안의 내 땅에 나무가 없습니다(경계 밖 나무는 못 씀). 빈 칸을 눌러 묘목(15G · 물 2)을 심거나 옆 구역을 사세요.':'네 칸 안의 내 땅에 바위가 없습니다(경계 밖 바위는 못 씀). 바위가 남은 곳으로 옮기거나 옆 구역을 사세요.'),label:'영토 확장',focus:b.id,tool:'expand'};}
  if(b.status==='야생 클로버 필요')return {...fallback,label:'야생 클로버 선택',focus:null,tool:open(sim,'clover')?'clover':null};

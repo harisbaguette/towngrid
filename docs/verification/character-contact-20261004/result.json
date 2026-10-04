@@ -1,0 +1,36 @@
+{
+  "complete": false,
+  "runtimeChanges": [
+    "Plant-foot ground sampling for the full cast",
+    "Transparent railway, pipe and conveyor areas retain ground height",
+    "Canvas shadows follow the WebGL shadow geometry, opacity and ground position"
+  ],
+  "artQualityComplete": false,
+  "authoredTrial": "art-source/pixel-characters/authored-actions-v12/mira/generation.json",
+  "runtimeArtReplaced": false,
+  "checks": {
+    "typecheck": true,
+    "build": true,
+    "characterGroundContact": true,
+    "castLocomotionBrowser": true,
+    "bronBrowser": true,
+    "networkContactBrowser": true,
+    "shadowBrowser": true,
+    "localSuitesPassed": 73,
+    "localSuitesFailed": [
+      {
+        "file": "tests/balance-20260928.mjs",
+        "pass": false,
+        "exitCode": 1,
+        "output": "node:internal/modules/run_main:123\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: coppermine.amount\r\n\r\n4 !== 3\r\n\r\n    at file:///C:/Users/ghd12/Desktop/TownGrid/tests/balance-20260928.mjs:24:122\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\r\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:647:26)\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 4,\r\n  expected: 3,\r\n  operator: 'deepStrictEqual'\r\n}\r\n\r\nNode.js v22.18.0\r\n"
+      }
+    ]
+  },
+  "remaining": [
+    "Whole-body authored animation with stable arms, garments and proportions for 51 characters",
+    "Consistent independent contact poses and in-betweens",
+    "Start, stop, turn and handling transition artwork",
+    "Locomotion for actual walking and upgraded road speeds",
+    "Independent legs on uneven ground"
+  ]
+}

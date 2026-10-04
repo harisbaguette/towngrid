@@ -1,0 +1,36 @@
+import assert from 'node:assert/strict';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {pathToFileURL} from 'node:url';
+const {chromium}=await import(pathToFileURL(process.argv[2]).href);
+const browser=await chromium.launch({headless:true,executablePath:process.argv[3],args:['--enable-unsafe-swiftshader']});
+const out='docs/verification/townstar-followup-20261003',errors=[],failed=[],report={};await mkdir(out,{recursive:true});
+const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'});context.setDefaultTimeout(30000);
+const page=await context.newPage();await page.routeWebSocket('**/*',()=>{});page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400&&r.url().includes('/assets/'))failed.push(r.url());});
+const shot=name=>page.screenshot({path:out+'/'+name+'.png'});
+const hook=()=>page.evaluate(async()=>{for(const url of new Set([...performance.getEntriesByType('resource').map(r=>r.name).filter(u=>/\/app\/game\/scene\.js(?:\?|$)/.test(u)),'/src/app/game/scene.js'])){const {GameScene}=await import(url),original=GameScene.prototype.setSimulation;GameScene.prototype.setSimulation=function(...args){window.starterGame=this;return original.apply(this,args);};}});
+try{
+ await page.goto(process.env.TOWNGRID_URL||'http://localhost:5173',{waitUntil:'domcontentloaded',timeout:120000});
+ await page.locator('canvas[role="application"]').waitFor({state:'attached',timeout:120000});await page.getByRole('button',{name:'화면을 눌러 시작',exact:true}).click({timeout:120000});await page.getByRole('button',{name:'새 게임',exact:true}).waitFor({timeout:120000});await hook();
+ const main=await page.evaluate(async()=>{const {Campaign}=await import('/src/app/game/campaign.js'),{encodeSave,SAVE_KEY}=await import('/src/app/game/persistence.js');const raw=encodeSave(new Campaign().save());localStorage.setItem(SAVE_KEY,raw);return raw;});
+ await page.getByRole('button',{name:'산업 도전',exact:true}).click();assert.equal(await page.locator('.industry-trials article').count(),3);await shot('01-scenarios');
+ await page.getByRole('button',{name:'강변 제빵사 시작',exact:true}).click();await page.locator('.game-shell.is-playing:not([inert]) .minimal-hud').waitFor({timeout:120000});
+ await page.getByRole('button',{name:'일시정지',exact:true}).click();assert.match(await page.getByLabel('산업 도전 현황').innerText(),/빵 0\/100개/);await shot('02-trial');
+ await page.getByRole('button',{name:'시장',exact:true}).click();await page.locator('.market-logistics > summary').click();await page.locator('.storage-card > summary').click();await page.getByText('품목별 보관 설정',{exact:true}).click();
+ await page.getByLabel('보관 상한',{exact:true}).fill('40');await page.getByLabel('예약 공간',{exact:true}).fill('25');await page.getByRole('button',{name:'보관 설정 적용',exact:true}).click();
+ assert.deepEqual(await page.evaluate(()=>window.starterGame.sim.starterStore.storageRules.fuel),{limit:40,reserve:25});await shot('03-storage-policy');
+ await page.getByRole('tab',{name:'수입',exact:true}).click();assert.equal(await page.getByRole('button',{name:'빵 1개 수입',exact:true}).isDisabled(),true);
+ await page.getByRole('tab',{name:'판매',exact:true}).click();
+ const cities=await page.getByLabel('교역 도시',{exact:true}).locator('option').evaluateAll(ns=>ns.map(n=>n.value));const near=await page.locator('[data-item="bread"] .market-item').innerText();await page.getByLabel('교역 도시',{exact:true}).selectOption(cities.at(-1));const far=await page.locator('[data-item="bread"] .market-item').innerText();assert.notEqual(near,far);report.prices={near,far};await shot('04-destination');
+ await page.setViewportSize({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await shot('05-mobile-storage');await page.setViewportSize({width:1440,height:900});await page.keyboard.press('Escape');
+ await page.evaluate(()=>{const g=window.starterGame,s=g.sim;s.rank=8;s.money=1e5;s.stock.plank=40;s.stock.stone=40;s.build('windturbine',10,12,true);const b=s.at(10,12);b.activeUntil=1e5;s.revision++;g.rebuild();g.callbacks.onClick(b.x,b.z);});
+ await page.getByRole('button',{name:'시설 상세 정보',exact:true}).click();assert.match(await page.locator('.power-summary').innerText(),/발전 용량 6/);await page.locator('.facility-upgrade button').click();assert.match(await page.locator('.power-summary').innerText(),/발전 용량 9/);await shot('06-power-upgrade');await page.keyboard.press('Escape');await page.keyboard.press('Escape');
+ await page.evaluate(()=>{const s=window.starterGame.sim,c=s.campaign;c.treasury.produced.bread=100;c.treasury.sold.bread=100;s.paused=false;c.tick(.25);});
+ await page.waitForFunction(()=>document.querySelector('.industry-trial-status')?.textContent.includes('성공'));await shot('07-result');
+ await page.getByRole('button',{name:'같은 도전 다시 시작',exact:true}).click();await page.waitForFunction(()=>window.starterGame.sim.campaign.trial.delivered===0);await page.getByRole('button',{name:'일시정지',exact:true}).click();
+ report.record=await page.evaluate(()=>JSON.parse(localStorage.getItem('towngrid-industry-records-v1')).bread);assert.ok(report.record.score>=10000);
+ assert.equal(await page.evaluate(()=>localStorage.getItem('first-land-v1')),main);
+ await page.setViewportSize({width:390,height:844});await shot('08-mobile-trial');assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ await page.reload({waitUntil:'domcontentloaded'});await page.locator('canvas[role="application"]').waitFor({state:'attached',timeout:120000});await page.getByRole('button',{name:'화면을 눌러 시작',exact:true}).click({timeout:120000});await page.getByRole('button',{name:'새 게임',exact:true}).waitFor({timeout:120000});await hook();
+ await page.getByRole('button',{name:'산업 도전',exact:true}).click();await page.getByRole('button',{name:'산업 도전 이어하기',exact:true}).click();await page.locator('.game-shell.is-playing:not([inert]) .minimal-hud').waitFor({timeout:120000});assert.equal(await page.evaluate(()=>window.starterGame.sim.paused),true);assert.equal(await page.evaluate(()=>window.starterGame.sim.campaign.trial.id),'bread');assert.equal(await page.evaluate(()=>localStorage.getItem('first-land-v1')),main);
+ report.errors=errors;report.failed=failed;assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);await writeFile(out+'/browser.json',JSON.stringify(report,null,2)+'\n');console.log('PASS scenarios, storage policies, destination quotes, power upgrades, results, immediate retry, mobile and separate saved campaigns');
+}catch(e){await shot('failure').catch(()=>{});throw e;}finally{await browser.close();}

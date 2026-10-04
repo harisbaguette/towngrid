@@ -3,6 +3,7 @@
 // Needs a running dev server (TOWNGRID_URL, default http://localhost:5173). Isolated browser context; no user save is touched.
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { mkdirSync, writeFileSync } from 'node:fs';
+import { BACKGROUND_FILES } from '../src/app/game/audio.js';
 const { chromium } = await import(process.argv[2] ? pathToFileURL(process.argv[2]).href : 'playwright');
 const browser = await chromium.launch({ headless: true, ...(process.argv[3] ? { executablePath: process.argv[3] } : {}), args: ['--enable-unsafe-swiftshader'] });
 const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
@@ -66,7 +67,7 @@ await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configur
 await page.waitForTimeout(1500);
 result.steps.push(await sample('tab visible again', 3));
 // Every background file decodes in the real browser (only the current ones are loaded during play).
-result.backgroundDecode = await page.evaluate(async () => { const a = window.tgAudio, names = ['calm-theme', 'music-town', 'music-harp', 'amb-river', 'amb-coast', 'amb-wind', 'forest-ambience', 'amb-crickets']; const out = {}; for (const n of names) { const b = await a.fetchBuffer(n); out[n] = b ? +b.duration.toFixed(1) : null; } return out; });
+result.backgroundDecode = await page.evaluate(async names => { const a = window.tgAudio; const out = {}; for (const n of names) { const b = await a.fetchBuffer(n); out[n] = b ? +b.duration.toFixed(1) : null; } return out; }, BACKGROUND_FILES);
 result.audioFail = audioFail; result.errors = errors.slice(0, 10);
 console.log(JSON.stringify(result, null, 1));
 mkdirSync(outDir, { recursive: true });writeFileSync(fileURLToPath(new URL(mode + '.json', outDir)), JSON.stringify(result, null, 1));

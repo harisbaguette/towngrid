@@ -52,9 +52,20 @@ for(const [type,def] of Object.entries(BUILDINGS).filter(([,d])=>!d.tile)){
   if(!state.service&&!['well','lumber','sawmill','field'].includes(type)){
    const piles=m.userData.layers.filter(l=>l.name.startsWith('output-'));
    assert.ok(piles.some(l=>l.visible),type+' '+recipe.id+' stock is visible');
-   for(const p of piles)assert.equal(p.userData.frame,RESOURCE_FRAMES[recipe.output],type+' actual output artwork');
+   for(const p of piles.filter(l=>l.visible))assert.equal(p.userData.frame,RESOURCE_FRAMES[recipe.output],type+' actual output artwork');
   }
   recipes++;
+ }
+}
+// Returned ingredients and completed products share the pad; empty slots are hidden.
+const distillery=makePixelBuilding('distillery','human');
+const stockContext={time:2,recipeOf:()=>({output:'fuel'}),poweredAt:()=>true};
+for(const [out,returnStock,expected] of [[8,{},['fuel','fuel']],[8,{flour:8},['flour','fuel','flour']],[0,{},[]]]){
+ const building={type:'distillery',health:100,enabled:true,out,returnStock,inputs:{}};
+ for(let view=0;view<4;view++){
+  distillery.userData.animate(2,building,stockContext,view);
+  const shown=distillery.userData.layers.filter(l=>l.name.startsWith('output-')&&l.visible);
+  assert.deepEqual(shown.map(l=>l.userData.frame),expected.map(id=>RESOURCE_FRAMES[id]),'distillery shows only its actual stock in every view');
  }
 }
 assert.deepEqual(new Simulation('river',sim.save()).save().stock,sim.save().stock,'illustrations do not change saved inventory');

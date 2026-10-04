@@ -1,0 +1,13 @@
+{
+  "errors": [],
+  "software": true,
+  "quotaSave": true,
+  "cancellation": {
+    "before": 0.60835,
+    "after": 20.60835,
+    "final": 20.60835,
+    "paused": true,
+    "running": false
+  },
+  "manualPause": true
+}

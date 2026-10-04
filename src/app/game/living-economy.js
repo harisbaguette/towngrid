@@ -1,3 +1,4 @@
+import {destinationMarket} from './trade-journey.js';
 import {remainingSeconds} from './game-time.js';
 import {RESOURCES, BUILDINGS, MERCHANT_PRICE, SANITATION} from './simulation.js';
 import {NATIONS} from './world.js';
@@ -12,7 +13,7 @@ export function marketFactor(s,item,extra=0){
  return Math.max(.5,Math.min(1.3,demand-pressure*.009))*seasonFactor(s,item)*policy*border*(s.sanctionUntil>s.time?.75:1)*(s.merchantUntil>s.time?MERCHANT_PRICE:1);
 }
 // The trade route a site sells through adds its own premium or middleman cut (trade-routes.js).
-export function saleQuote(s,item,amount=1){let total=0;for(let i=0;i<amount;i++)total+=RESOURCES[item].price*marketFactor(s,item,i);return Math.round(total*tradeConnection(s).price);}
+export function saleQuote(s,item,amount=1){let total=0;for(let i=0;i<amount;i++)total+=RESOURCES[item].price*marketFactor(s,item,i);return Math.round(total*tradeConnection(s).price*destinationMarket(s,item).factor);}
 export const INFECTION_SPREAD=.0086;
 export function tickEconomy(s,dt){
  // M6: a running marketplace speeds price recovery (marketRecovery), multiplied with the trade charter.

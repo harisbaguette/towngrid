@@ -1,0 +1,3115 @@
+{
+  "characters": [
+    {
+      "id": "mira",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "rowan",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "hana",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "ethan",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "vera",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "nara",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "garron",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "maren",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "roa",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "cedric",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "bel",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "oswin",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "dax",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "hugo",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "iris",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "garen",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "marna",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "dorin",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "borik",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "otto",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "taron",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "silen",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "ael",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "lien",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "elion",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "elvar",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "serin",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "lyra",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "oriel",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "nalia",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "vian",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "erena",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "norin",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "selia",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "luth",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "aira",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "aster",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "terin",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "dew",
+      "mode": "hover",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "mist",
+      "mode": "hover",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "lana",
+      "mode": "centaur",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "kai",
+      "mode": "centaur",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "fia",
+      "mode": "hover",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "eil",
+      "mode": "hover",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "ravik",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "grum",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "niki",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "sora",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "kael",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    },
+    {
+      "id": "neris",
+      "mode": "biped",
+      "cases": [
+        {
+          "view": 0,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 0,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 1,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 2,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "walk",
+          "frames": 32,
+          "stopped": 0,
+          "pivot": true
+        },
+        {
+          "view": 3,
+          "action": "carry",
+          "frames": 32,
+          "stopped": 41,
+          "pivot": true
+        }
+      ]
+    }
+  ],
+  "liveFrames": 12800,
+  "floorSamples": 12800,
+  "clippedPixels": 0,
+  "cpuAnchorError": 0.49999999999954525,
+  "groundHeights": [
+    0.013,
+    0.026,
+    0.036,
+    0.04
+  ],
+  "errors": []
+}

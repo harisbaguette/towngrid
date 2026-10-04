@@ -1,14 +1,32 @@
+import {powerCellColor} from './power-grid.js';
 import * as THREE from 'three';
-import {pixelTexture,pixelImage} from './pixel-environment.js';
+import {pixelTexture,pixelImage,pixelSurfaceAlpha} from './pixel-environment.js';
 import {ENVIRONMENT_ASSETS} from './pixel-environment-data.js';
 import {groundAt} from './infrastructure.js';
 import {waterAt,groundOf,legacyLayout} from './world-grid.js';
 import {biomeSurface} from './biome-terrain.js';
 import {biomeOf} from './biome-data.js';
-import {networkShader} from './pixel-network.js';
+import {networkShader,networkSamples} from './pixel-network.js';
 import {makeLandscapeSurface} from './landscape-surface.js';
+import {roadContains,roadFragmentMask,SURFACE_TILE_SIZE} from './road-footprint.js';
 
 export const CARDINALS=[[0,-1,1],[1,0,2],[0,1,4],[-1,0,8]];
+export function terrainHeightAt(sim,x,z){
+ const tx=Math.round(x),tz=Math.round(z),key=tx+','+tz;
+ const u=.5+(x-tx)/SURFACE_TILE_SIZE,v=.5-(z-tz)/SURFACE_TILE_SIZE;
+ const onNetwork=(set,id,frame,entrance)=>{
+  if(!set?.has(key))return false;
+  const mask=connectionMask(tx,tz,(nx,nz)=>set.has(nx+','+nz)||entrance(sim.at?.(nx,nz)));
+  return networkSamples(mask,u,v).some(([sx,sy])=>(pixelSurfaceAlpha(id,frame,sx,sy)??1)>=.5);
+ };
+ if(onNetwork(sim?.pipes,'infrastructureGround',4,Boolean)||onNetwork(sim?.conveyors,'infrastructureGround',6,Boolean))return .040;
+ if(onNetwork(sim?.rails,'networks',0,building=>building?.type==='station'))return .036;
+ if(sim?.roads?.has(key)){
+  const mask=connectionMask(tx,tz,(nx,nz)=>sim.roads.has(nx+','+nz)||!!sim.at?.(nx,nz));
+  if(roadContains(mask,.5+(x-tx)/SURFACE_TILE_SIZE,.5+(z-tz)/SURFACE_TILE_SIZE))return .026;
+ }
+ return .013;
+}
 export function connectionMask(x,z,has){return CARDINALS.reduce((mask,[dx,dz,bit])=>mask|(has(x+dx,z+dz)?bit:0),0);}
 export function railShape(mask){
  if(mask===15)return {frame:3,turn:0};
@@ -34,8 +52,7 @@ export function makeSurfaceBatch(id,frame,cells,{layer=2,repeat=[1,1],mask=null,
  // Cutout terrain writes depth before translucent contact shadows. Sorting a
  // whole terrain batch with the shadows can otherwise erase them on rotation.
  const material=new THREE.MeshBasicMaterial({map:texture,alphaTest:.5,toneMapped:false,side:THREE.DoubleSide});
- const n=mask===null?null:CARDINALS.map(([, ,bit])=>mask&bit?1:0);
- const roadMask=n?`bool onRoad(vec2 p){return (abs(p.x-.5)<.29&&abs(p.y-.5)<.29)||(${n[0]}>0&&p.y>.5&&abs(p.x-.5)<.29)||(${n[1]}>0&&p.x>.5&&abs(p.y-.5)<.29)||(${n[2]}>0&&p.y<.5&&abs(p.x-.5)<.29)||(${n[3]}>0&&p.x<.5&&abs(p.y-.5)<.29);}`:'';
+ const roadMask=mask===null?'':roadFragmentMask(mask);
  material.onBeforeCompile=shader=>{
   shader.uniforms.surfaceFrame=uniform;
   shader.fragmentShader='uniform float surfaceFrame;\n'+roadMask+'\n'+shader.fragmentShader;
@@ -43,7 +60,7 @@ export function makeSurfaceBatch(id,frame,cells,{layer=2,repeat=[1,1],mask=null,
    vec4 surfaceSample(vec2 uv){uv=clamp(fract(uv),vec2(.00260417),vec2(.99739583));return texture2D(map,vec2((uv.x+surfaceFrame)/${frames.toFixed(1)},uv.y));}
   `);
   shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',`
-   ${n?'if(!onRoad(vMapUv))discard;':''}
+   ${mask!==null?'if(!onRoad(vMapUv))discard;':''}
    vec2 tileUV=fract(vMapUv*vec2(${Number(repeat[0]).toFixed(4)},${Number(repeat[1]).toFixed(4)}));
    tileUV=clamp(tileUV,vec2(.00260417),vec2(.99739583));
    ${network!==null?networkShader(network):'vec4 sampledDiffuseColor=surfaceSample(tileUV);'}
@@ -54,7 +71,7 @@ export function makeSurfaceBatch(id,frame,cells,{layer=2,repeat=[1,1],mask=null,
  const mesh=new THREE.InstancedMesh(new THREE.PlaneGeometry(1,1),material,cells.length),dummy=new THREE.Object3D();
  mesh.name='surface-'+id+'-'+frame;
  for(const [i,c] of cells.entries()){
-  dummy.position.set(c.x,c.y??.014,c.z);dummy.scale.set(c.w??1.002,c.h??1.002,1);
+  dummy.position.set(c.x,c.y??.014,c.z);dummy.scale.set(c.w??SURFACE_TILE_SIZE,c.h??SURFACE_TILE_SIZE,1);
   dummy.rotation.set(c.vertical?0:-Math.PI/2,c.vertical?(c.turn||0)*Math.PI/2:0,c.vertical?0:-(c.turn||0)*Math.PI/2);
   dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);mesh.setColorAt(i,new THREE.Color(c.tint||'#ffffff'));
  }
@@ -79,7 +96,7 @@ export function makeMapTerrain(sim,overlay=''){
   const ground=groundAt(sim,t.x,t.z),special=ground==='ice'?0:ground==='mountain'?1:ground==='sand'?2:null;
   const frame=coast?3:sim.region==='highland'?2:0;
   let tint='#ffffff';
-  if(overlay&&!sim.roads.has(key)){
+  if(overlay&&overlay!=='power'&&!sim.roads.has(key)){
    const value=['pollution','shade'].includes(overlay)?sim.placementEffects('field',t.x,t.z)[overlay]*(overlay==='pollution'?100/6:100/3):overlay==='oil'?(t.oil??t.ore):t[overlay]??50;
    tint=new THREE.Color('#90664c').lerp(new THREE.Color(overlay==='fertility'?'#a9cf5e':overlay==='moisture'?'#72bfd7':overlay==='pollution'?'#b36570':overlay==='shade'?'#7186b0':'#d7bd71'),value/100).getStyle();
   }
@@ -106,7 +123,12 @@ export function makeMapTerrain(sim,overlay=''){
   }
  }
  for(const {id,frame,cells,options} of batches.values())group.add(makeSurfaceBatch(id,frame,cells,options));
- group.userData.animate=time=>{for(const m of group.children)m.userData.animate(time);};
+ if(overlay==='power'){
+  const cells=sim.tiles.filter(t=>t.terrain!=='water'),material=new THREE.MeshBasicMaterial({transparent:true,opacity:.7,depthWrite:false,toneMapped:false,side:THREE.DoubleSide}),mesh=new THREE.InstancedMesh(new THREE.PlaneGeometry(1,1),material,cells.length),dummy=new THREE.Object3D();
+  cells.forEach((t,i)=>{dummy.position.set(t.x,.018,t.z);dummy.rotation.x=-Math.PI/2;dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);mesh.setColorAt(i,new THREE.Color(powerCellColor(sim,t.x,t.z)));});
+  mesh.name='power-overlay';mesh.userData.powerOverlay=true;group.add(mesh);
+ }
+ group.userData.animate=time=>{for(const m of group.children)m.userData.animate?.(time);};
  group.userData.water=group.children.find(m=>['river','creek','sea','lake'].includes(m.userData.environmentId));
  return group;
 }

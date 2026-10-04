@@ -31,6 +31,7 @@ export function characterPose(state,worker,time,cameraAzimuth,metadata,distance=
  // The final lift pose has planted feet and the box held at carrying height.
  // Keep it between pickup and the first moving tick, or while a carrier waits.
  const holding=action==='carry'&&!worker.walking&&metadata?.clips?.pickup;
- const frame=holding?metadata.clips.pickup.frames.at(-1):pixelFrame(action,elapsed,1,metadata);
+ const loadedHurt=action==='hurt'&&worker.task?.carried&&metadata?.variants?.hurt?.carry;
+ const frame=loadedHurt?loadedHurt.frames[Math.min(loadedHurt.frames.length-1,Math.max(0,Math.floor(elapsed*loadedHurt.fps)))]:holding?metadata.clips.pickup.frames.at(-1):pixelFrame(action,elapsed,1,metadata);
  return {action,direction,elapsed,frame};
 }

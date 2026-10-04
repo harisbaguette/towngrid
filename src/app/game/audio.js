@@ -1,4 +1,11 @@
 import {BUILDINGS} from './simulation.js';
+import {localWeatherState,daylight} from './effect-state.js';
+import {shipmentPose} from './export-route.js';
+import {shipmentVehicle} from './vehicle-art.js';
+import {MUSIC,MUSIC_PLAYLISTS,musicSelection,ACTION_SOUNDS,LOCAL_EVENTS,ALERT_EVENTS,vehicleSound} from './soundscape.js';
+import {MUSIC_CATALOG} from './music-catalog.js';
+import {musicLocation} from './audio-geography.js';
+export {MUSIC,MUSIC_PLAYLISTS} from './soundscape.js';
 export const FILES={click:'bookPlace1',cancel:'cloth1',invalid:'metalLatch',build:'chop',demolish:'doorClose_1',sell:'handleCoins',pickup:'dropLeather',drop:'bookPlace1',heal:'cloth3',footstep:'footstep00',field:'clothBelt',well:'metalPot2',lumber:'chop',quarry:'metalPot1',stable:'creak2',warehouse:'doorOpen_1',house:'doorOpen_2',dwarfhouse:'doorOpen_2',titanhouse:'doorOpen_2',spirithouse:'doorOpen_2',centaurhouse:'doorOpen_2',sawmill:'knifeSlice',mill:'creak1',bakery:'metalPot3',dock:'cloth3',generator:'metalClick',workshop:'metalPot1',logistics:'beltHandle1',clinic:'bookOpen',road:'footstep04',repair:'chop',upgrade:'metalClick',expand:'bookOpen'};
 Object.assign(FILES,{magetower:'bookOpen',steamworks:'metalClick',leyrelay:'bookOpen',plant:'cloth1',defend:'metalLatch',impact:'metalPot1',defeat:'cloth3',retreat:'doorClose_1',victory:'handleCoins',ironmine:'metalPot1',coalpit:'chop',smelter:'metalPot3',oilpump:'creak2',refinery:'metalPot2',chemical:'metalPot3',manaextractor:'bookOpen',electronics:'metalClick',automotive:'metalLatch',laboratory:'metalPot2',hospital:'bookOpen',arcanepower:'metalClick',battery:'metalLatch',station:'beltHandle1',rail:'metalClick',bank:'handleCoins',barracks:'doorOpen_1',dispatch:'doorClose_1',delivery:'handleCoins',strike:'bookClose',raid:'doorClose_1',manaStorm:'metalPot3',sanction:'metalLatch'});
 // M11: facilities added by the 2026-09-28 balance patch reuse the existing samples.
@@ -8,6 +15,7 @@ Object.assign(FILES,{reservoir:'metalPot2',depot:'doorOpen_1',windturbine:'creak
 Object.assign(FILES,{roadhub:'doorOpen_1',pavedroad:'footstep04',pavedhub:'doorOpen_1',snowmobile:'creak2',ferrydock:'cloth3',canaldock:'cloth3',streamdock:'cloth3',riverport:'beltHandle1',lakeport:'beltHandle1',coastport:'beltHandle1',polarferry:'cloth3',polarport:'beltHandle1',railterminal:'beltHandle1',airport:'metalLatch',airterminal:'beltHandle1',pipe:'metalPot2',substation:'metalClick',conveyor:'beltHandle1'});
 // Original sound designs are reproducible with scripts/build-presentation-audio.py.
 Object.assign(FILES,{hover:'ui-hover',tab:'ui-tab',open:'ui-open',close:'ui-close',select:'ui-select',pause:'ui-pause',resume:'ui-resume',rotate:'ui-rotate',zoom:'ui-zoom',save:'ui-save',load:'ui-load',nation:'ui-tab',notify:'ui-notice',contract:'contract-complete',dispatch:'transport-depart',delivery:'transport-arrive'});
+Object.assign(FILES,ACTION_SOUNDS);
 // Building sounds are chosen by what the facility does, so facilities added later get a fitting sound without a FILES entry.
 // Recordings are listed in music-sources.json; original animal calls in presentation-sounds.json.
 export const SOUND_PROFILES={
@@ -57,7 +65,6 @@ for(const type of Object.keys(BUILDINGS))FILES[type]??=SOUND_PROFILES[soundProfi
 const CHANNELS=['music','effects','ambience'];
 const DEFAULT_VOLUMES={master:.82,music:.48,effects:.85,ambience:.45};
 // Background tracks rotate with a crossfade; region beds and the day/evening layers loop underneath.
-export const MUSIC=['calm-theme','music-town','music-harp'];
 export const AMBIENCE={river:'amb-river',coast:'amb-coast',highland:'amb-wind'};
 export const LAYERS={day:'forest-ambience',evening:'amb-crickets'};
 export const FRONT_AMBIENCE={
@@ -66,25 +73,50 @@ export const FRONT_AMBIENCE={
  winter:{'amb-wind':.65},wind:{'amb-wind':.6},workshop:{'amb-workshop':.8,'forest-ambience':.15},
  forge:{'amb-hearth':.9,'amb-workshop':.3},magic:{'amb-arcane':.8,'amb-room':.3},room:{'amb-room':.8,'amb-hearth':.25},
 };
-// Source loudness trims in dB (ffmpeg volumedetect mean). Built files are levelled already (music -20 dB, beds -24 dB RMS);
-// the two original downloads are far quieter: calm-theme -26.7 dB, forest-ambience -51 dB.
-const TRIM={'calm-theme':6.7,'forest-ambience':25};
+// Source loudness trims in dB. Music is mastered to -20 LUFS; beds use -24 dB RMS.
+// the original forest recording is far quieter (-51 dB RMS).
+const TRIM={'forest-ambience':25};
 const MUSIC_FADE=4;
 // Building/footstep sounds share one budget so dozens of working facilities never pile up.
 export const WORLD_LIMITS={perSecond:4,voices:5,gain:.16,radius:13,gap:.6,nearby:3};
 export const SAMPLE_FILES=[...new Set([...Object.values(FILES),...Object.values(SOUND_PROFILES).flatMap(p=>p.files)])];
-export const BACKGROUND_FILES=[...new Set([...MUSIC,...Object.values(AMBIENCE),...Object.values(LAYERS),...Object.values(FRONT_AMBIENCE).flatMap(Object.keys)])];
-const WIND_ECOLOGY=['snow','desert','basin','volcanic'];
+export const BACKGROUND_FILES=[...new Set([...MUSIC,'amb-rain',...Object.values(AMBIENCE),...Object.values(LAYERS),...Object.values(FRONT_AMBIENCE).flatMap(Object.keys)])];
+const BIOME_AMBIENCE={
+ snow:{bed:'amb-wind',level:.75,birds:0,insects:0},
+ desert:{bed:'amb-wind',level:.65,birds:0,insects:0},
+ volcanic:{bed:'amb-wind',level:.55,birds:0,insects:0},
+ basin:{bed:'amb-wind',level:.5,birds:.12,insects:0},
+ forest:{bed:'amb-wind',level:.15,birds:.65,insects:.5},
+ meadow:{bed:'amb-river',level:.35,birds:.4,insects:.35},
+ marsh:{bed:'amb-river',level:.6,birds:.45,insects:.65},
+ coast:{bed:'amb-coast',level:.7,birds:.18,insects:.12},
+};
+// A brief look at a tool or menu should not interrupt a phrase.
+const DELAYED_MUSIC=new Set(['menu','settings','residents','ledger','map-tools','terrain','help','credits','operations','goals','haul','trade','league','trials','build','facility','confirm']);
 const db=v=>Math.pow(10,v/20);
 export class GameAudio{
  constructor(){
   this.context=null;this.muted=false;this.step=0;this.buffers={};this.pending={};this.volumes={...DEFAULT_VOLUMES};this.last={};this.region='river';this.ecology=null;this.clock=0;this._paused=false;this.voices=new Set();this.failed=[];this.disposed=false;this.beds={};this.worldStarts=[];this.musicIndex=0;this.musicResume=null;this.variant={};
+  this.front='game';this.dialog=null;this.scene='town';this.world=false;this.industrial=false;this.raid=false;this.environment={};this.movingVehicles=new WeakMap();
+  this.selection=musicSelection();this.musicPositions=new Map();this.location=null;
   try{const saved=JSON.parse(localStorage.getItem('orvetharn-audio')||'null');if(saved){for(const key of Object.keys(DEFAULT_VOLUMES)){const v=saved.volumes?.[key];if(Number.isFinite(v))this.volumes[key]=Math.max(0,Math.min(1,v));}this.muted=saved.muted===true;}}catch{}
  }
  get paused(){return this._paused;}
  // Game pause silences the world (effects, ambience); the music keeps playing so dialogs never restart it.
  set paused(value){const next=!!value,changed=next!==this._paused;this._paused=next;if(next&&changed)this.stopVoices(['effects']);if(changed)this.ambience();}
  setPresentation(preset){const next=FRONT_AMBIENCE[preset]?preset:null;if(this.presentation===next)return;this.presentation=next;this.ambience();}
+ setInterface(front='game',dialog=null,{loading=false,...options}={}){this.front=front;this.dialog=dialog;this.interfaceLoading=loading;Object.assign(this,options);this.refreshScene(true);this.ambience();}
+ setLocation(next){if(!next)return;const old=this.location,same=old&&old.nation===next.nation&&old.ecology===next.ecology&&old.country===next.country&&old.world===next.world;this.location={...next,entry:same?old.entry:old&&old.nation!==next.nation&&old.ecology===next.ecology?'nation':'region'};}
+ refreshScene(immediate=false){
+  const next=musicSelection({...this,loading:!!this.interfaceLoading}),now=this.context?.currentTime||0;
+  if(next.scene===this.scene){this.selection=next;this.sceneCandidate=null;return;}
+  const delay=DELAYED_MUSIC.has(next.scene)?1.25:!immediate&&!['danger','error','loading'].includes(next.scene)?1:0;
+  if(delay){
+   if(this.sceneCandidate?.scene!==next.scene)this.sceneCandidate={scene:next.scene,since:now};
+   if(now-this.sceneCandidate.since<delay)return;
+  }
+  this.selection=next;this.scene=next.scene;this.sceneCandidate=null;this.musicResume=null;this.music();
+ }
  start(){
   if(this.disposed||typeof window==='undefined'||(typeof document!=='undefined'&&document.hidden)||!(window.AudioContext||window.webkitAudioContext))return;
   if(!this.context){
@@ -93,7 +125,7 @@ export class GameAudio{
    this.meters={};for(const name of CHANNELS){this[name+'Gain']=c.createGain();this[name+'Gain'].connect(this.gain);if(c.createAnalyser){const m=c.createAnalyser();m.fftSize=512;this[name+'Gain'].connect(m);this.meters[name]=m;}}
    this.applyVolumes();this.timer=setInterval(()=>this.tick(),500);this.loadSamples();
    // Coming back to the tab resumes the context the game suspended on hide (a gesture already unlocked it).
-   if(typeof document!=='undefined'){this.onVisible=()=>{if(!document.hidden&&this.unlocked&&this.context?.state==='suspended')this.context.resume().then(()=>this.tick()).catch(()=>{});};document.addEventListener('visibilitychange',this.onVisible);}
+   if(typeof document!=='undefined'){this.onVisible=()=>{if(document.hidden)this.suspend();else if(this.unlocked&&this.context?.state==='suspended')this.context.resume().then(()=>this.tick()).catch(()=>{});};document.addEventListener('visibilitychange',this.onVisible);}
   }
   return this.context.resume().then(()=>{if(!this.unlocked){this.unlocked=true;this.tone(523.25,.22,'sine',.28);this.tone(783.99,.3,'sine',.19,.12);}this.tick();return true;}).catch(()=>false);
  }
@@ -112,9 +144,14 @@ export class GameAudio{
   if(!this.context||this.loading||this.disposed)return;this.loading=true;this.abort??=new AbortController();
   await Promise.all(SAMPLE_FILES.map(file=>this.fetchBuffer(file)));this.loading=false;
  }
+ async retryFailed(){
+  const background=this.failed.filter(name=>BACKGROUND_FILES.includes(name));
+  await Promise.all([this.loadSamples(),...background.map(name=>this.fetchBuffer(name))]);this.tick();
+ }
  level(node){if(!node||this.context?.state!=='running')return 0;const data=this.waveform;node.getFloatTimeDomainData(data);let sum=0;for(const v of data)sum+=v*v;return Math.round(Math.sqrt(sum/data.length)*100000)/100000;}
- get status(){const rms=this.level(this.analyser),levels={};for(const n of CHANNELS)levels[n]=this.level(this.meters?.[n]);return {rms,levels,state:this.context?.state||'idle',loaded:SAMPLE_FILES.filter(f=>this.buffers[f]).length,total:SAMPLE_FILES.length,failed:this.failed.length,voices:this.voices.size,loading:!!this.loading,music:this.voices.has(this.musicVoice)?this.musicVoice.name:null,ambience:Object.keys(this.beds).filter(n=>this.voices.has(this.beds[n])&&this.beds[n].target>.02)};}
- applyVolumes(){if(!this.context)return;const now=this.context.currentTime;this.gain.gain.setTargetAtTime(this.muted?0:this.volumes.master,now,.025);for(const n of CHANNELS)this[n+'Gain'].gain.setTargetAtTime(this.volumes[n],now,.025);}
+ get status(){const rms=this.level(this.analyser),levels={};for(const n of CHANNELS)levels[n]=this.level(this.meters?.[n]);const music=this.voices.has(this.musicVoice)?this.musicVoice:null;return {rms,levels,state:this.context?.state||'idle',loaded:SAMPLE_FILES.filter(f=>this.buffers[f]).length,total:SAMPLE_FILES.length,failed:this.failed.length,voices:this.voices.size,loading:!!this.loading,scene:this.scene,music:music?.name||null,musicTitle:MUSIC_CATALOG[music?.name]?.title||'',musicContext:music?.label||'',ambience:Object.keys(this.beds).filter(n=>this.voices.has(this.beds[n])&&this.beds[n].target>.02)};}
+ applyVolumes(){if(!this.context)return;const now=this.context.currentTime;this.gain.gain.setTargetAtTime(this.muted?0:this.volumes.master,now,.025);for(const n of CHANNELS){const gain=this[n+'Gain'].gain;gain.cancelScheduledValues?.(now);gain.setTargetAtTime(this.volumes[n]*(n==='music'&&this.duckUntil>now?.6:1),now,.025);if(n==='music'&&this.duckUntil>now)gain.setTargetAtTime(this.volumes[n],this.duckUntil,.45);}}
+ duckMusic(seconds=1.8){if(!this.context)return;this.duckUntil=Math.max(this.duckUntil||0,this.context.currentTime+seconds);this.applyVolumes();}
  setVolume(name,v){if(!(name in DEFAULT_VOLUMES)||!Number.isFinite(v))return;this.volumes[name]=Math.max(0,Math.min(1,v));this.applyVolumes();this.saveSettings();}
  resetVolumes(){this.volumes={...DEFAULT_VOLUMES};this.setMuted(false);this.start();return {...this.volumes};}
  saveSettings(){try{localStorage.setItem('orvetharn-audio',JSON.stringify({volumes:this.volumes,muted:this.muted}));}catch{}}
@@ -125,8 +162,8 @@ export class GameAudio{
   source.onended=cleanup;this.voices.add(voice);return voice;
  }
  stopVoices(channels){for(const voice of [...this.voices])if(!channels||channels.includes(voice.channel)){if(voice===this.musicVoice)this.rememberMusic();voice.stop();}}
- rememberMusic(){const v=this.musicVoice;if(v&&this.voices.has(v)&&this.context)this.musicResume={name:v.name,offset:Math.max(0,(v.offset+this.context.currentTime-v.started))%v.duration};}
- tick(){if(this.disposed)return;this.music();this.ambience();}
+ rememberMusic(){const v=this.musicVoice;if(v&&this.voices.has(v)&&this.context){this.musicResume={name:v.name,offset:Math.max(0,(v.offset+this.context.currentTime-v.started))%v.duration};this.musicPositions.delete(v.scene);this.musicPositions.set(v.scene,this.musicResume);if(this.musicPositions.size>128)this.musicPositions.delete(this.musicPositions.keys().next().value);}}
+ tick(){if(this.disposed)return;this.refreshScene();this.music();this.ambience();}
  tone(frequency,duration=.15,type='sine',volume=.15,delay=0,channel='effects'){
   if(this.context?.state!=='running'||this.muted||this.disposed)return;
   const o=this.context.createOscillator(),g=this.context.createGain(),t=this.context.currentTime+delay;o.type=type;o.frequency.value=frequency;
@@ -142,18 +179,31 @@ export class GameAudio{
  music(){
   if(this.muted||this.disposed||this.context?.state!=='running')return;
   const c=this.context,now=c.currentTime,current=this.voices.has(this.musicVoice)?this.musicVoice:null;
-  if(current&&now<current.ends-MUSIC_FADE-.6)return;if(current?.handedOver)return;
-  const resume=!current&&this.musicResume,name=resume?resume.name:current?MUSIC[(MUSIC.indexOf(current.name)+1)%MUSIC.length]:MUSIC[this.musicIndex%MUSIC.length];
+  // A missing contextual track falls back to the normal town playlist, with no repeated failed requests.
+  const preferred=this.selection.tracks,available=preferred.filter(n=>!this.failed.includes(n));
+  const playlist=available.length?available:MUSIC_PLAYLISTS.town.filter(n=>!this.failed.includes(n));
+  if(!playlist.length){if(!current)this.fallbackMusic();return;}
+  const changing=!!current&&(!playlist.includes(current.name)||(current.scene!==this.scene&&current.name!==playlist[0]));
+  if(current&&!changing){current.scene=this.scene;current.label=this.selection.label;}
+  const saved=!current&&this.musicResume||((!current||changing)&&this.musicPositions.get(this.scene));
+  const resume=saved&&playlist.includes(saved.name)?saved:null;
+  const name=resume?resume.name:changing?playlist[0]:current?playlist[(playlist.indexOf(current.name)+1)%playlist.length]:playlist[0];
+  // Old requests can finish after a fast menu change; retain only live tracks and the next selection.
+  const live=new Set([...this.voices].filter(v=>v.channel==='music').map(v=>v.name));
+  for(const n of MUSIC)if(n!==name&&!live.has(n))delete this.buffers[n];
+  if(current&&!changing&&now<current.ends-MUSIC_FADE-.6)return;
+  if(changing&&now-(this.musicChangedAt??-10)<.8)return;
   const buffer=this.buffers[name];
-  if(!buffer){if(!this.failed.includes(name)){this.fetchBuffer(name);return;}
-   const next=MUSIC.find(n=>!this.failed.includes(n));if(next&&!current){this.musicIndex=MUSIC.indexOf(next);this.musicResume=null;this.fetchBuffer(next);return;}
-   if(!next&&!current)this.fallbackMusic();return;}
-  const at=current?Math.max(now,current.ends-MUSIC_FADE):now,offset=resume&&resume.offset<buffer.duration-MUSIC_FADE*2?resume.offset:0,d=buffer.duration-offset,fadeIn=offset?1.5:current?MUSIC_FADE:2.5,level=db(TRIM[name]||0);
+  if(!buffer){this.fetchBuffer(name);return;}
+  const at=current&&!changing?Math.max(now,current.ends-MUSIC_FADE):now,offset=resume&&resume.offset<buffer.duration-MUSIC_FADE*2?resume.offset:0,d=buffer.duration-offset,fadeIn=changing?1.2:offset?1.2:current?MUSIC_FADE:1.5,level=db(TRIM[name]||0);
+  // At most two music sources, even when menus are opened and closed quickly.
+  for(const voice of [...this.voices])if(voice.channel==='music'&&voice!==current)voice.stop();
+  if(changing){this.rememberMusic();const gain=current.g.gain;if(gain.cancelAndHoldAtTime)gain.cancelAndHoldAtTime(now);else{gain.cancelScheduledValues?.(now);gain.setValueAtTime(Math.max(0,gain.value),now);}gain.linearRampToValueAtTime(0,now+1.2);current.src.stop(now+1.25);current.ends=now+1.2;this.musicChangedAt=now;}
   const src=c.createBufferSource(),g=c.createGain();src.buffer=buffer;
   g.gain.setValueAtTime(0,at);g.gain.linearRampToValueAtTime(level,at+fadeIn);g.gain.setValueAtTime(level,at+d-MUSIC_FADE);g.gain.linearRampToValueAtTime(0,at+d);src.connect(g);g.connect(this.musicGain);
-  const voice=this.track(src,[g],'music',{name,started:at,offset,duration:buffer.duration,ends:at+d});if(!voice){g.disconnect();return;}
+  const voice=this.track(src,[g],'music',{name,src,g,scene:this.scene,label:this.selection.label,started:at,offset,duration:buffer.duration,ends:at+d});if(!voice){g.disconnect();return;}
   if(current)current.handedOver=true;this.musicVoice=voice;this.musicResume=null;this.musicIndex=MUSIC.indexOf(name);src.start(at,offset);src.stop(at+d+.05);
-  const upcoming=MUSIC[(this.musicIndex+1)%MUSIC.length];if(!this.buffers[upcoming])this.fetchBuffer(upcoming);
+  const upcoming=playlist[(playlist.indexOf(name)+1)%playlist.length];if(!this.buffers[upcoming])this.fetchBuffer(upcoming);
   // Keep at most the playing and the next track decoded (each is tens of MB once decoded).
   for(const n of MUSIC)if(n!==name&&n!==upcoming&&n!==current?.name)delete this.buffers[n];
  }
@@ -164,16 +214,19 @@ export class GameAudio{
   if(this.step%2===0)this.tone(phrase[Math.floor(this.step/2)%8]*pitch,1.6,'triangle',.19,0,'music');
   if(this.step%8===0){const root=[146.83,110,123.47,130.81][Math.floor(this.step/16)%4]*pitch;this.tone(root,3.2,'sine',.14,0,'music');this.tone(root*1.5,3.2,'sine',.07,0,'music');}this.step++;
  }
- // Region bed + birds by day / crickets towards evening. One ambience cycle = 6 in-game days.
+ // The same day/night phase as the visible lighting; wildlife follows the visible biome.
  ambienceMix(){
   if(this.presentation)return FRONT_AMBIENCE[this.presentation];
-  const bed=this.region==='coast'?AMBIENCE.coast:this.region==='highland'||WIND_ECOLOGY.includes(this.ecology)?AMBIENCE.highland:AMBIENCE.river;
-  const evening=.5-.5*Math.cos(2*Math.PI*((this.clock/480)%1)),open=bed===AMBIENCE.river?.8:.55;
-  return {[bed]:1,[LAYERS.day]:open*(1-evening*.85),[LAYERS.evening]:.75*evening};
+  if(this.dialog==='trade')return {'amb-room':.8};
+  if(this.overview||this.dialog==='world')return {'amb-wind':.45};
+  const ecology=this.location?.ecology||this.ecology;
+  const profile=BIOME_AMBIENCE[ecology]||{bed:AMBIENCE[this.region]||AMBIENCE.river,level:.7,birds:.4,insects:.35};
+  const night=daylight(this.clock).night,calm=1-Math.min(.8,this.environment['amb-rain']||0);
+  return {[profile.bed]:profile.level,[LAYERS.day]:profile.birds*(1-night)*calm,[LAYERS.evening]:profile.insects*night*calm,...this.environment};
  }
  ambience(){
   if(this.muted||this.disposed||this.context?.state!=='running')return;
-  const c=this.context,now=c.currentTime,mix=this.paused&&!this.presentation?{}:this.ambienceMix();
+  const c=this.context,now=c.currentTime,mix=this.paused&&!this.presentation&&!['trade','world'].includes(this.dialog)?{}:this.ambienceMix();
   for(const name of new Set([...Object.keys(this.beds),...Object.keys(mix)])){
    const target=(mix[name]||0)*db(TRIM[name]||0);let voice=this.voices.has(this.beds[name])?this.beds[name]:null;
    if(!voice&&target>0){const buffer=this.buffers[name];if(!buffer){if(!this.failed.includes(name))this.fetchBuffer(name);else if(name.startsWith('amb-')&&now-(this.last.bedNoise??-10)>4){this.last.bedNoise=now;this.noise(4.5,this.region==='coast'?.17:.05,this.region==='highland'?320:1100,'ambience');}continue;}
@@ -192,21 +245,21 @@ export class GameAudio{
   if(this.context?.state!=='running'||this.muted||this.disposed)return false;const now=this.context.currentTime;
   const profileId=soundProfileOf(type),profile=SOUND_PROFILES[profileId],key=world&&profile?'p:'+profileId:type;
   if(world){
-   if(now-(this.last[key]??-10)<WORLD_LIMITS.gap)return false;
+   if(now-(this.last[key]??-10)<(type.startsWith('vehicle-')?1.8:WORLD_LIMITS.gap))return false;
    // 1.1 s window: the audio clock ticks in render quanta, so a plain 1 s window can let a fifth start into one wall-clock second.
    this.worldStarts=this.worldStarts.filter(t=>now-t<1.1);if(this.worldStarts.length>=WORLD_LIMITS.perSecond)return false;
    if([...this.voices].filter(v=>v.world).length>=WORLD_LIMITS.voices)return false;
    volume=Math.min(volume,WORLD_LIMITS.gain);this.worldStarts.push(now);
-  }else if(now-(this.last[key]??-10)<(type==='notify'?4:.13))return false;
+  }else if(now-(this.last[key]??-10)<(type==='notify'?4:ALERT_EVENTS.has(type)?1.5:.13))return false;
   this.last[key]=now;
+  if(!world&&this.volumes.effects>0&&ALERT_EVENTS.has(type))this.duckMusic(type==='promotion'?2.4:1.8);
   // A promotion has its own fanfare (B5); it no longer shares the coin sample of a sale.
   if(type==='promotion'){this.fanfare();return true;}
   let name=FILES[type];if(profile){const files=profile.files.filter(f=>this.buffers[f]);if(files.length){const i=(this.variant[profileId]=((this.variant[profileId]??-1)+1+Math.floor(Math.random()*Math.max(1,files.length-1)))%files.length);name=files[i];}}
   const buffer=this.buffers[name];
-  if(buffer){const src=this.context.createBufferSource(),g=this.context.createGain(),p=this.context.createStereoPanner(),[lo,hi]=profile?.rate||[.94,1.06];src.buffer=buffer;src.playbackRate.value=lo+Math.random()*(hi-lo);g.gain.value=Math.min(world?WORLD_LIMITS.gain:1,volume*(profile?.gain??1));p.pan.value=Math.max(-1,Math.min(1,pan));src.connect(g);g.connect(p);p.connect(this.effectsGain);if(!this.track(src,[g,p],'effects',{world})){p.disconnect();return false;}src.start();}
+  if(buffer){const src=this.context.createBufferSource(),g=this.context.createGain(),p=this.context.createStereoPanner(),[lo,hi]=profile?.rate||(ACTION_SOUNDS[type]?[1,1]:[.94,1.06]);src.buffer=buffer;src.playbackRate.value=lo+Math.random()*(hi-lo);g.gain.value=Math.min(world?WORLD_LIMITS.gain:1,volume*(profile?.gain??1));p.pan.value=Math.max(-1,Math.min(1,pan));src.connect(g);g.connect(p);p.connect(this.effectsGain);if(!this.track(src,[g,p],'effects',{world,type,name})){p.disconnect();return false;}src.start();}
   else if(!world)this.tone(type==='invalid'?110:520,.09,'triangle',.08);
   if(world)return true;
-  if(type==='storm'){this.noise(2,.45,280);this.tone(48,1.8,'sine',.2);}if(type==='illness')this.tone(196,.5,'sine',.16);if(type==='manaStorm'){this.noise(1.4,.2,1500);this.tone(82,.8,'sine',.08);}if(type==='victory')this.success();if(type==='defend')this.tone(220,.4,'triangle',.09);if(type==='impact')this.noise(.25,.08,400);
   return true;
  }
  interact(type='click'){const ready=this.start();if(this.context?.state==='running')this.play(type,{volume:type==='hover'?.10:.48});else ready?.then(ok=>{if(ok)this.play(type,{volume:.48});});}
@@ -216,15 +269,26 @@ export class GameAudio{
   g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(level,t+.4);g.gain.setValueAtTime(level,t+seconds-.8);g.gain.linearRampToValueAtTime(0,t+seconds);src.connect(g);g.connect(this.ambienceGain);if(!this.track(src,[g],'ambience')){g.disconnect();return;}src.start(t,Math.random()*Math.max(0,buffer.duration-seconds));src.stop(t+seconds+.05);
  }
  test(channel){this.start();this.context?.resume().then(()=>{if(channel==='effects')this.play('build');if(channel==='music'){if(this.voices.has(this.musicVoice))return;this.music();if(!this.voices.has(this.musicVoice))for(const[i,f]of [293.66,369.99,440].entries())this.tone(f,.65,'triangle',.12,i*.25,'music');}if(channel==='ambience')this.preview(Object.keys(this.ambienceMix())[0]);}).catch(()=>{});}
- update(sim,camera){
+ update(sim,camera,view={}){
   this.presentation=null;this.paused=sim.paused;this.region=sim.region;this.ecology=sim.layout?.ecology||null;this.clock=sim.time||0;const events=sim.soundEvents.splice(0);
+  this.world=(view.span??55)>95||Math.hypot((camera?.x??12)-12,(camera?.z??12)-12)>34;
+  this.overview=(view.span??55)>95;
+  this.raid=!!sim.raid&&!sim.raid.finished;
+  this.industrial=sim.buildings.filter(b=>b.enabled!==false&&(b.health??100)>0&&['industry','advanced','energy'].includes(BUILDINGS[b.type]?.group)).length>=3;
+  this.setLocation(musicLocation(sim,camera,view));
+  this.refreshScene();
   const cx=camera?.x??12,cz=camera?.z??12,fall=(x,z,r=WORLD_LIMITS.radius)=>Math.max(0,1-Math.hypot(x-cx,z-cz)/r)**2,pan=x=>Math.max(-.35,Math.min(.35,(x-cx)/12));
+  const weather=localWeatherState(sim,{x:cx,z:cz}),snow=(this.location?.ecology||this.ecology)==='snow';
+  this.environment={'amb-rain':snow?0:weather.rain*.7,'amb-arcane':weather.mana*.25};
+  if(snow&&weather.rain>0)this.environment['amb-wind']=.75+weather.rain*.25;
+  for(const b of sim.buildings){if(!b.working||this.world)continue;const f=fall(b.x,b.z,10),profile=soundProfileOf(b.type),bed=profile==='magic'?'amb-arcane':profile==='furnace'?'amb-hearth':['machine','metal','saw'].includes(profile)?'amb-workshop':null;if(bed)this.environment[bed]=Math.max(this.environment[bed]||0,.55*f);}
   for(const e of events){
-   if(e.type==='footstep'){const f=fall(e.x,e.z,8);if(f>.05)this.play('footstep',{pan:pan(e.x),volume:.06*f});continue;}
-   if(BUILDINGS[e.type]||e.type==='pickup'||e.type==='drop'){const f=fall(e.x,e.z);if(f>.02)this.play(e.type,{pan:pan(e.x),volume:.16*f,world:true});continue;}
-   this.play(e.type,{pan:pan(e.x),volume:Math.max(.03,.36-Math.hypot(e.x-cx,e.z-cz)*.023)});
+   if(BUILDINGS[e.type]||LOCAL_EVENTS.has(e.type)){if(sim.paused||this.world)continue;const f=fall(e.x,e.z,e.type==='footstep'?8:WORLD_LIMITS.radius);if(f>.02)this.play(e.type,{pan:pan(e.x),volume:(e.type==='footstep'?.06:.16)*f,world:true});continue;}
+   // Confirmation and important notices remain audible while paused or looking at the continent.
+   this.play(e.type,{volume:.36});
   }
-  if(sim.paused||!this.context)return;
+  if(sim.paused||this.world||!this.context)return;
+  for(const sh of sim.shipments||[]){const old=this.movingVehicles.get(sh);this.movingVehicles.set(sh,{progress:sh.progress,away:sh.away});if(sh.blocked||!old||!sh.route?.length)continue;const departed=sh.away&&!old.away;if(!departed&&(sh.away||old.progress===sh.progress))continue;const p=shipmentPose(sh),f=fall(p.x,p.z,11);if(f>.02)this.play(vehicleSound(departed?sh.vehicle:shipmentVehicle(sh,sim,p)),{pan:pan(p.x),volume:.1*f,world:true});}
   // Quiet work rhythm from the nearest few running facilities; the world budget above still applies.
   const nearby=sim.buildings.filter(b=>b.working&&SOUND_PROFILES[soundProfileOf(b.type)]?.cadence&&fall(b.x,b.z,9)>0).sort((a,b)=>Math.hypot(a.x-cx,a.z-cz)-Math.hypot(b.x-cx,b.z-cz)).slice(0,WORLD_LIMITS.nearby);
   for(const b of nearby){const cadence=SOUND_PROFILES[soundProfileOf(b.type)].cadence,phase=Math.floor((b.animationTime||sim.time||0)/cadence),key='work-'+b.id;

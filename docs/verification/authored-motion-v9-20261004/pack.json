@@ -1,0 +1,17 @@
+{
+  "status": "review-only",
+  "source": "art-source/pixel-characters/authored-actions-v9/mira/walk-SW.json",
+  "drawings": 8,
+  "mirroredViews": 1,
+  "alpha": "binary",
+  "sourceHashes": "passed",
+  "clipping": "none",
+  "runtimeApplied": false,
+  "fullArtQualityApproved": false,
+  "remaining": [
+    "Foot-contact registration and continuous playback review",
+    "Arm/boot consistency across the loop",
+    "NW and mirrored NE artwork",
+    "Carry artwork and starts/stops/handling transitions"
+  ]
+}

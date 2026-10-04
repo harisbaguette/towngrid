@@ -12,14 +12,19 @@ import { EXPORT_GATE, shipmentPose, parkedVehicles } from './export-route.js';
 import { shipmentVehicle, shipmentLoaded, PORT_VEHICLES } from './vehicle-art.js';
 import {biomeTree,biomeDecoration} from './biome-terrain.js';
 import {biomeOf} from './biome-data.js';
+import {treeCluster} from './landform-patterns.js';
 import { makePixelProp,makeNetworkCargo } from './pixel-environment.js';
 import {logisticsVisualEvents,transferPose} from './logistics-visual-events.js';
-import { makeMapTerrain, CARDINALS } from './pixel-terrain.js';
+import { makeMapTerrain, CARDINALS, terrainHeightAt } from './pixel-terrain.js';
 import { configureQuarterControls, applyQuarterView, settleQuarterControls, QUARTER_VIEWS } from './quarter-camera.js';
 import { tradeProvince } from './trade-routes.js';
 import { edgePoint } from './world-grid.js';
 import { stationRailPath, railPathPose } from './freight-path.js';
 import {makePlotBoundaries} from './plot-boundaries.js';
+import {WorldLandscape} from './world-landscape.js';
+import {WorldAtmosphere} from './world-atmosphere.js';
+import {WorldEffects} from './world-effects.js';
+import {WORLD_SIZE,worldOrigin,localToWorld,worldToLocal,worldCellAt,plotCenter} from './world-space.js';
 
 function release(root){if(!root)return;root.traverse(n=>{if(n.geometry&&!n.geometry.userData.shared)n.geometry.dispose();if(n.material&&(!n.geometry?.userData.shared||n.userData.ownedMaterial))for(const m of(Array.isArray(n.material)?n.material:[n.material]))if(m&&!m.userData.shared)m.dispose();if(n.userData.pixel||n.userData.pixelEnvironment||n.userData.pixelWater||n.userData.pixelSurface)n.userData.texture.dispose();if(n.isSkinnedMesh)n.skeleton.dispose();if(n.isInstancedMesh)n.dispose();if(n.userData.mixer){n.userData.mixer.stopAllAction();n.userData.mixer.uncacheRoot(n.userData.root);}});}
 // Unclaimed resources receive a light fade; the landscape keeps its natural colour.
@@ -31,28 +36,38 @@ function fadeUnowned(obj){
 export class GameScene{
  constructor(container,sim,callbacks={},renderOptions={}){
   this.container=container;this.sim=sim;this.callbacks=callbacks;this.models=new Map();this.workerModels=new Map();this.nature=[];this.mode=null;this.selection=null;this.hover=null;this.lastRevision=-1;this.alive=true;
+  this.characterSurface=(x,z)=>terrainHeightAt(this.sim,x,z);
   this.renderer=createRenderer({antialias:true,alpha:false,powerPreference:'high-performance',...renderOptions});
   this.renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.75));this.renderer.setClearColor('#6ca345');this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFShadowMap;
   this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.12;
   this.renderer.domElement.setAttribute('aria-label','타일 지도. 시설을 선택한 뒤 빈 칸을 눌러 건설하세요.');this.renderer.domElement.setAttribute('role','application');this.renderer.domElement.tabIndex=0;
-  container.appendChild(this.renderer.domElement);this.scene=new THREE.Scene();this.scene.background=new THREE.Color('#6ca345');
+  container.appendChild(this.renderer.domElement);this.scene=new THREE.Scene();this.scene.background=new THREE.Color('#c7d6bd');this.renderer.setClearColor('#c7d6bd');
   this.scene.add(new THREE.HemisphereLight('#e7f4ff','#6c765b',1.8));const sun=this.sun=new THREE.DirectionalLight('#fff0d6',2.8);sun.position.set(-11,24,16);sun.castShadow=true;
   sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=-21;sun.shadow.camera.right=21;sun.shadow.camera.top=21;sun.shadow.camera.bottom=-21;sun.shadow.camera.near=1;sun.shadow.camera.far=70;sun.shadow.normalBias=.025;sun.shadow.bias=-.0001;sun.shadow.radius=3;sun.target.position.set(11,0,11);this.scene.add(sun,sun.target);
-  this.camera=new THREE.OrthographicCamera(-10,10,10,-10,.1,120);this.camera.position.set(27,31,34);
+  this.camera=new THREE.OrthographicCamera(-10,10,10,-10,-4000,8000);this.camera.position.set(27,31,34);
   this.controls=new OrbitControls(this.camera,this.renderer.domElement);this.controls.target.set(11.1,0,11.7);this.controls.enableDamping=true;this.controls.dampingFactor=.15;this.controls.screenSpacePanning=false;this.controls.minZoom=.48;this.controls.maxZoom=3.4;this.controls.zoomSpeed=.65;configureQuarterControls(this.controls);this.viewIndex=applyQuarterView(this.camera,this.controls,0);
+  this.controls.addEventListener('start',()=>{this.flight=null;});
   this.world=new THREE.Group();this.scene.add(this.world);this.selectionLine=this.outline(1,'#edcb70');this.hoverLine=this.outline(1,'#fbfbdf');this.scene.add(this.selectionLine,this.hoverLine);this.selectionLine.visible=false;this.hoverLine.visible=false;
   this.expansionLines=new THREE.Group();this.scene.add(this.expansionLines);this.raycaster=new THREE.Raycaster();this.pointer=new THREE.Vector2();this.plane=new THREE.Plane(new THREE.Vector3(0,1,0),0);
   const canvas=this.renderer.domElement;
   this.onLost=e=>{e.preventDefault();this.contextLost=true;this.sim.paused=true;this.callbacks.onContextLost?.();};this.onRestored=()=>{this.contextLost=false;this.resize();this.callbacks.onContextRestored?.();};canvas.addEventListener('webglcontextlost',this.onLost);canvas.addEventListener('webglcontextrestored',this.onRestored);
   this.activePointers=new Set();this.onDown=e=>{this.activePointers.add(e.pointerId);if(this.activePointers.size>1){this.down=null;return;}if(e.button!==0)return;this.down={x:e.clientX,y:e.clientY,time:performance.now()};};
   this.onMove=e=>this.pointerMove(e);
-  this.onUp=e=>{this.activePointers.delete(e.pointerId);if(!this.down||this.activePointers.size)return;const distance=Math.hypot(e.clientX-this.down.x,e.clientY-this.down.y),held=performance.now()-this.down.time;this.down=null;if(distance<7&&held<650){this.pointerMove(e);if(this.hover){if(e.pointerType==='touch'&&this.mode&&this.confirmTile!==this.hover.x+','+this.hover.z){this.confirmTile=this.hover.x+','+this.hover.z;this.callbacks.onHint?.('다시 누르면 건설');return;}this.confirmTile=null;this.callbacks.onClick?.(this.hover.x,this.hover.z);}}};
+  this.onUp=e=>{this.activePointers.delete(e.pointerId);if(!this.down||this.activePointers.size)return;const distance=Math.hypot(e.clientX-this.down.x,e.clientY-this.down.y),held=performance.now()-this.down.time;this.down=null;if(distance<7&&held<650){this.pointerMove(e);if(this.worldHover&&!this.mode&&(this.worldPicking||!this.hover||this.worldSpan()>95)){this.callbacks.onWorldPick?.(this.worldHover);return;}if(this.hover){if(e.pointerType==='touch'&&this.mode&&this.confirmTile!==this.hover.x+','+this.hover.z){this.confirmTile=this.hover.x+','+this.hover.z;this.callbacks.onHint?.('다시 누르면 건설');return;}this.confirmTile=null;this.callbacks.onClick?.(this.hover.x,this.hover.z);}}};
   this.onCancel=()=>{this.activePointers.clear();this.down=null;this.confirmTile=null;};
   this.onLeave=()=>{this.hoverLine.visible=false;if(this.ghost)this.ghost.visible=false;};
   this.onContext=e=>e.preventDefault();
+  this.onMapKey=e=>{
+   if(e.ctrlKey||e.metaKey||e.altKey||(!this.worldPicking&&this.worldSpan()<95))return;
+   if(e.key==='Home'){e.preventDefault();this.showWorld();return;}
+   if(e.key==='Enter'){e.preventDefault();const cell=worldCellAt(...localToWorld(this.sim,this.controls.target.x,this.controls.target.z));if(cell)this.callbacks.onWorldPick?.(cell);return;}
+   const directions={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,1],ArrowDown:[0,-1]},v=directions[e.key];if(!v)return;
+   e.preventDefault();const right=new THREE.Vector3().setFromMatrixColumn(this.camera.matrixWorld,0),up=new THREE.Vector3().setFromMatrixColumn(this.camera.matrixWorld,1),[x,z]=localToWorld(this.sim,this.controls.target.x,this.controls.target.z);
+   this.flyToWorld(x+Math.sign(right.x*v[0]+up.x*v[1])*24,z+Math.sign(right.z*v[0]+up.z*v[1])*24,this.worldSpan(),{animate:false});
+  };canvas.addEventListener('keydown',this.onMapKey);
   canvas.addEventListener('pointerdown',this.onDown);canvas.addEventListener('pointermove',this.onMove);canvas.addEventListener('pointerup',this.onUp);canvas.addEventListener('pointerleave',this.onLeave);canvas.addEventListener('pointercancel',this.onCancel);canvas.addEventListener('contextmenu',this.onContext);
   let quality='auto';try{quality=localStorage.getItem('orvetharn-quality')||'auto';}catch{}this.setQuality(quality);
-  this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(container);this.resize();this.rebuild();this.resetCamera();
+  this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(container);this.resize();this.rebuild();this.resetCamera();this.atmosphere=new WorldAtmosphere(this);this.effects=new WorldEffects(this);
   this.last=performance.now();this.uiAccum=0;this.loop=this.loop.bind(this);this.frame=requestAnimationFrame(this.loop);
  }
  outline(size,color){
@@ -67,7 +82,7 @@ export class GameScene{
   this.renderer.shadowMap.enabled=effective!=='low';this.sun.shadow.mapSize.set(effective==='high'?2048:1024,effective==='high'?2048:1024);if(this.sun.shadow.map){this.sun.shadow.map.dispose();this.sun.shadow.map=null;}this.renderer.shadowMap.needsUpdate=true;this.resize();
   try{localStorage.setItem('orvetharn-quality',this.quality);}catch{}
  }
- resize(){this.lastPaint=null;const w=this.container.clientWidth,h=this.container.clientHeight;if(!w||!h)return;this.renderer.setSize(w,h,false);const span=w<700?7.1:6.8;this.camera.left=-span*w/h;this.camera.right=span*w/h;this.camera.top=span;this.camera.bottom=-span;this.camera.updateProjectionMatrix();}
+ resize(){this.lastPaint=null;const w=this.container.clientWidth,h=this.container.clientHeight;if(!w||!h)return;this.renderer.setSize(w,h,false);const span=w<700?7.1:6.8;this.camera.left=-span*w/h;this.camera.right=span*w/h;this.camera.top=span;this.camera.bottom=-span;this.controls.minZoom=(this.camera.right-this.camera.left)/((WORLD_SIZE.width+WORLD_SIZE.height)*.9);this.camera.zoom=Math.max(this.controls.minZoom,this.camera.zoom);this.camera.updateProjectionMatrix();}
  // Facility markers: React (onMarkers, 0.4 s) decides which exist and what they say; their screen position follows the
  // camera every frame here (B11), so a drag, zoom or 90-degree turn never leaves them behind.
  markerPoint(b,w,h){const v=this.markerVector||(this.markerVector=new THREE.Vector3());v.set(b.x,({well:1.02,lumber:.72,sawmill:.72,field:.64})[b.type]||1.38,b.z).project(this.camera);return {x:(v.x+1)*w/2,y:(1-v.y)*h/2};}
@@ -91,14 +106,25 @@ export class GameScene{
    for(const tex of textures){if(performance.now()-t0>budget)break;r.initTexture(tex);if(performance.now()-slice>12){await pause();slice=performance.now();}}
   }catch(e){console.warn('warmUp skipped',e);}finally{this.warming=false;}
  }
- setSimulation(sim){this.sim=sim;this.selection=null;this.callbacks.onMarkers?.([]);this.setMode(null);this.lastRevision=-1;this.rebuild();this.resetCamera();}
- resetCamera(){settleQuarterControls(this.controls);this.controls.target.set(11.5,0,11.5);this.camera.zoom=Math.min((this.camera.right-this.camera.left)/43,(this.camera.top-this.camera.bottom)/28);this.controls.minZoom=Math.min(.18,this.camera.zoom);this.camera.updateProjectionMatrix();this.setQuarterView(0);}
+ setSimulation(sim,{preserveCamera=false}={}){const at=localToWorld(this.sim,this.controls.target.x,this.controls.target.z),zoom=this.camera.zoom;this.sim=sim;this.selection=null;this.callbacks.onMarkers?.([]);this.setMode(null);this.lastRevision=-1;this.rebuild();if(preserveCamera){const [x,z]=worldToLocal(sim,...at);this.controls.target.set(x,0,z);this.camera.zoom=zoom;this.setQuarterView(this.viewIndex);}else this.resetCamera();}
+ worldSpan(){return (this.camera.right-this.camera.left)/this.camera.zoom;}
+ worldScreenPoint(x,z){const [lx,lz]=worldToLocal(this.sim,x,z),p=new THREE.Vector3(lx,0,lz).project(this.camera);return {x:(p.x+1)*this.container.clientWidth/2,y:(1-p.y)*this.container.clientHeight/2};}
+ flyToWorld(x,z,span,{animate=true}={}){
+  settleQuarterControls(this.controls);const [lx,lz]=worldToLocal(this.sim,x,z),zoom=Math.max(this.controls.minZoom,Math.min(3.4,(this.camera.right-this.camera.left)/span));
+  const reduced=typeof window!=='undefined'&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(animate&&!reduced)this.flight={start:performance.now(),from:this.controls.target.clone(),to:new THREE.Vector3(lx,0,lz),zoom:this.camera.zoom,toZoom:zoom};
+  else{this.flight=null;this.controls.target.set(lx,0,lz);this.camera.zoom=zoom;this.camera.updateProjectionMatrix();this.setQuarterView(this.viewIndex);this.lastPaint=null;}
+ }
+ focusProvince(id,span=60){const point=plotCenter(id);if(point){this.landscape?.select(id);this.flyToWorld(...point,span);}}
+ showWorld(){this.setMode(null);this.select(null);this.flyToWorld(WORLD_SIZE.width/2,WORLD_SIZE.height/2,(WORLD_SIZE.width+WORLD_SIZE.height)*.76);}
+ resetCamera(){this.flight=null;settleQuarterControls(this.controls);this.controls.target.set(11.5,0,11.5);this.camera.zoom=Math.min((this.camera.right-this.camera.left)/52,(this.camera.top-this.camera.bottom)/34);this.controls.minZoom=(this.camera.right-this.camera.left)/((WORLD_SIZE.width+WORLD_SIZE.height)*.9);this.camera.updateProjectionMatrix();this.setQuarterView(0);}
  setQuarterView(view){this.viewIndex=applyQuarterView(this.camera,this.controls,view);this.renderer.cache?.clear();this.renderer.poseCache?.clear();this.renderer.domElement.dataset.cameraView=QUARTER_VIEWS[this.viewIndex];this.renderer.domElement.dataset.cameraQuarter=String(this.viewIndex);this.renderer.domElement.dataset.cameraAzimuth=String(this.controls.getAzimuthalAngle());this.renderer.domElement.dataset.cameraPolar=String(this.controls.getPolarAngle());for(const m of this.models.values())m.userData.animate?.(this.sim.time,m.userData.building,this.sim,this.viewIndex);this.hover=null;this.confirmTile=null;this.hoverLine.visible=false;if(this.ghost){this.ghost.visible=false;this.ghost.userData.animate?.(this.sim.time,{working:false,progress:0,inputs:{}},this.sim,this.viewIndex);}for(const p of [...this.nature,...(this.decorations||[])])p.userData.animate?.(this.sim.time,p.userData.tile,false,this.viewIndex);this.scenery?.animate(this.sim.time,this.viewIndex);this.callbacks.onViewChange?.(QUARTER_VIEWS[this.viewIndex]);}
  focusEdge(side){const [x,z]=edgePoint(side,5,11.5);settleQuarterControls(this.controls);this.controls.target.set(x,0,z);this.camera.zoom=Math.max(.8,this.camera.zoom);this.camera.updateProjectionMatrix();this.setQuarterView(this.viewIndex);}
  rotate(direction){if(Number.isFinite(direction)&&direction!==0)this.setQuarterView(this.viewIndex+Math.sign(direction));}
  setOverlay(value){this.overlay=value;this.rebuild();}
- zoom(by){this.camera.zoom=THREE.MathUtils.clamp(this.camera.zoom*by,this.controls.minZoom,3.4);this.camera.updateProjectionMatrix();}
+ zoom(by){this.flight=null;this.camera.zoom=THREE.MathUtils.clamp(this.camera.zoom*by,this.controls.minZoom,3.4);this.camera.updateProjectionMatrix();}
  setMode(mode){
+  if(mode&&(this.worldSpan()>95||this.controls.target.x<0||this.controls.target.x>24||this.controls.target.z<0||this.controls.target.z>24))this.focusProvince(this.sim.provinceId,55);
   if(mode)this.callbacks.onMarkers?.([]);
   this.mode=mode;this.relocatingId=null;if(this.buildGrid)this.buildGrid.visible=!!BUILDINGS[mode];this.confirmTile=null;this.hover=null;if(this.ghost){this.scene.remove(this.ghost);release(this.ghost);this.ghost=null;}
   if(mode&&BUILDINGS[mode]&&!BUILDINGS[mode].tile){
@@ -116,6 +142,10 @@ export class GameScene{
  pointerMove(e){
   const rect=this.renderer.domElement.getBoundingClientRect();this.pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);this.raycaster.setFromCamera(this.pointer,this.camera);
   const hit=new THREE.Vector3();if(!this.raycaster.ray.intersectPlane(this.plane,hit))return;
+  if(this.landscape){const ridge=this.raycaster.intersectObjects(this.landscape.landmarks.children.filter(n=>n.visible),true)[0];if(ridge&&ridge.distance<this.raycaster.ray.origin.distanceTo(hit))hit.copy(ridge.point);}
+  this.worldHover=worldCellAt(...localToWorld(this.sim,hit.x,hit.z));
+  if(this.worldHover?.terrain==='mountain'){this.hover=null;this.onLeave();return;}
+  if(this.worldPicking||this.worldSpan()>95){this.hover=null;this.onLeave();return;}
   let x=Math.floor(hit.x+.5),z=Math.floor(hit.z+.5);
   if(!this.mode){const models=[...this.models.values()];const hits=this.raycaster.intersectObjects(models,true);if(hits.length){let n=hits[0].object;while(n&&!n.userData.building)n=n.parent;if(n?.userData.building){x=n.userData.building.x;z=n.userData.building.z;}}}
   if(x<0||z<0||x>=N||z>=N){this.hover=null;this.onLeave();return;}
@@ -136,7 +166,11 @@ export class GameScene{
   if(this.stumpSimulation!==this.sim){this.stumps=new Map();this.stumpSimulation=this.sim;}
   for(const n of this.nature){const t=n.userData.tile;if(n.userData.wasMature&&t===this.sim.tile(t.x,t.z)&&t.nature===null&&t.remaining<=0&&!this.sim.at(t.x,t.z)&&!this.sim.roads.has(t.x+','+t.z))this.stumps.set(t.x+','+t.z,{x:t.x,z:t.z,scale:n.scale.x,until:this.sim.time+2.4});}
   for(const [key,s]of this.stumps)if(s.until<=this.sim.time||this.sim.tile(s.x,s.z)?.nature||this.sim.at(s.x,s.z)||this.sim.roads.has(key))this.stumps.delete(key);
-  this.renderer.cache?.clear();release(this.world);this.scene.remove(this.world);this.world=new THREE.Group();this.scene.add(this.world);this.models.clear();this.workerModels.clear();this.enemyModels=new Map();this.nature=[];this.dockBoats=[];const sceneryKey=this.sim.region+':'+this.sim.race+':'+tradeProvince(this.sim)+':'+JSON.stringify(this.sim.layout);if(this.sceneryKey!==sceneryKey){this.renderer.surfacePatterns?.clear();if(this.scenery){release(this.scenery.group);this.scene.remove(this.scenery.group);}this.scenery=makeScenery(this.sim.region,this.sim.race,this.sim);this.scene.add(this.scenery.group);this.sceneryKey=sceneryKey;}
+  this.renderer.cache?.clear();release(this.world);this.scene.remove(this.world);this.world=new THREE.Group();this.scene.add(this.world);this.models.clear();this.workerModels.clear();this.enemyModels=new Map();this.nature=[];this.dockBoats=[];
+  if(this.sim.layout.cell){
+   if(this.scenery){release(this.scenery.group);this.scene.remove(this.scenery.group);this.scenery=null;}
+   if(!this.landscape)this.landscape=new WorldLandscape(this,this.sim);else if(this.landscape.sim!==this.sim)this.landscape.rebase(this.sim);
+  }else{if(this.landscape){this.landscape.dispose();this.landscape=null;this.renderer.worldFog=null;}const sceneryKey=this.sim.region+':'+this.sim.race+':'+tradeProvince(this.sim)+':'+JSON.stringify(this.sim.layout);if(this.sceneryKey!==sceneryKey){this.renderer.surfacePatterns?.clear();if(this.scenery){release(this.scenery.group);this.scene.remove(this.scenery.group);}this.scenery=makeScenery(this.sim.region,this.sim.race,this.sim);this.scene.add(this.scenery.group);this.sceneryKey=sceneryKey;}}
   const sim=this.sim;
   this.networkCargo=new Map();this.starterCargo=new Map();
   this.terrain=makeMapTerrain(sim,this.overlay);this.world.add(this.terrain);this.water=this.terrain.userData.water;
@@ -148,7 +182,7 @@ export class GameScene{
    const key=t.x+','+t.z;
    if(t.terrain==='water')continue;
    if(t.nature&&!sim.at(t.x,t.z)&&!sim.roads.has(key)){
-    const tree=biomeTree(sim.layout,t),scale=.73+noise(t.x,t.z)*.20;
+    const tree=biomeTree(sim.layout,t),scale=.67+treeCluster(sim.layout,t.x,t.z)*.28;
     const obj=['tree','sapling'].includes(t.nature)?(tree?makePixelProp(tree,scale*(t.nature==='sapling'?.35:1)):makeTree(Math.floor(noise(t.z,t.x)*6),scale)):makeRock(.9+noise(t.x,t.z)*.25,t.ore>70?'oreRock':t.moisture>70?'mossrock':'rock');
     if(!sim.ownedAt(t.x,t.z))fadeUnowned(obj);
     obj.position.set(t.x,.015,t.z);obj.userData.tile=t;obj.userData.wasMature=t.nature==='tree';obj.userData.animate?.(sim.time,t,false,this.viewIndex);this.world.add(obj);this.nature.push(obj);
@@ -178,7 +212,7 @@ export class GameScene{
  // Residents follow the simulation every frame; warmUp calls it too, so their character atlases are
  // uploaded behind the transition picture instead of in the first visible frame.
  syncPeople(){
-   for(const w of this.sim.workers){let m=this.workerModels.get(w.id);if(!m){m=makeWorker(w.id,w.race||this.sim.race,w.appearance);this.workerModels.set(w.id,m);this.world.add(m);}animateWorker(m,w,this.sim.time,this.camera);m.visible=!w.atHome;}
+   for(const w of this.sim.workers){let m=this.workerModels.get(w.id);if(!m){m=makeWorker(w.id,w.race||this.sim.race,w.appearance);this.workerModels.set(w.id,m);this.world.add(m);}animateWorker(m,w,this.sim.time,this.camera,this.characterSurface);m.visible=!w.atHome;}
    for(const[id,m]of this.workerModels)if(!this.sim.workers.some(w=>w.id===id)){this.world.remove(m);release(m);this.workerModels.delete(id);}
    this.syncExportVehicles();
  }
@@ -206,11 +240,16 @@ export class GameScene{
  loop(now){
   if(!this.alive)return;if(this.contextLost||this.active===false||this.warming){this.last=now;this.frame=requestAnimationFrame(this.loop);return;}if(now-this.last<1000/this.maxFps-1){this.frame=requestAnimationFrame(this.loop);return;}const dt=Math.min((now-this.last)/1000,.5);this.last=now;advanceGame(this.sim,dt);
   if(this.lastRevision!==this.sim.revision)this.rebuild();
-  this.controls.update();this.camera.updateMatrixWorld();
+  if(this.overlay==='power'){const grid=this.sim.gridStatus(),key=grid.groups.map(g=>g.nodes.map(b=>b.id).join(',')+':'+g.supply.toFixed(1)+':'+g.used.toFixed(1)).join('|')+';'+[...grid.powered].join(',');if(this.lastPowerOverlay!==key){this.lastPowerOverlay=key;this.rebuild();}}
+  if(this.flight){const f=this.flight,t=Math.min(1,(now-f.start)/850),k=t*t*(3-2*t),delta=this.controls.target.clone();this.controls.target.lerpVectors(f.from,f.to,k);delta.sub(this.controls.target);this.camera.position.sub(delta);this.camera.zoom=Math.exp(Math.log(f.zoom)*(1-k)+Math.log(f.toZoom)*k);this.camera.updateProjectionMatrix();if(t===1)this.flight=null;}
+  this.controls.update();
+  if(this.landscape){const [ox,oz]=worldOrigin(this.sim),x=THREE.MathUtils.clamp(this.controls.target.x,-ox,WORLD_SIZE.width-ox),z=THREE.MathUtils.clamp(this.controls.target.z,-oz,WORLD_SIZE.height-oz);this.camera.position.x+=x-this.controls.target.x;this.camera.position.z+=z-this.controls.target.z;this.controls.target.x=x;this.controls.target.z=z;this.landscape.update();this.world.visible=this.worldSpan()<450;this.landscape.attachFog(this.world);}
+  this.camera.updateMatrixWorld();
+  this.atmosphere.update(dt);
   for(const [id,m]of this.models){const b=this.sim.buildings.find(v=>v.id===id);if(b){m.userData.animate?.(this.sim.time,b,this.sim,this.viewIndex);m.rotation.z=0;}}
   this.syncPeople();
   for(const {boat,b,x,z} of this.dockBoats||[]){boat.position.y=-.16+Math.sin(this.sim.time*.8)*.008;boat.position.z=z+(b.type==='dock'&&b.working&&b.health>0&&b.enabled!==false?Math.sin(b.progress*Math.PI)*.25:0);boat.userData.animate(this.sim.time,null,false,this.viewIndex);}
-  this.scenery?.animate(this.sim.time,this.viewIndex);this.callbacks.onAudio?.(this.sim,this.controls.target);
+  this.scenery?.animate(this.sim.time,this.viewIndex);this.callbacks.onAudio?.(this.sim,this.controls.target,{span:this.worldSpan(),viewIndex:this.viewIndex});
   for(const prop of this.decorations||[])prop.userData.animate?.(this.sim.time,null,false,this.viewIndex);
   const harvesting=new Set(this.sim.buildings.filter(b=>b.working&&BUILDINGS[b.type]?.natural==='tree').map(b=>this.sim.closestNatural(b,'tree')));
   for(const n of this.nature){if(n.userData.stumpUntil)n.visible=this.sim.time<n.userData.stumpUntil;else n.userData.animate?.(this.sim.time,n.userData.tile,harvesting.has(n.userData.tile),this.viewIndex);}
@@ -218,7 +257,7 @@ export class GameScene{
   const transfers=logisticsVisualEvents(this.sim).filter(e=>e.path),visibleTransfers=new Set(transfers.map(e=>e.id));
   for(const event of transfers){let m=this.networkCargo.get(event.id);if(!m){m=makeNetworkCargo(event.item,event.kind);this.networkCargo.set(event.id,m);this.world.add(m);}const pose=transferPose(event,this.sim.time);m.position.set(pose.x,event.kind==='pipe'?.09:.15,pose.z);m.userData.animate(this.sim.time,null,false,this.viewIndex);}
   for(const [id,m]of this.networkCargo)if(!visibleTransfers.has(id)){this.world.remove(m);release(m);this.networkCargo.delete(id);}
-  for(const enemy of [...(this.sim.attackers||[]),...(this.sim.guards||[])]){let m=this.enemyModels.get(enemy.id);if(!m){m=makeWorker(Number(enemy.id)||0,enemy.race,enemy.appearance);const bar=new THREE.Group();const bg=new THREE.Mesh(new THREE.PlaneGeometry(.5,.065),new THREE.MeshBasicMaterial({color:'#382f35',side:THREE.DoubleSide}));const hp=new THREE.Mesh(new THREE.PlaneGeometry(.46,.035),new THREE.MeshBasicMaterial({color:enemy.guard?'#59baa3':'#eb826c',side:THREE.DoubleSide}));bar.add(bg,hp);bar.position.y=1.45;hp.position.z=.002;bar.userData.fill=hp;m.add(bar);m.userData.hpBar=bar;m.userData.worker=true;this.enemyModels.set(enemy.id,m);this.world.add(m);}animateWorker(m,enemy,this.sim.time,this.camera);if(m.userData.hpBar){m.userData.hpBar.visible=enemy.hp>0;m.userData.hpBar.quaternion.copy(m.quaternion).invert().multiply(this.camera.quaternion);m.userData.hpBar.userData.fill.scale.x=Math.max(.01,(enemy.hp??1)/(enemy.maxHp??1));}}for(const[id,m]of this.enemyModels){if(![...this.sim.attackers,...(this.sim.guards||[])].some(e=>e.id===id)){this.world.remove(m);release(m);this.enemyModels.delete(id);}}
+  for(const enemy of [...(this.sim.attackers||[]),...(this.sim.guards||[])]){let m=this.enemyModels.get(enemy.id);if(!m){m=makeWorker(Number(enemy.id)||0,enemy.race,enemy.appearance);const bar=new THREE.Group();const bg=new THREE.Mesh(new THREE.PlaneGeometry(.5,.065),new THREE.MeshBasicMaterial({color:'#382f35',side:THREE.DoubleSide}));const hp=new THREE.Mesh(new THREE.PlaneGeometry(.46,.035),new THREE.MeshBasicMaterial({color:enemy.guard?'#59baa3':'#eb826c',side:THREE.DoubleSide}));bar.add(bg,hp);bar.position.y=1.45;hp.position.z=.002;bar.userData.fill=hp;m.add(bar);m.userData.hpBar=bar;m.userData.worker=true;this.enemyModels.set(enemy.id,m);this.world.add(m);}animateWorker(m,enemy,this.sim.time,this.camera,this.characterSurface);if(m.userData.hpBar){m.userData.hpBar.visible=enemy.hp>0;m.userData.hpBar.quaternion.copy(m.quaternion).invert().multiply(this.camera.quaternion);m.userData.hpBar.userData.fill.scale.x=Math.max(.01,(enemy.hp??1)/(enemy.maxHp??1));}}for(const[id,m]of this.enemyModels){if(![...this.sim.attackers,...(this.sim.guards||[])].some(e=>e.id===id)){this.world.remove(m);release(m);this.enemyModels.delete(id);}}
   this.uiAccum+=dt;this.frameSamples=(this.frameSamples||0)+1;this.frameElapsed=(this.frameElapsed||0)+dt;if(this.uiAccum>.4){this.uiAccum=0;this.renderer.domElement.dataset.fps=String(Math.round(this.frameSamples/this.frameElapsed));this.renderer.domElement.dataset.renderer=this.renderer.isSoftware?'canvas':'webgl';this.renderer.domElement.dataset.geometries=String(this.renderer.info?.memory.geometries||(this.renderer.cache?.size||0)+(this.renderer.poseCache?.size||0));this.renderer.domElement.dataset.textures=String(this.renderer.info?.memory.textures||0);this.renderer.domElement.dataset.models=String(this.models.size+this.workerModels.size+this.enemyModels.size);this.renderer.domElement.dataset.gameTime=String(Math.round(this.sim.time*10)/10);this.renderer.domElement.dataset.characterStyle='pixel';this.renderer.domElement.dataset.characterFrames=[...this.workerModels.values()].map(m=>m.userData.direction+':'+m.userData.frame).join(',');this.frameSamples=0;this.frameElapsed=0;this.callbacks.onUpdate?.(this.sim);const w=this.container.clientWidth,h=this.container.clientHeight;this.callbacks.onMarkers?.(this.sim.buildings.filter(b=>!this.mode).map(b=>{const p=this.markerPoint(b,w,h);return {id:b.id,type:b.type,status:b.status,working:b.working,x:p.x,y:p.y};}).filter(m=>m.x>-200&&m.x<w+200&&m.y>-200&&m.y<h+200));}
   if(this.markerLayer)this.placeMarkers();
   for(const {m,route} of this.freight||[]){
@@ -228,7 +267,8 @@ export class GameScene{
    m.visible=!!route.cargo&&!!pose;
    if(m.visible){m.position.set(pose.x,route.mode==='rail'?.04:.08,pose.z);m.rotation.y=pose.dir;m.userData.animate?.(this.sim.time,null,false,this.viewIndex);}
   }
-  const paintKey=this.sim.time+':'+this.sim.revision+':'+this.camera.matrixWorld.elements.join(',')+':'+this.camera.zoom+':'+this.mode+':'+this.selection+':'+this.hover?.x+','+this.hover?.z+':'+this.container.clientWidth+':'+this.container.clientHeight;if(!this.sim.paused||paintKey!==this.lastPaint){this.renderer.render(this.scene,this.camera);this.lastPaint=paintKey;}this.frame=requestAnimationFrame(this.loop);
+  this.effects.update();
+  const paintKey=this.sim.time+':'+this.sim.revision+':'+this.camera.matrixWorld.elements.join(',')+':'+this.camera.zoom+':'+this.mode+':'+this.selection+':'+this.hover?.x+','+this.hover?.z+':'+this.container.clientWidth+':'+this.container.clientHeight+':'+this.atmosphere.time;if(!this.sim.paused||paintKey!==this.lastPaint){this.renderer.render(this.scene,this.camera);this.lastPaint=paintKey;}this.frame=requestAnimationFrame(this.loop);
  }
  // Building art does not depend on the race (only resident portraits do), so each building icon is drawn once per
  // scene and shared by every race's icon object. Icons are drawn a few per idle period (placed types first) and
@@ -282,6 +322,6 @@ export class GameScene{
   this.alive=false;cancelAnimationFrame(this.frame);this.resizeObserver.disconnect();this.controls.dispose();
   if(this.iconTask?.idle)cancelIdleCallback(this.iconTask.idle);if(this.iconTask?.timer)clearTimeout(this.iconTask.timer);this.iconTask=null;this.disposeIconRenderer();
   const c=this.renderer.domElement;c.removeEventListener('webglcontextlost',this.onLost);c.removeEventListener('webglcontextrestored',this.onRestored);c.removeEventListener('pointerdown',this.onDown);c.removeEventListener('pointermove',this.onMove);c.removeEventListener('pointerup',this.onUp);c.removeEventListener('pointerleave',this.onLeave);c.removeEventListener('pointercancel',this.onCancel);c.removeEventListener('contextmenu',this.onContext);
-  release(this.world);release(this.scenery?.group);release(this.ghost);release(this.selectionLine);release(this.hoverLine);release(this.expansionLines);this.renderer.dispose();c.remove();
+  c.removeEventListener('keydown',this.onMapKey);this.effects.dispose();this.atmosphere.dispose();this.landscape?.dispose();release(this.world);release(this.scenery?.group);release(this.ghost);release(this.selectionLine);release(this.hoverLine);release(this.expansionLines);this.renderer.dispose();c.remove();
  }
 }

@@ -1,0 +1,6599 @@
+{
+  "actions": [
+    "idle",
+    "walk",
+    "carry",
+    "work",
+    "pickup",
+    "drop",
+    "greet",
+    "attack",
+    "hurt",
+    "defeat",
+    "turn"
+  ],
+  "characters": [
+    {
+      "id": "mira",
+      "name": "미라",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "bron",
+      "name": "브론",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "taron",
+      "name": "타론",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "silen",
+      "name": "실렌",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "dew",
+      "name": "이슬",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "kai",
+      "name": "카이",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "fia",
+      "name": "피아",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "hana",
+      "name": "하나",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "rowan",
+      "name": "로웬",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "marna",
+      "name": "마르나",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "ethan",
+      "name": "에단",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "vera",
+      "name": "베라",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "lien",
+      "name": "리엔",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "ael",
+      "name": "아엘",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "elion",
+      "name": "엘리온",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "mist",
+      "name": "안개",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "lana",
+      "name": "라나",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "eil",
+      "name": "에일",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "ravik",
+      "name": "라비크",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "grum",
+      "name": "그룸",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "niki",
+      "name": "니키",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "sora",
+      "name": "소라",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "kael",
+      "name": "카엘",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "neris",
+      "name": "네리스",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "dorin",
+      "name": "도린",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "elvar",
+      "name": "엘바르",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "serin",
+      "name": "세린",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "nara",
+      "name": "나라",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "lyra",
+      "name": "리라",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "borik",
+      "name": "보리크",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "oriel",
+      "name": "오리엘",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "garron",
+      "name": "가론",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "maren",
+      "name": "마렌",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "nalia",
+      "name": "날리아",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "roa",
+      "name": "로아",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "cedric",
+      "name": "세드릭",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "bel",
+      "name": "벨",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "vian",
+      "name": "비안",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "oswin",
+      "name": "오스윈",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "erena",
+      "name": "에레나",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "dax",
+      "name": "닥스",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "norin",
+      "name": "노린",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "hugo",
+      "name": "휴고",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "selia",
+      "name": "셀리아",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "otto",
+      "name": "오토",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "luth",
+      "name": "루스",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "iris",
+      "name": "아이리스",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "aira",
+      "name": "아이라",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "garen",
+      "name": "가렌",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "aster",
+      "name": "아스테르",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    },
+    {
+      "id": "terin",
+      "name": "테린",
+      "actions": [
+        {
+          "action": "idle",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "walk",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "carry",
+          "selected": true,
+          "frames": 32,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "work",
+          "selected": true,
+          "frames": 8,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "pickup",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "drop",
+          "selected": true,
+          "frames": 12,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "greet",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "attack",
+          "selected": true,
+          "frames": 6,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "hurt",
+          "selected": true,
+          "frames": 2,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "defeat",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        },
+        {
+          "action": "turn",
+          "selected": true,
+          "frames": 4,
+          "directions": [
+            "SW",
+            "NW",
+            "NE",
+            "SE"
+          ]
+        }
+      ],
+      "atlasLoaded": true,
+      "portraitLoaded": true
+    }
+  ],
+  "errors": [],
+  "failedRequests": [],
+  "qualityApproval": false
+}

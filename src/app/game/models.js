@@ -27,7 +27,7 @@ export function makeBuildingSafe(type, race = 'human') {
 export function makeTree(kind = 0, scale = 1) { return makePixelTree(kind, scale); }
 export function makeRock(scale = 1, kind = 'rock') { return makePixelProp(kind, scale); }
 export function makeWorker(index = 0, race = 'human', appearance) { return character(index, race, appearance); }
-export function animateWorker(group, worker, time, camera) { animateCharacter(group, worker, time, camera); }
+export function animateWorker(group, worker, time, camera, groundHeight) { animateCharacter(group, worker, time, camera, groundHeight); }
 // The west-edge gate spans z while the export road runs along x.
 export function makeExportGate() {
  const gate = makePixelProp('exportGate');

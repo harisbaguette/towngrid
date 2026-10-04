@@ -21,4 +21,4 @@ export async function loadAssets(race = 'human') {
  ]);
 }
 export function character(index, race = 'human', appearance) { return createPixelCharacter(index, race, appearance); }
-export function animateCharacter(group, worker, time, camera) { return animatePixelCharacter(group, worker, time, camera); }
+export function animateCharacter(group, worker, time, camera, groundHeight) { return animatePixelCharacter(group, worker, time, camera, groundHeight); }

@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import {networkSamples} from './pixel-network.js';
+import {roadRectangles} from './road-footprint.js';
+import {atmosphereVisibility} from './atmosphere-focus.js';
 
 // CPU renderer for devices where WebGL is unavailable. It projects the very same
 // animated Three.js models, with cached model layers and diffuse face lighting.
@@ -23,6 +25,8 @@ export class SoftwareRenderer {
    if(!material||material.visible===false)return;
    world.copy(m.matrixWorld);normalMat.getNormalMatrix(world);col.copy(material.color||new THREE.Color('#ffffff')).convertLinearToSRGB();
    const count=idx?idx.count:p.count,projected=new Float32Array(p.count*3),shades=new Float32Array(p.count);
+   const uv=m.geometry.attributes.uv,relief=m.userData.landformSurface;
+   if(relief&&!m.userData.cpuTexture)m.userData.cpuTexture=m.userData.image.getContext('2d').getImageData(0,0,m.userData.image.width,m.userData.image.height);
    const mvp=new THREE.Matrix4().multiplyMatrices(this.projection,world);
    const used=idx?new Set(idx.array):Array.from({length:p.count},(_,i)=>i);for(const i of used){a.fromBufferAttribute(p,i);if(m.isSkinnedMesh)m.applyBoneTransform(i,a);a.applyMatrix4(mvp);projected[i*3]=(a.x+1)*this.width/2;projected[i*3+1]=(1-a.y)*this.height/2;projected[i*3+2]=a.z;if(n){va.fromBufferAttribute(n,i).applyNormalMatrix(normalMat);const diffuse=Math.max(0,va.dot(this.sun)),spec=Math.pow(Math.max(0,va.dot(this.sun.clone().add(this.viewDirection||new THREE.Vector3(0,.4,1)).normalize())),24)*(1-(material.roughness??.8))*.35;shades[i]=.72+diffuse*.28+spec+Math.max(0,va.y)*.025;}else shades[i]=.86;}
    for(let i=0;i<count;i+=3){
@@ -30,7 +34,7 @@ export class SoftwareRenderer {
     const ax=projected[ia*3],ay=projected[ia*3+1],bx=projected[ib*3],by=projected[ib*3+1],cx=projected[ic*3],cy=projected[ic*3+1];
     const area=(bx-ax)*(cy-ay)-(by-ay)*(cx-ax);if(area>=-.025&&material.side!==THREE.DoubleSide)continue;
     const vertexColor=m.geometry.attributes.color;if(vertexColor&&(material.vertexColors||material.map)){col.fromBufferAttribute(vertexColor,ia).convertLinearToSRGB();}
-    triangles.push({ax,ay,bx,by,cx,cy,az:projected[ia*3+2],bz:projected[ib*3+2],cz:projected[ic*3+2],z:(projected[ia*3+2]+projected[ib*3+2]+projected[ic*3+2])/3,r:col.r*255,g:col.g*255,b:col.b*255,sa:shades[ia],sb:shades[ib],sc:shades[ic],alpha:material.transparent?material.opacity:1});
+    triangles.push({ax,ay,bx,by,cx,cy,az:projected[ia*3+2],bz:projected[ib*3+2],cz:projected[ic*3+2],z:(projected[ia*3+2]+projected[ib*3+2]+projected[ic*3+2])/3,r:col.r*255,g:col.g*255,b:col.b*255,sa:relief?1:shades[ia],sb:relief?1:shades[ib],sc:relief?1:shades[ic],alpha:material.transparent?material.opacity:1,...(relief?{texture:m.userData.cpuTexture,uv:[uv.getX(ia),uv.getY(ia),uv.getX(ib),uv.getY(ib),uv.getX(ic),uv.getY(ic)]}:{})});
    }
   });
   triangles.sort((a,b)=>b.z-a.z);return triangles;
@@ -50,7 +54,8 @@ export class SoftwareRenderer {
    const dxA=(by-cy)/denominator,dxB=(cy-ay)/denominator;
    for(let y=y0;y<=y1;y++){let a=((by-cy)*(x0+.5-cx)+(cx-bx)*(y+.5-cy))/denominator,b=((cy-ay)*(x0+.5-cx)+(ax-cx)*(y+.5-cy))/denominator;
     for(let x=x0;x<=x1;x++,a+=dxA,b+=dxB){const c=1-a-b;if(a<-.00001||b<-.00001||c<-.00001)continue;const z=a*t.az+b*t.bz+c*t.cz,index=y*w+x;if(z>depth[index]+1e-7)continue;const shade=a*t.sa+b*t.sb+c*t.sc,k=index*4,alpha=t.alpha;
-     if(alpha>=.999){pixels[k]=t.r*shade;pixels[k+1]=t.g*shade;pixels[k+2]=t.b*shade;pixels[k+3]=255;depth[index]=z;}
+     if(t.texture){const tex=t.texture,u=a*t.uv[0]+b*t.uv[2]+c*t.uv[4],v=a*t.uv[1]+b*t.uv[3]+c*t.uv[5],tx=Math.max(0,Math.min(tex.width-1,Math.floor(u*tex.width))),ty=Math.max(0,Math.min(tex.height-1,Math.floor((1-v)*tex.height))),ti=(ty*tex.width+tx)*4;pixels[k]=tex.data[ti];pixels[k+1]=tex.data[ti+1];pixels[k+2]=tex.data[ti+2];pixels[k+3]=255;depth[index]=z;}
+     else if(alpha>=.999){pixels[k]=t.r*shade;pixels[k+1]=t.g*shade;pixels[k+2]=t.b*shade;pixels[k+3]=255;depth[index]=z;}
      else{const old=pixels[k+3]/255,combined=alpha+old*(1-alpha);if(combined<=0)continue;pixels[k]=(t.r*shade*alpha+pixels[k]*old*(1-alpha))/combined;pixels[k+1]=(t.g*shade*alpha+pixels[k+1]*old*(1-alpha))/combined;pixels[k+2]=(t.b*shade*alpha+pixels[k+2]*old*(1-alpha))/combined;pixels[k+3]=combined*255;}
     }
    }
@@ -61,10 +66,10 @@ export class SoftwareRenderer {
  }
  drawPixelSurface(mesh){
   const u=mesh.userData,image=u.image;if(!image)return;
-  const ctx=this.ctx,cell=image.height,key=u.environmentId.startsWith('landscape-')?image:u.environmentId+':'+u.frame+':'+u.network;
+  const ctx=this.ctx,cell=image.height,worldGround=u.environmentId==='world-ground',key=worldGround||u.environmentId.startsWith('landscape-')?image:u.environmentId+':'+u.frame+':'+u.network;
   if(!this.surfacePatterns.has(key)){
-   const tile=document.createElement('canvas');tile.width=tile.height=cell;
-   const tileCtx=tile.getContext('2d');tileCtx.drawImage(image,u.frame*cell,0,cell,cell,0,0,cell,cell);
+   const tile=document.createElement('canvas');tile.width=worldGround?image.width:cell;tile.height=cell;
+   const tileCtx=tile.getContext('2d');if(worldGround)tileCtx.drawImage(image,0,0);else tileCtx.drawImage(image,u.frame*cell,0,cell,cell,0,0,cell,cell);
    if(u.network!==null&&u.network!==undefined){
     const source=tileCtx.getImageData(0,0,cell,cell),target=tileCtx.createImageData(cell,cell);
     for(let y=0;y<cell;y++)for(let x=0;x<cell;x++)for(const [s,t] of networkSamples(u.network,(x+.5)/cell,1-(y+.5)/cell)){
@@ -80,14 +85,11 @@ export class SoftwareRenderer {
    mesh.getMatrixAt(i,matrix);matrix.premultiply(mesh.matrixWorld);
    const p=corners.map(([x,y])=>{const v=new THREE.Vector3(x,y,0).applyMatrix4(matrix);return this.project(v.x,v.y,v.z);});
    if(Math.max(...p.map(v=>v.x))<0||Math.min(...p.map(v=>v.x))>this.width||Math.max(...p.map(v=>v.y))<0||Math.min(...p.map(v=>v.y))>this.height)continue;
-   const w=cell*repeat[0],h=cell*repeat[1];
+   const w=(worldGround?image.width:cell)*repeat[0],h=cell*repeat[1];
    ctx.save();ctx.imageSmoothingEnabled=false;ctx.transform((p[1].x-p[0].x)/w,(p[1].y-p[0].y)/w,(p[3].x-p[0].x)/h,(p[3].y-p[0].y)/h,p[0].x,p[0].y);
    if(u.mask!==null){
-    ctx.beginPath();ctx.rect(w*.21,h*.21,w*.58,h*.58);
-    if(u.mask&1)ctx.rect(w*.21,0,w*.58,h*.5);
-    if(u.mask&2)ctx.rect(w*.5,h*.21,w*.5,h*.58);
-    if(u.mask&4)ctx.rect(w*.21,h*.5,w*.58,h*.5);
-    if(u.mask&8)ctx.rect(0,h*.21,w*.5,h*.58);
+    ctx.beginPath();
+    for(const [x,y,width,height] of roadRectangles(u.mask))ctx.rect(x*w,y*h,width*w,height*h);
     ctx.clip();
    }
    // Overlap opaque ground by a subpixel; rotated Canvas rectangles otherwise
@@ -104,14 +106,14 @@ export class SoftwareRenderer {
   if(mesh.userData.pixelSurface){this.drawPixelSurface(mesh);return;}
   const ctx=this.ctx,dummy=new THREE.Matrix4(),color=new THREE.Color(),pos=new THREE.Vector3();
   for(let i=0;i<mesh.count;i++){
-   mesh.getMatrixAt(i,dummy);pos.setFromMatrixPosition(dummy);const water=mesh.geometry.type==='PlaneGeometry';
+   mesh.getMatrixAt(i,dummy);pos.setFromMatrixPosition(dummy);const water=mesh.geometry.type==='PlaneGeometry'&&!mesh.userData.powerOverlay;
    const x=pos.x,z=pos.z,y=pos.y+(water?0:(mesh.geometry.parameters?.height||.2)/2),hx=(mesh.geometry.parameters?.width||1)*.5,hz=(water?mesh.geometry.parameters?.height:mesh.geometry.parameters?.depth||1)*.5,points=[this.project(x-hx,y,z-hz),this.project(x+hx,y,z-hz),this.project(x+hx,y,z+hz),this.project(x-hx,y,z+hz)];
    if(Math.max(...points.map(v=>v.x))<0||Math.min(...points.map(v=>v.x))>this.width||Math.max(...points.map(v=>v.y))<0||Math.min(...points.map(v=>v.y))>this.height)continue;
    if(mesh.instanceColor){mesh.getColorAt(i,color);ctx.fillStyle=color.getStyle(THREE.SRGBColorSpace);}else ctx.fillStyle=water?'#36b4c2':mesh.material.color.getStyle(THREE.SRGBColorSpace);
    const baseColor=ctx.fillStyle;
    const path=(pts,round=0)=>{ctx.beginPath();for(let j=0;j<4;j++){const p=pts[j],prev=pts[(j+3)%4],next=pts[(j+1)%4],a={x:p.x+(prev.x-p.x)*round,y:p.y+(prev.y-p.y)*round},b={x:p.x+(next.x-p.x)*round,y:p.y+(next.y-p.y)*round};if(j===0)ctx.moveTo(a.x,a.y);else ctx.lineTo(a.x,a.y);ctx.quadraticCurveTo(p.x,p.y,b.x,b.y);}ctx.closePath();};
    if(mesh.userData.soil){const bottom=[this.project(x-hx,pos.y-.21,z-hz),this.project(x+hx,pos.y-.21,z-hz),this.project(x+hx,pos.y-.21,z+hz),this.project(x-hx,pos.y-.21,z+hz)];for(let side=0;side<4;side++){const next=(side+1)%4;if((points[next].x-points[side].x)>=0)continue;const [nx,nz]=[[0,-1],[1,0],[0,1],[-1,0]][side];if(mesh.userData.land?.has((x+nx)+','+(z+nz)))continue;path([points[side],points[next],bottom[next],bottom[side]],.035);const grad=ctx.createLinearGradient(0,points[side].y,0,bottom[side].y);grad.addColorStop(0,'#ceb68a');grad.addColorStop(1,'#a5865e');ctx.fillStyle=grad;ctx.fill();}}
-   path(points,(mesh.userData.tiles||mesh.userData.soil)?.012:0);ctx.fillStyle=baseColor;ctx.fill();
+   path(points,(mesh.userData.tiles||mesh.userData.soil)?.012:0);ctx.fillStyle=baseColor;ctx.globalAlpha=mesh.userData.powerOverlay?mesh.material.opacity:1;ctx.fill();ctx.globalAlpha=1;
    if(mesh.userData.tiles){const top=Math.min(...points.map(p=>p.y)),bottom=Math.max(...points.map(p=>p.y)),light=ctx.createLinearGradient(0,top,0,bottom);light.addColorStop(0,'#f7ffcf16');light.addColorStop(.75,'#f7ffcf00');light.addColorStop(1,'#56724517');ctx.fillStyle=light;ctx.fill();ctx.strokeStyle='#d3eaad18';ctx.lineWidth=.65;ctx.stroke();}
    if(mesh.userData.pixelWater&&mesh.userData.image){
     const u=mesh.userData,image=u.image,cell=image.height,p=points;
@@ -138,14 +140,22 @@ export class SoftwareRenderer {
   const cellWidth=image.width/u.atlas.columns,cellHeight=image.height/u.atlas.rows;
   const position=u.sprite.getWorldPosition(new THREE.Vector3()),anchor=this.project(position.x,position.y,position.z);
   const x=Math.round(anchor.x-size*u.sprite.center.x),y=Math.round(anchor.y-size*(1-u.sprite.center.y));
-  ctx.save();ctx.imageSmoothingEnabled=false;ctx.globalAlpha=u.sprite.material.opacity;
-  ctx.fillStyle='#183d3d35';ctx.beginPath();ctx.ellipse(center.x,center.y+1,baseSize*.18,baseSize*.065,0,0,Math.PI*2);ctx.fill();
+  ctx.save();ctx.imageSmoothingEnabled=false;
+  const shadow=u.shadow;
+  if(shadow.visible){
+   const radius=shadow.geometry.parameters.radius,shadowCenter=shadow.getWorldPosition(new THREE.Vector3());
+   const shadowX=shadow.localToWorld(new THREE.Vector3(radius,0,0)),shadowY=shadow.localToWorld(new THREE.Vector3(0,radius,0));
+   const sc=this.project(shadowCenter.x,shadowCenter.y,shadowCenter.z),sx=this.project(shadowX.x,shadowX.y,shadowX.z),sy=this.project(shadowY.x,shadowY.y,shadowY.z);
+   ctx.save();ctx.globalAlpha=shadow.material.opacity;ctx.fillStyle=shadow.material.color.getStyle(THREE.SRGBColorSpace);
+   ctx.transform(sx.x-sc.x,sx.y-sc.y,sy.x-sc.x,sy.y-sc.y,sc.x,sc.y);ctx.beginPath();ctx.arc(0,0,1,0,Math.PI*2);ctx.fill();ctx.restore();
+  }
+  ctx.globalAlpha=u.sprite.material.opacity;
   if(u.sprite.material.rotation){
    // Authored defeat frames already contain the fallen body. Only rotate
    // legacy sprites, around the same anchor and with the WebGL rotation sign.
    ctx.translate(anchor.x,anchor.y);ctx.rotate(-u.sprite.material.rotation);
-   ctx.drawImage(image,u.frame*cellWidth,u.atlas.row*cellHeight,cellWidth,cellHeight,-size*u.sprite.center.x,-size*(1-u.sprite.center.y),size,size);
-  }else ctx.drawImage(image,u.frame*cellWidth,u.atlas.row*cellHeight,cellWidth,cellHeight,x,y,size,size);
+   ctx.drawImage(image,(u.atlas.frame??u.frame)*cellWidth,u.atlas.row*cellHeight,cellWidth,cellHeight,-size*u.sprite.center.x,-size*(1-u.sprite.center.y),size,size);
+  }else ctx.drawImage(image,(u.atlas.frame??u.frame)*cellWidth,u.atlas.row*cellHeight,cellWidth,cellHeight,x,y,size,size);
   ctx.restore();
   const bar=u.hpBar;if(bar?.visible){const width=Math.max(16,size*.48),top=y+size*.05;ctx.fillStyle='#302c35';ctx.fillRect(center.x-width/2,top,width,5);ctx.fillStyle=bar.userData.fill.material.color.getStyle(THREE.SRGBColorSpace);ctx.fillRect(center.x-width/2+1,top+1,(width-2)*bar.userData.fill.scale.x,3);}
  }
@@ -185,6 +195,46 @@ export class SoftwareRenderer {
   for(const wake of u.wakes||[])if(wake.visible)this.line(wake);
   if(u.layers)for(const layer of u.layers)if(layer.visible&&!layer.userData.behind)this.drawPixelEnvironment(layer,projectPoint(layer.getWorldPosition(new THREE.Vector3())));
  }
+ drawAtmosphere(layer){
+  this.atmosphereSurface??=document.createElement('canvas');
+  const surface=this.atmosphereSurface;
+  if(surface.width!==this.width||surface.height!==this.height){surface.width=this.width;surface.height=this.height;}
+  const ctx=surface.getContext('2d');ctx.clearRect(0,0,surface.width,surface.height);
+  if(!this.atmosphereFocusMask){
+   const mask=this.atmosphereFocusMask=document.createElement('canvas');mask.width=mask.height=256;
+   const c=mask.getContext('2d'),data=c.createImageData(256,256);
+   for(let y=0;y<256;y++)for(let x=0;x<256;x++)data.data[(y*256+x)*4+3]=Math.round(255*atmosphereVisibility((x+.5)/128-1,(y+.5)/128-1));
+   c.putImageData(data,0,0);
+  }
+  for(const sprite of layer.children){
+   if(!sprite.visible||sprite.material.opacity<.003)continue;
+   const texture=sprite.material.map,image=texture?.image;if(!image)continue;
+   const p=sprite.getWorldPosition(this.v),point=this.project(p.x,p.y,p.z);
+   const width=sprite.scale.x*this.pixelsPerWorldUnit,height=sprite.scale.y*this.pixelsPerWorldUnit;
+   ctx.save();ctx.globalAlpha=sprite.material.opacity;ctx.imageSmoothingEnabled=false;
+   ctx.drawImage(image,texture.offset.x*image.width,(1-texture.offset.y-texture.repeat.y)*image.height,texture.repeat.x*image.width,texture.repeat.y*image.height,point.x-width/2,point.y-height/2,width,height);ctx.restore();
+  }
+  ctx.save();ctx.globalCompositeOperation='destination-in';ctx.imageSmoothingEnabled=true;ctx.drawImage(this.atmosphereFocusMask,0,0,this.width,this.height);ctx.restore();
+  this.ctx.drawImage(surface,0,0,this.width,this.height);
+ }
+ drawEffects(batch){
+  this.effectSprites??=new Map();
+  const texture=batch.mesh.material.uniforms.atlas.value,image=texture.image,cell=image.height,ctx=this.ctx;
+  for(const p of batch.items){
+   const key=p.frame+':'+p.color;
+   if(!this.effectSprites.has(key)){
+    const tile=document.createElement('canvas');tile.width=tile.height=cell;const c=tile.getContext('2d');c.drawImage(image,p.frame*cell,0,cell,cell,0,0,cell,cell);
+    if(p.color!=='#ffffff'){c.globalCompositeOperation='source-in';c.fillStyle=p.color;c.fillRect(0,0,cell,cell);}this.effectSprites.set(key,tile);
+   }
+   ctx.save();ctx.globalAlpha=p.alpha;ctx.imageSmoothingEnabled=false;
+   if(batch.ground){
+    const co=Math.cos(p.rotation),si=Math.sin(p.rotation),project=(x,z)=>this.project(p.x+x*co-z*si,p.y,p.z+x*si+z*co);
+    const a=project(-p.w/2,-p.h/2),b=project(p.w/2,-p.h/2),d=project(-p.w/2,p.h/2);
+    ctx.transform((b.x-a.x)/cell,(b.y-a.y)/cell,(d.x-a.x)/cell,(d.y-a.y)/cell,a.x,a.y);ctx.drawImage(this.effectSprites.get(key),0,0);
+   }else{const center=this.project(p.x,p.y,p.z),w=p.w*this.pixelsPerWorldUnit,h=p.h*this.pixelsPerWorldUnit;ctx.translate(center.x,center.y);ctx.rotate(-p.rotation);ctx.drawImage(this.effectSprites.get(key),-w/2,-h/2,w,h);}
+   ctx.restore();
+  }
+ }
  render(scene,camera){
   this.viewDirection=camera.getWorldDirection(new THREE.Vector3()).negate();const renderStart=performance.now();this.frame++;scene.updateMatrixWorld();scene.traverse(m=>{if(m.isSkinnedMesh)m.skeleton.update();});camera.updateMatrixWorld();this.projection.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);
   this.pixelsPerWorldUnit=this.height*camera.zoom/(camera.top-camera.bottom);
@@ -192,14 +242,15 @@ export class SoftwareRenderer {
   if(this.zoom!==zoom){this.cache.clear();this.poseCache.clear();this.domElement.dataset.clears=String(+(this.domElement.dataset.clears||0)+1);this.zoom=zoom;}
   const ctx=this.ctx;ctx.setTransform(this.ratio,0,0,this.ratio,0,0);ctx.globalAlpha=1;
   if(this.alpha)ctx.clearRect(0,0,this.width,this.height);else{ctx.fillStyle=this.background;ctx.fillRect(0,0,this.width,this.height);}
-  const ground=[],units=[],lines=[],grass=[];
-  const gather=g=>{if(!g.visible)return;if(g.isInstancedMesh){if(g.geometry.type==='ConeGeometry')grass.push(g);else ground.push(g);return;}if(g.isLine){lines.push(g);return;}if(g.isGroup&&(g.userData.pixelEnvironment||g.userData.asset||g.userData.worker||g.children.some(c=>c.isMesh))&&!g.children.some(c=>c.isInstancedMesh)){units.push(g);return;}for(const c of g.children)gather(c);};
-  const groundLayer=m=>m.userData.pixelSurface?m.userData.layer:m.userData.tiles?3:m.userData.soil?2:0;
+  const ground=[],units=[],lines=[],grass=[],atmosphere=[],effects=[];
+  const gather=g=>{if(!g.visible)return;if(g.userData.worldTint)return;if(g.userData.effectBatch){effects.push(g.userData.effectBatch);return;}if(g.userData.atmosphereLayer){atmosphere.push(g);return;}if(g.isInstancedMesh){if(g.geometry.type==='ConeGeometry')grass.push(g);else ground.push(g);return;}if(g.isLine){lines.push(g);return;}if(g.isGroup&&(g.userData.pixelEnvironment||g.userData.asset||g.userData.worker||g.children.some(c=>c.isMesh))&&!g.children.some(c=>c.isInstancedMesh)){units.push(g);return;}for(const c of g.children)gather(c);};
+  const groundLayer=m=>m.userData.powerOverlay?3.5:m.userData.pixelSurface?m.userData.layer:m.userData.tiles?3:m.userData.soil?2:0;
   gather(scene);ground.sort((a,b)=>groundLayer(a)-groundLayer(b)||Math.max(b.geometry.parameters?.width||1,b.geometry.parameters?.height||1,b.geometry.parameters?.depth||1)-Math.max(a.geometry.parameters?.width||1,a.geometry.parameters?.height||1,a.geometry.parameters?.depth||1));ground.forEach(g=>this.drawGround(g));grass.forEach(g=>this.grass(g));
+  effects.filter(e=>e.ground).forEach(e=>this.drawEffects(e));
   units.sort((a,b)=>this.point(b.matrixWorld.elements[12],b.matrixWorld.elements[13],b.matrixWorld.elements[14]).z-this.point(a.matrixWorld.elements[12],a.matrixWorld.elements[13],a.matrixWorld.elements[14]).z);
   const now=performance.now();const refreshIds=new Set(units.filter(root=>!root.userData.pixel&&!root.userData.pixelEnvironment&&!root.name.startsWith('tree-')&&root.name!=='rock'&&(root.userData.legs||root.userData.worker||root.userData.animate)).sort((a,b)=>(this.cache.get(a.uuid)?.time||0)-(this.cache.get(b.uuid)?.time||0)).slice(0,4).map(root=>root.uuid));
   for(const root of units){
-   const center=this.project(root.matrixWorld.elements[12],root.matrixWorld.elements[13],root.matrixWorld.elements[14]);if(center.x< -200||center.x>this.width+200||center.y< -100||center.y>this.height+250)continue;
+   const center=this.project(root.matrixWorld.elements[12],root.matrixWorld.elements[13],root.matrixWorld.elements[14]),margin=root.userData.landformSurface?32*this.pixelsPerWorldUnit:200;if(center.x< -margin||center.x>this.width+margin||center.y< -margin||center.y>this.height+margin)continue;
    if(root.userData.pixel){this.drawPixelCharacter(root,center);continue;}
    if(root.userData.pixelEnvironment){this.drawPixelEnvironment(root,center);continue;}
    const natural=root.name.startsWith('tree-')||root.name==='rock';const key=natural?root.name+':'+Math.round(root.scale.x*4):root.uuid;
@@ -207,12 +258,17 @@ export class SoftwareRenderer {
    let sprite=pose?this.poseCache.get(pose):this.cache.get(key);const moving=!!u.worker||!!u.legs||(!natural&&!!u.animate);const refresh=!pose&&moving&&(!sprite||now-sprite.time>(u.worker?85:180))&&refreshIds.has(root.uuid)&&performance.now()-now<12;
    if(!sprite||refresh){sprite=this.sprite(root);if(sprite){this.cache.set(key,sprite);if(pose){this.poseCache.set(pose,sprite);if(this.poseCache.size>512)this.poseCache.delete(this.poseCache.keys().next().value);}}}
    if(!sprite)continue;
-   if(!this.alpha&&!root.name.startsWith('ghost')){const rx=Math.max(4,sprite.w*.41),ry=Math.max(2,sprite.w*.18);ctx.save();ctx.translate(center.x+sprite.w*.065,center.y+2);ctx.scale(1,ry/rx);const shadow=ctx.createRadialGradient(0,0,rx*.13,0,0,rx);shadow.addColorStop(0,'#25492450');shadow.addColorStop(.58,'#25492428');shadow.addColorStop(1,'#29472800');ctx.fillStyle=shadow;ctx.beginPath();ctx.arc(0,0,rx,0,Math.PI*2);ctx.fill();ctx.restore();}
+   if(!this.alpha&&!root.name.startsWith('ghost')&&!root.userData.landformSurface){const rx=Math.max(4,sprite.w*.41),ry=Math.max(2,sprite.w*.18);ctx.save();ctx.translate(center.x+sprite.w*.065,center.y+2);ctx.scale(1,ry/rx);const shadow=ctx.createRadialGradient(0,0,rx*.13,0,0,rx);shadow.addColorStop(0,'#25492450');shadow.addColorStop(.58,'#25492428');shadow.addColorStop(1,'#29472800');ctx.fillStyle=shadow;ctx.beginPath();ctx.arc(0,0,rx,0,Math.PI*2);ctx.fill();ctx.restore();}
    ctx.drawImage(sprite.canvas,center.x+sprite.dx,center.y+sprite.dy,sprite.w,sprite.h);
   }
-  lines.forEach(l=>this.line(l));this.domElement.dataset.renderMs=String(Math.round(performance.now()-renderStart));
+  effects.filter(e=>!e.ground).forEach(e=>this.drawEffects(e));
+  lines.forEach(l=>this.line(l));
+  if(this.worldFog){const center=this.project(this.worldFog.center.x,0,this.worldFog.center.z),radius=Math.max(this.width,this.height)*.7,gradient=ctx.createRadialGradient(center.x,center.y,radius*.38,center.x,center.y,radius);gradient.addColorStop(0,'#c7d6bd00');gradient.addColorStop(.65,'#c7d6bd32');gradient.addColorStop(1,'#c7d6bddd');ctx.fillStyle=gradient;ctx.fillRect(0,0,this.width,this.height);}
+  if(this.worldTint?.alpha){ctx.save();ctx.fillStyle=this.worldTint.color;ctx.globalAlpha=this.worldTint.alpha;ctx.fillRect(0,0,this.width,this.height);ctx.restore();}
+  atmosphere.sort((a,b)=>a.children[0].renderOrder-b.children[0].renderOrder).forEach(layer=>this.drawAtmosphere(layer));
+  this.domElement.dataset.renderMs=String(Math.round(performance.now()-renderStart));
  }
- dispose(){this.cache.clear();this.poseCache.clear();this.surfacePatterns.clear();}
+ dispose(){this.cache.clear();this.poseCache.clear();this.surfacePatterns.clear();this.effectSprites?.clear();}
 }
 export function createRenderer({forceSoftware=false,...options}={}){
  if(forceSoftware)return new SoftwareRenderer(options);

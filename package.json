@@ -15,7 +15,8 @@
     "typecheck": "tsc --noEmit --incremental false",
     "check:characters": "node scripts/check-pixel-characters.mjs",
     "test": "node scripts/test-local.mjs",
-    "build:launcher": "node scripts/launcher/build.mjs"
+    "build:launcher": "node scripts/launcher/build.mjs",
+    "community": "node server/community.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

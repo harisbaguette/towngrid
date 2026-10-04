@@ -214,4 +214,4 @@ if __name__ == '__main__':
         print(summary['id'], summary['frames'], 'frames', summary.get('sourceGrid',summary.get('animationMethod','rig')))
     # Incremental correction packs must retain the rest of the roster catalog.
     catalog = [json.loads(path.read_text()) for path in sorted(output.glob('*/frames.json'))]
-    (output / 'catalog.json').write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + '\n')
+    (output / 'catalog.json').write_text(json.dumps(catalog, ensure_ascii=False, separators=(',', ':')) + '\n')

@@ -1,4 +1,7 @@
 import {remainingSeconds} from './game-time.js';
+import {capacity} from './storage.js';
+import {outputItems} from './facility-inventory.js';
+import {terminalVehicleCapacity} from './trade-terminals.js';
 import { BUILDINGS, RESOURCES } from './simulation.js';
 
 export const SERVICE_OUTPUTS = {
@@ -12,8 +15,10 @@ export const SERVICE_OUTPUTS = {
 
 /** A facility's description with its supply window ({supply} in the text) in the real seconds that the facility card
  *  counts down (game-time.js), so both read the same number at every speed. */
-export function describeFacility(type, sim) {
+export function describeFacility(type, sim, building) {
+ if(['warehouse','depot'].includes(type))return BUILDINGS[type].description.replace('{capacity}',String(capacity(sim||{rank:0},building||{type,level:1})));
  const def = BUILDINGS[type], service = SERVICE_OUTPUTS[def?.output];
+ if(def?.terminal){const terminal=building&&sim?.tradeTerminals?.().find(t=>t.building===building.id);return def.description.replace('{load}',String(terminalVehicleCapacity(terminal||{type,capacity:def.terminal.capacity})));}
  return !def ? '' : service ? def.description.replace('{supply}', String(remainingSeconds(service.duration, sim))) : def.description;
 }
 
@@ -50,7 +55,9 @@ export function productionVisualState(type, building = {}, sim) {
  const label = phase === 'broken' ? '파손' : phase === 'disabled' ? '중지'
   : active ? service.label : working ? service ? '공급 준비' : '생산 중'
   : outage ? '공급 중단' : powerBlocked ? '전력 부족' : missing ? '재료 부족' : exhausted ? '자원 고갈' : count ? '완료' : building.status || '대기';
- return { phase, label, working, count, ready: service ? active : count > 0, progress, output: made.output,
+ const items=typeof sim?.recipeOf==='function'&&building.type?Object.fromEntries(outputItems(sim,building)):{[made.output]:count};
+ const piles=Object.entries(items).filter(([,n])=>n>0).flatMap(([item,n])=>Array.from({length:Math.ceil(n/4)},(_,i)=>({item,priority:i}))).sort((a,b)=>a.priority-b.priority).slice(0,3).map(v=>v.item);
+ return { piles, phase, label, working, count, ready: service ? active : count > 0, progress, output: made.output,
   service: !!service, active, remaining, displayValue: service ? remainingSeconds(remaining, sim) + '초' : String(count),
   displayProgress: active ? Math.min(1, remaining / service.duration) : progress,
   outputName: service?.name || RESOURCES[made.output]?.name || made.output, missing, exhausted,

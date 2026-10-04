@@ -12,6 +12,7 @@ export const RESOURCE_SOURCES = {
  mithril:['expansionGoods',15], airship:['expansionGoods',16],
  ...Object.fromEntries(FARM_GOODS_ORDER.map((id,i)=>[id,['farmGoods',i]])),
  ...Object.fromEntries(FARM_GOODS2_ORDER.map((id,i)=>[id,['farmGoods2',i]])),
+ petroleum:['industrialGoods',8],processwater:['productionParts',0],
 };
 export const RESOURCE_FRAMES = Object.fromEntries(Object.keys(RESOURCE_SOURCES).map((id,i)=>[id,i]));
 export const SERVICE_ART = {power:0,horse:1,irrigation:2,ward:3,transit:4,health:5};

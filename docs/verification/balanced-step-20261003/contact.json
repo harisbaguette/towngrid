@@ -1,0 +1,452 @@
+[
+  {
+    "id": "ael",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.516781756762918e-08,
+    "maxSolePixelError": 0.628245523987134,
+    "heldFrameDriftBefore": 3.5355079569961894,
+    "heldFrameDriftAfter": 1.325815483873571
+  },
+  {
+    "id": "aira",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.577966354231904e-08,
+    "maxSolePixelError": 0.655008651090108,
+    "heldFrameDriftBefore": 3.5970173660927447,
+    "heldFrameDriftAfter": 1.3488815122847793
+  },
+  {
+    "id": "aster",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.486229803078267e-08,
+    "maxSolePixelError": 0.6745853030766251,
+    "heldFrameDriftBefore": 3.50479213323748,
+    "heldFrameDriftAfter": 1.314297049964055
+  },
+  {
+    "id": "bel",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.7308550442184725e-08,
+    "maxSolePixelError": 0.6176520301800985,
+    "heldFrameDriftBefore": 3.7507209034129105,
+    "heldFrameDriftAfter": 1.4065203387798415
+  },
+  {
+    "id": "borik",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.088625601173947e-08,
+    "maxSolePixelError": 0.6840168069841431,
+    "heldFrameDriftBefore": 3.105071695952196,
+    "heldFrameDriftAfter": 1.1644018859820735
+  },
+  {
+    "id": "cedric",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.486222998837886e-08,
+    "maxSolePixelError": 0.6868674872335366,
+    "heldFrameDriftBefore": 3.5047869491322046,
+    "heldFrameDriftAfter": 1.3142951059245767
+  },
+  {
+    "id": "dax",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.914349924969522e-08,
+    "maxSolePixelError": 0.6422955244686515,
+    "heldFrameDriftBefore": 3.9351921055445445,
+    "heldFrameDriftAfter": 1.4756970395792042
+  },
+  {
+    "id": "dew",
+    "mode": "hover",
+    "frames": 256,
+    "maxContactDrift": 0.0,
+    "maxSolePixelError": 0.0,
+    "heldFrameDriftBefore": 4.838498257349488,
+    "heldFrameDriftAfter": 1.8144368465060579
+  },
+  {
+    "id": "dorin",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.210942220957603e-08,
+    "maxSolePixelError": 0.6344289079990545,
+    "heldFrameDriftBefore": 3.228038673092549,
+    "heldFrameDriftAfter": 1.210514502409706
+  },
+  {
+    "id": "eil",
+    "mode": "hover",
+    "frames": 256,
+    "maxContactDrift": 0.0,
+    "maxSolePixelError": 0.0,
+    "heldFrameDriftBefore": 3.689236909076367,
+    "heldFrameDriftAfter": 1.3834638409036375
+  },
+  {
+    "id": "elion",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 4.0060973006677245e-08,
+    "maxSolePixelError": 0.6851598946953626,
+    "heldFrameDriftBefore": 4.027427706610361,
+    "heldFrameDriftAfter": 1.5102853899788853
+  },
+  {
+    "id": "elvar",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 4.189570532329844e-08,
+    "maxSolePixelError": 0.6420780030896098,
+    "heldFrameDriftBefore": 4.2118781723208905,
+    "heldFrameDriftAfter": 1.579454314620334
+  },
+  {
+    "id": "erena",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.333308704135564e-08,
+    "maxSolePixelError": 0.6318304290744196,
+    "heldFrameDriftBefore": 3.3510574912856597,
+    "heldFrameDriftAfter": 1.2566465592321223
+  },
+  {
+    "id": "ethan",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.149845951135393e-08,
+    "maxSolePixelError": 0.6768593216819759,
+    "heldFrameDriftBefore": 3.1666173937856805,
+    "heldFrameDriftAfter": 1.1874815226696303
+  },
+  {
+    "id": "fia",
+    "mode": "hover",
+    "frames": 256,
+    "maxContactDrift": 0.0,
+    "maxSolePixelError": 0.0,
+    "heldFrameDriftBefore": 3.4125574172628084,
+    "heldFrameDriftAfter": 1.279709031473553
+  },
+  {
+    "id": "garen",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.547361285478143e-08,
+    "maxSolePixelError": 0.6260155736608942,
+    "heldFrameDriftBefore": 3.5662497012812775,
+    "heldFrameDriftAfter": 1.337343637980479
+  },
+  {
+    "id": "garron",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 4.097843482179177e-08,
+    "maxSolePixelError": 0.6625945345748856,
+    "heldFrameDriftBefore": 4.119663307676177,
+    "heldFrameDriftAfter": 1.5448737403785664
+  },
+  {
+    "id": "grum",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.853152201755992e-08,
+    "maxSolePixelError": 0.5836542349130536,
+    "heldFrameDriftBefore": 3.873668045715688,
+    "heldFrameDriftAfter": 1.452625517143383
+  },
+  {
+    "id": "hana",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.394478270222502e-08,
+    "maxSolePixelError": 0.6805990766153334,
+    "heldFrameDriftBefore": 3.4125513480663874,
+    "heldFrameDriftAfter": 1.2797067555248953
+  },
+  {
+    "id": "hugo",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.3027307651696605e-08,
+    "maxSolePixelError": 0.6666983742403927,
+    "heldFrameDriftBefore": 3.320315747000571,
+    "heldFrameDriftAfter": 1.2451184051252142
+  },
+  {
+    "id": "iris",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.6391076685202905e-08,
+    "maxSolePixelError": 0.6453551030226299,
+    "heldFrameDriftBefore": 3.6584853023470942,
+    "heldFrameDriftAfter": 1.3719319883801604
+  },
+  {
+    "id": "kael",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.6391089920616926e-08,
+    "maxSolePixelError": 0.6268953685988155,
+    "heldFrameDriftBefore": 3.6584853023470942,
+    "heldFrameDriftAfter": 1.3719319883801604
+  },
+  {
+    "id": "kai",
+    "mode": "centaur",
+    "frames": 256,
+    "maxContactDrift": 4.3531783700642476e-08,
+    "maxSolePixelError": 0.4166537860559003,
+    "heldFrameDriftBefore": 3.542764825720303,
+    "heldFrameDriftAfter": 1.3285368096451136
+  },
+  {
+    "id": "lana",
+    "mode": "centaur",
+    "frames": 256,
+    "maxContactDrift": 4.3531783700642476e-08,
+    "maxSolePixelError": 0.4166537860559003,
+    "heldFrameDriftBefore": 3.542764825720303,
+    "heldFrameDriftAfter": 1.3285368096451136
+  },
+  {
+    "id": "lien",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.241571966448591e-08,
+    "maxSolePixelError": 0.6754005441634069,
+    "heldFrameDriftBefore": 3.258832258430395,
+    "heldFrameDriftAfter": 1.222062096911398
+  },
+  {
+    "id": "luth",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.363862247569589e-08,
+    "maxSolePixelError": 0.6482518860396099,
+    "heldFrameDriftBefore": 3.3817733150443687,
+    "heldFrameDriftAfter": 1.2681649931416383
+  },
+  {
+    "id": "lyra",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.425047248099977e-08,
+    "maxSolePixelError": 0.6844595650067619,
+    "heldFrameDriftBefore": 3.4432827241409245,
+    "heldFrameDriftAfter": 1.2912310215528466
+  },
+  {
+    "id": "maren",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.944877799010485e-08,
+    "maxSolePixelError": 0.6710057580203876,
+    "heldFrameDriftBefore": 3.965882008776875,
+    "heldFrameDriftAfter": 1.487205753291328
+  },
+  {
+    "id": "marna",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.02746884494351e-08,
+    "maxSolePixelError": 0.6919991245098549,
+    "heldFrameDriftBefore": 3.043588207382019,
+    "heldFrameDriftAfter": 1.141345577768257
+  },
+  {
+    "id": "mira",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 4.125318328479028e-08,
+    "maxSolePixelError": 0.6060580032259218,
+    "heldFrameDriftBefore": 4.1472842205852745,
+    "heldFrameDriftAfter": 1.555231582719478
+  },
+  {
+    "id": "mist",
+    "mode": "hover",
+    "frames": 256,
+    "maxContactDrift": 0.0,
+    "maxSolePixelError": 0.0,
+    "heldFrameDriftBefore": 4.838498257349488,
+    "heldFrameDriftAfter": 1.8144368465060579
+  },
+  {
+    "id": "nalia",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.7002567797051096e-08,
+    "maxSolePixelError": 0.6518828164093562,
+    "heldFrameDriftBefore": 3.7199584227067195,
+    "heldFrameDriftAfter": 1.3949844085150198
+  },
+  {
+    "id": "nara",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.241592809414711e-08,
+    "maxSolePixelError": 0.655918159890112,
+    "heldFrameDriftBefore": 3.2588529948514977,
+    "heldFrameDriftAfter": 1.2220698730693116
+  },
+  {
+    "id": "neris",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.547331264895489e-08,
+    "maxSolePixelError": 0.623270109786632,
+    "heldFrameDriftBefore": 3.5662195392142184,
+    "heldFrameDriftAfter": 1.337332327205332
+  },
+  {
+    "id": "niki",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.3332627963681357e-08,
+    "maxSolePixelError": 0.6021467202846008,
+    "heldFrameDriftBefore": 3.3510108343381777,
+    "heldFrameDriftAfter": 1.2566290628768166
+  },
+  {
+    "id": "norin",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.822623262882936e-08,
+    "maxSolePixelError": 0.5916098847847785,
+    "heldFrameDriftBefore": 3.8429772408998297,
+    "heldFrameDriftAfter": 1.4411164653374362
+  },
+  {
+    "id": "oriel",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.4555980150966056e-08,
+    "maxSolePixelError": 0.6429099260227462,
+    "heldFrameDriftBefore": 3.4739985478996336,
+    "heldFrameDriftAfter": 1.3027494554623626
+  },
+  {
+    "id": "oswin",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.51675087287887e-08,
+    "maxSolePixelError": 0.6558395335165264,
+    "heldFrameDriftBefore": 3.5354768523645355,
+    "heldFrameDriftAfter": 1.3258038196367008
+  },
+  {
+    "id": "otto",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.0580992372078974e-08,
+    "maxSolePixelError": 0.6433265392935243,
+    "heldFrameDriftBefore": 3.074381792719865,
+    "heldFrameDriftAfter": 1.1528931722699494
+  },
+  {
+    "id": "ravik",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.4861917268898293e-08,
+    "maxSolePixelError": 0.683467090661254,
+    "heldFrameDriftBefore": 3.5047539114443453,
+    "heldFrameDriftAfter": 1.3142827167916296
+  },
+  {
+    "id": "roa",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 4.036624512937976e-08,
+    "maxSolePixelError": 0.6658157188444643,
+    "heldFrameDriftBefore": 4.058117609842692,
+    "heldFrameDriftAfter": 1.5217941036910094
+  },
+  {
+    "id": "rowan",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.883739843255563e-08,
+    "maxSolePixelError": 0.6746370274927909,
+    "heldFrameDriftBefore": 3.904419256627802,
+    "heldFrameDriftAfter": 1.4641572212354257
+  },
+  {
+    "id": "selia",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.4555980150966056e-08,
+    "maxSolePixelError": 0.6777233908164636,
+    "heldFrameDriftBefore": 3.4739985478996336,
+    "heldFrameDriftAfter": 1.3027494554623626
+  },
+  {
+    "id": "serin",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.6697029775616834e-08,
+    "maxSolePixelError": 0.6696064996957536,
+    "heldFrameDriftBefore": 3.68924259894801,
+    "heldFrameDriftAfter": 1.3834659746055038
+  },
+  {
+    "id": "silen",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.4250463201212224e-08,
+    "maxSolePixelError": 0.669004501293765,
+    "heldFrameDriftBefore": 3.4432827241409245,
+    "heldFrameDriftAfter": 1.2912310215528466
+  },
+  {
+    "id": "sora",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.6085308440664855e-08,
+    "maxSolePixelError": 0.6642164311810578,
+    "heldFrameDriftBefore": 3.6277447100854,
+    "heldFrameDriftAfter": 1.360404266282025
+  },
+  {
+    "id": "taron",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 4.525928642703633e-08,
+    "maxSolePixelError": 0.6634307772950722,
+    "heldFrameDriftBefore": 4.550026991246311,
+    "heldFrameDriftAfter": 1.7062601217173665
+  },
+  {
+    "id": "terin",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.9143585701699345e-08,
+    "maxSolePixelError": 0.6731781130514263,
+    "heldFrameDriftBefore": 3.9352024737550946,
+    "heldFrameDriftAfter": 1.4757009276581605
+  },
+  {
+    "id": "vera",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.486222998837886e-08,
+    "maxSolePixelError": 0.6704119012302576,
+    "heldFrameDriftBefore": 3.5047869491322046,
+    "heldFrameDriftAfter": 1.3142951059245767
+  },
+  {
+    "id": "vian",
+    "mode": "biped",
+    "frames": 256,
+    "maxContactDrift": 3.853176015191668e-08,
+    "maxSolePixelError": 0.6380575435838612,
+    "heldFrameDriftBefore": 3.8736930646585397,
+    "heldFrameDriftAfter": 1.4526348992469524
+  }
+]

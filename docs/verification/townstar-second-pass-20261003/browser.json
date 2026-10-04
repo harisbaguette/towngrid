@@ -1,0 +1,31 @@
+{
+  "errors": [],
+  "software": false,
+  "contract": "납품 계약\n밀 14개 · 연료 부족 · 이번 왕복에 1개 필요 · 시장에서 연료를 수입하세요\n납품 +151G",
+  "storage": {
+    "status": "보관 제한 · 판재",
+    "out": 10,
+    "idle": 1,
+    "advice": 1
+  },
+  "save": {
+    "workers": 103,
+    "capacity": 102,
+    "message": "저장됨 · 오후 11:32",
+    "downloadLinks": 1
+  },
+  "powerOverlay": "power",
+  "powerPreview": "Lv.2 개선 후 필요 전력 3.9 · 1곳 공급 중단 예상",
+  "offlineEnabled": true,
+  "offline": {
+    "time": 66.2255,
+    "paused": true,
+    "config": {
+      "enabled": true,
+      "running": false,
+      "at": 1791124383039,
+      "deficit": false
+    },
+    "events": []
+  }
+}

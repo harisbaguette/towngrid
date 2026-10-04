@@ -21,7 +21,7 @@ export async function loadPixelEnvironment() {
    image.onload = () => {
     clearTimeout(timeout);
     try {
-     if (spec.building || spec.cutout || spec.scenery) {
+     if (spec.building || spec.cutout || spec.scenery || id==='networks' || id==='infrastructureGround') {
       const canvas = document.createElement('canvas');canvas.width = image.width;canvas.height = image.height;
       const context = canvas.getContext('2d', { willReadFrequently: true });context.drawImage(image, 0, 0);
       alphaMasks.set(id, context.getImageData(0, 0, image.width, image.height).data);
@@ -57,6 +57,15 @@ function textureFor(id) {
 // Terrain batches share authored images with the billboard renderer.
 export const pixelTexture = id => textureFor(id);
 export const pixelImage = id => images.get(id);
+export function pixelSurfaceAlpha(id,frame,u,v){
+ const image=images.get(id),pixels=alphaMasks.get(id),spec=ENVIRONMENT_ASSETS[id];
+ if(!image||!pixels)return undefined;
+ // Match the surface shader's repeat, half-texel inset and texture Y axis.
+ const wrap=value=>Math.max(.00260417,Math.min(.99739583,value-Math.floor(value)));
+ const x=Math.min(image.width-1,Math.floor((frame+wrap(u))*image.width/spec.frames));
+ const y=Math.min(image.height-1,Math.floor((1-wrap(v))*image.height));
+ return pixels[(y*image.width+x)*4+3]/255;
+}
 
 function setFrame(object, frame, direction = 0) {
  const u = object.userData;

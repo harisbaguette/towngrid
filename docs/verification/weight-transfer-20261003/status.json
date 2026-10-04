@@ -1,0 +1,38 @@
+{
+  "status": "runtime-corrections-verified-full-animation-art-unfinished",
+  "scope": { "characters": 51, "actions": 11, "directions": 4, "characterActions": 561 },
+  "runtimeChanges": {
+    "independentPickupDropCharacters": 51,
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "weightAcceptanceAndArmSwingRigs": 50,
+    "bronStandingArtHandlingRig": "art-source/pixel-characters/bron-handling-v3/rig.json"
+  },
+  "verification": {
+    "npmTest": "pass",
+    "typecheck": "pass",
+    "build": "pass after retry; first attempt failed cleaning dist/client/assets/audio with ENOTEMPTY",
+    "scopedEslint": "pass",
+    "characterAndBronRuntimeTests": "pass",
+    "atlasCellsChecked": 26112,
+    "handlingBrowserFrames": 4896,
+    "locomotionBrowserFrames": 12800,
+    "floorClippedPixels": 0,
+    "previewCharacterActionSelections": 561,
+    "previewErrors": 0,
+    "residentPanelMobileCpuAndFourCameras": "pass; updated the test inspection hook for the current setSimulation signature"
+  },
+  "artQuality": {
+    "approvedCharacters": 0,
+    "approvedCharacterActions": 0,
+    "newMiraWalkCandidates": 5,
+    "candidateDisposition": "rejected-for-runtime",
+    "blockers": [
+      "Generated cel sheets did not maintain reliable foot alternation, contact registration and pose continuity.",
+      "Current runtime remains predominantly original-texture joint animation.",
+      "Full character/action artwork, heel/toe movement and continuous motion quality remain unfinished."
+    ],
+    "checklist": "docs/CHARACTER_ANIMATION_CHECKLIST.md",
+    "worklist": "art-source/pixel-characters/authored-actions-v7/worklist.json"
+  }
+}

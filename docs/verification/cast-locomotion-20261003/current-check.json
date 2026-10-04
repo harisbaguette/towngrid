@@ -1,0 +1,93 @@
+{
+  "status": "reopened",
+  "charactersUpdated": 50,
+  "bodyTypes": {
+    "biped": 44,
+    "centaur": 2,
+    "hover": 4
+  },
+  "walkCarryFramesPerDirection": 32,
+  "gaitAtlasCells": 12800,
+  "liveGaitFrames": 12800,
+  "depthTestedFloorSamples": 12800,
+  "floorClippedPixels": 0,
+  "maxVisibleSoleErrorPixels": 0.6981691786424171,
+  "heldFrameDriftReduction": 0.625,
+  "portraitFilesPreserved": 100,
+  "reproducedFiles": 250,
+  "bronFilesUnchanged": 5,
+  "tests": [
+    "npm test",
+    "npm run typecheck",
+    "npm run build",
+    "scoped ESLint",
+    "tests/cast-locomotion.mjs",
+    "tests/cast-locomotion.py",
+    "tests/cast-locomotion-browser.mjs",
+    "tests/character-finish.py",
+    "tests/character-skinning.py",
+    "scripts/verify-roster-art.py",
+    "tests/roster-browser.mjs",
+    "tests/specialists-browser.mjs",
+    "tests/mira-runtime-browser.mjs",
+    "tests/mira-preview-browser.mjs",
+    "tests/sprite-grounding-browser.mjs"
+  ],
+  "actualLogistics": {
+    "seconds": 55.018200000001045,
+    "frames": [
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95
+    ],
+    "actions": [
+      "walk",
+      "idle",
+      "pickup",
+      "carry",
+      "drop"
+    ],
+    "delivered": 112,
+    "counts": {
+      "moving": 10437,
+      "handling": 3361,
+      "holding": 53,
+      "corners": 194
+    },
+    "mismatches": []
+  },
+  "remainingKnownDefects": [
+    "User-observed limping: old screen-projected shin length compresses asymmetrically despite fixed 3D bones. Previous numeric checks did not validate natural motion."
+  ],
+  "artMethod": "Original texture rigs with rigid boots and recalibrated sole contacts; opposite facings remain mirrored.",
+  "supersededBy": "../balanced-step-20261003/current-check.json"
+}

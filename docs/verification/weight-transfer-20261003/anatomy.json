@@ -1,0 +1,1102 @@
+[
+  {
+    "id": "ael",
+    "before": {
+      "minimumProjectedLengthRatio": 0.515369689309024,
+      "tenthPercentile": 0.5694297127660285,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5128432898771486,
+      "tenthPercentile": 0.5709799702409288,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 88,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "aira",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5472743573739322,
+      "tenthPercentile": 0.5658982658156662,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 92,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5468667386935256,
+      "tenthPercentile": 0.5685575156972077,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "aster",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5573310503517996,
+      "tenthPercentile": 0.5724909751766384,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 92,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5578527624846353,
+      "tenthPercentile": 0.5764460940288119,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 68,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "bel",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5506337005763975,
+      "tenthPercentile": 0.5820148005375683,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5508274583812721,
+      "tenthPercentile": 0.5799388914452257,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "borik",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5239379543581265,
+      "tenthPercentile": 0.5799906656517038,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.52162941244614,
+      "tenthPercentile": 0.5804742687351255,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 88,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "cedric",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5340827837056986,
+      "tenthPercentile": 0.567865976101469,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 91,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5345374526261032,
+      "tenthPercentile": 0.5711647352072258,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 68,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "dax",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5633968715768467,
+      "tenthPercentile": 0.5815379481052426,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 92,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5637223867615971,
+      "tenthPercentile": 0.5838474819880234,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 91,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "dorin",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5220421800592486,
+      "tenthPercentile": 0.5796933251803086,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5209846137877641,
+      "tenthPercentile": 0.5829816331443332,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 88,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "elion",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5552682139470666,
+      "tenthPercentile": 0.5878886431675214,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 92,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5553106142474017,
+      "tenthPercentile": 0.5900181622616746,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "elvar",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5591519502606404,
+      "tenthPercentile": 0.59706028665746,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 91,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5585123905615158,
+      "tenthPercentile": 0.5978143799934343,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 66,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "erena",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5516382093686841,
+      "tenthPercentile": 0.5719378942815397,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 94,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5512410473509246,
+      "tenthPercentile": 0.5752155174151987,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "ethan",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5364974162630154,
+      "tenthPercentile": 0.5798329709135138,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5360500830231737,
+      "tenthPercentile": 0.5812234397217386,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 88,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "garen",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5551481396042709,
+      "tenthPercentile": 0.5731858390958352,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 78,
+        "leg": 1,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5583396115800354,
+      "tenthPercentile": 0.5746951228403885,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 82,
+        "leg": 1,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "garron",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5345605137370062,
+      "tenthPercentile": 0.5711375873656355,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 92,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5344216603925196,
+      "tenthPercentile": 0.5689583312806401,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "grum",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5355847186706924,
+      "tenthPercentile": 0.5925826267884227,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 91,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5360520851283126,
+      "tenthPercentile": 0.5943543640039308,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 68,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "hana",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5180089572955432,
+      "tenthPercentile": 0.5797005639925791,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 92,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.518015108237327,
+      "tenthPercentile": 0.5819990578770611,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "hugo",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5516224343058512,
+      "tenthPercentile": 0.5698566354774222,
+      "worst": {
+        "view": 0,
+        "action": "walk",
+        "frame": 85,
+        "leg": 0,
+        "segment": 1
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5505637364037034,
+      "tenthPercentile": 0.5719692536509072,
+      "worst": {
+        "view": 0,
+        "action": "walk",
+        "frame": 87,
+        "leg": 0,
+        "segment": 1
+      }
+    }
+  },
+  {
+    "id": "iris",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5544225261428226,
+      "tenthPercentile": 0.5703528580014581,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 92,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5547347147480727,
+      "tenthPercentile": 0.5751496348862809,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "kael",
+    "before": {
+      "minimumProjectedLengthRatio": 0.550723225334771,
+      "tenthPercentile": 0.5803775207519586,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5506723975944198,
+      "tenthPercentile": 0.582558284762467,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "lien",
+    "before": {
+      "minimumProjectedLengthRatio": 0.49730362296174463,
+      "tenthPercentile": 0.5819068510586328,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.4965166544705702,
+      "tenthPercentile": 0.5821924460666135,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "luth",
+    "before": {
+      "minimumProjectedLengthRatio": 0.545354680019368,
+      "tenthPercentile": 0.5788762394705862,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5445247965686171,
+      "tenthPercentile": 0.5806812666683524,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 88,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "lyra",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5600094562873367,
+      "tenthPercentile": 0.572807151990409,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 92,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.560444807345753,
+      "tenthPercentile": 0.5775797716508341,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "maren",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5516995892776545,
+      "tenthPercentile": 0.579246898566653,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 91,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5510149777964314,
+      "tenthPercentile": 0.5804796080238225,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 66,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "marna",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5433554051940921,
+      "tenthPercentile": 0.556995713338119,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5428207337257313,
+      "tenthPercentile": 0.5592042842913638,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 88,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "mira",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5416443717998467,
+      "tenthPercentile": 0.5742109866694772,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 74,
+        "leg": 1,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5422889407817827,
+      "tenthPercentile": 0.5635500494820327,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 75,
+        "leg": 1,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "nalia",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5419208089562462,
+      "tenthPercentile": 0.5779947307598304,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 92,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5421598679428465,
+      "tenthPercentile": 0.5817864039792573,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "nara",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5372234484462939,
+      "tenthPercentile": 0.5552046760572448,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5373496536632179,
+      "tenthPercentile": 0.5586315981803367,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "neris",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5418772290389414,
+      "tenthPercentile": 0.5991021237828331,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5416000728333392,
+      "tenthPercentile": 0.5990349221644272,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "niki",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5361562474485794,
+      "tenthPercentile": 0.5743405200083855,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5340267864239957,
+      "tenthPercentile": 0.5751193892766062,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 88,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "norin",
+    "before": {
+      "minimumProjectedLengthRatio": 0.570515422593336,
+      "tenthPercentile": 0.5780421285412318,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 92,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.570398227273582,
+      "tenthPercentile": 0.5824665490568588,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 91,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "oriel",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5407095416029055,
+      "tenthPercentile": 0.5728620308449096,
+      "worst": {
+        "view": 3,
+        "action": "walk",
+        "frame": 88,
+        "leg": 0,
+        "segment": 1
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5392206970462826,
+      "tenthPercentile": 0.5769289350719682,
+      "worst": {
+        "view": 3,
+        "action": "walk",
+        "frame": 88,
+        "leg": 0,
+        "segment": 1
+      }
+    }
+  },
+  {
+    "id": "oswin",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5556117421296031,
+      "tenthPercentile": 0.5679913895414478,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5558231563532765,
+      "tenthPercentile": 0.5689740037761062,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "otto",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5372158102973464,
+      "tenthPercentile": 0.5700981092851922,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5356145555931663,
+      "tenthPercentile": 0.5697063886029338,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 88,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "ravik",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5409894112753909,
+      "tenthPercentile": 0.5819618785866035,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 94,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5410395270826609,
+      "tenthPercentile": 0.5855212192900523,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "roa",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5585095623767476,
+      "tenthPercentile": 0.5925784178615329,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 78,
+        "leg": 1,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.565107424651875,
+      "tenthPercentile": 0.5852735276904665,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 82,
+        "leg": 1,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "rowan",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5505968563569313,
+      "tenthPercentile": 0.5812800089419128,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 91,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5507295742894011,
+      "tenthPercentile": 0.5882263613098319,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 67,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "selia",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5508636889142028,
+      "tenthPercentile": 0.5660657922231613,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 92,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5507135485890533,
+      "tenthPercentile": 0.5701512665932066,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "serin",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5578349123546728,
+      "tenthPercentile": 0.5796150548039314,
+      "worst": {
+        "view": 0,
+        "action": "walk",
+        "frame": 88,
+        "leg": 0,
+        "segment": 1
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5570749029499643,
+      "tenthPercentile": 0.5852733183138956,
+      "worst": {
+        "view": 3,
+        "action": "walk",
+        "frame": 88,
+        "leg": 0,
+        "segment": 1
+      }
+    }
+  },
+  {
+    "id": "silen",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5476874051816021,
+      "tenthPercentile": 0.5912395006256683,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5479574867950363,
+      "tenthPercentile": 0.5952088096396908,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "sora",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5421272505757836,
+      "tenthPercentile": 0.5918018309326496,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 91,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5425920224441156,
+      "tenthPercentile": 0.5743751056717166,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 68,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "taron",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5395093318247257,
+      "tenthPercentile": 0.5841603497918171,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 91,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5397851999998124,
+      "tenthPercentile": 0.5850974310287167,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 68,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "terin",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5552507705790846,
+      "tenthPercentile": 0.5719921872899082,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 76,
+        "leg": 1,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5560329250902721,
+      "tenthPercentile": 0.5719671406758785,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 82,
+        "leg": 1,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "vera",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5486301580155015,
+      "tenthPercentile": 0.5868870145395058,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5484713831419042,
+      "tenthPercentile": 0.5855476275756751,
+      "worst": {
+        "view": 2,
+        "action": "walk",
+        "frame": 89,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  },
+  {
+    "id": "vian",
+    "before": {
+      "minimumProjectedLengthRatio": 0.5535725660290705,
+      "tenthPercentile": 0.5807097523454091,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    },
+    "after": {
+      "minimumProjectedLengthRatio": 0.5538038755545478,
+      "tenthPercentile": 0.5775472203678674,
+      "worst": {
+        "view": 1,
+        "action": "walk",
+        "frame": 90,
+        "leg": 0,
+        "segment": 0
+      }
+    }
+  }
+]

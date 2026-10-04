@@ -17,6 +17,15 @@ try {
  await page.screenshot({path:fileURLToPath(new URL('preview-four-directions.png',out)),fullPage:true});
  for(const action of ['walk','carry','idle','work','greet','cargo','rotation']) {
   await page.locator(`[data-action="${action}"]`).click();
+  if(['walk','carry'].includes(action)){
+   assert.equal(await page.locator('#frames button').count(),32);
+   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+   const dark=await page.locator('#stage').evaluate(canvas=>{
+    const p=canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data;
+    let n=0;for(let i=0;i<p.length;i+=4)if(p[i]+p[i+1]+p[i+2]<400)n++;return n;
+   });
+   assert.ok(dark>2000,`${action}: the paged atlas must paint visible characters`);
+  }
   for(const direction of ['SW','NW','NE','SE']) {
    await page.locator(`[data-direction="${direction}"]`).click();
    await page.locator('#step').click();

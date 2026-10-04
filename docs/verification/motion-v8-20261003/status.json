@@ -1,0 +1,43 @@
+{
+  "status": "runtime-corrections-verified-full-artwork-unfinished",
+  "characters": 51,
+  "actions": 11,
+  "directions": 4,
+  "characterActions": 561,
+  "actionDirections": 2244,
+  "atlasCells": 39168,
+  "liveActionFrames": 36656,
+  "liveGaitFrames": 12800,
+  "floorClippedPixels": 0,
+  "implemented": [
+    "heel/flat/toe support on 44 biped rigs",
+    "fixed-length ankle connection",
+    "20-pose profession work on 50 rigs",
+    "8 idle / 12 greet / 8 hurt / 16 defeat / 8 pivot exposures on all 51 rigs",
+    "12-pose attack on 50 rigs; authored Bron hammer retained",
+    "8-pose carried-hurt variant on all 51 rigs",
+    "matching rest and held-cargo recovery poses",
+    "per-pixel fog/cloud focus clearance in WebGL and Canvas"
+  ],
+  "checks": {
+    "npmTest": "passed",
+    "typecheck": "passed",
+    "build": "passed",
+    "scopedEslint": "passed",
+    "coverage": "passed",
+    "fixedBonesAndSoles": "passed",
+    "projectedAnatomy": "passed",
+    "jointSkinning": "passed",
+    "allActionRendering": "passed",
+    "liveMovementAndCamera": "passed",
+    "mobileResidentPanel": "passed",
+    "largeFogFocusWebGLAndCanvas": "passed",
+    "worldAtmosphereBrowser": "passed"
+  },
+  "remaining": [
+    "Full new artwork for every character/action has not been produced or approved.",
+    "The cutout-rig appearance and starts/stops still require full visual finishing; mechanical passes are not art approval.",
+    "Opposite views remain mirrored and turns switch between four views without intermediate-angle artwork."
+  ],
+  "additionalFix": "Corrected an invalid unary-minus exponent expression in landform-data.js discovered by typecheck."
+}

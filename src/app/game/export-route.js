@@ -1,5 +1,5 @@
 import {stores,storeById,storeStock,freeSpace,withdraw,deposit} from './storage.js';
-import {tradeJourney} from './trade-journey.js';
+import {tradeJourney,tradeJourneyTo,transportMode} from './trade-journey.js';
 import {RESOURCES,BUILDINGS,N,CONTRACT_WAIT} from './simulation.js';
 import {activeTerminal,tradeCapacity,terminalsOf} from './trade-terminals.js';
 import {recordTerminalTransfer} from './logistics-visual-events.js';
@@ -15,7 +15,10 @@ export const VEHICLES={
  wagon:{name:'마차',fuel:false,load:1,land:1,water:0},
  raft:{name:'뗏목',fuel:false,load:1.5,land:1,water:1.2},
  truck:{name:'트럭',fuel:true,load:2,land:2,water:0},
- steamer:{name:'증기선',fuel:true,load:3,land:1.6,water:2.4}
+ steamer:{name:'증기선',fuel:true,load:3,land:1.6,water:2.4},
+ ship:{name:'화물선',fuel:true,load:1,land:1.4,water:2.4},
+ rail:{name:'화물 열차',fuel:true,load:1,land:1.4,water:0},
+ plane:{name:'화물기',fuel:true,load:1,land:1.4,water:0}
 };
 export const FUEL_FREE=0;
 export const STARTER_FLEET=1;
@@ -93,11 +96,14 @@ export function waterRoute(s){
 }
 /** The supplied truck plus vehicles from operating terminals and later ranks. */
 export function fleet(s){
- const extra=s.buildings.filter(b=>BUILDINGS[b.type].terminal&&b.health>0&&b.enabled!==false&&!(b.movingUntil>s.time)).length+(s.rank>=14?2:0)+s.buildings.reduce((n,b)=>n+(b.health>0&&b.enabled!==false?BUILDINGS[b.type].exportCarts||0:0),0);
- const free=['van'],fuel=Array.from({length:Math.min(MAX_EXPORT_CARTS-1,extra)},()=> 'truck');
- // Each shipment holds the slot of its kind; shipments saved before vehicles existed are wagons and take any slot left.
- const slots=[...free,...fuel].map(kind=>({kind,busy:false}));
- for(const sh of s.shipments){const slot=slots.find(v=>!v.busy&&v.kind===(sh.vehicle||'wagon'))||slots.find(v=>!v.busy);if(slot)slot.busy=true;}
+ const terminal=activeTerminal(s),operating=terminalsOf(s).filter(t=>t.building&&t.usable&&findExportRoute(s,t.goals));
+ const type=t=>({road:'truck',ship:'ship',rail:'rail',air:'plane'})[transportMode(t)];
+ const compatible=v=>transportMode(terminal)==='road'?['van','truck'].includes(v.kind):v.terminalId===terminal.id;
+ const bonus=(s.rank>=14?2:0)+s.buildings.reduce((n,b)=>n+(b.health>0&&b.enabled!==false&&!(b.movingUntil>s.time)?BUILDINGS[b.type].exportCarts||0:0),0);
+ const all=[{kind:'van',slotId:'starter'},...operating.map(t=>({kind:type(t),slotId:t.id,terminalId:t.id})),...Array.from({length:Math.min(6,bonus)},(_,i)=>({kind:'truck',slotId:'bonus:'+i}))];
+ // Retain busy slots even if their terminal is stopped while they are away.
+ const slots=[];for(const sh of s.shipments){const v=all.find(v=>v.slotId===sh.slotId&&!slots.some(a=>a.slotId===v.slotId))||(!sh.slotId&&all.find(v=>v.kind===(sh.vehicle||'wagon')&&!slots.some(a=>a.slotId===v.slotId)))||{kind:sh.vehicle||'wagon',slotId:sh.slotId||'legacy:'+sh.id,terminalId:sh.terminalId};slots.push({...v,busy:true,selected:compatible(v)});}
+ for(const v of all.sort((a,b)=>Number(compatible(b))-Number(compatible(a))))if(slots.length<MAX_EXPORT_CARTS&&!slots.some(a=>a.slotId===v.slotId))slots.push({...v,busy:false,selected:compatible(v)});
  return slots;
 }
 /** Idle slots stay visible on the export road, or at a reachable shore for boats. Never saved as shipments. */
@@ -105,7 +111,7 @@ export function parkedVehicles(s){
  const slots=fleet(s),sail=slots.some(v=>!v.busy&&VEHICLES[v.kind].water)?waterRoute(s)?.filter(p=>water(s,p.x,p.z)&&!s.at(p.x,p.z)):null;
  let berth=0;
  return slots.flatMap((v,i)=>{
-  if(v.busy)return [];
+  if(v.busy||['ship','rail','plane'].includes(v.kind))return [];
   const afloat=VEHICLES[v.kind].water&&sail?.[berth++],p=afloat||EXPORT_TILES[EXPORT_TILES.length-1-i];
   if(!p||s.at(p.x,p.z)||s.tile(p.x,p.z)?.terrain==='water'&&!afloat)return [];
   return [{...v,id:i,x:p.x,z:p.z,afloat:!!afloat}];
@@ -113,27 +119,29 @@ export function parkedVehicles(s){
 }
 /** Fuel above the warehouse reserve (production needs, freight, the open contract and the player's own reserve). Anything
  *  that burns fuel from a site's stock (vehicles here, the campaign's freight trucks) should spend only this. */
-export const spareFuel=s=>Math.floor((s.availableStock?.('fuel')??s.stock.fuel??0)-(s.minimumStock?.('fuel')??0));
+export const tripFuelItem=s=>tradeJourney(s,activeTerminal(s)).fuelItem;
+export const spareFuel=(s,item='fuel')=>Math.floor(exportableStock(s,item)-(s.minimumStock?.(item)??0));
 /** The vehicle the next shipment would take: a free one first, then a fuel one while spare fuel lasts. hold: fuel the
  *  shipment itself carries, which the vehicle may not burn. */
-export function nextVehicle(s,hold=0){
- const slots=fleet(s),free=slots.find(v=>!v.busy&&!VEHICLES[v.kind].fuel);if(free)return free.kind;
- const fuel=slots.find(v=>!v.busy&&VEHICLES[v.kind].fuel);return fuel&&spareFuel(s)-hold>=tripFuel(s)?fuel.kind:null;
+export function nextVehicle(s,hold=0,journey=tradeJourney(s,activeTerminal(s))){
+ const slots=fleet(s).filter(v=>v.selected).sort((a,b)=>VEHICLES[b.kind].load-VEHICLES[a.kind].load),free=slots.find(v=>!v.busy&&!VEHICLES[v.kind].fuel);if(free)return free.kind;
+ const fuel=slots.find(v=>!v.busy&&VEHICLES[v.kind].fuel);return fuel&&spareFuel(s,journey.fuelItem)-hold>=journey.fuel?fuel.kind:null;
 }
 /** Idle vehicles whose round-trip fuel is available. */
-export function idleVehicles(s){const slots=fleet(s).filter(v=>!v.busy);return slots.filter(v=>!VEHICLES[v.kind].fuel).length+Math.min(slots.filter(v=>VEHICLES[v.kind].fuel).length,Math.max(0,Math.floor(spareFuel(s)/tripFuel(s))));}
+export function idleVehicles(s){const slots=fleet(s).filter(v=>!v.busy&&v.selected);return slots.filter(v=>!VEHICLES[v.kind].fuel).length+Math.min(slots.filter(v=>VEHICLES[v.kind].fuel).length,Math.max(0,Math.floor(spareFuel(s,tripFuelItem(s))/tripFuel(s))));}
 /** Goods the next vehicle can carry: the terminal's lot times its load. */
-export const vehicleLoad=(s,kind=nextVehicle(s)||'wagon')=>Math.max(1,Math.floor(tradeCapacity(s)*VEHICLES[kind].load));
+export const vehicleLoad=(s,kind=nextVehicle(s)||fleet(s).find(v=>v.selected)?.kind||'van')=>Math.max(1,Math.floor(tradeCapacity(s)*VEHICLES[kind].load));
 /** Fuel a shipment carries that the reserve has not already set aside, which its vehicle may not burn. The lord's order
  *  is already in the reserve (economy.js reserveFor) and leaves with this shipment, so it holds nothing extra (audit C7:
  *  it was counted twice and a truck needed the order's fuel twice over). An import carries nothing out. */
 export const tripFuel=s=>tradeJourney(s,activeTerminal(s)).fuel;
 export const fuelHold=(item,amount,kind)=>item==='fuel'&&kind!=='import'&&kind!=='contract'?amount:0;
 /** Why nothing can leave now, or null. */
-export function shipmentError(s,hold=0){
- const {route,error}=exportRoute(s);if(!route)return error;if(nextVehicle(s,hold))return null;
- const slots=fleet(s),fuelIdle=slots.some(v=>!v.busy&&VEHICLES[v.kind].fuel);
- return fuelIdle?'연료 부족 · 이번 왕복에 '+tripFuel(s)+'개 필요 · 시장에서 연료를 수입하세요':'운송 수단이 모두 운행 중입니다 · 귀환 후 출발합니다';
+export function shipmentError(s,hold=0,journey=tradeJourney(s,activeTerminal(s))){
+ if(!journey?.worldRoute?.length)return '목적지로 이어지는 운송 경로가 없습니다';
+ const {route,error}=exportRoute(s);if(!route)return error;if(nextVehicle(s,hold,journey))return null;
+ const slots=fleet(s).filter(v=>v.selected),fuelIdle=slots.some(v=>!v.busy&&VEHICLES[v.kind].fuel);
+ return fuelIdle?RESOURCES[journey.fuelItem].name+' 부족 · 이번 왕복에 '+journey.fuel+'개 필요 · 시장에서 '+RESOURCES[journey.fuelItem].name+'를 수입하세요':'운송 수단이 모두 운행 중입니다 · 귀환 후 출발합니다';
 }
 /** Send goods (or, for an import, an empty vehicle) toward the terminal. kind: undefined sale, 'contract', 'state', 'import'. */
 function storeRoute(s,b,t){
@@ -142,13 +150,19 @@ function storeRoute(s,b,t){
  return null;
 }
 export function exportableStock(s,item){const t=activeTerminal(s);return stores(s).reduce((n,b)=>n+(storeRoute(s,b,t)?storeStock(s,b,item):0),0);}
+export function importStore(s,item,amount){const t=activeTerminal(s);return stores(s).map(b=>({b,route:storeRoute(s,b,t)})).filter(v=>v.route&&freeSpace(s,v.b,item)>=amount).sort((a,b)=>a.route.length-b.route.length)[0]||null;}
 export function dispatchShipment(s,item,amount,revenue,auto,extra={}){
- const hold=fuelHold(item,amount,extra.kind),terminal=activeTerminal(s),journey=tradeJourney(s,terminal),importing=extra.kind==='import';
- const supplied=importing&&item==='fuel',vehicle=nextVehicle(s,hold)||(supplied?fleet(s).find(v=>!v.busy)?.kind:null);
- if(!vehicle)return fleet(s).every(v=>v.busy)?'운송 수단이 모두 운행 중입니다':'연료 부족 · 시장에서 연료를 수입하세요';
+ const terminal=activeTerminal(s),journey=extra.destinationId?tradeJourneyTo(s,terminal,extra.destinationId):tradeJourney(s,terminal);if(!journey)return '목적지로 이어지는 운송 경로가 없습니다';const importing=extra.kind==='import',fuelItem=journey.fuelItem;
+ const hold=item===fuelItem&&!importing&&extra.kind!=='contract'?amount:0;
+ const supplied=importing&&item===fuelItem,vehicle=nextVehicle(s,hold,journey)||(supplied?fleet(s).find(v=>!v.busy&&v.selected)?.kind:null);
+ // Only vehicles of the active terminal can carry it (shipmentError reads the same slots).
+ if(!vehicle)return fleet(s).filter(v=>v.selected).every(v=>v.busy)?'운송 수단이 모두 운행 중입니다':RESOURCES[fuelItem].name+' 부족 · 시장에서 '+RESOURCES[fuelItem].name+'를 수입하세요';
+ if(!Number.isInteger(amount)||amount<1||amount>vehicleLoad(s,vehicle))return '한 번에 '+vehicleLoad(s,vehicle)+'개까지 운송할 수 있습니다';
+ if(!journey.worldRoute.length)return '교역 도시로 이어지는 경로가 없습니다';
+ const slot=fleet(s).find(v=>!v.busy&&v.selected&&v.kind===vehicle);
  const candidates=stores(s).map(b=>({b,route:storeRoute(s,b,terminal)})).filter(v=>v.route).sort((a,b)=>a.route.length-b.route.length);
  const pickups=[];let left=amount,route=[],store=null;
- if(importing){const dest=candidates.find(v=>freeSpace(s,v.b,item)>=amount);if(!dest)return '수입품을 받을 연결된 창고의 공간이 부족합니다';store=dest.b;route=dest.route;}
+ if(importing){const dest=importStore(s,item,amount);if(!dest)return '수입품을 받을 연결된 창고의 공간이 부족합니다';store=dest.b;route=dest.route;}
  else{
   for(const v of candidates){const n=Math.min(left,Math.floor(storeStock(s,v.b,item)));if(n<=0)continue;
    if(!route.length){route=v.route.slice(0,1);store=v.b;}
@@ -165,11 +179,12 @@ export function dispatchShipment(s,item,amount,revenue,auto,extra={}){
   // Inland lake ports transfer onto their regional shipping route at the pier.
   route.push(...(sail||[{x:port.x,z:port.z}]));
  }
- const vendorFuel=supplied&&spareFuel(s)-hold<journey.fuel;
- if(!vendorFuel){if(spareFuel(s)-hold<journey.fuel)return '연료가 부족합니다';s.stock.fuel-=journey.fuel;}
+ const vendorFuel=supplied&&spareFuel(s,fuelItem)-hold<journey.fuel;
+ if(!vendorFuel&&spareFuel(s,fuelItem)-hold<journey.fuel)return RESOURCES[fuelItem].name+'가 부족합니다';
  s.logisticsStats.fuel=(s.logisticsStats.fuel||0)+journey.fuel;s.logisticsStats.fuelTrips=(s.logisticsStats.fuelTrips||0)+1;
  for(const pick of pickups)withdraw(s,item,pick.amount,pick.store);
- s.shipments.push({id:(s.nextShipmentId=(s.nextShipmentId||0)+1),item,amount,revenue,auto:!!auto,...extra,vehicle,storeId:store.id,terminalId:terminal.id,portIndex,portBuilding:port?.id||null,waterVehicle:port?'steamer':null,...journey,route:route.map(p=>({x:p.x,z:p.z})),progress:0,phase:'out',away:null,remaining:0});return null;
+ if(!vendorFuel){let fuelLeft=journey.fuel;for(const v of candidates){fuelLeft-=withdraw(s,fuelItem,Math.min(fuelLeft,storeStock(s,v.b,fuelItem)),v.b);if(!fuelLeft)break;}}
+ s.shipments.push({id:(s.nextShipmentId=(s.nextShipmentId||0)+1),item,amount,revenue,auto:!!auto,...extra,vehicle,slotId:slot.slotId,storeId:store.id,terminalId:terminal.id,portIndex,portBuilding:port?.id||null,waterVehicle:port?'steamer':null,...journey,route:route.map(p=>({x:p.x,z:p.z})),progress:0,phase:'out',away:null,remaining:0});return null;
 }
 
 /** Where a cart stands along its route, and which way it faces. */
@@ -179,39 +194,82 @@ export function shipmentPose(sh){
  const a=r[i],b=r[i+1],sign=sh.phase==='out'?1:-1;return {x:a.x+(b.x-a.x)*f,z:a.z+(b.z-a.z)*f,dx:(b.x-a.x)*sign,dz:(b.z-a.z)*sign};
 }
 
+const routeChecks=new WeakMap();
+export function vehicleOccupies(s,x,z){return s.shipments.some(sh=>!sh.away&&[sh.route[Math.floor(sh.progress)],sh.route[Math.ceil(sh.progress)]].some(p=>p?.x===x&&p?.z===z));}
+function refreshShipmentRoute(s,sh,force=false){
+ if(!force&&routeChecks.get(sh)===s.revision)return !sh.blocked;
+ routeChecks.set(sh,s.revision);
+ const pose=shipmentPose(sh),start={x:Math.round(pose.x),z:Math.round(pose.z)},port=s.buildings.find(b=>b.id===sh.portBuilding),afloat=water(s,start.x,start.z);
+ const future=sh.phase==='out'?sh.route.slice(Math.ceil(sh.progress)):sh.route.slice(0,Math.floor(sh.progress)+1);
+ if(!force&&!sh.blocked&&future.every(p=>!s.at(p.x,p.z)||s.at(p.x,p.z)===port))return true;
+ const terminal=terminalsOf(s).find(t=>t.id===(sh.terminalId||'gate')),store=storeById(s,sh.storeId),land=passable(s);
+ const landTo=goals=>search([start],land,(x,z)=>goals.some(p=>p.x===x&&p.z===z));
+ let route=null;
+ if(sh.phase==='out'&&terminal?.usable){
+  if(afloat)route=search([start],(x,z)=>water(s,x,z)&&(!s.at(x,z)||s.at(x,z)===port),(x,z)=>x===0||z===0||x===N-1||z===N-1);
+  else{route=landTo(terminal.goals);if(route&&port){const sail=search([{x:port.x,z:port.z}],(x,z)=>water(s,x,z)&&!s.at(x,z),(x,z)=>x===0||z===0||x===N-1||z===N-1);sh.portIndex=route.length-1;route.push(...(sail||[{x:port.x,z:port.z}]));}}
+ }else if(sh.phase==='back'&&store&&stores(s).includes(store)){
+  if(afloat&&port){const walk=storeRoute(s,store,{goals:s.entries(port)}),sail=search([start],(x,z)=>water(s,x,z)&&(!s.at(x,z)||s.at(x,z)===port),(x,z)=>x===port.x&&z===port.z);if(walk&&sail){sh.portIndex=walk.length-1;route=[...walk,...sail.reverse()];}}
+  else{const walk=landTo(s.entries(store));if(walk){route=walk.reverse();sh.portIndex=0;}}
+ }
+ if(!route){sh.blocked='운송 경로가 막혔습니다 · 길이나 창고 연결을 복구하세요';return false;}
+ sh.route=route;sh.progress=sh.phase==='out'?0:route.length-1;sh.portIndex=Math.min(sh.portIndex||0,route.length-1);delete sh.blocked;return true;
+}
+
 // At the terminal a sale, contract or state order is paid once (the phase turns to 'back' in the same step, so a save
 // holds either the unpaid or the paid shipment). An import is loaded there and unloaded at the warehouse on return.
 function arrive(s,sh){
  const end=sh.route[sh.route.length-1];if(sh.kind==='import'){s.sound('pickup',end.x,end.z);return;}
  s.money+=sh.revenue;s.budget.income+=sh.revenue;s.totalRevenue+=sh.revenue;s.sold[sh.item]=(s.sold[sh.item]||0)+sh.amount;awardStars(s,sh);
+ // A split delivery counts only against the order it was sent for (a save may hold one whose order was drawn again).
+ if(sh.kind==='contract'&&sh.contractFinal===false){const open=(s.campaign?.treasury||s).contractOrder;if(open?.n===s.contracts&&open.item===sh.item){open.delivered=(open.delivered||0)+sh.amount;open.rewardPaid=(open.rewardPaid||0)+sh.revenue;}s.notify('분할 납품 도착 · '+RESOURCES[sh.item].name+' '+sh.amount+'개 · 남은 '+s.contract().amount+'개','success');return;}
  if(sh.kind==='contract'){s.contracts++;s.contractReadyAt=s.time+CONTRACT_WAIT;s.sound('contract',end.x,end.z);s.notify('영주 납품 완료 · '+RESOURCES[sh.item].name+' '+sh.amount+'개 · +'+sh.revenue+'G · 다음 주문은 하루 뒤','success');return;}
  s.sound('sell',end.x,end.z);if(!sh.auto)s.notify((sh.label?sh.label+' · ':'')+RESOURCES[sh.item].name+' '+sh.amount+'개 '+(sh.kind==='state'?'교역':'수출')+' 완료 · +'+sh.revenue+'G','success');
 }
-function unload(s,sh){deposit(s,sh.item,sh.amount,storeById(s,sh.storeId)||s.warehouse||s.starterStore);s.sound('delivery',sh.route[0].x,sh.route[0].z);s.notify(RESOURCES[sh.item].name+' '+sh.amount+'개 수입품 입고','success');s.checkStorage?.();}
+/** Another store that takes the whole import, with its land path from where the vehicle stands, nearest first; or null. */
+function importRedirect(s,sh,from){
+ const pose=shipmentPose(sh),start={x:Math.round(pose.x),z:Math.round(pose.z)},land=passable(s);
+ return stores(s).filter(b=>b!==from&&freeSpace(s,b,sh.item,sh)>=sh.amount).map(b=>({b,walk:search([start],land,(x,z)=>s.entries(b).some(p=>p.x===x&&p.z===z))})).filter(v=>v.walk).sort((a,c)=>a.walk.length-c.walk.length)[0]||null;
+}
+function unload(s,sh){
+ let store=storeById(s,sh.storeId);
+ if(!store||freeSpace(s,store,sh.item,sh)<sh.amount){
+  // The room reserved when the import was ordered (storage.js incoming) can be filled meanwhile (a refund or a cleared tree
+  // is stocked wherever there is room, storage.js deposit) or closed by a storage rule. The vehicle then drives on to another
+  // store with the room, as inter-site freight picks its drop-off stores again on arrival (campaign.js tickRoute).
+  const next=importRedirect(s,sh,store);
+  if(!next){sh.waitingForSpace=true;sh.blocked='입고 공간·보관 설정 확인';return;}
+  sh.storeId=next.b.id;delete sh.waitingForSpace;delete sh.blocked;
+  if(next.walk.length>1){sh.route=next.walk.reverse();sh.progress=sh.route.length-1;sh.portIndex=0;routeChecks.set(sh,s.revision);return;}
+  store=next.b;
+ }
+ delete sh.waitingForSpace;delete sh.blocked;deposit(s,sh.item,sh.amount,store);s.sound('delivery',sh.route[0].x,sh.route[0].z);s.notify(RESOURCES[sh.item].name+' '+sh.amount+'개 수입품 입고','success');s.checkStorage?.();}
 
 export function tickShipments(s,dt){
  for(const sh of s.shipments){
+  if(sh.waitingForSpace){unload(s,sh);continue;}
   if(sh.away){
    sh.remaining=Math.max(0,sh.remaining-dt);
    if(sh.remaining>0)continue;
    if(sh.away==='out'){sh.phase='back';arrive(s,sh);sh.away='back';sh.remaining=sh.duration;}
-   else sh.away=null;
+   else {sh.away=null;refreshShipmentRoute(s,sh,true);}
    continue;
   }
+  if(!refreshShipmentRoute(s,sh))continue;
   const pose=shipmentPose(sh),x=Math.round(pose.x),z=Math.round(pose.z),key=K(x,z),v=VEHICLES[sh.vehicle]||VEHICLES.truck;
   const speed=1.25*(water(s,x,z)?2:v.land*(s.paved?.has(key)?2.2:s.roads.has(key)?1.7:1));
   if(sh.phase==='out'){
    sh.progress=Math.min(sh.route.length-1,sh.progress+dt*speed);
    if(sh.kind!=='import'&&sh.portBuilding&&!sh.portLoaded&&sh.progress>=(sh.portIndex||0)){recordTerminalTransfer(s,sh,sh.portBuilding,sh.route[sh.portIndex]);sh.portLoaded=true;}
-   if(sh.progress>=sh.route.length-1){if(sh.duration){sh.away='out';sh.remaining=sh.duration;}else{sh.phase='back';arrive(s,sh);}}
-  }else{sh.progress-=dt*speed;if(sh.kind==='import'&&sh.portBuilding&&!sh.portUnloaded&&sh.progress<=(sh.portIndex||0)){recordTerminalTransfer(s,sh,sh.portBuilding,sh.route[sh.portIndex]);sh.portUnloaded=true;}if(sh.progress<=0&&sh.kind==='import')unload(s,sh);}
+   if(sh.progress>=sh.route.length-1){if(sh.duration){sh.away='out';sh.remaining=sh.duration;}else{sh.phase='back';arrive(s,sh);refreshShipmentRoute(s,sh,true);}}
+  }else{sh.progress=Math.max(0,sh.progress-dt*speed);if(sh.kind==='import'&&sh.portBuilding&&!sh.portUnloaded&&sh.progress<=(sh.portIndex||0)){recordTerminalTransfer(s,sh,sh.portBuilding,sh.route[sh.portIndex]);sh.portUnloaded=true;}if(sh.progress<=0&&sh.kind==='import')unload(s,sh);}
  }
- s.shipments=s.shipments.filter(sh=>sh.phase==='out'||sh.away||sh.progress>0);
+ s.shipments=s.shipments.filter(sh=>sh.phase==='out'||sh.away||sh.blocked||sh.progress>0);
 }
 
 /** What the trade panel shows: connection, every vehicle slot and whether fuel vehicles can run now. */
 export function exportStatus(s){
- const {route,error}=exportRoute(s),vehicles=fleet(s).map(v=>({...v,name:VEHICLES[v.kind].name,fuel:VEHICLES[v.kind].fuel})),fuelReady=spareFuel(s)>=tripFuel(s);
- return {connected:!!route,error,busy:s.shipments.length,carts:vehicles.filter(v=>!v.fuel||fuelReady).length,vehicles,fuelFree:FUEL_FREE,fuelPerTrip:tripFuel(s),...tradeJourney(s,activeTerminal(s)),fuelReady,spareFuel:Math.max(0,spareFuel(s)),waterside:waterside(s),waterRoute:!!waterRoute(s),
+ const {route,error}=exportRoute(s),vehicles=fleet(s).map(v=>({...v,name:VEHICLES[v.kind].name,fuel:VEHICLES[v.kind].fuel})),fuelReady=spareFuel(s,tripFuelItem(s))>=tripFuel(s);
+ return {connected:!!route,error,busy:s.shipments.length,carts:vehicles.filter(v=>!v.fuel||fuelReady).length,vehicles,fuelFree:FUEL_FREE,fuelPerTrip:tripFuel(s),...tradeJourney(s,activeTerminal(s)),fuelReady,capacity:vehicleLoad(s),spareFuel:Math.max(0,spareFuel(s,tripFuelItem(s))),waterside:waterside(s),waterRoute:!!waterRoute(s),
   inTransit:s.shipments.filter(sh=>sh.phase==='out'&&sh.kind!=='import').reduce((n,sh)=>n+sh.revenue,0),imports:s.shipments.filter(sh=>sh.kind==='import').length,contract:s.shipments.some(sh=>sh.kind==='contract'&&sh.phase==='out')};
 }

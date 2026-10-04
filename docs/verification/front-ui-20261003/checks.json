@@ -1,0 +1,70 @@
+{
+  "result": "PASS",
+  "surfaces": [
+    "native launcher preparation",
+    "title",
+    "home without save",
+    "home with save",
+    "folded trial menu",
+    "daily/transition gallery",
+    "loading",
+    "short screen transition",
+    "new-game confirmation",
+    "renderer startup error",
+    "graphics recovery and download"
+  ],
+  "layoutScreens": 30,
+  "viewports": [
+    "1440x900",
+    "1920x1080",
+    "390x844",
+    "360x800",
+    "844x390"
+  ],
+  "interactionChecks": [
+    "title keyboard entry, no-save continue disabled, stable random home, home/settings/world navigation, 24 daily + 4 transition gallery, filters/thumbnails/arrows",
+    "Saved home prioritizes continue; new-game confirmation fits desktop/mobile; cancel preserves save",
+    "actual save import, long-load artwork advances, immediate completion, playable demo, saved game preserved",
+    "390px mobile, short landscape, reduced motion",
+    "normal motion context-specific transitions, keyboard skip, default home probability branch",
+    "no legacy GLB requests throughout home, save import and playable demo",
+    "Five viewport sizes, title keyboard entry, primary-first home, folded extras, gallery, indeterminate loading, recovery focus loop and retry",
+    "Actual WebGL loss while a modal is open, paused simulation, focused recovery, valid campaign download, context restoration and home navigation",
+    "Renderer initialization failure displays branded error and retry; no export offered before a campaign exists",
+    "24 daily and 4 transition images decoded; category filters, thumbnails and keyboard navigation",
+    "random home shown, stable across rerenders, caption opens matching artwork, default-home probability branch",
+    "actual loading component rotates after 8 seconds; transition automatically finishes and supports keyboard skip",
+    "390px portrait and 844x390 landscape, full-image gallery, long titles without overflow",
+    "failed random artwork keeps the default home; existing save untouched"
+  ],
+  "typecheck": "PASS",
+  "build": "PASS",
+  "launcherBuild": "PASS",
+  "launcherReview": "Compiled Splash rendered offscreen at 520x300; three status messages inspected. Full launcher/server restart was not exercised.",
+  "regression": {
+    "result": "PASS",
+    "suites": 58,
+    "skips": [
+      "SKIP expansion-new-browser: no TOWNGRID_PLAYWRIGHT/TOWNGRID_CHROME"
+    ]
+  },
+  "comparison": {
+    "reference": "Concept 3 palette with minimal-v2 layout treatment",
+    "matches": [
+      "approved logo and screen artwork files",
+      "teal/cream/orange palette",
+      "flat controls",
+      "one primary home action"
+    ],
+    "notPixelIdentical": [
+      "responsive sizing and text wrapping",
+      "live map terrain and buildings differ from concept illustration"
+    ]
+  },
+  "incidentalCorrection": "GAME_DESIGN refinery input row now matches existing code: water 2.",
+  "limits": [
+    "No physical phone test",
+    "Not a screenshot-exact reproduction of concept artwork",
+    "Browser fault scenarios were deliberately injected in isolated contexts"
+  ]
+}

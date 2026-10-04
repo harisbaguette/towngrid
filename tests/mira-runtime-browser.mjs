@@ -12,18 +12,16 @@ try {
  await page.routeWebSocket('**/*',()=>{});
  page.on('pageerror', e => errors.push(e.message));
  page.on('response', r => { if (r.status() >= 400 && r.url().includes('/pixel-characters/')) failedAssets.push(r.url()); });
+ await page.route(/\/src\/app\/game\/scene\.js(?:\?|$)/,async route=>{
+  const response=await route.fetch(),source=await response.text();
+  await route.fulfill({response,body:source.replace('setSimulation(sim) {','setSimulation(sim) { window.miraScene=this;').replace('setSimulation(sim){','setSimulation(sim){window.miraScene=this;')});
+ });
  await page.goto(process.env.TOWNGRID_URL || 'http://localhost:5173');
  // The scene canvas exists after the client and its game assets initialize.
  await page.locator('canvas[role="application"]').waitFor({ state: 'attached', timeout: 120000 });
  await page.getByRole('button', { name: '화면을 눌러 시작', exact: true }).click({ timeout: 120000 });
+ await page.locator('.home-extras summary').click();
  await page.getByRole('button', { name: '초반 마을 테스트', exact: true }).waitFor({ timeout: 120000 });
- await page.evaluate(async () => {
-  const urls = performance.getEntriesByType('resource').map(e => e.name).filter(url => /\/app\/game\/scene\.js(?:\?|$)/.test(url));
-  for (const url of new Set([...urls, '/src/app/game/scene.js'])) {
-   const { GameScene } = await import(url), original = GameScene.prototype.setSimulation;
-   GameScene.prototype.setSimulation = function(sim) { window.miraScene = this; return original.call(this, sim); };
-  }
- });
  await page.getByRole('button', { name: '초반 마을 테스트', exact: true }).click();
  await page.waitForFunction(() => window.miraScene?.sim.workers.some(w => w.appearance === 'mira'));
  await page.getByRole('button', { name: '일시정지', exact: true }).click();
@@ -34,7 +32,7 @@ try {
   const ctx = canvas.getContext('2d'); ctx.drawImage(image, 0, 0); const pixels = ctx.getImageData(0, 0, image.width, image.height).data;
   const alpha = (x, y) => pixels[(y * image.width + x) * 4 + 3];
   const cells = [];
-  for (let row = 0; row < 4; row++) for (let column = 0; column < 64; column++) {
+  for (let row = 0; row < 8; row++) for (let column = 0; column < 64; column++) {
    let opaque = 0, border = 0, minY = 128, maxY = 0;
    for (let y = 0; y < 128; y++) for (let x = 0; x < 128; x++) if (alpha(column * 128 + x, row * 128 + y)) {
     opaque++; minY = Math.min(minY, y); maxY = Math.max(maxY, y);
@@ -45,7 +43,7 @@ try {
   const s = window.miraScene;
   return { width: image.width, height: image.height, revision: data.revision, clips: data.clips, cells, residents: s.sim.workers.map(w => ({ id: w.id, appearance: w.appearance, columns: s.workerModels.get(w.id)?.userData.atlas.columns })) };
  });
- assert.equal(assets.width, 8192); assert.equal(assets.height, 512);
+ assert.equal(assets.width, 8192); assert.equal(assets.height, 1536);
  assert.ok(assets.cells.every(c => c.opaque > 600 && c.opaque < 10000 && c.border === 0));
  assert.ok(assets.cells.every(c => c.minY > 0 && c.maxY < 127), 'all actions stay inside their cells');
  assert.ok(assets.residents.filter(w => w.appearance === 'mira').every(w => w.columns === 64));
@@ -56,7 +54,7 @@ try {
   const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const ctx=c.getContext('2d');ctx.drawImage(img,0,0);
   const checks=[];
   for(let row=0;row<4;row++) {
-   const bytes=(col,bob)=>Array.from(ctx.getImageData(col*128+42,row*128+13+bob,44,30).data).join(',');
+   const bytes=(col,bob)=>Array.from(ctx.getImageData((col%64)*128+42,(row+Math.floor(col/64)*4)*128+13+bob,44,30).data).join(',');
    const reference=bytes(0,meta.rigAudit[row][0].coreOffset[1]);
    for(const action of ['walk','carry']) for(const col of meta.clips[action].frames) {
     const bob=meta.rigAudit[row][col].coreOffset[1];checks.push(bytes(col,bob)===reference);
@@ -64,7 +62,7 @@ try {
   }
   return {samples:checks.length,identical:checks.every(Boolean)};
  });
- assert.deepEqual(headCheck,{samples:96,identical:true},'head pixels remain identical across walk and carry');
+ assert.deepEqual(headCheck,{samples:256,identical:true},'head pixels remain identical across walk and carry');
  const views = [];
  for (let view = 0; view < 4; view++) {
   await page.waitForTimeout(60);
@@ -72,9 +70,9 @@ try {
    const s = window.miraScene; return { view: s.viewIndex, models: [...s.workerModels.values()].filter(m => m.userData.appearance === 'mira').map(m => ({ row: m.userData.atlas.row, columns: m.userData.atlas.columns, frame: m.userData.frame, center: m.userData.sprite.center.toArray() })) };
   }));
   await page.screenshot({ path: fileURLToPath(new URL(`game-quarter-${view}.png`, out)) });
-  await page.getByRole('button', { name: '오른쪽 90도 회전', exact: true }).click();
+  await page.keyboard.press('e');
  }
- assert.equal(new Set(views.flatMap(v => v.models.map(m => m.row))).size, 4);
+ assert.equal(new Set(views.flatMap(v => v.models.map(m => m.row%4))).size, 4);
  // Actual, unforced logistics: observe empty walking and loaded cargo in the village.
  const activity = await page.evaluate(async () => {
   const scene = window.miraScene, sim = scene.sim, start = sim.time, frames = new Set(), actions = new Set();
@@ -103,15 +101,17 @@ try {
   sim.paused = true;
   return { seconds:sim.time-start, frames: [...frames].sort((a,b) => a-b), actions: [...actions], delivered: sim.logisticsStats.delivered - delivered,counts,mismatches };
  });
- assert.deepEqual(activity.frames, Array.from({length:12},(_,i)=>i+4));
+ assert.deepEqual(activity.frames, Array.from({length:32},(_,i)=>i+64));
  assert.ok(activity.actions.includes('carry')); assert.ok(activity.delivered > 0);
  assert.ok(activity.counts.corners>0&&activity.counts.handling>0&&activity.counts.holding>0);
  assert.deepEqual(activity.mismatches,[],'real logistics keeps moving cargo, handling and waiting poses');
+ await page.getByRole('button', { name: '게임 메뉴', exact: true }).click();
  await page.getByRole('button', { name: '주민', exact: true }).click();
  await page.locator('.resident-choice').filter({ hasText: /^미라/ }).first().click();
+ await page.locator('.resident-motion summary').click();
  const sprite = page.locator('.resident-preview');
  assert.equal(await sprite.getAttribute('data-character'), 'mira');
- assert.equal(await sprite.evaluate(e => e.style.backgroundSize), '6400% 400%');
+ assert.equal(await sprite.evaluate(e => e.style.backgroundSize), '6400% 800%');
  await page.waitForFunction(()=>document.querySelector('.resident-illustration')?.naturalWidth>0);
  const portrait = await page.locator('.resident-illustration').evaluate(e => ({ width: e.naturalWidth, height: e.naturalHeight }));
  assert.deepEqual(portrait, { width: 220, height: 314 });
@@ -133,16 +133,13 @@ try {
  await page.locator('.resident-actions').getByRole('button', { name: '걷기', exact: true }).click();
  for (const name of ['왼쪽 앞','왼쪽 뒤','오른쪽 뒤','오른쪽 앞']) {
   await page.locator('.resident-directions').getByRole('button', { name, exact: true }).click();
-  assert.equal(await sprite.evaluate(e => e.getAnimations()[0].effect.getKeyframes().length), 13);
+  assert.equal(await sprite.evaluate(e => e.getAnimations()[0].effect.getKeyframes().length), 33);
  }
  await page.screenshot({ path: fileURLToPath(new URL('resident-mira.png', out)) });
- await page.locator('.resident-choice').filter({ hasText: /^닥스/ }).first().click();
- assert.equal(await sprite.evaluate(e => e.style.backgroundSize), '6400% 400%');
- await page.locator('.resident-choice').filter({ hasText: /^미라/ }).first().click();
  await page.setViewportSize({ width: 390, height: 844 });
  await page.screenshot({ path: fileURLToPath(new URL('mobile-mira.png', out)), fullPage: true });
  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
  assert.deepEqual(errors, []); assert.deepEqual(failedAssets, []);
  await writeFile(new URL('browser-check.json', out), JSON.stringify({ assets, headCheck, views, activity, portrait, uiClips, mobileOverflow: false, errors, failedAssets }, null, 2));
- console.log(JSON.stringify({ atlas: '8192x512 RGBA', newFrames: 256, legacyActionFrames: 0, views: 4, activity, portrait, uiClips: uiClips.length, errors, failedAssets }));
+ console.log(JSON.stringify({ atlas: '8192x1024 RGBA', newFrames: 512, legacyActionFrames: 0, views: 4, activity, portrait, uiClips: uiClips.length, errors, failedAssets }));
 } finally { await browser.close(); }

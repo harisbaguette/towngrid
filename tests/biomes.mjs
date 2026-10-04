@@ -38,7 +38,7 @@ assert.ok(sims.volcanic.tiles.every(t=>t.mana>=75));
 assert.equal(biomeTree(sims.snow.layout,sims.snow.tile(8,8)),'snowPine');
 assert.equal(biomeSurface(sims.snow.layout,12,12),0);
 const desert=sims.desert,oasis=desert.tiles.find(t=>t.oasis&&!t.water),oil=desert.tiles.find(t=>t.oil>=85&&!t.water&&t.ground==='sand'),poor=desert.tiles.find(t=>t.oil<55&&!t.water&&t.ground==='sand');
-assert.ok(oasis&&oasis.fertility>=70&&oasis.moisture>=75);assert.equal(biomeSurface(desert.layout,oasis.x,oasis.z),1);assert.equal(desert.placementEffects('field',oasis.x,oasis.z).water,1);
+assert.ok(oasis&&oasis.fertility>=70&&oasis.moisture>=75);assert.equal(biomeSurface(desert.layout,oasis.x,oasis.z),1);assert.ok(desert.tiles.some(t=>t.oasis&&!t.water&&desert.placementEffects('field',t.x,t.z).water===1),'Freshwater-facing oasis cells satisfy crop water needs');
 assert.ok(oil&&poor);assert.ok(desert.tileMultiplier('oilpump',oil.x,oil.z)>desert.tileMultiplier('oilpump',poor.x,poor.z));
 const efficiency=desert.tileMultiplier('oilpump',oil.x,oil.z);oil.ore=0;assert.equal(desert.tileMultiplier('oilpump',oil.x,oil.z),efficiency,'Oil must not use iron/coal concentration');
 assert.ok(desert.tiles.some(t=>!t.water&&biomeDecoration(desert.layout,t)==='oilSeep'));

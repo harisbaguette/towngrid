@@ -41,7 +41,7 @@ export function ArtworkGallery({ onBack, initialId, onArtChange }: { onBack: () 
   </section>;
 }
 
-export function TitleScreen({ onEnter, muted, onSound }: { onEnter: () => void; muted: boolean; onSound: () => void }) {
+export function TitleScreen({ onEnter, muted, soundReady = true, onSound }: { onEnter: () => void; muted: boolean; soundReady?: boolean; onSound: () => void }) {
   const enter = useRef<HTMLButtonElement>(null);
   useEffect(() => { enter.current?.focus({ preventScroll: true }); }, []);
   return <section className="front-screen title-screen" aria-label="타운그리드 대기 화면">
@@ -51,18 +51,21 @@ export function TitleScreen({ onEnter, muted, onSound }: { onEnter: () => void; 
       <img className="title-logo" src={logo} alt="타운그리드" />
       <span className="screen-button title-prompt">화면을 눌러 시작 <ArrowRight size={22} /></span>
     </button>
-    <button className="screen-sound" aria-label={muted ? '소리 켜기' : '소리 끄기'} onClick={onSound}>{muted ? <VolumeX /> : <Volume2 />}</button>
+    <button data-sound="toggle" className="screen-sound" aria-label={muted || !soundReady ? '소리 켜기' : '소리 끄기'} title={muted || !soundReady ? '소리 켜기' : '소리 끄기'} onClick={onSound}>{muted || !soundReady ? <VolumeX /> : <Volume2 />}</button>
   </section>;
 }
 
 type HomeProps = {
-  saved: boolean; busy: boolean; muted: boolean;
+  saved: boolean; busy: boolean; muted: boolean; soundReady?: boolean;
   onContinue: () => void; onNew: () => void; onImport: () => void; onSettings: () => void;
-  onStarter: () => void; onDemo: () => void; onSound: () => void; onTitle: () => void;
+  onTrials?: () => void; onStarter: () => void; onDemo: () => void; onSound: () => void; onTitle: () => void;
+  onCommunity?: () => void;
   onArtChange?: (src: string) => void;
+  onGalleryChange?: (open: boolean) => void;
 };
 export function HomeScreen(props: HomeProps) {
   const [gallery, setGallery] = useState(false), [homeArt, setHomeArt] = useState<Art | null>(null);
+  useEffect(() => { props.onGalleryChange?.(gallery);return () => props.onGalleryChange?.(false); }, [gallery, props.onGalleryChange]);
   const chosen = useRef<Art | null | undefined>(undefined);
   const primary = useRef<HTMLButtonElement>(null);
   useEffect(() => { if (!gallery) props.onArtChange?.(homeArt?.src || SCREEN_BACKGROUNDS.home); }, [homeArt, gallery, props.onArtChange]);
@@ -82,18 +85,21 @@ export function HomeScreen(props: HomeProps) {
     <div className="home-content">
       <img className="home-logo" src={logo} alt="타운그리드" />
       <nav className="home-menu" aria-label="게임 메뉴">
-        <button data-sound="load" ref={props.saved ? primary : undefined} className={'screen-button ' + (props.saved ? 'primary' : '')} disabled={!props.saved || props.busy} onClick={props.onContinue}>이어하기 <ArrowRight size={23} /></button>
-        <button data-sound="open" ref={!props.saved ? primary : undefined} className={'screen-button ' + (!props.saved ? 'primary' : '')} disabled={props.busy} onClick={props.onNew}>새 게임</button>
+        {(props.saved ? ['continue', 'new'] : ['new', 'continue']).map((action, index) => <button key={action} data-sound={action === 'continue' ? 'load' : 'open'} ref={index === 0 ? primary : undefined} className={'screen-button' + (index === 0 ? ' primary' : '')} disabled={props.busy || action === 'continue' && !props.saved} onClick={action === 'continue' ? props.onContinue : props.onNew}>{action === 'continue' ? '이어하기' : '새 게임'}{index === 0 && <ArrowRight size={20} />}</button>)}
+        {props.onTrials&&<button className="screen-button" disabled={props.busy} onClick={props.onTrials}>산업 도전</button>}
+        {props.onCommunity&&<button className="screen-button" disabled={props.busy} onClick={props.onCommunity}>온라인·서버 저장</button>}
         <button data-sound="load" className="screen-button" disabled={props.busy} onClick={props.onImport}>불러오기</button>
         <button data-sound="none" className="screen-button" onClick={props.onSettings}>설정</button>
       </nav>
-      <details className="home-extras" open><summary>체험·점검 <ChevronDown size={15} aria-hidden /></summary>
-        <div className="home-extras-list"><button disabled={props.busy} onClick={props.onDemo}>산업도시 둘러보기</button><button disabled={props.busy} onClick={props.onStarter}>초반 마을 테스트</button><button onClick={() => setGallery(true)}>마을의 하루</button><a href="/art-preview.html">일러스트 테스트</a><a href="/biome-preview.html">지형 8종 테스트</a></div>
-      </details>
+      <div className="home-secondary"><button className="home-gallery" onClick={() => setGallery(true)}>마을의 하루 <ChevronRight size={15} /></button>
+        <details className="home-extras"><summary>체험·점검 <ChevronDown size={15} aria-hidden /></summary>
+          <div className="home-extras-list"><button disabled={props.busy} onClick={props.onDemo}>산업도시 둘러보기</button><button disabled={props.busy} onClick={props.onStarter}>초반 마을 테스트</button><a href="/art-preview.html">일러스트 테스트</a><a href="/biome-preview.html">지형 8종 테스트</a><a href="/world-effects-preview.html">환경·효과 컴포넌트</a><a href="/landforms-preview.html">지형 둘러보기</a></div>
+        </details>
+      </div>
       <button data-sound="close" className="home-to-title" onClick={props.onTitle}><ArrowLeft size={16} /> 대기 화면</button>
     </div>
     {homeArt && <button className="home-art-caption" onClick={() => setGallery(true)}>{homeArt.title} <ChevronRight size={15} /></button>}
-    <button className="screen-sound" aria-label={props.muted ? '소리 켜기' : '소리 끄기'} onClick={props.onSound}>{props.muted ? <VolumeX /> : <Volume2 />}</button>
+    <button data-sound="toggle" className="screen-sound" aria-label={props.muted || props.soundReady === false ? '소리 켜기' : '소리 끄기'} title={props.muted || props.soundReady === false ? '소리 켜기' : '소리 끄기'} onClick={props.onSound}>{props.muted || props.soundReady === false ? <VolumeX /> : <Volume2 />}</button>
   </section>;
 }
 
@@ -126,6 +132,31 @@ export function LoadingScreen({ art, onNext, label = '마을을 불러오는 중
       <h1 role="status">{label}</h1>
       <div className="screen-loading-track" role="progressbar" aria-label={label}><span /></div>
       <p>{art?.tip || '생산 시설을 도로로 연결해 보세요.'}</p>
+    </div>
+  </section>;
+}
+
+export function ScreenError({ title, message, onRetry, onExport }: { title: string; message: string; onRetry: () => void; onExport?: () => string }) {
+  const surface = useRef<HTMLElement>(null);
+  const [download, setDownload] = useState<string | null>(null), [exportError, setExportError] = useState('');
+  useEffect(() => { const previous = document.activeElement;surface.current?.focus({ preventScroll: true });return () => { if (previous instanceof HTMLElement && previous.isConnected) previous.focus({ preventScroll: true }); }; }, []);
+  useEffect(() => { if (!download) return;surface.current?.querySelector<HTMLAnchorElement>('a[download]')?.focus();return () => URL.revokeObjectURL(download); }, [download]);
+  const prepareBackup = () => {
+    try { const raw = onExport?.();if (!raw) throw new Error('저장할 진행이 없습니다.');setDownload(URL.createObjectURL(new Blob([raw], { type: 'application/json' })));setExportError(''); }
+    catch (error) { setExportError(error instanceof Error ? error.message : '진행 파일을 만들지 못했습니다. 다시 시도해 주세요.'); }
+  };
+  return <section ref={surface} tabIndex={-1} className="front-screen screen-error" aria-label={title} onKeyDown={event => {
+    event.stopPropagation();
+    if (event.key === 'Tab') {
+      const buttons = [...event.currentTarget.querySelectorAll<HTMLElement>('button,a[href]')];
+      if (event.shiftKey && (document.activeElement === buttons[0] || document.activeElement === surface.current)) { event.preventDefault();buttons.at(-1)?.focus(); }
+      else if (!event.shiftKey && document.activeElement === buttons.at(-1)) { event.preventDefault();buttons[0]?.focus(); }
+    }
+  }}>
+    <img className="error-logo" src={logo} alt="타운그리드" />
+    <div className="screen-error-content"><div role="alert"><h1>{title}</h1><p>{message}</p></div>
+      <div className="screen-error-actions">{onExport && (download ? <a className="screen-button" href={download} download={'towngrid-recovery-' + new Date().toISOString().slice(0, 10) + '.json'}>파일 저장 · JSON</a> : <button className="screen-button" onClick={prepareBackup}>진행 파일로 보관</button>)}<button className="screen-button primary" onClick={onRetry}>화면 다시 열기</button></div>
+      {exportError && <p role="alert">{exportError}</p>}
     </div>
   </section>;
 }

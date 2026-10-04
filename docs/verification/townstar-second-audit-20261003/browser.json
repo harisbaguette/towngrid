@@ -1,0 +1,16 @@
+{
+  "errors": [],
+  "contract": "납품 계약\n밀 14개 · 10/14\n납품 +151G",
+  "storage": {
+    "status": "운반 대기",
+    "out": 10,
+    "idle": 1,
+    "advice": 0
+  },
+  "save": {
+    "workers": 103,
+    "capacity": 102,
+    "message": "저장 실패 · 파일로 내보내세요",
+    "downloadLinks": 0
+  }
+}

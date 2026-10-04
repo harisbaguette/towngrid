@@ -1,0 +1,37 @@
+.world-map-screen.start-world { background:transparent; pointer-events:none; }
+.campaign-world-layout.unified-world-management { display:block; }
+.unified-world-management .campaign-site-panel { width:100%; max-width:none; }
+.start-world>.start-top,.start-world>.start-bottom,.start-world>.start-find,.start-world>.start-help-button,.start-world>.start-plot-find { pointer-events:auto; }
+.world-place-labels { position:absolute; inset:0; z-index:2; pointer-events:none; overflow:hidden; }
+.world-place-labels button { position:absolute; top:0; left:0; pointer-events:auto; border:0; padding:7px 10px; min-height:36px; background:#edf1d9d9; color:#244a44; border-radius:3px; font-size:16px; font-weight:800; white-space:nowrap; box-shadow:0 2px 5px #24433333; }
+.world-place-labels button[hidden] { display:none; }
+.world-place-labels .world-plot-label { font-size:12px; background:#214e51ed; color:#fff0bb; }
+.world-view-controls { position:absolute; top:50%; right:18px; transform:translateY(-50%); z-index:5; display:flex; flex-direction:column; gap:3px; padding:5px; background:#19484bdf; border:1px solid #84a19b; border-radius:4px; pointer-events:auto; }
+.world-view-controls button { display:grid; place-items:center; width:38px; height:38px; min-height:38px; padding:0; border:0; background:transparent; color:#fff5d6; border-radius:2px; }
+.world-view-controls button:hover { background:#668773; }
+.world-view-controls button:focus-visible,.world-place-labels button:focus-visible { outline:3px solid #ffd780; outline-offset:2px; }
+.world-manage { position:absolute; right:22px; bottom:24px; z-index:5; padding:10px 15px; min-height:40px; background:#1c484de8; color:#fff3da; border:1px solid #9aac91; border-radius:3px; font-weight:700; }
+.world-plot-panel { position:absolute; left:50%; bottom:24px; transform:translateX(-50%); z-index:12; display:flex; align-items:center; gap:16px; width:min(860px,calc(100% - 180px)); padding:20px 50px 20px 24px; background:#1e4d50; color:#fff3d7; border:2px solid #a9b99a; border-radius:4px; box-shadow:0 5px 20px #19392d44; }
+.world-plot-panel>div { display:grid; gap:4px; flex:1; }
+.world-plot-panel strong { font-size:20px; }
+.world-plot-panel small,.world-plot-panel span { font-size:12px; color:#c5d4b9; }
+.world-plot-panel button { min-height:42px; display:flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; background:#d29a44; color:#273b35; border:0; border-radius:3px; font-weight:750; }
+.world-plot-panel button:disabled { background:#31585a; color:#becbbd; font-size:12px; max-width:250px; }
+.world-plot-panel .world-plot-close { position:absolute; right:6px; top:6px; width:36px; min-height:36px; padding:0; background:transparent; color:#fff3d7; }
+.world-view-controls,.world-plot-panel { isolation:isolate; background:transparent; border:0; border-radius:0; }
+.world-view-controls::before,.world-plot-panel::before { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; border-image:var(--ui-panel-art) 48 fill / 12px / 0 stretch; image-rendering:pixelated; }
+.world-manage,.world-plot-panel>button:not(.world-plot-close) { isolation:isolate; background:transparent; border:0; border-radius:0; color:#fff3dc; }
+.world-plot-panel>button:not(.world-plot-close) { position:relative; }
+.world-manage::before,.world-plot-panel>button:not(.world-plot-close)::before { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; border-image:var(--ui-button-art) 42 fill / 10px / 0 stretch; image-rendering:pixelated; }
+.world-plot-panel>button:nth-last-child(2):not(:disabled)::before { border-image-source:var(--ui-action-art); }
+.world-plot-panel>button:disabled::before { filter:grayscale(.8) brightness(.7); }
+@media(max-width:700px){
+ .world-view-controls { right:8px; gap:0; padding:3px; }
+ .world-view-controls button { width:36px; height:36px; min-height:36px; }
+ .world-place-labels button { font-size:13px; }
+ .world-manage { right:12px; bottom:100px; padding:8px 12px; font-size:12px; }
+ .world-plot-panel { bottom:12px; width:calc(100% - 24px); flex-wrap:wrap; padding:18px; gap:10px; }
+ .world-plot-panel>div { flex-basis:100%; }
+ .world-plot-panel strong { font-size:17px; }
+ .world-plot-panel button:disabled { max-width:none; flex:1; }
+}

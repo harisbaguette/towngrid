@@ -1,0 +1,14 @@
+{
+  "prices": {
+    "near": "빵\n1개 39G · 수요 96% · 도시 100%",
+    "far": "빵\n1개 51G · 수요 96% · 도시 130%"
+  },
+  "record": {
+    "score": 17995,
+    "elapsed": 0.42500000000000004,
+    "delivered": 100,
+    "status": "won"
+  },
+  "errors": [],
+  "failed": []
+}

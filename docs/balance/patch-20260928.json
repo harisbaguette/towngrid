@@ -124,6 +124,16 @@
     "color": "#e3b04b",
     "price": 12000,
     "final": true
+   },
+   "petroleum": {
+    "name": "석유 중간재",
+    "color": "#bb913d",
+    "price": 40
+   },
+   "processwater": {
+    "name": "공업용수",
+    "color": "#489fc3",
+    "price": 12
    }
   },
   "change": {
@@ -744,7 +754,34 @@
     "cost": 900
    },
    "refinery": {
-    "cost": 1000
+    "cost": 1000,
+    "materials": {
+     "plank": 12,
+     "stone": 12
+    },
+    "period": 14,
+    "inputs": {
+     "oil": 3,
+     "water": 2
+    },
+    "output": "fuel",
+    "amount": 3,
+    "stages": [
+     {
+      "name": "원유 증류",
+      "until": 0.5714285714285714,
+      "inputs": {
+       "oil": 3
+      }
+     },
+     {
+      "name": "냉각·혼합",
+      "until": 1,
+      "inputs": {
+       "water": 2
+      }
+     }
+    ]
    },
    "chemical": {
     "cost": 1000
@@ -777,6 +814,26 @@
    "bakery": {
     "period": 13,
     "amount": 5
+   },
+   "windturbine": {
+    "cost": 330,
+    "materials": {
+     "plank": 10,
+     "stone": 6
+    },
+    "period": 30,
+    "output": "power",
+    "amount": 1
+   },
+   "oilpump": {
+    "cost": 420,
+    "materials": {
+     "plank": 8,
+     "stone": 6
+    },
+    "period": 12,
+    "output": "oil",
+    "amount": 3
    }
   }
  },
@@ -805,13 +862,14 @@
  "ranks": {
   "table": [
    {
+    "id": 0,
     "name": "농노",
     "fee": 0,
     "requirements": [],
-    "unlocks": [],
-    "id": 0
+    "unlocks": []
    },
    {
+    "id": 1,
     "name": "등록 농노",
     "fee": 35,
     "requirements": [
@@ -828,10 +886,10 @@
     ],
     "unlocks": [
      "sawmill"
-    ],
-    "id": 1
+    ]
    },
    {
+    "id": 2,
     "name": "개간 농노",
     "fee": 60,
     "requirements": [
@@ -849,10 +907,10 @@
     "unlocks": [
      "mill",
      "smokehouse"
-    ],
-    "id": 2
+    ]
    },
    {
+    "id": 3,
     "name": "계약 농노",
     "fee": 100,
     "requirements": [
@@ -870,10 +928,10 @@
     "unlocks": [
      "bakery",
      "cottonfield"
-    ],
-    "id": 3
+    ]
    },
    {
+    "id": 4,
     "name": "준자유민",
     "fee": 160,
     "requirements": [
@@ -891,11 +949,13 @@
     "unlocks": [
      "herbgarden",
      "clinic",
-     "weaver"
-    ],
-    "id": 4
+     "weaver",
+     "windturbine",
+     "oilpump"
+    ]
    },
    {
+    "id": 5,
     "name": "임차 사업주",
     "fee": 250,
     "requirements": [
@@ -911,11 +971,12 @@
      ]
     ],
     "unlocks": [
-     "depot"
-    ],
-    "id": 5
+     "depot",
+     "refinery"
+    ]
    },
    {
+    "id": 6,
     "name": "등록 사업주",
     "fee": 300,
     "requirements": [
@@ -933,10 +994,10 @@
     "unlocks": [
      "henhouse",
      "marketplace"
-    ],
-    "id": 6
+    ]
    },
    {
+    "id": 7,
     "name": "지역 공급자",
     "fee": 350,
     "requirements": [
@@ -954,10 +1015,10 @@
     "unlocks": [
      "confectionery",
      "reservoir"
-    ],
-    "id": 7
+    ]
    },
    {
+    "id": 8,
     "name": "제조 허가업자",
     "fee": 400,
     "requirements": [
@@ -975,10 +1036,10 @@
     "unlocks": [
      "kiln",
      "stable"
-    ],
-    "id": 8
+    ]
    },
    {
+    "id": 9,
     "name": "지역 납품업자",
     "fee": 500,
     "requirements": [
@@ -996,10 +1057,10 @@
     "unlocks": [
      "tailor",
      "glassworks"
-    ],
-    "id": 9
+    ]
    },
    {
+    "id": 10,
     "name": "공인 계약업자",
     "fee": 600,
     "requirements": [
@@ -1023,10 +1084,10 @@
      "watermill",
      "dwarfhouse",
      "spirithouse"
-    ],
-    "id": 10
+    ]
    },
    {
+    "id": 11,
     "name": "개척 사업자",
     "fee": 700,
     "requirements": [
@@ -1039,10 +1100,10 @@
     "unlocks": [
      "generator",
      "workshop"
-    ],
-    "id": 11
+    ]
    },
    {
+    "id": 12,
     "name": "동력 제조업자",
     "fee": 850,
     "requirements": [
@@ -1058,12 +1119,11 @@
      ]
     ],
     "unlocks": [
-     "windturbine",
      "logistics"
-    ],
-    "id": 12
+    ]
    },
    {
+    "id": 13,
     "name": "법인 대표",
     "fee": 1200,
     "requirements": [
@@ -1083,10 +1143,10 @@
      "coalpit",
      "titanhouse",
      "centaurhouse"
-    ],
-    "id": 13
+    ]
    },
    {
+    "id": 14,
     "name": "중공업 사업자",
     "fee": 1500,
     "requirements": [
@@ -1110,10 +1170,10 @@
      "smelter",
      "steamworks",
      "wardpost"
-    ],
-    "id": 14
+    ]
    },
    {
+    "id": 15,
     "name": "에너지 사업자",
     "fee": 2200,
     "requirements": [
@@ -1129,13 +1189,11 @@
      ]
     ],
     "unlocks": [
-     "oilpump",
-     "refinery",
      "coppermine"
-    ],
-    "id": 15
+    ]
    },
    {
+    "id": 16,
     "name": "산업단지 운영자",
     "fee": 2800,
     "requirements": [
@@ -1159,10 +1217,10 @@
      "chemical",
      "manaextractor",
      "wiremill"
-    ],
-    "id": 16
+    ]
    },
    {
+    "id": 17,
     "name": "정밀 제조업자",
     "fee": 3400,
     "requirements": [
@@ -1186,10 +1244,10 @@
      "electronics",
      "magetower",
      "cementworks"
-    ],
-    "id": 17
+    ]
    },
    {
+    "id": 18,
     "name": "광역 투자자",
     "fee": 4000,
     "requirements": [
@@ -1213,10 +1271,10 @@
      "station",
      "rail",
      "cannery"
-    ],
-    "id": 18
+    ]
    },
    {
+    "id": 19,
     "name": "자동차 제조사",
     "fee": 4800,
     "requirements": [
@@ -1233,10 +1291,10 @@
     ],
     "unlocks": [
      "automotive"
-    ],
-    "id": 19
+    ]
    },
    {
+    "id": 20,
     "name": "기술 기업군",
     "fee": 6000,
     "requirements": [
@@ -1247,17 +1305,17 @@
      ],
      [
       "contracts",
-      19,
+      16,
       "납품 계약"
      ]
     ],
     "unlocks": [
      "laboratory",
      "hospital"
-    ],
-    "id": 20
+    ]
    },
    {
+    "id": 21,
     "name": "기반시설 운영자",
     "fee": 7000,
     "requirements": [
@@ -1276,10 +1334,10 @@
      "arcanepower",
      "battery",
      "leyrelay"
-    ],
-    "id": 21
+    ]
    },
    {
+    "id": 22,
     "name": "개발구 운영권자",
     "fee": 8000,
     "requirements": [
@@ -1297,10 +1355,10 @@
     "unlocks": [
      "bank",
      "barracks"
-    ],
-    "id": 22
+    ]
    },
    {
+    "id": 23,
     "name": "치안권 보유자",
     "fee": 9500,
     "requirements": [
@@ -1318,10 +1376,10 @@
     "unlocks": [
      "fortress",
      "lampworks"
-    ],
-    "id": 23
+    ]
    },
    {
+    "id": 24,
     "name": "재정 운영권자",
     "fee": 11000,
     "requirements": [
@@ -1337,16 +1395,16 @@
      ],
      [
       "contracts",
-      27,
+      23,
       "납품 계약"
      ]
     ],
     "unlocks": [
      "engineworks"
-    ],
-    "id": 24
+    ]
    },
    {
+    "id": 25,
     "name": "자치구 대표",
     "fee": 12500,
     "requirements": [
@@ -1362,16 +1420,16 @@
      ],
      [
       "contracts",
-      29,
+      25,
       "납품 계약"
      ]
     ],
     "unlocks": [
      "mithrilforge"
-    ],
-    "id": 25
+    ]
    },
    {
+    "id": 26,
     "name": "자치정부 수장",
     "fee": 14000,
     "requirements": [
@@ -1393,10 +1451,10 @@
     ],
     "unlocks": [
      "parliament"
-    ],
-    "id": 26
+    ]
    },
    {
+    "id": 27,
     "name": "독립 선언국",
     "fee": 16000,
     "requirements": [
@@ -1418,10 +1476,10 @@
     ],
     "unlocks": [
      "shipyard"
-    ],
-    "id": 27
+    ]
    },
    {
+    "id": 28,
     "name": "승인 독립국",
     "fee": 19000,
     "requirements": [
@@ -1443,10 +1501,10 @@
     ],
     "unlocks": [
      "airdock"
-    ],
-    "id": 28
+    ]
    },
    {
+    "id": 29,
     "name": "지역 강국",
     "fee": 28000,
     "requirements": [
@@ -1473,10 +1531,10 @@
     ],
     "unlocks": [
      "blastfurnace"
-    ],
-    "id": 29
+    ]
    },
    {
+    "id": 30,
     "name": "다지역 연방",
     "fee": 38000,
     "requirements": [
@@ -1498,10 +1556,10 @@
     ],
     "unlocks": [
      "assemblyline"
-    ],
-    "id": 30
+    ]
    },
    {
+    "id": 31,
     "name": "열강",
     "fee": 56000,
     "requirements": [
@@ -1523,10 +1581,10 @@
     ],
     "unlocks": [
      "exchange"
-    ],
-    "id": 31
+    ]
    },
    {
+    "id": 32,
     "name": "패권국",
     "fee": 70000,
     "requirements": [
@@ -1551,8 +1609,7 @@
       "자동차 생산"
      ]
     ],
-    "unlocks": [],
-    "id": 32
+    "unlocks": []
    }
   ],
   "previous": [
@@ -5819,7 +5876,7 @@
      "output": "jetfuel",
      "amount": 2,
      "period": 24,
-     "unlock": 26
+     "unlock": 21
     }
    ],
    "shipyard": [
@@ -6219,24 +6276,30 @@
  "logistics20261003": {
   "storage": {
    "starter": 160,
-   "warehouse": 960,
+   "warehouse": 480,
    "warehouseRank1Bonus": 120,
-   "depot": 240,
+   "depot": 1200,
    "capacity": "한 장소 안의 상품 수량 합계",
    "inventory": "starterInventory와 건물별 inventory, stock은 합계",
    "legacy": "기존 총재고를 기존 창고 또는 미니 창고에 보존",
-   "discard": "창고별 예약되지 않은 상품만 폐기 가능"
+   "discard": "창고별 예약되지 않은 상품만 폐기 가능",
+   "levelMultipliers": [
+    1,
+    1.5,
+    2
+   ]
   },
   "journey": {
-   "destination": "세계 격자에서 가장 가까운 개발된 플레이 국가 도시",
-   "distance": "맨해튼 거리",
-   "seconds": "ceil((1 + distance × 0.5) × 수단 배율)",
-   "factors": {
-    "road": 1,
-    "port": 0.8,
-    "rail": 0.65,
-    "air": 0.45
-   }
+   "destination": "선택한 개발 도시, 기본은 최단 시간 도시",
+   "distance": "세계 격자 경로: 산 고개·강 도하·간선 회랑·수운 환적; 항공은 직선",
+   "fuelItems": {
+    "road": "fuel",
+    "ship": "fuel",
+    "rail": "coal",
+    "air": "jetfuel"
+   },
+   "duration": "가중 이동 비용 × 0.5 + 1, 올림",
+   "fuel": "가중 이동 비용 / 12, 올림·최소 1"
   },
   "relocation": {
    "cost": "max(5, ceil(건설비 × 0.1))",
@@ -6252,27 +6315,29 @@
     "wood": 6,
     "stone": 4
    },
-   "period": 12,
+   "period": 60,
    "inputs": {
-    "grain": 2,
-    "wood": 1,
-    "water": 1
+    "grain": 6,
+    "wood": 3,
+    "water": 2
    },
    "output": "fuel",
-   "amount": 2,
-   "description": "밀과 장작으로 수출용 연료를 만듭니다. 전력 없이 가동하며 초반부터 연료를 자급할 수 있습니다.",
+   "amount": 1,
+   "unique": true,
+   "emergency": true,
+   "description": "비상용 연료 1개를 60게임초에 만듭니다. 연료 재고가 5개 미만일 때만 가동합니다. 원료가 비싸고 느려 정유소를 대신할 수 없습니다. 거점당 1곳 · 업그레이드 불가.",
    "recipes": [
     {
      "id": "fuel",
      "name": "연료",
      "inputs": {
-      "grain": 2,
-      "wood": 1,
-      "water": 1
+      "grain": 6,
+      "wood": 3,
+      "water": 2
      },
      "output": "fuel",
-     "amount": 2,
-     "period": 12
+     "amount": 1,
+     "period": 60
     }
    ]
   },
@@ -6283,7 +6348,7 @@
    "spawn": "주택만",
    "idleHomeAfter": 6
   },
-  "saveVersion": 9,
+  "saveVersion": 10,
   "storageVersion": 1,
   "counts": {
    "resources": 80,
@@ -6295,6 +6360,31 @@
    "scope": "단계 진입 이후 창고·시설 간 주민 및 관·컨베이어 운반"
   },
   "autoSalePriority": "출하 금액 내림차순"
+ },
+ "facilityUpgrades": {
+  "levels": [
+   1,
+   2,
+   3
+  ],
+  "productionSpeed": [
+   1,
+   1.3,
+   1.6
+  ],
+  "storageAndTransport": [
+   1,
+   1.5,
+   2
+  ],
+  "residentWagePerDay": 1,
+  "emergencyUpgrade": false,
+  "fuelTechnology": {
+   "windturbine": 4,
+   "oilpump": 4,
+   "refinery": 5,
+   "jetfuel": 21
+  }
  },
  "balance20261003": {
   "note": "첫 1시간 막힘 보정. 정본은 코드(simulation.js contractItem, world.js RANKS)이고 BALANCE_PATCH_20260928.md 21절이 같은 내용이다.",
@@ -6322,6 +6412,76 @@
    },
    "unit": "8단계 도달 게임일(1일=80게임초)"
   }
+ },
+ "followup20261003": {
+  "power": {
+   "supply": {
+    "windturbine": 6,
+    "generator": 16,
+    "watermill": 12,
+    "arcanepower": 28,
+    "solarpanel": 6,
+    "battery": 12
+   },
+   "demand": {
+    "oilpump": 2,
+    "refinery": 3,
+    "chemical": 3,
+    "smelter": 3,
+    "automotive": 4,
+    "shipyard": 5,
+    "blastfurnace": 5,
+    "assemblyline": 5,
+    "logistics": 2
+   },
+   "defaultDemand": 1,
+   "upgradeSupplyFactor": 0.5,
+   "upgradeDemandFactor": 0.3
+  },
+  "destination": {
+   "demandRange": [
+    0.9,
+    1.2
+   ],
+   "demandDays": 5,
+   "extraDistanceFactor": 0.008,
+   "maxDistanceBonus": 0.3
+  },
+  "trials": [
+   {
+    "id": "bread",
+    "name": "강변 제빵사",
+    "nation": "estern",
+    "rank": 3,
+    "item": "bread",
+    "target": 100,
+    "duration": 800,
+    "money": 3000,
+    "text": "강변에서 빵 100개를 직접 생산해 수출하세요."
+   },
+   {
+    "id": "cloth",
+    "name": "숲의 직물 공방",
+    "nation": "silvaen",
+    "rank": 5,
+    "item": "cloth",
+    "target": 60,
+    "duration": 960,
+    "money": 4000,
+    "text": "목화 공급과 직조를 연결해 직물 60개를 수출하세요."
+   },
+   {
+    "id": "steel",
+    "name": "산업 동력 시험",
+    "nation": "kardum",
+    "rank": 15,
+    "item": "steel",
+    "target": 60,
+    "duration": 1200,
+    "money": 8000,
+    "text": "광산·전력·제철을 연결해 강철 60개를 수출하세요."
+   }
+  ]
  },
  "townstar20261003": {
   "note": "타운스타 대조 반영. 정본은 코드이고 BALANCE_PATCH_20260928.md 24절이 같은 내용이다.",
@@ -6434,15 +6594,133 @@
    "reeds": 60
   },
   "offline": {
-   "minRealSeconds": 60,
-   "maxRealSeconds": 1800,
-   "speed": 16,
-   "events": "시작하지 않음",
-   "budgetMs": 2000
+   "enabledByDefault": false,
+   "maxRealSeconds": 600,
+   "speed": 1,
+   "stops": [
+    "money <= 0",
+    "spare route fuel < max(2, route fuel cost)",
+    "last ledger net < 0",
+    "pending event, active raid, infection, strike or sanction"
+   ],
+   "manualPause": false,
+   "trials": false,
+   "persistLastDeficit": true,
+   "module": "offline-progress.js"
   },
   "contractImport": "납품 품목을 만들고 있는데 모자라고 자금이 수입가의 3배 + 300G 이상이면 계약 목표 버튼이 나머지 수입을 안내한다",
   "relocation": "나무·바위 칸으로 이전하면 부지 정리비를 더 내고 목재·석재 2개를 얻는다",
   "depletedMove": "자원 고갈 벌목장·채석장을 자원이 남은 가장 가까운 내 땅으로 옮기는 버튼"
+ },
+ "secondAudit20261003": {
+  "refining": {
+   "resources": {
+    "petroleum": {
+     "name": "석유 중간재",
+     "color": "#bb913d",
+     "price": 40
+    },
+    "processwater": {
+     "name": "공업용수",
+     "color": "#489fc3",
+     "price": 12
+    }
+   },
+   "refinery": [
+    {
+     "id": "petroleum",
+     "name": "석유 중간재 증류",
+     "inputs": {
+      "oil": 3
+     },
+     "output": "petroleum",
+     "amount": 3,
+     "period": 10,
+     "unlock": 5
+    },
+    {
+     "id": "blendedfuel",
+     "name": "중간재 연료 혼합",
+     "inputs": {
+      "petroleum": 3,
+      "processwater": 1
+     },
+     "output": "fuel",
+     "amount": 3,
+     "period": 4,
+     "unlock": 5
+    }
+   ],
+   "well": [
+    {
+     "id": "processwater",
+     "name": "공업용수 정제",
+     "inputs": {
+      "water": 2
+     },
+     "output": "processwater",
+     "amount": 1,
+     "period": 3,
+     "unlock": 5
+    }
+   ],
+   "defaultRefinery": {
+    "oil": 3,
+    "water": 2,
+    "fuel": 3,
+    "period": 14
+   },
+   "emergencyDistillery": {
+    "unique": true,
+    "maxFuel": 5,
+    "period": 60,
+    "amount": 1,
+    "upgrade": false
+   }
+  },
+  "power": {
+   "reach": 6,
+   "batteryCapacity": 90,
+   "batteryChargePerSecond": 2,
+   "batteryDrainPerSecond": 1,
+   "storage": "per building; legacy aggregate restored when absent"
+  },
+  "offline": {
+   "enabledByDefault": false,
+   "maxRealSeconds": 600,
+   "speed": 1,
+   "stops": [
+    "money <= 0",
+    "spare route fuel < max(2, route fuel cost)",
+    "last ledger net < 0",
+    "pending event, active raid, infection, strike or sanction"
+   ],
+   "manualPause": false,
+   "trials": false,
+   "persistLastDeficit": true
+  },
+  "weeklyTrials": {
+   "roundDays": 7,
+   "epoch": "2026-01-05T00:00:00.000Z",
+   "durationMultiplier": 1.5,
+   "moneyBonus": 1000,
+   "oddTargetBonus": 20,
+   "oddFuelPenalty": 50
+  },
+  "promotionContracts": [
+   {
+    "rank": 20,
+    "target": 16
+   },
+   {
+    "rank": 24,
+    "target": 23
+   },
+   {
+    "rank": 25,
+    "target": 25
+   }
+  ]
  },
  "audit20261004": {
   "coppermine": {
@@ -6462,6 +6740,440 @@
     "pass": true,
     "day": 55
    }
+  }
+ },
+ "competitionV2": {
+  "idPrefixes": [
+   "practice-v2-",
+   "weekly-v2-"
+  ],
+  "roundDays": 7,
+  "epoch": "2026-01-05T00:00:00.000Z",
+  "catalog": [
+   {
+    "id": "timber",
+    "name": "숲의 제재소",
+    "nation": "silvaen",
+    "rank": 2,
+    "item": "plank",
+    "target": 140,
+    "duration": 960,
+    "money": 3200,
+    "plan": [
+     [
+      "house",
+      5
+     ],
+     [
+      "lumber",
+      3
+     ],
+     [
+      "sawmill",
+      2
+     ]
+    ]
+   },
+   {
+    "id": "bread",
+    "name": "강변 제빵사",
+    "nation": "estern",
+    "rank": 3,
+    "item": "bread",
+    "target": 100,
+    "duration": 1000,
+    "money": 4000,
+    "plan": [
+     [
+      "house",
+      6
+     ],
+     [
+      "well",
+      2
+     ],
+     [
+      "lumber",
+      1
+     ],
+     [
+      "field",
+      2
+     ],
+     [
+      "mill",
+      1
+     ],
+     [
+      "bakery",
+      1
+     ]
+    ]
+   },
+   {
+    "id": "cloth",
+    "name": "숲의 직물 공방",
+    "nation": "silvaen",
+    "rank": 5,
+    "item": "cloth",
+    "target": 60,
+    "duration": 1100,
+    "money": 5000,
+    "plan": [
+     [
+      "house",
+      6
+     ],
+     [
+      "well",
+      2
+     ],
+     [
+      "cottonfield",
+      3
+     ],
+     [
+      "weaver",
+      2
+     ]
+    ]
+   },
+   {
+    "id": "brick",
+    "name": "건축 자재 납품",
+    "nation": "estern",
+    "rank": 8,
+    "item": "brick",
+    "target": 100,
+    "duration": 1200,
+    "money": 5000,
+    "plan": [
+     [
+      "house",
+      6
+     ],
+     [
+      "lumber",
+      2
+     ],
+     [
+      "quarry",
+      2
+     ],
+     [
+      "kiln",
+      2
+     ]
+    ]
+   },
+   {
+    "id": "workwear",
+    "name": "작업복 수출",
+    "nation": "silvaen",
+    "rank": 9,
+    "item": "workwear",
+    "target": 40,
+    "duration": 1600,
+    "money": 6500,
+    "plan": [
+     [
+      "house",
+      7
+     ],
+     [
+      "well",
+      2
+     ],
+     [
+      "cottonfield",
+      3
+     ],
+     [
+      "weaver",
+      2
+     ],
+     [
+      "tailor",
+      1
+     ]
+    ]
+   },
+   {
+    "id": "steel",
+    "name": "산업 동력 시험",
+    "nation": "kardum",
+    "rank": 15,
+    "item": "steel",
+    "target": 60,
+    "duration": 1800,
+    "money": 9000,
+    "plan": [
+     [
+      "house",
+      3
+     ],
+     [
+      "dwarfhouse",
+      3
+     ],
+     [
+      "well",
+      2
+     ],
+     [
+      "windturbine",
+      1
+     ],
+     [
+      "ironmine",
+      1
+     ],
+     [
+      "coalpit",
+      1
+     ],
+     [
+      "smelter",
+      1
+     ]
+    ]
+   },
+   {
+    "id": "gear",
+    "name": "기계 부품 공방",
+    "nation": "kardum",
+    "rank": 11,
+    "item": "gear",
+    "target": 60,
+    "duration": 1600,
+    "money": 7000,
+    "plan": [
+     [
+      "house",
+      4
+     ],
+     [
+      "dwarfhouse",
+      3
+     ],
+     [
+      "lumber",
+      3
+     ],
+     [
+      "sawmill",
+      2
+     ],
+     [
+      "quarry",
+      2
+     ],
+     [
+      "windturbine",
+      1
+     ],
+     [
+      "workshop",
+      2
+     ]
+    ]
+   },
+   {
+    "id": "wool",
+    "name": "목장의 양모",
+    "nation": "estern",
+    "rank": 6,
+    "item": "wool",
+    "target": 80,
+    "duration": 1200,
+    "money": 5000,
+    "plan": [
+     [
+      "house",
+      6
+     ],
+     [
+      "well",
+      2
+     ],
+     [
+      "field",
+      3
+     ],
+     [
+      "feedmill",
+      1
+     ],
+     [
+      "sheeppen",
+      2
+     ]
+    ]
+   },
+   {
+    "id": "baguette",
+    "name": "제빵 분업 시험",
+    "nation": "estern",
+    "rank": 5,
+    "item": "baguette",
+    "target": 60,
+    "duration": 1500,
+    "money": 6000,
+    "plan": [
+     [
+      "house",
+      7
+     ],
+     [
+      "well",
+      2
+     ],
+     [
+      "lumber",
+      2
+     ],
+     [
+      "field",
+      3
+     ],
+     [
+      "mill",
+      2
+     ],
+     [
+      "bakery",
+      2
+     ]
+    ],
+    "recipes": {
+     "bakery": [
+      "dough",
+      "baguette"
+     ]
+    }
+   }
+  ],
+  "conditions": [
+   {
+    "id": "time",
+    "name": "빠른 납품",
+    "text": "남은 시간으로 추가 점수를 얻습니다.",
+    "fuelPenalty": 0,
+    "buildingPenalty": 0
+   },
+   {
+    "id": "fuel",
+    "name": "연료 절약",
+    "text": "운송 연료 1개당 50점이 차감됩니다.",
+    "fuelPenalty": 50,
+    "buildingPenalty": 0
+   },
+   {
+    "id": "compact",
+    "name": "작은 공장",
+    "text": "도로 등 바닥 타일을 제외한 시설 한 곳당 100점이 차감됩니다.",
+    "fuelPenalty": 0,
+    "buildingPenalty": 100
+   }
+  ],
+  "scoreEvents": [
+   {
+    "name": "제분 기술전",
+    "goods": {
+     "flour": 3,
+     "bread": 1.5
+    }
+   },
+   {
+    "name": "직물 박람회",
+    "goods": {
+     "cloth": 3,
+     "yarn": 2,
+     "workwear": 2
+    }
+   },
+   {
+    "name": "건축 자재전",
+    "goods": {
+     "plank": 2,
+     "brick": 3,
+     "gear": 2
+    }
+   },
+   {
+    "name": "수확 가공전",
+    "goods": {
+     "jam": 3,
+     "candy": 3,
+     "winered": 2
+    }
+   },
+   {
+    "name": "금속 기술전",
+    "goods": {
+     "steel": 3,
+     "copper": 2,
+     "wire": 2
+    }
+   },
+   {
+    "name": "목축 품평회",
+    "goods": {
+     "wool": 3,
+     "milk": 2,
+     "butter": 3
+    }
+   },
+   {
+    "name": "해안 식품전",
+    "goods": {
+     "smokedfish": 3,
+     "salt": 2,
+     "canned": 3
+    }
+   },
+   {
+    "name": "첨단 산업전",
+    "goods": {
+     "circuit": 3,
+     "car": 3,
+     "airship": 2
+    }
+   }
+  ],
+  "scoreFormula": "max(0, floor(min(delivered,target)*100 + (won ? (duration-elapsed)*10 : 0) - fuelUsed*fuelPenalty - nonTileFacilities*buildingPenalty))",
+  "fixedReplayStep": 0.25,
+  "rivals": {
+   "initialCash": 2000,
+   "initialFuel": 40,
+   "operatingRate": 0.015,
+   "baseDailyCapacity": 18,
+   "capacityPerRival": 3,
+   "baseStorage": 240,
+   "storagePerFacility": 20,
+   "expansionEveryDays": 28,
+   "maxPlanCopies": 3,
+   "productionTicksPerDay": 10,
+   "secondsPerTick": 8,
+   "baseProductionFactor": 0.8,
+   "productionFactorPerRival": 0.06,
+   "maxCyclesPerTick": 4,
+   "inputReserveCycles": 3,
+   "outputBufferShipments": 2,
+   "importFactor": 1.85,
+   "fuelPurchaseUnits": 12,
+   "fuelDelivered": 10,
+   "fuelPurchaseBelow": 4,
+   "unitsPerFuel": 10,
+   "model": "aggregate recipes and budgets; no tile placement, resident paths or natural depletion"
+  },
+  "operatingAdvice": {
+   "minimumCash": 60,
+   "fuelTrips": 3,
+   "wagesDays": 1,
+   "upkeepDays": 1,
+   "saleOrder": "next vehicle revenue minus replacement fuel import cost; only positive lots for cash advice",
+   "contractReserve": "count open order once"
   }
  }
 }

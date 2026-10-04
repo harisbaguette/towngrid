@@ -6,7 +6,9 @@ export const SITE_MATERIALS={wood:24,stone:16,water:8};
 /** Read-only quote shared by the atlas, the button and the actual transaction. */
 export function expansionOffer(c,nation,requested=null){
  const wilderness=nation==='unclaimed',frontier=nation==='player',operator=wilderness||frontier?c.home.nation:nation;
- const cost=700+(c.sites.length-1)*250,seed=(c.nextSite+1)*41;
+ // Unoccupied world tiles already exist before a deed is bought. Acquiring a
+ // plot must not reroll its trees or deposits; existing sites keep their seed.
+ const cost=700+(c.sites.length-1)*250,seed=c.sites.find(s=>s.provinceId===requested)?.sim.seed??0;
  const candidates=WORLD_PLOTS.filter(p=>frontier?frontierClaimOf(p.id,c.sites):wilderness?sovereignOf(p.id,c.provinces)===null:p.nation===nation);
  const automatic=[...Array.from({length:6},(_,i)=>nation+'-'+((c.nextSite-1+i)%6)),...candidates.map(p=>p.id)].find(id=>candidates.some(p=>p.id===id)&&!restrictionOf(id)&&(frontier||!c.sites.some(s=>s.provinceId===id)));
  const province=candidates.find(p=>p.id===(requested||automatic))||null;

@@ -3,6 +3,171 @@
     "id": 1,
     "appearance": "bron"
   },
+  "locomotion": {
+    "runtimeRevision": "bron-weight-and-hammer-1",
+    "cases": [
+      {
+        "view": 0,
+        "action": "walk",
+        "frames": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "stopFrame": 0,
+        "turnFinished": true
+      },
+      {
+        "view": 0,
+        "action": "carry",
+        "frames": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ],
+        "stopFrame": 41,
+        "turnFinished": true
+      },
+      {
+        "view": 1,
+        "action": "walk",
+        "frames": [
+          15,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "stopFrame": 0,
+        "turnFinished": true
+      },
+      {
+        "view": 1,
+        "action": "carry",
+        "frames": [
+          27,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "stopFrame": 41,
+        "turnFinished": true
+      },
+      {
+        "view": 2,
+        "action": "walk",
+        "frames": [
+          15,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "stopFrame": 0,
+        "turnFinished": true
+      },
+      {
+        "view": 2,
+        "action": "carry",
+        "frames": [
+          27,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "stopFrame": 41,
+        "turnFinished": true
+      },
+      {
+        "view": 3,
+        "action": "walk",
+        "frames": [
+          14,
+          15,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "stopFrame": 0,
+        "turnFinished": true
+      },
+      {
+        "view": 3,
+        "action": "carry",
+        "frames": [
+          25,
+          26,
+          27,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24
+        ],
+        "stopFrame": 41,
+        "turnFinished": true
+      }
+    ]
+  },
   "camera0": {
     "action": "attack",
     "frame": 50,

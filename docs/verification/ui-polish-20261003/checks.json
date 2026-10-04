@@ -1,0 +1,22 @@
+{
+  "typecheck": "PASS",
+  "build": "PASS",
+  "regression": {
+    "status": "PASS",
+    "passedSuites": 55,
+    "skipped": ["tests/expansion-new-browser.mjs: browser paths not configured for npm test"]
+  },
+  "panelBrowser": {
+    "status": "PASS",
+    "viewports": 5,
+    "screens": 65,
+    "overlappingControls": 0,
+    "horizontalOverflow": 0,
+    "browserErrors": 0,
+    "report": "final/results.json"
+  },
+  "playBrowser": {"status": "PASS", "report": "play/results.json"},
+  "startMapBrowser": {"status": "PASS", "report": "start-map/browser-results.json"},
+  "scope": ["market", "settings", "goals", "residents", "facility inspection", "in-game atlas", "freight", "diplomacy", "shared dialog controls"],
+  "limits": ["Headless Chromium with software rendering; physical phone performance and a full late-game campaign were not tested."]
+}

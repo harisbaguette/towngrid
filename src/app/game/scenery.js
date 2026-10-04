@@ -6,14 +6,14 @@ import {waterAt,groundOf,legacyLayout,edgePoint,riverMiddle} from './world-grid.
 import {noise} from './simulation.js';
 
 export function makeScenery(region,race,sim){
- const g=new THREE.Group(),objects=[],ships=[],clouds=[],birds=[];g.name='scenery';
+ const g=new THREE.Group(),objects=[],ships=[];g.name='scenery';
  const terrain=makeBackgroundTerrain(region,sim);g.add(terrain);
  const layout=sim?.layout||legacyLayout(region),wet=(x,z)=>!!waterAt(layout,Math.round(x),Math.round(z));
  const add=(id,x,z,scale=1)=>{const p=makePixelProp(id,scale);p.position.set(x,.014,z);g.add(p);objects.push(p);return p;};
  const landmarks=edgeScenery(layout);
  for(const prop of landmarks){const p=add(prop.id,prop.x,prop.z,prop.scale);p.userData.mapSide=prop.side;}
  // Distant details follow the same side; keep the near edge clean enough to read.
- for(let i=0;i<75;i++){
+ for(let i=0;i<200;i++){
   const x=-19+noise(i,83)*62,z=-19+noise(i,97)*62,side=outsideSide(x,z);
   if(!side||x>-9&&x<33&&z>-9&&z<33||wet(x,z))continue;
   const kind=layout.edges[side],ground=groundOf(layout,Math.round(x),Math.round(z));
@@ -29,10 +29,6 @@ export function makeScenery(region,race,sim){
   const boat=add('fishingBoat',0,0,sea?1.2:.8);
   boat.userData.vehicle=true;ships.push({boat,index:i});
  }
- for(let i=0;i<4;i++){
-  const c=makePixelProp('clouds',.8+noise(i,7)*.5,i);c.position.set(i*14-15,6.5,-10+(i%2)*42);g.add(c);clouds.push(c);
- }
- for(let i=0;i<5;i++){const bird=makePixelProp('birds');g.add(bird);birds.push(bird);}
  return {group:g,animate:(time,view=0)=>{
   terrain.userData.animate(time);
   for(const p of objects)p.userData.animate?.(time,{},null,view);
@@ -41,7 +37,5 @@ export function makeScenery(region,race,sim){
    boat.position.x=x;boat.position.z=z;
    boat.position.y=-.165+Math.sin(time+index)*.008;boat.userData.animate(time,null,false,view);
   }
-  clouds.forEach((c,i)=>{c.position.x=((time*.08+i*14)%65)-19;c.userData.animate(time,null,false,view);});
-  birds.forEach((b,i)=>{const a=time*.08+i*1.4;b.position.set(12+Math.cos(a)*16,4+i*.25,12+Math.sin(a)*16);b.userData.animate(time+i*.15,null,false,view);});
  }};
 }

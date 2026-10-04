@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {characterCue} from '../src/app/game/preview-audio.js';
+import {GameAudio} from '../src/app/game/audio.js';
+
+const meta=JSON.parse(fs.readFileSync('public/assets/pixel-characters/bron/frames.json','utf8'));
+const first=characterCue({id:'bron',action:'walk',time:0,meta,stepSpeed:.36});
+const next=characterCue({id:'bron',action:'walk',time:meta.clips.walk.strideLength/.36/2+.001,meta,stepSpeed:.36});
+assert.equal(first.type,'footstep');assert.equal(next.phase,first.phase+1,'one cue per visual foot contact');
+assert.equal(characterCue({id:'bron',action:'work',meta}).type,'quarry');
+for(const id of ['fia','dew','mist','eil'])assert.equal(characterCue({id,action:'carry'}),null);
+assert.equal(characterCue({id:'bron',action:'work',paused:true,meta}),null);
+assert.equal(characterCue({id:'bron',action:'pickup',time:100,meta}),null,'completed one-shot does not keep sounding');
+const a=new GameAudio(),scheduled=[];
+a.context={currentTime:2};
+for(const name of ['gain','musicGain','effectsGain','ambienceGain'])a[name]={gain:{cancelScheduledValues(){},setTargetAtTime(value,time){if(name==='musicGain')scheduled.push({value,time});}}};
+a.duckMusic(1.8);
+assert.equal(scheduled[0].value,a.volumes.music*.6);assert.equal(scheduled[1].value,a.volumes.music);assert.equal(scheduled[1].time,3.8);
+a.context.currentTime=2.5;a.setVolume('music',.3);
+assert.equal(scheduled.at(-2).value,.18);assert.equal(scheduled.at(-1).value,.3,'changing volume during a notice restores the new volume');
+console.log('PASS selected-character contact timing, floating and paused silence, one-shot completion, notice ducking and volume changes');

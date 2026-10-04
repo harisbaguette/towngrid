@@ -1,0 +1,25 @@
+'use client';
+import {Button} from '@/components/ui/button';
+import {Switch} from '@/components/ui/switch';
+import {Tabs,TabsContent,TabsList,TabsTrigger} from '@/components/ui/tabs';
+
+export default function SettingsPanel({playing,demo,muted,onSound,volumes,onVolume,onTest,onReset,audioStatus,onRetry,quality,onQuality,onHelp,onCredits,onTutorial,saveState,onSave,onExport,onImport,onRestore,exportData,exportUrl,onHome,onRecover,offlineEnabled,offlineAllowed,onOffline}:any){
+ return <div className="settings-focused"><Tabs defaultValue="general">
+  <TabsList aria-label="설정 분류"><TabsTrigger value="general">소리·화면</TabsTrigger>{playing&&<TabsTrigger value="save">저장·불러오기</TabsTrigger>}</TabsList>
+  <TabsContent value="general">
+   <section className="settings-section"><label className="setting-row"><strong>소리</strong><Switch data-sound="toggle" checked={!muted} onCheckedChange={onSound} aria-label="소리"/></label>
+    {Object.entries({master:'전체',music:'음악',effects:'효과음',ambience:'환경음'}).map(([id,label])=><label className="audio-slider" key={id}><span>{label}</span><input type="range" min="0" max="1" step="0.01" value={volumes[id]} style={{'--range-fill':volumes[id]*100+'%'} as React.CSSProperties} aria-label={label+' 음량'} onChange={e=>onVolume(id,+e.target.value)}/><span>{Math.round(volumes[id]*100)}</span></label>)}
+    {!muted&&audioStatus.musicTitle&&<p aria-label="현재 배경음악"><strong>{audioStatus.musicContext}</strong><br/>{audioStatus.musicTitle}</p>}
+    <details className="ui-disclosure"><summary>소리 확인·초기화{audioStatus.failed>0&&<small>불러오기 실패 {audioStatus.failed}개</small>}</summary><div className="disclosure-body"><div className="sound-tests">{[['music','음악 듣기'],['effects','효과음 듣기'],['ambience','환경음 듣기']].map(([id,label])=><Button key={id} variant="outline" disabled={muted} onClick={()=>onTest(id)}>{label}</Button>)}</div><Button variant="outline" onClick={onReset}>기본 음량 복원</Button><div className="sound-meter" aria-label="소리 출력"><i style={{width:Math.min(100,(audioStatus.rms||0)*1800)+'%'}}/></div></div></details>
+    <p className={'audio-status'+(audioStatus.failed?' has-error':' sr-only')} role="status" data-audio-state={audioStatus.state} data-audio-loaded={audioStatus.loaded} data-audio-voices={audioStatus.voices} data-audio-level={audioStatus.rms}>{audioStatus.failed?`소리 ${audioStatus.failed}개를 불러오지 못했습니다.`:audioStatus.loading?'소리 준비 중…':`소리 ${muted?'꺼짐':audioStatus.state==='running'?'켜짐':'일시 중단'} · ${audioStatus.loaded}/${audioStatus.total}개 준비됨`}{audioStatus.failed>0&&<button onClick={onRetry}>다시 받기</button>}</p>
+   </section>
+   <section className="settings-section"><label className="setting-row"><strong>그래픽 품질</strong><select aria-label="그래픽 품질" value={quality} onChange={e=>onQuality(e.target.value)}><option value="auto">자동</option><option value="high">높음</option><option value="balanced">균형</option><option value="low">절전</option></select></label></section>
+   <section className="settings-section">{playing&&offlineAllowed&&<><label className="setting-row"><strong>부재 중 생산</strong><Switch checked={offlineEnabled} onCheckedChange={onOffline} aria-label="부재 중 생산"/></label><p>진행 중 자리를 비우면 재접속 때 최대 10분을 1배속으로 반영합니다. 연료 부족·적자·사건이 생기면 멈춥니다. 직접 일시정지한 게임과 산업 도전에는 적용하지 않습니다.</p></>}</section><div className="settings-links"><Button variant="outline" onClick={onHelp}>조작법</Button>{playing&&<Button variant="outline" onClick={onTutorial}>초반 안내 켜기</Button>}<Button variant="outline" onClick={onCredits}>에셋 출처</Button></div>
+  </TabsContent>
+  {playing&&<TabsContent value="save"><section className="settings-section"><p className="save-status" role="status">{demo?'시연은 자동 저장하지 않습니다. 파일로 내보낼 수 있습니다.':saveState||'6초마다 자동 저장'}</p><Button disabled={demo} data-sound="none" onClick={onSave}>지금 저장</Button></section><div className="save-actions"><Button variant="outline" onClick={onExport}>저장 파일 내보내기</Button><Button variant="outline" onClick={onImport}>파일 불러오기</Button></div>
+   {exportData&&<div className="export-box"><strong>진행 파일 준비 완료</strong><a className="save-download" href={exportUrl} download={'towngrid-'+new Date().toISOString().slice(0,10)+'.json'}>파일 저장 · JSON</a><details><summary>텍스트로 보관</summary><p>다운로드가 제한된 기기에서는 복사해 .json 파일로 보관할 수 있습니다.</p><textarea aria-label="저장 파일 내용" readOnly value={exportData} onFocus={e=>e.currentTarget.select()}/></details></div>}
+   <details className="ui-disclosure"><summary>이전 저장 복구</summary><div className="disclosure-body save-actions"><Button variant="outline" onClick={()=>onRestore(true)}>자동 저장 복구</Button><Button variant="outline" onClick={()=>onRestore(false)}>새 게임 전 백업 복구</Button></div></details>
+   <details className="ui-disclosure"><summary>회생 자금</summary><div className="disclosure-body"><p>자금 150G 이하일 때 500G까지 회복합니다. 지급액의 130%가 빚에 더해지며, 5일마다 한 번 신청할 수 있습니다.</p><Button variant="outline" onClick={onRecover}>회생 자금 신청</Button></div></details>
+  </TabsContent>}
+ </Tabs>{playing&&<footer className="settings-footer"><Button variant="outline" onClick={onHome}>시작 화면으로</Button></footer>}</div>;
+}

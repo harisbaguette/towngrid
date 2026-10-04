@@ -10,6 +10,7 @@ import {RESOURCES} from './simulation';
 import {NATIONS} from './world';
 import {DAILY,LEAGUE_PRIZE,LEAGUE_BASE,LEAGUE_PER_RANK,WEEK_DAYS,GIFT,seasonOf,standings,giftShort} from './league';
 import {HAUL_GEAR,haulLoad} from './logistics';
+import {scoreEvent} from './competition-rules';
 import '../townstar.css';
 
 const R=RESOURCES as any,N=NATIONS as any;
@@ -29,15 +30,17 @@ export function LeaguePanel({campaign:c,onAction}:any){
   <section className="league-card daily" aria-label="오늘의 도전">
    <header><Star size={17}/><strong>오늘의 도전</strong><span>{d.done?'달성':'별 '+num(Math.min(done,d.goal))+' / '+num(d.goal)}</span></header>
    <Progress value={Math.min(100,done/d.goal*100)}/>
-   <small>상품을 팔거나 납품하면 별을 받습니다(목록가 10G마다 1개, 납품은 1.5배). 달성하면 {num(Math.round(d.goal*DAILY.pay))}G를 받습니다. 연속으로 달성하면 다음 목표가 하루 8%씩(최대 6일) 오르고, 놓치면 다시 낮아집니다.{d.streak>1?' · 연속 '+d.streak+'일':''}</small>
+   <small>기본 별은 목록가 10G마다 1개이며, 주간 품평회 배수와 납품 1.5배를 적용합니다. 달성하면 {num(Math.round(d.goal*DAILY.pay))}G를 받습니다. 연속으로 달성하면 다음 목표가 하루 8%씩(최대 6일) 오르고, 놓치면 다시 낮아집니다.{d.streak>1?' · 연속 '+d.streak+'일':''}</small>
   </section>
   <section className="league-card season" aria-label="계절 축제">
    <header><PartyPopper size={17}/><strong>{season.name}</strong><span>{left}일 남음</span></header>
    <div className="season-goods">{Object.entries(season.goods).map(([id,f]:any)=><span key={id}><ResourceIcon name={id} size={16}/>{R[id].name} <b>+{Math.round((f-1)*100)}%</b></span>)}</div>
   </section>
   <section className="league-card" aria-label="주간 교역 순위">
+   <div className="season-goods"><strong>{scoreEvent(c.lastWorldDay).name}</strong>{Object.entries(scoreEvent(c.lastWorldDay).goods).map(([id,f]:any)=><span key={id}><ResourceIcon name={id} size={16}/>{R[id].name} · 별 ×{f}</span>)}</div>
    <header><Trophy size={17}/><strong>{l.week}주차 교역 순위</strong><span>{place}위 · {left}일 남음</span></header>
    <table className="league-table"><thead><tr><th>순위</th><th>상회</th><th>별</th><th>상금</th></tr></thead><tbody>{table.map((v:any,i:number)=><tr key={v.id} className={v.player?'player':''}><td>{i+1}</td><td>{v.name}</td><td>{num(v.score)}</td><td>{LEAGUE_PRIZE[i]?num(LEAGUE_PRIZE[i]*base)+'G':'—'}</td></tr>)}</tbody></table>
+   <details><summary>상회 생산·운송 현황</summary><p>컴퓨터 상회는 각자의 자금·시설·원료·연료로 생산하고 출하합니다. 내 점수를 따라 올리지 않습니다.</p>{l.rivals.map((r:any)=><p key={r.id}><strong>{r.name}</strong> · {r.economy?`${r.economy.facilities.length}시설 · 자금 ${num(r.economy.cash)}G · 누적 생산 ${r.economy.produced}개 · ${r.economy.status}`:'사업 준비 중'}</p>)}</details>
    {l.history.length>0&&<small>지난 주: {l.history.slice(-4).reverse().map((h:any)=>h.week+'주차 '+h.place+'위'+(h.prize?' +'+num(h.prize)+'G':'')).join(' · ')}</small>}
   </section>
   <section className="league-card gift" aria-label="이웃 나라 선물">

@@ -1,5 +1,8 @@
+import {putReturn,padUsed,outputItems} from './facility-inventory.js';
+import {tickBatteries} from './power-grid.js';
+import {upgradeKind,upgradeQuote,upgradeError} from './facility-upgrades.js';
 import {landSaleOffer,sellLand,applySold} from './land-sale.js';
-import {initStorage,stores,isStore,storeById,storeStock,used,capacity,freeSpace,deposit,withdraw,removeStore,storageSummary,STORE_MODES,accepts} from './storage.js';
+import {initStorage,stores,isStore,storeById,storeStock,used,capacity,freeSpace,deposit,withdraw,removeStore,storageSummary,setStorageRule,outputStorageIssue,STORE_MODES,accepts} from './storage.js';
 import {canRelocate,relocate,relocationCost} from './relocation.js';
 import {remainingSeconds} from './game-time.js';
 import {nextTrial,tickChallenges,chooseCharter} from './progression.js';
@@ -10,12 +13,12 @@ import { placementEffects, EMISSIONS } from './proximity.js';
 import { reserveFor, purchase, plant, plantShort, restructure, recoveryReady } from './economy.js';
 import { startRaid, tickRaid, mobilize, mobilizeShort, ATTACKER_ID_BASE } from './encounters.js';
 import { MODERN_RESOURCES, MODERN_BUILDINGS, ALT_RECIPES } from './industry.js';
-import { layExportRoad, isExportTile, dispatchShipment, tickShipments, exportStatus, exportRoute, cutsExportRoute, shipmentError, vehicleLoad, idleVehicles, fleet, fuelHold, exportableStock } from './export-route.js';
+import { layExportRoad, isExportTile, dispatchShipment, tickShipments, exportStatus, exportRoute, cutsExportRoute, vehicleOccupies, shipmentError, vehicleLoad, idleVehicles, fleet, fuelHold, exportableStock } from './export-route.js';
 import { tradeOptions } from './trade-routes.js';
-import { terminalsOf, activeTerminal, tradeConnection, chooseTradeRoute, tradeCapacity, autoSaleLot, placementError, tickNetworks, poweredAt, powerNodes } from './trade-terminals.js';
+import { terminalsOf, terminalVehicleCapacity, activeTerminal, tradeConnection, chooseTradeRoute, tradeCapacity, autoSaleLot, placementError, tickNetworks, poweredAt, powerNodes, powerShort, gridStatus } from './trade-terminals.js';
 import { INFRA_BUILDINGS, groundFactor } from './infrastructure.js';
-import {biomeTile} from './biome-terrain.js';
-import { layoutOf, legacyLayout, regionOf, validLayout, waterAt, groundOf, forestAt } from './world-grid.js';
+import {generateTerrainTiles,terrainNoise} from './terrain-tiles.js';
+import { layoutOf, legacyLayout, regionOf, validLayout } from './world-grid.js';
 import { NATIONS, RACES, RANKS, unlockRank, RESIDENT_NAMES, FACTIONS, factionOf, playableRace, PROGRESSION_OFFSET, crewOf } from './world.js';
 export const N=24;
 export const RESOURCES={
@@ -30,7 +33,7 @@ export const REGIONS={
  highland:{name:'붉은돌 고원',tag:'채석과 가공',description:'풍부한 석재로 가공 산업을 먼저 준비합니다.',bonus:'산악과 암석 타일 분포',risk:'광산 접근로 확보',color:'#ae8863'}
 };
 export const BUILDINGS={
- distillery:{name:'소형 증류소',group:'energy',size:1,cost:160,materials:{wood:6,stone:4},period:12,inputs:{grain:2,wood:1,water:1},output:'fuel',amount:2,description:'밀과 장작으로 수출용 연료를 만듭니다. 전력 없이 가동하며 초반부터 연료를 자급할 수 있습니다.'},
+ distillery:{name:'소형 증류소',group:'energy',size:1,cost:160,materials:{wood:6,stone:4},period:60,inputs:{grain:6,wood:3,water:2},output:'fuel',amount:1,unique:true,emergency:true,description:'비상용 연료 1개를 60게임초에 만듭니다. 연료 재고가 5개 미만일 때만 가동합니다. 원료가 비싸고 느려 정유소를 대신할 수 없습니다. 거점당 1곳 · 업그레이드 불가.'},
  warehouse:{name:'창고',group:'base',size:1,cost:80,materials:{wood:6},description:'상품을 보관합니다. 주민은 가까운 창고를 이용하며 생산 시설끼리도 직접 운반합니다.'},
  road:{name:'흙길',group:'base',size:1,cost:4,description:'운반자가 길 위에서 70% 빠르게 이동합니다.'},
  well:{name:'우물',group:'base',size:1,cost:60,materials:{stone:4},period:6,output:'water',amount:2,description:'물통을 끌어올려 물을 공급합니다.'},
@@ -106,7 +109,7 @@ export function unpackTiles(text){
   const t={nature:CODE_NATURE[m[1]]||null,remaining:m[2]?Number(m[2]):0};if(m[3]!==undefined)t.growAt=Number(m[3]);out.push(t);}
  return out;
 }
-export const noise=(x,z)=>{let a=Math.sin(x*127.1+z*311.7+37)*43758.5453;return a-Math.floor(a);};
+export const noise=terrainNoise;
 export class Simulation{
  constructor(region='river',saved=null,options={}){
   this.charter=null;this.market={pressure:{}};this.health={infection:0,sanitationUntil:0,nextCare:0,recoveries:0};this.rescueQuest={step:0,remaining:0,route:null};this.logisticsStats={direct:0,delivered:0,last:null};this.challenge={};
@@ -124,18 +127,7 @@ export class Simulation{
   initStorage(this,saved);
  }
  seedMap(){
-  this.tiles=[];const grid=!this.layout.legacy;
-  for(let z=0;z<N;z++)for(let x=0;x<N;x++){
-   const water=waterAt(this.layout,x,z),ground=water?null:groundOf(this.layout,x,z),terrain=water?'water':'grass';
-   // Woods thicken toward a forest side and rocks gather on a mountain side of a world-grid map.
-   const rugged=grid&&ground==='mountain',limit=grid&&forestAt(this.layout,x,z)?.5:rugged?.58:.72;
-   let nature=null;if(terrain==='grass'&&noise(x,z)>limit)nature=noise(z,x)>(rugged?.75:.3)?'tree':'rock';
-   if(x>=9&&x<=14&&z>=10&&z<=15)nature=null;
-   if((x===8&&z===8)||(x===8&&z===9)||(x===9&&z===8))nature='tree';
-   if((x===15&&z===8)||(x===15&&z===9)||(x===14&&z===8))nature='rock';
-   const fertility=Math.round(35+noise(x+17+this.seed,z+4)*65), moisture=Math.round(30+noise(x+8,z+22+this.seed)*70), ore=Math.round((rugged?80:30)+noise(x+31+this.seed,z+7)*(rugged?20:70));
-   this.tiles.push(biomeTile(this.layout,{x,z,terrain,water,ground,nature,remaining:nature?(rugged&&nature==='rock'?180:90):0,fertility,moisture,ore,mana:Math.round(25+noise(x+43+this.seed,z+51)*75)},this.seed));
-  }
+  this.tiles=generateTerrainTiles(this.layout,this.seed);
  }
  tile(x,z){return x>=0&&z>=0&&x<N&&z<N?this.tiles[z*N+x]:null;}
  ownedAt(x,z){return this.owned.has(K(x,z));}
@@ -144,22 +136,24 @@ export class Simulation{
  // list changes (its identity, length or the map revision); anything that only changes health or on/off is read live.
  listCache(name,make){const c=this[name];if(c&&c.list===this.buildings&&c.n===this.buildings.length&&c.rev===this.revision)return c.value;const value=make();this[name]={list:this.buildings,n:this.buildings.length,rev:this.revision,value};return value;}
  get warehouse(){return this.listCache('warehouseCache',()=>this.buildings.find(b=>b.type==='warehouse'));}
- get power(){if(this.outageUntil>this.time)return this.batteryCharge>0&&this.buildings.some(b=>b.type==='battery'&&b.health>0&&b.enabled!==false);return this.buildings.some(b=>BUILDINGS[b.type].output==='power'&&b.activeUntil>this.time&&b.health>0&&b.enabled!==false);}
+ get power(){return powerNodes(this).some(b=>b.type!=='substation');}
  get medicalProtection(){return this.healthUntil>this.time||(this.stage<15&&this.buildings.some(b=>b.type==='clinic'&&b.health>0&&b.enabled!==false));}
  get horse(){return this.buildings.some(b=>b.type==='stable'&&b.activeUntil>this.time&&b.health>0&&b.enabled!==false);}
  get automatic(){return this.buildings.some(b=>b.type==='logistics'&&b.health>0&&b.enabled!==false&&poweredAt(this,b));}
+ gridStatus(){return gridStatus(this);}
  poweredAt(b){return poweredAt(this,b);}
  get workerCount(){return this.buildings.reduce((n,b)=>n+homeCapacity(b),0);}
  residentOf(type){const d=BUILDINGS[type];return d?.home?d.resident||this.availableRaces[0]:null;}
  get stage(){return this.rank-PROGRESSION_OFFSET;}
  get day(){return Math.floor(this.time/80)+1;}
  get tax(){const site=this.campaign?.sites.find(v=>v.id===this.siteId);if(this.stage>=22&&(!site||site.territory||site.id===this.campaign?.homeId))return 0;if(this.stage>=20&&site?.territory)return 2;return Math.max(0,NATIONS[this.nation].tax+(this.charter==='industry'?4:this.charter==='commons'?-3:0)-(this.rank>=1?2:0));}
- get wage(){return 5+this.buildings.length+this.buildings.filter(b=>b.specialized).length*2+this.tax+(this.campaign&&this.campaign.homeId!==this.siteId?0:this.debt>0?Math.ceil(this.debt*(this.family?.008:.01)):0);}
+ get wage(){return 5+this.workerCount+this.buildings.length+this.buildings.filter(b=>b.specialized).length*2+this.tax+(this.campaign&&this.campaign.homeId!==this.siteId?0:this.debt>0?Math.ceil(this.debt*(this.family?.008:.01)):0);}
  notify(text,type='info'){this.notices.push({id:(this.noticeSeq=(this.noticeSeq||0)+1),text,type});if(this.notices.length>5)this.notices.shift();}
  closestNatural(b,type){const size=b.size||1,dist=t=>Math.max(b.x-t.x,0,t.x-(b.x+size-1))+Math.max(b.z-t.z,0,t.z-(b.z+size-1));return this.tiles.filter(t=>t.nature===type&&t.remaining>0&&this.ownedAt(t.x,t.z)&&dist(t)>0&&dist(t)<=4).sort((a,c)=>dist(a)-dist(c))[0];}
  nearWater(x,z,size=1,reach=3){return this.tiles.some(t=>t.terrain==='water'&&t.x>=x-reach&&t.x<=x+size+reach-1&&t.z>=z-reach&&t.z<=z+size+reach-1);}
  canBuild(type,x,z,free=false){
   const d=BUILDINGS[type];if(!d||!Number.isInteger(x)||!Number.isInteger(z))return '건설 위치를 선택하세요';
+  if(!d.tile&&!d.terrain&&vehicleOccupies(this,x,z))return '운송 차량이 지나간 뒤 건설하세요';
   if(d.unique&&this.buildings.some(b=>b.type===type))return '한 곳만 건설할 수 있습니다';
   if(d.resident&&!this.availableRaces.includes(d.resident))return '이 진영에는 '+RACES[d.resident].name+' 주민이 없습니다';
   if(!free&&this.rank<unlockRank(type))return RANKS[unlockRank(type)].name+' 승급이 필요합니다';
@@ -207,7 +201,7 @@ export class Simulation{
   const b={enabled:true,priority:1,id:this.nextId++,type,x,z,size:d.size,inputs:{},out:0,progress:0,working:false,health:100,level:1,status:'준비 중',activeUntil:0,age:0,animationTime:0,race:this.residentOf(type)||this.availableRaces[(this.nextId-2)%this.availableRaces.length],specialized:false,cycles:0};
   // A paid build can be cancelled in full (REFUND_GRACE); the tree, rock or sapling its tile held is kept to put back.
   if(!free){b.refundUntil=this.time+REFUND_GRACE;if(cleared)b.cleared=cleared;if(clearing)b.clearing=clearing;}
-  if(isStore(b))b.inventory={};this.sound('build',x,z);this.buildings.push(b);this.revision++;this.syncWorkers();return {ok:true,id:b.id};
+  if(b.type==='battery')b.charge=0;if(isStore(b))b.inventory={};this.sound('build',x,z);this.buildings.push(b);this.revision++;this.syncWorkers();return {ok:true,id:b.id};
  }
  walkable(x,z){const t=this.tile(x,z);return t&&(this.ownedAt(x,z)||isExportTile(x,z))&&t.terrain!=='water'&&!this.at(x,z);}
  entries(b){if(b?.type==='starter')return [{x:b.x,z:b.z}];const p=[];for(let i=0;i<b.size;i++)p.push({x:b.x+i,z:b.z+b.size},{x:b.x+b.size,z:b.z+i},{x:b.x-1,z:b.z+i},{x:b.x+i,z:b.z-1});return p.filter(p=>this.walkable(p.x,p.z));}
@@ -225,8 +219,8 @@ export class Simulation{
  syncWorkers(){
   // Residents live in houses: each house keeps its own race at its own door. Warehouses hold goods, not people.
   const homes=new Map(),count=new Map();for(const b of this.buildings)if(BUILDINGS[b.type].home)homes.set(b.id,b);
-  const stays=w=>{const h=homes.get(w.homeId),n=count.get(w.homeId)||0;if(!h||crewOf(w.race)!==this.residentOf(h.type)||n>=homeCapacity(h))return false;count.set(w.homeId,n+1);return true;};
-  if(!this.workers.every(stays)){count.clear();this.workers=this.workers.filter(w=>stays(w)||(this.refundTask(w),false));}
+  const stays=w=>{if(w.retiring&&w.task?.carried)return true;const h=homes.get(w.homeId),n=count.get(w.homeId)||0;if(!h||crewOf(w.race)!==this.residentOf(h.type)||n>=homeCapacity(h))return false;count.set(w.homeId,n+1);return true;};
+  if(!this.workers.every(stays)){count.clear();this.workers=this.workers.filter(w=>{if(stays(w))return true;if(w.task?.carried){this.refundTask(w);delete w.homeId;w.retiring=true;return true;}return false;});}
   for(const h of homes.values()){const race=this.residentOf(h.type);
    for(let n=count.get(h.id)||0;n<homeCapacity(h);n++){const doors=this.entries(h),spawn=doors[n%Math.max(1,doors.length)]||{x:h.x,z:h.z},kin=this.availableRaces.filter(r=>crewOf(r)===race),pick=kin[this.workers.filter(w=>crewOf(w.race)===race).length%kin.length]||race,ordinal=this.workers.filter(w=>w.race===pick).length;this.workers.push(assignResidentAppearance({id:this.nextWorkerId++,homeId:h.id,race:pick,x:spawn.x,z:spawn.z,route:[],task:null,phase:'idle',walking:false,dir:0},this.availableRaces,ordinal));}}
  }
@@ -271,39 +265,42 @@ export class Simulation{
   if(this.day!==lastDay){this.books.last=this.dayRecord(this.books.today);this.budget.lastIncome=this.budget.income;this.budget.lastExpenses=this.budget.expenses;this.budget.income=0;this.budget.expenses=0;this.openDay(false);const wage=this.wage;this.budget.expenses=wage;this.budget.day=this.day;this.money-=wage;this.notify(this.day+'일째 · 유지비·세금 '+wage+'G 지출');}
   if(this.growthRevision!==this.revision){this.growthRevision=this.revision;this.nextGrowth=this.tiles.reduce((n,t)=>t.nature==='sapling'&&Number.isFinite(t.growAt)?Math.min(n,t.growAt):n,Infinity);}
   if(this.time>=this.nextGrowth){for(const t of this.tiles)if(t.nature==='sapling'&&t.growAt<=this.time){t.nature='tree';t.remaining=90;delete t.growAt;}this.revision++;}
-  if(this.outageUntil>this.time)this.batteryCharge=Math.max(0,this.batteryCharge-dt);else if(this.power&&this.buildings.some(b=>b.type==='battery'&&b.health>0&&b.enabled!==false))this.batteryCharge=Math.min(90,this.batteryCharge+dt*2);tickRaid(this,dt);this.syncWorkers();this.tickWorkers(dt);if(this.pathRevision!==this.revision){this.pathRevision=this.revision;this.reachable=new Set();const q=stores(this).flatMap(b=>this.entries(b));q.forEach(p=>this.reachable.add(K(p.x,p.z)));for(let i=0;i<q.length;i++){const p=q[i];for(const [dx,dz]of [[1,0],[-1,0],[0,1],[0,-1]]){const x=p.x+dx,z=p.z+dz,k=K(x,z);if(!this.reachable.has(k)&&this.walkable(x,z)){this.reachable.add(k);q.push({x,z});}}}}
+  tickBatteries(this,dt,gridStatus(this));tickRaid(this,dt);this.syncWorkers();this.tickWorkers(dt);if(this.pathRevision!==this.revision){this.pathRevision=this.revision;this.reachable=new Set();const q=stores(this).flatMap(b=>this.entries(b));q.forEach(p=>this.reachable.add(K(p.x,p.z)));for(let i=0;i<q.length;i++){const p=q[i];for(const [dx,dz]of [[1,0],[-1,0],[0,1],[0,-1]]){const x=p.x+dx,z=p.z+dz,k=K(x,z);if(!this.reachable.has(k)&&this.walkable(x,z)){this.reachable.add(k);q.push({x,z});}}}}
   for(const b of this.buildings){
    const d=BUILDINGS[b.type];b.age+=dt;b.animationTime=(b.animationTime||0)+(b.working?dt:0);b.working=false;
    if(b.health<=0){b.status='수리 필요';continue;}if(b.enabled===false){b.status='가동 중지';continue;}
    if(b.movingUntil>this.time){b.status='이전 중';continue;}
    if(d.road&&!this.placementEffects(b.type,b.x,b.z).road){b.status='도로 연결 필요';continue;}
-   if(d.power&&!poweredAt(this,b)){b.status=this.power?'전력망 밖 · 변전소 필요':'전력 부족';continue;}
-   if(d.terminal){const t=terminalsOf(this).find(t=>t.building===b.id);b.status=!t?.usable?t?.error||'사용 불가':(activeTerminal(this)===t?'수출 중':'수출 대기')+' · 한 번에 '+t.capacity+'개';continue;}
+   if(d.power&&!poweredAt(this,b)){b.status=this.power?powerShort(this,b):'전력 부족';continue;}
+   if(d.terminal){const t=terminalsOf(this).find(t=>t.building===b.id);b.status=!t?.usable?t?.error||'사용 불가':(activeTerminal(this)===t?'수출 중':'수출 대기')+' · 전용 차량 '+terminalVehicleCapacity(t)+'개';continue;}
    if(b.type==='substation'){b.status=powerNodes(this).includes(b)?'전력 중계 중':'전력망 밖 · 발전소나 변전소 여섯 칸 안에 두세요';continue;}
    if(!d.period){b.status=b.type==='logistics'?'자동 분류 중':b.type==='warehouse'?'운반 중':'정상 운영';b.working=b.type==='logistics'&&this.workers.some(w=>w.task);continue;}
    if(!this.entries(b).length){b.status='출입구 막힘';continue;}if(!this.entries(b).some(p=>this.reachable.has(K(p.x,p.z)))){b.status='창고 경로 막힘';continue;}
    const crew=crewFor(this,b.type);if(crew&&!this.workers.some(w=>crewOf(w.race)===crew)){b.status=RACES[crew].name+' 주민 필요';continue;}
    const fx=this.placementEffects(b.type,b.x,b.z);if(fx.blocked){b.status=fx.blocked;continue;}
-   const r=this.recipeOf(b),mult=this.speedOf(b,fx),timed=TIMED[d.output];if(b.out>=10){b.status=atStockCap(this,r.output)?'재고 상한':stores(this).every(v=>freeSpace(this,v,r.output)<=0)?'창고 가득 참':'운반 대기';continue;}
+   const r=this.recipeOf(b),mult=this.speedOf(b,fx),timed=TIMED[d.output];if(d.emergency&&b.progress===0&&this.stock.fuel+this.buildings.reduce((n,v)=>n+(Object.fromEntries(outputItems(this,v)).fuel||0),0)+this.workers.reduce((n,w)=>n+(w.task?.carried&&w.task.item==='fuel'?w.task.amount:0),0)>=5){b.status='비상 대기 · 연료 5개 미만에 가동';continue;}if(padUsed(b)>=10){const item=outputItems(this,b).find(([,n])=>n>0)?.[0];b.status=atStockCap(this,item)?'재고 상한':outputStorageIssue(this,b,item)?.status||'운반 대기';continue;}
    // Timed effects restart one real cycle (period at this facility's speed) before they lapse, so a supplied facility
    // never leaves a gap however slow it runs (audit H5, A2-G2: the threshold used the nominal period); one step of margin
    // covers the step on which the cycle actually completes.
    if(timed&&b.activeUntil-this.time>r.period/mult+dt){b.status=timed[0];b.working=true;continue;}
-   const missing=Object.entries(this.effectiveInputs(b)).find(([r,n])=>(b.inputs[r]||0)<n);
+   const stages=d.stages&&this.recipeOf(b).id===d.output?d.stages:null;
+   const missing=Object.entries(stages?stages[0].inputs:this.effectiveInputs(b)).find(([r,n])=>(b.inputs[r]||0)<n);
    if(b.progress===0&&missing){b.status=RESOURCES[missing[0]].name+' 대기';continue;}
    if(d.natural&&!this.closestNatural(b,d.natural)){b.status='자원 고갈';continue;}
    // The batch remembers what this cycle consumed, so a product switch or demolition can hand it back.
    if(b.progress===0)this.startBatch(b);
-   b.progress+=dt*mult/r.period;b.working=true;b.status='생산 중';
+   if(stages&&b.progress>0&&(!b.batch||b.batch.water)){b.batch??=this.effectiveInputs(b);b.processStage=1;}
+   if(stages){const index=b.processStage||0,stage=stages[index];if(index===0&&b.progress+dt*mult/r.period>=stage.until){const next=stages[1],lack=Object.entries(next.inputs).find(([k,n])=>(b.inputs[k]||0)<n);if(lack){b.progress=stage.until;b.status=RESOURCES[lack[0]].name+' 대기';continue;}for(const [k,n]of Object.entries(next.inputs)){b.inputs[k]-=n;b.batch[k]=(b.batch[k]||0)+n;}b.processStage=1;}}
+   b.progress+=dt*mult/r.period;b.working=true;b.status=stages?stages[b.processStage||0].name:'생산 중';
    // A tiny tolerance absorbs float drift from adding many small steps (a cycle must not wait one extra step).
    if(b.progress>=1-1e-9){
-    const over=Math.max(0,b.progress-1);b.progress=0;delete b.batch;b.cycles=(b.cycles||0)+1;if(b.specialized&&b.race==='elf'&&b.cycles%4===0&&Object.keys(r.inputs).length){const key=Object.keys(r.inputs)[0];b.inputs[key]=(b.inputs[key]||0)+1;}this.sound(b.type,b.x,b.z);
+    const over=Math.max(0,b.progress-1);b.progress=0;delete b.batch;delete b.processStage;b.cycles=(b.cycles||0)+1;if(b.specialized&&b.race==='elf'&&b.cycles%4===0&&Object.keys(r.inputs).length){const key=Object.keys(r.inputs)[0];b.inputs[key]=(b.inputs[key]||0)+1;}this.sound(b.type,b.x,b.z);
     if(timed){b.activeUntil=this.time+timed[1];if(d.output==='ward')this.wardUntil=b.activeUntil;if(d.output==='health')this.healthUntil=b.activeUntil;}
     else{b.out+=r.amount;this.produced[r.output]=(this.produced[r.output]||0)+r.amount;const made=this.books.today.made;made[r.output]=(made[r.output]||0)+r.amount;}
     if(d.natural){const t=this.closestNatural(b,d.natural);if(t){t.remaining-=r.amount;if(t.remaining<=0){t.nature=null;this.revision++;}}}
     // A step longer than the rest of the cycle carries into the next batch when its inputs are loaded, so coarse
     // steps (4x speed, a site ticked at longer intervals) make as much as fine ones (audit C4, C-T1).
-    if(over>0&&!timed&&b.out<10&&!Object.entries(this.effectiveInputs(b)).some(([k,n])=>(b.inputs[k]||0)<n)&&(!d.natural||this.closestNatural(b,d.natural))){this.startBatch(b);b.progress=Math.min(.999,over);}
+    if(over>0&&!timed&&!stages&&!d.emergency&&padUsed(b)<10&&!Object.entries(this.effectiveInputs(b)).some(([k,n])=>(b.inputs[k]||0)<n)&&(!d.natural||this.closestNatural(b,d.natural))){this.startBatch(b);b.progress=Math.min(.999,over);}
    }
   }
   // A cart that reaches the terminal in this step is paid there (export-route.js arrive): its goods are this site's sales.
@@ -317,7 +314,8 @@ export class Simulation{
     return {item,amount,value:this.saleQuote(item,Math.max(0,Math.min(load,amount)))};
    }).filter(o=>o.amount>=lot).sort((a,b)=>b.value-a.value);
    for(const offer of offers){
-    const slots=fleet(this);if(slots.filter(v=>!v.busy).length<=(slots.length>1?1:0))break;
+    // With two or more vehicles one stays for manual sales, orders and imports; only the active terminal's vehicles count.
+    const slots=fleet(this).filter(v=>v.selected);if(slots.filter(v=>!v.busy).length<=(slots.length>1?1:0))break;
     this.reportAutoSale(this.sell(offer.item,Math.min(offer.amount,vehicleLoad(this)),true));
    }
    this.checkStorage();
@@ -377,11 +375,11 @@ export class Simulation{
   // Payment arrives with the cart at the export gate (export-route.js); price and demand are fixed at loading.
   const revenue=this.saleQuote(item,amount),error=dispatchShipment(this,item,amount,revenue,auto);if(error)return {ok:false,error};
   this.market.pressure[item]=Math.min(100,(this.market.pressure[item]||0)+amount);
-  this.sound('sell');if(!auto)this.notify(RESOURCES[item].name+' '+amount+'개 수출 출발 · 거래 도시 도착 시 +'+revenue+'G','success');return {ok:true,amount,revenue};
+  this.sound('dispatch');if(!auto)this.notify(RESOURCES[item].name+' '+amount+'개 수출 출발 · 거래 도시 도착 시 +'+revenue+'G','success');return {ok:true,amount,revenue};
  }
  // Audit X2: a blocked export road stops auto-sales; warn once per reason instead of dropping the result.
  reportAutoSale(r){if(r.ok){this.autoSellBlocked=null;return;}if(this.autoSellBlocked===r.error)return;this.autoSellBlocked=r.error;this.notify('자동 판매 멈춤 · '+r.error,'warning');}
- // Audit L3: goods returned by demolition or cancelled hauls are kept even above capacity, so nothing is lost.
+ // Audit L3: demolition refunds and legacy over-capacity stock are preserved. Cancelled hauls return physically.
  // Production and hauling stop at capacity; the overflow is reported once so the player can sell it.
  storageOverflow(){return [...new Set(stores(this,false).filter(b=>used(b)>capacity(this,b)).flatMap(b=>Object.keys(b.inventory||{}).filter(r=>b.inventory[r]>0)))];}
  // The warning names the first STORAGE_NAMES goods and counts the rest ("외 4종") so the pop-up stays short; with more
@@ -413,8 +411,10 @@ export class Simulation{
   if(fixed<list.length)this.notify('시설 '+fixed+'곳 수리 · '+spent+'G · 남은 '+(list.length-fixed)+'곳은 '+(total-spent)+'G가 더 필요합니다','warning');return {ok:true,fixed,spent,remaining:list.length-fixed};}
  /** Why a facility cannot be upgraded now, or null (G3-11). The button and upgrade() read this one rule: goods a resident
   *  has reserved for a delivery do not count (availableStock), so the button shows ready only when the upgrade goes through. */
- upgradeShort(b){const d=b&&BUILDINGS[b.type];if(!d||!(d.period||d.home)||b.level>=3)return '더 이상 개선할 수 없습니다';return this.priceShort({money:this.upgradeCost(b),items:{[this.upgradeItem(b)]:3}},'개선비 ');}
- upgrade(id){const b=this.buildings.find(b=>b.id===id),error=this.upgradeShort(b);if(error)return {ok:false,error};const item=this.upgradeItem(b);this.money-=this.upgradeCost(b);this.stock[item]-=3;b.level++;this.syncWorkers();this.revision++;return {ok:true};}
+ upgradeQuote(b){return upgradeQuote(this,b);}
+ upgradeKind(b){return upgradeKind(b);}
+ upgradeShort(b){return upgradeError(this,b);}
+ upgrade(id){const b=this.buildings.find(v=>v.id===id),error=this.upgradeShort(b);if(error)return {ok:false,error};const q=this.upgradeQuote(b);this.money-=q.money;for(const [item,n]of Object.entries(q.items))this.stock[item]-=n;b.level++;delete b.refundUntil;this.syncWorkers();this.revision++;this.notify(BUILDINGS[b.type].name+' Lv.'+b.level+' · '+q.label+' '+q.from+' → '+q.to,'success');return {ok:true};}
  upgradeItem(b){return (b.level||1)>=2?'brick':BUILDINGS[b.type].home?'wood':'plank';}
  demolish(x,z){
   const k=K(x,z);if(this.pipes.delete(k)||this.conveyors.delete(k)){this.money+=2;this.revision++;return {ok:true};}
@@ -423,11 +423,12 @@ export class Simulation{
   if(this.roads.delete(k)){this.rails.delete(k);this.paved.delete(k);this.money+=2;this.revision++;return {ok:true};}const b=this.at(x,z);if(!b)return {ok:false,error:'철거할 시설이 없습니다'};
   if(isStore(b)&&used(b)>0)return {ok:false,error:'보관 중인 물자를 먼저 팔거나 옮겨 창고를 비우세요'};
   if(this.shipments.some(sh=>sh.storeId===b.id||sh.terminalId==='b:'+b.id))return {ok:false,error:'운송 수단이 돌아온 뒤 철거하세요'};
+  if(this.campaign?.routes.some(r=>r.to===this.siteId&&r.cargo&&r.dropoffs?.some(v=>v.id===b.id)))return {ok:false,error:'거점 운송 화물이 도착한 뒤 철거하세요'};
   const guardHome=this.buildings.find(v=>v.id!==b.id&&['warehouse','barracks','fortress'].includes(v.type))||this.buildings.find(v=>v.id!==b.id);if(!guardHome&&this.guards.some(g=>g.homeId===b.id))return {ok:false,error:'경비가 복귀할 시설을 먼저 지으세요'};for(const g of this.guards)if(g.homeId===b.id){g.homeId=guardHome.id;g.route=[];}
   for(const w of this.workers)if(w.task?.building===b.id||w.task?.sourceId===b.id||w.task?.targetId===b.id||w.task?.sourceStore===b.id||w.task?.targetStore===b.id)this.refundTask(w);for(const[r,n]of Object.entries(b.inputs))this.stock[r]+=n;
   // The running cycle's consumed batch goes back like loaded inputs, as a product switch does (audit C8).
   if(b.progress>0)for(const[k,n]of Object.entries(b.batch||this.effectiveInputs(b)))this.stock[k]=(this.stock[k]||0)+n;
-  const made=this.recipeOf(b).output,refund=this.demolishRefund(b);if(RESOURCES[made])this.stock[made]+=b.out;this.money+=refund.money;for(const[r,n]of Object.entries(refund.materials||{}))this.stock[r]=(this.stock[r]||0)+n;
+  for(const[k,n]of Object.entries(b.returnStock||{}))this.stock[k]=(this.stock[k]||0)+n;const made=this.recipeOf(b).output,refund=this.demolishRefund(b);if(RESOURCES[made])this.stock[made]+=b.out;this.money+=refund.money;for(const[r,n]of Object.entries(refund.materials||{}))this.stock[r]=(this.stock[r]||0)+n;
   // A cancelled build undoes the clearing too: the tree, rock or sapling goes back on its tile and the two wood or stone
   // the clearing gave are taken back, so building and cancelling leaves the stock as it was (player audit: 44 → 41 → 46).
   // A cancelled build takes its clearing fee back off the day's expenses, where build() put it.
@@ -449,6 +450,7 @@ export class Simulation{
  buildCost(type){return Math.round(BUILDINGS[type].cost*(NATIONS[this.nation].build||1));}
  get storageCapacity(){return stores(this).reduce((n,b)=>n+capacity(this,b),0);}
  get storageUsed(){return Object.values(this.stock).reduce((n,v)=>n+v,0);}
+ setStorageRule(id,item,limit,reserve){return setStorageRule(this,id,item,limit,reserve);}
  storageSummary(b){return storageSummary(this,b);}
  discardStock(id,item,amount){const b=storeById(this,id);if(!b||!RESOURCES[item]||!Number.isInteger(amount)||amount<1)return {ok:false,error:'폐기할 품목과 수량을 확인하세요'};if(storeStock(this,b,item)<amount)return {ok:false,error:'운반 중인 물량을 제외한 재고가 부족합니다'};withdraw(this,item,amount,b);this.notify(RESOURCES[item].name+' '+amount+'개 폐기');return {ok:true,amount};}
  setStoreDrain(id,drain){const b=stores(this,false).find(v=>v.id===id);if(!b)return {ok:false,error:'보관 장소가 없습니다'};b.drain=!!drain;return {ok:true};}
@@ -468,23 +470,22 @@ export class Simulation{
  }
  /** The product a facility is set to make: its chosen recipe, else the first; a facility without products returns its definition. */
  recipeOf(b){const d=BUILDINGS[b?.type];return d?.recipes?.find(r=>r.id===b.recipe)||d?.recipes?.[0]||d;}
- /** Switch a facility's product. The running cycle is cancelled and what it consumed goes back to the warehouse, loaded
-  *  inputs the new product does not use and finished goods waiting on the pad move to the warehouse too, and
-  *  residents hauling to or from the facility drop their jobs (carried goods return to the warehouse). Nothing is lost. */
+ /** A product change returns the running batch locally. Old goods wait on the facility pad for real hauling. */
  setRecipe(id,recipeId){
   const b=this.buildings.find(v=>v.id===id),list=BUILDINGS[b?.type]?.recipes,next=list?.find(r=>r.id===recipeId);
   if(!b)return {ok:false,error:'시설을 찾을 수 없습니다'};if(!next||list.length<2)return {ok:false,error:'이 시설은 다른 제품을 만들 수 없습니다'};
   if(this.rank<(next.unlock||0))return {ok:false,error:RANKS[next.unlock].name+' 승급이 필요합니다'};const now=this.recipeOf(b);if(now.id===next.id)return {ok:true};
-  for(const w of this.workers)if(w.task&&(w.task.targetId===b.id||w.task.sourceId===b.id&&!w.task.carried))this.refundTask(w);
-  if(b.progress>0)for(const[k,n]of Object.entries(b.batch||this.effectiveInputs(b)))this.stock[k]=(this.stock[k]||0)+n;
-  if(RESOURCES[now.output])this.stock[now.output]+=b.out;b.out=0;b.progress=0;delete b.batch;b.working=false;
-  for(const[k,n]of Object.entries(b.inputs))if(!next.inputs[k]){this.stock[k]=(this.stock[k]||0)+n;delete b.inputs[k];}
+  for(const w of this.workers)if(w.task&&!w.task.carried&&(w.task.targetId===b.id||w.task.sourceId===b.id))this.refundTask(w);
+  if(b.progress>0)for(const[k,n]of Object.entries(b.batch||this.effectiveInputs(b)))b.inputs[k]=(b.inputs[k]||0)+n;
+  if(RESOURCES[now.output])putReturn(b,now.output,b.out);b.out=0;b.progress=0;delete b.batch;delete b.processStage;b.working=false;
+  for(const[k,n]of Object.entries(b.inputs))if(!next.inputs[k]){putReturn(b,k,n);delete b.inputs[k];}
   b.recipe=next.id;this.revision++;this.checkStorage();this.notify(BUILDINGS[b.type].name+' · '+next.name+' 생산으로 전환','success');return {ok:true};
  }
  /** Take one cycle's inputs from the facility's pad; the batch is kept so a switch or demolition returns it. */
- startBatch(b){b.batch=this.effectiveInputs(b);for(const[k,n]of Object.entries(b.batch))b.inputs[k]-=n;}
+ startBatch(b){const d=BUILDINGS[b.type],staged=d.stages&&this.recipeOf(b).id===d.output;delete b.processStage;b.batch=staged?{...d.stages[0].inputs}:this.effectiveInputs(b);for(const[k,n]of Object.entries(b.batch))b.inputs[k]-=n;}
  /** How fast a facility runs now (1 = its recipe period). Production and the restart of timed effects both use it. */
  speedOf(b,fx=this.placementEffects(b.type,b.x,b.z)){
+  if(BUILDINGS[b.type].emergency)return b.health>0?Math.min(1,b.health/100):0;
   const d=BUILDINGS[b.type];let m=(1+((b.level||1)-1)*.3)*(1-this.health.infection*.0025)*damageFactor(b.health)*(this.strikeUntil>this.time?STRIKE_SPEED:1)*(this.harvestUntil>this.time&&d.group==='farm'?HARVEST_BOOST:1)*(this.money<0?UNPAID_SPEED:1);
   if(this.charter==='industry'&&['craft','industry','advanced'].includes(d.group))m*=1.08;
   return m*this.tileMultiplier(b.type,b.x,b.z)*this.countryMultiplier(b.type)*this.specialtyMultiplier(b)*fx.speed;
@@ -493,7 +494,7 @@ export class Simulation{
  tileMultiplier(type,x,z){const t=this.tile(x,z);if(!t)return 1;const v=BUILDINGS[type]?.irrigable?t.fertility:type==='well'?t.moisture:type==='oilpump'?(t.oil??t.ore):['quarry','ironmine','coalpit','coppermine'].includes(type)?t.ore:type==='manaextractor'?t.mana:null;return (v===null?1:.7+v*.008)*groundFactor(this,type,x,z,BUILDINGS[type]?.irrigable);}
  // A2-B1: a production upgrade costs 25% (to level 2) and 40% (to level 3) of the facility's price, so +30% output costs
  // about what the same output costs as another copy; a house upgrade (one more resident) stays 60G a level.
- upgradeCost(b){const level=b.level||1;return Math.round((BUILDINGS[b.type].home?level*60:Math.max(10,this.buildCost(b.type)*(level>=2?.4:.25)))*(b.specialized&&b.race==='human'?.8:1));}
+ upgradeCost(b){return this.upgradeQuote(b)?.money||0;}
  eventName(type){return ({storm:'폭풍',illness:this.stage>=15?'마력성 감염병':'감염병',strike:'파업',raid:'외부 습격',manaStorm:'마력 폭풍',sanction:'무역 압박',harvest:'풍년',merchant:'순회 상인',migrants:'이주민'})[type]||type;}
  /** The money error of every paid action (J5): the price, how much is missing and the way out; null when affordable. */
  moneyShort(cost,what=''){if(this.money>=cost)return null;return what+cost+'G · '+Math.ceil(cost-this.money)+'G 부족 · '+(recoveryReady(this)?'회생 자금을 신청하세요':'재고를 팔아 자금을 마련하세요');}
@@ -545,23 +546,24 @@ export class Simulation{
  /** Every good a standing facility on any site of the campaign is set to make. */
  madeGoods(){const sims=this.campaign?.sites?.map(v=>v.sim).filter(Boolean);return new Set((sims?.length?sims:[this]).flatMap(s=>(s.buildings||[]).map(b=>s.recipeOf(b)?.output)));}
  /** An open order kept from before the skip rule (a save stuck on 20 smoked fish with no dock): a base good nothing makes
-  *  while another base good is made. Campaign.restore drops it so the next look draws again. */
- contractStale(){const holder=this.campaign?.treasury||this,open=holder.contractOrder;if(!open||open.n!==this.contracts)return false;const [,base]=CONTRACT_POOLS.find(([below])=>this.rank<below);if(!base.includes(open.item))return false;const made=this.madeGoods();return !made.has(open.item)&&base.some(i=>made.has(i));}
+  *  while another base good is made. Campaign.restore drops it so the next look draws again. An order with a split delivery
+  *  on the road is kept: the shipment is counted against it on arrival (export-route.js arrive). */
+ contractStale(){const holder=this.campaign?.treasury||this,open=holder.contractOrder;if(!open||open.n!==this.contracts||this.contractSent())return false;const [,base]=CONTRACT_POOLS.find(([below])=>this.rank<below);if(!base.includes(open.item))return false;const made=this.madeGoods();return !made.has(open.item)&&base.some(i=>made.has(i));}
  contract(){const item=this.contractItem(),price=RESOURCES[item].price,full=item==='airship'?1:price>=1000?2:price>=150?6:12+Math.min(this.contracts*2,16);
   // J2: the very first order is a half-size trial order the starting stock already covers (grain 6 of the 8 on hand), so
   // the first delivery can leave right after the tutorial instead of minutes of waiting on the first harvests.
-  const amount=this.contracts===0?Math.ceil(full/2):full;return {item,amount,reward:Math.round(amount*RESOURCES[item].price*CONTRACT_PREMIUM[this.rank>=2?1:0])};}
+  const delivered=(this.campaign?.treasury||this).contractOrder?.delivered||0,amount=(this.contracts===0?Math.ceil(full/2):full)-delivered;return {item,amount,reward:Math.round((amount+delivered)*RESOURCES[item].price*CONTRACT_PREMIUM[this.rank>=2?1:0])-((this.campaign?.treasury||this).contractOrder?.rewardPaid||0)};}
  /** True while the lord's order is on the road from any site (contracts are shared by the whole campaign). */
  contractSent(){const sims=this.campaign?.sites?.map(v=>v.sim).filter(Boolean);return (sims?.length?sims:[this]).some(s=>s.shipments.some(sh=>sh.kind==='contract'&&sh.phase==='out'));}
  /** Whether the lord's order can be sent now: ready, seconds until the next order, or the order already on the road. */
  contractStatus(){
   const inTransit=this.contractSent(),wait=Math.max(0,Math.ceil((this.contractReadyAt||0)-this.time)),c=this.contract();
-  const error=inTransit?'납품 화물이 영주에게 가는 중입니다':wait>0?'다음 납품 주문까지 '+remainingSeconds(wait,this)+'초':this.priceShort({items:{[c.item]:c.amount}},'납품 ')||shipmentError(this,fuelHold(c.item,c.amount,'contract'));
+  const error=inTransit?'납품 화물이 영주에게 가는 중입니다':wait>0?'다음 납품 주문까지 '+remainingSeconds(wait,this)+'초':this.priceShort({items:{[c.item]:Math.min(c.amount,vehicleLoad(this))}},'납품 ')||shipmentError(this,fuelHold(c.item,Math.min(c.amount,vehicleLoad(this)),'contract'));
   return error?{ready:false,wait,inTransit,error}:{ready:true,wait:0,inTransit:false};
  }
  /** Send the lord's order: the goods leave the warehouse on an export vehicle and the reward is paid when it reaches the terminal. */
- fulfill(){const st=this.contractStatus();if(!st.ready)return {ok:false,error:st.error};const c=this.contract(),error=dispatchShipment(this,c.item,c.amount,c.reward,false,{kind:'contract'});if(error)return {ok:false,error};
-  this.sound('dispatch');this.notify(RESOURCES[c.item].name+' '+c.amount+'개 납품 출발 · 도착 시 +'+c.reward+'G','success');return {ok:true,reward:c.reward};}
+ fulfill(){const st=this.contractStatus();if(!st.ready)return {ok:false,error:st.error};const c=this.contract(),amount=Math.min(c.amount,vehicleLoad(this)),reward=Math.round(c.reward*amount/c.amount),error=dispatchShipment(this,c.item,amount,reward,false,{kind:'contract',contractFinal:amount===c.amount});if(error)return {ok:false,error};
+  this.sound('dispatch');this.notify(RESOURCES[c.item].name+' '+amount+'개 납품 출발'+(amount<c.amount?' · 분할 납품':'')+' · 도착 시 +'+reward+'G','success');return {ok:true,amount,reward};}
  /** The counter to a trade sanction (A2-C2), like reinforcing against a storm or a welfare pact against a strike: a trade
   *  negotiation ends it at once for 4% of yesterday's income (at least 150G), less than the 25% cut on 100 s of sales. */
  sanctionCost(){return Math.max(150,Math.round((this.budget.lastIncome||0)*.04));}
@@ -595,13 +597,13 @@ export class Simulation{
   const before=this.workers.length;for(const w of this.workers)this.refundTask(w);
   const origin=this.warehouse||this.buildings[0];let missing=Math.ceil(Math.max(0,before-this.workerCount)/3);
   if(origin&&missing>0)for(const t of this.tiles.filter(t=>this.walkable(t.x,t.z)&&!this.roads.has(K(t.x,t.z))&&!t.nature).sort((a,c)=>Math.abs(a.x-origin.x)+Math.abs(a.z-origin.z)-Math.abs(c.x-origin.x)-Math.abs(c.z-origin.z))){if(missing<=0)break;if(this.build('house',t.x,t.z,true).ok){this.at(t.x,t.z).level=3;missing--;}}
-  this.workers=this.workers.filter(w=>{const h=this.buildings.find(b=>b.id===w.homeId);return h&&w.race===this.residentOf(h.type);});
+  this.workers=this.workers.filter(w=>{const h=this.buildings.find(b=>b.id===w.homeId);if(h&&w.race===this.residentOf(h.type))return true;if(w.task?.carried){delete w.homeId;w.retiring=true;return true;}return false;});
   if(before)this.notify('주민이 이제 주택에서 나옵니다. 기존 주민을 위해 주민 주택을 지어 두었습니다.','success');
  }
- save(){return {version:9,storageVersion:1,starterDrain:!!this.starterStore.drain,starterInventory:{...this.starterStore.inventory},land:structuredClone(this.layout),nextWorkerId:this.nextWorkerId,charter:this.charter,market:structuredClone(this.market),health:structuredClone(this.health),rescueQuest:structuredClone(this.rescueQuest),logisticsStats:structuredClone(this.logisticsStats),challenge:structuredClone(this.challenge),guards:structuredClone(this.guards),raid:this.raid,raidCount:this.raidCount,eventCount:this.eventCount,lastRecoveryDay:this.lastRecoveryDay,reserves:this.reserves,budget:this.budget,attackers:this.attackers,wardUntil:this.wardUntil,seed:this.seed,availableRaces:this.availableRaces,rails:[...this.rails],paved:[...this.paved],pipes:[...this.pipes],conveyors:[...this.conveyors],healthUntil:this.healthUntil,outageUntil:this.outageUntil,strikeUntil:this.strikeUntil,sanctionUntil:this.sanctionUntil,harvestUntil:this.harvestUntil,merchantUntil:this.merchantUntil,batteryCharge:this.batteryCharge,nation:this.nation,race:this.race,rank:this.rank,contracts:this.contracts,contractReadyAt:this.contractReadyAt,...(this.contractOrder?{contractOrder:structuredClone(this.contractOrder)}:{}),protected:this.protected,region:this.region,time:this.time,money:this.money,debt:this.debt,family:this.family,expansions:this.expansions,stock:{...this.stock},buildings:structuredClone(this.buildings),roads:[...this.roads],owned:[...this.owned],workers:structuredClone(this.workers),nextId:this.nextId,sold:{...this.sold},produced:{...this.produced},nextEvent:this.nextEvent,pendingEvent:this.pendingEvent,diseaseUntil:this.diseaseUntil,events:this.events,autoSell:this.autoSell,shipments:structuredClone(this.shipments),nextShipmentId:this.nextShipmentId||0,tradeRoute:this.tradeRoute,totalRevenue:this.totalRevenue,emergencyUsed:this.emergencyUsed,stockCap:{...this.stockCap},haulGear:this.haulGear||0,soldLand:[...this.soldLand],tileState:packTiles(this.tiles)};}
+ save(){return {version:10,storageVersion:1,starterDrain:!!this.starterStore.drain,starterStorageRules:structuredClone(this.starterStore.storageRules||{}),starterInventory:{...this.starterStore.inventory},land:structuredClone(this.layout),nextWorkerId:this.nextWorkerId,charter:this.charter,market:structuredClone(this.market),health:structuredClone(this.health),rescueQuest:structuredClone(this.rescueQuest),logisticsStats:structuredClone(this.logisticsStats),challenge:structuredClone(this.challenge),guards:structuredClone(this.guards),raid:this.raid,raidCount:this.raidCount,eventCount:this.eventCount,lastRecoveryDay:this.lastRecoveryDay,reserves:this.reserves,budget:this.budget,attackers:this.attackers,wardUntil:this.wardUntil,seed:this.seed,availableRaces:this.availableRaces,rails:[...this.rails],paved:[...this.paved],pipes:[...this.pipes],conveyors:[...this.conveyors],healthUntil:this.healthUntil,outageUntil:this.outageUntil,strikeUntil:this.strikeUntil,sanctionUntil:this.sanctionUntil,harvestUntil:this.harvestUntil,merchantUntil:this.merchantUntil,batteryCharge:this.batteryCharge,nation:this.nation,race:this.race,rank:this.rank,contracts:this.contracts,contractReadyAt:this.contractReadyAt,...(this.contractOrder?{contractOrder:structuredClone(this.contractOrder)}:{}),protected:this.protected,region:this.region,time:this.time,money:this.money,debt:this.debt,family:this.family,expansions:this.expansions,stock:{...this.stock},buildings:structuredClone(this.buildings),roads:[...this.roads],owned:[...this.owned],workers:structuredClone(this.workers),nextId:this.nextId,sold:{...this.sold},produced:{...this.produced},nextEvent:this.nextEvent,pendingEvent:this.pendingEvent,diseaseUntil:this.diseaseUntil,events:this.events,autoSell:this.autoSell,shipments:structuredClone(this.shipments),nextShipmentId:this.nextShipmentId||0,tradeRoute:this.tradeRoute,tradeDestination:this.tradeDestination||null,totalRevenue:this.totalRevenue,emergencyUsed:this.emergencyUsed,stockCap:{...this.stockCap},haulGear:this.haulGear||0,soldLand:[...this.soldLand],tileState:packTiles(this.tiles)};}
  restore(s){
-  if(![1,2,3,4,5,6,7,8,9].includes(s.version)||!Array.isArray(s.buildings)||!Array.isArray(s.owned)||!s.stock)throw new Error('저장 형식이 맞지 않습니다');
-  for(const key of ['charter','market','health','rescueQuest','logisticsStats','challenge','guards','raid','raidCount','eventCount','lastRecoveryDay','reserves','budget','attackers','wardUntil','availableRaces','healthUntil','outageUntil','strikeUntil','sanctionUntil','harvestUntil','merchantUntil','batteryCharge','nation','race','rank','contracts','contractReadyAt','contractOrder','protected','time','money','debt','family','expansions','stock','buildings','workers','nextId','nextWorkerId','sold','produced','nextEvent','pendingEvent','diseaseUntil','events','autoSell','shipments','nextShipmentId','tradeRoute','totalRevenue','emergencyUsed','stockCap','haulGear'])if(s[key]!==undefined){const v=structuredClone(s[key]);this[key]=MERGED.includes(key)&&v&&typeof v==='object'&&!Array.isArray(v)?{...this[key],...v}:v;}
+  if(![1,2,3,4,5,6,7,8,9,10].includes(s.version)||!Array.isArray(s.buildings)||!Array.isArray(s.owned)||!s.stock)throw new Error('저장 형식이 맞지 않습니다');
+  for(const key of ['charter','market','health','rescueQuest','logisticsStats','challenge','guards','raid','raidCount','eventCount','lastRecoveryDay','reserves','budget','attackers','wardUntil','availableRaces','healthUntil','outageUntil','strikeUntil','sanctionUntil','harvestUntil','merchantUntil','batteryCharge','nation','race','rank','contracts','contractReadyAt','contractOrder','protected','time','money','debt','family','expansions','stock','buildings','workers','nextId','nextWorkerId','sold','produced','nextEvent','pendingEvent','diseaseUntil','events','autoSell','shipments','nextShipmentId','tradeRoute','tradeDestination','totalRevenue','emergencyUsed','stockCap','haulGear'])if(s[key]!==undefined){const v=structuredClone(s[key]);this[key]=MERGED.includes(key)&&v&&typeof v==='object'&&!Array.isArray(v)?{...this[key],...v}:v;}
   if(s.version===1)this.rank=Math.max(PROGRESSION_OFFSET,...this.buildings.map(b=>unlockRank(b.type)));else if(s.version<4)this.rank+=PROGRESSION_OFFSET;if(!playableRace(this.race)){this.race='human';this.nation='estern';}this.availableRaces=[...FACTIONS[factionOf(this.race)].members];this.buildings.forEach(b=>{if(!playableRace(b.race))b.race=this.race;b.race=b.race||this.race;b.size=1;});for(const r of Object.keys(RESOURCES))this.stock[r]??=0;this.rails=new Set(s.rails||[]);this.paved=new Set(s.paved||[]);this.pipes=new Set(s.pipes||[]);this.conveyors=new Set(s.conveyors||[]);if(!this.availableRaces.includes(this.race))this.availableRaces.unshift(this.race);
   for(const w of this.workers)if(!playableRace(w.race)){w.race=this.availableRaces[w.id%this.availableRaces.length];w.name=RESIDENT_NAMES[w.race][w.id%4];}for(const w of this.workers)assignResidentAppearance(w,this.availableRaces);for(const g of this.guards)assignResidentAppearance(g,this.availableRaces);if(s.version<6){for(const w of this.workers){if(w.task){const t=w.task,b=this.buildings.find(b=>b.id===t.building);if(t.kind==='pickup'&&w.phase==='source'&&b)b.out+=t.amount;else this.stock[t.item]=(this.stock[t.item]||0)+t.amount;w.task=null;w.route=[];w.phase='idle';}}if(this.diseaseUntil>this.time)this.health.infection=25;this.rescueQuest.step=this.family?5:0;}
   if(s.version<5)this.eventCount=this.events.length;this.owned=new Set(s.owned);this.roads=new Set(s.roads);this.soldLand=new Set(Array.isArray(s.soldLand)?s.soldLand:[]);for(const k of this.soldLand){const [x,z]=k.split(',').map(Number);const t=this.tile(x,z);if(t)applySold(t);}const tiles=typeof s.tileState==='string'?unpackTiles(s.tileState):s.tiles;if(tiles?.length===N*N)tiles.forEach((t,i)=>{const u=this.tiles[i];u.nature=t.nature??null;u.remaining=t.remaining??0;if(t.growAt!==undefined)u.growAt=t.growAt;else delete u.growAt;});layExportRoad(this);
@@ -610,6 +612,7 @@ export class Simulation{
   const floor=(v,list,start)=>Math.max(Number.isInteger(v)?v:start,Math.max(start-1,...list.map(o=>o.id).filter(Number.isInteger))+1);
   this.nextWorkerId=floor(s.nextWorkerId,this.workers,0);this.nextId=floor(s.nextId,this.buildings,1);this.nextShipmentId=Math.max(Number.isInteger(s.nextShipmentId)?s.nextShipmentId:0,...this.shipments.map(o=>o.id).filter(Number.isInteger));
   this.attackers.forEach((w,i)=>{if(!(w.id>=ATTACKER_ID_BASE))w.id=ATTACKER_ID_BASE+Math.max(0,(this.raidCount||1)-1)*3+i;});
+  for(const b of this.buildings)if(b.type==='battery')b.charge??=Math.min(90,this.batteryCharge||0);
   if(s.version<7)this.moveResidentsIntoHouses();else if(s.version<8)this.settleHouseLevels();this.revision++;
  }
 }

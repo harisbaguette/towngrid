@@ -66,7 +66,7 @@ export function tickRaid(s,dt){
   else{w.walking=false;w.dir=Math.atan2(target.x-w.x,target.z-w.z);if(s.time>=w.lastAttack+(guard?1.05:3.2)){
    w.lastAttack=s.time;s.sound('impact',w.x,w.z);
    if(guard)guard.hp=Math.max(0,guard.hp-5*r.strength);
-   else if(wardAt(s,target))s.sound('defend',target.x,target.z);
+   else if(wardAt(s,target))s.sound('guardHit',target.x,target.z);
    else{target.health=Math.max(target.type==='warehouse'?15:0,target.health-10*r.strength);const loss=Math.min(Math.max(0,s.money)*.015,32*r.strength);s.money-=loss;r.damage+=loss;if(target.health===0)s.revision++;
     if(!r.disrupted&&!(r.faction==='demon'&&s.wardUntil>s.time)){r.disrupted=true;if(r.faction==='demon')s.outageUntil=s.time+20;if(r.faction==='beast')for(const route of s.campaign?.routes||[])if(route.from===s.siteId||route.to===s.siteId)route.ambush=25;}
    }
@@ -84,7 +84,7 @@ export function tickRaid(s,dt){
   if(!enemy){if(distance(g,home)>1.6)walk(s,g,home,dt,1.8);continue;}
   if(g.target!==enemy.id){g.target=enemy.id;g.route=[];}
   if(distance(g,enemy)>=MELEE)walk(s,g,enemy,dt,2.1);
-  else{g.route=[];g.dir=Math.atan2(enemy.x-g.x,enemy.z-g.z);g.attacking=true;if(s.time>=g.attackAt){enemy.hp=Math.max(0,enemy.hp-9);g.attackAt=s.time+.7;s.sound('defend',g.x,g.z);}}
+  else{g.route=[];g.dir=Math.atan2(enemy.x-g.x,enemy.z-g.z);g.attacking=true;if(s.time>=g.attackAt){enemy.hp=Math.max(0,enemy.hp-9);g.attackAt=s.time+.7;s.sound('guardHit',g.x,g.z);}}
  }
  for(const w of active)if(w.hp<=0){r.defeated++;w.walking=false;w.attacking=false;w.until=s.time+2;s.sound('defeat',w.x,w.z);}
  active=s.attackers.filter(w=>w.hp>0);s.attackers=s.attackers.filter(w=>w.hp>0||w.until>s.time);

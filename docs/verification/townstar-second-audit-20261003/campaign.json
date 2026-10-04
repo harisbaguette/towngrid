@@ -1,0 +1,1335 @@
+{
+ "date": "2026-10-03",
+ "test": "tests/full-campaign.mjs",
+ "method": "Normal paid player actions and elapsed time; no injected cash, stock, production or ranks. Roads built through player actions. Periodic save/restore. Days are recorded at each day change: rank and cash at the end of the day, revenue earned that day across all sites, facilities on the map.",
+ "result": {
+  "day": 59,
+  "baseTimeScale": 0.5,
+  "completionRealMinutesAt1x": 157,
+  "sites": 6,
+  "revenue": 1102263,
+  "produced": {
+   "water": 3970,
+   "wood": 3177,
+   "stone": 270,
+   "grain": 7539,
+   "fish": 2574,
+   "plank": 1947,
+   "flour": 4434,
+   "smokedfish": 588,
+   "cotton": 2002,
+   "bread": 2210,
+   "herb": 367,
+   "cloth": 1288,
+   "oil": 1524,
+   "fuel": 1202,
+   "egg": 804,
+   "cake": 744,
+   "brick": 423,
+   "glass": 422,
+   "workwear": 694,
+   "gear": 1390,
+   "iron": 788,
+   "coal": 1080,
+   "steel": 759,
+   "copper": 465,
+   "polymer": 387,
+   "wire": 601,
+   "mana": 428,
+   "circuit": 280,
+   "concrete": 321,
+   "canned": 156,
+   "car": 133,
+   "medicine": 282,
+   "lamp": 130,
+   "engine": 51,
+   "mithril": 73,
+   "airship": 19
+  },
+  "milestones": 32,
+  "contracts": 35,
+  "contractsSent": 40,
+  "recipeSwitches": 6,
+  "recipeUse": {
+   "bakery:cake": 1,
+   "kiln:glass": 1,
+   "bakery:bread": 1,
+   "kiln:brick": 1,
+   "steamworks:wire": 1,
+   "steamworks:gear": 1
+  },
+  "fuelBurnedByVehicles": 1260,
+  "fuelTrips": 1192,
+  "investments": 5,
+  "stateTradeDays": 28,
+  "upkeepPerDay": {
+   "facilities": 3178,
+   "sites": 2025,
+   "guards": 275,
+   "total": 5478
+  },
+  "completion": {
+   "day": 59,
+   "seconds": 4700,
+   "revenue": 1102263,
+   "produced": 43513,
+   "sold": 14229,
+   "contracts": 35,
+   "sites": 6,
+   "territories": 5,
+   "recognition": 6,
+   "states": 14,
+   "battles": 13
+  }
+ },
+ "segments": [
+  {
+   "name": "A 개척",
+   "ranks": "1~6",
+   "endDay": 7,
+   "target": 6,
+   "window": [
+    4.5,
+    7.5
+   ],
+   "averageIncome": 1450,
+   "days": 8
+  },
+  {
+   "name": "B 가공",
+   "ranks": "7~13",
+   "endDay": 16.5,
+   "target": 16,
+   "window": [
+    12,
+    20
+   ],
+   "averageIncome": 4543,
+   "days": 9
+  },
+  {
+   "name": "C 중공업",
+   "ranks": "14~19",
+   "endDay": 27.25,
+   "target": 27,
+   "window": [
+    20.25,
+    33.75
+   ],
+   "averageIncome": 13898,
+   "days": 18
+  },
+  {
+   "name": "D 첨단",
+   "ranks": "20~23",
+   "endDay": 43.75,
+   "target": 35,
+   "window": [
+    26.25,
+    43.75
+   ],
+   "averageIncome": 21617,
+   "days": 10
+  },
+  {
+   "name": "E 자치",
+   "ranks": "24~28",
+   "endDay": 50.63,
+   "target": 47,
+   "window": [
+    35.25,
+    58.75
+   ],
+   "averageIncome": 30485,
+   "days": 7
+  },
+  {
+   "name": "F 국가",
+   "ranks": "29~32",
+   "endDay": 58.75,
+   "target": 60,
+   "window": [
+    45,
+    75
+   ],
+   "averageIncome": 54285,
+   "days": 6
+  }
+ ],
+ "acceptance": {
+  "A1": {
+   "rule": "각 구간 종료일이 목표의 ±25% 안",
+   "segments": [
+    {
+     "name": "A 개척",
+     "endDay": 7,
+     "window": [
+      4.5,
+      7.5
+     ]
+    },
+    {
+     "name": "B 가공",
+     "endDay": 16.5,
+     "window": [
+      12,
+      20
+     ]
+    },
+    {
+     "name": "C 중공업",
+     "endDay": 27.25,
+     "window": [
+      20.25,
+      33.75
+     ]
+    },
+    {
+     "name": "D 첨단",
+     "endDay": 43.75,
+     "window": [
+      26.25,
+      43.75
+     ]
+    },
+    {
+     "name": "E 자치",
+     "endDay": 50.63,
+     "window": [
+      35.25,
+      58.75
+     ]
+    },
+    {
+     "name": "F 국가",
+     "endDay": 58.75,
+     "window": [
+      45,
+      75
+     ]
+    }
+   ],
+   "pass": true
+  },
+  "A2": {
+   "rule": "같은 날 승급 3회 이상 없음",
+   "maxPerDay": 2,
+   "pass": true
+  },
+  "A3": {
+   "rule": "13~31단계 일말 자금 300G 미만인 날 20% 이하",
+   "poorDays": 1,
+   "days": 42,
+   "pass": true
+  },
+  "A4": {
+   "rule": "승급 간 최장 간격 5일 이하 · 마지막 3개 승급 사이 최대 보유 자금이 최종 수수료의 2배 이하",
+   "maxGap": 8,
+   "maxMoney": 52426,
+   "limit": 140000,
+   "pass": false
+  },
+  "A5": {
+   "rule": "구간별 평균 일일 수입이 A→F 단조 증가 · E 평균이 C 평균의 2배 이상",
+   "averages": [
+    1450,
+    4543,
+    13898,
+    21617,
+    30485,
+    54285
+   ],
+   "pass": true
+  }
+ },
+ "promotions": [
+  {
+   "rank": 2,
+   "name": "등록 농노",
+   "day": 1,
+   "elapsed": 0.38,
+   "money": 95,
+   "nextOnArrival": [
+    [
+     "produced:plank",
+     0,
+     12
+    ],
+    [
+     "contracts",
+     1,
+     2
+    ]
+   ]
+  },
+  {
+   "rank": 3,
+   "name": "개간 농노",
+   "day": 3,
+   "elapsed": 2,
+   "money": 510,
+   "nextOnArrival": [
+    [
+     "produced:flour",
+     0,
+     12
+    ],
+    [
+     "expansions",
+     1,
+     1
+    ]
+   ]
+  },
+  {
+   "rank": 4,
+   "name": "계약 농노",
+   "day": 3,
+   "elapsed": 2.63,
+   "money": 224,
+   "nextOnArrival": [
+    [
+     "sold:bread",
+     0,
+     10
+    ],
+    [
+     "debtFree",
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "rank": 5,
+   "name": "준자유민",
+   "day": 5,
+   "elapsed": 4.88,
+   "money": 919,
+   "nextOnArrival": [
+    [
+     "family",
+     0,
+     1
+    ],
+    [
+     "produced:herb",
+     0,
+     8
+    ]
+   ]
+  },
+  {
+   "rank": 6,
+   "name": "임차 사업주",
+   "day": 6,
+   "elapsed": 5.38,
+   "money": 1188,
+   "nextOnArrival": [
+    [
+     "produced:cloth",
+     2,
+     8
+    ],
+    [
+     "revenue",
+     6851,
+     8000
+    ]
+   ]
+  },
+  {
+   "rank": 7,
+   "name": "등록 사업주",
+   "day": 8,
+   "elapsed": 7,
+   "money": 275,
+   "nextOnArrival": [
+    [
+     "produced:egg",
+     0,
+     12
+    ],
+    [
+     "contracts",
+     5,
+     6
+    ]
+   ]
+  },
+  {
+   "rank": 8,
+   "name": "지역 공급자",
+   "day": 9,
+   "elapsed": 8.5,
+   "money": 2028,
+   "nextOnArrival": [
+    [
+     "produced:cake",
+     0,
+     10
+    ],
+    [
+     "contracts",
+     7,
+     8
+    ]
+   ]
+  },
+  {
+   "rank": 9,
+   "name": "제조 허가업자",
+   "day": 12,
+   "elapsed": 11.75,
+   "money": 1770,
+   "nextOnArrival": [
+    [
+     "produced:brick",
+     0,
+     14
+    ],
+    [
+     "revenue",
+     24393,
+     23000
+    ]
+   ]
+  },
+  {
+   "rank": 10,
+   "name": "지역 납품업자",
+   "day": 13,
+   "elapsed": 12.88,
+   "money": 1138,
+   "nextOnArrival": [
+    [
+     "produced:workwear",
+     0,
+     8
+    ],
+    [
+     "produced:glass",
+     0,
+     8
+    ],
+    [
+     "contracts",
+     9,
+     10
+    ]
+   ]
+  },
+  {
+   "rank": 11,
+   "name": "공인 계약업자",
+   "day": 15,
+   "elapsed": 14.5,
+   "money": 288,
+   "nextOnArrival": [
+    [
+     "workers",
+     18,
+     28
+    ]
+   ]
+  },
+  {
+   "rank": 12,
+   "name": "개척 사업자",
+   "day": 16,
+   "elapsed": 15,
+   "money": 1062,
+   "nextOnArrival": [
+    [
+     "power",
+     1,
+     1
+    ],
+    [
+     "produced:gear",
+     0,
+     8
+    ]
+   ]
+  },
+  {
+   "rank": 13,
+   "name": "동력 제조업자",
+   "day": 17,
+   "elapsed": 16.38,
+   "money": 2606,
+   "nextOnArrival": [
+    [
+     "automatic",
+     0,
+     1
+    ],
+    [
+     "revenue",
+     46154,
+     47000
+    ]
+   ]
+  },
+  {
+   "rank": 14,
+   "name": "법인 대표",
+   "day": 17,
+   "elapsed": 16.5,
+   "money": 3230,
+   "nextOnArrival": [
+    [
+     "produced:iron",
+     0,
+     16
+    ],
+    [
+     "produced:coal",
+     0,
+     16
+    ],
+    [
+     "workers",
+     33,
+     40
+    ]
+   ]
+  },
+  {
+   "rank": 15,
+   "name": "중공업 사업자",
+   "day": 18,
+   "elapsed": 17.5,
+   "money": 2665,
+   "nextOnArrival": [
+    [
+     "produced:steel",
+     0,
+     18
+    ],
+    [
+     "debtFree",
+     1,
+     1
+    ]
+   ]
+  },
+  {
+   "rank": 16,
+   "name": "에너지 사업자",
+   "day": 20,
+   "elapsed": 19.5,
+   "money": 6438,
+   "nextOnArrival": [
+    [
+     "produced:fuel",
+     164,
+     12
+    ],
+    [
+     "produced:copper",
+     0,
+     12
+    ],
+    [
+     "deliveries",
+     1,
+     3
+    ]
+   ]
+  },
+  {
+   "rank": 17,
+   "name": "산업단지 운영자",
+   "day": 21,
+   "elapsed": 20.75,
+   "money": 6031,
+   "nextOnArrival": [
+    [
+     "produced:polymer",
+     0,
+     18
+    ],
+    [
+     "produced:wire",
+     0,
+     12
+    ],
+    [
+     "produced:mana",
+     0,
+     8
+    ]
+   ]
+  },
+  {
+   "rank": 18,
+   "name": "정밀 제조업자",
+   "day": 23,
+   "elapsed": 22.38,
+   "money": 1492,
+   "nextOnArrival": [
+    [
+     "produced:circuit",
+     0,
+     12
+    ],
+    [
+     "produced:concrete",
+     0,
+     12
+    ],
+    [
+     "deliveries",
+     5,
+     10
+    ]
+   ]
+  },
+  {
+   "rank": 19,
+   "name": "광역 투자자",
+   "day": 26,
+   "elapsed": 25,
+   "money": 3265,
+   "nextOnArrival": [
+    [
+     "railRoutes",
+     0,
+     1
+    ],
+    [
+     "produced:canned",
+     0,
+     12
+    ]
+   ]
+  },
+  {
+   "rank": 20,
+   "name": "자동차 제조사",
+   "day": 28,
+   "elapsed": 27.25,
+   "money": 1727,
+   "nextOnArrival": [
+    [
+     "produced:car",
+     0,
+     6
+    ],
+    [
+     "contracts",
+     11,
+     19
+    ]
+   ]
+  },
+  {
+   "rank": 21,
+   "name": "기술 기업군",
+   "day": 36,
+   "elapsed": 35.88,
+   "money": 10561,
+   "nextOnArrival": [
+    [
+     "sites",
+     2,
+     3
+    ],
+    [
+     "railRoutes",
+     1,
+     2
+    ]
+   ]
+  },
+  {
+   "rank": 22,
+   "name": "기반시설 운영자",
+   "day": 38,
+   "elapsed": 37.38,
+   "money": 3090,
+   "nextOnArrival": [
+    [
+     "revenue",
+     351666,
+     280000
+    ],
+    [
+     "deliveries",
+     69,
+     55
+    ]
+   ]
+  },
+  {
+   "rank": 23,
+   "name": "개발구 운영권자",
+   "day": 40,
+   "elapsed": 39,
+   "money": 1093,
+   "nextOnArrival": [
+    [
+     "defense",
+     0,
+     1
+    ],
+    [
+     "produced:medicine",
+     27,
+     90
+    ]
+   ]
+  },
+  {
+   "rank": 24,
+   "name": "치안권 보유자",
+   "day": 44,
+   "elapsed": 43.75,
+   "money": 35139,
+   "nextOnArrival": [
+    [
+     "investment",
+     0,
+     3
+    ],
+    [
+     "produced:lamp",
+     0,
+     10
+    ],
+    [
+     "contracts",
+     25,
+     27
+    ]
+   ]
+  },
+  {
+   "rank": 25,
+   "name": "재정 운영권자",
+   "day": 46,
+   "elapsed": 45.25,
+   "money": 23950,
+   "nextOnArrival": [
+    [
+     "sites",
+     3,
+     4
+    ],
+    [
+     "support",
+     55,
+     65
+    ],
+    [
+     "contracts",
+     27,
+     29
+    ]
+   ]
+  },
+  {
+   "rank": 26,
+   "name": "자치구 대표",
+   "day": 48,
+   "elapsed": 47.63,
+   "money": 40990,
+   "nextOnArrival": [
+    [
+     "defense",
+     3,
+     4
+    ],
+    [
+     "railRoutes",
+     2,
+     3
+    ],
+    [
+     "produced:mithril",
+     0,
+     5
+    ]
+   ]
+  },
+  {
+   "rank": 27,
+   "name": "자치정부 수장",
+   "day": 50,
+   "elapsed": 49.13,
+   "money": 33900,
+   "nextOnArrival": [
+    [
+     "recognition",
+     1,
+     2
+    ],
+    [
+     "support",
+     89,
+     70
+    ],
+    [
+     "building:parliament",
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "rank": 28,
+   "name": "독립 선언국",
+   "day": 50,
+   "elapsed": 49.25,
+   "money": 10523,
+   "nextOnArrival": [
+    [
+     "recognition",
+     2,
+     3
+    ],
+    [
+     "produced:airship",
+     0,
+     2
+    ],
+    [
+     "deliveries",
+     164,
+     170
+    ]
+   ]
+  },
+  {
+   "rank": 29,
+   "name": "승인 독립국",
+   "day": 51,
+   "elapsed": 50.63,
+   "money": 5714,
+   "nextOnArrival": [
+    [
+     "sites",
+     4,
+     5
+    ],
+    [
+     "investment",
+     3,
+     5
+    ],
+    [
+     "building:fortress",
+     2,
+     2
+    ],
+    [
+     "revenue",
+     670420,
+     700000
+    ]
+   ]
+  },
+  {
+   "rank": 30,
+   "name": "지역 강국",
+   "day": 54,
+   "elapsed": 53,
+   "money": 3435,
+   "nextOnArrival": [
+    [
+     "territories",
+     2,
+     3
+    ],
+    [
+     "support",
+     71,
+     75
+    ],
+    [
+     "deliveries",
+     207,
+     215
+    ]
+   ]
+  },
+  {
+   "rank": 31,
+   "name": "다지역 연방",
+   "day": 56,
+   "elapsed": 55.13,
+   "money": 25497,
+   "nextOnArrival": [
+    [
+     "sites",
+     5,
+     6
+    ],
+    [
+     "recognition",
+     5,
+     6
+    ],
+    [
+     "produced:airship",
+     11,
+     14
+    ]
+   ]
+  },
+  {
+   "rank": 32,
+   "name": "열강",
+   "day": 57,
+   "elapsed": 56.5,
+   "money": 4754,
+   "nextOnArrival": [
+    [
+     "territories",
+     4,
+     5
+    ],
+    [
+     "revenue",
+     973772,
+     1100000
+    ],
+    [
+     "defense",
+     9,
+     10
+    ],
+    [
+     "produced:car",
+     112,
+     120
+    ]
+   ]
+  },
+  {
+   "rank": 33,
+   "name": "패권국",
+   "day": 59,
+   "elapsed": 58.75,
+   "money": 25268,
+   "nextOnArrival": []
+  }
+ ],
+ "days": [
+  {
+   "day": 1,
+   "rank": 1,
+   "money": 389,
+   "income": 65,
+   "buildings": 16
+  },
+  {
+   "day": 2,
+   "rank": 2,
+   "money": 495,
+   "income": 750,
+   "buildings": 20
+  },
+  {
+   "day": 3,
+   "rank": 3,
+   "money": 171,
+   "income": 811,
+   "buildings": 25
+  },
+  {
+   "day": 4,
+   "rank": 3,
+   "money": 660,
+   "income": 1790,
+   "buildings": 27
+  },
+  {
+   "day": 5,
+   "rank": 4,
+   "money": 697,
+   "income": 2394,
+   "buildings": 33
+  },
+  {
+   "day": 6,
+   "rank": 5,
+   "money": 1099,
+   "income": 2185,
+   "buildings": 36
+  },
+  {
+   "day": 7,
+   "rank": 6,
+   "money": 260,
+   "income": 137,
+   "buildings": 37
+  },
+  {
+   "day": 8,
+   "rank": 6,
+   "money": 1630,
+   "income": 3466,
+   "buildings": 41
+  },
+  {
+   "day": 9,
+   "rank": 7,
+   "money": 1318,
+   "income": 3543,
+   "buildings": 41
+  },
+  {
+   "day": 10,
+   "rank": 7,
+   "money": 1009,
+   "income": 1704,
+   "buildings": 41
+  },
+  {
+   "day": 11,
+   "rank": 7,
+   "money": 333,
+   "income": 3520,
+   "buildings": 43
+  },
+  {
+   "day": 12,
+   "rank": 8,
+   "money": 1148,
+   "income": 4329,
+   "buildings": 49
+  },
+  {
+   "day": 13,
+   "rank": 9,
+   "money": 2433,
+   "income": 3396,
+   "buildings": 54
+  },
+  {
+   "day": 14,
+   "rank": 9,
+   "money": 2244,
+   "income": 1286,
+   "buildings": 61
+  },
+  {
+   "day": 15,
+   "rank": 11,
+   "money": 1062,
+   "income": 6819,
+   "buildings": 68
+  },
+  {
+   "day": 16,
+   "rank": 11,
+   "money": 3182,
+   "income": 6870,
+   "buildings": 70
+  },
+  {
+   "day": 17,
+   "rank": 13,
+   "money": 1179,
+   "income": 9418,
+   "buildings": 79
+  },
+  {
+   "day": 18,
+   "rank": 14,
+   "money": 1142,
+   "income": 9045,
+   "buildings": 84
+  },
+  {
+   "day": 19,
+   "rank": 14,
+   "money": 3980,
+   "income": 8995,
+   "buildings": 85
+  },
+  {
+   "day": 20,
+   "rank": 15,
+   "money": 7102,
+   "income": 9916,
+   "buildings": 86
+  },
+  {
+   "day": 21,
+   "rank": 16,
+   "money": 5059,
+   "income": 11159,
+   "buildings": 88
+  },
+  {
+   "day": 22,
+   "rank": 16,
+   "money": 4137,
+   "income": 13321,
+   "buildings": 90
+  },
+  {
+   "day": 23,
+   "rank": 17,
+   "money": 699,
+   "income": 10656,
+   "buildings": 92
+  },
+  {
+   "day": 24,
+   "rank": 17,
+   "money": 3013,
+   "income": 12322,
+   "buildings": 93
+  },
+  {
+   "day": 25,
+   "rank": 18,
+   "money": 3265,
+   "income": 8917,
+   "buildings": 93
+  },
+  {
+   "day": 26,
+   "rank": 18,
+   "money": 104,
+   "income": 12276,
+   "buildings": 97
+  },
+  {
+   "day": 27,
+   "rank": 18,
+   "money": 3717,
+   "income": 10985,
+   "buildings": 97
+  },
+  {
+   "day": 28,
+   "rank": 19,
+   "money": 4183,
+   "income": 13387,
+   "buildings": 98
+  },
+  {
+   "day": 29,
+   "rank": 19,
+   "money": 9994,
+   "income": 12136,
+   "buildings": 98
+  },
+  {
+   "day": 30,
+   "rank": 19,
+   "money": 7053,
+   "income": 12844,
+   "buildings": 98
+  },
+  {
+   "day": 31,
+   "rank": 19,
+   "money": 13169,
+   "income": 20733,
+   "buildings": 98
+  },
+  {
+   "day": 32,
+   "rank": 19,
+   "money": 14465,
+   "income": 19696,
+   "buildings": 99
+  },
+  {
+   "day": 33,
+   "rank": 19,
+   "money": 15875,
+   "income": 19621,
+   "buildings": 99
+  },
+  {
+   "day": 34,
+   "rank": 19,
+   "money": 17574,
+   "income": 22555,
+   "buildings": 99
+  },
+  {
+   "day": 35,
+   "rank": 19,
+   "money": 10818,
+   "income": 21597,
+   "buildings": 99
+  },
+  {
+   "day": 36,
+   "rank": 20,
+   "money": 3906,
+   "income": 20108,
+   "buildings": 103
+  },
+  {
+   "day": 37,
+   "rank": 20,
+   "money": 2374,
+   "income": 20624,
+   "buildings": 106
+  },
+  {
+   "day": 38,
+   "rank": 21,
+   "money": 557,
+   "income": 17041,
+   "buildings": 109
+  },
+  {
+   "day": 39,
+   "rank": 22,
+   "money": 1093,
+   "income": 13413,
+   "buildings": 109
+  },
+  {
+   "day": 40,
+   "rank": 22,
+   "money": 11853,
+   "income": 21518,
+   "buildings": 112
+  },
+  {
+   "day": 41,
+   "rank": 22,
+   "money": 14814,
+   "income": 24161,
+   "buildings": 112
+  },
+  {
+   "day": 42,
+   "rank": 22,
+   "money": 24312,
+   "income": 24508,
+   "buildings": 112
+  },
+  {
+   "day": 43,
+   "rank": 22,
+   "money": 35199,
+   "income": 26719,
+   "buildings": 112
+  },
+  {
+   "day": 44,
+   "rank": 23,
+   "money": 15260,
+   "income": 20835,
+   "buildings": 115
+  },
+  {
+   "day": 45,
+   "rank": 23,
+   "money": 30833,
+   "income": 27245,
+   "buildings": 115
+  },
+  {
+   "day": 46,
+   "rank": 24,
+   "money": 17577,
+   "income": 28581,
+   "buildings": 121
+  },
+  {
+   "day": 47,
+   "rank": 24,
+   "money": 37572,
+   "income": 25954,
+   "buildings": 121
+  },
+  {
+   "day": 48,
+   "rank": 25,
+   "money": 27381,
+   "income": 25156,
+   "buildings": 122
+  },
+  {
+   "day": 49,
+   "rank": 25,
+   "money": 45583,
+   "income": 25401,
+   "buildings": 122
+  },
+  {
+   "day": 50,
+   "rank": 27,
+   "money": 680,
+   "income": 18392,
+   "buildings": 125
+  },
+  {
+   "day": 51,
+   "rank": 28,
+   "money": 2988,
+   "income": 45963,
+   "buildings": 127
+  },
+  {
+   "day": 52,
+   "rank": 28,
+   "money": 17263,
+   "income": 43945,
+   "buildings": 130
+  },
+  {
+   "day": 53,
+   "rank": 29,
+   "money": 985,
+   "income": 54041,
+   "buildings": 132
+  },
+  {
+   "day": 54,
+   "rank": 29,
+   "money": 12285,
+   "income": 39153,
+   "buildings": 133
+  },
+  {
+   "day": 55,
+   "rank": 29,
+   "money": 34923,
+   "income": 34887,
+   "buildings": 133
+  },
+  {
+   "day": 56,
+   "rank": 30,
+   "money": 15445,
+   "income": 62230,
+   "buildings": 138
+  },
+  {
+   "day": 57,
+   "rank": 31,
+   "money": 7396,
+   "income": 73068,
+   "buildings": 139
+  },
+  {
+   "day": 58,
+   "rank": 31,
+   "money": 52426,
+   "income": 62332,
+   "buildings": 139
+  },
+  {
+   "day": 59,
+   "rank": 32,
+   "money": 20990,
+   "income": 44344,
+   "buildings": 139,
+   "partial": true
+  }
+ ]
+}

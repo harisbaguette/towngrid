@@ -8,10 +8,11 @@ export const VEHICLE_ANCHORS = {cargoTrainEmpty:[.5,140/192]};
 // A water shipment is carried to the shore over land. Its boat must never drive
 // through fields; old saves without a vehicle are horse-drawn wagons.
 export function shipmentVehicle(sh,sim,pose){
+ if(['rail','plane'].includes(sh.vehicle))return sim.layout?.ecology==='snow'?'sled':'truck';
  const kind=sh.waterVehicle||(sh.vehicle==='van'?'truck':sh.vehicle)||'wagon';
  const afloat=sim.tile(Math.round(pose.x),Math.round(pose.z))?.terrain==='water';
  if(kind==='truck'&&sim.layout?.ecology==='snow')return 'sled';
- return (kind==='raft'||kind==='steamer')&&!afloat?(kind==='raft'?'wagon':'truck'):kind;
+ return (['raft','steamer','ship'].includes(kind))&&!afloat?(kind==='raft'?'wagon':'truck'):kind;
 }
 export const shipmentLoaded=sh=>sh.kind==='import'?sh.phase==='back':sh.phase==='out';
 export const PORT_VEHICLES={dock:'fishingBoat',ferrydock:'cargoFerry',canaldock:'cargoFerry',streamdock:'cargoFerry',polarferry:'cargoFerry',riverport:'cargoSteamer',lakeport:'cargoSteamer',coastport:'cargoShip',polarport:'cargoShip'};

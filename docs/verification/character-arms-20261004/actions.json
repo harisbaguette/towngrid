@@ -1,0 +1,664 @@
+[
+  {
+    "id": "ael",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6814856500876344
+  },
+  {
+    "id": "aira",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.655008651090108
+  },
+  {
+    "id": "aster",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6745853030766251
+  },
+  {
+    "id": "bel",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6176520301800985
+  },
+  {
+    "id": "borik",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6840168069841431
+  },
+  {
+    "id": "bron",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4
+    },
+    "maximumSupportPixelError": 0.0
+  },
+  {
+    "id": "cedric",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6868674872335366
+  },
+  {
+    "id": "dax",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6422955244686515
+  },
+  {
+    "id": "dew",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 8,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.0
+  },
+  {
+    "id": "dorin",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6344289079990545
+  },
+  {
+    "id": "eil",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 5,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.0
+  },
+  {
+    "id": "elion",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6851598946953626
+  },
+  {
+    "id": "elvar",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6420780030896098
+  },
+  {
+    "id": "erena",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6318304290744196
+  },
+  {
+    "id": "ethan",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6768593216819759
+  },
+  {
+    "id": "fia",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 5,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.0
+  },
+  {
+    "id": "garen",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6260155736608942
+  },
+  {
+    "id": "garron",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6625945345748856
+  },
+  {
+    "id": "grum",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.5836542349130536
+  },
+  {
+    "id": "hana",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6805990766153334
+  },
+  {
+    "id": "hugo",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6666983742403927
+  },
+  {
+    "id": "iris",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6453551030226299
+  },
+  {
+    "id": "kael",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 8,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6268953685988155
+  },
+  {
+    "id": "kai",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 8,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.0
+  },
+  {
+    "id": "lana",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 8,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.0
+  },
+  {
+    "id": "lien",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6754005441634069
+  },
+  {
+    "id": "luth",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6482518860396099
+  },
+  {
+    "id": "lyra",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6844595650067619
+  },
+  {
+    "id": "maren",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6710057580203876
+  },
+  {
+    "id": "marna",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6919991245098549
+  },
+  {
+    "id": "mira",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6751125241278373
+  },
+  {
+    "id": "mist",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 8,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.0
+  },
+  {
+    "id": "nalia",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6518828164093562
+  },
+  {
+    "id": "nara",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.655918159890112
+  },
+  {
+    "id": "neris",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.623270109786632
+  },
+  {
+    "id": "niki",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6021467202846008
+  },
+  {
+    "id": "norin",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.5916098847847785
+  },
+  {
+    "id": "oriel",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6429099260227462
+  },
+  {
+    "id": "oswin",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6558395335165264
+  },
+  {
+    "id": "otto",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6433265392935243
+  },
+  {
+    "id": "ravik",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.683467090661254
+  },
+  {
+    "id": "roa",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6658157188444643
+  },
+  {
+    "id": "rowan",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6746370274927909
+  },
+  {
+    "id": "selia",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6777233908164636
+  },
+  {
+    "id": "serin",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6696064996957536
+  },
+  {
+    "id": "silen",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.669004501293765
+  },
+  {
+    "id": "sora",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 8,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6642164311810578
+  },
+  {
+    "id": "taron",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6634307772950722
+  },
+  {
+    "id": "terin",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6731781130514263
+  },
+  {
+    "id": "vera",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6704119012302576
+  },
+  {
+    "id": "vian",
+    "views": 4,
+    "uniquePosesLastView": {
+      "idle": 2,
+      "greet": 11,
+      "hurt": 7,
+      "defeat": 16,
+      "turn": 4,
+      "attack": 11
+    },
+    "maximumSupportPixelError": 0.6380575435838612
+  }
+]

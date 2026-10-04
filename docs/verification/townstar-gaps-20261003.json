@@ -1,0 +1,135 @@
+[
+  {
+    "id": "recipe_storage_bypass",
+    "reproduced": false,
+    "result": {
+      "ok": true
+    },
+    "before": {
+      "stock": 160,
+      "capacity": 160,
+      "flour": 0,
+      "output": 3,
+      "workers": 0
+    },
+    "after": {
+      "stock": 160,
+      "capacity": 160,
+      "flour": 0,
+      "output": 0,
+      "workers": 0
+    }
+  },
+  {
+    "id": "truck_crosses_new_building",
+    "reproduced": false,
+    "obstruction": {
+      "x": 9,
+      "z": 13
+    },
+    "result": {
+      "ok": true,
+      "id": 2
+    },
+    "pose": null
+  },
+  {
+    "id": "unavailable_store_fuel",
+    "reproduced": false,
+    "reachableFuel": 0,
+    "result": {
+      "ok": false,
+      "error": "연료 부족 · 시장에서 연료를 수입하세요"
+    },
+    "before": 10,
+    "after": 10,
+    "movingUntil": 6,
+    "time": 0
+  },
+  {
+    "id": "import_over_vehicle_capacity",
+    "reproduced": false,
+    "apiOnly": true,
+    "result": {
+      "ok": false,
+      "error": "한 번에 10개까지 운송할 수 있습니다"
+    },
+    "load": 10
+  },
+  {
+    "id": "disconnected_terminal_truck",
+    "reproduced": false,
+    "before": 2,
+    "after": 1,
+    "terminalUsable": false,
+    "error": "무역로와 이어진 도로 옆에 지으세요"
+  },
+  {
+    "id": "depot_dominated",
+    "reproduced": false,
+    "warehouse": {
+      "cost": 80,
+      "materials": {
+        "wood": 6
+      },
+      "capacity": 600,
+      "tiles": 1,
+      "shade": 2,
+      "unlock": 0
+    },
+    "depot": {
+      "cost": 220,
+      "materials": {
+        "plank": 6,
+        "stone": 4
+      },
+      "capacity": 1200,
+      "tiles": 1,
+      "shade": 2,
+      "unlock": 5
+    },
+    "multipleWarehouses": true
+  },
+  {
+    "id": "resident_wages_flat",
+    "reproduced": false,
+    "before": {
+      "workers": 1,
+      "wage": 27
+    },
+    "after": {
+      "workers": 3,
+      "wage": 29
+    }
+  },
+  {
+    "id": "fuel_chain_tradeoff",
+    "reproduced": false,
+    "distillery": {
+      "cost": 160,
+      "materials": {
+        "wood": 6,
+        "stone": 4
+      },
+      "perGameMinute": 1,
+      "inputValuePerFuel": 87,
+      "power": false,
+      "unlock": 0,
+      "pollution": 0,
+      "height": 0
+    },
+    "refinery": {
+      "cost": 1000,
+      "materials": {
+        "plank": 12,
+        "stone": 12
+      },
+      "perGameMinute": 12.857142857142856,
+      "inputValuePerFuel": 19,
+      "power": true,
+      "unlock": 5,
+      "pollution": 3,
+      "height": 3
+    }
+  }
+]

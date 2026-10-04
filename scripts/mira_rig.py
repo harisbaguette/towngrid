@@ -11,6 +11,8 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageOps
 from rig_skinning import limb_layers, SKINNING_REVISION
+from character_body_motion import gait_bob, handling_pose, ease
+from character_arm_motion import reach_pose, walk_pose, handling_lowering, arm_audit, mirror_arms, grip_point, carry_center
 
 
 def clean(image):
@@ -132,61 +134,82 @@ def render(rig, action, phase, spec, crate, wrench):
     moving = action in ['walk', 'carry']
     cargo = action in ['carry', 'pickup', 'drop']
     handling = action in ['pickup', 'drop']
-    progress = 1-phase if action == 'drop' else phase
-    crouch = math.sin(math.pi*progress)*11 if handling else 0
+    handling_state = handling_pose(action, phase) if handling else None
+    crouch = handling_state['crouch']*8 if handling else 0
     # The pelvis rises over the planted leg at passing, then lowers at contact.
     # Standing straight is higher than the split-stance walking contact pose.
-    bob = -round(1.8*math.sin(phase*2*math.pi)**2) if moving else -3+(round(math.sin(phase*math.pi)**2) if action == 'idle' else 0)
+    bob = gait_bob(phase) if moving else -3+(round(math.sin(phase*math.pi)**2) if action == 'idle' else 0)
+    if moving and rig.get('contactView') is None:
+        bob=-round(1.8*math.sin(phase*math.tau)**2)
     offset = np.array([0., bob+crouch])
-    leg_layers, arm_layers, audit = [], [], []
+    reaction=np.array(rig.get('reactionOffset',[0.,0.]))
+    offset+=reaction
+    if action=='work' and rig.get('contactView') is not None:
+        from profession_motion import body_offset
+        offset+=body_offset('labor',phase,f)
+    crate_center = np.array([64., spec['baseline']-47.])+f*13+offset
+    if cargo:crate_center=carry_center(rig['arms'],offset,crate_center,crate.width)
+    if handling:
+        standing=np.array([0.,-3])+reaction
+        crate_center=carry_center(rig['arms'],standing,np.array([64.,spec['baseline']-47.])+f*13+standing,crate.width)
+        crate_center[1]+=(1-handling_state['lift'])*23
+        offset[1]+=handling_lowering(rig['arms'],offset,crate_center,crate.width,handling_state['reach'])
+    leg_layers, arm_layers, audit, arm_details = [], [], [], []
     for index, limb in enumerate(rig['legs']):
         a, b, c = limb['joints']
-        (root,knee,end),foot = leg_pose(rig,index,phase,moving,offset,spec)
-        leg_layers.append(limb_layers(limb,root,knee,end))
+        if rig.get('contactView') is not None:
+            from cast_locomotion import contact_legs
+            (root,knee,end),foot = contact_legs(rig,phase,moving,offset,spec)[index]
+            foot['ankle']=end.tolist()
+            foot['hip']=root.tolist();foot['knee']=knee.tolist()
+        else:
+            (root,knee,end),foot = leg_pose(rig,index,phase,moving,offset,spec)
+        leg_layers.append(limb_layers(limb,root,knee,end,foot.get('footMatrix')))
         audit.append(foot)
-    crate_center = np.array([64., spec['baseline']-47.])+f*13+(offset if not handling else 0)
-    if handling:
-        lift = max(0, (progress-.3)/.7)
-        crate_center += [0, (1-lift)*29]
     for index, limb in enumerate(rig['arms']):
         a,b,c = limb['joints']
         root = a+offset
         # Close the A pose into a natural rest position before adding arm swing.
         end = c + [-4 if c[0] > 64 else 4, -1]+offset
-        if moving and not cargo:
-            swing = math.cos(2*math.pi*(phase+(1-index)*.5))
-            arm_length=np.linalg.norm(b-a)+np.linalg.norm(c-b)
-            end=root+[0,arm_length*.92]+f*swing*4
         if cargo:
-            grip = crate_center+([-crate.width/2+2, -5] if root[0] < 64 else [crate.width/2-2, -3])
-            reach = min(1,progress*3) if handling else 1
+            grip = grip_point(limb,rig['arms'],crate_center,crate.width)
+            reach = handling_state['reach'] if handling else 1
             end = end*(1-reach)+grip*reach
         elif action in ['work', 'attack'] and index == 1:
-            stroke = (.5-.5*math.cos(phase*2*math.pi))
+            from profession_motion import work_stroke
+            stroke = work_stroke(phase)
             end = root+f*(8+10*stroke)+[0, -17+28*stroke]
         elif action == 'greet' and index == 1:
-            raise_amount = math.sin(math.pi*phase)**.4
+            raise_amount = ease(phase/.3)*(1-ease((phase-.72)/.28))
             end = end*(1-raise_amount)+(root+[7*math.sin(phase*math.pi*6), -16])*raise_amount
-        lengths = [np.linalg.norm(b-a), np.linalg.norm(c-b)]
-        elbow = joint(root,end,lengths,-f)
+        pose=walk_pose(limb,root,f,phase,index) if moving and not cargo else reach_pose(limb,root,end,-f)
+        root,elbow,end=pose
+        arm_details.append(arm_audit(limb,pose))
+        if cargo:arm_details[-1]['grip']=grip.tolist()
         arm_layers.append((*limb_layers(limb,root,elbow,end),end))
     # Far limbs, legs, torso, carried object, then near arm: consistent occlusion.
     for img in arm_layers[0][:2]: layer.alpha_composite(img)
     for pair in leg_layers:
         for img in pair: layer.alpha_composite(img)
-    if cargo and f[1] < 0:
+    show_cargo = cargo and (not handling or handling_state['visible'])
+    if show_cargo and f[1] < 0:
         layer.alpha_composite(crate, (round(crate_center[0]-crate.width/2), round(crate_center[1]-crate.height/2)))
     layer.alpha_composite(move(rig['core'],offset))
-    if cargo and f[1] > 0:
+    if show_cargo and f[1] > 0:
         layer.alpha_composite(crate, (round(crate_center[0]-crate.width/2), round(crate_center[1]-crate.height/2)))
         layer.alpha_composite(arm_layers[0][1])
     for img in arm_layers[1][:2]: layer.alpha_composite(img)
     if action in ['work','attack']:
         hand = arm_layers[1][2]
-        angle = -25+90*(.5-.5*math.cos(phase*2*math.pi))
+        from profession_motion import work_stroke
+        angle = -25+90*work_stroke(phase)
         tool = wrench.rotate(angle, Image.Resampling.NEAREST, expand=True)
         layer.alpha_composite(tool, (round(hand[0]-tool.width/2), round(hand[1]-tool.height*.75)))
-    return layer, {'coreOffset': offset.tolist(), 'feet': audit}
+    details = {'coreOffset': offset.tolist(), 'feet': audit, 'arms': arm_details}
+    if cargo:details.update(cargoCenter=crate_center.tolist(),cargoSize=list(crate.size))
+    if handling:
+        details.update(handling=handling_state, cargoCenter=crate_center.tolist())
+    return layer, details
 
 
 def pack_mira_rig(spec_path, output):
@@ -223,6 +246,8 @@ def pack_mira_rig(spec_path, output):
                 tile, audit = render(rig,action,phase,spec,crate,wrench)
                 if mirrored:
                     tile = ImageOps.mirror(tile)
+                    mirror_arms(audit)
+                    if 'cargoCenter' in audit:audit['cargoCenter'][0]=128-audit['cargoCenter'][0]
                     for foot in audit['feet']: foot['ankle'][0] = cell-foot['ankle'][0]
                 atlas.alpha_composite(tile,(col*cell,row*cell))
                 row_audit.append({'action':action,'phase':phase,**audit})
@@ -244,12 +269,21 @@ def pack_mira_rig(spec_path, output):
                 'gait':spec['gait'],'rigAudit':audits,'limitations':['Mirrored opposite views','Attack shares tool-work motion','No dedicated injury/death artwork']}
     from character_actions import append_actions
     atlas,metadata=append_actions(atlas,metadata,rigs,{**spec,'kind':'biped'})
+    if spec.get('contactMotion'):
+        from cast_locomotion import apply_contact_motion
+        atlas,metadata=apply_contact_motion(atlas,metadata,rigs,spec,render,crate,wrench)
+        from character_body_motion import install_handling
+        atlas,metadata=install_handling(atlas,metadata,rigs,spec,render,crate,wrench)
+    from character_action_finish import install_action_finish
+    atlas,metadata=install_action_finish(atlas,metadata,rigs,spec,render,crate,wrench)
     atlas.save(target/'sprites.png',optimize=True)
     (target/'frames.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     proof = []
     for col in clips['walk']['frames']:
         panel=Image.new('RGBA',(cell*4,cell),'#dce9e6')
-        for row in range(4): panel.alpha_composite(atlas.crop((col*cell,row*cell,(col+1)*cell,(row+1)*cell)),(row*cell,0))
+        for row in range(4):
+            columns=metadata.get('atlasColumns',len(metadata['columns']));x=col%columns*cell;y=(row+(col//columns)*4)*cell
+            panel.alpha_composite(atlas.crop((x,y,x+cell,y+cell)),(row*cell,0))
         proof.append(panel.convert('RGB').resize((1024,256),Image.Resampling.NEAREST))
     proof[0].save(target/'walk-preview.gif',save_all=True,append_images=proof[1:],duration=round(1000/clips['walk']['fps']),loop=0)
     return metadata
@@ -264,4 +298,4 @@ if __name__ == '__main__':
     output=Path(args.output)
     catalog=[json.loads(path.read_text(encoding='utf-8')) for path in sorted(output.glob('*/frames.json'))]
     (output/'catalog.json').write_text(json.dumps(catalog,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print(f"Mira: {meta['frames']} cells, fixed body textures, 12-frame alternating walking/carrying.")
+    print(f"Mira: {meta['frames']} cells, fixed body textures, {len(meta['clips']['walk']['frames'])}-frame alternating walking/carrying.")

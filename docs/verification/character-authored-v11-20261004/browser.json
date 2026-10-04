@@ -1,0 +1,66 @@
+{
+  "count": 8,
+  "views": [
+    {
+      "action": "walk",
+      "direction": "SW",
+      "distinct": 8,
+      "expected": 8
+    },
+    {
+      "action": "walk",
+      "direction": "NW",
+      "distinct": 8,
+      "expected": 8
+    },
+    {
+      "action": "walk",
+      "direction": "NE",
+      "distinct": 8,
+      "expected": 8
+    },
+    {
+      "action": "walk",
+      "direction": "SE",
+      "distinct": 8,
+      "expected": 8
+    },
+    {
+      "action": "carry",
+      "direction": "SW",
+      "distinct": 8,
+      "expected": 8
+    },
+    {
+      "action": "carry",
+      "direction": "NW",
+      "distinct": 8,
+      "expected": 8
+    },
+    {
+      "action": "carry",
+      "direction": "NE",
+      "distinct": 8,
+      "expected": 8
+    },
+    {
+      "action": "carry",
+      "direction": "SE",
+      "distinct": 8,
+      "expected": 8
+    }
+  ],
+  "method": "whole-authored-cels-uniform-registration",
+  "runtimeSource": "art-source/pixel-characters/prototypes/mira-v3/runtime-pack.json",
+  "notice": "오른쪽은 새로 그린 걷기·운반 초안입니다. 팔의 반대 운동·디딤·자세 연결이 미완성이며, 게임 적용 전 검수 중입니다.",
+  "retiredRequests": [],
+  "errors": [],
+  "runtimeHashes": {
+    "public/assets/pixel-characters/mira/sprites.png": "0af4dd97322d429e861873cc70947d7405abfce8db5b953649ac6bde29eb4be0",
+    "public/assets/pixel-characters/mira/frames.json": "5877bada9f4447c1470915cc2ae0e3bda7d238fdf58ab5997545668e6c2a9e9e",
+    "public/assets/pixel-characters/mira/portrait.png": "f9b3841454a422c4df3f97aa7cd21bdde3781a95da599a3ccc18cbc482698fc1"
+  },
+  "runtimePreserved": true,
+  "mobile": "passed",
+  "reducedMotion": "passed"
+}

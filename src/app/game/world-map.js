@@ -1,12 +1,11 @@
 // The drawn world of Irdea: one big grid, one character per square. Each square is one 24×24 site
 // map, and the square beside it decides what that side of the site map is (world-grid.js). The map is
-// shaped for play, not copied from a globe: no open ocean, but a closed basin — frozen north, a
-// mountain wall west and east, red desert south — around the trefoil Glass Sea. Each lobe of the sea
-// faces one overlord realm; the playable nations sit in the green ring around it and the hostile ones
-// on the harsh rim, where the ice, desert and mountain industries are.
+// shaped for play, not copied from a globe. Waterways and impassable cells anchor saved sites.
+// mixedLandcover distributes woodland, meadow and dry/cold pockets within that fixed topology.
 //   ~ sea   ^ mountain   f forest   d desert   * ice   . plain
 //   1–6 lakes   A B D E G rivers   K M N canals   a b c e g h j k streams   (WATERWAY_CHARS)
-export const WORLD_MAP=[
+import {mixedLandcover} from './world-landcover.js';
+const BASE_WORLD_MAP=[
  '^^^^**************~~~~~~~~~~~~~*************^^^^^^',
  '^^^^**************~~~~~~~~~~~~~****B********^*^^^^',
  '^^^^***************~~~~~~~~~~~*****B************^^',
@@ -39,6 +38,7 @@ export const WORLD_MAP=[
  'dddddddddddddddddddd^dddddddddddddddddd~~~~....~~~',
  'ddddddddddddddddddddddddddddddddddddddd~~~~~~~~~~~'
 ];
+export const WORLD_MAP=mixedLandcover(BASE_WORLD_MAP);
 /** Waterways drawn on the map. A river, canal or stream is a chain of squares traced from `from`. */
 export const WATERWAY_CHARS={
  A:{id:'river-eungyeol',kind:'river',name:'은결강',from:[3,14]},

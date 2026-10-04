@@ -2,6 +2,17 @@
 const distances = new WeakMap();
 export const characterDistance = actor => distances.get(actor) || 0;
 
+// Shared with the animation preview, so road/upgrade speeds are not hidden by
+// a slower presentation-only walk. This does not alter simulation timing.
+export function characterTravelSpeed(sim, actor) {
+ const tile = `${Math.round(actor.x)},${Math.round(actor.z)}`;
+ const surface = sim.paved?.has(tile) ? 2.2 : sim.roads.has(tile) ? 1.7 : 1;
+ return 1.25 * (actor.race === 'centaur' ? 1.15 : 1)
+  * (sim.time < sim.strikeUntil ? .55 : 1) * surface
+  * (sim.horse ? 1.35 : 1) * (sim.automatic ? 1.65 : 1)
+  * (1 - (sim.health?.infection || 0) * .005) * (sim.money < 0 ? .65 : 1);
+}
+
 // Spend the whole movement budget along the route, including around corners.
 // A waypoint is removed only after reaching it, never by a proximity shortcut.
 export function advanceCharacterRoute(actor, dt, speed, canEnter = () => true) {

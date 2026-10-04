@@ -1,0 +1,37 @@
+{
+  "checklistItems": 10,
+  "regression": true,
+  "typecheck": true,
+  "build": true,
+  "balance": "C1-C15 PASS",
+  "campaign": "A1-A5 PASS",
+  "completedDay": 57,
+  "inventoryStress": {
+    "gameSeconds": 900,
+    "actions": 130,
+    "unexplained": 0
+  },
+  "industryTrials": {
+    "bread": {
+      "delivered": 103,
+      "elapsed": 384.5
+    },
+    "cloth": {
+      "delivered": 62,
+      "elapsed": 243.75
+    },
+    "steel": {
+      "delivered": 60,
+      "elapsed": 555.25
+    }
+  },
+  "remaining": {
+    "guidePacing": {
+      "softTargetDays": 30,
+      "estern": 42.65,
+      "silvaen": 24.03,
+      "kardum": 36.9
+    },
+    "onlineLeaderboard": false
+  }
+}

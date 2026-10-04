@@ -1,11 +1,16 @@
 import {Simulation,RESOURCES} from './simulation.js';
 import {layoutOf} from './world-grid.js';
+import {WORLD_PLOTS,PLOT_INDEX} from './territory.js';
 
 // These are real province layouts, including the very same four neighbours as the atlas.
-export const BIOME_EXAMPLES={snow:'kardum-1',meadow:'estern-0',forest:'silvaen-1',basin:'kardum-0',desert:'torvik-3',coast:'rivente-0',marsh:'miel-4',volcanic:'elune-0'};
+const preferred={snow:'kardum-1',meadow:'estern-0',forest:'silvaen-1',basin:'kardum-0',desert:'torvik-3',coast:'rivente-0',marsh:'miel-4',volcanic:'elune-0'};
+export const BIOME_EXAMPLES=Object.fromEntries(Object.entries(preferred).map(([biome,id])=>{
+ const score=p=>{const e=Object.values(layoutOf(p.id).edges);return (p.id===id?-1:0)+(biome==='meadow'?e.filter(t=>t==='forest').length*10:biome==='desert'&&!e.some(t=>['river','lake','stream','canal'].includes(t))?100:0);};
+ return [biome,WORLD_PLOTS.filter(p=>layoutOf(p.id).ecology===biome).sort((a,b)=>score(a)-score(b))[0].id];
+}));
 export function biomePreview(id='meadow'){
  const land=structuredClone(layoutOf(Object.hasOwn(BIOME_EXAMPLES,id)?BIOME_EXAMPLES[id]:BIOME_EXAMPLES.meadow));
- const sim=new Simulation('river',null,{land,nation:land.province.split('-')[0],race:'human'});
+ const sim=new Simulation('river',null,{land,nation:PLOT_INDEX.get(land.province)?.nation||'estern',race:'human'});
  sim.paused=true;sim.rank=32;sim.money=1e6;sim.debt=0;sim.nextEvent=1e9;
  for(const r of Object.keys(RESOURCES))sim.stock[r]=150;
  for(const t of sim.tiles)sim.owned.add(t.x+','+t.z);

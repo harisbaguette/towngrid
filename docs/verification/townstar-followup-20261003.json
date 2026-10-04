@@ -1,0 +1,96 @@
+[
+  {
+    "id": "partial_contract_requires_whole_order",
+    "reproduced": false,
+    "contract": {
+      "item": "grain",
+      "amount": 14,
+      "reward": 151
+    },
+    "load": 10,
+    "stock": 0,
+    "result": {
+      "ok": true,
+      "amount": 10,
+      "reward": 108
+    }
+  },
+  {
+    "id": "freight_withdraws_from_moving_store",
+    "reproduced": false,
+    "before": 20,
+    "after": 20,
+    "exportableBefore": 2,
+    "cargo": 0,
+    "time": 0,
+    "movingUntil": 6
+  },
+  {
+    "id": "cancel_haul_teleports_into_full_store",
+    "reproduced": false,
+    "amount": 3,
+    "position": {
+      "x": 9.09375,
+      "z": 11
+    },
+    "store": {
+      "x": 7,
+      "z": 11
+    },
+    "before": {
+      "used": 160,
+      "wood": 7
+    },
+    "after": {
+      "used": 160,
+      "capacity": 160,
+      "wood": 7
+    },
+    "task": {
+      "kind": "return",
+      "building": 0,
+      "item": "wood",
+      "amount": 3,
+      "carried": true
+    }
+  },
+  {
+    "id": "import_button_ignores_per_store_space",
+    "reproduced": false,
+    "totalFree": 7,
+    "storeFree": [
+      3,
+      4
+    ],
+    "quantity": 5,
+    "buttonReason": "수입품을 받을 연결된 창고의 공간이 부족합니다",
+    "result": {
+      "ok": false,
+      "error": "수입품을 받을 연결된 창고의 공간이 부족합니다"
+    }
+  },
+  {
+    "id": "depot_description_wrong",
+    "reproduced": false,
+    "description": "상품 {capacity}개를 보관합니다. 생산 시설 가까이에 두면 주민 운반 거리가 줄어듭니다.",
+    "actual": 1200
+  },
+  {
+    "id": "far_destination_no_price_incentive",
+    "reproduced": false,
+    "near": {
+      "name": "엘레실 수도권",
+      "distance": 9,
+      "fuel": 1,
+      "duration": 6,
+      "revenue": 398
+    },
+    "far": {
+      "name": "세르칸 마을",
+      "distance": 48,
+      "fuel": 4,
+      "duration": 23,
+      "revenue": 517
+    }
+  }
+]

@@ -25,7 +25,7 @@ const multi=Object.keys(BUILDINGS).filter(t=>BUILDINGS[t].recipes?.length>1);ass
  const carried=r=>s.workers.reduce((n,w)=>n+(w.task?.carried&&w.task.item===r?w.task.amount:0),0);
  const before=Object.fromEntries(['flour','water','wood','bread'].map(r=>[r,s.stock[r]+(b.inputs[r]||0)+(b.batch[r]||0)+(r==='bread'?b.out:0)+carried(r)]));
  s.rank=7;assert.ok(s.setRecipe(b.id,'cake').ok);assert.equal(b.progress,0);assert.equal(b.out,0);assert.equal(b.batch,undefined);
- for(const r of ['water','wood','bread','flour'])assert.equal(s.stock[r]+(b.inputs[r]||0)+carried(r),before[r],r+' is kept (carried loads return to the warehouse)');
+ for(const r of ['water','wood','bread','flour'])assert.equal(s.stock[r]+(b.inputs[r]||0)+(b.returnStock?.[r]||0)+carried(r),before[r],r+' is kept at the facility until hauled');
  assert.equal(b.inputs.water,undefined,'inputs the cake does not use leave the bakery');
  const cakes=s.produced.cake||0;run(s,60);assert.ok((s.produced.cake||0)>cakes,'the bakery bakes cakes');assert.ok(s.workers.every(w=>!w.task||w.task.targetId!==b.id||['flour','egg'].includes(w.task.item)),'residents haul only cake ingredients to it');
  // The choice is saved; an unknown product id in a save is refused; a save without a choice uses the first product.
@@ -61,7 +61,7 @@ const multi=Object.keys(BUILDINGS).filter(t=>BUILDINGS[t].recipes?.length>1);ass
  s.stock.fuel=10;assert.ok(s.sell('wood',1).ok);s.rank=14;const lot=s.tradeConnection().capacity,r=s.sell('wood',200);assert.ok(r.ok);
  const truck=s.shipments.at(-1);assert.equal(truck.vehicle,'truck');assert.equal(truck.amount,lot*VEHICLES.truck.load);assert.equal(s.stock.fuel,10-2*s.exportStatus().fuelPerTrip);
  s.stock.fuel=5;s.reserves.fuel=5;assert.equal(s.sell('wood',5).ok,false,'reserved fuel is not burned');
- const race=town('highland');race.rank=14;race.stock.wood=100;race.stock.fuel=10;race.reserves.fuel=0;race.sell('wood',1);race.sell('wood',1);
+ const race=town('highland');race.stock.wood=100;race.stock.fuel=10;race.reserves.fuel=0;race.sell('wood',1);race.rank=14;race.sell('wood',1);
  const legs={};for(let i=0;i<400&&Object.keys(legs).length<2;i++){race.tick(.25);for(const v of race.shipments)if(v.phase==='back'&&!legs[v.vehicle])legs[v.vehicle]=race.time;}assert.ok(legs.truck<legs.van);
  assert.equal(decodeSave(encodeSave(s.save())).shipments.filter(v=>v.vehicle==='truck').length,1);}
 

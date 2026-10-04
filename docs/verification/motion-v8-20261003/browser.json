@@ -1,0 +1,212 @@
+{
+  "characters": [
+    {
+      "id": "mira",
+      "cases": 48
+    },
+    {
+      "id": "rowan",
+      "cases": 48
+    },
+    {
+      "id": "hana",
+      "cases": 48
+    },
+    {
+      "id": "ethan",
+      "cases": 48
+    },
+    {
+      "id": "vera",
+      "cases": 48
+    },
+    {
+      "id": "nara",
+      "cases": 48
+    },
+    {
+      "id": "garron",
+      "cases": 48
+    },
+    {
+      "id": "maren",
+      "cases": 48
+    },
+    {
+      "id": "roa",
+      "cases": 48
+    },
+    {
+      "id": "cedric",
+      "cases": 48
+    },
+    {
+      "id": "bel",
+      "cases": 48
+    },
+    {
+      "id": "oswin",
+      "cases": 48
+    },
+    {
+      "id": "dax",
+      "cases": 48
+    },
+    {
+      "id": "hugo",
+      "cases": 48
+    },
+    {
+      "id": "iris",
+      "cases": 48
+    },
+    {
+      "id": "garen",
+      "cases": 48
+    },
+    {
+      "id": "marna",
+      "cases": 48
+    },
+    {
+      "id": "bron",
+      "cases": 48
+    },
+    {
+      "id": "dorin",
+      "cases": 48
+    },
+    {
+      "id": "borik",
+      "cases": 48
+    },
+    {
+      "id": "otto",
+      "cases": 48
+    },
+    {
+      "id": "taron",
+      "cases": 48
+    },
+    {
+      "id": "silen",
+      "cases": 48
+    },
+    {
+      "id": "ael",
+      "cases": 48
+    },
+    {
+      "id": "lien",
+      "cases": 48
+    },
+    {
+      "id": "elion",
+      "cases": 48
+    },
+    {
+      "id": "elvar",
+      "cases": 48
+    },
+    {
+      "id": "serin",
+      "cases": 48
+    },
+    {
+      "id": "lyra",
+      "cases": 48
+    },
+    {
+      "id": "oriel",
+      "cases": 48
+    },
+    {
+      "id": "nalia",
+      "cases": 48
+    },
+    {
+      "id": "vian",
+      "cases": 48
+    },
+    {
+      "id": "erena",
+      "cases": 48
+    },
+    {
+      "id": "norin",
+      "cases": 48
+    },
+    {
+      "id": "selia",
+      "cases": 48
+    },
+    {
+      "id": "luth",
+      "cases": 48
+    },
+    {
+      "id": "aira",
+      "cases": 48
+    },
+    {
+      "id": "aster",
+      "cases": 48
+    },
+    {
+      "id": "terin",
+      "cases": 48
+    },
+    {
+      "id": "dew",
+      "cases": 48
+    },
+    {
+      "id": "mist",
+      "cases": 48
+    },
+    {
+      "id": "lana",
+      "cases": 48
+    },
+    {
+      "id": "kai",
+      "cases": 48
+    },
+    {
+      "id": "fia",
+      "cases": 48
+    },
+    {
+      "id": "eil",
+      "cases": 48
+    },
+    {
+      "id": "ravik",
+      "cases": 48
+    },
+    {
+      "id": "grum",
+      "cases": 48
+    },
+    {
+      "id": "niki",
+      "cases": 48
+    },
+    {
+      "id": "sora",
+      "cases": 48
+    },
+    {
+      "id": "kael",
+      "cases": 48
+    },
+    {
+      "id": "neris",
+      "cases": 48
+    }
+  ],
+  "frames": 36656,
+  "floorClippedPixels": 0,
+  "cpuCrops": 36656,
+  "errors": []
+}

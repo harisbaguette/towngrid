@@ -1,0 +1,256 @@
+{
+ "result": "PASS",
+ "screens": [
+  {
+   "name": "title-1440x900",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 2
+  },
+  {
+   "name": "home-1440x900",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 7
+  },
+  {
+   "name": "extras-1440x900",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 11
+  },
+  {
+   "name": "gallery-1440x900",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 20
+  },
+  {
+   "name": "loading-1440x900",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 0
+  },
+  {
+   "name": "recovery-1440x900",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 2
+  },
+  {
+   "name": "title-1920x1080",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 2
+  },
+  {
+   "name": "home-1920x1080",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 7
+  },
+  {
+   "name": "extras-1920x1080",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 11
+  },
+  {
+   "name": "gallery-1920x1080",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 24
+  },
+  {
+   "name": "loading-1920x1080",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 0
+  },
+  {
+   "name": "recovery-1920x1080",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 2
+  },
+  {
+   "name": "title-390x844",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 2
+  },
+  {
+   "name": "home-390x844",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 7
+  },
+  {
+   "name": "extras-390x844",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 11
+  },
+  {
+   "name": "gallery-390x844",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 12
+  },
+  {
+   "name": "loading-390x844",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 0
+  },
+  {
+   "name": "recovery-390x844",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 2
+  },
+  {
+   "name": "title-360x800",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 2
+  },
+  {
+   "name": "home-360x800",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 7
+  },
+  {
+   "name": "extras-360x800",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 11
+  },
+  {
+   "name": "gallery-360x800",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 11
+  },
+  {
+   "name": "loading-360x800",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 0
+  },
+  {
+   "name": "recovery-360x800",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 2
+  },
+  {
+   "name": "title-844x390",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 2
+  },
+  {
+   "name": "home-844x390",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 7
+  },
+  {
+   "name": "extras-844x390",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 7
+  },
+  {
+   "name": "gallery-844x390",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 18
+  },
+  {
+   "name": "loading-844x390",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 0
+  },
+  {
+   "name": "recovery-844x390",
+   "overflow": false,
+   "covered": [],
+   "tiny": [],
+   "unskinned": [],
+   "count": 2
+  }
+ ],
+ "checks": [
+  "Five viewport sizes, title keyboard entry, primary-first home, folded extras, gallery, indeterminate loading, recovery focus loop and retry",
+  "Actual WebGL loss while a modal is open, paused simulation, focused recovery, valid campaign download, context restoration and home navigation",
+  "Renderer initialization failure displays branded error and retry; no export offered before a campaign exists"
+ ],
+ "browser": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

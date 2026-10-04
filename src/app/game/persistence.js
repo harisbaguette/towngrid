@@ -1,3 +1,6 @@
+import {trialRule} from './industry-trials.js';
+import {validRivalEconomy} from './rival-economy.js';
+import {validReplay} from './trial-replay.js';
 import {PROVINCES,PLOT_INDEX,plotBelongsTo} from './territory.js';
 import {BUILDINGS,RESOURCES,N,homeCapacity,unpackTiles,GOOD_EVENTS} from './simulation.js';
 import {NATIONS,RANKS,RACES} from './world.js';
@@ -23,14 +26,16 @@ const PROVINCE=new Map(PROVINCES.map(p=>[p.id,p]));
 const provinceRef=id=>typeof id==='string'&&PROVINCE.has(id);
 const charter=v=>v===undefined||v===null||['industry','commons','trade'].includes(v);
 // The open lord's order kept until delivered (simulation.js contractItem, G1-E4): its number and item.
-const order=o=>o===undefined||record(o)&&Number.isInteger(o.n)&&o.n>=0&&ref(RESOURCES,o.item);
+const order=o=>{if(o===undefined)return true;if(!record(o)||!Number.isInteger(o.n)||o.n<0||!ref(RESOURCES,o.item))return false;const price=RESOURCES[o.item].price,full=o.item==='airship'?1:price>=1000?2:price>=150?6:12+Math.min(o.n*2,16),total=o.n===0?Math.ceil(full/2):full;return (o.rewardPaid===undefined||number(o.rewardPaid,0,total*price*1.35))&&(o.delivered===undefined||Number.isInteger(o.delivered)&&o.delivered>=0&&o.delivered<total);};
 // The family rescue: the campaign's copy is used as is (shared), a site's copy is merged over defaults (simulation.js MERGED).
 const rescue=(q,whole)=>{if(!record(q)||!Number.isInteger(q.step)||!number(q.step,0,5)||!number(whole?q.remaining:q.remaining??0,0,100)||![undefined,null,'river','checkpoint'].includes(q.route))fail();};
 // Moving characters (residents, guards, attackers): the fields their walk, work and fight read every step.
-function actor(w){numericFields(w,['dir','think','lastAttack','attackAt','handlingTime','moveSpeed','stepDistance','idleFor','hitUntil','target','targetId'],-1e12);flags(w,['walking','attacking','guard','enemy','atHome']);
+function actor(w){numericFields(w,['dir','think','lastAttack','attackAt','handlingTime','moveSpeed','stepDistance','idleFor','hitUntil','target','targetId'],-1e12);flags(w,['walking','attacking','guard','enemy','atHome','retiring']);
  for(const k of ['phase','name','appearance','gender'])if(w[k]!==undefined&&!label(w[k],100))fail();if(![undefined,null,'pickup','drop'].includes(w.handling)||w.id!==undefined&&!Number.isInteger(w.id))fail();}
+function storageRules(r){if(r===undefined)return;if(!record(r))fail();for(const [item,v]of Object.entries(r))if(!ref(RESOURCES,item)||!record(v)||v.limit!==undefined&&(!Number.isInteger(v.limit)||!number(v.limit,0,100000))||v.reserve!==undefined&&(!Number.isInteger(v.reserve)||!number(v.reserve,0,100000))||(v.reserve||0)>(v.limit??100000))fail();}
 function validateSimulation(s){
- if(!s||![1,2,3,4,5,6,7,8,9].includes(s.version)||!ref(NATIONS,s.nation||'estern')||!number(s.time)||!number(s.money,-1e12)||!number(s.debt)||!s.stock||!Array.isArray(s.buildings)||s.buildings.length>N*N||!Array.isArray(s.owned)||s.owned.length>N*N||!s.owned.every(point))fail();
+ if(!s||![1,2,3,4,5,6,7,8,9,10].includes(s.version)||!ref(NATIONS,s.nation||'estern')||!number(s.time)||!number(s.money,-1e12)||!number(s.debt)||!s.stock||!Array.isArray(s.buildings)||s.buildings.length>N*N||!Array.isArray(s.owned)||s.owned.length>N*N||!s.owned.every(point))fail();
+ storageRules(s.starterStorageRules);for(const b of s.buildings)storageRules(b.storageRules);
  resourceMap(s.stock);if(s.produced)resourceMap(s.produced);if(s.sold)resourceMap(s.sold);if(s.reserves)resourceMap(s.reserves);
  if(!charter(s.charter)||!order(s.contractOrder))fail();
  // Objects merged over the defaults on load (simulation.js MERGED) must be objects: a number or text there replaces the
@@ -53,8 +58,8 @@ function validateSimulation(s){
  const ids=new Set(),occupied=new Set();
  for(const b of s.buildings){if(!ref(BUILDINGS,b.type)||!Number.isInteger(b.id)||ids.has(b.id)||!Number.isInteger(b.x)||!Number.isInteger(b.z)||b.x<0||b.x>=N||b.z<0||b.z>=N||!number(b.health,0,100)||!number(b.out)||!number(b.progress,0,1.01)||!b.inputs)fail();ids.add(b.id);const k=`${b.x},${b.z}`;if(occupied.has(k))fail();occupied.add(k);for(const[r,n]of Object.entries(b.inputs))if(!ref(RESOURCES,r)||!number(n))fail();}
  // A chosen product must be one of the facility's recipes; the running batch lists real resources.
- for(const b of s.buildings){if(b.recipe!==undefined&&!BUILDINGS[b.type].recipes?.some(r=>r.id===b.recipe))fail();if(b.batch!==undefined)resourceMap(b.batch);}
- for(const b of s.buildings){if(b.level!==undefined&&(!Number.isInteger(b.level)||b.level<1||b.level>3))fail();if(b.race&&!ref(RACES,b.race))fail();numericFields(b,['activeUntil','age','animationTime','cycles','refundUntil','movingUntil','clearing']);numericFields(b,['priority'],0,2);flags(b,['enabled','working','specialized','armorUsed','drain']);if(b.status!==undefined&&!label(b.status,300))fail();
+ for(const b of s.buildings){if(b.recipe!==undefined&&!BUILDINGS[b.type].recipes?.some(r=>r.id===b.recipe))fail();if(b.batch!==undefined)resourceMap(b.batch);if(b.returnStock!==undefined)resourceMap(b.returnStock);}
+ for(const b of s.buildings){if(b.charge!==undefined&&(!number(b.charge,0,90)||b.type!=='battery'))fail();if(b.processStage!==undefined&&![0,1].includes(b.processStage))fail();if(b.level!==undefined&&(!Number.isInteger(b.level)||b.level<1||b.level>3))fail();if(b.race&&!ref(RACES,b.race))fail();numericFields(b,['activeUntil','age','animationTime','cycles','refundUntil','movingUntil','clearing']);numericFields(b,['priority'],0,2);flags(b,['enabled','working','specialized','armorUsed','drain']);if(b.status!==undefined&&!label(b.status,300))fail();
   // What a paid build cleared from its tile, put back if it is cancelled in full (simulation.js build / demolish).
   const c=b.cleared;if(c!==undefined&&(!record(c)||!['tree','rock','sapling'].includes(c.nature)||!number(c.remaining,-100,1e6)||c.growAt!==undefined&&!number(c.growAt)))fail();}
  if(s.storageVersion!==undefined){
@@ -65,16 +70,22 @@ function validateSimulation(s){
  }
  if(s.nextId!==undefined&&(!Number.isInteger(s.nextId)||[...ids].some(id=>id>=s.nextId)))fail();
  for(const key of ['roads','rails','paved','pipes','conveyors','soldLand'])if(s[key]&&(!Array.isArray(s[key])||!s[key].every(point)))fail();
- if(s.shipments!==undefined&&(!Array.isArray(s.shipments)||s.shipments.length>MAX_EXPORT_CARTS))fail();for(const sh of s.shipments||[]){if(!sh||!Number.isInteger(sh.id)||!ref(RESOURCES,sh.item)||!Number.isInteger(sh.amount)||!number(sh.amount,1,1e6)||!number(sh.revenue)||!route(sh.route)||!sh.route.length||!number(sh.progress,0,sh.route.length-1)||!['out','back'].includes(sh.phase))fail();flags(sh,['auto','portLoaded','portUnloaded']);if(sh.kind!==undefined&&!['contract','state','import'].includes(sh.kind)||sh.vehicle!==undefined&&!ref(VEHICLES,sh.vehicle)||sh.label!==undefined&&!label(sh.label,2000))fail();numericFields(sh,['cost','duration','remaining','distance','fuel','portIndex']);
+ if(s.shipments!==undefined&&(!Array.isArray(s.shipments)||s.shipments.length>MAX_EXPORT_CARTS))fail();for(const sh of s.shipments||[]){if(!sh||!Number.isInteger(sh.id)||!ref(RESOURCES,sh.item)||!Number.isInteger(sh.amount)||!number(sh.amount,1,1e6)||!number(sh.revenue)||!route(sh.route)||!sh.route.length||!number(sh.progress,0,sh.route.length-1)||!['out','back'].includes(sh.phase))fail();flags(sh,['auto','portLoaded','portUnloaded','contractFinal','waitingForSpace']);if(sh.kind!==undefined&&!['contract','state','import'].includes(sh.kind)||sh.vehicle!==undefined&&!ref(VEHICLES,sh.vehicle)||sh.label!==undefined&&!label(sh.label,2000))fail();numericFields(sh,['cost','duration','remaining','distance','fuel','portIndex']);
  if(![undefined,null,'out','back'].includes(sh.away)||sh.destination!==undefined&&!label(sh.destination,200)||sh.storeId!==undefined&&sh.storeId!==0&&!s.buildings.some(b=>b.id===sh.storeId&&['warehouse','depot'].includes(b.type)))fail();
- if(sh.portIndex!==undefined&&(!Number.isInteger(sh.portIndex)||sh.portIndex>=sh.route.length))fail();
+ if(sh.slotId!==undefined&&!label(sh.slotId,100)||sh.blocked!==undefined&&!label(sh.blocked,200)||sh.fuelItem!==undefined&&!ref(RESOURCES,sh.fuelItem)||sh.mode!==undefined&&!['road','ship','rail','air'].includes(sh.mode))fail();
+  if(sh.worldRoute!==undefined&&(!Array.isArray(sh.worldRoute)||sh.worldRoute.length>1600||!sh.worldRoute.every(p=>Array.isArray(p)&&p.length===2&&p.every(v=>Number.isInteger(v)&&v>=0&&v<50))))fail();
+  if(sh.destinationId!==undefined&&!label(sh.destinationId,100))fail();
+  if(sh.portIndex!==undefined&&(!Number.isInteger(sh.portIndex)||sh.portIndex>=sh.route.length))fail();
  if(sh.terminalId!==undefined&&(typeof sh.terminalId!=='string'||!/^gate$|^b:\d+$/.test(sh.terminalId))||sh.portBuilding!==undefined&&sh.portBuilding!==null&&!ids.has(sh.portBuilding)||sh.waterVehicle!==undefined&&sh.waterVehicle!==null&&!['steamer','raft'].includes(sh.waterVehicle))fail();
  if(sh.away&&(!(sh.duration>0)||!number(sh.remaining,0,sh.duration)||sh.away==='out'&&sh.phase!=='out'||sh.away==='back'&&sh.phase!=='back'))fail();
  }if(s.nextShipmentId!==undefined&&!Number.isInteger(s.nextShipmentId))fail();
  // A terminal id ('gate' or 'b:<building>') the map no longer has falls back to the best terminal (trade-terminals.js).
- if(s.tradeRoute!==undefined&&s.tradeRoute!==null&&!label(s.tradeRoute,64))fail();
- if(s.workers&&(!Array.isArray(s.workers)||s.workers.length>Math.max(100,s.buildings.reduce((n,b)=>n+homeCapacity(b),0))))fail();if(s.nextWorkerId!==undefined&&!Number.isInteger(s.nextWorkerId))fail();
- const workerIds=new Set();for(const w of s.workers||[]){if(!w||!Number.isInteger(w.id)||workerIds.has(w.id)||!number(w.x,-1,N)||!number(w.z,-1,N)||!route(w.route))fail();workerIds.add(w.id);if(w.task?.sourceId&&!ids.has(w.task.sourceId))fail();if(w.task?.targetId&&!ids.has(w.task.targetId))fail();if(w.race&&!ref(RACES,w.race))fail();if(w.homeId!==undefined&&!ids.has(w.homeId))fail();actor(w);if(w.task!==undefined&&w.task!==null&&(!record(w.task)||!ref(RESOURCES,w.task.item)||!number(w.task.amount)||!['pickup','supply'].includes(w.task.kind)||!ids.has(w.task.building)||(w.task.dest&&!route([w.task.dest]))))fail();if(w.task){flags(w.task,['carried']);for(const k of ['sourceStore','targetStore'])if(w.task[k]!==undefined&&w.task[k]!==0&&!s.buildings.some(b=>b.id===w.task[k]&&['warehouse','depot'].includes(b.type)))fail();}}
+ if(s.tradeDestination!==undefined&&s.tradeDestination!==null&&!label(s.tradeDestination,100))fail();
+  if(s.tradeRoute!==undefined&&s.tradeRoute!==null&&!label(s.tradeRoute,64))fail();
+ if(s.workers&&(!Array.isArray(s.workers)||s.workers.length>10000||s.workers.filter(w=>!w?.retiring).length>Math.max(100,s.buildings.reduce((n,b)=>n+homeCapacity(b),0))))fail();
+ for(const w of s.workers||[])if(w?.retiring&&(w.homeId!==undefined||w.task?.kind!=='return'||w.task?.carried!==true||!(w.task.amount>0)))fail();
+ if(s.nextWorkerId!==undefined&&!Number.isInteger(s.nextWorkerId))fail();
+ const workerIds=new Set();for(const w of s.workers||[]){if(!w||!Number.isInteger(w.id)||workerIds.has(w.id)||!number(w.x,-1,N)||!number(w.z,-1,N)||!route(w.route))fail();workerIds.add(w.id);if(w.task?.sourceId&&!ids.has(w.task.sourceId))fail();if(w.task?.targetId&&!ids.has(w.task.targetId))fail();if(w.race&&!ref(RACES,w.race))fail();if(w.homeId!==undefined&&!ids.has(w.homeId))fail();actor(w);if(w.task!==undefined&&w.task!==null&&(!record(w.task)||!ref(RESOURCES,w.task.item)||!number(w.task.amount)||!['pickup','supply','return'].includes(w.task.kind)||(w.task.kind!=='return'&&!ids.has(w.task.building))||(w.task.dest&&!route([w.task.dest]))))fail();if(w.task){flags(w.task,['carried']);for(const k of ['sourceStore','targetStore'])if(w.task[k]!==undefined&&w.task[k]!==0&&!s.buildings.some(b=>b.id===w.task[k]&&['warehouse','depot'].includes(b.type)))fail();}}
  if(s.guards&&(!Array.isArray(s.guards)||s.guards.length>8))fail();for(const g of s.guards||[]){if(!g||!ref(RACES,g.race)||!route(g.route)||!number(g.x,-1,N)||!number(g.z,-1,N)||!number(g.hp,0,75)||!ids.has(g.homeId)||g.task!=null)fail();actor(g);numericFields(g,['maxHp'],1,75);}
  if(s.attackers&&(!Array.isArray(s.attackers)||s.attackers.length>100))fail();for(const w of s.attackers||[]){if(!w||!ref(RACES,w.race)||!number(w.x,-1,N)||!number(w.z,-1,N)||!route(w.route)||!number(w.hp)||!number(w.maxHp,1)||w.hp>w.maxHp||w.task!=null)fail();numericFields(w,['until','delay']);actor(w);}
  if(s.raid){if(!['demon','orc','beast'].includes(s.raid.faction))fail();numericFields(s.raid,['started','ends','strength','damage','defeated','boostUntil','lastHit']);flags(s.raid,['finished','boosted','disrupted']);}
@@ -91,6 +102,8 @@ export function validateSave(data){
  safeObject(data);
  if(!data?.campaignVersion)return validateSimulation(data);
  if(data.campaignVersion!==1||!Array.isArray(data.sites)||data.sites.length<1||data.sites.length>50||!data.treasury||!number(data.treasury.money,-1e12)||!number(data.treasury.debt)||!Number.isInteger(data.treasury.rank)||data.treasury.rank<0||data.treasury.rank>=RANKS.length)fail();
+ if(data.offline!==undefined){if(!record(data.offline))fail();flags(data.offline,['enabled','running','deficit']);if(data.offline.at!==undefined&&!number(data.offline.at,0,1e14))fail();}
+ if(data.trial){const t=data.trial,rule=trialRule(t.id);if(!record(t)||!rule||!['playing','won','expired'].includes(t.status)||!number(t.started)||!number(t.elapsed,0,rule.duration)||!number(t.score)||!number(t.delivered)||(t.replay!==undefined&&(!validReplay(t.replay)||t.replay.id!==t.id)))fail();}
  resourceMap(data.treasury.produced);resourceMap(data.treasury.sold);if(!number(data.support,0,100)||!number(data.defense,0,1e6))fail();
  for(const key of ['newStates','factions','investments','recognition','history'])if(!Array.isArray(data[key]))fail();
  if(data.newStates.length>1000||data.factions.length>100||data.investments.length>10000||data.history.length>1000)fail();
@@ -112,7 +125,7 @@ export function validateSave(data){
  // The league (league.js): stars, rival houses, the week's results, the daily goal and gift bookkeeping.
  if(data.league!==undefined&&data.league!==null){const l=data.league;if(!record(l))fail();numericFields(l,['week','stars','total','dayStars']);
   if(l.recent!==undefined&&(!Array.isArray(l.recent)||l.recent.length>10||!l.recent.every(v=>number(v))))fail();
-  if(l.rivals!==undefined&&(!Array.isArray(l.rivals)||l.rivals.length>20||!l.rivals.every(r=>record(r)&&ref(NATIONS,r.id)&&label(r.name,100)&&number(r.pace,0,10)&&number(r.score))))fail();
+  if(l.rivals!==undefined&&(!Array.isArray(l.rivals)||l.rivals.length>20||!l.rivals.every(r=>record(r)&&ref(NATIONS,r.id)&&label(r.name,100)&&number(r.pace,0,10)&&number(r.score)&&(r.economy===undefined||validRivalEconomy(r.economy)))))fail();
   if(l.history!==undefined&&(!Array.isArray(l.history)||l.history.length>50||!l.history.every(h=>record(h)&&['week','place','stars','prize'].every(k=>number(h[k])))))fail();
   if(l.daily!==undefined){if(!record(l.daily))fail();numericFields(l.daily,['day','goal','from','met','streak']);flags(l.daily,['done']);}
   if(l.gifts!==undefined){if(!record(l.gifts))fail();numericFields(l.gifts,['at','count'],-1e12);if(l.gifts.thanked!==undefined&&(!record(l.gifts.thanked)||!Object.values(l.gifts.thanked).every(v=>v===true)))fail();}}
@@ -122,7 +135,7 @@ export function validateSave(data){
  for(const site of data.sites){if(!label(site.name)||!number(site.unrest,0,100)||site.nation!==site.simulation.nation||site.provinceId!==undefined&&!plotBelongsTo(site.provinceId,site.nation))fail();flags(site,['territory']);}
  if(!ids.has(data.homeId)||!ids.has(data.activeId)||!Array.isArray(data.routes)||data.routes.length>300)fail();
  for(const r of data.routes)if(!ids.has(r.from)||!ids.has(r.to)||r.from===r.to||!ref(RESOURCES,r.item)||!['truck','rail'].includes(r.mode)||!number(r.amount,1,30)||!number(r.cargo,0,30)||!number(r.remaining,0,10000))fail();
- const routeIds=new Set();for(const r of data.routes){if(!label(r.id,100)||routeIds.has(r.id)||!number(r.duration,r.cargo?1:0,10000)||!number(r.completed)||r.status!==undefined&&!label(r.status,200))fail();routeIds.add(r.id);numericFields(r,['ambush'],-1);flags(r,['enabled','closing']);}
+ const routeIds=new Set();for(const r of data.routes){if(!label(r.id,100)||routeIds.has(r.id)||!number(r.duration,r.cargo?1:0,10000)||!number(r.completed)||r.status!==undefined&&!label(r.status,200))fail();if(r.dropoffs!==undefined){const dest=data.sites.find(s=>s.id===r.to)?.simulation;if(!Array.isArray(r.dropoffs)||r.dropoffs.length>N*N||!r.dropoffs.every(v=>v&&Number.isInteger(v.id)&&Number.isInteger(v.amount)&&v.amount>0&&(v.id===0||dest?.buildings.some(b=>b.id===v.id&&['warehouse','depot'].includes(b.type))))||r.dropoffs.reduce((n,v)=>n+v.amount,0)!==r.cargo)fail();}routeIds.add(r.id);numericFields(r,['ambush'],-1);flags(r,['enabled','closing']);}
  const active=data.sites.find(s=>s.id===data.activeId).simulation;if(data.lastWorldDay!==undefined&&Math.abs(data.lastWorldDay-(Math.floor(active.time/80)+1))>1)fail();
  return data;
 }

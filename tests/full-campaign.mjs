@@ -1,3 +1,4 @@
+import {vehicleLoad} from '../src/app/game/export-route.js';
 import {BASE_TIME_SCALE, realSeconds} from '../src/app/game/game-time.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -8,7 +9,7 @@ import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
 import {POWER_REACH} from '../src/app/game/trade-terminals.js';
 // This driver uses only player actions and elapsed time. It never grants money,
 // stock, production totals, rank or contract completions.
-let c=new Campaign(),lastRank=-1,lastAction=0;const milestones=[],days=[];
+let c=new Campaign(),lastRank=-1,lastAction=0,lastPowerBuild=-100;const milestones=[],days=[];
 const count=(s,t)=>s.buildings.filter(b=>b.type===t).length;
 // Power is local (POWER_REACH tiles from a plant or substation): powered facilities go inside the grid,
 // and when it has no room left a substation goes where it newly covers the most free land.
@@ -19,7 +20,7 @@ const inReach=(s,t)=>gridNodes(s).some(n=>Math.max(Math.abs(n.x-t.x),Math.abs(n.
 const incoming=(s,r)=>s.shipments.filter(sh=>sh.kind==='import'&&sh.item===r).reduce((n,sh)=>n+sh.amount,0);
 // Residents keep hauling warehouse stock to facilities that use it, so a player orders a few extra and builds once
 // enough is free (availableStock) rather than merely in the warehouse.
-function order(s,r,n){const need=Math.ceil(n-s.availableStock(r)-incoming(s,r));if(need>0)s.buy(r,Math.min(100,need+6));}
+function order(s,r,n){const need=Math.ceil(n-s.availableStock(r)-incoming(s,r));if(need>0)s.buy(r,Math.min(vehicleLoad(s),need+6));}
 function buyMissing(s,cost,items){let budget=cost;for(const [r,n] of Object.entries(items||{}))budget+=Math.max(0,n-s.availableStock(r)-incoming(s,r))*Math.ceil(RESOURCES[r].price*1.85);if(s.money<budget+120)return false;for(const [r,n] of Object.entries(items||{}))if(s.availableStock(r)<n)order(s,r,n);return Object.entries(items||{}).every(([r,n])=>s.availableStock(r)>=n);}
 // While the next rank counts lord orders, the goods of the open order are not spent on construction.
 const heldForOrder=s=>s.campaign&&!s.contractStatus().ready&&(s.promotion()?.requirements||[]).some(q=>q.key==='contracts'&&!q.done)?s.contract()?.item:null;
@@ -31,13 +32,15 @@ function build(s,type,desired=1){if(s.rank<unlockRank(type)||count(s,type)>=desi
  else if(def.irrigable)tiles.sort((a,b)=>s.placementEffects(type,b.x,b.z).water-s.placementEffects(type,a.x,a.z).water||Math.abs(a.x-11)+Math.abs(a.z-12)-Math.abs(b.x-11)-Math.abs(b.z-12));
  // The placement preview's slowdown (proximity.js slowNotes) counts like a few tiles of walking.
  else{const far=t=>Math.abs(t.x-11)+Math.abs(t.z-12)+(1-s.placementEffects(type,t.x,t.z).speed)*8;const cost=new Map(tiles.map(t=>[t,far(t)]));tiles.sort((a,b)=>cost.get(a)-cost.get(b));}
+ // Guards defend their barracks, so its placement follows the exposed border shown by the raid forecast.
+ if(type==='barracks'){const border=s.tiles.filter(t=>s.walkable(t.x,t.z)&&[[1,0],[-1,0],[0,1],[0,-1]].some(([dx,dz])=>!s.ownedAt(t.x+dx,t.z+dz))).sort((a,b)=>a.z-b.z||a.x-b.x).slice(0,6);const score=t=>border.reduce((n,p)=>n+Math.hypot(t.x-p.x,t.z-p.z),0);tiles.sort((a,b)=>score(a)-score(b));}
  for(const t of tiles){if(type!=='warehouse'&&!s.routeTo(s.entries(s.warehouse)[0],{x:t.x,z:t.z,size:1}))continue;if(s.build(type,t.x,t.z).ok)return;}
  if(onGrid&&type!=='substation'){build(s,'substation',count(s,'substation')+1);return;}
  if(s.money>s.expansionCost()+400){for(let z=0;z<6;z++)for(let x=0;x<6;x++)if(s.canExpand(x,z)){s.expand(x,z);return;}}
 }
 // Home build order follows the unlock ladder (docs/BALANCE_PATCH_20260928.md 9-3). A locked or already
 // built entry is skipped, so the list is also the priority order once several entries are open.
-const PLAN=[['roadhub',2],['house',4],['well',3],['field',3],['lumber',2],['distillery',2],['sawmill',1],['quarry',1],['mill',1],['bakery',1],['cottonfield',2],['herbgarden',2],['clinic',1],['weaver',1],['dock',2],['smokehouse',1],['depot',1],['henhouse',1],['marketplace',1],['confectionery',1],['reservoir',1],['kiln',1],['stable',1],['tailor',1],['glassworks',1],['watermill',1],['dwarfhouse',2],['generator',1],['workshop',1],['windturbine',1],['logistics',1],['ironmine',1],['coalpit',1],['titanhouse',1],['smelter',1],['steamworks',1],['wardpost',1],['oilpump',1],['refinery',1],['coppermine',1],['chemical',1],['manaextractor',1],['wiremill',1],['electronics',1],['magetower',1],['cementworks',1],['station',1],['cannery',1],['automotive',1],['laboratory',1],['hospital',1],['arcanepower',1],['battery',1],['leyrelay',1],['bank',1],['barracks',1],['fortress',2],['lampworks',1],['engineworks',1],['mithrilforge',1],['parliament',1],['shipyard',1],['airdock',1],['blastfurnace',1],['assemblyline',1],['exchange',1]];
+const PLAN=[['roadhub',2],['house',4],['well',3],['field',3],['lumber',2],['distillery',1],['sawmill',1],['quarry',1],['mill',1],['bakery',1],['windturbine',1],['oilpump',1],['refinery',1],['cottonfield',2],['herbgarden',2],['clinic',1],['weaver',1],['dock',2],['smokehouse',1],['depot',1],['henhouse',1],['marketplace',1],['confectionery',1],['reservoir',1],['kiln',1],['stable',1],['tailor',1],['glassworks',1],['watermill',1],['dwarfhouse',2],['generator',1],['workshop',1],['windturbine',1],['logistics',1],['ironmine',1],['coalpit',1],['titanhouse',1],['smelter',1],['steamworks',1],['wardpost',1],['oilpump',1],['refinery',1],['coppermine',1],['chemical',1],['manaextractor',1],['wiremill',1],['electronics',1],['magetower',1],['cementworks',1],['station',1],['cannery',1],['automotive',1],['laboratory',1],['hospital',1],['arcanepower',1],['battery',1],['leyrelay',1],['bank',1],['barracks',1],['fortress',2],['lampworks',1],['engineworks',1],['mithrilforge',1],['parliament',1],['shipyard',1],['airdock',1],['blastfurnace',1],['assemblyline',1],['exchange',1]];
 // Intermediates feed other chains and are never auto-sold; smoked fish is sold until the cannery needs it.
 const KEEP=['water','wood','stone','iron','coal','oil','mana','steel','fuel','polymer','circuit','cotton','herb','egg','cloth','brick','glass','copper','wire','concrete','canned','engine','mithril'];
 let contractsSent=0,recipeSwitches=0,tradedDay=0,stateTrades=0;const switchedAt=new Map(),recipeUse={};
@@ -60,6 +63,8 @@ function operate(){const s=c.home.sim;c.activeId=c.homeId;
  for(const [type,n] of PLAN)build(s,type,type==='house'?Math.min(18,n+Math.floor(s.rank/2)):n);
  // A rank that asks for more residents gets another home of the newest unlocked kind.
  if(s.promotion()?.requirements.some(q=>q.key==='workers'&&!q.done)){const home=Object.keys(BUILDINGS).filter(t=>BUILDINGS[t].home&&unlockRank(t)<=s.rank).sort((a,b)=>unlockRank(b)-unlockRank(a))[0];build(s,home,count(s,home)+1);}
+ // The power map identifies overloaded factories; add generation as their upgraded loads grow.
+ if(s.time-lastPowerBuild>=80&&s.buildings.some(b=>b.status.startsWith('전력 용량 부족'))){lastPowerBuild=s.time;build(s,'windturbine',count(s,'windturbine')+1);}
  chooseRecipes(s);
  for(const b of s.buildings){const recipe=s.recipeOf(b);if(RESOURCES[recipe?.output]&&!RESOURCES[recipe.output].final){const limit=Math.max(s.minimumStock(recipe.output)+30,60);const on=s.stock[recipe.output]<limit;if(b.enabled!==on)s.setOperation(b.id,on);}}
 
@@ -67,17 +72,17 @@ function operate(){const s=c.home.sim;c.activeId=c.homeId;
  if(s.money>(s.promotion()?.fee||0)+500){const starved=new Set(s.buildings.map(b=>Object.keys(RESOURCES).find(r=>b.status===RESOURCES[r].name+' 대기')).filter(Boolean));for(const r of starved){const p=Object.keys(BUILDINGS).filter(t=>BUILDINGS[t].output===r&&BUILDINGS[t].period&&unlockRank(t)<=s.rank).sort((a,b)=>unlockRank(b)-unlockRank(a))[0];if(p&&count(s,p)<(['grain','water'].includes(r)?6:3)){build(s,p,count(s,p)+1);break;}}}
  // Upgrades wait while they would eat the goods of the lord's open order.
  const ordered=heldForOrder(s);
- for(const site of c.sites){const sim=site.sim;for(const b of sim.buildings){if(b.health<100&&sim.money>sim.repairCost(b)+100)sim.repair(b.id);if(b.level<3&&sim.upgradeItem(b)===ordered)continue;if(b.level<3&&BUILDINGS[b.type].home&&sim.money>200&&sim.stock.wood>=6)sim.upgrade(b.id);if(b.level<3&&BUILDINGS[b.type].period&&sim.money>1200&&sim.stock.plank>=3)sim.upgrade(b.id);}
+ for(const site of c.sites){const sim=site.sim;for(const b of sim.buildings){if(b.health<100&&sim.money>sim.repairCost(b)+100)sim.repair(b.id);if(b.level<3&&sim.upgradeItem(b)===ordered)continue;if(b.level<3&&BUILDINGS[b.type].home&&sim.money>200&&sim.stock.wood>=6)sim.upgrade(b.id);if(b.level<3&&(BUILDINGS[b.type].period||BUILDINGS[b.type].terminal)&&sim.money>1200&&sim.stock.plank>=3)sim.upgrade(b.id);}
   if(sim.money>300)for(const t of sim.tiles)if(sim.ownedAt(t.x,t.z)&&t.z%2===1&&!sim.at(t.x,t.z)&&!sim.roads.has(t.x+','+t.z)&&sim.money>220)sim.build('road',t.x,t.z);
   if(sim.health.infection>15&&sim.health.sanitationUntil<sim.time&&sim.money>100)sim.sanitize();if(sim.pendingEvent?.type==='storm')sim.reinforce();if(sim.raid&&!sim.raid.finished)sim.mobilize();
-  if(site.id!==c.homeId){if(sim.stock.fuel<5&&sim.money>400)order(sim,'fuel',10);build(sim,'warehouse');if(sim.warehouse){build(sim,'house');build(sim,'generator');build(sim,'station');}for(const r of ['wood','water'])if(sim.stock[r]+incoming(sim,r)<12&&sim.money>1200)sim.buy(r,30);}
+  if(site.id!==c.homeId){if(sim.stock.fuel<5&&sim.money>400)order(sim,'fuel',10);build(sim,'warehouse');if(sim.warehouse){build(sim,'house');build(sim,'generator');build(sim,'station');}for(const r of ['wood','water'])if(sim.stock[r]+incoming(sim,r)<12&&sim.money>1200)sim.buy(r,Math.min(30,vehicleLoad(sim)));}
   const st=sim.buildings.find(b=>b.type==='station');if(st&&!sim.rails.size&&buyMissing(sim,sim.buildCost('rail'),BUILDINGS.rail.materials))for(const[dx,dz]of [[1,0],[-1,0],[0,1],[0,-1]])if(sim.build('rail',st.x+dx,st.z+dz).ok)break;
  }
  for(const r of Object.keys(RESOURCES)){s.autoSell[r]=!KEEP.includes(r)&&!(r==='smokedfish'&&s.rank>=unlockRank('cannery'));s.reserves[r]=({fuel:0,grain:35,plank:25,gear:30,bread:s.rank>=20?35:0,car:8,medicine:20,workwear:8,lamp:6}[r]??(RESOURCES[r].price>=1000?0:12));}
  // High-value finished goods (airships) are shipped as soon as they are made instead of waiting for a lot of ten.
  for(const r of Object.keys(RESOURCES)){const spare=Math.floor(s.availableStock(r)-s.minimumStock(r));if(RESOURCES[r].price>=1000&&s.autoSell[r]&&spare>=1)s.sell(r,spare);}
  // Import only resources whose unlocked producer is genuinely short of supply.
- if(s.money>2400)for(const r of ['wood','stone','water','grain','iron','coal','oil','mana','steel','gear','fuel','polymer','circuit'])if(s.stock[r]+incoming(s,r)<12)s.buy(r,20);
+ if(s.money>2400)for(const r of ['wood','stone','water','grain','iron','coal','oil','mana','steel','gear','fuel','polymer','circuit'])if(s.stock[r]+incoming(s,r)<12)s.buy(r,Math.min(20,vehicleLoad(s)));
  if(s.contractStatus().ready&&s.fulfill().ok)contractsSent++;
  if(s.debt&&(s.money>1400||(s.promotion()?.requirements.some(r=>r.key==='debtFree'&&!r.done)&&s.money>300)))s.repay();if(!s.family&&s.rank>=2&&s.money>400)s.rescue();if(s.rank>=5&&!s.charter)s.chooseCharter('commons');
  if(s.rank>=2&&s.expansions<2&&s.money>s.expansionCost()+300){for(const [x,z]of [[4,3],[3,4],[2,4]])if(s.expand(x,z).ok)break;}
@@ -115,7 +120,7 @@ function operate(){const s=c.home.sim;c.activeId=c.homeId;
 }
 // Daily ledger (end of each day): rank, cash, revenue earned that day across every site, facilities on the map.
 let revenueMark=0,dayMark=c.active.day;
-const record=()=>{const day=c.active.day;if(day===dayMark)return;days.push({day:dayMark,rank:c.rank,money:Math.floor(c.treasury.money),income:Math.round(c.treasury.totalRevenue-revenueMark),buildings:c.sites.reduce((n,v)=>n+v.sim.buildings.length,0)});revenueMark=c.treasury.totalRevenue;dayMark=day;};
+const record=()=>{const day=c.active.day;if(day===dayMark)return;if(process.env.TG_CAMPAIGN_TRACE)console.log('TRACE '+JSON.stringify({day,rank:c.rank,open:c.active.promotion()?.requirements.filter(r=>!r.done),contract:c.active.contract(),status:c.active.contractStatus(),trial:c.active.promotion()?.trial,pending:c.active.pendingEvent,nextEvent:c.active.nextEvent,time:c.active.time,buildings:c.active.buildings.filter(b=>/대기|부족/.test(b.status)).map(b=>[b.type,b.status])}));days.push({day:dayMark,rank:c.rank,money:Math.floor(c.treasury.money),income:Math.round(c.treasury.totalRevenue-revenueMark),buildings:c.sites.reduce((n,v)=>n+v.sim.buildings.length,0)});revenueMark=c.treasury.totalRevenue;dayMark=day;};
 // The player also acts at the moment the day turns, so the end-of-day cash is what remains after that day's decisions.
 for(let i=0;i<240000&&c.rank<32;i++){if(i%40===0)operate();c.tick(.25);if(c.active.day!==dayMark)operate();record();if(i>0&&i%8000===0){const before=c.save();c=new Campaign({saved:decodeSave(encodeSave(before))});assert.deepEqual(c.save(),before,'periodic save recovery preserves full campaign');}}
 days.push({day:dayMark,rank:c.rank,money:Math.floor(c.treasury.money),income:Math.round(c.treasury.totalRevenue-revenueMark),buildings:c.sites.reduce((n,v)=>n+v.sim.buildings.length,0),partial:true});
@@ -142,7 +147,7 @@ const acceptance={
 const fuel=c.sites.reduce((n,v)=>n+(v.sim.logisticsStats.fuel||0),0),fuelTrips=c.sites.reduce((n,v)=>n+(v.sim.logisticsStats.fuelTrips||0),0);
 const result={day:c.active.day,baseTimeScale:BASE_TIME_SCALE,completionRealMinutesAt1x:Math.round(realSeconds(c.active.time)/60),sites:c.sites.length,revenue:Math.round(c.treasury.totalRevenue),produced:c.treasury.produced,milestones:milestones.length,contracts:c.treasury.contracts,contractsSent,recipeSwitches,recipeUse,fuelBurnedByVehicles:fuel,fuelTrips,investments:c.investments.length,stateTradeDays:stateTrades,upkeepPerDay:c.upkeep(),completion:c.completion};
 assert.ok(recipeSwitches>0,'the player uses alternative products');assert.ok(fuel>0&&fuelTrips>0,'fuel vehicles run and burn fuel');
-fs.writeFileSync(new URL('../docs/FULL_CAMPAIGN_RESULT.json',import.meta.url),JSON.stringify({date:new Date().toISOString().slice(0,10),test:'tests/full-campaign.mjs',method:'Normal paid player actions and elapsed time; no injected cash, stock, production or ranks. Roads built through player actions. Periodic save/restore. Days are recorded at each day change: rank and cash at the end of the day, revenue earned that day across all sites, facilities on the map.',result,segments,acceptance,promotions:milestones,days},null,1)+'\n');
+fs.writeFileSync(process.env.TG_CAMPAIGN_REPORT||new URL('../docs/FULL_CAMPAIGN_RESULT.json',import.meta.url),JSON.stringify({date:new Date().toISOString().slice(0,10),test:'tests/full-campaign.mjs',method:'Normal paid player actions and elapsed time; no injected cash, stock, production or ranks. Roads built through player actions. Periodic save/restore. Days are recorded at each day change: rank and cash at the end of the day, revenue earned that day across all sites, facilities on the map.',result,segments,acceptance,promotions:milestones,days},null,1)+'\n');
 console.log(JSON.stringify({segments,acceptance},null,1));
 for(const [id,a] of Object.entries(acceptance))assert.ok(a.pass,id+' '+a.rule+' :: '+JSON.stringify(a));
 console.log('FULL CAMPAIGN PASS',JSON.stringify(result));

@@ -1,0 +1,152 @@
+{
+ "metrics": [
+  {
+   "id": "mountain",
+   "chunks": 25,
+   "mountains": 34,
+   "triangles": 8600
+  },
+  {
+   "id": "snowMountain",
+   "chunks": 16,
+   "mountains": 18,
+   "triangles": 4426
+  },
+  {
+   "id": "rockMountain",
+   "chunks": 25,
+   "mountains": 28,
+   "triangles": 5354
+  },
+  {
+   "id": "volcano",
+   "chunks": 25,
+   "mountains": 15,
+   "triangles": 5314
+  },
+  {
+   "id": "dunes",
+   "chunks": 25,
+   "mountains": 6,
+   "triangles": 3606
+  },
+  {
+   "id": "rockDesert",
+   "chunks": 25,
+   "mountains": 4,
+   "triangles": 3674
+  },
+  {
+   "id": "gravelDesert",
+   "chunks": 25,
+   "mountains": 4,
+   "triangles": 3402
+  },
+  {
+   "id": "meadow",
+   "chunks": 25,
+   "mountains": 1,
+   "triangles": 3466
+  },
+  {
+   "id": "flowerMeadow",
+   "chunks": 25,
+   "mountains": 10,
+   "triangles": 5534
+  },
+  {
+   "id": "dryGrass",
+   "chunks": 25,
+   "mountains": 0,
+   "triangles": 3392
+  },
+  {
+   "id": "highlandGrass",
+   "chunks": 25,
+   "mountains": 1,
+   "triangles": 2156
+  },
+  {
+   "id": "woodland",
+   "chunks": 25,
+   "mountains": 1,
+   "triangles": 4904
+  },
+  {
+   "id": "pineForest",
+   "chunks": 25,
+   "mountains": 0,
+   "triangles": 2406
+  },
+  {
+   "id": "wetForest",
+   "chunks": 25,
+   "mountains": 1,
+   "triangles": 4828
+  },
+  {
+   "id": "marsh",
+   "chunks": 25,
+   "mountains": 1,
+   "triangles": 4146
+  },
+  {
+   "id": "coast",
+   "chunks": 25,
+   "mountains": 0,
+   "triangles": 1274
+  },
+  {
+   "id": "lake",
+   "chunks": 25,
+   "mountains": 0,
+   "triangles": 2422
+  },
+  {
+   "id": "pond",
+   "chunks": 6,
+   "mountains": 0,
+   "triangles": 292
+  },
+  {
+   "id": "river",
+   "chunks": 25,
+   "mountains": 0,
+   "triangles": 2792
+  },
+  {
+   "id": "stream",
+   "chunks": 25,
+   "mountains": 11,
+   "triangles": 5734
+  },
+  {
+   "id": "canal",
+   "chunks": 25,
+   "mountains": 1,
+   "triangles": 1998
+  },
+  {
+   "id": "oilfield",
+   "chunks": 9,
+   "mountains": 1,
+   "triangles": 488
+  },
+  {
+   "id": "oasis",
+   "chunks": 9,
+   "mountains": 1,
+   "triangles": 508
+  },
+  {
+   "id": "glacier",
+   "chunks": 25,
+   "mountains": 17,
+   "triangles": 4672
+  }
+ ],
+ "errors": [],
+ "consoleErrors": [],
+ "consoleWarnings": [],
+ "failedRequests": []
+}

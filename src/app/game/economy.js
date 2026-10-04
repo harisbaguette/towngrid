@@ -1,6 +1,7 @@
+import {trialState} from './industry-trials.js';
 import { BUILDINGS, RESOURCES, PLANTING } from './simulation.js';
 import { unlockRank } from './world.js';
-import { dispatchShipment,tripFuel,spareFuel } from './export-route.js';
+import { dispatchShipment,importStore,tripFuel,tripFuelItem,spareFuel,vehicleLoad,fleet,shipmentError } from './export-route.js';
 
 export function reserveFor(sim, item) {
  const production = sim.buildings.filter(b => b.enabled !== false && b.health > 0)
@@ -12,15 +13,27 @@ export function reserveFor(sim, item) {
  return Math.max(sim.reserves?.[item] || 0, production) + freight + (contract.item === item && !sent ? contract.amount : 0);
 }
 
-export const importCost=(sim,item,quantity)=>Math.ceil(RESOURCES[item].price*1.85)*(quantity+(item==='fuel'&&spareFuel(sim)<tripFuel(sim)?tripFuel(sim):0));
+export const importCost=(sim,item,quantity)=>Math.ceil(RESOURCES[item].price*1.85)*(quantity+(item===tripFuelItem(sim)&&spareFuel(sim,item)<tripFuel(sim)?tripFuel(sim):0));
 
-export function purchase(sim, item, quantity) {
- if (!RESOURCES[item] || !Number.isInteger(quantity) || quantity < 1 || quantity > 100)
-  return {ok:false,error:'1~100개의 수입 수량을 선택하세요'};
+export function purchaseShort(sim, item, quantity) {
+ if(trialState(sim.campaign)?.item===item)return '도전 목표 상품은 직접 생산해야 합니다';
+ if (!RESOURCES[item] || !Number.isInteger(quantity) || quantity < 1 || quantity > 1000000)
+  return '수입 수량을 1 이상의 정수로 입력하세요';
  // Any product a facility is permitted to make counts, alternative recipes included.
  if (item!=='fuel'&&!Object.entries(BUILDINGS).some(([id, d]) => unlockRank(id) <= sim.rank && (d.recipes || [d]).some(r => r.output === item && (r.unlock || 0) <= sim.rank)))
-  return {ok:false,error:'생산 허가를 얻은 자원만 수입할 수 있습니다'};
- if(sim.storageUsed+sim.shipments.filter(sh=>sh.kind==='import').reduce((n,sh)=>n+sh.amount,0)+quantity>sim.storageCapacity)return {ok:false,error:'창고가 가득 찹니다. 재고를 팔거나 자재 보관소를 지으세요'};
+  return '생산 허가를 얻은 자원만 수입할 수 있습니다';
+ if(sim.storageUsed+sim.shipments.filter(sh=>sh.kind==='import').reduce((n,sh)=>n+sh.amount,0)+quantity>sim.storageCapacity)return '창고가 가득 찹니다. 재고를 팔거나 자재 보관소를 지으세요';
+
+ if(quantity>vehicleLoad(sim))return '한 번에 '+vehicleLoad(sim)+'개까지 운송할 수 있습니다';
+ const short=sim.moneyShort?.(importCost(sim,item,quantity),'수입 비용 ');if(short)return short;
+ if(!importStore(sim,item,quantity))return '수입품을 받을 연결된 창고의 공간이 부족합니다';
+ const status=sim.exportStatus();if(!status.connected)return status.error;
+ if(!fleet(sim).some(v=>v.selected&&!v.busy))return '운송 수단이 모두 운행 중입니다';
+ if(item!==tripFuelItem(sim))return shipmentError(sim);
+ return null;
+}
+export function purchase(sim,item,quantity){
+ const why=purchaseShort(sim,item,quantity);if(why)return {ok:false,error:why};
 
  const cost=importCost(sim,item,quantity);
  const short = sim.moneyShort?.(cost, '수입 비용 '); if (short) return {ok:false,error:short};

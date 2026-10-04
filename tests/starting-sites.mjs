@@ -15,7 +15,7 @@ for(const [nation,n] of Object.entries(NATIONS)){
  const initial=new Campaign({nation}),def=defaultStartingProvince(nation);
  assert.equal(initial.active.provinceId,def.id);
  assert.equal(def.capital,false);
- const outer=startingProvinces(nation).find(p=>p.id===nation+'-5');
+ const outer=startingProvinces(nation).find(p=>p.id===(nation==='estern'?'estern-3':nation+'-5'));
  assert.equal(def.id,(outer||startingProvinces(nation)[0]).id,'Default uses an available noncapital plot within the current border');
  assert.equal(initial.home.provinceId,def.id,'Atlas and simulation use the same province');
  assert.notEqual(initial.home.provinceId,nation+'-0','A capital district can contain undeveloped plots outside the capital tile');
@@ -33,6 +33,9 @@ for(const [nation,n] of Object.entries(NATIONS)){
  }
  assert.throws(()=>new Campaign({nation,provinceId:nation+'-0'}),/수도권/);
 }
+const firstLand=layoutOf(defaultStartingProvince('estern').id);
+assert.equal(firstLand.ecology,'meadow','The initial preview opens on the approved fertile plain');
+assert.ok(Object.values(firstLand.edges).includes('river')&&Object.values(firstLand.edges).includes('forest'),'The initial plain has its actual river and forest edges');
 for(const provinceId of [null,'estern-99','silvaen-1','nezar-1'])assert.throws(()=>new Campaign({nation:'estern',provinceId}),/수도권/);
 
 // Existing campaigns and old single-town saves must not move out of their capital.

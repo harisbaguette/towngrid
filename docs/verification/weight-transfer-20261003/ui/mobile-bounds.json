@@ -1,0 +1,38 @@
+{
+  ".game-dialog": {
+    "x": 11.703125,
+    "right": 378.296875,
+    "width": 366.59375,
+    "minWidth": "0px",
+    "cssWidth": "366.594px",
+    "translate": "-50% -50%",
+    "transform": "none"
+  },
+  ".dialog-scroll-body": {
+    "x": 25.703125,
+    "right": 364.296875,
+    "width": 338.59375,
+    "minWidth": "0px",
+    "cssWidth": "338.594px",
+    "translate": "none",
+    "transform": "none"
+  },
+  ".resident-profile": {
+    "x": 25.703125,
+    "right": 346.296875,
+    "width": 320.59375,
+    "minWidth": "auto",
+    "cssWidth": "320.594px",
+    "translate": "none",
+    "transform": "none"
+  },
+  ".resident-illustration": {
+    "x": 25.703125,
+    "right": 155.703125,
+    "width": 130,
+    "minWidth": "0px",
+    "cssWidth": "130px",
+    "translate": "none",
+    "transform": "none"
+  }
+}

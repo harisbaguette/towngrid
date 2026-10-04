@@ -352,7 +352,7 @@ static class JobGuard
 class Splash : Form
 {
     readonly Label status;
-    readonly ProgressBar bar;
+    readonly LoadingLine bar;
 
     public Splash(string root)
     {
@@ -360,14 +360,14 @@ class Splash : Form
         Text = "타운그리드";
         FormBorderStyle = FormBorderStyle.None;
         StartPosition = FormStartPosition.CenterScreen;
-        BackColor = Color.FromArgb(5, 44, 50);
-        ClientSize = new Size((int)(560 * s), (int)(330 * s));
+        BackColor = Color.FromArgb(25, 63, 66);
+        ClientSize = new Size((int)(520 * s), (int)(300 * s));
         try { Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath); } catch { }
 
         var logo = new PictureBox
         {
             SizeMode = PictureBoxSizeMode.Zoom,
-            Bounds = new Rectangle((int)(30 * s), (int)(26 * s), (int)(500 * s), (int)(210 * s)),
+            Bounds = new Rectangle((int)(80 * s), (int)(30 * s), (int)(360 * s), (int)(156 * s)),
             BackColor = Color.Transparent,
         };
         string logoPath = Path.Combine(root, @"public\assets\brand\towngrid-title.png");
@@ -377,18 +377,16 @@ class Splash : Form
         status = new Label
         {
             Text = "시작하는 중…",
-            ForeColor = Color.FromArgb(255, 243, 210),
-            Font = new Font("Malgun Gothic", 11f, FontStyle.Bold),
+            ForeColor = Color.FromArgb(241, 237, 223),
+            Font = new Font("Malgun Gothic", 10f, FontStyle.Regular),
             TextAlign = ContentAlignment.MiddleCenter,
-            Bounds = new Rectangle((int)(20 * s), (int)(246 * s), (int)(520 * s), (int)(34 * s)),
+            Bounds = new Rectangle((int)(24 * s), (int)(204 * s), (int)(472 * s), (int)(40 * s)),
         };
         Controls.Add(status);
 
-        bar = new ProgressBar
+        bar = new LoadingLine
         {
-            Style = ProgressBarStyle.Marquee,
-            MarqueeAnimationSpeed = 30,
-            Bounds = new Rectangle((int)(90 * s), (int)(290 * s), (int)(380 * s), (int)(10 * s)),
+            Bounds = new Rectangle((int)(80 * s), (int)(264 * s), (int)(360 * s), Math.Max(3, (int)(4 * s))),
         };
         Controls.Add(bar);
     }
@@ -408,5 +406,37 @@ class Splash : Form
     static float ScreenDpi()
     {
         using (var g = Graphics.FromHwnd(IntPtr.Zero)) return g.DpiX;
+    }
+}
+
+// Indeterminate progress, using the same thin orange line as the browser loading screen.
+class LoadingLine : Control
+{
+    readonly System.Windows.Forms.Timer timer;
+    float position;
+    public LoadingLine()
+    {
+        DoubleBuffered = true;
+        BackColor = Color.FromArgb(58, 87, 85);
+        timer = new System.Windows.Forms.Timer { Interval = 30 };
+        timer.Tick += delegate { position = (position + .012f) % 2f; Invalidate(); };
+        timer.Start();
+    }
+    protected override void OnPaint(PaintEventArgs e)
+    {
+        base.OnPaint(e);
+        float travel = position <= 1 ? position : 2 - position;
+        using (var brush = new SolidBrush(Color.FromArgb(238, 112, 27)))
+            e.Graphics.FillRectangle(brush, (Width * .65f) * travel, 0, Width * .35f, Height);
+    }
+    protected override void OnVisibleChanged(EventArgs e)
+    {
+        base.OnVisibleChanged(e);
+        if (timer != null) timer.Enabled = Visible;
+    }
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing) timer.Dispose();
+        base.Dispose(disposing);
     }
 }

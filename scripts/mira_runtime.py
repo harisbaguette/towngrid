@@ -103,5 +103,5 @@ if __name__ == '__main__':
     result = pack_mira_runtime(args.spec, args.output)
     output = Path(args.output)
     catalog = [json.loads(path.read_text(encoding='utf-8')) for path in sorted(output.glob('*/frames.json'))]
-    (output / 'catalog.json').write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    (output / 'catalog.json').write_text(json.dumps(catalog, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf-8')
     print(f"Mira runtime: {result['frames']} cells; {result['revision']}.")

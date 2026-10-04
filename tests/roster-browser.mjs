@@ -11,11 +11,17 @@ try{
  const page=await browser.newPage({viewport:{width:1440,height:1050}});
  // Keep this test snapshot stable while other local work triggers HMR.
  await page.routeWebSocket('**/*',()=>{});
+ await page.route(/\/src\/app\/game\/scene\.js(?:\?|$)/,async route=>{
+  const response=await route.fetch(),source=await response.text();
+  const body=source.replace(/setSimulation\([^)]*\)\s*\{/,'$& window.rosterScene=this;');
+  assert.ok(body!==source,'Scene inspection hook must match the current setSimulation signature');
+  await route.fulfill({response,body});
+ });
  page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400&&r.url().includes('pixel-characters'))failed.push(r.url());});
  await page.goto(origin+'/character-preview/');
  await page.waitForFunction(()=>window.rosterPreview?.assets.size>=7);
  report.cast=await page.evaluate(async()=>{const p=window.rosterPreview,rows=[];for(const entry of p.cast){await p.select(entry[0]);const a=p.assets.get(entry[0]);rows.push({id:entry[0],columns:a.meta.columns.length,frames:a.meta.frames,portrait:a.meta.portraitAnimation?.frames});}return rows;});
- assert.equal(report.cast.length,51);assert.ok(report.cast.every(v=>v.columns===64&&v.frames===256&&v.portrait>8));
+ assert.equal(report.cast.length,51);assert.ok(report.cast.every(v=>v.columns===192&&v.frames===768&&v.portrait>8));
  await page.evaluate(()=>window.rosterPreview.select('taron'));
  await page.screenshot({path:fileURLToPath(new URL('cast-titan.png',out)),fullPage:true});
  await page.evaluate(()=>window.rosterPreview.select('hana'));
@@ -34,11 +40,8 @@ try{
  await page.goto(origin);
  await page.locator('canvas[role="application"]').waitFor({state:'attached',timeout:120000});
  await page.getByRole('button',{name:'화면을 눌러 시작',exact:true}).click({timeout:120000});
+ await page.locator('.home-extras summary').click();
  await page.getByRole('button',{name:'산업도시 둘러보기',exact:true}).waitFor({timeout:120000});
- await page.evaluate(async()=>{
-  const urls=performance.getEntriesByType('resource').map(e=>e.name).filter(url=>/\/app\/game\/scene\.js(?:\?|$)/.test(url));
-  for(const url of new Set([...urls,'/src/app/game/scene.js'])){const{GameScene}=await import(url),original=GameScene.prototype.setSimulation;GameScene.prototype.setSimulation=function(sim){window.rosterScene=this;return original.call(this,sim);};}
- });
  await page.getByRole('button',{name:'산업도시 둘러보기',exact:true}).click();
  await page.waitForFunction(()=>window.rosterScene?.workerModels?.size>0,{},{timeout:120000});
  await page.getByRole('button',{name:'일시정지',exact:true}).click();
@@ -49,26 +52,36 @@ try{
  for(let view=0;view<4;view++){
   await page.evaluate(v=>window.rosterScene.setQuarterView(v),view);
   await page.waitForTimeout(180);
-  const directions=await page.evaluate(()=>[...window.rosterScene.workerModels.values()].map(m=>({row:m.userData.atlas.row,columns:m.userData.atlas.columns,repeat:m.userData.texture.repeat.toArray()})));
-  assert.ok(directions.every(v=>v.row>=0&&v.row<4&&v.columns===64&&v.repeat[0]===1/64&&v.repeat[1]===.25));
+  const directions=await page.evaluate(()=>[...window.rosterScene.workerModels.values()].map(m=>({row:m.userData.atlas.row,rows:m.userData.atlas.rows,columns:m.userData.atlas.columns,repeat:m.userData.texture.repeat.toArray()})));
+  assert.ok(directions.every(v=>v.row>=0&&v.row<v.rows&&v.columns===64&&v.repeat[0]===1/64&&v.repeat[1]===1/v.rows));
   await page.screenshot({path:fileURLToPath(new URL('game-view-'+view+'.png',out))});
  }
+ await page.getByRole('button',{name:'게임 메뉴',exact:true}).click();
  await page.getByRole('button',{name:'주민',exact:true}).click();
  await page.locator('.resident-choice').filter({hasText:'미라'}).first().click();
  assert.match(await page.locator('.resident-illustration').getAttribute('src'),/mira\/portrait-idle\.png$/);
  assert.equal(await page.locator('.resident-actions button').count(),11);
+ await page.locator('.resident-motion summary').click();
  await page.locator('.resident-actions button').filter({hasText:'작업'}).click();
  await page.screenshot({path:fileURLToPath(new URL('residents-baker.png',out))});
  await page.setViewportSize({width:390,height:844});
+ await page.waitForTimeout(250);
+ report.mobileBounds=await page.evaluate(()=>Object.fromEntries(['.game-dialog','.dialog-scroll-body','.resident-profile','.resident-illustration'].map(selector=>{
+  const element=document.querySelector(selector),rect=element.getBoundingClientRect(),style=getComputedStyle(element);
+  return [selector,{x:rect.x,right:rect.right,width:rect.width,minWidth:style.minWidth,cssWidth:style.width,translate:style.translate,transform:style.transform}];
+ })));
+ await writeFile(new URL('mobile-bounds.json',out),JSON.stringify(report.mobileBounds,null,2));
+ assert.ok(report.mobileBounds['.game-dialog'].x>=0&&report.mobileBounds['.game-dialog'].right<=390,'dialog must stay inside the mobile viewport');
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
  await page.screenshot({path:fileURLToPath(new URL('residents-mobile.png',out))});
  await page.keyboard.press('Escape');await page.setViewportSize({width:1440,height:1050});
  const bakeryId=await page.evaluate(()=>{const scene=window.rosterScene,b=scene.sim.buildings.find(b=>b.type==='bakery');scene.focusBuilding(b.id);scene.callbacks.onClick(b.x,b.z);return b.id;});
- await page.locator('.facility-card').waitFor();
+ await page.getByRole('button',{name:'시설 상세 정보',exact:true}).click();
+ await page.locator('.facility-inspector').waitFor();
  assert.equal(await page.locator('.facility-staff').count(),0);
- await page.getByRole('button',{name:'가동 중지',exact:true}).click();
+ await page.locator('.facility-inspector').getByRole('button',{name:'가동 중지',exact:true}).click();
  await page.waitForFunction(id=>window.rosterScene.sim.buildings.find(b=>b.id===id)?.enabled===false,bakeryId);
- assert.match(await page.locator('.facility-card').innerText(),/가동 중지/);
+ assert.match(await page.locator('.facility-inspector').innerText(),/가동 중지/);
  await page.screenshot({path:fileURLToPath(new URL('bakery-stopped.png',out))});
  const before=await page.evaluate(()=>JSON.stringify(window.rosterScene.sim.save()));
  await page.evaluate(()=>window.rosterScene.rebuild());

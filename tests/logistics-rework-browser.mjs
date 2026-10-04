@@ -26,11 +26,14 @@ try{
   }
  });
  await page.getByRole('button',{name:'새 게임',exact:true}).click();
- await page.locator('.start-button:not(:disabled)').waitFor({timeout:120000});
+ await page.getByRole('button',{name:'지역 살펴보기',exact:true}).click();
+ await page.getByRole('button',{name:'지역 자세히 보기',exact:true}).click();
  assert.match(await page.locator('.preview-transport').innerText(),/시작 수출 운송/);
  assert.match(await page.locator('.preview-transport').innerText(),/사용 가능 40개/);
  await shot('01-selected-map');
- await page.locator('.start-button').click();
+ await page.keyboard.press('Escape');
+ await page.getByRole('button',{name:'땅 미리보기',exact:true}).click();
+ await page.getByRole('button',{name:'이 땅에서 시작',exact:true}).click({timeout:120000});
  await page.locator('.game-shell.is-playing:not([inert]) .minimal-hud').waitFor({timeout:120000});
  await page.getByRole('button',{name:'일시정지',exact:true}).click();
  assert.equal(await page.locator('.tutorial-card').count(),0);
@@ -43,7 +46,8 @@ try{
   await shot('02-start-view-'+view);
  }
  await page.getByRole('button',{name:'시장',exact:true}).click();
- assert.match(await page.locator('.export-status').innerText(),/0\/1/);
+ await page.locator('.market-logistics > summary').click();
+ assert.match(await page.locator('.market-logistics .fleet-line').innerText(),/0\/1/);
  const before=await page.evaluate(()=>({money:window.starterGame.sim.money,wood:window.starterGame.sim.stock.wood}));
  await page.getByRole('button',{name:'목재 1개 판매',exact:true}).click();
  await page.waitForFunction(()=>window.starterGame.exportCarts.size===1&&window.starterGame.idleExportCarts.size===0);
@@ -78,8 +82,8 @@ try{
  // The mini store receives real production; the new fuel facility has four rendered views.
  report.production=await page.evaluate(()=>{const g=window.starterGame,s=g.sim;s.paused=false;s.nextEvent=1e9;s.autoSell={};for(let i=0;i<180;i++)s.tick(.25);s.paused=true;g.lastPaint=null;return {water:s.starterStore.inventory.water,made:s.produced.water};});
  assert.ok(report.production.made>0&&report.production.water>16);
- await page.evaluate(()=>{const g=window.starterGame,s=g.sim;s.stock.grain=25;s.money=3000;s.build('distillery',11,12);s.paused=false;for(let i=0;i<500;i++)s.tick(.25);s.paused=true;g.lastPaint=null;});
- assert.ok(await page.evaluate(()=>window.starterGame.sim.produced.fuel>0));
+ await page.evaluate(()=>{const g=window.starterGame,s=g.sim;s.stock.grain=25;s.stock.fuel=0;s.money=3000;const result=s.build('distillery',11,12);if(!result.ok)throw new Error(result.error);s.paused=false;for(let i=0;i<2400&&!s.produced.fuel;i++)s.tick(.25);s.paused=true;g.lastPaint=null;});
+ assert.ok(await page.evaluate(()=>window.starterGame.sim.produced.fuel>0),JSON.stringify(await page.evaluate(()=>({buildings:window.starterGame.sim.buildings,stock:window.starterGame.sim.stock}))));
  assert.equal(await page.evaluate(()=>window.starterGame.workerModels.size),1);
  for(let v=0;v<4;v++){await page.evaluate(v=>{const g=window.starterGame;g.setQuarterView(v);g.lastPaint=null;},v);await page.waitForTimeout(200);await shot('07-distillery-'+v);}
  // The visible relocation control uses the same paid action as the map.
@@ -91,17 +95,39 @@ try{
  assert.equal(await page.evaluate(p=>window.starterGame.sim.at(p.x,p.z)?.id,destination),destination.id);
  await page.keyboard.press('Escape');await shot('08-relocation');
  await page.getByRole('button',{name:'시장',exact:true}).click();
+ await page.locator('.market-logistics > summary').click();
  assert.match(await page.locator('.storage-list').first().innerText(),/미니 창고/);
  await page.locator('.storage-card summary').first().click();await shot('09-stores');
  const beforeDiscard=await page.evaluate(()=>window.starterGame.sim.stock.wood);await page.getByLabel('폐기할 품목').first().selectOption('wood');await page.getByRole('button',{name:'최대 10개 폐기',exact:true}).click();assert.equal(await page.evaluate(()=>window.starterGame.sim.stock.wood),beforeDiscard);await page.getByRole('button',{name:'폐기 확인',exact:true}).click();assert.equal(await page.evaluate(()=>window.starterGame.sim.stock.wood),beforeDiscard-Math.min(10,beforeDiscard));await page.keyboard.press('Escape');
 
+ // Real upgrade buttons and market quantity/destination controls.
+ await page.evaluate(()=>{const g=window.starterGame,s=g.sim;s.rank=8;s.money=10000;const p=s.tiles.find(t=>!s.canBuild('warehouse',t.x,t.z,true));s.build('warehouse',p.x,p.z,true);s.stock.plank=30;s.stock.brick=30;s.stock.wood=80;s.stock.fuel=40;s.revision++;g.rebuild();const h=s.buildings.find(b=>b.type==='house');g.callbacks.onClick(h.x,h.z);});
+ await page.getByRole('button',{name:'시설 상세 정보',exact:true}).click();
+ await page.locator('.facility-upgrade button').click();
+ assert.equal(await page.evaluate(()=>window.starterGame.sim.buildings.find(b=>b.type==='house').level),2);
+ await shot('10-house-upgrade');await page.keyboard.press('Escape');
+ const hub=await page.evaluate(()=>{const g=window.starterGame,s=g.sim;s.build('road',8,11,true);const p=s.tiles.find(t=>!s.canBuild('roadhub',t.x,t.z,true));const r=s.build('roadhub',p.x,p.z,true);g.rebuild();g.callbacks.onClick(p.x,p.z);return {id:r.id};});
+ await page.getByRole('button',{name:'시설 상세 정보',exact:true}).click();
+ await page.locator('.facility-upgrade button').click();
+ assert.equal(await page.evaluate(id=>window.starterGame.sim.buildings.find(b=>b.id===id).level,hub.id),2);
+ await shot('11-transport-upgrade');await page.keyboard.press('Escape');await page.keyboard.press('Escape');
+ await page.getByRole('button',{name:'시장',exact:true}).click();
+ await page.locator('.market-logistics > summary').click();
+ await page.getByLabel('수출 터미널',{exact:true}).selectOption('b:'+hub.id);
+ const max=await page.getByLabel('주문 수량',{exact:true}).getAttribute('max');assert.ok(+max>10);
+ await page.getByRole('button',{name:'최대 '+max,exact:true}).click();assert.equal(await page.getByLabel('주문 수량',{exact:true}).inputValue(),max);
+ const options=await page.getByLabel('교역 도시',{exact:true}).locator('option').evaluateAll(nodes=>nodes.map(n=>n.value));assert.ok(options.length>1);
+ await page.getByLabel('교역 도시',{exact:true}).selectOption(options.at(-1));
+ assert.equal(await page.evaluate(()=>window.starterGame.sim.tradeDestination),options.at(-1));
+ await page.getByText('운송 경로 보기',{exact:true}).click();assert.equal(await page.locator('.trade-journey svg polyline').count(),2);
+ await shot('12-market-route');await page.setViewportSize({width:390,height:844});await page.waitForTimeout(300);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await shot('13-mobile-market');await page.locator('.market-logistics > summary').click();await shot('14-mobile-order');await page.setViewportSize({width:1440,height:900});await page.keyboard.press('Escape');
  // A saved town reloads into the same sparse scene, keeping its transport.
  report.saved=await page.evaluate(async()=>{
   const {Simulation}=await import('/src/app/game/simulation.js');const {encodeSave,decodeSave}=await import('/src/app/game/persistence.js');
   const g=window.starterGame,s=new Simulation(g.sim.region,decodeSave(encodeSave(g.sim.save())));s.paused=true;g.setSimulation(s);g.syncPeople();
   return {buildings:s.buildings.map(b=>b.type),workers:g.workerModels.size,parked:g.idleExportCarts.size,staff:g.world.children.filter(m=>m.userData.facilityStaff).length};
  });
- assert.deepEqual(report.saved,{buildings:['house','well','distillery'],workers:1,parked:1,staff:0});
+ assert.deepEqual(report.saved,{buildings:['house','well','distillery','warehouse','roadhub'],workers:2,parked:2,staff:0});
  // The CPU renderer uses the same scene objects and must also show parked vehicles without facility staff.
  await page.evaluate(async()=>{
   const {SoftwareRenderer}=await import('/src/app/game/software-renderer.js');const g=window.starterGame,cpu=new SoftwareRenderer({alpha:false});

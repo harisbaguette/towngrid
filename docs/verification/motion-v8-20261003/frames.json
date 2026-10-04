@@ -1,0 +1,38 @@
+{
+  "characters": 51,
+  "cells": 39168,
+  "preservedPortraits": 0,
+  "attachments": [
+    {
+      "id": "kai",
+      "row": 1,
+      "frame": 44,
+      "detachedAfter": 0
+    },
+    {
+      "id": "dew",
+      "row": 1,
+      "frame": 16,
+      "detachedAfter": 0
+    },
+    {
+      "id": "fia",
+      "row": 0,
+      "frame": 59,
+      "detachedAfter": 0
+    },
+    {
+      "id": "sora",
+      "row": 0,
+      "frame": 28,
+      "detachedAfter": 0
+    },
+    {
+      "id": "sora",
+      "row": 0,
+      "frame": 59,
+      "detachedAfter": 0
+    }
+  ],
+  "preservedGaits": 0
+}

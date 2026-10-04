@@ -1,0 +1,19 @@
+{
+  "bugs": 6,
+  "reproductionCases": 7,
+  "guideStarts": 12,
+  "guideDays": [
+    15.53,
+    26.25
+  ],
+  "guideTargetDays": 30,
+  "campaignAcceptance": {
+    "A1": true,
+    "A2": true,
+    "A3": true,
+    "A4": true,
+    "A5": true
+  },
+  "campaignDays": 56.25,
+  "scope": "Local game. Online human leaderboard and hosting are not included."
+}

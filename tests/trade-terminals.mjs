@@ -22,7 +22,7 @@ assert.deepEqual(Object.fromEntries(Object.entries(INFRA_BUILDINGS).filter(([,d]
  {roadhub:10,pavedhub:30,snowmobile:10,ferrydock:10,canaldock:30,streamdock:30,riverport:100,lakeport:100,coastport:200,polarferry:10,polarport:30,railterminal:100,airterminal:100});
 
 // The west gate is a built-in 10-lot road terminal.
-{const s=town();assert.deepEqual(s.tradeTerminals().map(t=>[t.id,t.capacity]),[['gate',10]]);assert.equal(ship(s),10);}
+{const s=town();assert.deepEqual(s.tradeTerminals().map(t=>[t.id,t.capacity]),[['gate',10]]);assert.equal(ship(s),20);}
 
 // Ports stand on water only, on their own kind of water; a big port needs wide water.
 {const s=town();
@@ -45,9 +45,9 @@ assert.deepEqual(Object.fromEntries(Object.entries(INFRA_BUILDINGS).filter(([,d]
  assert.equal(s.canBuild('pavedhub',8,12),'무역로와 이어진 포장 도로 옆에만 지을 수 있습니다');
  place(s,'pavedroad',8,11);assert.ok(s.paved.has('8,11')&&s.roads.has('8,11'),'paving keeps the road');
  const paved=place(s,'pavedhub',8,12);const [gate,a,b]=s.tradeTerminals();
- assert.deepEqual([gate.capacity,a.capacity,b.capacity],[10,10,30]);assert.equal(s.tradeConnection().building,paved.id);assert.equal(ship(s),30);
+ assert.deepEqual([gate.capacity,a.capacity,b.capacity],[10,10,30]);assert.equal(s.tradeConnection().building,paved.id);assert.equal(ship(s),60);
  // A choice holds, survives save/load, and falls back when the terminal is gone.
- run(s,90);assert.ok(s.chooseTradeRoute('b:'+hub.id).ok);assert.equal(ship(s),10);
+ run(s,90);assert.ok(s.chooseTradeRoute('b:'+hub.id).ok);assert.equal(ship(s),20);
  const back=new Simulation('river',decodeSave(encodeSave(s.save())));assert.equal(back.tradeConnection().building,hub.id);assert.ok(back.paved.has('8,11'));
  assert.equal(s.chooseTradeRoute('b:9999').ok,false);
  run(s,90);assert.ok(s.demolish(8,10).ok);assert.equal(s.tradeConnection().building,paved.id,'a demolished choice falls back');

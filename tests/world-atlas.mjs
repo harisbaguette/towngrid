@@ -34,7 +34,7 @@ for(const view of [FULL_VIEW,viewAround([650,400],500),viewAround([650,400],208)
   for(const b of labels.slice(i+1))assert.ok(a.box.x+a.box.w<=b.box.x||b.box.x+b.box.w<=a.box.x||a.box.y+a.box.h<=b.box.y||b.box.y+b.box.h<=a.box.y,'No label overlaps');
  }
 }
-const c=new Campaign({nation:'estern'}),target='estern-3',foreign=defaultStartingProvince('silvaen').id;
+const c=new Campaign({nation:'estern',provinceId:'estern-5'}),target='estern-3',foreign=defaultStartingProvince('silvaen').id;
 const initial=c.save();assert.equal(c.siteOffer('estern',target).status,'locked');
 assert.equal(c.foundSite('estern',undefined,target).ok,false);assert.deepEqual(c.save(),initial);
 c.active.rank=PROGRESSION_OFFSET+8;c.active.money=10000;

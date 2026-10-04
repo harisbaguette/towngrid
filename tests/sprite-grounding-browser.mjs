@@ -45,7 +45,8 @@ try{
      const cpu=new SoftwareRenderer();cpu.setSize(240,240);cpu.projection.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);cpu.pixelsPerWorldUnit=120;
      const calls=[],original=cpu.ctx.drawImage.bind(cpu.ctx);cpu.ctx.drawImage=(...args)=>{calls.push(args);original(...args);};
      const center=cpu.project(model.position.x,model.position.y,model.position.z);cpu.drawPixelCharacter(model,center);
-     const pos=model.userData.sprite.getWorldPosition(new THREE.Vector3()),anchor=cpu.project(pos.x,pos.y,pos.z),size=Math.round(model.userData.pixelHeight*120),draw=calls[0];
+     const pos=model.userData.sprite.getWorldPosition(new THREE.Vector3()),anchor=cpu.project(pos.x,pos.y,pos.z),size=Math.round(model.userData.sprite.scale.y*120),draw=calls[0];
+     if(draw[7]!==size||draw[8]!==size)throw Error(`${id}: CPU must preserve the WebGL sprite extent`);
      report.cpuAnchorError=Math.max(report.cpuAnchorError,Math.abs(draw[5]+size*model.userData.sprite.center.x-anchor.x),Math.abs(draw[6]+size*(1-model.userData.sprite.center.y)-anchor.y));
     }
    }

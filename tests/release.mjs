@@ -67,14 +67,14 @@ try{
  // Background: a music track, the region bed and daytime birds really start, and the playlist never leaves a gap.
  const sim={paused:false,region:'river',time:0,soundEvents:[],buildings:[],layout:{ecology:'meadow'}};
  a.update(sim,{x:12,z:12});a.tick();await settle();a.tick();
- assert.equal(a.status.music,'calm-theme');assert.deepEqual(a.status.ambience.sort(),['amb-river','forest-ambience']);
+ assert.equal(a.status.music,'music-morning');assert.deepEqual(a.status.ambience.sort(),['amb-river','forest-ambience']);
  const first=a.musicVoice;advance(57.5,.5,()=>a.tick());await settle();a.tick();
- assert.equal(a.musicVoice.name,'music-town','playlist moves on');assert.ok(a.musicVoice.started<=first.ends-3.9,'next track overlaps the end of the last one');
+ assert.equal(a.musicVoice.name,'music-bustling','playlist moves on');assert.ok(a.musicVoice.started<=first.ends-3.9,'next track overlaps the end of the last one');
  assert.ok(starts.filter(n=>MUSIC.includes(n.buffer?.file)).length>=2);
  // Region follows the site; the old bed fades out and is released.
- sim.region='coast';a.update(sim,{x:12,z:12});a.tick();await settle();a.tick();advance(5,.5,()=>a.tick());
+ sim.region='coast';sim.layout.ecology='coast';a.update(sim,{x:12,z:12});a.tick();await settle();a.tick();advance(5,.5,()=>a.tick());
  assert.ok(a.status.ambience.includes('amb-coast'));assert.ok(!Object.keys(a.beds).includes('amb-river'),'river bed released');
- sim.time=240;a.update(sim,{x:12,z:12});a.tick();await settle();a.tick();assert.ok(a.status.ambience.includes('amb-crickets'),'evening layer');
+ sim.time=44;a.update(sim,{x:12,z:12});a.tick();await settle();a.tick();assert.ok(a.status.ambience.includes('amb-crickets'),'evening layer matches visual night');
  // Game pause keeps the music but silences the world; unpausing brings the beds back.
  sim.paused=true;a.update(sim,{x:12,z:12});advance(5,.5,()=>a.tick());assert.ok(a.voices.has(a.musicVoice));assert.deepEqual(a.status.ambience,[]);
  sim.paused=false;a.update(sim,{x:12,z:12});a.tick();assert.ok(a.status.ambience.includes('amb-coast'));
@@ -105,6 +105,37 @@ try{
  a.setPresentation('room');a.tick();await settle();a.tick();advance(5,.5,()=>a.tick());
  assert.ok(a.status.ambience.includes('amb-room'));assert.ok(!a.status.ambience.includes('amb-hearth')||a.beds['amb-hearth'].target<.3);
  a.setPresentation(null);advance(5,.5,()=>a.tick());assert.equal(a.status.ambience.length,0,'game pause removes presentation ambience');
+ // Contextual music follows real UI/world state, shares crossfades and survives missing tracks.
+ const change=async(front,dialog,expected)=>{a.setInterface(front,dialog);advance(3.5,.5,()=>a.tick());await settle();a.tick();assert.equal(a.status.music,expected);assert.ok([...a.voices].filter(v=>v.channel==='music').length<=2);};
+ await change('world',null,'music-explore');
+ await change('game','trade','music-bustling');
+ assert.ok(a.status.ambience.includes('amb-room'),'trade has indoor ambience while paused');
+ await change('game',null,'music-industry');
+ a.update(sim,{x:12,z:12});await change('game',null,a.musicPositions.get('town')?.name||'music-morning');
+ assert.ok(a.musicVoice.offset>0,'returning from a menu resumes the town track');
+ sim.paused=false;sim.raid={finished:false};a.update(sim,{x:12,z:12});
+ advance(3.5,.5,()=>a.tick());await settle();a.tick();assert.equal(a.status.music,'music-danger');
+ sim.raid.finished=true;sim.events=[{type:'storm',time:sim.time}];a.update(sim,{x:12,z:12});a.tick();await settle();a.tick();
+ assert.ok(a.status.ambience.includes('amb-rain'),'actual storm drives rain');
+ a.stopVoices(['effects']);const offscreen=starts.length;
+ sim.soundEvents=Array.from({length:50},()=>({type:'footstep',x:12,z:12}));a.update(sim,{x:12,z:12},{span:800});
+ assert.equal(starts.slice(offscreen).filter(n=>n.buffer?.file==='footstep00').length,0,'world zoom suppresses local sounds');
+ sim.soundEvents=[{type:'raid',x:0,z:0}];a.update(sim,{x:500,z:500},{span:800});
+ assert.ok([...a.voices].some(v=>v.type==='raid'),'global warning remains audible far from the village');
+ for(let i=0;i<12;i++){a.setInterface(i%2?'world':'game',i%3?'trade':null);advance(.4,.2,()=>a.tick());await settle();assert.ok([...a.voices].filter(v=>v.channel==='music').length<=2,'rapid menu switches');}
+ a.setInterface('world');advance(4,.5,()=>a.tick());await settle();a.tick();
+ a.stopVoices(['music']);a.musicResume=null;delete a.buffers['music-explore'];a.failed.push('music-explore');
+ a.tick();await settle();a.tick();assert.equal(a.status.music,'music-morning','failed exploration track falls back to town music');
+ const attempts=requests.filter(u=>u.includes('music-explore')).length;advance(5,.5,()=>a.tick());
+ assert.equal(requests.filter(u=>u.includes('music-explore')).length,attempts,'failed background is not requested every frame');
+ await a.retryFailed();advance(4,.5,()=>a.tick());await settle();a.tick();
+ assert.equal(a.status.music,'music-explore','explicit retry restores failed background music');
+ a.beds['amb-wind']?.stop();delete a.beds['amb-wind'];delete a.buffers['amb-wind'];a.failed.push('amb-wind');
+ await a.retryFailed();assert.ok(a.buffers['amb-wind'],'explicit retry also restores missing ambience');assert.ok(!a.failed.includes('amb-wind'));
+ a.setInterface('home');a.loading=true;a.refreshScene(true);
+ assert.equal(a.scene,'home','sample downloads do not masquerade as a screen transition');a.loading=false;
+ a.setMuted(true);for(const type of ['build','repair','raid','storm','victory'])a.play(type);a.tick();assert.equal(a.voices.size,0);
+ console.log('PASS contextual music, crossfade bounds, weather, distant warnings, world zoom, failed-track fallback and mute');
  a.dispose();assert.equal(activeConnections,0);assert.equal(a.voices.size,0);
  console.log('PASS audio fallback, volume sanitation, voice cap, background playlist/beds, pause/mute, reusable noise and full node cleanup');
 }finally{Object.assign(globalThis,original);}

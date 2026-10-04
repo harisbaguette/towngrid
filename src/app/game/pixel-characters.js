@@ -4,6 +4,7 @@ import { pixelMetadata } from './pixel-character-meta.js';
 import { characterDistance } from './character-movement.js';
 import { characterPose } from './character-motion-state.js';
 import { groundSprite } from './sprite-grounding.js';
+import { characterGroundHeight } from './character-ground-contact.js';
 
 const images = new Map(), loading = new Map(), textures = new Map();
 export async function loadPixelCharacters(race) {
@@ -58,7 +59,7 @@ export function createPixelCharacter(index, race, appearance) {
  return group;
 }
 
-export function animatePixelCharacter(group, worker, time, camera) {
+export function animatePixelCharacter(group, worker, time, camera, groundHeight=.026) {
  const u = group.userData;
  if (!u.pixel) return false;
  if (!u.image && images.has(u.identity.id)) { u.image = images.get(u.identity.id); u.texture.image = u.image; u.texture.needsUpdate = true; }
@@ -67,6 +68,7 @@ export function animatePixelCharacter(group, worker, time, camera) {
  const metadata = pixelMetadata.get(u.identity.id);
  u.motionState ||= {};
  const {action,direction,elapsed,frame}=characterPose(u.motionState,worker,time,cameraAzimuth,metadata,distance);
+ const grounded=metadata?.groundContactActions?.includes(action);
  u.current=action;u.actionTime=u.motionState.actionAt;u.gaitDistance=distance;
  const atlas = pixelAtlasFrame(direction, frame, metadata);
  u.sprite.center.set(atlas.anchor[0], 1 - atlas.anchor[1]);
@@ -74,19 +76,23 @@ export function animatePixelCharacter(group, worker, time, camera) {
  if (frame !== u.frame || direction !== u.direction || atlas.rows !== u.atlas.rows || atlas.row !== u.atlas.row || atlas.columns !== u.atlas.columns) {
   u.frame = frame; u.direction = direction;
   u.texture.repeat.set(1 / atlas.columns, 1 / atlas.rows);
-  u.texture.offset.set(frame / atlas.columns, (atlas.rows - 1 - atlas.row) / atlas.rows);
+  u.texture.offset.set(atlas.frame / atlas.columns, (atlas.rows - 1 - atlas.row) / atlas.rows);
  }
  u.atlas = atlas;
- group.position.set(worker.x, .04, worker.z);
+ const supportHeight=characterGroundHeight(worker,metadata,direction,frame,atlas,u.pixelHeight,cameraAzimuth,groundHeight);
+ u.supportHeight=supportHeight;
+ group.position.set(worker.x, grounded ? supportHeight+.002 : .04, worker.z);
  group.rotation.set(0, 0, 0);
- u.sprite.position.y = u.flying ? .16 + Math.sin(time * 3 + (Number(worker.id) || 0)) * .025 : .035;
+ u.sprite.position.y = u.flying ? .16 + Math.sin(time * 3 + (Number(worker.id) || 0)) * .025 : grounded ? 0 : .035;
+ const shadowHeight=typeof groundHeight==='function'?groundHeight(worker.x,worker.z):supportHeight;
+ u.shadow.position.y=grounded ? shadowHeight-supportHeight+.003 : .008;
  const defeated = action === 'defeat';
  const deathClip=pixelClip('defeat',metadata),deathDuration=metadata?.authoredDefeat?deathClip.frames.length/deathClip.fps:0;
  u.sprite.material.rotation = defeated&&!metadata?.authoredDefeat ? -Math.PI / 2 : 0;
  u.sprite.material.opacity = defeated ? Math.max(0,Math.min(1,1-(elapsed-deathDuration)/Math.max(.1,2-deathDuration))) : 1;
  u.sprite.material.depthWrite = u.sprite.material.opacity === 1;
  u.shadow.material.opacity = .16 * u.sprite.material.opacity;
- if(defeated)u.sprite.position.y=metadata?.authoredDefeat ? .035 : .08;
+ if(defeated)u.sprite.position.y=metadata?.authoredDefeat ? (grounded ? 0 : .035) : .08;
  groundSprite(u.sprite, { azimuth: cameraAzimuth, height: u.sprite.position.y });
  u.lastTime = time;
  return true;

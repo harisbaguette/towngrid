@@ -33,7 +33,7 @@ export function attachIndustryAnimation(type, {part, position, setFrame, rope, s
    const show = spec.show === 'always' ? true : spec.show === 'work' ? work
     : spec.show === 'supply' ? enabled && state?.active
     : spec.show === 'input' ? state?.workpiece
-    : spec.show === 'charge' ? enabled && (sim?.batteryCharge || 0) > spec.threshold
+    : spec.show === 'charge' ? enabled && (b?.charge ?? sim?.batteryCharge ?? 0) > spec.threshold
     : spec.show === 'care' ? enabled && sim?.stage < 15 && (sim?.health?.nextCare || 0) > (sim?.time || 0)
     : spec.show === 'grid' ? enabled && !!sim?.poweredAt?.(b) : false;
    layer.visible = !!point && !!show;
@@ -64,8 +64,8 @@ export function attachIndustryAnimation(type, {part, position, setFrame, rope, s
    }
   }
   for(const [i,pile] of stock.entries()){
-   pile.visible = !!state && !state.service && RESOURCE_FRAMES[state.output]!==undefined && state.count > i*4;
-   setFrame(pile,RESOURCE_FRAMES[state?.output]??0);
+   const item=state?.piles?state.piles[i]:state&&!state.service&&state.count>i*4?state.output:null;pile.visible = !!item && RESOURCE_FRAMES[item]!==undefined;
+   setFrame(pile,RESOURCE_FRAMES[item]??0);
    const point=(profile.outputPos||[[76,153],[96,163],[117,153]])[i];
    position(pile,...point);
   }

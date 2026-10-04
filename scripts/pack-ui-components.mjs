@@ -1,0 +1,11 @@
+import {createRequire} from 'node:module';
+import {readFile,mkdir,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+const root='art-source/ui-components/2026-10-03/runtime-frames',out='public/assets/ui/industrial';
+const manifest=JSON.parse(await readFile(root+'/manifest.json','utf8'));
+const wrangler=createRequire(import.meta.resolve('wrangler')),sharp=createRequire(wrangler.resolve('miniflare'))('sharp');
+await mkdir(out,{recursive:true});
+const source=await readFile(root+'/'+manifest.source);
+for(const [name,{slice,...rect}] of Object.entries(manifest.components))await sharp(source).extract(rect).png().toFile(out+'/'+name+'.png');
+await writeFile(out+'/manifest.json',JSON.stringify({sourceHash:createHash('sha256').update(source).digest('hex'),components:manifest.components},null,2)+'\n');
+console.log('Packed 4 industrial UI frames');

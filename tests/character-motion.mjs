@@ -22,7 +22,7 @@ pose=characterPose(state,worker,4.11,camera,meta,.15);
 assert.equal(pose.direction,pixelDirection(worker.dir,camera));
 pose=characterPose(state,worker,4.21,camera,meta,.15);
 assert.equal(pose.action,'walk');
-assert.equal(pose.frame,pixelFrame('walk',.15/meta.clips.walk.strideLength*12/meta.clips.walk.fps,1,meta));
+assert.equal(pose.frame,pixelFrame('walk',.15/meta.clips.walk.strideLength*meta.clips.walk.frames.length/meta.clips.walk.fps,1,meta));
 pose=characterPose(state,worker,5,camera+Math.PI/2,meta,.15);
 assert.equal(pose.action,'walk','camera rotation is not an actor pivot');
 worker.attacking=true;worker.walking=false;
@@ -45,6 +45,11 @@ const metadata=readdirSync('public/assets/pixel-characters',{withFileTypes:true}
  .filter(entry=>entry.isDirectory())
  .map(entry=>JSON.parse(readFileSync(`public/assets/pixel-characters/${entry.name}/frames.json`)));
 for(const rig of metadata)for(let view=0;view<4;view++){
+ assert.equal(rig.handlingRevision,'weight-transfer-and-handling-1',`${rig.id}: independent handling pack`);
+ assert.equal(rig.clips.pickup.frames.length,12);
+ assert.equal(rig.clips.drop.frames.length,12);
+ assert.ok(rig.clips.drop.frames.every(frame=>!rig.clips.pickup.frames.includes(frame)),`${rig.id}: lowering must have its own poses`);
+ for(const action of ['pickup','drop'])assert.ok((rig.clips[action].frames.length-1)/rig.clips[action].fps<.55,`${rig.id}: complete handling before logistics advances`);
  const azimuth=camera+view*Math.PI/2,s={},w={dir:0,walking:true,task:{carried:true}};
  characterPose(s,w,0,azimuth,rig,.1);
  for(let corner=1;corner<=4;corner++){
@@ -59,6 +64,12 @@ for(const rig of metadata)for(let view=0;view<4;view++){
  assert.equal(holding.action,'carry');
  assert.equal(holding.frame,rig.clips.pickup.frames.at(-1),'waiting carrier keeps a box and planted feet');
  assert.equal(characterPose(s,w,5,azimuth,rig,.26).frame,holding.frame);
+ const hit={},loaded={dir:w.dir,hp:10,walking:false,task:{carried:true}};
+ characterPose(hit,loaded,0,azimuth,rig,.26);loaded.hp=9;
+ const recoil=characterPose(hit,loaded,.1,azimuth,rig,.26);
+ assert.equal(recoil.action,'hurt');
+ assert.ok(rig.variants.hurt.carry.frames.includes(recoil.frame),`${rig.id}: damage must not remove carried goods`);
+ assert.equal(characterPose(hit,loaded,.4,azimuth,rig,.26).frame,rig.clips.pickup.frames.at(-1));
  for(const action of ['pickup','drop']){
   w.handling=action;w.dir+=Math.PI/2;
   for(const elapsed of [0,.09,.18,.36,.5]){
@@ -87,7 +98,7 @@ const injury={},damaged={dir:0,hp:75,attacking:true};
 characterPose(injury,damaged,0,camera,meta);
 damaged.hp=74;characterPose(injury,damaged,.01,camera,meta);
 damaged.hp=73;
-assert.equal(characterPose(injury,damaged,.13,camera,meta).frame,meta.clips.hurt.frames[1],
+assert.equal(characterPose(injury,damaged,.13,camera,meta).frame,pixelFrame('hurt',.12,1,meta),
  'continuous damage must not reset the flinch to its first frame every tick');
 
 // Canvas must draw the same fallen frame and anchor as WebGL, not rotate an
@@ -95,8 +106,8 @@ assert.equal(characterPose(injury,damaged,.13,camera,meta).frame,meta.clips.hurt
 pixelMetadata.set('garen',meta);
 const model=createPixelCharacter(0,'human','garen'),fallen={x:0,z:0,dir:0,hp:0};
 animatePixelCharacter(model,fallen,0);
-animatePixelCharacter(model,fallen,.7);
-model.userData.image={width:8192,height:512};
+animatePixelCharacter(model,fallen,.81);
+model.userData.image={width:8192,height:meta.atlasRows*128};
 const calls=[],ctx=new Proxy({}, {get:(_,key)=>(...args)=>calls.push([key,...args]),set:()=>true});
 const testCamera=new THREE.OrthographicCamera(-2,2,2,-2,.1,100);
 testCamera.position.setFromSphericalCoords(20,QUARTER_POLAR,Math.PI/4);testCamera.lookAt(0,0,0);testCamera.updateMatrixWorld();
@@ -105,7 +116,8 @@ const center=project(model.position.x,model.position.y,model.position.z);
 SoftwareRenderer.prototype.drawPixelCharacter.call({ctx,pixelsPerWorldUnit:128,project},model,center);
 assert.equal(calls.some(([name])=>name==='rotate'),false,'authored defeat stays upright in atlas coordinates');
 const draw=calls.find(([name])=>name==='drawImage');
-assert.equal(draw[2],meta.clips.defeat.frames.at(-1)*128);
+assert.equal(draw[2],meta.clips.defeat.frames.at(-1)%64*128);
+assert.equal(draw[3],Math.floor(meta.clips.defeat.frames.at(-1)/64)*4*128);
 const size=Math.round(model.userData.pixelHeight*128);
 const world=model.userData.sprite.getWorldPosition(new THREE.Vector3()),anchor=project(world.x,world.y,world.z);
 assert.equal(draw[6],Math.round(anchor.x-size*model.userData.sprite.center.x));

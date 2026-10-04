@@ -1,0 +1,77 @@
+{
+  "result": "PASS",
+  "results": [
+    {
+      "suite": "start-map",
+      "passed": true,
+      "stdout": "{\"passed\":true,\"plots\":1027,\"oldSaves\":3,\"starts\":279,\"coverage\":240,\"distributions\":{\"estern\":{\"meadow\":59,\"coast\":7,\"marsh\":9,\"forest\":7},\"silvaen\":{\"forest\":7,\"meadow\":4,\"marsh\":2},\"kardum\":{\"forest\":1,\"meadow\":1},\"miel\":{\"forest\":4,\"meadow\":2},\"rivente\":{\"meadow\":19,\"coast\":6,\"forest\":4},\"arsel\":{\"forest\":12,\"basin\":21,\"meadow\":55,\"marsh\":8,\"snow\":6},\"broden\":{\"forest\":5,\"meadow\":16,\"marsh\":3,\"basin\":1,\"coast\":3},\"neiren\":{\"forest\":2,\"meadow\":11,\"coast\":4}}}",
+      "stderr": ""
+    },
+    {
+      "suite": "world-grid",
+      "passed": true,
+      "stdout": "{\"result\":\"PASS\",\"checked\":[\"one site square per province\",\"sides are neighbour squares\",\"trade water = side water\",\"every terrain on some side\",\"capitals play like their nation\",\"sea under a fifth\",\"all ecologies playable\",\"ferry routes\",\"start land and road dry\",\"port on its own water\",\"layout saved\",\"bad layout rejected\",\"mountain side ground and conveyors\",\"old saves keep region water\",\"bare map legacy\",\"campaign sites on their square\"]}",
+      "stderr": ""
+    },
+    {
+      "suite": "starting-sites",
+      "passed": true,
+      "stdout": "{\"result\":\"PASS\",\"nations\":8,\"locations\":279,\"checks\":[\"noncapital defaults\",\"selected location and terrain\",\"invalid starts rejected\",\"new and legacy saves\",\"distinct expansion sites\"]}",
+      "stderr": ""
+    },
+    {
+      "suite": "world-atlas",
+      "passed": true,
+      "stdout": "{\"result\":\"PASS\",\"terrainCells\":1550,\"sprites\":16,\"terrainBytes\":2263450,\"checks\":[\"raster matches world\",\"shoreline and river neighbors\",\"fixed type size and nonoverlapping labels\",\"read-only quotes\",\"promotion/material gates\",\"selected plot transaction\",\"preview equals generated tiles\",\"save compatibility\"]}",
+      "stderr": ""
+    },
+    {
+      "suite": "continuous-map",
+      "passed": true,
+      "stdout": "{\"passed\":true,\"plots\":1027,\"checks\":[\"every land square\",\"exact neighbors and ports\",\"multiple plots per region\",\"preview and generation\",\"save roundtrip\",\"invalid plot rejection\",\"political ownership\",\"home protection\",\"rendering reads saved terrain\"]}",
+      "stderr": ""
+    },
+    {
+      "suite": "world-realms",
+      "passed": true,
+      "stdout": "{\"passed\":true,\"countries\":14,\"major\":4,\"minor\":10,\"terrainMarks\":523,\"historicalCountries\":30,\"relocatedPolitics\":3}",
+      "stderr": ""
+    },
+    {
+      "suite": "wilderness",
+      "passed": true,
+      "stdout": "{\"passed\":true,\"unclaimedCells\":441,\"unclaimedPlots\":343,\"nationalPlots\":684,\"nationalUndeveloped\":665,\"settlements\":19}",
+      "stderr": ""
+    },
+    {
+      "suite": "frontier-land",
+      "passed": true,
+      "stdout": "{\"passed\":true,\"restricted\":108,\"biomes\":8,\"claimedPlots\":4,\"saveCompatible\":true}",
+      "stderr": ""
+    },
+    {
+      "suite": "atlas-isometric",
+      "passed": true,
+      "stdout": "{\"passed\":true,\"views\":4,\"pickedCells\":6200,\"authoredSprites\":64,\"terrainObjects\":325}",
+      "stderr": ""
+    },
+    {
+      "suite": "atlas-geometry",
+      "passed": true,
+      "stdout": "{\"tiles\":1550,\"terrainPaths\":10,\"reductionPercent\":99.4,\"countries\":14,\"provinces\":180}",
+      "stderr": ""
+    },
+    {
+      "suite": "map-edges",
+      "passed": true,
+      "stdout": "Map edges: four rotated layouts, mountain yield/resources, forest density, sea/freshwater ports/irrigation, matching scenery and save compatibility PASS.",
+      "stderr": ""
+    },
+    {
+      "suite": "biomes",
+      "passed": true,
+      "stdout": "Biomes PASS: eight playable profiles, actual resource advantages, oil/oasis, marsh water, matching scenery, deterministic generation and old/new saves.",
+      "stderr": ""
+    }
+  ]
+}

@@ -38,11 +38,12 @@ export function pixelDirection(heading = 0, cameraAzimuth = Math.PI / 4) {
  return ((Math.round((cameraAzimuth - heading - Math.PI / 4) / (Math.PI / 2)) % 4) + 4) % 4;
 }
 export function pixelAtlasFrame(direction, frame, metadata) {
- // Eight-row originals remain readable; newly packed atlases need four rows.
+ // Four facing rows per page; logical frame numbers can span multiple pages.
  const directions = metadata?.directions || LEGACY_DIRECTIONS;
  const facing = PIXEL_DIRECTIONS[((direction % 4) + 4) % 4];
  const row = Math.max(0, directions.indexOf(facing));
- return { row, rows: directions.length, columns: metadata?.columns?.length || 8, anchor: metadata?.anchors?.[row]?.[frame] || [.5, PIXEL_BASELINE], scale: metadata?.frameScales?.[frame] || 1 };
+ const columns = metadata?.atlasColumns || metadata?.columns?.length || 8;
+ return { frame: frame % columns, row: row + Math.floor(frame / columns) * directions.length, rows: metadata?.atlasRows || directions.length, columns, anchor: metadata?.anchors?.[row]?.[frame] || [.5, PIXEL_BASELINE], scale: metadata?.frameScales?.[frame] || 1 };
 }
 export function pixelAction(worker) {
  if (worker.hp !== undefined && worker.hp <= 0) return 'defeat';

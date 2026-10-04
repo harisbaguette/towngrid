@@ -1,0 +1,119 @@
+/* One image-backed skin; screen styles own placement and information density. */
+:root {
+ --ui-button-art:url('/assets/ui/industrial/button-teal.png');
+ --ui-action-art:url('/assets/ui/industrial/button-orange.png');
+ --ui-panel-art:url('/assets/ui/industrial/panel-teal.png');
+ --ui-paper-art:url('/assets/ui/industrial/panel-paper.png');
+}
+:is(.screen-button,.screen-back,.screen-sound,.screen-motion-toggle,
+ .minimal-game .town-actions button,.minimal-camera button,.minimal-facility-actions button,
+ .start-primary,.start-top>button,.start-find,.start-plot-find,
+ .start-world .atlas-rotation button,.start-world .atlas-zoom button,.start-preview-tools button,
+ .game-dialog [data-slot=button]) {
+ position:relative; isolation:isolate; border:0; border-radius:0; box-shadow:none;
+ background:transparent; color:#fff5df; font-weight:750; text-shadow:0 1px #082b32;
+ --frame-art:var(--ui-button-art); --frame-slice:42; --frame-width:12px;
+}
+:is(.screen-button,.screen-back,.screen-sound,.screen-motion-toggle,
+ .minimal-game .town-actions button,.minimal-camera button,.minimal-facility-actions button,
+ .start-primary,.start-top>button,.start-find,.start-plot-find,
+ .start-world .atlas-rotation button,.start-world .atlas-zoom button,.start-preview-tools button,
+ .game-dialog [data-slot=button])::before {
+ content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+ border-image:var(--frame-art) var(--frame-slice) fill / var(--frame-width) / 0 stretch;
+ image-rendering:pixelated; clip-path:polygon(4px 0,calc(100% - 4px) 0,100% 4px,100% calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,0 calc(100% - 4px),0 4px);
+}
+:is(.screen-button.primary,.title-prompt,.minimal-game .town-actions .build-action,.start-primary,.game-dialog [data-slot=button][data-variant=default]) { --frame-art:var(--ui-action-art); background:transparent; color:#fff9e9; text-shadow:0 1px #934108; }
+:is(.screen-button,.screen-back,.screen-sound,.screen-motion-toggle,.start-primary,.start-find,.start-plot-find,.minimal-game .town-actions button,.minimal-camera button,.minimal-facility-actions button,.game-dialog [data-slot=button]):hover:not(:disabled) { background:transparent; }
+:is(.screen-button,.screen-back,.screen-sound,.screen-motion-toggle,.start-primary,.start-find,.start-plot-find,.minimal-game .town-actions button,.minimal-camera button,.minimal-facility-actions button,.game-dialog [data-slot=button]):hover:not(:disabled)::before { filter:brightness(1.15); }
+:is(.screen-button,.start-primary,.minimal-game .town-actions button,.game-dialog [data-slot=button]):disabled { background:transparent; color:#b7bfba; opacity:1; text-shadow:none; box-shadow:none; }
+:is(.screen-button,.start-primary,.minimal-game .town-actions button,.game-dialog [data-slot=button]):disabled::before { filter:grayscale(1) brightness(.7); }
+.front-screen button.screen-sound,.front-screen button.screen-motion-toggle { position:absolute; }
+.start-world button.start-find,.start-world button.start-plot-find { position:absolute; }
+.screen-button { min-height:56px; padding:16px 24px; --frame-width:16px; }
+.home-menu { gap:8px; }
+.home-menu .primary { min-height:64px; margin-bottom:0; }
+.home-menu .screen-button { font-size:18px; }
+.title-prompt { min-width:290px; min-height:58px; }
+.title-enter:hover .title-prompt { background:transparent; }
+.title-enter:hover .title-prompt::before { filter:brightness(1.15); }
+.start-primary { --frame-width:16px; }
+.start-primary:hover:not(:disabled) { background:transparent; }
+.start-breadcrumb>button { --frame-width:10px; }
+.start-top:not(.start-breadcrumb)>button { --frame-width:13px; }
+.minimal-game .town-actions { background:transparent; padding:0; gap:8px; box-shadow:none; }
+.minimal-game .town-actions button { min-height:54px; height:54px; --frame-width:12px; }
+.minimal-game .town-actions .build-action { width:136px; }
+.minimal-game .town-actions button span { color:#fff5df; }
+.minimal-resources,.minimal-time,.minimal-game .minimal-construction,.minimal-game .minimal-facility,
+.start-bottom,.start-breadcrumb,.minimal-popover[data-slot=popover-content] {
+ isolation:isolate; background:transparent; border:0; border-radius:0; box-shadow:none;
+ --frame-art:var(--ui-panel-art); --frame-slice:48; --frame-width:13px;
+}
+.minimal-resources,.minimal-time { position:relative; padding:7px 10px; }
+:is(.minimal-resources,.minimal-time,.minimal-game .minimal-construction,.minimal-game .minimal-facility,
+ .start-bottom,.start-breadcrumb,.minimal-popover[data-slot=popover-content])::before {
+ content:''; display:block; position:absolute; inset:0; z-index:-1; pointer-events:none;
+ border-image:var(--frame-art) var(--frame-slice) fill / var(--frame-width) / 0 stretch;
+ image-rendering:pixelated;
+}
+.minimal-game .minimal-construction { padding:10px 16px 14px; }
+.minimal-game .minimal-construction .build-item { background:#f1eddf; color:#19383b; border:2px solid #71938c; border-radius:1px; padding:2px 4px; grid-template-rows:20px 54px 24px; height:106px; }
+.minimal-game .minimal-construction .build-item>strong { grid-row:1; color:#19383b; font-weight:750; }
+.minimal-game .minimal-construction .build-item>img { grid-row:2; }
+.minimal-game .minimal-construction .build-item .item-price { background:#193f42; color:#fff5df; width:calc(100% + 8px); margin-left:-4px; }
+.minimal-game .minimal-construction .build-item.selected { border-color:#ee701b; box-shadow:inset 0 0 0 2px #ee701b; }
+.minimal-game .minimal-construction .build-item:disabled { background:#9ca69c; opacity:.75; }
+.minimal-game .minimal-construction .build-item:disabled strong { color:#35453f; }
+.minimal-game .minimal-construction .build-item:disabled .item-price { background:#35453f; color:#e3e4d7; }
+.minimal-game .minimal-construction .build-item:hover:not(:disabled) { background:#fff7df; border-color:#f9c36a; }
+.minimal-facility { padding:18px 20px; }
+.minimal-meter [data-slot=progress] { height:10px; border:1px solid #0c292d; border-radius:0; box-shadow:inset 0 1px #6c8984; }
+.minimal-meter [data-slot=progress-indicator] { background:repeating-linear-gradient(90deg,transparent 0 18px,#0b766f80 18px 20px),#1bb8a4; box-shadow:inset 0 2px #83d2bf,inset 0 -2px #0a8b7e; }
+.start-world .atlas-rotation,.start-world .atlas-v2 .atlas-zoom,.start-preview-tools { background:transparent; gap:4px; overflow:visible; }
+.start-world .atlas-rotation button,.start-world .atlas-zoom button,.start-preview-tools button { width:44px; --frame-width:11px; }
+.start-world .atlas-zoom button+button { border:0; }
+.start-world .atlas-zoom button:disabled::before { filter:grayscale(1) brightness(.75); }
+.start-bottom { --frame-width:14px; }
+.start-race button[aria-pressed=true] { background:transparent; box-shadow:none; }
+.start-race button { text-shadow:none; }
+.minimal-dialog.game-dialog,.start-options[data-slot=dialog-content] {
+ isolation:isolate; background:#f1eddf; border:0; border-radius:0; box-shadow:0 12px 35px #0b252948;
+}
+.minimal-dialog.game-dialog::before,.start-options[data-slot=dialog-content]::before {
+ content:''; display:block; position:absolute; inset:0; z-index:-1; pointer-events:none;
+ border-image:var(--ui-paper-art) 48 fill / 16px / 0 stretch; image-rendering:pixelated;
+}
+.minimal-dialog.game-dialog [data-slot=dialog-title] { margin:-6px -6px 16px; padding:12px 38px 12px 14px; background:#16494d; color:#fff5df; border:0; }
+.minimal-dialog.game-dialog>[data-slot=dialog-close] { color:#fff5df; background:#193f42; right:20px; top:20px; }
+/* The component catalogue and newly added screens use the same image skin. */
+[data-slot=button]:not([data-variant=link]) { position:relative; isolation:isolate; background:transparent; color:#fff5df; border:0; border-radius:0; box-shadow:none; --frame-art:var(--ui-button-art); }
+[data-slot=button]:not([data-variant=link])::before { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; border-image:var(--frame-art) 42 fill / 10px / 0 stretch; image-rendering:pixelated; }
+[data-slot=button][data-variant=default],[data-slot=button][aria-pressed=true] { --frame-art:var(--ui-action-art); color:#fff9e9; }
+[data-slot=button][data-variant=destructive]::before { filter:hue-rotate(165deg) saturate(.7); }
+[data-slot=button]:disabled::before { filter:grayscale(1) brightness(.7); }
+[data-slot=button]:hover:not(:disabled) { background:transparent; }
+.ui-frame { position:relative; isolation:isolate; background:transparent; border:0; border-radius:0; box-shadow:none; padding:14px; }
+.ui-frame::before { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; border-image:var(--ui-paper-art) 48 fill / 16px / 0 stretch; image-rendering:pixelated; }
+.ui-frame-heading { padding:8px 10px; background:#16494d; }
+.build-item { position:relative; isolation:isolate; }
+.build-item::before { content:''; display:block; position:absolute; inset:0; z-index:-1; pointer-events:none; border-image:var(--ui-paper-art) 48 fill / 9px / 0 stretch; image-rendering:pixelated; }
+.build-item.selected::after { content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(#ed701c,#ed701c) 0 0/16px 4px no-repeat,linear-gradient(#ed701c,#ed701c) 0 0/4px 16px no-repeat,linear-gradient(#ed701c,#ed701c) 100% 0/16px 4px no-repeat,linear-gradient(#ed701c,#ed701c) 100% 0/4px 16px no-repeat,linear-gradient(#ed701c,#ed701c) 0 100%/16px 4px no-repeat,linear-gradient(#ed701c,#ed701c) 0 100%/4px 16px no-repeat,linear-gradient(#ed701c,#ed701c) 100% 100%/16px 4px no-repeat,linear-gradient(#ed701c,#ed701c) 100% 100%/4px 16px no-repeat; }
+.build-item:disabled::before { filter:grayscale(.8) brightness(.7); }
+.build-item.selected .item-price { background:#193f42; color:#fff5df; }
+.screen-loading-track { height:12px; padding:2px; background:#102f32; border:2px solid #83a59c; border-radius:0; box-shadow:0 2px #08292c; }
+.screen-loading-track span { background:repeating-linear-gradient(90deg,transparent 0 22px,#086e6b90 22px 24px),#1bb8a4; box-shadow:inset 0 1px #9addc6; }
+@media(max-width:600px) {
+ .screen-button { min-height:50px; padding:13px 20px; --frame-width:13px; }
+ .home-menu .primary { min-height:56px; }
+ .minimal-resources,.minimal-time { padding:6px; --frame-width:10px; }
+ .minimal-game .town-actions button { min-height:48px; height:48px; }
+ .minimal-game .town-actions .build-action { width:116px; }
+ .start-primary { --frame-width:13px; }
+ .minimal-game .minimal-construction { padding:8px 12px 12px; }
+}
+@media(max-height:560px) and (min-aspect-ratio:1/1) {
+ .home-menu .screen-button,.home-menu .primary { min-height:44px; padding:10px 16px; font-size:14px; --frame-width:12px; }
+ .home-menu { gap:6px; }
+ .start-primary { --frame-width:12px; }
+}

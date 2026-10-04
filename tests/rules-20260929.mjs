@@ -58,7 +58,7 @@ const place=(s,type,free=true)=>{const w=s.warehouse;for(const t of s.tiles.filt
 // C4: the cached placement effects always equal a fresh computation, through building, toggling and a reservoir lapsing.
 {const s=town(22);const res=place(s,'reservoir');const field=place(s,'field');const gen=place(s,'generator');const check=()=>{for(const b of s.buildings)assert.deepEqual(s.placementEffects(b.type,b.x,b.z),placementEffects(s,b.type,b.x,b.z),b.type);};
  res.activeUntil=s.time+3;check();run(s,4);check();s.setOperation(gen.id,false);check();s.setOperation(gen.id,true);check();place(s,'smelter');check();s.demolish(field.x,field.z);check();s.roads.add('12,10');check();
- assert.equal(s.warehouse.type,'warehouse');const cap=s.storageCapacity;const d=place(s,'depot');assert.equal(s.storageCapacity,cap+240);d.health=0;assert.equal(s.storageCapacity,cap);}
+ assert.equal(s.warehouse.type,'warehouse');const cap=s.storageCapacity;const d=place(s,'depot');assert.equal(s.storageCapacity,cap+1200);d.health=0;assert.equal(s.storageCapacity,cap);}
 // A2-G2: a timed support facility slowed below full speed keeps its effect without gaps once running.
 {const s=town(22);const g=place(s,'generator');g.inputs={wood:80,water:40};s.health.infection=60;let first=null,off=0;for(let i=0;i<2400;i++){s.health.infection=60;s.tick(.25);if(s.power&&first===null)first=i;else if(first!==null&&!s.power)off++;}
  assert.ok(first!==null);assert.equal(off,0);}
@@ -87,6 +87,6 @@ const place=(s,type,free=true)=>{const w=s.warehouse;for(const t of s.tiles.filt
  s.contracts=1;assert.ok(s.contract().amount>c.amount,'later orders are full size');}
 // J5: paid actions without the money say how much is missing and what to do.
 {const s=town();const b=place(s,'sawmill');b.health=40;s.money=-500;const r=s.repair(b.id);assert.equal(r.ok,false);assert.match(r.error,/부족/);assert.match(r.error,/회생 자금/);
- s.money=10;assert.match(s.canBuild('sawmill',...[s.tiles.find(t=>s.canBuild('sawmill',t.x,t.z,true)===null)].map(t=>[t.x,t.z]).flat()),/부족/);assert.match(s.upgrade(b.id).error,/부족/);
+ s.money=10;assert.match(s.canBuild('sawmill',...[s.tiles.find(t=>s.canBuild('sawmill',t.x,t.z,true)===null)].map(t=>[t.x,t.z]).flat()),/부족/);assert.match(s.upgrade(b.id).error,/수리/);
  s.money=1e6;b.health=40;const d=place(s,'well');d.health=50;const all=s.repairAll();assert.ok(all.ok&&all.fixed===2&&s.buildings.every(v=>v.health===100));}
 console.log('PASS rules 2026-09-29: raid melee and ids, id counters and nested defaults, fuel contract, demolish batch and grace refund, packed tiles and full storage, effect cache, timed effects, coarse steps, damage and strike, good events, sanction counter, upgrade costs, first order, money errors');

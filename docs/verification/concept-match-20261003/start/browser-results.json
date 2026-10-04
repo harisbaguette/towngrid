@@ -1,0 +1,152 @@
+{
+ "layouts": [
+  {
+   "stage": "country",
+   "tag": "1440x900",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  {
+   "stage": "plot",
+   "tag": "1440x900",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  {
+   "stage": "preview",
+   "tag": "1440x900",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  {
+   "stage": "country",
+   "tag": "1920x1080",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  {
+   "stage": "plot",
+   "tag": "1920x1080",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  {
+   "stage": "preview",
+   "tag": "1920x1080",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  {
+   "stage": "country",
+   "tag": "390x844",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  {
+   "stage": "plot",
+   "tag": "390x844",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  {
+   "stage": "preview",
+   "tag": "390x844",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  {
+   "stage": "country",
+   "tag": "360x800",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  {
+   "stage": "plot",
+   "tag": "360x800",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  {
+   "stage": "preview",
+   "tag": "360x800",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  {
+   "stage": "country",
+   "tag": "844x390",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  {
+   "stage": "plot",
+   "tag": "844x390",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  },
+  {
+   "stage": "preview",
+   "tag": "844x390",
+   "covered": [],
+   "offscreen": [],
+   "clipped": [],
+   "tinyTargets": [],
+   "smallText": []
+  }
+ ],
+ "checks": [
+  "14 countries, playable and hostile gates, clickable country names",
+  "Five viewport sizes, three stages, four camera directions, selection preserved on back",
+  "Water blocked, chosen plot and faction, read-only preview, preview tiles equal the actual new game",
+  "In-game atlas and expansion inspection remain available"
+ ],
+ "result": "PASS",
+ "browser": {
+  "errors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failedRequests": []
+ }
+}

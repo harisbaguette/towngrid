@@ -1,5 +1,6 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { mountPreviewAudio } from '@/app/game/preview-audio.js';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Check, Coins, Factory, Hammer, Lock, Minus, Pause, Play, Plus, RotateCcw, RotateCw, Settings2, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -17,6 +18,8 @@ const palette = [
   ['생산', '--ui-progress', '#1BB8A4'], ['위험', '--ui-danger', '#AD3D2C'],
 ];
 export default function DesignSystemPage() {
+  const previewSound=useRef<ReturnType<typeof mountPreviewAudio>|null>(null);
+  useEffect(()=>{const p=mountPreviewAudio();previewSound.current=p;setSound(p.audio.volumes.effects>0);return ()=>{p.dispose();previewSound.current=null;};},[]);
   const [category, setCategory] = useState('production'), [selected, setSelected] = useState('lumber');
   const [running, setRunning] = useState(true), [sound, setSound] = useState(true), [speed, setSpeed] = useState('1×');
   const [dialog, setDialog] = useState(false);
@@ -33,7 +36,7 @@ export default function DesignSystemPage() {
         <div className="ds-row"><ResourceCounter icon={<Coins color="var(--ui-gold)" size={24}/>} label="골드" value="1,250" onClick={()=>setDialog(true)}/><ResourceCounter icon={<ResourceIcon name="wood" size={25}/>} label="목재" value={48} onClick={()=>setDialog(true)}/><ResourceCounter icon={<ResourceIcon name="stone" size={25}/>} label="석재" value={32} onClick={()=>setDialog(true)}/></div>
         <div className="ds-row"><StatusBadge>생산 중</StatusBadge><StatusBadge tone="warning">재료 부족</StatusBadge><StatusBadge tone="info">운반 대기</StatusBadge><StatusBadge tone="danger">수리 필요</StatusBadge></div>
         <div className="ds-row" role="group" aria-label="시간 조절">{['정지','1×','2×','4×'].map(s=><Button key={s} variant="secondary" aria-pressed={speed===s} onClick={()=>setSpeed(s)}>{s==='정지'?<Pause size={15}/>:s}</Button>)}</div>
-        <div className="ds-row"><Switch id="sample-sound" checked={sound} onCheckedChange={setSound}/><label htmlFor="sample-sound">효과음 {sound?'켜짐':'꺼짐'}</label></div>
+        <div className="ds-row"><Switch id="sample-sound" checked={sound} onCheckedChange={v=>{setSound(v);previewSound.current?.audio.setVolume('effects',v?.85:0);}}/><label htmlFor="sample-sound">효과음 {sound?'켜짐':'꺼짐'}</label></div>
       </GamePanel>
       <GamePanel title="건설 목록" icon={<Hammer size={19}/>}>
         <Tabs value={category} onValueChange={setCategory}><TabsList aria-label="건설 분류"><TabsTrigger value="basic">기초</TabsTrigger><TabsTrigger value="production">생산</TabsTrigger><TabsTrigger value="transport">운송</TabsTrigger></TabsList></Tabs>

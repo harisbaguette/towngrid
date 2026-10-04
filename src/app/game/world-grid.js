@@ -7,6 +7,7 @@
 import {WORLD_MAP,WATERWAY_CHARS,SEAS,FERRIES,MAP_COLS,MAP_ROWS} from './world-map.js';
 import {WORLD_PLOTS} from './territory.js';
 import {BIOMES,ecologyOf} from './biome-data.js';
+import {branchWater,pondAt} from './landform-patterns.js';
 
 export const CELL=26,COLS=MAP_COLS,ROWS=MAP_ROWS,MAP=24;
 /** Water kinds in order of precedence where two meet. A local map may also hold a small 'pond'. */
@@ -70,7 +71,7 @@ const LAYOUTS=new Map();
 export function layoutOf(id){
  if(LAYOUTS.has(id))return LAYOUTS.get(id);
  const p=PROVINCE_BY_ID.get(id);if(!p)return null;
- const [cx,cz]=p.cell,layout={province:id,cell:[cx,cz],biome:terrainOfCell(cx,cz),edges:edgesOf(cx,cz)};
+ const [cx,cz]=p.cell,layout={province:id,cell:[cx,cz],biome:terrainOfCell(cx,cz),edges:edgesOf(cx,cz),surfaceVersion:1};
  layout.ecology=ecologyOf(layout);LAYOUTS.set(id,layout);return layout;
 }
 /** The layout of a map made before the grid: the old water of its region template, and the ground of
@@ -104,14 +105,14 @@ const legacyWater=(region,x,z)=>{
 };
 /** The kind of water on tile (x,z) of a layout, or null. Works beyond the 24×24 map for the scenery. */
 export function waterAt(layout,x,z){
- const pond=x>=3&&x<=4&&z>=5&&z<=6;
+ const pond=layout.surfaceVersion?pondAt(layout,x,z):x>=3&&x<=4&&z>=5&&z<=6;
  if(layout.legacy)return legacyWater(layout.legacy,x,z)||(pond?'pond':null);
  // The starting land and the export road into it stay dry on every map.
  if(x>=8&&x<=15&&z>=8&&z<=15||z===11&&x>=0&&x<8)return null;
  let best=null;
  for(const [side] of SIDES){
   const kind=layout.edges[side];if(!WATER_KINDS.includes(kind)||best&&WATER_KINDS.indexOf(best)<=WATER_KINDS.indexOf(kind))continue;
-  const [d,u]=along(side,x,z);if(wetAlong(kind,d,u,phaseOf(layout,side)))best=kind;
+  const [d,u]=along(side,x,z);if(layout.surfaceVersion&&['river','canal','stream'].includes(kind)?branchWater(layout,side,kind,d,u):wetAlong(kind,d,u,phaseOf(layout,side)))best=kind;
  }
  const marsh=layout.ecology==='marsh'&&([[6,18,2.4,1.6],[18,7,1.6,2.5],[20,19,1.8,1.8]].some(([a,b,rx,rz])=>((x-a)/rx)**2+((z-b)/rz)**2<=1));
  return best||(pond||marsh?'pond':null);
@@ -136,6 +137,6 @@ export const riverMiddle=(layout,side,u)=>layout.legacy==='river'?4.5-Math.floor
 /** Check a saved layout before trusting it. */
 export function validLayout(v){
  const terrains=Object.keys(TERRAIN_NAMES);
- return !!v&&typeof v==='object'&&(v.ecology===undefined||Object.hasOwn(BIOMES,v.ecology))&&(v.legacy===undefined||['river','coast','highland'].includes(v.legacy))&&(v.province===null||v.province===undefined||typeof v.province==='string')&&
+ return !!v&&typeof v==='object'&&(v.surfaceVersion===undefined||v.surfaceVersion===1)&&(v.ecology===undefined||Object.hasOwn(BIOMES,v.ecology))&&(v.legacy===undefined||['river','coast','highland'].includes(v.legacy))&&(v.province===null||v.province===undefined||typeof v.province==='string')&&
   (v.cell===null||Array.isArray(v.cell)&&v.cell.length===2&&v.cell.every(Number.isInteger))&&terrains.includes(v.biome)&&!!v.edges&&SIDES.every(([s])=>terrains.includes(v.edges[s]));
 }

@@ -8,7 +8,7 @@ const town=(race='human')=>{const s=new Simulation('river',null,{race});s.nextEv
 const s=town();s.build('warehouse',10,12);assert.equal(s.workers.length,0);
 assert.equal(s.build('house',9,14).ok,true);assert.deepEqual(s.workers.map(w=>w.race),['human'],'a new house holds one resident');
 const home=s.at(9,14);s.stock.wood=0;assert.equal(s.upgrade(home.id).ok,false,'a house upgrade costs wood');s.stock.wood=20;
-const paid=s.money;assert.equal(s.upgrade(home.id).ok,true);assert.equal(s.money,paid-60);assert.equal(s.workers.length,2);assert.equal(s.upgrade(home.id).ok,false,'the third resident needs bricks');s.stock.brick=3;assert.equal(s.upgrade(home.id).ok,true);assert.equal(s.workers.length,3);assert.equal(s.upgrade(home.id).ok,false,'three residents is the most a house holds');
+const paid=s.money;assert.equal(s.upgrade(home.id).ok,true);assert.equal(s.money,paid-60);assert.equal(s.workers.length,2);assert.equal(s.upgrade(home.id).ok,false,'the third resident needs bricks');s.stock.brick=3;assert.equal(s.upgrade(home.id).ok,false,'brick upgrades also need the kiln technology');s.rank=8;assert.equal(s.upgrade(home.id).ok,true);assert.equal(s.workers.length,3);assert.equal(s.upgrade(home.id).ok,false,'three residents is the most a house holds');
 assert.ok(s.workers.every(w=>w.homeId===home.id&&w.gender==='female'&&w.appearance==='mira'),'human housing supplies female general workers');
 assert.match(s.canBuild('dwarfhouse',11,14),/승급/,'dwarf houses unlock through rank');
 s.rank=13;for(const r of ['plank','stone','gear'])s.stock[r]=100;

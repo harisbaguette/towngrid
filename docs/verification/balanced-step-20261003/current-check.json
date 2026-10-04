@@ -1,0 +1,1066 @@
+{
+  "status": "partial-bugfix-verified-art-unfinished",
+  "revision": "cast-balanced-step-2",
+  "anatomicalFixAppliedToBipeds": 44,
+  "repackedCharacters": 50,
+  "bron": "Separate existing authored pack; regression test passed, no new art in this repair.",
+  "fixes": [
+    "Restore source anatomical foot spacing instead of widening the stance to the painted boot width.",
+    "Fit fixed leg chains per painted leg; do not force both legs to use the longest chain.",
+    "Bend knees in the actor forward plane instead of toward a camera-dependent pole.",
+    "Use equal half-cycle alternating support and swing for both legs."
+  ],
+  "projectedLegLengthRatio": {
+    "beforeWorst": 0.11625570188688665,
+    "afterWorst": 0.49730362296174463,
+    "regressionMinimum": 0.4,
+    "meaning": "2D projected segment length divided by its fixed 3D segment length. This is a collapse guard, not an artistic quality score."
+  },
+  "runtimeChecks": {
+    "characters": 50,
+    "liveGaitFrames": 12800,
+    "floorSamples": 12800,
+    "clippedPixels": 0,
+    "browserErrors": [],
+    "maximumVisibleSoleErrorPixels": 0.6919991245098549
+  },
+  "passed": [
+    "tests/gait-anatomy.py",
+    "tests/cast-locomotion.py",
+    "tests/cast-locomotion.mjs",
+    "tests/cast-locomotion-browser.mjs",
+    "tests/character-finish.py",
+    "tests/bron-motion.mjs",
+    "npm run typecheck",
+    "npm run build",
+    "Scoped ESLint of the modified JavaScript tests",
+    "Fresh rebuild: 250 files from all 50 character sources match runtime files byte-for-byte"
+  ],
+  "fullSuite": {
+    "command": "npm test",
+    "status": "failed",
+    "latestFailure": "tests/world-atlas.mjs:38: actual owned, expected locked; the campaign fixture starts on its expansion target.",
+    "scope": "World-map test outside the animation repair; not altered in this repair."
+  },
+  "visualEvidence": {
+    "comparison": "walk-carry-comparison.mp4",
+    "comparisonScope": "Six representative bipeds, front/back, walk/carry, previous and current packed poses.",
+    "gameCaptures": [
+      "live-cast-1.png",
+      "live-cast-2.png",
+      "live-cast-3.png",
+      "live-cast-4.png",
+      "live-cast-5.png"
+    ],
+    "review": "Leg collapse is reduced in the sampled poses. Existing texture-rig motion remains visibly limited; this is not approval of natural motion for the whole cast."
+  },
+  "remainingWork": [
+    "Full-character, full-action original cel animation requested by the user is not completed.",
+    "Weight transfer, toe release and arm/leg coordination still need visual refinement.",
+    "The new Mira, Silen and Taron source sheets in authored-actions-v6 are unapproved drafts, not runtime replacements.",
+    "Opposite facings remain mirrored and there are no intermediate turning drawings.",
+    "The complete npm test suite is not passing."
+  ],
+  "reproducedFiles": [
+    {
+      "path": "public/assets/pixel-characters/ael/frames.json",
+      "sha256": "2f46e9f819e27edcd70a19e9dee93295c08815fab51dc803d221e90b58d34219"
+    },
+    {
+      "path": "public/assets/pixel-characters/ael/sprites.png",
+      "sha256": "58892721a50b240f0d8c23de057ce0aade235cb080d46e6b75aac9dcf68ecdfa"
+    },
+    {
+      "path": "public/assets/pixel-characters/ael/walk-preview.gif",
+      "sha256": "f4480f8d13389e9e4605c43481e01f43cc5c4a3eef6cab715a85416e327ae04a"
+    },
+    {
+      "path": "public/assets/pixel-characters/ael/portrait.png",
+      "sha256": "2e22172d5f60bc8b4ec96866831ff87cc588f57a22763984d83b53364ea849c6"
+    },
+    {
+      "path": "public/assets/pixel-characters/ael/portrait-idle.png",
+      "sha256": "d02233e3f4e4be2d53a780f9b374d5b05dfad1f22b88e37e00a45ea1c0b1bc04"
+    },
+    {
+      "path": "public/assets/pixel-characters/aira/frames.json",
+      "sha256": "601b423bcbf31f577e53b3ef4e101707c365f85b4f696ba08ad87f79776ec0d6"
+    },
+    {
+      "path": "public/assets/pixel-characters/aira/sprites.png",
+      "sha256": "7e6ccf63cc8856cda7e77219bb87013bde338f52a33a4e3b8c2fd1f789f7c9b4"
+    },
+    {
+      "path": "public/assets/pixel-characters/aira/walk-preview.gif",
+      "sha256": "dd1c4e39ee6e9e70f94eed3b17a9a9546d12f3e3c995a892f25b5f3dc1a6ef9e"
+    },
+    {
+      "path": "public/assets/pixel-characters/aira/portrait.png",
+      "sha256": "2d3f75fd986e2ed00dcf02ea5eb7ca240da63b59aa452f3e6b252c16fe71fd1b"
+    },
+    {
+      "path": "public/assets/pixel-characters/aira/portrait-idle.png",
+      "sha256": "c0275e4951bf4b31d23d84334e1aaa5f5811adc2f8fa0868142d95c7210df795"
+    },
+    {
+      "path": "public/assets/pixel-characters/aster/frames.json",
+      "sha256": "acd91d30b7d6b4be728bdd92b86024880192d5106afc3ca0201f050434a63591"
+    },
+    {
+      "path": "public/assets/pixel-characters/aster/sprites.png",
+      "sha256": "9bd764d5d81b321efdc77c2e103fcb8488b9dbc2930a18a6e1dcff924977e1a4"
+    },
+    {
+      "path": "public/assets/pixel-characters/aster/walk-preview.gif",
+      "sha256": "3ee8d7fc6c2cb808f3041f5844e8833c227c3696fa4389c8797911e306389d1b"
+    },
+    {
+      "path": "public/assets/pixel-characters/aster/portrait.png",
+      "sha256": "df925e7b8c9b8b323cd01e2d84d87d38fc52e8308ce8751298f448dcaa05ce5e"
+    },
+    {
+      "path": "public/assets/pixel-characters/aster/portrait-idle.png",
+      "sha256": "9af61000c4f152e21b7dbcfc505e449e57c5ab5e44f49658e483a0244bddc7fd"
+    },
+    {
+      "path": "public/assets/pixel-characters/bel/frames.json",
+      "sha256": "fff30ac5390b9eb73fc2812d7192c0b80c4f6c2836cfa34c05c175ed443634bd"
+    },
+    {
+      "path": "public/assets/pixel-characters/bel/sprites.png",
+      "sha256": "41ca55bb1ba61f198cb4c9e59ee8f7af676db81cf6c25cc2350bf2527eb9e2c2"
+    },
+    {
+      "path": "public/assets/pixel-characters/bel/walk-preview.gif",
+      "sha256": "91da047d3ad573db6e887da6c94e05f6d0a7f658b7f18c1b491670e174c46233"
+    },
+    {
+      "path": "public/assets/pixel-characters/bel/portrait.png",
+      "sha256": "f63068014c2aff20b1ef8bf179337d1eed8d1b7c72bc51b0a5417dc53ea83191"
+    },
+    {
+      "path": "public/assets/pixel-characters/bel/portrait-idle.png",
+      "sha256": "763e51c2f8638bf5f98bb45b72947052a1a381afe86f46827e05aab67c1f80e5"
+    },
+    {
+      "path": "public/assets/pixel-characters/borik/frames.json",
+      "sha256": "c448d95eb68132092abe493219b0f24beb0316cf7b1f63e5b4383ab9c8ffd61e"
+    },
+    {
+      "path": "public/assets/pixel-characters/borik/sprites.png",
+      "sha256": "9ca5e054eac9b94f7275fbf6f44c0bb9cd945c9c358b3687820df45b84468553"
+    },
+    {
+      "path": "public/assets/pixel-characters/borik/walk-preview.gif",
+      "sha256": "96d0ff252bbf66ca1a6afd93a6966ad8fc1cc062a6c63ec3c2bee9715c1ac81c"
+    },
+    {
+      "path": "public/assets/pixel-characters/borik/portrait.png",
+      "sha256": "cfcd4ae2ce6d2db5dec649eac0140246bf12d2c9fb22d64e0c4fae66d58370d7"
+    },
+    {
+      "path": "public/assets/pixel-characters/borik/portrait-idle.png",
+      "sha256": "45940f67a8f617168bdbd931d0852063fc3be715d375c876fb869812993ac347"
+    },
+    {
+      "path": "public/assets/pixel-characters/cedric/frames.json",
+      "sha256": "01914fc0f2b0d606e68097635ba68db83bf858659468ffd9aa147ebcfc0ee7d7"
+    },
+    {
+      "path": "public/assets/pixel-characters/cedric/sprites.png",
+      "sha256": "98b3bd0e98740309f52fdca3b896d9676f1a70cb16bf9395901176f2fe67735b"
+    },
+    {
+      "path": "public/assets/pixel-characters/cedric/walk-preview.gif",
+      "sha256": "7779c3402480a60e02f9be067f7c0a4beb18793181855c607bc4b37f80421100"
+    },
+    {
+      "path": "public/assets/pixel-characters/cedric/portrait.png",
+      "sha256": "9bcd01698b0e0330a94af786ccd92c3d17c34d985c9ecb505a994176f132cf70"
+    },
+    {
+      "path": "public/assets/pixel-characters/cedric/portrait-idle.png",
+      "sha256": "a1e2cffacedb12e9c24b4d6f8ddcaad0fb22c3a245967a80951c23c911cbf0a7"
+    },
+    {
+      "path": "public/assets/pixel-characters/dax/frames.json",
+      "sha256": "f04ae859171bfa3e13e90f99faf01889b624fb904e985cb9b4288a653bb8b8ed"
+    },
+    {
+      "path": "public/assets/pixel-characters/dax/sprites.png",
+      "sha256": "205a4e11da7b3351bcbc3dba024f732547e74979e0b97d5f1abde3e400cabb7b"
+    },
+    {
+      "path": "public/assets/pixel-characters/dax/walk-preview.gif",
+      "sha256": "04937fc1a55f5307c23174f261088bc798258d4c606f3e5f05db69d5c136559a"
+    },
+    {
+      "path": "public/assets/pixel-characters/dax/portrait.png",
+      "sha256": "e5b1220d1a1888712f964f0fff546d363a70b0ed704792bd1f3866d85d0ad1f9"
+    },
+    {
+      "path": "public/assets/pixel-characters/dax/portrait-idle.png",
+      "sha256": "8aa082d01507ca3e16f474f1c77ee00d2d5efe0499d15b170c29a014f6989145"
+    },
+    {
+      "path": "public/assets/pixel-characters/dew/frames.json",
+      "sha256": "aec017c18246d90dcb15079b78eeafa23e56d5498c28b45c9cade014afb93b53"
+    },
+    {
+      "path": "public/assets/pixel-characters/dew/sprites.png",
+      "sha256": "5618db4e496a981ddbc3a1d4078b2476820daef31d6fa27f1a5ecf5dbd68b1e5"
+    },
+    {
+      "path": "public/assets/pixel-characters/dew/walk-preview.gif",
+      "sha256": "26d59012fa35ba92d2e24744cf3be8415f5294f4a4647bac6a1549ebcb63c0a1"
+    },
+    {
+      "path": "public/assets/pixel-characters/dew/portrait.png",
+      "sha256": "f6c827cfc7af6cdd641524d7acc7905edb32584411732a182de49c16e7eedd51"
+    },
+    {
+      "path": "public/assets/pixel-characters/dew/portrait-idle.png",
+      "sha256": "62b29de933ee42c2fa00d020c99814b50aec06e69c79a9c2a18f357ccd7004a4"
+    },
+    {
+      "path": "public/assets/pixel-characters/dorin/frames.json",
+      "sha256": "9a42053567dfcababc6d6a78f27cd143913da72e5db5bd712574a90f514a4f69"
+    },
+    {
+      "path": "public/assets/pixel-characters/dorin/sprites.png",
+      "sha256": "b9ad6bd4ead1eb4986108b9097b18af40467c1b88d25ae599e365ea771c2438a"
+    },
+    {
+      "path": "public/assets/pixel-characters/dorin/walk-preview.gif",
+      "sha256": "ed26e33fbbda77c838882ce2861bd7c78d903195ccace4d4673566b66107543b"
+    },
+    {
+      "path": "public/assets/pixel-characters/dorin/portrait.png",
+      "sha256": "388afd535902f94f01a0b00e0e58969514c1d411ecafb4602481cba01f744c8c"
+    },
+    {
+      "path": "public/assets/pixel-characters/dorin/portrait-idle.png",
+      "sha256": "3ef6299f83b3e658b077292218b77587566c6e22b3caca0a0b4f8bb90b75d82e"
+    },
+    {
+      "path": "public/assets/pixel-characters/eil/frames.json",
+      "sha256": "f9d543abe2a748367cb2ce2d430e0f9db222894f845dc94d9519ff860b80fbb9"
+    },
+    {
+      "path": "public/assets/pixel-characters/eil/sprites.png",
+      "sha256": "1d3671e3ff3ade4ee36c8be02344dd9df706ef2273dbf4906b821dc9f6d37daf"
+    },
+    {
+      "path": "public/assets/pixel-characters/eil/walk-preview.gif",
+      "sha256": "073ea5396bb87d42737e9eafa31ff89ff45c48580cce7b50c74941cc8142c8d4"
+    },
+    {
+      "path": "public/assets/pixel-characters/eil/portrait.png",
+      "sha256": "8f93e0a76ed32d4de66a9aff802a45eb941d30e2cb0d9bdbd45d44024d7d487c"
+    },
+    {
+      "path": "public/assets/pixel-characters/eil/portrait-idle.png",
+      "sha256": "aa46c7055ebf3cf66a0c49731097b69d15c37fdf1ff3182ff0deb5cd7b23a3dd"
+    },
+    {
+      "path": "public/assets/pixel-characters/elion/frames.json",
+      "sha256": "220cdb7c1cdd3ca7dae9ce415775726a066c6696a0294b039f9d26f81f72c0f7"
+    },
+    {
+      "path": "public/assets/pixel-characters/elion/sprites.png",
+      "sha256": "65ffb594b31f4f4a77fc77dbbefcbaf88c4895005680aff928c22ae0dda63810"
+    },
+    {
+      "path": "public/assets/pixel-characters/elion/walk-preview.gif",
+      "sha256": "c3826579574d6489ac5582ee2c5ad08718396794cfd4eea1088fdc5969d13a77"
+    },
+    {
+      "path": "public/assets/pixel-characters/elion/portrait.png",
+      "sha256": "a2752dd9dd4356ad999cd1e2d5ed59de07f9c368bd8de48a70815f4addd58937"
+    },
+    {
+      "path": "public/assets/pixel-characters/elion/portrait-idle.png",
+      "sha256": "12d224c387ddaded648cf9679c3b17729251feb2da186ff2e033ec7695715983"
+    },
+    {
+      "path": "public/assets/pixel-characters/elvar/frames.json",
+      "sha256": "5e66a637a7703419b932cad961de996e4c8d2dd23a388eb3b4906a1829ccd951"
+    },
+    {
+      "path": "public/assets/pixel-characters/elvar/sprites.png",
+      "sha256": "5b6610fd5c57a6e7e14aced12467d1606a658f9b682a606d4c67469023c2725a"
+    },
+    {
+      "path": "public/assets/pixel-characters/elvar/walk-preview.gif",
+      "sha256": "e9d60b789241d68aaea104fd38db0bf4b010f8e42ab2f64d3f6a1a1470fb237a"
+    },
+    {
+      "path": "public/assets/pixel-characters/elvar/portrait.png",
+      "sha256": "794a3c157fc47121832ce1e2530220117545f3e56f08c47aaa3e4c6380fdb6fb"
+    },
+    {
+      "path": "public/assets/pixel-characters/elvar/portrait-idle.png",
+      "sha256": "7351edcd6c54f4d321f904aad19bafb7d6c566c1a866a544a231147e1bda1853"
+    },
+    {
+      "path": "public/assets/pixel-characters/erena/frames.json",
+      "sha256": "600bdb7945c5752355e3a6f6e04cb0570fc98b0187a86a3e91f9c47636ad3000"
+    },
+    {
+      "path": "public/assets/pixel-characters/erena/sprites.png",
+      "sha256": "f6b356a2a8f08e9a6744cd6918b00a3d96e61b74a528f8fbceec9215bf5ebb07"
+    },
+    {
+      "path": "public/assets/pixel-characters/erena/walk-preview.gif",
+      "sha256": "480f0ff7b672229c6c9c1bac041247d5bf6a4c3a7371b0396dadccb7107765ce"
+    },
+    {
+      "path": "public/assets/pixel-characters/erena/portrait.png",
+      "sha256": "f22546feddcebbd5ae7a8c25cf019a31222d2c23552b981ad9f8fdfe4d328d52"
+    },
+    {
+      "path": "public/assets/pixel-characters/erena/portrait-idle.png",
+      "sha256": "8ed816c8d120257ed212cfcef074beb3db0417e1137a54ac74fb21147286883a"
+    },
+    {
+      "path": "public/assets/pixel-characters/ethan/frames.json",
+      "sha256": "15b672a3601b4c0006ab32461d5204a0f74d4bea734e2adc901f4bb9142abc64"
+    },
+    {
+      "path": "public/assets/pixel-characters/ethan/sprites.png",
+      "sha256": "c9a8b4d427856e80a169a42d69489b26ab9a351c9a15544439fde820972dd9b7"
+    },
+    {
+      "path": "public/assets/pixel-characters/ethan/walk-preview.gif",
+      "sha256": "4dfb8263c080472b8c66cba3b49f2f6e4cd158111538398e3f461bd6bc5900de"
+    },
+    {
+      "path": "public/assets/pixel-characters/ethan/portrait.png",
+      "sha256": "2e58114d0cf678d0cd27550c37f4281f8c7ec3722528e6f9c2b8c56944e61f02"
+    },
+    {
+      "path": "public/assets/pixel-characters/ethan/portrait-idle.png",
+      "sha256": "a0fb5cdea43952f144402e22c7dfd481ceacfdac94b3995de8ff52302ab7c361"
+    },
+    {
+      "path": "public/assets/pixel-characters/fia/frames.json",
+      "sha256": "2574f2781a652dfbcf7ae67e4724392de3ffd1ba799b8cd6834b4f1dcce8d981"
+    },
+    {
+      "path": "public/assets/pixel-characters/fia/sprites.png",
+      "sha256": "185e095c28b3931dd6b696f12e5adaca8b7342a5d06f08651571a97e6e532755"
+    },
+    {
+      "path": "public/assets/pixel-characters/fia/walk-preview.gif",
+      "sha256": "1975a70c55c2384034df9a06505ec188e7e092158a471205648d932c19d56ddc"
+    },
+    {
+      "path": "public/assets/pixel-characters/fia/portrait.png",
+      "sha256": "4e27e6509cf17b5a930faebb6537cd0e8b20d3d34858dbfd92b6bcaa1890b38a"
+    },
+    {
+      "path": "public/assets/pixel-characters/fia/portrait-idle.png",
+      "sha256": "8fdeef041293c0aa52effd11fa562439e80381f4117d3c84eff1c23cfb54b610"
+    },
+    {
+      "path": "public/assets/pixel-characters/garen/frames.json",
+      "sha256": "462277751b6ac5328d5b29f1dab3d2a70f1ae346299c1a8d9492faccfe5ec42d"
+    },
+    {
+      "path": "public/assets/pixel-characters/garen/sprites.png",
+      "sha256": "e69eb11df80d79a32eff522b88fdca1fb2d975ad13e2e97600f8bf9529dc5a83"
+    },
+    {
+      "path": "public/assets/pixel-characters/garen/walk-preview.gif",
+      "sha256": "0173f49d68fb682146f35435b52f6e5881e42f1a77afb64cd57f06bb46dd454d"
+    },
+    {
+      "path": "public/assets/pixel-characters/garen/portrait.png",
+      "sha256": "e68c683b15d88608548a5a0375f79da32e4d66d70f924dcea8c2d0dabaa64b8b"
+    },
+    {
+      "path": "public/assets/pixel-characters/garen/portrait-idle.png",
+      "sha256": "7b8bf71a8c9b078bfd851a8a7bcda4abadc1b20a4f79aa70d74b704e21b57a68"
+    },
+    {
+      "path": "public/assets/pixel-characters/garron/frames.json",
+      "sha256": "433733b8c8e2404954a1dad9b594f400304e5e5400be136aa5ee2764f2ae4984"
+    },
+    {
+      "path": "public/assets/pixel-characters/garron/sprites.png",
+      "sha256": "095a0b17e66c1d327071755ce8e3a4ff6eb14347befc7b7d485c3f30ea610c04"
+    },
+    {
+      "path": "public/assets/pixel-characters/garron/walk-preview.gif",
+      "sha256": "05d2b6174aab4f5d7c2a74696105373b9d4e9e3054f9f12c514d241acb39bddd"
+    },
+    {
+      "path": "public/assets/pixel-characters/garron/portrait.png",
+      "sha256": "5ec329606500f84b4a5ead23ee29add906fb091736e14961af4bfaf5f064966f"
+    },
+    {
+      "path": "public/assets/pixel-characters/garron/portrait-idle.png",
+      "sha256": "da80dfc807511f3fecec8eec93e8575741cb03dc6fd295e867ea84c165970f74"
+    },
+    {
+      "path": "public/assets/pixel-characters/grum/frames.json",
+      "sha256": "13740b30d0a9c429e8662640dee1cec075d5bd3f26100dda88b9bc90fcd59735"
+    },
+    {
+      "path": "public/assets/pixel-characters/grum/sprites.png",
+      "sha256": "4d1d6370ced146c58afa65eac7681d6e037f2224c4f680acc6ae3a97da5218d1"
+    },
+    {
+      "path": "public/assets/pixel-characters/grum/walk-preview.gif",
+      "sha256": "31a9e88e5e09a30da7d8c4582543009b2939ab17eb8148f7f77807914e751d44"
+    },
+    {
+      "path": "public/assets/pixel-characters/grum/portrait.png",
+      "sha256": "6a08bdcc70e69dbe20571ccd0d6a8f1d9fd208ff208283483485a984ef4af165"
+    },
+    {
+      "path": "public/assets/pixel-characters/grum/portrait-idle.png",
+      "sha256": "e4d69b41c3326ff91bbc9f3d8d940282a8266c07008e98bcc5c6f1978e86d069"
+    },
+    {
+      "path": "public/assets/pixel-characters/hana/frames.json",
+      "sha256": "276608e41b39545922d85a3547181538d378e4c8a0a31ac5d9b02bc21ae4d8b5"
+    },
+    {
+      "path": "public/assets/pixel-characters/hana/sprites.png",
+      "sha256": "24f1e47c9e1b0ba4a5155fa5c36c469dbb692c222d382f0d09b0891e73a3931d"
+    },
+    {
+      "path": "public/assets/pixel-characters/hana/walk-preview.gif",
+      "sha256": "c68f6714fb0a240f00d362d310c50bf36611a7bef3ab6a23c9281857475fe52b"
+    },
+    {
+      "path": "public/assets/pixel-characters/hana/portrait.png",
+      "sha256": "405217f2aba83a05305b469a8999ef5b32901a7fcb086bf028004098a899a7ad"
+    },
+    {
+      "path": "public/assets/pixel-characters/hana/portrait-idle.png",
+      "sha256": "27cb2f0303dde72840e0d3d04a260eebc0917c00a63c410298b043c8d37d24ec"
+    },
+    {
+      "path": "public/assets/pixel-characters/hugo/frames.json",
+      "sha256": "a3f37ac81084b4d71c470dfc282894e72228cc3bbad11d6c7681c1ef2b7f0f0d"
+    },
+    {
+      "path": "public/assets/pixel-characters/hugo/sprites.png",
+      "sha256": "e2044d9e98896b5713eaded9fd8c9003f32324153340c33a3e061c94cb6b0a0e"
+    },
+    {
+      "path": "public/assets/pixel-characters/hugo/walk-preview.gif",
+      "sha256": "6474da2c94f9ed9b690af7f3935ec07e0564a503844a45f1775bf144076e4cd5"
+    },
+    {
+      "path": "public/assets/pixel-characters/hugo/portrait.png",
+      "sha256": "6939981257d5ee52b1fe4dc8337b382fbeed8ddf0a062ca41cf560bbf9817bcb"
+    },
+    {
+      "path": "public/assets/pixel-characters/hugo/portrait-idle.png",
+      "sha256": "96433b02c25e9fce93a95f00ef654185bd8745ede8f600aa53d545dcbd10bf25"
+    },
+    {
+      "path": "public/assets/pixel-characters/iris/frames.json",
+      "sha256": "cebd368d6deb8a74b2efc99e4a8e0e08dcf557356c79822e3d21619e2c6a463b"
+    },
+    {
+      "path": "public/assets/pixel-characters/iris/sprites.png",
+      "sha256": "093ee8ea4097d17085ab4f954fa88e813a77b6bad0edb4cc554f1df68044585e"
+    },
+    {
+      "path": "public/assets/pixel-characters/iris/walk-preview.gif",
+      "sha256": "b8897780707fefe7e6ed7c7cdf62ecbdc0cc937f651ef8a5a294b481c5ee9d05"
+    },
+    {
+      "path": "public/assets/pixel-characters/iris/portrait.png",
+      "sha256": "009b2294e4d36093ed632b221ce7dc08028d71ef668280d5fb00563fd1169955"
+    },
+    {
+      "path": "public/assets/pixel-characters/iris/portrait-idle.png",
+      "sha256": "e0b7fa4acd457e789ffecf307266ea67aed7d09e6efe73122a31880b3f672cb4"
+    },
+    {
+      "path": "public/assets/pixel-characters/kael/frames.json",
+      "sha256": "7ddaf9d373ae1f15ae6c7c78d5fd707050493ed8588045b6e7bdfe8be761b2ce"
+    },
+    {
+      "path": "public/assets/pixel-characters/kael/sprites.png",
+      "sha256": "7ab7aecbbdd95ef06a1eb8c6b81c723a30c0ebc39a3ead6673a20fb575650f80"
+    },
+    {
+      "path": "public/assets/pixel-characters/kael/walk-preview.gif",
+      "sha256": "c293f0bced1bac67f920925bc70de6597a7d0a9518a5edd3dead99bfabfec067"
+    },
+    {
+      "path": "public/assets/pixel-characters/kael/portrait.png",
+      "sha256": "590f0faa72cd7faa82d56601e53f1557fbd968b94739be8853512938b01df09c"
+    },
+    {
+      "path": "public/assets/pixel-characters/kael/portrait-idle.png",
+      "sha256": "a87bf7f02ba39a2328a6d8b52a54cfbd018e52a870563b2a9efa4c954c60327f"
+    },
+    {
+      "path": "public/assets/pixel-characters/kai/frames.json",
+      "sha256": "a6c2619670dcb945cc6bca00b82316ed1604ecbc6ebbedc9274bdb237a9fd8dc"
+    },
+    {
+      "path": "public/assets/pixel-characters/kai/sprites.png",
+      "sha256": "e02d9f7b4f18da1fcc750aabc35e501449aa9cb75753fc69fd59a2a44bce470a"
+    },
+    {
+      "path": "public/assets/pixel-characters/kai/walk-preview.gif",
+      "sha256": "0dac8ca637c87150dc928e7912838557d1ace6ce276ca117e62d4d5568794052"
+    },
+    {
+      "path": "public/assets/pixel-characters/kai/portrait.png",
+      "sha256": "ae47afbb920b35fcdae5f6a8af4de01d8fb724887897d1ebd76e16df68a2557b"
+    },
+    {
+      "path": "public/assets/pixel-characters/kai/portrait-idle.png",
+      "sha256": "d121b34944c87c2a70bcf229e162651393b574d095758c7a72c64adbf08bec1e"
+    },
+    {
+      "path": "public/assets/pixel-characters/lana/frames.json",
+      "sha256": "58d91ff777fea7dc2dbe9e97cd4c95ac03a7c694b076442a8fc812b3353ea360"
+    },
+    {
+      "path": "public/assets/pixel-characters/lana/sprites.png",
+      "sha256": "388e3176322654d8c86e2c6b0390ccc229de45421c8f22825622f7dccf0d707a"
+    },
+    {
+      "path": "public/assets/pixel-characters/lana/walk-preview.gif",
+      "sha256": "f6a24e7e98514ac693ae6bc13f59a7c2a30e626b3b2aa984bfbf294e77aa797d"
+    },
+    {
+      "path": "public/assets/pixel-characters/lana/portrait.png",
+      "sha256": "eb63c125da19eb2b7701b9c40435df0af48ba47ae8f2a4ed02401f0edc969db3"
+    },
+    {
+      "path": "public/assets/pixel-characters/lana/portrait-idle.png",
+      "sha256": "47ba5f8ba09dd5b2cf7087730c4a55d378d4a39e8c91d0ddce6c3bfc9ce84662"
+    },
+    {
+      "path": "public/assets/pixel-characters/lien/frames.json",
+      "sha256": "dae923ee6cb8e3fdeb553e7c97a17f9b962243db7d19d39afe1d59d37d8e5669"
+    },
+    {
+      "path": "public/assets/pixel-characters/lien/sprites.png",
+      "sha256": "69626ec6289b95694549299e439ba042d5c196c8a24d84410e67171f31b2dd0d"
+    },
+    {
+      "path": "public/assets/pixel-characters/lien/walk-preview.gif",
+      "sha256": "e9860d0e076bb9e3a63ec8a8fc4c48fb033c90d9f62108046627a333f96548cd"
+    },
+    {
+      "path": "public/assets/pixel-characters/lien/portrait.png",
+      "sha256": "9f0eab7b024fd6e57b6b58e3650c19c58bc1af3512d1b0ab67642b0c2315a29d"
+    },
+    {
+      "path": "public/assets/pixel-characters/lien/portrait-idle.png",
+      "sha256": "a2c926a417be7ff079d3e330a5ea7fb32b46cdf8ffbd4b1edfca0558c64c8229"
+    },
+    {
+      "path": "public/assets/pixel-characters/luth/frames.json",
+      "sha256": "7d9d4c968c07b2a192bd25f8da89123c3d2193a6ab9677de5c427770271edf8f"
+    },
+    {
+      "path": "public/assets/pixel-characters/luth/sprites.png",
+      "sha256": "fd7fb893855c0c4e7dc01251b18575e869c68c42904e881fd6e91d6b0bd37e09"
+    },
+    {
+      "path": "public/assets/pixel-characters/luth/walk-preview.gif",
+      "sha256": "5a949ad7cc3daea658692ab68e55229737aeb4f2178113d6c8a3e149084527a3"
+    },
+    {
+      "path": "public/assets/pixel-characters/luth/portrait.png",
+      "sha256": "334fb7c6afee037f62546aa3a0cf0eb7e836da68c205480db8d3aed90cf79cf1"
+    },
+    {
+      "path": "public/assets/pixel-characters/luth/portrait-idle.png",
+      "sha256": "004f2335bb058103607550d66c5e777d8800a451991009e8dab345c9caeaeb62"
+    },
+    {
+      "path": "public/assets/pixel-characters/lyra/frames.json",
+      "sha256": "fadb9a7868b0dae38ac150fa07179266a7acf535dfb5ae8655f3c28594dece88"
+    },
+    {
+      "path": "public/assets/pixel-characters/lyra/sprites.png",
+      "sha256": "1149bd6b8275b9330b0e50e0ac3d24a5cb85f08b1ef1a841d7cba15ecdda1683"
+    },
+    {
+      "path": "public/assets/pixel-characters/lyra/walk-preview.gif",
+      "sha256": "7f360f86f566c28c78483dfe568287ec8be9520a71d8b187d29597bc26713b71"
+    },
+    {
+      "path": "public/assets/pixel-characters/lyra/portrait.png",
+      "sha256": "e8df3b7a4fcc3b868e222882b814ffcc4a7a438028a4b3c9cdea63f953ea0acc"
+    },
+    {
+      "path": "public/assets/pixel-characters/lyra/portrait-idle.png",
+      "sha256": "035e77188f345eb34d92132c415fb222326b86d7e864e0d2f30f7243585cb88e"
+    },
+    {
+      "path": "public/assets/pixel-characters/maren/frames.json",
+      "sha256": "431f41d57121c028690d0837e8184a7cfd06062240589be499e6c2bfbcc1bbf3"
+    },
+    {
+      "path": "public/assets/pixel-characters/maren/sprites.png",
+      "sha256": "5bbbe9fa58931a75a9c025e00bad5cc2ed4a782282bb8c8d3d87b74df0883433"
+    },
+    {
+      "path": "public/assets/pixel-characters/maren/walk-preview.gif",
+      "sha256": "416e2f164aeef0862eb9385158c414e601eae39b8ec2991ba8914e1a56056792"
+    },
+    {
+      "path": "public/assets/pixel-characters/maren/portrait.png",
+      "sha256": "080dc68f6f00924bc34652e76985985aaec93fb3cfbd345f0e46e663b9b5bd5b"
+    },
+    {
+      "path": "public/assets/pixel-characters/maren/portrait-idle.png",
+      "sha256": "61d37147cc6537d1bf2611b19321d9672728a5ac51ca281029f573f7a1263e6e"
+    },
+    {
+      "path": "public/assets/pixel-characters/marna/frames.json",
+      "sha256": "977c50447e9321637e2672c24861c983558312dde3edf262b2e07011c9d34596"
+    },
+    {
+      "path": "public/assets/pixel-characters/marna/sprites.png",
+      "sha256": "b905b14c6663cbef9222e447cd1f39791b630cff0bff871764f752aef4a3255b"
+    },
+    {
+      "path": "public/assets/pixel-characters/marna/walk-preview.gif",
+      "sha256": "73a6b4921a232431b60239d4801bbb879e15634001fc17f45047a52ddf10f404"
+    },
+    {
+      "path": "public/assets/pixel-characters/marna/portrait.png",
+      "sha256": "cd7f3926b48bb007d54071613287000116a14dc58070aab0c5b741b411f52fb5"
+    },
+    {
+      "path": "public/assets/pixel-characters/marna/portrait-idle.png",
+      "sha256": "4dc3623fcff925d5beb9c89c11d8afc14d493f4b685ae441d2fdde7561bdd54e"
+    },
+    {
+      "path": "public/assets/pixel-characters/mira/frames.json",
+      "sha256": "299cf4e8cd75694cfbce64813a6e41d4dad87b132e0f5ae64d06ce4f2309729a"
+    },
+    {
+      "path": "public/assets/pixel-characters/mira/sprites.png",
+      "sha256": "ce3b8b6c9f7d81fb3d2949263739af7b361910f565551d500da1c4cca9dc29d6"
+    },
+    {
+      "path": "public/assets/pixel-characters/mira/walk-preview.gif",
+      "sha256": "8c019388c07f08df2670c9b69b2dbec918fb8346153cd52f3376d365b3cfe239"
+    },
+    {
+      "path": "public/assets/pixel-characters/mira/portrait.png",
+      "sha256": "f9b3841454a422c4df3f97aa7cd21bdde3781a95da599a3ccc18cbc482698fc1"
+    },
+    {
+      "path": "public/assets/pixel-characters/mira/portrait-idle.png",
+      "sha256": "c2d146823d29fb582036ee0de35b8e81da2e97ec22d7e46c26d51ead83ef0921"
+    },
+    {
+      "path": "public/assets/pixel-characters/mist/frames.json",
+      "sha256": "ceabd8ae3592b069d5c9d806019ade59a2b8c50f488e6200035af2d0bbd6d355"
+    },
+    {
+      "path": "public/assets/pixel-characters/mist/sprites.png",
+      "sha256": "3f209c28c0d6b672422634b96fa67d09bfbb2785236691037f458e05515eb99e"
+    },
+    {
+      "path": "public/assets/pixel-characters/mist/walk-preview.gif",
+      "sha256": "97c4401648c118d0a480b0fcbf2a0e53d3982f896c89ff8648706952570afdcb"
+    },
+    {
+      "path": "public/assets/pixel-characters/mist/portrait.png",
+      "sha256": "e85d1b1bea24455aa7700375cac57e02b8484502885adf2050a2fee25ac3f17e"
+    },
+    {
+      "path": "public/assets/pixel-characters/mist/portrait-idle.png",
+      "sha256": "877bd13a006396dadba4e16271069a6532c2e0d352434795b7daacd09349defc"
+    },
+    {
+      "path": "public/assets/pixel-characters/nalia/frames.json",
+      "sha256": "da8cd809e3cf512e5226d210f0b5e334a3239c392768c542c78f9a1c797c4fb5"
+    },
+    {
+      "path": "public/assets/pixel-characters/nalia/sprites.png",
+      "sha256": "bdecae9c2163c22edd695459f97c0c3161a6782006fbe8d06d3f90388844b8c3"
+    },
+    {
+      "path": "public/assets/pixel-characters/nalia/walk-preview.gif",
+      "sha256": "4402498dd78679c36d6202c4aa083dffe2947c7910ea6c527d416625b3864f9a"
+    },
+    {
+      "path": "public/assets/pixel-characters/nalia/portrait.png",
+      "sha256": "faf9464aa8b2636d5cbc1de43becb450caef559c2bd091a6552191111d171f0d"
+    },
+    {
+      "path": "public/assets/pixel-characters/nalia/portrait-idle.png",
+      "sha256": "05beaf5fcea631867f66449e09388cf17ef1bce2f07ca608027f8672de5f5aae"
+    },
+    {
+      "path": "public/assets/pixel-characters/nara/frames.json",
+      "sha256": "a8a6efba143d92b4d355550a01667898c0d2cf95511fb812fc58f8d9f79faafd"
+    },
+    {
+      "path": "public/assets/pixel-characters/nara/sprites.png",
+      "sha256": "47c0ef319d346f8f82c7464f610279965213901a022fe3ea36b404802e1bc84e"
+    },
+    {
+      "path": "public/assets/pixel-characters/nara/walk-preview.gif",
+      "sha256": "e0d111511613168cc8f841b688d8211b81a7a0b3479b7616f1fbd4589825afea"
+    },
+    {
+      "path": "public/assets/pixel-characters/nara/portrait.png",
+      "sha256": "8be3674cb571256be9b2dd363a788d3ad9fc73c56734116526b20c315da0a58f"
+    },
+    {
+      "path": "public/assets/pixel-characters/nara/portrait-idle.png",
+      "sha256": "d50bae7ca5e03df3b3c601cbe28d87ad529d36995e0b1f900dff0fa46f006f0a"
+    },
+    {
+      "path": "public/assets/pixel-characters/neris/frames.json",
+      "sha256": "c0290a8f70eea5b8aeda7e6b4de831bbf90231e6dff2e8e46bb87645a8cb0f07"
+    },
+    {
+      "path": "public/assets/pixel-characters/neris/sprites.png",
+      "sha256": "3c999a24b1d1849e1361d95de85b14cf7841d7776f82f1a3b9dd6966ef58f26d"
+    },
+    {
+      "path": "public/assets/pixel-characters/neris/walk-preview.gif",
+      "sha256": "861bd9741d0e11eae9fb51ccde1b287566d3f40157a2c0813355b521941f51eb"
+    },
+    {
+      "path": "public/assets/pixel-characters/neris/portrait.png",
+      "sha256": "772ac795cde174dbc5f2856faf2723238de4e443a96f86eae3d1c88506c44917"
+    },
+    {
+      "path": "public/assets/pixel-characters/neris/portrait-idle.png",
+      "sha256": "4f92082d62e34c253a09c38d9afd27fe46fd125f060ce1881eaf6c4162445117"
+    },
+    {
+      "path": "public/assets/pixel-characters/niki/frames.json",
+      "sha256": "a8f8fd7a71a15a6e6a22bd93f112b588b13c9290ffd79168b274c5ad0f013ff5"
+    },
+    {
+      "path": "public/assets/pixel-characters/niki/sprites.png",
+      "sha256": "a63b7f5180c200cd9dc02c1bdd4cd2591f91d54834901b3bce62cb988de716a3"
+    },
+    {
+      "path": "public/assets/pixel-characters/niki/walk-preview.gif",
+      "sha256": "604aa3ca8a1b28853d6638bdc9c003a4b01e1bca9c745aefdcfa47b1cb18b5b8"
+    },
+    {
+      "path": "public/assets/pixel-characters/niki/portrait.png",
+      "sha256": "2a1b412c983f379b9016cc14e4914d6d107e2dd757472b4eb84896df628d4eb0"
+    },
+    {
+      "path": "public/assets/pixel-characters/niki/portrait-idle.png",
+      "sha256": "97bf34325fa75d7cc0a98251edeced0c8369a4908a7fc54f377238294a0094d8"
+    },
+    {
+      "path": "public/assets/pixel-characters/norin/frames.json",
+      "sha256": "c290835a88694d42a426757e552a67514f2bb4a99a32bfb8797dd0cf55c14867"
+    },
+    {
+      "path": "public/assets/pixel-characters/norin/sprites.png",
+      "sha256": "e98759c4645221b10538f51c533e784f1d0fc9b55d2bde25f154fdba494ff747"
+    },
+    {
+      "path": "public/assets/pixel-characters/norin/walk-preview.gif",
+      "sha256": "d9d03d7d7d10ca3ca23a1ad84e9001aedb2ab0a2ae8ad6e51a6a1ce4a9172128"
+    },
+    {
+      "path": "public/assets/pixel-characters/norin/portrait.png",
+      "sha256": "3984dd277051fb3caa9be766e3311e77ce19df625e891cfe4c72025fb1fc0daf"
+    },
+    {
+      "path": "public/assets/pixel-characters/norin/portrait-idle.png",
+      "sha256": "c116625caf3c80f3b06cbc032c9b42a2aa6628fb27af2493f95be974307cad94"
+    },
+    {
+      "path": "public/assets/pixel-characters/oriel/frames.json",
+      "sha256": "ec62831affd6e21c4c5cdd3f7f25beb569365abf56476c9aba75c438377e5271"
+    },
+    {
+      "path": "public/assets/pixel-characters/oriel/sprites.png",
+      "sha256": "ca339fdd612b2f5b317ddafac4c307b1fc03fa8dec2a6e46b3ae5c4652b680b8"
+    },
+    {
+      "path": "public/assets/pixel-characters/oriel/walk-preview.gif",
+      "sha256": "a3ddc9226e04cc25cdec1e17168bdd93b1a9026d2aec0429b635ea9597bf777d"
+    },
+    {
+      "path": "public/assets/pixel-characters/oriel/portrait.png",
+      "sha256": "6c69004a145fdcf3515ac5b6ff0c16b1ba8b8d333d42fb469e81b96c6b8ceff9"
+    },
+    {
+      "path": "public/assets/pixel-characters/oriel/portrait-idle.png",
+      "sha256": "a4f2f3cd700d01e84fcffe10b57d6fcd69cbfcaa87bde780111c8ebb6dfdef62"
+    },
+    {
+      "path": "public/assets/pixel-characters/oswin/frames.json",
+      "sha256": "4b0cc549e038b451a131e54e523c48408f505477836e53e77f8ece6c3e6a79b6"
+    },
+    {
+      "path": "public/assets/pixel-characters/oswin/sprites.png",
+      "sha256": "e1013128cfebc03e4dbc58329bc0486f4bd6556d0a00f4d5f69b889b87a8046f"
+    },
+    {
+      "path": "public/assets/pixel-characters/oswin/walk-preview.gif",
+      "sha256": "6fb73e0b940b2d5b417e5296c8a1369e92bc8af18d4ce251ba26f3a1fcc3f891"
+    },
+    {
+      "path": "public/assets/pixel-characters/oswin/portrait.png",
+      "sha256": "924a18c3880cba8c9fb9328c6c2be429f220f8fa5f11ffd3cdcf1cb67b3e252c"
+    },
+    {
+      "path": "public/assets/pixel-characters/oswin/portrait-idle.png",
+      "sha256": "4e75a9bec9f6bbffbf4d8e1711ea9c6a42d253d486dc454bb6c9952d0a99be7b"
+    },
+    {
+      "path": "public/assets/pixel-characters/otto/frames.json",
+      "sha256": "0921d3949ebbf4c172010f5fc5e64188af50e62f53bf1c536b5c6e30b4d45358"
+    },
+    {
+      "path": "public/assets/pixel-characters/otto/sprites.png",
+      "sha256": "c71a1a0491a420c9d75bdada8d25ace1bd125abdf941c127e00dfc8866d81921"
+    },
+    {
+      "path": "public/assets/pixel-characters/otto/walk-preview.gif",
+      "sha256": "43d9c135a74053ff29c0ea157d8a8372147781945e818999beffc37dd807b868"
+    },
+    {
+      "path": "public/assets/pixel-characters/otto/portrait.png",
+      "sha256": "04f1572d9b1af50a2b32ca76ac7f78bca0a897d0e3fb28a054b856d473bf1d51"
+    },
+    {
+      "path": "public/assets/pixel-characters/otto/portrait-idle.png",
+      "sha256": "ecdf7d3ef1185ebe0a0d8a5a9d82555a4fdceba1758256a879630dc3c05b8f17"
+    },
+    {
+      "path": "public/assets/pixel-characters/ravik/frames.json",
+      "sha256": "ab0f1b056cb606a2fcafb791a967f8d3ff117302773f6d545d460969cccb39dd"
+    },
+    {
+      "path": "public/assets/pixel-characters/ravik/sprites.png",
+      "sha256": "ac64ac4c0c72af6f5bfa9c1760097789c669fc9d8f23febd7f1d853c7431b69a"
+    },
+    {
+      "path": "public/assets/pixel-characters/ravik/walk-preview.gif",
+      "sha256": "5307e21792066fe0951df40095c39dbab7389a2883a8392e75a262fc2b0cca26"
+    },
+    {
+      "path": "public/assets/pixel-characters/ravik/portrait.png",
+      "sha256": "fd86b1c2b24907bac0b03ad7d76d6affcec6721f8e4b7b53eeda9d8ae542b35e"
+    },
+    {
+      "path": "public/assets/pixel-characters/ravik/portrait-idle.png",
+      "sha256": "fc816b53557326e36aed0920ff8c0524186796dab921ae1c699427112c45bb4b"
+    },
+    {
+      "path": "public/assets/pixel-characters/roa/frames.json",
+      "sha256": "c96847c5b7126491d07c03f0dfec3ef51ff1e555358451790e9581b7d3b8241f"
+    },
+    {
+      "path": "public/assets/pixel-characters/roa/sprites.png",
+      "sha256": "55529dbd256735bd9ea97379261782f85fd51aa0450a2386f26c1cde39a819b8"
+    },
+    {
+      "path": "public/assets/pixel-characters/roa/walk-preview.gif",
+      "sha256": "09f483393a33d917418bebf6f2126d94529f8e27401e9df7ea524c5d7713ac98"
+    },
+    {
+      "path": "public/assets/pixel-characters/roa/portrait.png",
+      "sha256": "baf2f56a35cfe9b463094d5bd17a8fc33756330991bf1b258a5668a5d87d7824"
+    },
+    {
+      "path": "public/assets/pixel-characters/roa/portrait-idle.png",
+      "sha256": "6f66bfccfe2fdabe0bd79f0bf74c289d771ce61cd80d1e180e4438392171897d"
+    },
+    {
+      "path": "public/assets/pixel-characters/rowan/frames.json",
+      "sha256": "52d76581f278c401f7a111c3cb17a01f788502817635aef3dd298a99bab6e4c0"
+    },
+    {
+      "path": "public/assets/pixel-characters/rowan/sprites.png",
+      "sha256": "10a5f5017544836a130257f0f4a2cd28c8f62514e56ae0f3d576f5dc34b73bc5"
+    },
+    {
+      "path": "public/assets/pixel-characters/rowan/walk-preview.gif",
+      "sha256": "7487caa2926825a428f3d344f1f08f7c6aa30e9461a763de21810b166f5a24c0"
+    },
+    {
+      "path": "public/assets/pixel-characters/rowan/portrait.png",
+      "sha256": "36b161a1afc31dca0c5be2f7872fd71e8fd727529c03fd0eb62418e749a6c236"
+    },
+    {
+      "path": "public/assets/pixel-characters/rowan/portrait-idle.png",
+      "sha256": "eefeafad37b377e12246110a6e51a0dd9ec10029e658fd1a91cbb0df215b7228"
+    },
+    {
+      "path": "public/assets/pixel-characters/selia/frames.json",
+      "sha256": "9849bb8f42c91b2add706ae344e0cda6dd68a852db37d24a48eca494450954fe"
+    },
+    {
+      "path": "public/assets/pixel-characters/selia/sprites.png",
+      "sha256": "c3622613a60d8cad49b9c568b61b1ef7feac5b4df6c351dc248e85a0ae642bd8"
+    },
+    {
+      "path": "public/assets/pixel-characters/selia/walk-preview.gif",
+      "sha256": "ad370b1d99c3a6b68cc9e8d70655a1212ef9a505ebafa0b678254e49a558c1b7"
+    },
+    {
+      "path": "public/assets/pixel-characters/selia/portrait.png",
+      "sha256": "d59bfa5e87dce91e2644507069996433a1bca3a6accec64a5e395edcfa105d0e"
+    },
+    {
+      "path": "public/assets/pixel-characters/selia/portrait-idle.png",
+      "sha256": "2459c73e8f0e368ba49a89e1451dc232b5518f4cb4e2f97c29acdf8b7adf5b61"
+    },
+    {
+      "path": "public/assets/pixel-characters/serin/frames.json",
+      "sha256": "388c89f88367e548c69b1d7097017f695d9260e15dd35ce3609d2501166ae656"
+    },
+    {
+      "path": "public/assets/pixel-characters/serin/sprites.png",
+      "sha256": "3f27f69b0256c8fc1e393bdc04cdb3c6a3964cd68a779e397a1a99f62ed5e314"
+    },
+    {
+      "path": "public/assets/pixel-characters/serin/walk-preview.gif",
+      "sha256": "d96e4b8414c557e93d682d319ea443b3fe0dbfdcb648516b2e2264d1574d1487"
+    },
+    {
+      "path": "public/assets/pixel-characters/serin/portrait.png",
+      "sha256": "f40ac1e1091d3e4aaa501ee09779533e54f153ed052aeb6798728b578d7f7923"
+    },
+    {
+      "path": "public/assets/pixel-characters/serin/portrait-idle.png",
+      "sha256": "d4821e1e81ed58894f56029b01d34580b32839daf24a4b521bf4a0ac721f0c0e"
+    },
+    {
+      "path": "public/assets/pixel-characters/silen/frames.json",
+      "sha256": "7b8b744b0198c2966e03bfc4e3e92224ca13dd8c7d23e980dd0c9b436431176d"
+    },
+    {
+      "path": "public/assets/pixel-characters/silen/sprites.png",
+      "sha256": "a9ba5f0f3431c8721dbc1cc66ca49fbd8b7498653d6ece16641b36e621c4ed55"
+    },
+    {
+      "path": "public/assets/pixel-characters/silen/walk-preview.gif",
+      "sha256": "f9732205281e9dc720996c5b4f2347752986587357858d8c75cbab86db238ea6"
+    },
+    {
+      "path": "public/assets/pixel-characters/silen/portrait.png",
+      "sha256": "07311657ad3bc2b2ae606956ada56964e5cbb70eb07966524bed7f3b9ec7f5f6"
+    },
+    {
+      "path": "public/assets/pixel-characters/silen/portrait-idle.png",
+      "sha256": "776cb5a6980946e99afbae176f06c30c4546e42d1f92e6e94f01ffa328dbcb6c"
+    },
+    {
+      "path": "public/assets/pixel-characters/sora/frames.json",
+      "sha256": "fed5233acbbd3fd4be5478a0fcb7dd3a7387c4ae4eaa6f712afb436ad0b483c1"
+    },
+    {
+      "path": "public/assets/pixel-characters/sora/sprites.png",
+      "sha256": "7dabcd36b9b43f834da65b7faecd41c633b8778a0ea5c4c8bc0a46cf0d6d411a"
+    },
+    {
+      "path": "public/assets/pixel-characters/sora/walk-preview.gif",
+      "sha256": "dca6d0661d86aff7afc25370a0f9d6f31dbc0dcc5b8ffbb43f71c10a213e0dd6"
+    },
+    {
+      "path": "public/assets/pixel-characters/sora/portrait.png",
+      "sha256": "986c7c0f02dbe67f6a94a5f649d66d28c668059779398c7e52fc52c252ed4db2"
+    },
+    {
+      "path": "public/assets/pixel-characters/sora/portrait-idle.png",
+      "sha256": "ba55eedc350ddcc5bddbcb50ee4519c73aa5da19318465a0864e04954189a93b"
+    },
+    {
+      "path": "public/assets/pixel-characters/taron/frames.json",
+      "sha256": "373a7f8822051405b89b4b0fd60bba2d82cffe577fa6a3b00896af5d3873897d"
+    },
+    {
+      "path": "public/assets/pixel-characters/taron/sprites.png",
+      "sha256": "1397c1001f4e39f756d1897d61a1ed159dc8d54f1aaaa797c8b5bc4fa24232e6"
+    },
+    {
+      "path": "public/assets/pixel-characters/taron/walk-preview.gif",
+      "sha256": "19daff0a994ce023bbd644d6c5bc89b6fa2b7af537591c02a8687891a5e78ab5"
+    },
+    {
+      "path": "public/assets/pixel-characters/taron/portrait.png",
+      "sha256": "44703a9740427cebb0c7b365fd590953b0951cc5bfeaeda7f0a3155461c11b63"
+    },
+    {
+      "path": "public/assets/pixel-characters/taron/portrait-idle.png",
+      "sha256": "ac2fe135903bcdee95bc8882706c5e682d01c733ebc0e87202dd42c76af39437"
+    },
+    {
+      "path": "public/assets/pixel-characters/terin/frames.json",
+      "sha256": "8ead0a85f0fa14d46b90b9bc91107b26550afa16ff4dc2dbd44077ea9a8672b4"
+    },
+    {
+      "path": "public/assets/pixel-characters/terin/sprites.png",
+      "sha256": "87d10861e2b8a373a12ba54750d33b9ae75d65f55c3291dd52cf91fab7669c02"
+    },
+    {
+      "path": "public/assets/pixel-characters/terin/walk-preview.gif",
+      "sha256": "c4e3ae4688f9d5930289067db1949647520d6603c7f02088600f23c6320f1436"
+    },
+    {
+      "path": "public/assets/pixel-characters/terin/portrait.png",
+      "sha256": "91523e9fea216cb6c3af129fe52ec158d45b79aebd2c1da04febfd0cadc890ad"
+    },
+    {
+      "path": "public/assets/pixel-characters/terin/portrait-idle.png",
+      "sha256": "7c38d8cdab717f6084a373c099d2959bf22390a233586ed03a815d2da5a8374b"
+    },
+    {
+      "path": "public/assets/pixel-characters/vera/frames.json",
+      "sha256": "99c66d0b527d62f45ec41771451993a060cc3b1dd0adb43d217f1f09ff99f7a6"
+    },
+    {
+      "path": "public/assets/pixel-characters/vera/sprites.png",
+      "sha256": "7831b403bbe0eaaf965617c061fb1e0649f7523758c4824c87f6569c3732a04d"
+    },
+    {
+      "path": "public/assets/pixel-characters/vera/walk-preview.gif",
+      "sha256": "8b1bb69f9375535daa0a3599341a79c04c58b5e35096db46d924dc7eb7928b87"
+    },
+    {
+      "path": "public/assets/pixel-characters/vera/portrait.png",
+      "sha256": "90e20cca245bb9b182d73173bd70537fb0eab6bdfa85f809a150dbf217b9184b"
+    },
+    {
+      "path": "public/assets/pixel-characters/vera/portrait-idle.png",
+      "sha256": "bd6bdfeafb7d31931df47d9946ef26d8c700024dbdda34d4d83c2f12c9ed666b"
+    },
+    {
+      "path": "public/assets/pixel-characters/vian/frames.json",
+      "sha256": "3cd9a309c914ee776ab3407af00a8e472f51040401186a15ddc9cddac5fa59c9"
+    },
+    {
+      "path": "public/assets/pixel-characters/vian/sprites.png",
+      "sha256": "37c07094c61e9a7f9539857a5b8a15f8ada3c4889e54a8505c82210b4a356c48"
+    },
+    {
+      "path": "public/assets/pixel-characters/vian/walk-preview.gif",
+      "sha256": "7bdaf161f947137f2d4b0ac2c19e585692f7c2c7c0c8722bf3a883498527d4ec"
+    },
+    {
+      "path": "public/assets/pixel-characters/vian/portrait.png",
+      "sha256": "0aea16dfa2c615fe19d2fb963d4f53f5aabb15263aed7a74a9dd166f354f1f6f"
+    },
+    {
+      "path": "public/assets/pixel-characters/vian/portrait-idle.png",
+      "sha256": "8da0393d36b2d1544da350b731f2e05f96ad2c77873616850a4232a86d83f301"
+    }
+  ]
+}

@@ -34,12 +34,12 @@ export function edgeScenery(layout){
    add(mountain,side,depth,u,1.05+landscapeHash(i,seed+8)*.6);
    if(i%2)add('oreRock',side,-1.2-landscapeHash(i,seed+3)*2,u+1,.7+landscapeHash(i,seed+5)*.25);
   }
-  for(let row=0;row<5;row++)for(let i=0;i<18;i++){
+  for(let row=0;row<7;row++)for(let i=0;i<22;i++){
    const h=landscapeHash(i+seed,row),u=-4+i*2+landscapeHash(i,row+seed)*1.3,depth=-1.4-row*1.9-landscapeHash(i+4,row+seed)*1.4;
-   const density=kind==='forest'?.5+landscapeNoise(i/3,row/2)*.35:kind==='plain'?.10:kind==='mountain'?.07:kind==='ice'?.13:kind==='desert'?.07:.12;
+   const density=kind==='forest'?.72+landscapeNoise(i/3,row/2)*.25:kind==='plain'?.22:kind==='mountain'?.12:kind==='ice'?.20:kind==='desert'?.09:.25;
    if(h>density)continue;
    const id=ecology==='snow'||kind==='ice'?'snowPine':ecology==='desert'||kind==='desert'?'cactus':kind==='coast'?'palm':kind==='mountain'?'pine':kind==='forest'?(profile?'forestTree':i%3?'pine':'willow'):['river','lake','stream','canal'].includes(kind)?i%3?'reeds':'willow':i%3?'bush':'willow';
-   add(id,side,depth,u,(kind==='forest'?.72:.55)+landscapeHash(row+seed,i+8)*.3);
+   add(id,side,depth,u,(kind==='forest'?.95:.62)+landscapeHash(row+seed,i+8)*.4);
   }
  }
  return props;

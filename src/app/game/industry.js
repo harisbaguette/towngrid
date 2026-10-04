@@ -7,16 +7,16 @@ export const MODERN_RESOURCES={
 };
 export const MODERN_BUILDINGS={
  reservoir:{name:'급수탑',group:'farm',cost:180,materials:{wood:8,stone:6},period:12,inputs:{water:3},output:'irrigation',amount:1,description:'물 3개로 주변 두 칸 작물의 물 요구량을 모두 채웁니다. 주민의 물 운반을 줄여줍니다.'},
- depot:{name:'자재 보관소',group:'base',cost:220,materials:{plank:6,stone:4},description:'상품 240개를 보관합니다. 생산 시설 가까이에 두면 주민 운반 거리가 줄어듭니다.'},
- windturbine:{name:'풍력 발전기',group:'energy',cost:330,materials:{plank:10,gear:2},period:30,output:'power',amount:1,description:'연료 없이 발전합니다. 주변 높은 건물이나 산이 바람을 가리면 느려지고, 제철소 같은 큰 공장이나 산 바로 옆(바람막이 3단계)에서는 전기가 끊기는 때가 생깁니다.'},
+ depot:{name:'자재 보관소',group:'base',cost:220,materials:{plank:6,stone:4},description:'상품 {capacity}개를 보관합니다. 생산 시설 가까이에 두면 주민 운반 거리가 줄어듭니다.'},
+ windturbine:{name:'풍력 발전기',group:'energy',cost:330,materials:{plank:10,stone:6},period:30,output:'power',amount:1,description:'연료 없이 발전합니다. 주변 높은 건물이나 산이 바람을 가리면 느려지고, 제철소 같은 큰 공장이나 산 바로 옆(바람막이 3단계)에서는 전기가 끊기는 때가 생깁니다.'},
  magetower:{name:'마탑',group:'energy',cost:700,materials:{brick:6,steel:4,glass:2,circuit:2},period:28,inputs:{mana:2,circuit:1},output:'ward',amount:1,wardRadius:4.5,description:'마력 결정과 회로로 반경 4.5칸에 결계를 칩니다. 결계 안의 시설은 습격 피해를 받지 않고 들어온 습격자는 약해집니다. 결계가 유지되는 동안 마족의 전력 교란도 막습니다.'},
  steamworks:{name:'증기 기계공장',group:'industry',cost:560,materials:{steel:8,gear:4},period:21,inputs:{steel:1,coal:1,water:1},output:'gear',amount:4,description:'강철·석탄·물을 사용해 증기기관으로 기계 부품을 대량 가공합니다.'},
  leyrelay:{name:'마력 중계소',group:'transport',cost:880,materials:{steel:8,circuit:4},period:25,inputs:{mana:1},output:'transit',amount:1,transitFactor:0.8,power:true,description:'양쪽 거점에서 가동하면 트럭과 철도의 운송 시간이 20% 짧아집니다.'},
  ironmine:{name:'철광산',group:'industry',cost:380,materials:{plank:8,gear:2},period:16,output:'iron',amount:4,description:'타일의 광물량에 따라 철광석을 채굴합니다. 물가에 붙이면 침수로 30% 느려집니다.'},
  coalpit:{name:'탄광',group:'industry',cost:330,materials:{plank:6,gear:2},period:17,inputs:{water:1},output:'coal',amount:4,description:'물을 공급해 석탄을 채굴합니다. 타일 광물량이 작업 속도에 영향을 주고, 물가에 붙이면 침수로 30% 느려집니다.'},
  smelter:{name:'제철소',group:'industry',cost:900,materials:{stone:12,gear:4},period:23,inputs:{iron:3,coal:2},output:'steel',amount:3,power:true,description:'철광석과 석탄을 강철로 제련합니다.'},
- oilpump:{name:'유정',group:'energy',cost:420,materials:{gear:4,steel:4},period:19,output:'oil',amount:4,power:true,description:'타일의 원유 농도에 따라 원유를 추출합니다.'},
- refinery:{name:'정유소',group:'energy',cost:1000,materials:{steel:8,gear:4},period:22,inputs:{oil:3,water:1},output:'fuel',amount:4,power:true,description:'원유와 물을 받아 운송 연료를 생산합니다.'},
+ oilpump:{name:'유정',group:'energy',cost:420,materials:{plank:8,stone:6},period:12,output:'oil',amount:3,power:true,description:'타일의 원유 농도에 따라 원유를 추출합니다.'},
+ refinery:{name:'정유소',group:'energy',cost:1000,materials:{plank:12,stone:12},period:14,inputs:{oil:3,water:2},output:'fuel',amount:3,power:true,stages:[{name:'원유 증류',until:8/14,inputs:{oil:3}},{name:'냉각·혼합',until:1,inputs:{water:2}}],description:'원유를 증류한 뒤 물로 냉각·혼합해 연료를 만듭니다. 냉각수가 부족하면 중간 공정에서 대기합니다. 증설·업그레이드하면 원유·냉각수·전력 수요도 늘어납니다.'},
  chemical:{name:'화학 공장',group:'industry',cost:1000,materials:{steel:8,gear:4},period:23,inputs:{oil:2,water:1},output:'polymer',amount:3,power:true,description:'원유를 가공해 자동차와 의약품에 쓰는 합성 소재를 생산합니다.'},
  manaextractor:{name:'마력 추출소',group:'energy',cost:620,materials:{stone:10,gear:4},period:21,inputs:{water:1},output:'mana',amount:2,description:'타일의 마력 농도에 따라 마력 결정을 추출합니다.'},
  electronics:{name:'전자 공장',group:'advanced',cost:1600,materials:{steel:6,glass:4,gear:4},period:26,inputs:{wire:2,mana:1},output:'circuit',amount:2,power:true,description:'구리 전선과 마력 결정으로 전자·마력 제어 회로를 조립합니다.'},
@@ -166,8 +166,18 @@ export const EXPANSION2_RECIPES={
  // G1-E7: honeycomb costs more than sugar, so the honeycomb candy runs faster (11 s against 14 s); it was the same line
  // at a higher input price.
  confectionery:[{id:'honeycandy',name:'벌집 박하 사탕',inputs:{mint:2,honeycomb:1},output:'candy',amount:3,period:11,unlock:11}],
- refinery:[{id:'jetfuel',name:'항공유',inputs:{oil:3,water:1},output:'jetfuel',amount:2,period:24,unlock:26}],
+ refinery:[{id:'jetfuel',name:'항공유',inputs:{oil:3,water:1},output:'jetfuel',amount:2,period:24,unlock:21}],
  shipyard:[{id:'jetairship',name:'항공유 비공정',inputs:{engine:2,mithril:2,cloth:4,jetfuel:2},output:'airship',amount:1,period:48,unlock:27}],
  shallowmine:[{id:'copper',name:'얕은 구리 광맥',inputs:{},output:'copper',amount:2,period:24,unlock:12}]
 };
 for(const [type,list] of Object.entries(EXPANSION2_RECIPES))ALT_RECIPES[type]=[...(ALT_RECIPES[type]||[]),...list];
+
+// Optional separated refining keeps existing refineries and their in-flight batches compatible.
+export const REFINING_RESOURCES={petroleum:{name:'석유 중간재',color:'#bb913d',price:40},processwater:{name:'공업용수',color:'#489fc3',price:12}};
+Object.assign(MODERN_RESOURCES,REFINING_RESOURCES);
+ALT_RECIPES.refinery.push(
+ {id:'petroleum',name:'석유 중간재 증류',inputs:{oil:3},output:'petroleum',amount:3,period:10,unlock:5},
+ {id:'blendedfuel',name:'중간재 연료 혼합',inputs:{petroleum:3,processwater:1},output:'fuel',amount:3,period:4,unlock:5}
+);
+ALT_RECIPES.well=[...(ALT_RECIPES.well||[]),{id:'processwater',name:'공업용수 정제',inputs:{water:2},output:'processwater',amount:1,period:3,unlock:5}];
+MODERN_BUILDINGS.refinery.description+=' 제품 선택에서 석유 중간재 증류와 연료 혼합을 나눌 수 있습니다. 공업용수는 우물의 정제 제품으로 만듭니다. 중간재와 공업용수는 창고에 비축하고 주민이 운반합니다.';

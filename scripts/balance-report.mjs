@@ -203,7 +203,9 @@ for (const pool of contractPools) {
   for (const item of pool.items) if (!(firstProducerRank(item) <= from)) problems.push(`contract pool from rank ${from}: ${item} has no producer unlocked yet`);
   if (pool.rankBelow !== undefined) poolStart = pool.rankBelow;
 }
-const processing = economy.filter(e => e.premium !== null);
+// Emergency conversion deliberately loses value; C15 constrains it separately.
+const commercial = economy.filter(e => !BUILDINGS[e.building].emergency);
+const processing = commercial.filter(e => e.premium !== null);
 // Alternative products: each must feed another chain (a different output) or change which chains it draws on (a
 // different input set), otherwise it is only a copy of the default line.
 const sameInputs = (a, b) => Object.keys(a || {}).sort().join() === Object.keys(b || {}).sort().join();
@@ -214,8 +216,8 @@ const recipeFacilities = new Set(alternatives.map(a => a.line.id)).size;
 const perUnit = (r, k) => (r.inputs?.[k] || 0) / r.amount, rate = r => r.amount / r.period;
 const dominated = alternatives.map(a => ({ a, by: lines.filter(l => l !== a.line && l.r.output === a.line.r.output && l.rank <= a.line.rank && Object.keys(l.r.inputs || {}).every(k => k in (a.line.r.inputs || {}) && perUnit(l.r, k) <= perUnit(a.line.r, k)) && rate(l.r) >= rate(a.line.r)) })).filter(v => v.by.length);
 // Production time: early lines show results quickly, and the average period grows with processing depth.
-const earlySlow = economy.filter(e => e.rank <= LIMITS.earlyPeriodRank && e.period > LIMITS.earlyPeriod);
-const byDepth = Object.entries(economy.filter(e => !e.alt).reduce((m, e) => ((m[e.depth] ??= []).push(e.period), m), {})).map(([d, p]) => [+d, p.reduce((n, v) => n + v, 0) / p.length]).sort((a, b) => a[0] - b[0]);
+const earlySlow = commercial.filter(e => e.rank <= LIMITS.earlyPeriodRank && e.period > LIMITS.earlyPeriod);
+const byDepth = Object.entries(commercial.filter(e => !e.alt).reduce((m, e) => ((m[e.depth] ??= []).push(e.period), m), {})).map(([d, p]) => [+d, p.reduce((n, v) => n + v, 0) / p.length]).sort((a, b) => a[0] - b[0]);
 const depthRises = byDepth.every(([, p], i) => !i || p > byDepth[i - 1][1]);
 // C12/C13: raw lines built in a full same-kind cluster run at their capped time cut (proximity.js clusterMax); every other
 // line, the processing plant included, runs at base speed. Each processing line must still out-earn its best input per
@@ -233,7 +235,7 @@ function clusterPremiums(fast) {
     seen.delete(res); memo.set(res, best); return best;
   };
   const chain = (r, seen = new Set()) => ((cut.get(r) ?? 1) * r.period + Object.entries(r.inputs || {}).reduce((n, [x, k]) => n + k * tile(x, seen), 0)) / r.amount;
-  return lines.filter(l => RESOURCES[l.r.output] && hasInputs(l.r) && !cut.has(l.r)).map(l => ({ line: l,
+  return lines.filter(l => !BUILDINGS[l.id].emergency && RESOURCES[l.r.output] && hasInputs(l.r) && !cut.has(l.r)).map(l => ({ line: l,
     premium: round(price(l.r.output) / chain(l.r) / Math.max(...Object.keys(l.r.inputs).map(x => price(x) / tile(x))), 2) }));
 }
 const clustered = clusterPremiums(l => BUILDINGS[l.id].group === 'farm' && rawLine(l));
@@ -267,6 +269,9 @@ const checks = [
   clusterCheck(clusteredAll, 'C13', `원료 밭(시간 -${round(CLUSTER_STEP * CLUSTER_MAX * 100, 0)}%)과 우물·벌목장·채석장·광산 등 채취 시설(시간 -${round(CLUSTER_STEP * EXTRACT_MAX * 100, 0)}%)을 모두 같은 시설 모으기 최대로 지어도 가공 시설이 타일당 분당 가치 ${LIMITS.premium}배 이상`),
   { id: 'C14', name: `확장 사슬 최종재의 타일당 분당 가치가 같은 단계 기존 가공 줄 중앙값의 ${LIMITS.expansionFloor}배 이상 · 그 단계 기존 최고값 이하`, value: (expansionFinals.filter(v => v.ratio < LIMITS.expansionFloor || v.e.tileValuePerMin > v.best).map(v => v.e.name + ' ' + v.ratio).join(', ') || expansionFinals.length + '줄 충족') + ' · 최저 ' + Math.min(...expansionFinals.map(v => v.ratio)), pass: expansionFinals.length > 0 && expansionFinals.every(v => v.ratio >= LIMITS.expansionFloor && v.e.tileValuePerMin <= v.best) },
 ];
+
+const emergency=BUILDINGS.distillery,industrial=BUILDINGS.refinery;
+checks.push({id:'C15',name:'비상 증류소: 한 곳·개선 불가·원가 손실·정유소 처리량의 10% 이하',value:'증류 '+round(rate(emergency)*60)+' / 정유 '+round(rate(industrial)*60)+'개/게임분',pass:emergency.unique&&emergency.emergency&&value(emergency.inputs)>price(emergency.output)*emergency.amount&&rate(emergency)<=rate(industrial)*.1});
 
 // ---------- output ----------
 const report = { source: patchFile ? 'patch:' + patchFile : 'code', pacing: {baseTimeScale: BASE_TIME_SCALE, dayRealSeconds: realSeconds(80)}, counts: { resources: Object.keys(RESOURCES).length, buildings: Object.keys(BUILDINGS).length, producers: economy.filter(e => !e.alt).length, alternatives: alternatives.length, recipeFacilities, ranks: RANKS.length }, startSet, economy, support, sinks, ladder, emptyRanks, unlockRanks, problems, checks };

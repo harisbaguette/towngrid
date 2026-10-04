@@ -15,7 +15,7 @@ try{
  await page.goto(origin+'/character-preview/');
  await page.waitForFunction(()=>window.rosterPreview?.assets.size>=7);
  report.cast=await page.evaluate(async()=>{const p=window.rosterPreview,rows=[];for(const e of p.cast){await p.select(e[0]);const a=p.assets.get(e[0]);rows.push({id:e[0],columns:a.meta.columns.length,frames:a.meta.frames,portrait:a.meta.portraitAnimation.frames,actions:Object.keys(a.meta.clips)});}return rows;});
- assert.equal(report.cast.length,51);assert.ok(report.cast.every(v=>v.columns===64&&v.frames===256&&v.portrait>8));
+ assert.equal(report.cast.length,51);assert.ok(report.cast.every(v=>v.columns===128&&v.frames===512&&v.portrait>8));
  for(const id of ['dorin','nara','borik','cedric','otto','garen']){
   await page.evaluate(id=>window.rosterPreview.select(id),id);
   await page.locator('[data-action="work"]').click();
@@ -54,7 +54,7 @@ try{
   for(const id of race==='human'?['dorin','nara','borik','cedric','bel','dax','garen']:['elvar','lyra','oriel','mist','vian','norin','aster'])assert.ok(report.factions[race].staff.includes(id),id);
   for(let view=0;view<4;view++){
    await page.evaluate(view=>window.environmentPreview.game.setQuarterView(view),view);await page.waitForTimeout(100);
-   assert.ok(await page.evaluate(()=>[...window.environmentPreview.game.workerModels.values()].every(m=>m.userData.texture.repeat.x===1/64&&m.userData.atlas.rows===4)));
+   assert.ok(await page.evaluate(()=>[...window.environmentPreview.game.workerModels.values()].every(m=>m.userData.texture.repeat.x===1/64&&m.userData.atlas.rows===8)));
    await page.screenshot({path:fileURLToPath(new URL('professions-'+race+'-'+view+'.png',out))});
   }
   const saved=await page.evaluate(()=>JSON.stringify(window.environmentPreview.game.sim.save()));
@@ -67,6 +67,7 @@ try{
  });
  await page.locator('.resident-choice').filter({hasText:'엘바르'}).first().click();
  assert.equal(await page.locator('.resident-actions button').count(),11);
+ await page.locator('.resident-motion summary').click();
  assert.match(await page.locator('.resident-illustration').getAttribute('src'),/elvar\/portrait-idle\.png$/);
  for(const title of ['작업','공격','피격','쓰러짐','회전'])await page.locator('.resident-actions button').getByText(title,{exact:true}).click();
  await page.screenshot({path:fileURLToPath(new URL('professions-resident.png',out))});

@@ -27,6 +27,13 @@ export async function open(viewport, extra = {}) {
     try { new PerformanceObserver(l => { for (const e of l.getEntries()) window.tgLongTasks.push({ t: Math.round(e.startTime), d: Math.round(e.duration) }); }).observe({ type: 'longtask', buffered: true }); } catch {}
   });
   const page = await context.newPage(), tag = viewport.width + 'x' + viewport.height;
+  // Instrument every served module revision; Vite can serve a new query URL after an edit.
+  await page.route('**/app/game/scene.js*', async route => {
+    const response = await route.fetch(), body = await response.text();
+    const instrumented = body.replace(/setSimulation\(([^)]*)\)\s*\{/, match => match + 'window.tgScene=this;')
+      .replace(/async warmUp\(([^)]*)\)\s*\{/, match => match + "if(this.container.closest('.starting-land-preview'))window.tgPreviewScene=this;");
+    await route.fulfill({ response, body: instrumented });
+  });
   page.on('pageerror', e => R.errors.push(tag + ': ' + e.message));
   page.on('console', m => { if (m.type() === 'error') R.consoleErrors.push(tag + ': ' + m.text().slice(0, 300)); if (m.type() === 'warning') R.consoleWarnings.push(tag + ': ' + m.text().slice(0, 200)); });
   page.on('response', r => { if (r.status() >= 400) R.failedRequests.push(tag + ': ' + r.status() + ' ' + r.url()); });
@@ -41,7 +48,7 @@ export const visible = async (page, sel) => (await page.locator(sel).count()) > 
 export const save = (name, data) => writeFile(join(outDir, name), JSON.stringify(data, null, 1));
 
 // Title -> home. The title is server-rendered; a click before hydration is lost, so repeat until the home menu shows.
-export async function toHome(page) {
+export async function toHome(page, { previewMenu = true } = {}) {
   const t0 = Date.now();
   await page.goto(origin);
   const timing = {};
@@ -54,13 +61,15 @@ export async function toHome(page) {
   await page.waitForFunction(() => [...document.querySelectorAll('.home-menu button')].some(b => b.textContent.includes('새 게임') && !b.disabled), null, { timeout: 120000 });
   timing.homeReadyMs = Date.now() - t0; timing.titleClicks = clicks;
   await hook(page);
+  // Audit callers enter preview towns. Normal home presentation is tested with previewMenu:false.
+  if (previewMenu) await page.locator('.home-extras:not([open]) > summary').click();
   return timing;
 }
 // Hook the scene and the audio engine through their modules (same approach as tests/starter-environment-browser.mjs).
 export async function hook(page) {
   await page.evaluate(async () => {
     const find = name => [...new Set([...performance.getEntriesByType('resource').map(e => e.name).filter(u => new RegExp('/app/game/' + name + '(?:\\?|$)').test(u)), '/src/app/game/' + name])];
-    for (const url of find('scene.js')) { try { const { GameScene } = await import(url); if (GameScene.prototype.__tgHooked) continue; const original = GameScene.prototype.setSimulation; GameScene.prototype.setSimulation = function (s) { window.tgScene = this; return original.call(this, s); }; GameScene.prototype.__tgHooked = true; } catch {} }
+    for (const url of find('scene.js')) { try { const { GameScene } = await import(url); if (GameScene.prototype.__tgHooked) continue; const original = GameScene.prototype.setSimulation; GameScene.prototype.setSimulation = function (...args) { window.tgScene = this; return original.apply(this, args); }; GameScene.prototype.__tgHooked = true; } catch {} }
     window.tgAudioLog = [];
     for (const url of find('audio.js')) {
       try {
@@ -81,6 +90,7 @@ export async function newGameFromHome(page, nation) {
 }
 export async function demo(page, label = '산업도시 둘러보기') {
   const t0 = Date.now();
+  if (await page.locator('.home-extras:not([open])').count()) await page.locator('.home-extras > summary').click();
   await page.getByRole('button', { name: label }).click();
   await waitSim(page, () => window.tgScene?.sim?.buildings.length > 3 && !document.querySelector('.screen-loading'), null, 120000);
   return Date.now() - t0;

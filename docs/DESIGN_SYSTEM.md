@@ -6,15 +6,15 @@
 
 ## 플레이 화면
 
-플레이 화면에서는 청록색 바탕·밝은 글자·주황색 주 행동을 사용하고, 나사·입체 테두리·버튼 하부 그림자를 생략한다. 자원마다 상자를 만들지 않는다.
+플레이 화면과 홈은 3번 시안의 청록색 프레임·나사·입체 버튼을 공유한다. 프레임 안에 다시 상자를 겹치지 않고, 배치는 미니멀 시안을 따른다. 자원은 하나의 계기판에 모은다.
 
 - 상단에는 자원 세 가지와 시간·메뉴만 둔다. 나머지 재고는 펼침 메뉴에서 본다.
 - 하단에는 기본 메뉴, 건설 목록, 배치 안내, 시설 요약 중 하나만 둔다.
 - 건설 목록은 세 개의 기본 분류와 건물 그림·이름·가격으로 구성한다. 선택된 분류에는 주황색 밑줄을 쓴다.
 - 시설 요약은 이름·상태·생산 진행·가동 버튼을 제공한다. 자세한 설정은 별도 창에서 연다.
-- 메뉴와 상세 창은 크림색 바탕, 얇은 구분선, 단순한 닫기 버튼을 사용한다.
+- 메뉴와 상세 창은 금속 프레임 안의 크림색 바탕, 얇은 구분선, 청록색 제목판을 사용한다.
 
-`MinimalHud`와 `MinimalFacilityDock`은 `src/app/game/MinimalHud.tsx`에 있다. 아래 공용 컴포넌트에 적용하는 플레이 화면 외형은 `src/app/minimal-game.css`에서 관리한다.
+`MinimalHud`와 `MinimalFacilityDock`은 `src/app/game/MinimalHud.tsx`에 있다. 배치는 `src/app/minimal-game.css`, 공통 이미지 외형은 `src/app/component-art.css`에서 관리한다.
 
 ## 색상
 
@@ -36,7 +36,7 @@
 | `--ui-gold` | `#EABE61` | 화폐 |
 | `--ui-focus` | `#FFB965` | 키보드 포커스 |
 
-상태는 색과 아이콘·문구를 함께 쓴다. 주황색 버튼의 글자는 짙은 색으로 쓴다. 건물 그림과 자원 아이콘은 기존 픽셀 원화를 사용한다.
+상태는 색과 아이콘·문구를 함께 쓴다. 이미지 버튼은 시안의 밝고 굵은 글자와 짙은 문자 그림자를 사용한다. 건물 그림과 자원 아이콘은 기존 픽셀 원화를 사용한다.
 
 ## 형태와 크기
 
@@ -86,4 +86,4 @@ import { GamePanel, StatusBadge } from '@/components/game-ui/industrial-kit';
 
 ## 스타일 수정 위치
 
-토큰은 `src/app/design-tokens.css`, 공용 외형은 `src/app/industrial-components.css`에 둔다. 기본 화면 배치는 `game-base` 레이어, 플레이 화면의 미니멀 규칙은 마지막에 읽는 `minimal-game.css`에서 관리한다. 새 화면은 공용 토큰과 컴포넌트를 사용한다. 장면·지도·캐릭터의 색은 UI 토큰으로 대체하지 않는다.
+토큰은 `src/app/design-tokens.css`, 기본 컴포넌트 값은 `src/app/industrial-components.css`에 둔다. 배치 CSS 뒤에 읽는 `component-art.css`가 공통 이미지 외형을 적용한다. 원본은 `art-source/ui-components/2026-10-03/runtime-frames/`, 실행용은 `public/assets/ui/industrial/`이며 `node scripts/pack-ui-components.mjs`로 패킹한다. 9분할 프레임의 모서리는 고정하고 중앙과 변만 늘린다. 새 화면은 공용 토큰과 컴포넌트를 사용한다. 장면·지도·캐릭터의 색은 UI 토큰으로 대체하지 않는다.

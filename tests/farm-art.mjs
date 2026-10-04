@@ -71,7 +71,7 @@ for(const [i,id] of FARM_GOODS_ORDER.entries()){
 }
 for(const id of Object.keys(RESOURCES))assert.ok(RESOURCE_ICONS[id],id+' icon');
 const goods=await pixels(ENVIRONMENT_ASSETS.farmGoods.sheet),atlas=await pixels(ENVIRONMENT_ASSETS.resourceGoods.sheet);
-assert.deepEqual([goods.w,atlas.w],[35*192,80*192]);
+assert.deepEqual([goods.w,atlas.w],[35*192,Object.keys(RESOURCES).length*192]);
 for(const [i,id] of FARM_GOODS_ORDER.entries()){
  const c=cell(goods,i,0);assert.equal(c.partial,0,id);assert.ok(c.count>2500,id+' drawn');
  assert.ok(c.minX>0&&c.minY>0&&c.maxX<191&&c.maxY<191,id+' transparent border');

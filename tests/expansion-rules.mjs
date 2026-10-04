@@ -194,7 +194,7 @@ assert.ok(BUILDINGS.apiary.description.includes('야생 클로버'));assert.ok(!
  for(const key of ['demo','early']){const c=new Campaign({saved:decodeSave(fixture[key])});
   for(const site of c.sites){const s=site.sim;assert.equal(terrainRules(s),false,key+' is an old map');
    for(const b of s.buildings){const now=s.placementEffects(b.type,b.x,b.z),then=oldEffects(s,b.type,b.x,b.z);for(const k of ['water','pollution','shade','windBlock','speed'])assert.equal(now[k],then[k],key+' '+b.type+' '+k);checked++;}}
-  for(let i=0;i<4*60;i++)c.tick(.25);const again=decodeSave(encodeSave(c.save()));assert.ok(again.sites.every(v=>v.simulation.version===9));}
+  for(let i=0;i<4*60;i++)c.tick(.25);const again=decodeSave(encodeSave(c.save()));assert.ok(again.sites.every(v=>v.simulation.version===10));}
  assert.ok(checked>20);ok.push('old saves: '+checked+' buildings match the old rule');}
 
 // 10. The balance record carries the same numbers as the code.

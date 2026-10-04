@@ -10,9 +10,12 @@ import math
 from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageOps
+from scipy.ndimage import label
 from mira_rig import clean, move, joint, foot_phase, prop_image
 from mira_portrait import bake_portrait
 from rig_skinning import limb_layers, SKINNING_REVISION
+from character_body_motion import gait_bob, handling_pose, ease
+from character_arm_motion import reach_pose, walk_pose, handling_lowering, arm_audit, mirror_arms, grip_point, carry_center
 
 ROOT=Path('art-source/pixel-characters/roster-v4')
 COUNTS={'idle':4,'walk':12,'carry':12,'work':8,'pickup':6,'greet':6}
@@ -68,6 +71,19 @@ def prepare(source,view,spec):
             candidates.append((kind,points,distance))
     distances=np.stack([item[2] for item in candidates])
     owners=np.argmin(distances,axis=0)
+    if spec.get('contactMotion') and len(view.get('legs',[]))==2:
+        # A protruding toe can be nearer the other leg's line. Assign each
+        # connected boot silhouette as a whole before splitting its layers.
+        leg_indices=[i for i,item in enumerate(candidates) if item[0]=='legs']
+        ankle_x=np.array([limb[2][0] for limb in view['legs']])
+        boot_top=min(limb[2][1] for limb in view['legs'])-3
+        alpha=np.asarray(image)[:,:,3]>0
+        labels,count=label(alpha&(Y>=boot_top)&~extra_mask&~core,structure=np.ones((3,3)))
+        for component in range(1,count+1):
+            ys,xs=np.where(labels==component)
+            if len(xs)<5 or xs.max()-xs.min()>abs(ankle_x[1]-ankle_x[0])+6:continue
+            owner=int(np.argmin(abs(ankle_x-np.mean(xs))))
+            owners[labels==component]=leg_indices[owner]
     lower_start=min((limb[0][1] for limb in view.get('legs',[])),default=view.get('tailStart',85))
     # Pixels above a limb's root are never reassigned to the opposite arm.
     # That used to rotate tiny shoulder/hair fragments beside the face.
@@ -85,10 +101,8 @@ def prepare(source,view,spec):
         upper=masked(image,owned&(split<=2));lower=masked(image,owned&(split>=-2))
         entry={'joints':points,'upper':upper,'lower':lower}
         if kind=='legs':
-            foot_top=view.get('footTop',[])
-            top=foot_top[len(result['legs'])] if foot_top else c[1]-2
-            entry['foot']=masked(lower,Y>=top)
-            entry['lower']=masked(lower,Y<=top+3)
+            entry['foot']=masked(lower,Y>=c[1]-2)
+            entry['lower']=masked(lower,Y<=c[1]+1)
         result[kind].append(entry)
     if spec['kind']=='spirit':
         tail=tail_region
@@ -98,6 +112,9 @@ def prepare(source,view,spec):
 
 
 def legs_pose(rig,phase,moving,offset,spec):
+    if rig.get('contactView') is not None:
+        from cast_locomotion import contact_legs
+        return contact_legs(rig,phase,moving,offset,spec)
     f=rig['forward'];lateral=np.array([math.copysign(math.sqrt(.5),f[1]),math.sqrt(1/6)])
     legs=rig['legs'];gait=spec['gait']
     origin=np.mean([p['joints'][0] for p in legs],axis=0)+[0,gait['pelvisHeight']*UP]
@@ -120,6 +137,9 @@ def legs_pose(rig,phase,moving,offset,spec):
 
 
 def horse_pose(rig,phase,moving,offset,spec):
+    if rig.get('contactView') is not None:
+        from cast_locomotion import contact_legs
+        return contact_legs(rig,phase,moving,offset,spec)
     # Four-beat walk: hind-left, fore-left, hind-right, fore-right. Body and
     # fore/hind roots stay fixed; each hoof has a distinct planted interval.
     results=[]
@@ -162,42 +182,64 @@ def remove_specks(image,protected_top):
 
 
 def render(rig,action,phase,spec,crate,tool):
-    if spec.get('motionProfile') and action in ['walk','carry']:
-        from bron_motion import render_locomotion
-        return render_locomotion(rig.get('locomotionRig',rig),action,phase,spec,crate)
+    if spec.get('authoredLocomotion') and action in ['walk','carry']:
+        # Replaced by the authored pack after the shared action slots exist.
+        return rig['core'],{'feet':[]}
     layer=Image.new('RGBA',(128,128));f=rig['forward']
     style=spec.get('workStyle','labor')
-    moving=action in ['walk','carry'];cargo=action in ['carry','pickup'] or action=='work' and style=='carrier';handling=action=='pickup'
-    bob=-round(1.8*math.sin(phase*math.tau)**2) if moving else -2+round(math.sin(phase*math.pi)**2)
-    crouch=math.sin(phase*math.pi)*5 if handling else 0
-    if spec['kind']=='spirit':bob=round(math.sin(phase*math.tau))
+    moving=action in ['walk','carry'];cargo=action in ['carry','pickup','drop'] or action=='work' and style=='carrier';handling=action in ['pickup','drop']
+    mode=spec.get('contactMotion',{}).get('mode',spec['kind'])
+    bob=gait_bob(phase,mode) if moving else -2+round(math.sin(phase*math.pi)**2)
+    if handling:bob=-2
+    if moving and rig.get('contactView') is None:
+        bob=-round(1.8*math.sin(phase*math.tau)**2)
+    handling_state=handling_pose(action,phase) if handling else None
+    crouch=handling_state['crouch']*5 if handling else 0
+    if spec['kind']=='spirit':bob=round(math.sin(phase*math.tau)) if not handling else 0
     offset=np.array([0.,bob+crouch]);audit={'coreOffset':offset.tolist(),'feet':[]}
+    reaction=np.array(rig.get('reactionOffset',[0.,0.]))
+    offset+=reaction;audit['coreOffset']=offset.tolist()
+    if action=='work' and rig.get('contactView') is not None:
+        from profession_motion import body_offset
+        offset+=body_offset(style,phase,f)
+        audit['coreOffset']=offset.tolist()
+    shoulders=np.array([p['joints'][0] for p in rig['arms']])
+    crate_center=shoulders.mean(axis=0)+[0,21]+f*10+offset
+    if cargo:crate_center=carry_center(rig['arms'],offset,crate_center,crate.width)
+    if handling:
+        standing=np.array([0.,0 if spec['kind']=='spirit' else -2])+reaction
+        crate_center=carry_center(rig['arms'],standing,shoulders.mean(axis=0)+[0,21]+f*10+standing,crate.width)
+        crate_center[1]+=(1-handling_state['lift'])*18
+        offset[1]+=handling_lowering(rig['arms'],offset,crate_center,crate.width,handling_state['reach'])
+        audit['coreOffset']=offset.tolist()
     leg_layers=[]
     poses=horse_pose(rig,phase,moving,offset,spec) if spec['kind']=='centaur' else legs_pose(rig,phase,moving,offset,spec) if rig['legs'] else []
     for limb,(pose,foot) in zip(rig['legs'],poses):
         a,b,c=limb['joints'];root,knee,end=pose
-        leg_layers.append(limb_layers(limb,root,knee,end))
-        audit['feet'].append({**foot,'ankle':end.round(4).tolist()})
-    shoulders=np.array([p['joints'][0] for p in rig['arms']])
-    crate_center=shoulders.mean(axis=0)+[0,21]+f*10+offset
-    if handling:crate_center+=[0,(1-max(0,(phase-.3)/.7))*22]
-    arms=[]
+        leg_layers.append(limb_layers(limb,root,knee,end,foot.get('footMatrix')))
+        entry={**foot,'ankle':end.round(4).tolist()}
+        if rig.get('contactView') is not None:
+            entry.update(hip=root.round(4).tolist(),knee=knee.round(4).tolist())
+        audit['feet'].append(entry)
+    arms=[];audit['arms']=[]
     for i,limb in enumerate(rig['arms']):
         a,b,c=limb['joints'];root=a+offset;lengths=[np.linalg.norm(b-a),np.linalg.norm(c-b)]
         end=c+[3 if c[0]<a[0] else -3,0]+offset
-        if moving and not cargo:end=root+[0,sum(lengths)*.92]+f*math.cos(math.tau*(phase+(1-i)*.5))*3.5
         if cargo:
-            grip=crate_center+[-crate.width/2+2 if root[0]<crate_center[0] else crate.width/2-2,-3]
-            reach=min(1,phase*3) if handling else 1;end=end*(1-reach)+grip*reach
+            grip=grip_point(limb,rig['arms'],crate_center,crate.width)
+            reach=handling_state['reach'] if handling else 1;end=end*(1-reach)+grip*reach
         elif action=='work':
             from profession_motion import hand_pose
             end=hand_pose(style,i,root,shoulders+offset,f,phase,end)
             reach=np.linalg.norm(end-root)
             if reach>sum(lengths)*.98:end=root+(end-root)/reach*sum(lengths)*.98
         elif action=='greet' and i==1:
-            amount=math.sin(math.pi*phase)**.4
+            amount=ease(phase/.3)*(1-ease((phase-.72)/.28))
             end=end*(1-amount)+(root+[5*math.sin(phase*math.pi*6),-12])*amount
-        elbow=joint(root,end,lengths,-f)
+        pose=walk_pose(limb,root,f,phase,i,mode) if moving and not cargo else reach_pose(limb,root,end,-f)
+        root,elbow,end=pose
+        audit['arms'].append(arm_audit(limb,pose))
+        if cargo:audit['arms'][-1]['grip']=grip.tolist()
         arms.append([*limb_layers(limb,root,elbow,end),end])
     for extra in rig['extras']:layer.alpha_composite(transform_extra(extra,phase,offset))
     for img in arms[0][:2]:layer.alpha_composite(img)
@@ -207,9 +249,10 @@ def render(rig,action,phase,spec,crate,tool):
         a=np.array(rig['tail']);start=rig['view']['tailStart'];weight=np.clip((Y-start)/max(1,115-start),0,1)
         shift=np.rint(np.sin(phase*math.tau-weight*2)*weight*2).astype(int)
         sx=np.clip(X-shift,0,127);tail=Image.fromarray(a[Y,sx]);layer.alpha_composite(move(tail,offset))
-    if cargo and f[1]<0:layer.alpha_composite(crate,tuple(np.rint(crate_center-[crate.width/2,crate.height/2]).astype(int)))
+    show_cargo=cargo and (not handling or handling_state['visible'])
+    if show_cargo and f[1]<0:layer.alpha_composite(crate,tuple(np.rint(crate_center-[crate.width/2,crate.height/2]).astype(int)))
     layer.alpha_composite(move(rig['core'],offset))
-    if cargo and f[1]>0:
+    if show_cargo and f[1]>0:
         layer.alpha_composite(crate,tuple(np.rint(crate_center-[crate.width/2,crate.height/2]).astype(int)))
         layer.alpha_composite(arms[0][1])
     for img in arms[1][:2]:layer.alpha_composite(img)
@@ -218,19 +261,16 @@ def render(rig,action,phase,spec,crate,tool):
         hand=arms[1][2];prop=tool.rotate(tool_angle(style,phase),Image.Resampling.NEAREST,expand=True)
         layer.alpha_composite(prop,(round(hand[0]-prop.width/2),round(hand[1]-prop.height*.75)))
     head_bottom=min(arm['joints'][0,1] for arm in rig['arms'])-2+offset[1]
+    if cargo:audit.update(cargoCenter=crate_center.tolist(),cargoSize=list(crate.size))
+    if handling:audit.update(handling=handling_state,cargoCenter=crate_center.tolist())
     return remove_specks(clean(layer),head_bottom),audit
 
 
 def pack_roster_rig(spec_path,output='public/assets/pixel-characters'):
     path=Path(spec_path);spec=json.loads(path.read_text(encoding='utf-8'));source=path.parent
     rigs=[prepare(source,v,spec) for v in spec['views']]
-    for rig,view,override in zip(rigs,spec['views'],spec.get('motionProfile',{}).get('views',[])):
-        rig['locomotionRig']=prepare(source,{**view,**override},spec)
     props=Image.open('art-source/pixel-characters/prototypes/mira-v3/portrait-props.png')
     crate=prop_image(props,[882,256,1254,670],(23,23));tool=prop_image(props,[978,704,1168,1225],(8,24))
-    if spec.get('motionProfile',{}).get('crateSize'):
-        size=spec['motionProfile']['crateSize']
-        crate=crate.resize((size,size),Image.Resampling.NEAREST)
     if spec.get('toolFile'):tool=clean(Image.open(Path(spec.get('toolRoot',ROOT))/spec['toolFile']))
     columns=[];clips={}
     for action,count in COUNTS.items():
@@ -249,6 +289,8 @@ def pack_roster_rig(spec_path,output='public/assets/pixel-characters'):
                 tile,audit=render(rig,action,phase,spec,crate,tool)
                 if row in [2,3]:
                     tile=ImageOps.mirror(tile)
+                    mirror_arms(audit)
+                    if 'cargoCenter' in audit:audit['cargoCenter'][0]=128-audit['cargoCenter'][0]
                     for foot in audit['feet']:foot['ankle'][0]=128-foot['ankle'][0]
                 atlas.alpha_composite(tile,(col*128,row*128));audit_row.append({'action':action,'phase':phase,**audit})
         audits.append(audit_row)
@@ -275,17 +317,35 @@ def pack_roster_rig(spec_path,output='public/assets/pixel-characters'):
     # Work and combat share the same complete sleeve masks and joint mapping.
     action_rigs=[prepare(source,v,{**spec,'partRadius':24}) for v in spec['views']]
     atlas,meta=append_actions(atlas,meta,action_rigs,spec)
+    if spec.get('contactMotion'):
+        from cast_locomotion import apply_contact_motion
+        atlas,meta=apply_contact_motion(atlas,meta,rigs,spec,render,crate,tool)
     if spec.get('authoredMotion'):
         from bron_motion import apply_hammer_cels
         atlas,meta=apply_hammer_cels(atlas,meta,spec['authoredMotion'])
+    if spec.get('authoredLocomotion'):
+        from bron_locomotion import apply_locomotion
+        atlas,meta=apply_locomotion(atlas,meta,target)
+        if meta['authoredLocomotion']!=spec['authoredLocomotion'] or meta['clips']['walk']['strideLength']!=spec['strideLength']:
+            raise ValueError('Authored locomotion source/stride disagrees with roster rig')
+    if spec.get('contactMotion'):
+        from character_body_motion import install_handling
+        atlas,meta=install_handling(atlas,meta,rigs,spec,render,crate,tool)
+    if spec.get('handlingMotion'):
+        from bron_handling import apply_handling
+        atlas,meta=apply_handling(atlas,meta,spec['handlingMotion'],crate,tool)
+    from character_action_finish import install_action_finish
+    atlas,meta=install_action_finish(atlas,meta,rigs,spec,render,crate,tool)
     atlas.save(target/'sprites.png',optimize=True)
     (target/'frames.json').write_text(json.dumps(meta,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     proof=[]
     for col in clips['walk']['frames']:
         panel=Image.new('RGBA',(512,128),'#dce9e6')
-        for row in range(4):panel.alpha_composite(atlas.crop((col*128,row*128,col*128+128,row*128+128)),(row*128,0))
+        for row in range(4):
+            columns=meta.get('atlasColumns',len(meta['columns']));x=(col%columns)*128;y=(row+(col//columns)*4)*128
+            panel.alpha_composite(atlas.crop((x,y,x+128,y+128)),(row*128,0))
         proof.append(panel.convert('RGB').resize((1024,256),Image.Resampling.NEAREST))
-    proof[0].save(target/'walk-preview.gif',save_all=True,append_images=proof[1:],duration=50,loop=0)
+    proof[0].save(target/'walk-preview.gif',save_all=True,append_images=proof[1:],duration=round(1000/clips['walk']['fps']),loop=0)
     return meta
 
 
@@ -295,4 +355,4 @@ if __name__=='__main__':
     for identity in ids:
         meta=pack_roster_rig(ROOT/identity/'rig.json',args.output);print(f'{identity}: {meta["frames"]} cells, {meta["locomotion"]}')
     output=Path(args.output);catalog=[json.loads(p.read_text(encoding='utf-8')) for p in sorted(output.glob('*/frames.json'))]
-    (output/'catalog.json').write_text(json.dumps(catalog,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    (output/'catalog.json').write_text(json.dumps(catalog,ensure_ascii=False,separators=(',',':'))+'\n',encoding='utf-8')

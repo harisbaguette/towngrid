@@ -1,0 +1,24 @@
+{
+ "before": {
+  "position": [
+   11.499999999999996,
+   0,
+   11.499999999999996
+  ],
+  "zoom": 0.35172413793103446
+ },
+ "after": {
+  "sameCanvas": true,
+  "position": [
+   11.499999999999996,
+   0,
+   11.499999999999996
+  ],
+  "zoom": 0.35172413793103446,
+  "canvases": 1
+ },
+ "errors": [],
+ "consoleErrors": [],
+ "consoleWarnings": [],
+ "failedRequests": []
+}

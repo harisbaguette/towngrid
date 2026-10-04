@@ -1,5 +1,5 @@
-import {remainingSeconds} from './game-time';
 'use client';
+import {remainingSeconds} from './game-time';
 import {useState} from 'react';
 import {ArrowRight,Caravan,Check,ChevronDown,ChevronUp,Coins,Flag,Grid2X2Plus,Hammer,Heart,LifeBuoy,Package,Sailboat,Ship,Sprout,Truck,TriangleAlert,Wrench} from 'lucide-react';
 import {Button} from '@/components/ui/button';
@@ -9,11 +9,12 @@ import {CHARTERS} from './progression';
 import {RESCUE_PRICES} from './living-economy';
 import {productionDiagnosis} from './proximity';
 import {unlockRank} from './world';
-import {blockHint,contractConflict,contractState,crewHouse,exportBlocked,fleetState,fullStoreSale,goalAction,nextBuild,plannedNeeds,shortfall,objectOf,outputOf,plantSpot,promotionParts,quickSaleLot,recoveryState,repairPlan,sellableStock,slowSpot,subjectOf,depletedMove} from './ui-rules';
+import {blockHint,contractConflict,contractState,crewHouse,exportBlocked,fleetState,fullStoreSale,goalAction,nextBuild,plannedNeeds,shortfall,objectOf,outputOf,plantSpot,promotionParts,quickSaleLot,recoveryState,repairPlan,sellableStock,slowSpot,subjectOf,depletedMove,haulingAction,fuelRestock} from './ui-rules';
+import {operatingReserve} from './ui-rules';
 
 const B:any=BUILDINGS,R:any=RESOURCES;
 const VEHICLE_ICONS:Record<string,typeof Truck>={wagon:Caravan,raft:Sailboat,truck:Truck,steamer:Ship};
-type Fleet={vehicles:{kind:string,busy:boolean,name:string,fuel:boolean}[],busy:number,total:number,fuelNote:string,waiting:string,fuelPerTrip:number,spareFuel:number,destination?:string,duration?:number,distance?:number};
+type Fleet={vehicles:{kind:string,busy:boolean,name:string,fuel:boolean}[],busy:number,total:number,fuelNote:string,waiting:string,fuelItem?:string,fuelPerTrip:number,spareFuel:number,destination?:string,duration?:number,distance?:number};
 
 /** Export vehicles as icons (filled while out), with the count or the fuel note when fuel holds shipments back. */
 export function FleetLine({fleet:f,detail}:{fleet:Fleet,detail?:boolean}){
@@ -21,7 +22,7 @@ export function FleetLine({fleet:f,detail}:{fleet:Fleet,detail?:boolean}){
  return <div className={'fleet-line'+(f.fuelNote?' fuel-short':'')}>
   <span className="fleet-icons" aria-hidden="true">{f.vehicles.map((v,i)=>{const Icon=VEHICLE_ICONS[v.kind]||Truck;return <i key={i} className={(v.busy?'busy':'')+(v.fuel?' fuel':'')} title={v.name}><Icon size={14}/></i>;})}</span>
   <span><span className="sr-only">운송 </span>{f.fuelNote?f.fuelNote+(detail?' · '+f.waiting:''):<><b>{f.busy}/{f.total}</b><span className="fleet-unit">대 운행</span></>}</span>
-  {detail&&<small className="fleet-detail">{names}<br/>{f.vehicles.some(v=>v.fuel)?'트럭·증기선은 운행당 연료 '+f.fuelPerTrip+'개 · 사용 가능 '+f.spareFuel+'개':'연료 없이 운행'}</small>}{detail&&f.destination&&<small>{f.destination} · 거리 {f.distance}칸</small>}
+  {detail&&<small className="fleet-detail">{names}<br/>{f.vehicles.some(v=>v.fuel)?'왕복 '+((RESOURCES as any)[f.fuelItem||'fuel']?.name||'연료')+' '+f.fuelPerTrip+'개 · 사용 가능 '+f.spareFuel+'개':'연료 없이 운행'}</small>}{detail&&f.destination&&<small>{f.destination} · 거리 {f.distance}칸</small>}
  </div>;
 }
 
@@ -33,7 +34,7 @@ export function ShortFunds({sim:s,need,onAction,onMarket}:any){
 /** K-01: the button that works on one unmet promotion condition (ui-rules goalAction), on the card and in the rank dialog. */
 export function GoalButton({sim:s,part,onTool,onMarket,onGoals,onWorld,onAction,onSpeed}:any){
  const a:any=part&&!part.done?goalAction(s,part.key):null;if(!a)return null;
- const run=()=>{if(a.kind==='tool'&&'tool' in a)onTool(a.tool);else if(a.kind==='market')onMarket();else if(a.kind==='contract')onAction(s.fulfill(),'success');else if(a.kind==='repay')onAction(s.repay(),'success');else if(a.kind==='sanitize')onAction(s.sanitize());else if(a.kind==='world')onWorld?.();else if(a.kind==='speed')onSpeed?.();else onGoals?.();};
+ const run=()=>{if(a.kind==='tool'&&'tool' in a)onTool(a.tool);else if(a.kind==='market')onMarket();else if(a.kind==='contract')onAction(s.fulfill(),'success');else if(a.kind==='repay')onAction(s.repay(),'success');else if(a.kind==='sanitize')onAction(s.sanitize(),'heal');else if(a.kind==='world')onWorld?.();else if(a.kind==='speed')onSpeed?.();else onGoals?.();};
  return <Button size="sm" variant="outline" className="goal-action" data-kind={a.kind} onClick={run}>{a.label}</Button>;
 }
 /** K-03: what an action with goods in it still lacks ("목재 3 · 물 8 부족") and the way to get it: import or the emergency fund. */
@@ -45,6 +46,7 @@ const autoSellOn=(s:any,item:string)=>{if(!RESOURCES[item as keyof typeof RESOUR
 
 /** Fix buttons right under a stalled facility: sell a full store, replant or expand a depleted gatherer, repair. */
 function FixActions({sim:s,b,onAction,onTool,onMarket,onFocus,repairs}:any){
+ if(b.status.startsWith('보관 제한'))return <div className="fix-actions"><Button size="sm" onClick={onMarket}>보관 설정 열기</Button></div>;
  // K-02: a facility shut in names the neighbours that close its sides; selecting one opens its card (demolish is there).
  if(b.status==='출입구 막힘'&&typeof s.doorBlockers==='function'){const near=s.doorBlockers(b).filter((v:any,i:number,all:any[])=>all.findIndex((w:any)=>w.id===v.id)===i);if(!near.length)return null;
   return <div className="fix-actions">{near.slice(0,4).map((n:any)=><Button key={n.id} size="sm" variant="outline" onClick={()=>onFocus?.(n.id)}>{B[n.type].name} 선택</Button>)}</div>;}
@@ -52,9 +54,9 @@ function FixActions({sim:s,b,onAction,onTool,onMarket,onFocus,repairs}:any){
   return <div className="fix-actions"><Button size="sm" disabled={lot<1} onClick={()=>onAction(s.sell(item,lot),'')}><Coins size={14}/>{R[item].name} {lot}개 팔기</Button>{!s.autoSell[item]&&<Button size="sm" variant="outline" onClick={()=>onAction(autoSellOn(s,item))}>자동 판매 켜기</Button>}{sale.discard>0&&<Button size="sm" variant="outline" onClick={()=>onAction(s.discardStock(sale.store,item,sale.discard))}>{R[item].name} {sale.discard}개 버리기</Button>}</div>;}
  if(b.status==='자원 고갈'&&b.health>=100){const spot=plantSpot(s,b),plantWhy=spot&&s.plantShort?s.plantShort(spot.x,spot.z):null;
   const move=depletedMove(s,b);
-  return <div className="fix-actions">{move&&<Button size="sm" onClick={()=>onAction(s.relocate(b.id,move.x,move.z),'build')}><ArrowRight size={14}/>{B[b.type].natural==='tree'?'나무':'바위'} 남은 곳으로 옮기기 · {move.cost}G</Button>}{spot&&<Button size="sm" disabled={!!plantWhy} onClick={()=>onAction(s.plant(spot.x,spot.z),'build')}><Sprout size={14}/>묘목 심기 · 15G + 물 2</Button>}<Button size="sm" variant="outline" onClick={()=>onTool('expand')}><Grid2X2Plus size={14}/>영토 확장 · {s.expansionCost()}G</Button>{spot&&<CostShort sim={s} text={plantWhy} price={ACTION_PRICES.plant} onAction={onAction} onMarket={onMarket}/>}</div>;}
+  return <div className="fix-actions">{move&&<Button size="sm" onClick={()=>onAction(s.relocate(b.id,move.x,move.z),'build')}><ArrowRight size={14}/>{B[b.type].natural==='tree'?'나무':'바위'} 남은 곳으로 옮기기 · {move.cost}G</Button>}{spot&&<Button size="sm" disabled={!!plantWhy} onClick={()=>onAction(s.plant(spot.x,spot.z),'plant')}><Sprout size={14}/>묘목 심기 · 15G + 물 2</Button>}<Button size="sm" variant="outline" onClick={()=>onTool('expand')}><Grid2X2Plus size={14}/>영토 확장 · {s.expansionCost()}G</Button>{spot&&<CostShort sim={s} text={plantWhy} price={ACTION_PRICES.plant} onAction={onAction} onMarket={onMarket}/>}</div>;}
  if(b.health<100&&repairs.list.length<2){const cost=s.repairCost(b);
-  return <div className="fix-actions"><Button size="sm" disabled={s.money<cost} onClick={()=>onAction(s.repair(b.id),'build')}><Wrench size={14}/>수리 · {cost}G</Button><ShortFunds sim={s} need={cost} onAction={onAction} onMarket={onMarket}/></div>;}
+  return <div className="fix-actions"><Button size="sm" disabled={s.money<cost} onClick={()=>onAction(s.repair(b.id),'repair')}><Wrench size={14}/>수리 · {cost}G</Button><ShortFunds sim={s} need={cost} onAction={onAction} onMarket={onMarket}/></div>;}
  return null;
 }
 
@@ -70,21 +72,25 @@ export function Operations({sim:s,onAction,onFocus,onGoals,onTool,onMarket,onWor
  const unmet=parts.filter((v:any)=>!v.done).filter((v:any,i:number,all:any[])=>{const a=goalAction(s,v.key);return a&&all.findIndex((w:any)=>goalAction(s,w.key)?.label===a.label)===i;});
  // K-03: the rule's own check locks the button and its sentence shows in place.
  const sanitizeWhy=s.health.infection>0&&typeof s.sanitizeShort==='function'?s.sanitizeShort():null;
- const slow=slowSpot(s),repairs=repairPlan(s),conflict=contractConflict(s),sale=falling?sellableStock(s,plannedNeeds(s,next)):null;
+ const haulAction=haulingAction(s),fuelOrder=fuelRestock(s);
+ const cash=operatingReserve(s),slow=slowSpot(s),repairs=repairPlan(s),conflict=contractConflict(s),sale=falling||cash.short?sellableStock(s,plannedNeeds(s,next)):null;
  // J4: a depleted gatherer or a full store keeps its fix buttons even when another stall is shown first.
  const second=failures.find((b:any)=>b!==urgent&&b.health>=100&&['자원 고갈','창고 가득 참'].includes(b.status));
  const conflictText=conflict&&('납품하면 승급 목표 '+R[conflict.goal].name+(conflict.goal===conflict.item?' 판매분':'의 재료 '+subjectOf(R[conflict.item].name))+' '+conflict.short+'개 모자랍니다');
  return <>
+ {cash.short&&<p className="finance-warning" role="status">다음 날 운영비와 운송 3회분 연료를 위해 {cash.target.toLocaleString('ko-KR')}G를 남겨 두세요. 판매 안내는 연료를 다시 살 비용보다 대금이 큰 상품을 우선합니다.</p>}
  {!hidden&&!s.warehouse&&fleet&&<aside className="operations-card panel starter-transport" aria-label="시작 수출 운송"><button className="bottleneck" onClick={onMarket}><Truck size={17}/><span><strong>수출 운송 · 미니 창고</strong><small>보관 {Math.ceil(s.storageSummary(s.starterStore).used)} / {s.storageSummary(s.starterStore).capacity} · 시장 열기</small></span><ArrowRight size={15}/></button><FleetLine fleet={fleet} detail/></aside>}
- {s.health.infection>0&&<aside className="health-alert panel" role="status"><Heart size={18}/><div><strong>감염 {Math.ceil(s.health.infection)}%</strong><span>{s.health.sanitationUntil>s.time?'방역 중 · '+remainingSeconds(s.health.sanitationUntil-s.time,s)+'초':s.stage>=15?'병원에 의약품 공급':s.rank>=unlockRank('clinic')?'진료소를 가동하세요':'방역으로 확산을 늦추세요'}</span></div><button disabled={!!sanitizeWhy} onClick={()=>onAction(s.sanitize())}>방역 · {ACTION_PRICES.sanitize.money}G + 물 {ACTION_PRICES.sanitize.items.water} + 목재 {ACTION_PRICES.sanitize.items.wood}</button><CostShort sim={s} text={sanitizeWhy} price={ACTION_PRICES.sanitize} onAction={onAction} onMarket={onMarket}/></aside>}
+ {s.health.infection>0&&<aside className="health-alert panel" role="status"><Heart size={18}/><div><strong>감염 {Math.ceil(s.health.infection)}%</strong><span>{s.health.sanitationUntil>s.time?'방역 중 · '+remainingSeconds(s.health.sanitationUntil-s.time,s)+'초':s.stage>=15?'병원에 의약품 공급':s.rank>=unlockRank('clinic')?'진료소를 가동하세요':'방역으로 확산을 늦추세요'}</span></div><button disabled={!!sanitizeWhy} onClick={()=>onAction(s.sanitize(),'heal')}>방역 · {ACTION_PRICES.sanitize.money}G + 물 {ACTION_PRICES.sanitize.items.water} + 목재 {ACTION_PRICES.sanitize.items.wood}</button><CostShort sim={s} text={sanitizeWhy} price={ACTION_PRICES.sanitize} onAction={onAction} onMarket={onMarket}/></aside>}
  {!hidden&&s.warehouse&&<aside className={'operations-card panel'+(phone&&!open?' folded':'')}>
  {phone&&<button className="ops-fold" aria-expanded={open} aria-label={open?'운영 카드 접기':'운영 카드 펼치기'} onClick={()=>setOpen(v=>!v)}>{open?<span>접기</span>:<span className={exported||urgent?'alert':''}>{exported||urgent?<TriangleAlert size={14}/>:<Flag size={14}/>}{exported?'수출길 막힘':urgent?B[urgent.type].name+' · '+urgent.status:next?next.name+' 짓기':promotion?promotion.name:'운영'}</span>}{open?<ChevronUp size={16}/>:<ChevronDown size={16}/>}</button>}
  {exported?<button className="bottleneck export-blocked" onClick={()=>onFocus(s.warehouse.id)}><TriangleAlert size={17}/><span><strong>수출길 막힘{exported.auto?' · 자동 판매 멈춤':''}</strong><small>{exported.error}</small></span><ArrowRight size={15}/></button>
  :urgent?<div className="bottleneck-block"><button className="bottleneck" onClick={()=>diagnostic?.tool?onTool(diagnostic.tool):onFocus(diagnostic?.focus||urgent.id)}><TriangleAlert size={17}/><span><strong>{B[urgent.type].name} · {urgent.status}</strong><small>{diagnostic?.text||'시설을 수리하세요.'}</small></span><ArrowRight size={15}/></button><FixActions sim={s} b={urgent} onAction={onAction} onTool={onTool} onMarket={onMarket} onFocus={onFocus} repairs={repairs}/></div>
  :!next&&<div className="network-ok"><Check size={16}/>생산망 연결됨<span><Truck size={14}/>{s.workers.filter((w:any)=>w.task).length}명 운반</span></div>}
  {second&&!exported&&<div className="bottleneck-block secondary"><button className="bottleneck" onClick={()=>onFocus(second.id)}><TriangleAlert size={15}/><span><strong>{B[second.type].name} · {second.status}</strong></span><ArrowRight size={14}/></button><FixActions sim={s} b={second} onAction={onAction} onTool={onTool} onMarket={onMarket} onFocus={onFocus} repairs={repairs}/></div>}
- {repairs.list.length>1&&<div className="repair-all"><Button size="sm" disabled={s.money<repairs.cheapest} title={s.money<repairs.total?'자금이 닿는 만큼 싼 곳부터 고칩니다':undefined} onClick={()=>onAction(s.repairAll(),'build')}><Wrench size={14}/>모두 수리 · {repairs.list.length}곳 · 합계 {repairs.total.toLocaleString('ko-KR')}G</Button><ShortFunds sim={s} need={repairs.total} onAction={onAction} onMarket={onMarket}/></div>}
+ {repairs.list.length>1&&<div className="repair-all"><Button size="sm" disabled={s.money<repairs.cheapest} title={s.money<repairs.total?'자금이 닿는 만큼 싼 곳부터 고칩니다':undefined} onClick={()=>onAction(s.repairAll(),'repair')}><Wrench size={14}/>모두 수리 · {repairs.list.length}곳 · 합계 {repairs.total.toLocaleString('ko-KR')}G</Button><ShortFunds sim={s} need={repairs.total} onAction={onAction} onMarket={onMarket}/></div>}
  {slow&&!exported&&<button className="slow-spot" onClick={()=>onAction(s.relocate(slow.building.id,slow.x,slow.z),'build')} aria-label={B[slow.building.type].name+' 자리 옮기기'}><Wrench size={15}/><span><strong>{B[slow.building.type].name} · 생산 효율 {Math.round(slow.from*100)}%</strong><small>그늘·바람막이·오염이 적은 {slow.x+1}, {slow.z+1}로 옮기면 {Math.round(slow.to*100)}% · 이전 {slow.cost}G</small></span><ArrowRight size={14}/></button>}
+ {fuelOrder&&<Button size="sm" variant="outline" disabled={!!fuelOrder.error} title={fuelOrder.error||'현재 경로의 왕복 연료를 보충합니다'} onClick={()=>onAction(s.buy(fuelOrder.item,fuelOrder.amount))}>{R[fuelOrder.item].name} {fuelOrder.amount}개 수입 · {fuelOrder.cost}G</Button>}
+ {haulAction&&<Button size="sm" variant="outline" title={haulAction.text} onClick={()=>onAction(haulAction.kind==='gear'?s.buyHaulGear():s.upgrade(haulAction.id),'upgrade')}>{haulAction.label}</Button>}
  {next&&<><button className="next-build" onClick={()=>onTool(next.type)} aria-label={next.name+' 짓기 · '+next.chain}><Hammer size={16}/><span><strong>{next.name} 짓기</strong><small>{next.chain}</small></span><ArrowRight size={15}/></button>{/* K-05: what the suggested building still lacks and where to get it */}<div className="next-build-short"><CostShort sim={s} price={{money:s.buildCost(next.type),items:B[next.type].materials||{}}} onAction={onAction} onMarket={onMarket}/></div></>}
  {sale&&sale.value>0&&<button className="sell-hint" onClick={onMarket} aria-label={'자금이 줄고 있습니다 · 팔 수 있는 재고 '+sale.value.toLocaleString('ko-KR')+'G어치 · 시장 열기'}><Coins size={16}/><span><strong>팔 수 있는 재고 {sale.value.toLocaleString('ko-KR')}G어치</strong><small>자금이 줄고 있습니다 · {sale.items.slice(0,3).map((v:any)=>R[v.id].name+' '+v.n).join(' · ')}</small></span><ArrowRight size={15}/></button>}
  <div className="quick-contract"><Package size={18}/><div><strong>{R[c.item]?.name} 납품</strong><span>{deal.have} / {c.amount} · {c.reward}G</span></div><Button size="sm" disabled={!deal.ready} title={conflictText||deal.note||undefined} onClick={()=>onAction(s.fulfill())}>{deal.label}</Button></div>

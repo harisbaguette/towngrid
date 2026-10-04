@@ -1,3 +1,6 @@
+import {gridAllocation,batteryChargeOf} from './power-grid.js';
+import {outputStock,takeOutput} from './facility-inventory.js';
+import {levelFactor} from './facility-upgrades.js';
 import {isStore,freeSpace,storeStock,deposit,withdraw} from './storage.js';
 // Export terminals, pipe and conveyor networks, and the local power grid (infrastructure.js holds the
 // definitions). Every site keeps the west gate as a small built-in road terminal; the other terminals
@@ -53,7 +56,7 @@ export function placementError(s,type,x,z){
  if(T.via==='road'&&!touch())return '무역로와 이어진 도로 옆에 지으세요';
  if(T.via==='paved'&&!touch(s.paved))return '무역로와 이어진 포장 도로 옆에만 지을 수 있습니다';
  if(T.via==='rail'&&!touch(s.rails))return '무역로와 이어진 철로 옆에만 지을 수 있습니다';
- if(T.via==='air'){if(!around(x,z).some(([a,c])=>s.at(a,c)?.type==='airport'))return '공항 바로 옆에만 지을 수 있습니다';if(!touch())return '무역로와 이어진 도로나 철로 옆에 지으세요';}
+ if(T.via==='air'){if(!around(x,z).some(([a,c])=>s.at(a,c)?.type==='airport'&&alive(s.at(a,c))&&!(s.at(a,c).movingUntil>s.time)))return '공항 바로 옆에만 지을 수 있습니다';if(!touch())return '무역로와 이어진 도로나 철로 옆에 지으세요';}
  return null;
 }
 
@@ -67,7 +70,7 @@ export function terminalsOf(s){
   const T=BUILDINGS[b.type].terminal;if(!T)continue;
   const water=T.water&&options.find(o=>o.kind===T.water),goals=s.entries(b);
   // Road hubs load onto the land route and share its lot; ships, trains, planes and snowmobiles carry their own.
-  const capacity=T.via==='road'||T.via==='paved'?Math.min(T.capacity,landCap):T.capacity;
+  const capacity=Math.floor((T.via==='road'||T.via==='paved'?Math.min(T.capacity,landCap):T.capacity)*levelFactor(b));
   const price=T.price??(T.water?water?.price??ROUTE_KINDS[T.water].price:land.price);
   const error=b.movingUntil>s.time?'이전 중':b.health<=0?'파손됨':b.enabled===false?'운영 중지':placementError(s,b.type,b.x,b.z)||(goals.length?null:'출입구가 막혔습니다');
   list.push({id:'b:'+b.id,type:b.type,building:b.id,name:BUILDINGS[b.type].name,...along(water||land),capacity,price:+price.toFixed(3),usable:!error,error,goals});
@@ -85,6 +88,8 @@ export function activeTerminal(s){
  s.activeTerminalRevision=s.revision;return s.activeTerminalCache=pick;
 }
 export const tradeConnection=activeTerminal;
+/** Capacity of the dedicated vehicle that comes with this terminal. */
+export const terminalVehicleCapacity=t=>Math.floor(t.capacity*(['road','paved','snow'].includes(BUILDINGS[t.type]?.terminal?.via)?2:1));
 /** Largest lot one shipment can carry, and the smallest lot auto-sale waits for. */
 export const tradeCapacity=s=>activeTerminal(s).capacity;
 export const autoSaleLot=s=>Math.min(10,tradeCapacity(s));
@@ -115,13 +120,13 @@ export function tickNetworks(s,dt){
  s.networkTimer=(s.networkTimer||0)+dt;if(s.networkTimer<1)return;s.networkTimer=0;
  for(const net of networks(s))for(const item of net.carries){
   const members=net.members.filter(b=>alive(b)&&!(b.movingUntil>s.time)),localStores=members.filter(isStore);
-  const sources=members.filter(b=>!isStore(b)&&s.recipeOf(b).output===item);
+  const sources=members.filter(b=>!isStore(b)&&outputStock(s,b,item)>0);
   const sinks=members.filter(b=>!isStore(b)&&s.effectiveInputs(b)[item]);
   const want=b=>Math.max(0,s.effectiveInputs(b)[item]*2-(b.inputs[item]||0)-pending(s,b,item));
-  const spare=b=>Math.max(0,Math.floor(b.out-reserved(s,item,b.id)));
+  const spare=b=>Math.max(0,Math.floor(outputStock(s,b,item)-reserved(s,item,b.id)));
   let budget=NETWORK_RATE;
   const move=(from,to,n)=>{n=Math.min(n,budget);if(n<=0)return;budget-=n;
-   if(isStore(from))withdraw(s,item,n,from);else from.out-=n;
+   if(isStore(from))withdraw(s,item,n,from);else takeOutput(s,from,item,n);
    if(isStore(to))deposit(s,item,n,to);else to.inputs[item]=(to.inputs[item]||0)+n;
    s.logisticsStats.direct=(s.logisticsStats.direct||0)+n;s.logisticsStats.delivered=(s.logisticsStats.delivered||0)+n;
    recordNetworkTransfer(s,net,from,to,item,n);};
@@ -137,9 +142,11 @@ export const POWER_REACH=6;
 const reach=(a,b)=>Math.max(Math.abs(a.x-b.x),Math.abs(a.z-b.z))<=POWER_REACH;
 export function powerNodes(s){
  if(s.gridTime===s.time&&s.gridRevision===s.revision)return s.gridNodes;
- const outage=s.outageUntil>s.time,nodes=s.buildings.filter(b=>alive(b)&&!(b.movingUntil>s.time)&&(outage?b.type==='battery'&&s.batteryCharge>0:BUILDINGS[b.type].output==='power'&&b.activeUntil>s.time));
+ const outage=s.outageUntil>s.time,nodes=s.buildings.filter(b=>alive(b)&&!(b.movingUntil>s.time)&&(outage?b.type==='battery'&&batteryChargeOf(s,b)>0:BUILDINGS[b.type].output==='power'&&b.activeUntil>s.time));
  const subs=s.buildings.filter(b=>alive(b)&&!(b.movingUntil>s.time)&&b.type==='substation');
  for(let grew=true;grew;){grew=false;for(const sub of subs)if(!nodes.includes(sub)&&nodes.some(n=>reach(n,sub))){nodes.push(sub);grew=true;}}
  s.gridTime=s.time;s.gridRevision=s.revision;return s.gridNodes=nodes;
 }
-export const poweredAt=(s,b)=>powerNodes(s).some(n=>reach(n,b));
+export const gridStatus=s=>gridAllocation(s,powerNodes(s));
+export const poweredAt=(s,b)=>BUILDINGS[b.type]?.power?gridStatus(s).powered.has(b.id):powerNodes(s).some(n=>reach(n,b));
+export const powerShort=(s,b)=>gridStatus(s).assigned.has(b.id)?'전력 용량 부족 · 발전소 증설 또는 업그레이드':'전력망 밖 · 변전소 필요';

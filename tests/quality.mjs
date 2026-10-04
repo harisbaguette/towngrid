@@ -46,7 +46,7 @@ passed('33-rank prerequisite graph has no future-industry deadlock');
 }
 {
  const c=new Campaign({demo:true}),s=c.active,battery=s.buildings.find(b=>b.type==='battery'),station=s.buildings.find(b=>b.type==='station');
- s.outageUntil=100;s.batteryCharge=40;assert.equal(s.power,true);s.setOperation(battery.id,false);assert.equal(s.power,false);s.setOperation(battery.id,true);assert.equal(s.power,true);
+ s.outageUntil=100;s.batteryCharge=40;battery.charge=40;assert.equal(s.power,true);s.setOperation(battery.id,false);assert.equal(s.power,false);s.setOperation(battery.id,true);assert.equal(s.power,true);
  assert.equal(c.stationReady(s),true);s.setOperation(station.id,false);assert.equal(c.stationReady(s),false);s.setOperation(station.id,true);assert.equal(c.stationReady(s),true);
  const clinic=fresh();clinic.rank=9;clinic.build('clinic',10,10,true);assert.ok(clinic.medicalProtection);clinic.rank=20;assert.equal(clinic.medicalProtection,false,'late illnesses require modern treatment');clinic.healthUntil=20;assert.ok(clinic.medicalProtection);
  s.strikeUntil=100;c.council('welfare');assert.equal(s.strikeUntil,0);

@@ -1,0 +1,13 @@
+{
+  "poses": 8,
+  "directions": [
+    "SW",
+    "SE"
+  ],
+  "distinctDrawings": 8,
+  "seek": "passed",
+  "mirrorSelection": "passed",
+  "reducedMotion": "passed",
+  "mobile": "passed",
+  "errors": []
+}

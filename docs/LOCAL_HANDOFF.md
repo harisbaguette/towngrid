@@ -16,13 +16,15 @@
 
 ## 2026-09-29 격자 세계 지도와 메인 UI
 
-세계 지도는 대륙·국가·거점 주변으로 확대하고 드래그·휠·키보드로 탐색한다. 무역로는 선택해서 표시한다. 게임 안에서는 현재 거점 주변부터 보고 보유 거점으로 이동한다. 새 게임은 지도에서 고른 비수도권의 빈 칸에서 시작하며 기본값은 외곽 개척지다. `territory.js`의 `WORLD_PLOTS`는 정착 가능한 모든 칸, `PROVINCES`는 행정 구역이며 `territoryOf`가 부지와 외교 소유권을 연결한다. `starting-sites.js`와 `Campaign`이 선택을 검증한다. 기존 저장은 원래 위치와 ID를 유지한다. 추가 거점은 사용 중인 칸을 건너뛰며 전체 운영 한도는 24곳이다.
+세계·지역·내 땅은 `GameScene`의 한 캔버스에서 연속적으로 확대·축소한다. 게임을 시작하면 현재 부지와 실제 이웃 땅이 함께 보이고, 카메라에서 먼 지형에 안개가 낀다. 새 게임은 지도에서 고른 비수도권의 빈 칸에서 시작하며 에스테른 기본값은 강과 숲에 접한 하벤 남부 평원이다. `territory.js`의 `WORLD_PLOTS`는 정착 가능한 모든 칸, `PROVINCES`는 행정 구역이며 `territoryOf`가 부지와 외교 소유권을 연결한다. `starting-sites.js`와 `Campaign`이 선택을 검증한다. 기존 저장은 원래 위치와 ID를 유지한다. 전체 운영 한도는 24곳이다.
 
 메인 UI는 **산업 제어반** 색상을 사용한 미니멀 배치다. 상단에는 돈·목재·석재와 시간·메뉴, 하단에는 시장·건설·세계를 둔다. 건설 목록과 시설 요약은 하단 메뉴를 대체한다. 목표·운영 알림·주민·영토 확장·주변 지형·지도 도구·설정은 메뉴에서 연다. 색상은 `src/app/design-tokens.css`, 공용 외형은 `industrial-components.css`, 플레이 화면 배치는 `minimal-game.css`, 상태·시설 요약은 `game/MinimalHud.tsx`에서 관리한다. [디자인 시스템](DESIGN_SYSTEM.md)과 [UI 배치](UI_DESIGN.md)를 참고한다.
 
-세계 지도 전용 픽셀 원화는 `art-source/world-atlas/`, 실행용은 `public/assets/world-atlas/`다. `node scripts/pack-world-atlas.mjs`가 지형 1,550칸과 이웃 물길·해안선을 지면 이미지로 합성하고 네 방향 스프라이트를 패킹한다. 원화나 `world-grid.js`를 수정하면 다시 패킹한다. `atlas-projection.js`가 고정 아이소메트릭 투영과 선택 좌표 역변환을 담당한다. `WorldAtlas.tsx`와 `world-atlas.css`는 Q/E·버튼 회전, 고정 크기 지명·수도/후보/보유/적대 표식·북향 미니맵·두 손가락 확대를 담당한다.
+메인 월드는 `world-space.js`의 타일 좌표를 사용한다. `world-ground.js`가 실제 지면, `world-landscape.js`가 주변 부지·상세 수준·거리 안개를 맡는다. 기존 `WorldAtlas.tsx`와 `art-source/world-atlas/`는 비교·지형 도구에 남아 있다. [연속 월드 구조와 검사 명령](WORLD_MAP.md)을 참고한다.
 
-`LocalMapPreview.tsx`의 미리보기는 실제 생성기의 24×24 타일·자원·확보한 땅을 읽는다. `CampaignWorld.tsx`에서 정확한 진출 부지를 고르고, `site-expansion.js`의 조건과 비용을 확인한 뒤 그 칸에 거점을 만든다. 기존 두 인수 `foundSite` 호출과 저장 위치는 호환된다. 세계 지도 검사는 `tests/world-atlas.mjs`, 브라우저 검사는 `tests/world-atlas-browser.mjs`다.
+`LocalMapPreview.tsx`는 자원 정보를 확인하는 작은 타일 미리보기다. 실제 땅을 살펴볼 때는 `CampaignWorld.tsx`의 `월드에서 이 땅 보기`가 메인 카메라를 이동시킨다. `site-expansion.js`가 조건·비용·확보를 함께 계산한다. 미개발지의 지형은 확보 전후 같은 seed를 사용하고, 기존 저장의 seed는 유지한다.
+
+새 게임은 `WorldMap.tsx`의 국가·부지·미리보기 3단계다. `start-world.css`가 선택 막대, `world-view.css`가 공용 카메라 조작과 부지 정보를 배치한다. 세 단계와 게임 시작은 같은 `GameScene`을 사용하며 시작 전에는 시간을 진행하거나 저장하지 않는다. 시작 흐름 검사는 `tests/start-map.mjs`·`tests/start-map-browser.mjs`다.
 
 배치·조작·수정 기준은 [UI_DESIGN.md](UI_DESIGN.md), 실제 화면과 검사 결과는 `docs/verification/ui-20260929/`를 참고한다.
 

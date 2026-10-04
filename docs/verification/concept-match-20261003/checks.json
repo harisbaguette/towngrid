@@ -1,0 +1,10 @@
+{
+  "typecheck": "PASS",
+  "build": "PASS",
+  "frontUi": {"result":"PASS","report":"front/results.json","viewportSizes":5},
+  "startMap": {"result":"PASS","report":"start/browser-results.json","viewportSizes":5,"previewEqualsNewGame":true},
+  "playUi": {"result":"PASS","report":"play/results.json","viewportSizes":5},
+  "expandedPanels": {"result":"PASS","report":"panels/results.json","viewportSizes":5},
+  "regression": {"result":"FAIL","log":"regression.log","failure":"scripts/check-pixel-characters.mjs:113 — Mira stance sole stays planted as the actor moves","remainingAuditSuites":"Nine remaining audit regressions were run separately and passed","skipped":"tests/expansion-new-browser.mjs: missing environment variables"},
+  "visualReview": {"comparison":"compare.html","componentReference":"../../../art-source/ui-components/2026-10-03/03-industrial-controls.png","literalSceneImageParity":false,"remainingDifferences":"World and local terrain geometry and scenery are rendered from playable map data; they are not identical to the illustrated concept map."}
+}

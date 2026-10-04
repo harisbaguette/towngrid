@@ -7,7 +7,7 @@ import {Simulation,BUILDINGS,RESOURCES,CONTRACT_POOLS} from '../src/app/game/sim
 import {Campaign} from '../src/app/game/campaign.js';
 import {RANKS,unlockRank} from '../src/app/game/world.js';
 import {encodeSave,decodeSave} from '../src/app/game/persistence.js';
-import {EXPANSION_RESOURCES,EXPANSION_BUILDINGS,EXPANSION_RECIPES,EXPANSION_RANKS,EXPANSION2_RESOURCES,EXPANSION2_BUILDINGS,EXPANSION2_RECIPES,EXPANSION2_RANKS} from '../src/app/game/industry.js';
+import {EXPANSION_RESOURCES,EXPANSION_BUILDINGS,EXPANSION_RECIPES,EXPANSION_RANKS,EXPANSION2_RESOURCES,EXPANSION2_BUILDINGS,EXPANSION2_RECIPES,EXPANSION2_RANKS,REFINING_RESOURCES} from '../src/app/game/industry.js';
 import {INFRA_BUILDINGS} from '../src/app/game/infrastructure.js';
 import {permitted,itemGate} from '../src/app/game/ui-rules.js';
 import {facilityStaff} from '../src/app/game/facility-staff.js';
@@ -52,7 +52,8 @@ assert.equal(spec2Resources.length,9,'9 resource ids in section 6');assert.equal
 for(const [id,name] of spec2Resources)assert.equal(RESOURCES[id]?.name,name,'resource '+id);
 for(const [id,name] of spec2Buildings)assert.equal(BUILDINGS[id]?.name,name,'facility '+id);
 assert.deepEqual(Object.keys(EXPANSION2_RESOURCES).sort(),spec2Resources.map(v=>v[0]).sort());assert.deepEqual(Object.keys(EXPANSION2_BUILDINGS).sort(),spec2Buildings.map(v=>v[0]).sort());
-assert.equal(Object.keys(RESOURCES).length,80);assert.equal(Object.keys(BUILDINGS).length,112);
+const expansionResourceCount=Object.keys(RESOURCES).filter(id=>!REFINING_RESOURCES[id]).length;
+assert.equal(expansionResourceCount,80);assert.equal(Object.keys(BUILDINGS).length,112);
 const NEW_RESOURCES={...EXPANSION_RESOURCES,...EXPANSION2_RESOURCES},NEW_BUILDINGS={...EXPANSION_BUILDINGS,...EXPANSION2_BUILDINGS},NEW_RANKS={...EXPANSION_RANKS,...EXPANSION2_RANKS};
 const NEW_RECIPES=Object.entries(EXPANSION_RECIPES).concat(Object.entries(EXPANSION2_RECIPES));
 for(const [id,r] of Object.entries(NEW_RESOURCES))assert.ok(r.price>0&&/^#[0-9a-f]{6}$/.test(r.color),id+' has a price and an icon colour');
@@ -67,7 +68,7 @@ for(const id of Object.keys(NEW_RESOURCES)){assert.ok(lines.some(l=>l.r.output==
 // Section 6 names the consumer of each new intermediate; honeycomb and jet fuel have the ones balance doc 17 chose.
 for(const [id,user] of [['dough','bakery:baguette'],['batter','chocolatier:fancycake'],['batter','chocolatier:decorcake'],['winebottle','winery:sangria'],['honeycomb','confectionery:honeycandy'],['jetfuel','shipyard:jetairship']]){const [type,recipe]=user.split(':');assert.ok(BUILDINGS[type].recipes.find(r=>r.id===recipe).inputs[id],user+' uses '+id);}
 // The old bread, cake, wine and fuel lines keep their inputs and prices.
-assert.deepEqual([BUILDINGS.bakery.recipes[0].inputs,BUILDINGS.confectionery.recipes[0].inputs,BUILDINGS.winery.recipes[0].inputs,BUILDINGS.refinery.recipes[0].inputs],[{flour:2,water:1,wood:1},{flour:2,egg:2},{grapered:3,barrel:1},{oil:3,water:1}]);
+assert.deepEqual([BUILDINGS.bakery.recipes[0].inputs,BUILDINGS.confectionery.recipes[0].inputs,BUILDINGS.winery.recipes[0].inputs,BUILDINGS.refinery.recipes[0].inputs],[{flour:2,water:1,wood:1},{flour:2,egg:2},{grapered:3,barrel:1},{oil:3,water:2}]);
 assert.deepEqual(['bread','cake','winered','winewhite','barrel','fuel','flour','egg','grain'].map(r=>RESOURCES[r].price),[42,200,125,130,85,75,23,25,9]);
 
 // 2. Balance data and docs match the code (docs/balance/patch-20260928.json, expansion20260929).
@@ -80,7 +81,7 @@ const patch2=JSON.parse(fs.readFileSync(new URL('../docs/balance/patch-20260928.
 assert.deepEqual(patch2.resources.add,EXPANSION2_RESOURCES);assert.deepEqual(patch2.unlocks,EXPANSION2_RANKS);assert.deepEqual(patch2.recipes,EXPANSION2_RECIPES);
 for(const [id,d] of Object.entries(patch2.buildings.add))for(const [k,v] of Object.entries(d))assert.deepEqual(BUILDINGS[id][k],v,id+'.'+k);
 assert.deepEqual(Object.keys(patch2.buildings.add).sort(),Object.keys(EXPANSION2_BUILDINGS).sort());
-assert.deepEqual([patch2.counts.resources.after,patch2.counts.buildings.after],[Object.keys(RESOURCES).length,Object.keys(BUILDINGS).filter(t=>t!=='distillery').length]);
+assert.deepEqual([patch2.counts.resources.after,patch2.counts.buildings.after],[expansionResourceCount,Object.keys(BUILDINGS).filter(t=>t!=='distillery').length]);
 
 // 3. Every product line that makes or uses a new resource really turns its inputs into its output.
 const chainLines=lines.filter(({type,r})=>RESOURCES[r.output]&&(NEW_BUILDINGS[type]||NEW_RESOURCES[r.output]||Object.keys(r.inputs).some(k=>NEW_RESOURCES[k])||NEW_RECIPES.some(([t,list])=>t===type&&list.some(v=>v.id===r.id))));
@@ -106,7 +107,7 @@ for(const [type,from,to] of [['bakery','bread','jam'],['sawmill','plank','barrel
  const items=[...new Set([...Object.keys(BUILDINGS[type].recipes.find(r=>r.id===from).inputs),s.recipeOf(b).output])];
  const before=Object.fromEntries(items.map(k=>[k,s.stock[k]+(b.inputs[k]||0)+(b.batch?.[k]||0)+(k===s.recipeOf(b).output?b.out:0)+carried(k)]));
  assert.ok(s.setRecipe(b.id,to).ok);assert.equal(b.progress,0);assert.equal(b.out,0);
- for(const k of items)assert.equal(s.stock[k]+(b.inputs[k]||0)+carried(k),before[k],type+' keeps '+k);
+ for(const k of items)assert.equal(s.stock[k]+(b.inputs[k]||0)+(b.returnStock?.[k]||0)+carried(k),before[k],type+' keeps '+k);
  assert.equal(s.recipeOf(reload(s).at(b.x,b.z)).id,to,'the chosen product survives a save');
 }
 
@@ -147,7 +148,7 @@ for(let rank=0;rank<RANKS.length;rank++){const s=new Simulation();s.rank=rank;fo
 {const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/save-before-20260928.json',import.meta.url),'utf8'));
  for(const key of ['demo','early']){const raw=JSON.parse(fixture[key]).game;assert.ok(raw.sites.every(v=>Object.keys(NEW_RESOURCES).every(r=>v.simulation.stock[r]===undefined)),'the fixture predates the new goods');
   const c=new Campaign({saved:decodeSave(fixture[key])});for(const site of c.sites)for(const r of Object.keys(NEW_RESOURCES))assert.equal(site.sim.stock[r],0,key+' '+r+' starts at zero');
-  for(let i=0;i<4*60;i++)c.tick(.25);const again=decodeSave(encodeSave(c.save()));assert.ok(again.sites.every(v=>v.simulation.version===9&&Object.keys(NEW_RESOURCES).every(r=>Number.isFinite(v.simulation.stock[r]))));}}
+  for(let i=0;i<4*60;i++)c.tick(.25);const again=decodeSave(encodeSave(c.save()));assert.ok(again.sites.every(v=>v.simulation.version===10&&Object.keys(NEW_RESOURCES).every(r=>Number.isFinite(v.simulation.stock[r]))));}}
 // Infrastructure and expansion never overlap, and every new facility is in exactly one rank's unlock list.
 assert.ok(Object.keys(NEW_BUILDINGS).every(id=>!INFRA_BUILDINGS[id]&&RANKS.filter(r=>r.unlocks.includes(id)).length===1));
 

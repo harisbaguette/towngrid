@@ -3,8 +3,9 @@ import {useState} from 'react';
 import {Mountain,Trees,Waves,Snowflake,Sun,Leaf,Compass,X} from 'lucide-react';
 import {biomeOf} from './biome-data';
 import {mapEdges} from './map-edges';
+import {landformName} from './landform-data';
 
-export function BiomeSummary({layout}:any){const biome=biomeOf(layout);return biome?<div className="biome-summary"><strong>{biome.name}</strong><span>{biome.summary}</span></div>:null;}
+export function BiomeSummary({layout}:any){const biome=biomeOf(layout);return biome?<div className="biome-summary"><strong>{landformName(layout)}</strong><span>{biome.summary}</span></div>:null;}
 const icons:any={mountain:Mountain,forest:Trees,ice:Snowflake,desert:Sun,plain:Leaf};
 export function MapEdgeList({layout,onFocus}:any){
  if(!layout)return null;

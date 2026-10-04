@@ -2,8 +2,8 @@
   "cast": [
     {
       "id": "mira",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 28,
       "actions": [
         "idle",
@@ -21,8 +21,8 @@
     },
     {
       "id": "bron",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -40,8 +40,8 @@
     },
     {
       "id": "taron",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -59,8 +59,8 @@
     },
     {
       "id": "silen",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -78,8 +78,8 @@
     },
     {
       "id": "dew",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -97,8 +97,8 @@
     },
     {
       "id": "kai",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -116,8 +116,8 @@
     },
     {
       "id": "fia",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -135,8 +135,8 @@
     },
     {
       "id": "hana",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -154,8 +154,8 @@
     },
     {
       "id": "rowan",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -173,8 +173,8 @@
     },
     {
       "id": "marna",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -192,8 +192,8 @@
     },
     {
       "id": "ethan",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -211,8 +211,8 @@
     },
     {
       "id": "vera",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -230,8 +230,8 @@
     },
     {
       "id": "lien",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -249,8 +249,8 @@
     },
     {
       "id": "ael",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -268,8 +268,8 @@
     },
     {
       "id": "elion",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -287,8 +287,8 @@
     },
     {
       "id": "mist",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -306,8 +306,8 @@
     },
     {
       "id": "lana",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -325,8 +325,8 @@
     },
     {
       "id": "eil",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -344,8 +344,8 @@
     },
     {
       "id": "ravik",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -363,8 +363,8 @@
     },
     {
       "id": "grum",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -382,8 +382,8 @@
     },
     {
       "id": "niki",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -401,8 +401,8 @@
     },
     {
       "id": "sora",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -420,8 +420,8 @@
     },
     {
       "id": "kael",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -439,8 +439,8 @@
     },
     {
       "id": "neris",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -458,8 +458,8 @@
     },
     {
       "id": "dorin",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -477,8 +477,8 @@
     },
     {
       "id": "elvar",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -496,8 +496,8 @@
     },
     {
       "id": "serin",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -515,8 +515,8 @@
     },
     {
       "id": "nara",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -534,8 +534,8 @@
     },
     {
       "id": "lyra",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -553,8 +553,8 @@
     },
     {
       "id": "borik",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -572,8 +572,8 @@
     },
     {
       "id": "oriel",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -591,8 +591,8 @@
     },
     {
       "id": "garron",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -610,8 +610,8 @@
     },
     {
       "id": "maren",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -629,8 +629,8 @@
     },
     {
       "id": "nalia",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -648,8 +648,8 @@
     },
     {
       "id": "roa",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -667,8 +667,8 @@
     },
     {
       "id": "cedric",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -686,8 +686,8 @@
     },
     {
       "id": "bel",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -705,8 +705,8 @@
     },
     {
       "id": "vian",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -724,8 +724,8 @@
     },
     {
       "id": "oswin",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -743,8 +743,8 @@
     },
     {
       "id": "erena",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -762,8 +762,8 @@
     },
     {
       "id": "dax",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -781,8 +781,8 @@
     },
     {
       "id": "norin",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -800,8 +800,8 @@
     },
     {
       "id": "hugo",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -819,8 +819,8 @@
     },
     {
       "id": "selia",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -838,8 +838,8 @@
     },
     {
       "id": "otto",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -857,8 +857,8 @@
     },
     {
       "id": "luth",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -876,8 +876,8 @@
     },
     {
       "id": "iris",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -895,8 +895,8 @@
     },
     {
       "id": "aira",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -914,8 +914,8 @@
     },
     {
       "id": "garen",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -933,8 +933,8 @@
     },
     {
       "id": "aster",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -952,8 +952,8 @@
     },
     {
       "id": "terin",
-      "columns": 64,
-      "frames": 256,
+      "columns": 128,
+      "frames": 512,
       "portrait": 23,
       "actions": [
         "idle",
@@ -1013,6 +1013,7 @@
         "oswin",
         "hugo"
       ],
+      "spawned": 0,
       "workers": [
         {
           "appearance": "mira",
@@ -1103,6 +1104,7 @@
         "erena",
         "selia"
       ],
+      "spawned": 0,
       "workers": [
         {
           "appearance": "silen",

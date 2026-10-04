@@ -1,0 +1,197 @@
+/* Minimal in-game panels share the same flat surfaces as the play controls. */
+.game-dialog.minimal-dialog { width:min(620px,calc(100vw - 32px))!important; max-width:620px!important; padding:20px!important; max-height:calc(100dvh - 32px)!important; border-radius:4px; }
+.minimal-dialog .dialog-scroll-body { max-height:calc(100dvh - 76px); padding:0 8px 0 0!important; scrollbar-gutter:stable; }
+.minimal-dialog.game-dialog [data-slot=dialog-title] { position:sticky; top:0; z-index:3; margin:0 0 14px; padding:8px 44px 16px 0; background:var(--ui-paper); font-size:20px; }
+.minimal-dialog.game-dialog>[data-slot=dialog-close] { top:20px!important; right:20px!important; width:40px; height:40px; min-height:40px; z-index:4; }
+.minimal-dialog :is(button,summary,input,select):focus-visible { outline:2px solid var(--ui-action); outline-offset:3px; }
+.minimal-dialog :is(button,input,select) { font-size:14px; }
+.minimal-dialog details>summary { min-height:40px; align-content:center; cursor:pointer; }
+.minimal-dialog input:not([type=range]),.minimal-dialog select { min-height:40px; padding:7px 10px; box-shadow:none; border-radius:3px; max-width:100%; }
+.minimal-dialog [data-slot=tabs-list] { display:flex; width:100%; height:auto; padding:0; gap:16px; border:0; border-bottom:1px solid var(--ui-rule); border-radius:0; background:transparent; box-shadow:none; justify-content:flex-start; }
+.minimal-dialog [data-slot=tabs-trigger] { flex:0 1 auto; padding:8px 2px; min-width:44px; min-height:42px; border:0; border-bottom:3px solid transparent; border-radius:0; background:transparent; color:var(--ui-muted); box-shadow:none; font-size:14px; }
+.minimal-dialog [data-slot=tabs-trigger][data-state=active] { background:transparent; color:var(--ui-ink); border-bottom-color:var(--ui-action); box-shadow:none; }
+.minimal-dialog [data-slot=tabs-content] { margin-top:16px; }
+.minimal-dialog [data-slot=button] { min-height:40px; padding:8px 12px; border-radius:3px; }
+.minimal-dialog [data-slot=button][data-variant=outline] { background:transparent; }
+.minimal-dialog [data-slot=button]:disabled { opacity:.48; }
+.minimal-dialog :is(.ui-disclosure,.atlas-key) { margin:0; border:0; border-bottom:1px solid var(--ui-rule); }
+.minimal-dialog :is(.ui-disclosure,.atlas-key)>summary { display:flex; align-items:center; gap:8px; min-height:44px; padding:10px 0; color:var(--ui-ink); cursor:pointer; font-size:13px; font-weight:600; list-style:none; }
+.minimal-dialog :is(.ui-disclosure,.atlas-key)>summary::-webkit-details-marker { display:none; }
+.minimal-dialog :is(.ui-disclosure,.atlas-key)>summary::after { content:'⌄'; margin-left:auto; font-size:16px; }
+.minimal-dialog :is(.ui-disclosure,.atlas-key)[open]>summary::after { content:'⌃'; }
+.minimal-dialog .ui-disclosure>summary small { margin-left:auto; font-weight:400; font-size:12px; }
+.minimal-dialog .disclosure-body { display:grid; gap:12px; padding:4px 0 16px; }
+.minimal-dialog .disclosure-body p { margin:0; font-size:13px; line-height:1.7; }
+.minimal-dialog .setting-row { display:flex; align-items:center; justify-content:space-between; gap:16px; font-size:14px; }
+.minimal-dialog .setting-row select { min-width:0; max-width:70%; }
+.game-dialog.minimal-menu-dialog { width:min(460px,calc(100vw - 32px))!important; }
+.minimal-menu-grid { gap:3px 16px; }
+.minimal-menu-grid>button { min-height:64px; }
+.minimal-menu-grid small { font-size:12px; }
+
+/* The market opens on products, with transport details available in one fold. */
+.market-focused .market-logistics { margin-top:-5px; }
+.market-focused .market-warning { margin:10px 0; padding:10px 12px; border-left:3px solid var(--ui-warning); color:#79451f; background:#e7d7b94d; font-size:13px; }
+.market-filters { display:flex; align-items:center; gap:10px; margin:16px 0 12px; }
+.market-search { display:flex; align-items:center; gap:8px; flex:1; min-width:0; padding-left:10px; border:1px solid var(--ui-rule); border-radius:3px; background:#fff9ea; }
+.minimal-dialog .market-search input { width:100%; min-width:0; background:none; border:0; }
+.market-focused .market-owned { flex:none; min-height:40px; padding:8px 12px; color:var(--ui-ink); background:transparent; border:1px solid var(--ui-rule); border-radius:3px; box-shadow:none; }
+.market-focused .market-owned[aria-pressed=true] { background:var(--ui-metal); color:var(--ui-paper); }
+.market-order { display:flex; align-items:center; gap:8px; padding-bottom:12px; font-size:12px; }
+.minimal-dialog .market-order input { width:68px; min-height:36px; }
+.market-order button { padding:6px 8px; background:transparent; color:var(--ui-metal); border:0; box-shadow:none; min-height:36px; font-size:12px; }
+.market-order>span { margin-left:auto; color:var(--ui-muted); }
+.minimal-dialog .market-focused .market-row { display:grid; grid-template-columns:32px minmax(0,1fr) auto; gap:8px 12px; padding:14px 0; border-bottom:1px solid var(--ui-rule); }
+.market-focused .market-item { min-width:0; }
+.market-focused .market-item strong { display:block; font-size:15px; }
+.market-focused .market-item small { display:block; font-size:12px; margin-top:4px; }
+.market-focused .market-item em { font-style:normal; }
+.market-focused .market-stock { font-size:17px; font-variant-numeric:tabular-nums; }
+.market-focused .market-actions { grid-column:2 / -1; display:flex; align-items:center; gap:8px; }
+.minimal-dialog .market-actions [data-slot=button] { width:auto; min-width:44px; padding:8px 12px; min-height:40px; height:auto; font-size:13px; }
+.minimal-dialog .market-actions [data-slot=button]:not([data-variant=outline]) { min-width:124px; background:var(--ui-metal); color:var(--ui-paper); }
+.market-focused .auto-switch { display:flex; align-items:center; gap:8px; margin-left:auto; font-size:12px; }
+.market-focused .reserve-line { grid-column:2 / -1; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 0 0; font-size:12px; border:0; }
+.market-focused .reserve-line input { width:70px; }
+.market-focused .market-more { width:100%; padding:12px; margin-top:8px; color:var(--ui-metal); background:transparent; border:0; box-shadow:none; }
+.market-focused .shipping-list>div { flex-wrap:wrap; }
+.market-focused .trade-journey { margin:0; }
+.market-focused .trade-journey>label { flex-wrap:wrap; }
+.market-focused .fleet-line { flex-wrap:wrap; }
+.minimal-dialog :is(.trade-journey,.storage-card) summary { min-height:40px; display:flex; align-items:center; cursor:pointer; }
+
+/* Settings and goals keep the current task separate from recovery and long-term plans. */
+.settings-focused .settings-section { display:grid; gap:10px; padding:4px 0 18px; margin-bottom:18px; border-bottom:1px solid var(--ui-rule); }
+.settings-focused .audio-slider { display:grid; grid-template-columns:50px minmax(0,1fr) 32px; gap:12px; align-items:center; min-height:40px; margin:0; font-size:13px; }
+.settings-focused .audio-slider input { width:100%; min-width:0; }
+.settings-focused .audio-slider>span:last-child { text-align:right; font-variant-numeric:tabular-nums; }
+.settings-focused .sound-tests { display:flex; flex-wrap:wrap; gap:8px; }
+.settings-focused .settings-links { display:flex; flex-wrap:wrap; gap:8px; }
+.settings-focused .save-status { margin:0; padding:0; border:0; background:none; box-shadow:none; }
+.settings-focused .settings-footer { margin-top:24px; padding-top:16px; border-top:1px solid var(--ui-rule); }
+.settings-focused .settings-footer button { width:100%; }
+.settings-focused .save-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 16px; }
+.minimal-dialog .goals-focused .promotion-box { margin:0; padding:0; border:0; background:none; box-shadow:none; }
+.goals-focused .promotion-box>span { font-size:12px; color:var(--ui-muted); }
+.minimal-dialog .goals-focused .promotion-box h3 { padding:5px 0 12px; margin:0; background:none; color:var(--ui-ink); font-size:23px; }
+.minimal-dialog .goals-focused .promotion-box>div { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px 12px; align-items:center; padding:12px 0; margin:0; border:0; border-top:1px solid var(--ui-rule); background:none; font-size:13px; }
+.goals-focused .promotion-box>div>.goal-action { grid-column:1 / -1; width:max-content; max-width:100%; margin:0; min-height:34px; padding:6px 10px; white-space:normal; }
+.goals-focused .promotion-box .promotion-trial small { grid-column:1 / -1; }
+.goals-focused .promotion-box>[data-slot=button] { width:100%; margin:12px 0 0; }
+.minimal-dialog .goals-focused .contract-box { margin:20px 0 0; padding:16px 0 0; border:0; border-top:1px solid var(--ui-rule); background:none; box-shadow:none; gap:12px; }
+.goals-focused .contract-box>div { min-width:0; }
+.goals-focused .contract-box span { margin-top:5px; }
+.goals-focused .rank-disclosure { margin-top:20px; }
+.goals-focused .rank-disclosure .rank-track { display:flex; flex-wrap:wrap; max-height:240px; overflow:auto; margin:0 0 12px; }
+.minimal-dialog .goals-focused :is(.rescue-chapter,.charter-panel,.story-goals>div) { background:transparent; box-shadow:none; border:0; border-bottom:1px solid var(--ui-rule); padding:14px 0; border-radius:0; }
+.minimal-operations .operations-card .next-build { background:var(--ui-paper-deep); color:var(--ui-ink); border:0; border-radius:0; }
+.minimal-operations .operations-card .next-build small { color:var(--ui-muted); }
+.minimal-operations :is(.next-goal,.bottleneck,.next-build) { box-shadow:none; }
+.minimal-dialog .facility-level { display:block; margin-bottom:8px; font-size:13px; color:var(--ui-muted); }
+.minimal-dialog .facility-inspector .production-progress { height:6px; border:0; border-radius:2px; box-shadow:none; }
+.minimal-dialog .facility-inspector .production-progress [data-slot=progress-indicator] { background:var(--ui-progress); background-image:none; box-shadow:none; }
+.minimal-dialog .facility-inspector :is(.effect-list strong,.operation-controls,.specialty-control) { color:var(--ui-ink); border-color:var(--ui-rule); }
+.minimal-dialog .facility-inspector .specialty-control>span { color:var(--ui-muted); }
+.minimal-dialog .facility-inspector .recipe>span { background:transparent; }
+.minimal-dialog .facility-inspector .storage-card { background:transparent; border-radius:3px; border-color:var(--ui-rule); box-shadow:none; }
+.minimal-dialog .map-edge-list button { background:transparent; color:var(--ui-ink); box-shadow:none; border:1px solid var(--ui-rule); min-height:66px; }
+.minimal-dialog .map-edge-list button:hover { background:var(--ui-paper-deep); }
+.minimal-dialog .map-edge-list button :is(strong,small) { color:inherit; }
+.minimal-dialog .help-content>div { background:transparent; box-shadow:none; border-bottom:1px solid var(--ui-rule); }
+.minimal-dialog .resident-summary { display:flex; flex-direction:row; align-items:center; justify-content:space-between; margin:0 0 12px; }
+.resident-roster { display:grid; grid-template-columns:1fr; }
+.minimal-dialog .resident-roster .resident-profile { display:grid; grid-template-columns:130px 1fr; gap:16px; min-height:0; height:190px; padding:0; margin:0; border:0; background:none; box-shadow:none; overflow:hidden; }
+.resident-roster .resident-profile picture { height:190px; display:block; }
+.minimal-dialog .resident-roster .resident-illustration { width:130px; height:190px; object-fit:contain; object-position:bottom; }
+.resident-roster .resident-profile-info { padding:8px 0; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:5px; }
+.resident-roster .resident-profile-info>strong { font-size:20px; }
+.resident-roster .resident-profile-info>span { font-size:12px; }
+.resident-roster .resident-preview { height:82px; width:82px; margin:0; }
+.resident-roster .resident-motion { order:3; margin-top:12px; }
+.resident-roster .resident-directions { display:flex; gap:6px; }
+.resident-roster .resident-actions { margin:0; justify-content:flex-start; gap:6px; }
+.resident-roster .resident-actions button { min-height:36px; padding:6px 10px; background:transparent; color:var(--ui-ink); border:1px solid var(--ui-rule); box-shadow:none; }
+.resident-roster .resident-actions button[aria-pressed=true] { background:var(--ui-metal); color:var(--ui-paper); }
+.minimal-dialog .resident-roster .resident-list { display:grid; grid-template-columns:1fr 1fr; gap:0 12px; margin-top:14px; }
+.minimal-dialog .resident-roster .resident-choice { display:flex; align-items:center; gap:10px; padding:8px; min-width:0; min-height:64px; border:0; border-bottom:1px solid var(--ui-rule); border-radius:0; background:transparent; text-align:left; color:var(--ui-ink); box-shadow:none; }
+.minimal-dialog .resident-roster .resident-choice[aria-pressed=true] { background:#dce4d6; border-left:3px solid var(--ui-metal); padding-left:5px; }
+.resident-roster .resident-choice .resident-portrait { width:38px; height:50px; object-fit:contain; }
+.resident-roster .resident-choice strong { font-size:14px; }
+.resident-roster .resident-choice small { display:block; font-size:11px; line-height:1.6; }
+.resident-roster .resident-duty { display:block; }
+
+/* In-game atlas: map and selected land, with secondary detail folded. */
+.game-dialog.minimal-dialog.campaign-dialog { width:min(1280px,calc(100vw - 32px))!important; max-width:1280px!important; }
+.minimal-dialog .campaign-world-layout { grid-template-columns:minmax(0,1fr) 270px; gap:20px; padding-top:0; }
+.minimal-dialog .campaign-world-layout .atlas-shell { height:clamp(360px,65dvh,720px); border:0; border-radius:3px; box-shadow:none; }
+.minimal-dialog .campaign-site-panel { padding:0; border:0; background:transparent; box-shadow:none; max-height:65dvh; }
+.minimal-dialog :is(.campaign-site-panel,.atlas-dock,.atlas-shell)::before,.minimal-dialog :is(.campaign-site-panel,.atlas-dock,.atlas-shell)::after { display:none; }
+.minimal-dialog .campaign-find { margin-bottom:14px; }
+.minimal-dialog .campaign-find label { display:grid; gap:6px; font-size:12px; }
+.minimal-dialog .campaign-find select { width:100%; }
+.minimal-dialog .expansion-offer { padding:0 0 16px; border:0; border-bottom:1px solid var(--ui-rule); border-radius:0; background:none; box-shadow:none; }
+.minimal-dialog .expansion-offer header { gap:8px; }
+.minimal-dialog .expansion-offer header strong { font-size:18px; }
+.minimal-dialog .expansion-offer p { margin:12px 0; font-size:13px; line-height:1.7; }
+.minimal-dialog .expansion-requirements { gap:8px; margin-top:12px; }
+.minimal-dialog .campaign-site-list-title { margin:18px 0 10px; font-size:13px; }
+.minimal-dialog .site-list>div { background:none; padding:10px 0; border:0; border-bottom:1px solid var(--ui-rule); box-shadow:none; }
+.minimal-dialog .atlas-dock { padding:0 10px; background:var(--ui-paper); border:0; border-radius:3px; box-shadow:none; }
+.minimal-dialog .atlas-bottom { padding:10px 0; gap:10px; background:none; border:0; }
+.minimal-dialog .atlas-cell-readout strong { font-size:13px; }
+.minimal-dialog .atlas-cell-readout span { font-size:11px; }
+.minimal-dialog .atlas-key { border:0; }
+.minimal-dialog .atlas-key>summary { min-height:30px; padding:5px 0; font-size:11px; }
+.minimal-dialog .atlas-legend { margin:0; padding:8px 0; background:none; border:0; gap:8px; }
+.minimal-dialog :is(.atlas-breadcrumb,.atlas-layer,.atlas-rotation,.atlas-zoom,.atlas-minimap) { box-shadow:none; border:0; border-radius:3px; }
+.minimal-dialog :is(.atlas-inspect,.atlas-rotation button,.atlas-zoom button) { box-shadow:none; min-height:36px; }
+.minimal-dialog .atlas-minimap { width:98px; }
+.minimal-dialog .campaign-preview .local-map-preview { margin:0 0 12px; }
+.minimal-dialog :is(.council-stats>span,.council-actions button,.route-list>div) { box-shadow:none; background:transparent; border-color:var(--ui-rule); }
+.minimal-dialog .council-stats { grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:16px 0; }
+.minimal-dialog .council-stats>span { padding:8px 0; border:0; border-bottom:1px solid var(--ui-rule); border-radius:0; font-size:12px; }
+.minimal-dialog .council-stats b { font-size:22px; margin-top:6px; }
+.minimal-dialog .council-actions { grid-template-columns:1fr 1fr; gap:10px; }
+.minimal-dialog .council-actions button { align-items:flex-start; text-align:left; white-space:normal; height:auto; padding:12px; min-height:86px; }
+.minimal-dialog .council-actions small { font-size:12px; line-height:1.6; }
+.minimal-dialog .council-actions [data-slot=button]:disabled { opacity:1; background:#e5e5d8; color:var(--ui-muted); }
+.minimal-dialog .diplomacy-form { display:flex; flex-wrap:wrap; gap:12px; align-items:end; }
+.minimal-dialog .diplomacy-form>label { min-width:0; flex:1 1 180px; }
+.minimal-dialog .diplomacy-form select { width:100%; }
+.minimal-dialog .diplomacy-form>button { max-width:100%; height:auto; white-space:normal; }
+.minimal-dialog .world-news { border-color:var(--ui-rule); }
+.minimal-dialog .council-history .world-news { border:0; margin:0; padding:0 0 14px; }
+.minimal-dialog .council-history .world-news>strong { display:none; }
+.minimal-dialog .council-chain { color:var(--ui-muted); }
+
+@media(max-width:700px) {
+ .game-dialog.minimal-dialog,.game-dialog.minimal-dialog.campaign-dialog { width:calc(100vw - 16px)!important; max-width:none!important; max-height:calc(100dvh - 16px)!important; padding:16px!important; }
+ .minimal-dialog .dialog-scroll-body { max-height:calc(100dvh - 52px); }
+ .minimal-dialog.game-dialog>[data-slot=dialog-close] { top:14px!important; right:14px!important; }
+ .minimal-dialog [data-slot=tabs-list] { gap:12px; }
+ .minimal-dialog [data-slot=tabs-trigger] { font-size:13px; padding:8px 1px; }
+ .minimal-dialog .market-focused .market-row { gap:8px 10px; }
+ .market-focused .market-actions { grid-column:1 / -1; }
+ .market-focused .market-item small { font-size:11px; }
+ .minimal-dialog .market-actions [data-slot=button] { padding:8px 10px; }
+ .market-focused .reserve-line { grid-column:1 / -1; }
+ .market-focused .market-logistics>summary { font-size:12px; }
+ .market-focused .market-logistics>summary small { font-size:11px; }
+ .settings-focused .save-actions { grid-template-columns:1fr; }
+ .minimal-dialog .resident-roster .resident-list { grid-template-columns:1fr; }
+ .minimal-dialog .campaign-world-layout { gap:14px; }
+ .minimal-dialog .campaign-world-layout .atlas-shell { width:100%; height:clamp(240px,42dvh,380px); }
+ .minimal-dialog .campaign-site-panel { max-height:none; }
+ .minimal-dialog .atlas-minimap { display:none; }
+ .minimal-dialog .atlas-dock { position:static; width:auto; margin:0; max-width:none; }
+ .minimal-dialog .atlas-key { display:block; }
+ .minimal-dialog .campaign-world-layout .atlas-shell { margin-bottom:0; }
+ .minimal-dialog .campaign-find { margin-bottom:10px; }
+ .minimal-dialog .council-stats { grid-template-columns:1fr 1fr; }
+ .minimal-dialog .council-actions { grid-template-columns:1fr; }
+ .minimal-menu-grid small { font-size:11px; }
+}
+@media(max-height:560px) and (min-width:701px) {
+ .minimal-dialog .campaign-world-layout .atlas-shell { height:340px; }
+ .minimal-dialog .campaign-site-panel { max-height:340px; }
+}

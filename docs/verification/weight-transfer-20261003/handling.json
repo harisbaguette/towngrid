@@ -1,0 +1,359 @@
+[
+  {
+    "id": "ael",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "aira",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "aster",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "bel",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "borik",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "bron",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "cedric",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "dax",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "dew",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "dorin",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "eil",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "elion",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "elvar",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "erena",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "ethan",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "fia",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "garen",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "garron",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "grum",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "hana",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "hugo",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "iris",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "kael",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "kai",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "lana",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "lien",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "luth",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "lyra",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "maren",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "marna",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "mira",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "mist",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "nalia",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "nara",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "neris",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "niki",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "norin",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "oriel",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "oswin",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "otto",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "ravik",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "roa",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "rowan",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "selia",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "serin",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "silen",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "sora",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "taron",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "terin",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "vera",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  },
+  {
+    "id": "vian",
+    "pickupFrames": 12,
+    "dropFrames": 12,
+    "directions": 4,
+    "continuousHandoffs": true
+  }
+]

@@ -51,6 +51,8 @@ try {
  await page.getByRole('button',{name:'자원 펼치기',exact:true}).click();await close();
  assert.equal(await page.locator('.minimal-facility').count(),1,'popover Escape preserves selection');
  await page.getByRole('button',{name:'시설 상세 정보',exact:true}).click();await page.locator('.facility-inspector').waitFor();
+ assert.equal(await page.getByRole('dialog').evaluate(el=>getComputedStyle(el,'::before').display),'block','The approved panel artwork is visible, not hidden by legacy styles');
+ assert.notEqual(await page.getByRole('dialog').evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)','Reading panels remain opaque');
  assert.ok(await page.getByRole('button',{name:/이전 ·/}).count());assert.ok(await page.getByRole('button',{name:/철거 ·/}).count());
  await page.locator('.facility-details summary').click();await page.getByLabel('작업 우선순위',{exact:true}).selectOption('2');
  assert.equal(await sim(page,()=>window.tgScene.sim.buildings.find(b=>b.type==='lumber').priority),2);

@@ -45,5 +45,11 @@ for identity, direction, rig in rigs:
         upper, lower = [np.asarray(layer) for layer in layers[:2]]
         shared = (upper[:, :, 3] > 0) & (lower[:, :, 3] > 0)
         assert np.array_equal(upper[shared], lower[shared]), (identity, 'joint UV seam')
+        if 'foot' in limb:
+            limb['rigidFoot']=True
+            boot=np.asarray(limb['foot'])
+            for knee in [b+[-4,1],b+[6,-8],b+[-7,-5]]:
+                moved=np.asarray(limb_layers(limb,a,knee,c+[2,-3])[-1])
+                assert np.array_equal(moved[:-3,2:],boot[3:,:-2]),(identity,direction,'knee deforms the rigid boot')
         limbs += 1
 print(f'Joint skinning PASS: {limbs} authored limbs, identity pixels, translation and folded-joint UV continuity')

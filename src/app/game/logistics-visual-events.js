@@ -33,6 +33,8 @@ export function recordNetworkTransfer(sim,net,from,to,item,amount) {
  const history=state(sim),duration=Math.min(3,Math.max(.7,(path.length-1)*.24));
  history.events.push({id:++history.next,kind:net.type,item,amount,path,from:from.id,to:to.id,
   start:sim.time,until:sim.time+duration,revision:sim.revision});
+ // Only a real transfer emits a sound; the audio engine applies distance and the shared world budget.
+ sim.sound?.(net.type,to.x,to.z);
  if(history.events.length>128)history.events.splice(0,history.events.length-128);
 }
 export function recordTerminalTransfer(sim,shipment,terminalId,at) {
@@ -40,6 +42,7 @@ export function recordTerminalTransfer(sim,shipment,terminalId,at) {
  const history=state(sim);
  history.events.push({id:++history.next,kind:'terminal',item:shipment.item,amount:shipment.amount,
   terminal:terminalId,import:shipment.kind==='import',start:sim.time,until:sim.time+1.6,revision:sim.revision,at});
+ sim.sound?.('logistics',at?.x,at?.z);
  if(history.events.length>128)history.events.splice(0,history.events.length-128);
 }
 export function logisticsVisualEvents(sim) {

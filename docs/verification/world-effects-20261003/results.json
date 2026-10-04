@@ -1,0 +1,190 @@
+{
+ "passed": true,
+ "metrics": [
+  {
+   "id": "rain",
+   "counts": {
+    "rain": 128,
+    "snow": 0,
+    "wind": 28,
+    "ripples": 33,
+    "shore": 52,
+    "birds": 0,
+    "chimneys": 0,
+    "work": 6,
+    "vehicles": 0,
+    "actions": 0,
+    "magic": 0,
+    "lighting": 0
+   }
+  },
+  {
+   "id": "snow",
+   "counts": {
+    "rain": 0,
+    "snow": 63,
+    "wind": 13,
+    "ripples": 0,
+    "shore": 12,
+    "birds": 0,
+    "chimneys": 0,
+    "work": 12,
+    "vehicles": 0,
+    "actions": 0,
+    "magic": 0,
+    "lighting": 0
+   }
+  },
+  {
+   "id": "wind",
+   "counts": {
+    "rain": 0,
+    "snow": 0,
+    "wind": 30,
+    "ripples": 5,
+    "shore": 24,
+    "birds": 0,
+    "chimneys": 0,
+    "work": 9,
+    "vehicles": 0,
+    "actions": 0,
+    "magic": 0,
+    "lighting": 0
+   }
+  },
+  {
+   "id": "ripples",
+   "counts": {
+    "rain": 0,
+    "snow": 0,
+    "wind": 19,
+    "ripples": 90,
+    "shore": 17,
+    "birds": 3,
+    "chimneys": 0,
+    "work": 6,
+    "vehicles": 0,
+    "actions": 0,
+    "magic": 0,
+    "lighting": 0
+   }
+  },
+  {
+   "id": "shore",
+   "counts": {
+    "rain": 0,
+    "snow": 0,
+    "wind": 19,
+    "ripples": 90,
+    "shore": 17,
+    "birds": 3,
+    "chimneys": 0,
+    "work": 6,
+    "vehicles": 0,
+    "actions": 0,
+    "magic": 0,
+    "lighting": 0
+   }
+  },
+  {
+   "id": "birds",
+   "counts": {
+    "rain": 0,
+    "snow": 0,
+    "wind": 19,
+    "ripples": 90,
+    "shore": 17,
+    "birds": 3,
+    "chimneys": 0,
+    "work": 6,
+    "vehicles": 0,
+    "actions": 0,
+    "magic": 0,
+    "lighting": 0
+   }
+  },
+  {
+   "id": "chimneys",
+   "counts": {
+    "rain": 0,
+    "snow": 0,
+    "wind": 5,
+    "ripples": 1,
+    "shore": 2,
+    "birds": 0,
+    "chimneys": 12,
+    "work": 12,
+    "vehicles": 0,
+    "actions": 0,
+    "magic": 0,
+    "lighting": 0
+   }
+  },
+  {
+   "id": "work",
+   "counts": {
+    "rain": 0,
+    "snow": 0,
+    "wind": 4,
+    "ripples": 2,
+    "shore": 2,
+    "birds": 3,
+    "chimneys": 4,
+    "work": 12,
+    "vehicles": 0,
+    "actions": 0,
+    "magic": 0,
+    "lighting": 0
+   }
+  },
+  {
+   "id": "magic",
+   "counts": {
+    "rain": 0,
+    "snow": 0,
+    "wind": 5,
+    "ripples": 0,
+    "shore": 2,
+    "birds": 3,
+    "chimneys": 0,
+    "work": 9,
+    "vehicles": 0,
+    "actions": 0,
+    "magic": 2,
+    "lighting": 0
+   }
+  },
+  {
+   "id": "lighting",
+   "counts": {
+    "rain": 0,
+    "snow": 0,
+    "wind": 5,
+    "ripples": 1,
+    "shore": 2,
+    "birds": 3,
+    "chimneys": 0,
+    "work": 6,
+    "vehicles": 0,
+    "actions": 0,
+    "magic": 0,
+    "lighting": 9
+   }
+  }
+ ],
+ "checks": [
+  "all twelve live components",
+  "real facility gates",
+  "five action triggers",
+  "real export vehicle movement",
+  "four-view exploration is read-only",
+  "reduced motion",
+  "mobile",
+  "Canvas",
+  "bounded GPU batches and disposal"
+ ],
+ "errors": [],
+ "consoleErrors": [],
+ "consoleWarnings": [],
+ "failedRequests": []
+}

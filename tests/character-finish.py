@@ -34,9 +34,9 @@ for path in sorted(output.glob('*/frames.json')):
     meta = json.loads(path.read_text(encoding='utf-8'))
     atlas = np.asarray(Image.open(path.parent/'sprites.png'))
     assert meta['rigFinish'] == 'continuous-joints-1', meta['id']
-    assert atlas.shape == (512, 8192, 4), meta['id']
-    for row in range(4):
-        for col in range(64):
+    assert atlas.shape == (meta.get('atlasRows',4)*128, meta.get('atlasColumns',64)*128, 4), meta['id']
+    for row in range(meta.get('atlasRows',4)):
+        for col in range(meta.get('atlasColumns',64)):
             cell = atlas[row*128:(row+1)*128, col*128:(col+1)*128]
             alpha = cell[:, :, 3]
             assert not (alpha[0].any() or alpha[-1].any() or alpha[:, 0].any() or alpha[:, -1].any()), (meta['id'], row, col, 'clipped')

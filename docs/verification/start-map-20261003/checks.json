@@ -1,0 +1,17 @@
+{
+  "typecheck": "PASS",
+  "build": "PASS",
+  "terrainSuites": 12,
+  "terrain": "PASS",
+  "browser": "PASS",
+  "browserViewports": 5,
+  "browserScreens": 15,
+  "browserErrors": 0,
+  "balanceStrict": "PASS",
+  "npmTest": {
+    "status": "PASS",
+    "passedSuites": 55,
+    "skipped": ["tests/expansion-new-browser.mjs: no TOWNGRID_PLAYWRIGHT/TOWNGRID_CHROME"]
+  },
+  "scope": "Start screen, world terrain distribution, atlas surroundings and read-only local preview"
+}

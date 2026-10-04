@@ -6,7 +6,7 @@ import {RACES,RANKS,unlockRank} from './world.js';
 import {operationHint} from './proximity.js';
 import {provinceZone} from './infrastructure.js';
 import {SERVICE_OUTPUTS} from './production-visuals.js';
-import {recoveryReady,RECOVERY_LIMIT} from './economy.js';
+import {recoveryReady,RECOVERY_LIMIT,importCost,purchaseShort} from './economy.js';
 import {EXPANSION_BUILDINGS,EXPANSION2_BUILDINGS} from './industry.js';
 import {accepts} from './storage.js';
 
@@ -22,7 +22,29 @@ export function crewHouse(status){
 }
 /** Haulers are the bottleneck: more facilities hold full output (운반 대기, three at least) than there are residents, all busy. A full output
  *  stops the facility, and without this the card said 생산망 연결됨 (tests/guide-bot.mjs: 2 houses for 16 facilities). */
-export function haulersShort(s){const full=s.buildings.filter(b=>b.status==='운반 대기'&&b.enabled!==false).length;return full>=Math.max(3,s.workers.length)&&s.workers.length>0&&s.workers.every(w=>w.task);}
+export function haulersShort(s){const full=s.buildings.filter(b=>b.status==='운반 대기'&&b.enabled!==false).length;return full>=Math.max(3,s.workers.length)&&s.workers.length>0&&s.workers.filter(w=>w.task).length>=Math.ceil(s.workers.length*.8);}
+/** Refill enough for several trips, accounting for emergency fuel bought for the import itself. */
+export function fuelRestock(s){
+ const e=s.exportStatus();if(!e.vehicles.some(v=>v.fuel)||e.spareFuel>=e.fuelPerTrip*2||s.shipments.some(sh=>sh.kind==='import'&&sh.item===e.fuelItem))return null;
+ const item=e.fuelItem||'fuel';let amount=Math.max(1,Math.min(e.capacity,Math.ceil(e.fuelPerTrip*3-e.spareFuel)));
+ while(amount>1&&importCost(s,item,amount)>s.money)amount--;
+ return {item,amount,cost:importCost(s,item,amount),error:purchaseShort(s,item,amount)};
+}
+/** Cash needed for the next operating day and a refill covering three export trips. */
+export function operatingReserve(s){
+ const route=s.exportStatus?.(),item=route?.fuelItem||'fuel';
+ const fuel=(route?.fuelPerTrip||0)*3*Math.ceil((RESOURCES[item]?.price||0)*1.85);
+ const wages=s.campaign?.sites?.reduce((n,v)=>n+(v.sim.wage||0),0)??s.wage??0;
+ const upkeep=s.campaign?.upkeep?.().total||0;
+ const target=Math.max(60,Math.ceil(fuel+wages+upkeep));return {target,short:s.money<target};
+}
+/** Reuse housing or hauling equipment before spending another tile on the same bottleneck. */
+export function haulingAction(s){
+ if(!haulersShort(s))return null;
+ const gear=s.haulGearOffer?.();if(gear&&!gear.error&&s.money>=gear.money+100)return {kind:'gear',label:gear.name+' 도입 · '+gear.money+'G',text:'주민 운반량 '+gear.load+'개'};
+ const homes=s.buildings.filter(b=>BUILDINGS[b.type].home&&b.health>=100&&!s.upgradeShort?.(b)&&s.money>=s.upgradeCost(b)+100).sort((a,b)=>s.upgradeCost(a)-s.upgradeCost(b));
+ const b=homes[0];return b?{kind:'upgrade',id:b.id,label:BUILDINGS[b.type].name+' 개선 · '+s.upgradeCost(b)+'G',text:'기존 주택의 주민 수 증가'}:null;
+}
 /** Advice for a blocked status, including the crew stall that operationHint has no text for. Empty when running. */
 // Pass the simulation for advice that quotes a time (real seconds at its speed) or names facilities already unlocked.
 export function blockHint(status,sim){if(status==='운반 대기')return sim&&haulersShort(sim)?'운반할 주민이 모자랍니다 · 주민 주택을 더 지으세요.':'';const hint=operationHint(status,sim);if(hint)return hint;const house=crewHouse(status);return house?BUILDINGS[house].name+' 건설 필요':'';}
@@ -199,14 +221,16 @@ export function nextBuild(s,{any=false}={}){
  if(!s.warehouse||s.rank<1)return null;
  const built=new Set(s.buildings.map(b=>b.type)),made=new Set(s.buildings.flatMap(b=>productsOf(BUILDINGS[b.type]).map(r=>r.output)));
  // Goods a pending requirement asks to make or sell that nothing here makes yet.
+ const fuelStock=typeof s.availableStock==='function'?s.availableStock('fuel'):s.stock?.fuel||0;
+ if(fuelStock<5&&!built.has('refinery')&&!built.has('distillery')&&made.has('grain')&&made.has('wood')&&placeSpot(s,'distillery'))return {type:'distillery',name:BUILDINGS.distillery.name,output:'fuel',chain:'비상 연료 1개 · 60게임초',text:'소형 증류소 · 연료 고갈 비상 대책'};
+ if(!built.has('refinery')&&s.rank>=4&&(fuelStock<25||s.rank>=5))for(const type of ['windturbine','oilpump','refinery'])if(!built.has(type)&&unlocked(s,type)&&placeSpot(s,type))return {type,name:BUILDINGS[type].name,output:BUILDINGS[type].output,chain:'정규 연료 생산망',text:BUILDINGS[type].name+' · 연료 자급 준비'};
+ if(s.storageUsed>=s.storageCapacity*.85){const type=unlocked(s,'depot')?'depot':'warehouse';if(placeSpot(s,type))return {type,name:BUILDINGS[type].name,output:null,chain:'보관 공간 확장',text:BUILDINGS[type].name+' · 재고 공간 확보'};}
  const wanted=(s.promotion()?.requirements||[]).filter(r=>!r.done&&/^(produced|sold):/.test(r.key)).map(r=>r.key.split(':')[1]).filter(item=>!made.has(item));
- // Every sale, order and import rides a vehicle that burns fuel; running dry with nothing making it leaves only an import at
- // the round-trip price (tests/guide-bot.mjs: 10 fuel quoted at 1,529G with 750G in hand), so from 3단계, or once the starting
- // 40 fall under 25, the guide names a fuel maker first.
+ // Emergency conversion is offered only when fuel is critically low; the regular chain is prepared from rank 4.
  // An open order counted by the next rank whose good nothing here makes is wanted too (see goalAction contracts).
  const order=typeof s.contract==='function'&&(s.promotion()?.requirements||[]).some(r=>!r.done&&r.key==='contracts')?s.contract()?.item:null;
  if(order&&!made.has(order)&&!wanted.includes(order))wanted.push(order);
- if(!made.has('fuel')&&RESOURCES.fuel&&(s.rank>=2||(typeof s.availableStock==='function'?s.availableStock('fuel'):s.stock?.fuel||0)<25))wanted.unshift('fuel');
+ if(!made.has('fuel')&&RESOURCES.fuel&&fuelStock<5)wanted.unshift('fuel');
  let best=null,bestScore=0;
  for(const type of Object.keys(BUILDINGS)){
   const rank=unlockRank(type),products=productsOf(BUILDINGS[type]);
@@ -260,7 +284,7 @@ export function contractState(s){
  const wait=remainingSeconds(st.wait||0,s);
  if(wait>0)return {contract:c,have,ready:false,label:wait+'초',note:'',wait};
  // A short stock already shows as have/amount; the note is for other stops (export road cut).
- return {contract:c,have,ready:!!st.ready,label:'납품',note:!st.ready&&have>=c.amount?st.error||'':''};
+ return {contract:c,have,ready:!!st.ready,label:'납품',note:!st.ready?st.error||'':''};
 }
 
 /**
@@ -272,20 +296,25 @@ export function fleetState(s){
  const busy=e.vehicles.filter(v=>v.busy).length,waiting=e.vehicles.filter(v=>v.fuel&&!v.busy),freeOut=e.vehicles.every(v=>v.fuel||v.busy);
  const names=[...new Set(waiting.map(v=>v.name))].join('·');
  const short=freeOut&&waiting.length>0&&!e.fuelReady;
- return {vehicles:e.vehicles,busy,total:e.vehicles.length,fuelNote:short?'연료 부족':'',waiting:short?names+' 대기':'',fuelPerTrip:e.fuelPerTrip,spareFuel:e.spareFuel,destination:e.destination,duration:e.duration,distance:e.distance};
+ return {vehicles:e.vehicles,busy,total:e.vehicles.length,fuelNote:short?'연료 부족':'',waiting:short?names+' 대기':'',fuelItem:e.fuelItem,fuelPerTrip:e.fuelPerTrip,spareFuel:e.spareFuel,destination:e.destination,duration:e.duration,distance:e.distance};
 }
 
 // ---- 2026-09-29 HUD fixes (F3a): problem -> fix actions, ledger, notices ----
 
 /** Stock that can be sold now (above auto-sale reserve and contract hold), priced at the current market quote. */
-export function sellableStock(s,keep={}){
- const items=[];let value=0;
+export function sellableStock(s,keep={},allowLoss=false){
+ const items=[];let value=0;const route=s.exportStatus?.(),cap=route?.capacity||10;
+ const fuelCost=(route?.fuelPerTrip||0)*Math.ceil((RESOURCES[route?.fuelItem||'fuel']?.price||0)*1.85),order=s.contract?.();
  for(const id of Object.keys(RESOURCES)){
-  const n=Math.floor(typeof s.availableStock==='function'?s.availableStock(id):s.stock[id]||0)-(typeof s.minimumStock==='function'?s.minimumStock(id):0)-(keep[id]||0);if(n<1)continue;
+  // Both reserveFor and plannedNeeds include the same open order. Hold it once.
+  const duplicate=order?.item===id&&!s.contractSent?.()?Math.min(keep[id]||0,order.amount):0;
+  const n=Math.floor(typeof s.availableStock==='function'?s.availableStock(id):s.stock[id]||0)-(typeof s.minimumStock==='function'?s.minimumStock(id):0)-(keep[id]||0)+duplicate;if(n<1)continue;
   const v=typeof s.saleQuote==='function'?s.saleQuote(id,Math.min(n,60))*n/Math.min(n,60):RESOURCES[id].price*n;
-  items.push({id,n,value:Math.round(v)});value+=v;
+  const lot=Math.min(n,cap),net=(typeof s.saleQuote==='function'?s.saleQuote(id,lot):RESOURCES[id].price*lot)-fuelCost;
+  if(!allowLoss&&net<=0)continue;
+  items.push({id,n,value:Math.round(v),net});value+=v;
  }
- return {value:Math.round(value),items:items.sort((a,b)=>b.value-a.value)};
+ return {value:Math.round(value),items:items.sort((a,b)=>b.net-a.net||b.value-a.value)};
 }
 /** K-05: goods the plans on screen still need, kept out of the sell hint: the suggested building's materials, the
  *  materials of a building a promotion condition asks for, the open lord order and a fuel reserve for the vehicles. */
@@ -311,19 +340,19 @@ export function fullStoreSale(s,output=null){
  // A depot set to one kind of goods (storage.js STORE_MODES) takes nothing else: selling water out of a full water tank
  // makes no room for the wood a lumber camp waits to store. With such a depot the goods are ranked by what the stores
  // taking the stalled `output` hold; without one every store takes every good and the ranking is the plain stock.
- const items=sellableStock(s,plannedNeeds(s,nextBuild(s))).items,dedicated=output&&s.buildings?.some(b=>b.mode);
+ const items=sellableStock(s,plannedNeeds(s,nextBuild(s)),true).items,dedicated=output&&s.buildings?.some(b=>b.mode);
  const inRoom=id=>[s.starterStore,...s.buildings].filter(b=>b?.inventory&&!(b.health<=0)&&b.enabled!==false&&!(b.movingUntil>s.time)&&accepts(b,output)).reduce((n,b)=>n+(b.inventory[id]||0),0);
  const top=dedicated?items.map(v=>({...v,n:Math.min(v.n,Math.floor(inRoom(v.id)))})).filter(v=>v.n>0).sort((a,b)=>b.n-a.n)[0]:items.sort((a,b)=>b.n-a.n)[0];if(!top)return null;
  // With no fuel a sale cannot leave and an import has no room, and a distillery cannot put fuel in a full store: the only way
  // out is to throw some stock away (tests/guide-bot.mjs locked at 1,080/1,080 with fuel 0 for ten days).
- const store=s.warehouse,held=Math.floor(store?.inventory?.[top.id]||0),dry=!!fleetState(s)?.fuelNote;
+ const store=[s.starterStore,...s.buildings.filter(b=>b.inventory)].filter(Boolean).sort((a,b)=>(b.inventory?.[top.id]||0)-(a.inventory?.[top.id]||0))[0],held=Math.floor(store?.inventory?.[top.id]||0),dry=!!fleetState(s)?.fuelNote;
  return {item:top.id,lot:quickSaleLot(s,top.id),discard:dry&&store&&typeof s.discardStock==='function'?Math.min(30,held):0,store:store?.id};
 }
-/** One market lot for a quick sale: 10 or the trade route capacity when smaller, never more than what may be sold. */
+/** Fill the next vehicle, never more than the available stock. */
 export function quickSaleLot(s,item){
- const cap=typeof s.tradeConnection==='function'?s.tradeConnection().capacity||10:10;
+ const cap=typeof s.exportStatus==='function'?s.exportStatus().capacity||10:10;
  const free=Math.floor(typeof s.availableStock==='function'?s.availableStock(item):s.stock[item]||0);
- return Math.max(0,Math.min(10,cap,free));
+ return Math.max(0,Math.min(cap,free));
 }
 /** Item a facility makes now (chosen product of a multi-product facility). */
 export const outputOf=(s,b)=>(typeof s.recipeOf==='function'?s.recipeOf(b)?.output:null)||BUILDINGS[b.type]?.output||null;
@@ -460,7 +489,8 @@ const SLOW_SPOTS=new WeakMap();
 export function slowSpot(s){
  if(typeof s.placementEffects!=='function'||typeof s.canRelocate!=='function')return null;
  const kept=SLOW_SPOTS.get(s),v=kept&&kept.revision===s.revision&&(!kept.spot||s.buildings.includes(kept.spot.building)&&!(kept.spot.building.movingUntil>s.time))?kept.spot:(()=>{const spot=findSlowSpot(s);SLOW_SPOTS.set(s,{revision:s.revision,spot});return spot;})();
- if(!v)return null;const b=v.building,cost=s.relocationCost(b);
+ // The price of the move to that spot, its clearing fee included (relocate charges the same).
+ if(!v)return null;const b=v.building,cost=s.relocationCost(b,v.x,v.z);
  if(s.moneyShort?.(cost)||s.shipments?.some(sh=>sh.storeId===b.id||sh.terminalId==='b:'+b.id))return null;
  return {...v,cost};
 }

@@ -1,0 +1,120 @@
+{
+ "passed": true,
+ "checks": [
+  "one canvas and same camera from start to play",
+  "identical start tiles",
+  "continuous world zoom",
+  "four-view coordinate picking",
+  "read-only exploration",
+  "bounded streaming cache",
+  "build and select after zoom",
+  "new-site acquisition and operation",
+  "management focuses same world",
+  "mobile and pinch input",
+  "Canvas renderer"
+ ],
+ "before": {
+  "position": [
+   11.499999999999996,
+   0,
+   11.499999999999996
+  ],
+  "zoom": 0.35172413793103446
+ },
+ "after": {
+  "sameCanvas": true,
+  "position": [
+   11.499999999999996,
+   0,
+   11.499999999999996
+  ],
+  "zoom": 0.35172413793103446,
+  "canvases": 1
+ },
+ "cache": [
+  {
+   "chunks": 25,
+   "props": 25,
+   "textures": 72
+  },
+  {
+   "chunks": 10,
+   "props": 10,
+   "textures": 39
+  },
+  {
+   "chunks": 12,
+   "props": 12,
+   "textures": 46
+  },
+  {
+   "chunks": 8,
+   "props": 8,
+   "textures": 32
+  },
+  {
+   "chunks": 8,
+   "props": 8,
+   "textures": 33
+  },
+  {
+   "chunks": 8,
+   "props": 8,
+   "textures": 35
+  },
+  {
+   "chunks": 12,
+   "props": 12,
+   "textures": 39
+  },
+  {
+   "chunks": 15,
+   "props": 15,
+   "textures": 46
+  },
+  {
+   "chunks": 19,
+   "props": 19,
+   "textures": 54
+  },
+  {
+   "chunks": 13,
+   "props": 13,
+   "textures": 43
+  },
+  {
+   "chunks": 15,
+   "props": 15,
+   "textures": 48
+  },
+  {
+   "chunks": 11,
+   "props": 11,
+   "textures": 38
+  },
+  {
+   "chunks": 13,
+   "props": 13,
+   "textures": 44
+  },
+  {
+   "chunks": 11,
+   "props": 11,
+   "textures": 45
+  },
+  {
+   "chunks": 11,
+   "props": 11,
+   "textures": 41
+  }
+ ],
+ "metrics": {
+  "fps": "60",
+  "drawCalls": 930,
+  "chunks": 25
+ },
+ "errors": [],
+ "consoleErrors": [],
+ "consoleWarnings": [],
+ "failedRequests": []
+}

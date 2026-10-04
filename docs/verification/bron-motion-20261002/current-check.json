@@ -1,0 +1,8 @@
+{
+  "checkedOn": "2026-10-03",
+  "supersededBy": "../bron-locomotion-20261003/current-check.json",
+  "runtimeRevision": "bron-authored-contact-2",
+  "sourceMatchesRuntime": true,
+  "authoredGaitConnected": true,
+  "draftPackerError": null
+}

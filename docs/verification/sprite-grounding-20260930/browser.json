@@ -1,11 +1,11 @@
 {
   "samples": 576,
-  "legacyClippedPixels": 12933,
+  "legacyClippedPixels": 202589,
   "clippedPixels": 0,
   "trainClippedPixels": 0,
-  "cpuAnchorError": 0.4960937500006253,
+  "cpuAnchorError": 0.4765625000006395,
   "frontOccludedPixels": 0,
-  "behindOccludedPixels": 2314,
-  "legacyBuildingOccludedPixels": 7798,
+  "behindOccludedPixels": 2199,
+  "legacyBuildingOccludedPixels": 8404,
   "errors": []
 }

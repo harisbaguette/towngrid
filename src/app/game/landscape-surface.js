@@ -67,18 +67,25 @@ export function makeLandscapeSurface(sim,region){
   let color;
   const waterKind=tile.waterKind;
   if(shore[i]){
-   const base=WATER_COLORS[waterKind]||WATER_COLORS.pond;
+   const original=WATER_COLORS[waterKind]||WATER_COLORS.pond;
+   const base=mixColor(original,waterKind==='coast'?[28,137,177]:[40,151,183],.8);
    color=d<.10?[188,222,200]:d<.25?[127,196,184]:d<.48?mixColor(base,[110,185,180],.6):d<.9?mixColor(base,[94,173,174],.3):base;
    // Sparse broken glints in world space, never one repeated wave stamp per tile.
-   if(d>.24&&x%23<6&&y%27===Math.floor(Math.sin(x/43)*2+2)&&landscapeHash(Math.floor(x/11),Math.floor(y/27))>.75)color=mixColor(color,[191,225,211],.23);
+   const ripple=landscapeNoise(Math.floor(gx*5)/2,Math.floor(gz*5)/2);
+   color=color.map(c=>c+(ripple-.5)*15);
+   if(d>.24&&x%23<6&&y%27===Math.floor(Math.sin(x/43)*2+2)&&landscapeHash(Math.floor(x/11),Math.floor(y/27))>.75)color=mixColor(color,[207,239,224],.55);
   }else{
    const ax=Math.floor(gx-.5),az=Math.floor(gz-.5),u=gx-.5-ax,v=gz-.5-az;
    const sample=(a,b)=>{const t=at(a,b);return t.water?tile.color:t.color;};
    color=mixColor(mixColor(sample(ax,az),sample(ax+1,az),u),mixColor(sample(ax,az+1),sample(ax+1,az+1),u),v);
-   const shade=Math.round((landscapeNoise(gx/5,gz/5)-.5)*16+(landscapeNoise(gx/1.6,gz/1.6)-.5)*4);
+   const shade=Math.round((landscapeNoise(gx/5,gz/5)-.5)*19+(landscapeNoise(Math.floor(gx*3)/3,Math.floor(gz*3)/3)-.5)*10);
    color=color.map(c=>c+shade);
    if(d<.20)color=mixColor(color,[218,202,145],d<.07?.9:.5);
-   const detail=landscapeHash(x,y);if(detail>.997&&d>.3)color=color.map(c=>c+10);
+   const patch=landscapeNoise(Math.floor(gx*8)/4,Math.floor(gz*8)/4);
+   if(patch>.66)color=mixColor(color,[195,185,103],.25);
+   else if(patch<.32)color=mixColor(color,[103,147,64],.16);
+   const detail=landscapeHash(x,y);if(detail>.98&&d>.3)color=color.map(c=>c+16);
+   else if(detail<.018&&d>.3)color=color.map(c=>c-12);
   }
   const target=shore[i]?wet.data:dry.data;for(let c=0;c<3;c++)target[k+c]=color[c];target[k+3]=255;
  }

@@ -1,0 +1,84 @@
+{
+  "checkedOn": "2026-10-03",
+  "runtimeRevision": "bron-authored-contact-2",
+  "characterWork": {
+    "sourceRuntimeMatch": true,
+    "standalonePacker": "pass",
+    "runtimeFilesByteIdentical": 5,
+    "authoredWalkCarryConnected": true,
+    "authoredRestConnected": true,
+    "walkCarryFrames": 32,
+    "strideLength": 0.38,
+    "remainingItems": []
+  },
+  "validation": {
+    "typecheck": "pass",
+    "build": "pass",
+    "scopedLint": "pass",
+    "characterRigs": 51,
+    "atlasCells": 13312,
+    "continuousLimbs": 408,
+    "bronUnit": "pass",
+    "fourCameraGame": "pass",
+    "stationaryCarry": "pass",
+    "pivotReturnToIdle": "pass",
+    "residentGaitCases": 8,
+    "rosterBrowser": "pass",
+    "specialistsBrowser": "pass",
+    "browserErrors": [],
+    "assetFailures": []
+  },
+  "floor": {
+    "samples": 576,
+    "legacyClippedPixels": 48170,
+    "clippedPixels": 0,
+    "trainClippedPixels": 0,
+    "cpuAnchorError": 0.4960937500006253,
+    "frontOccludedPixels": 0,
+    "behindOccludedPixels": 2314,
+    "legacyBuildingOccludedPixels": 7798,
+    "errors": []
+  },
+  "road": {
+    "cases": 48,
+    "clippedPixels": 0,
+    "shadows": [
+      {
+        "view": 0,
+        "normalShadowPixels": 448,
+        "opaqueFloorShadowPixels": 448
+      },
+      {
+        "view": 1,
+        "normalShadowPixels": 534,
+        "opaqueFloorShadowPixels": 534
+      },
+      {
+        "view": 2,
+        "normalShadowPixels": 534,
+        "opaqueFloorShadowPixels": 534
+      },
+      {
+        "view": 3,
+        "normalShadowPixels": 448,
+        "opaqueFloorShadowPixels": 448
+      }
+    ]
+  },
+  "projectRegression": {
+    "status": "pass",
+    "command": "npm test",
+    "failures": [],
+    "optionalBrowserSuite": "tests/expansion-new-browser.mjs skipped without browser environment variables",
+    "repairs": [
+      "Current rank 20 specification aligned to unchanged runtime (16 contracts)",
+      "Expansion resource totals exclude the later refining resources",
+      "Goods atlas width follows the registered resource count"
+    ]
+  },
+  "limitations": [
+    "Opposite views mirrored",
+    "Eight image-model gait poses per view with four contact samples per pose",
+    "Work and attack reuse the hammer pose set with different ranges and timing"
+  ]
+}
