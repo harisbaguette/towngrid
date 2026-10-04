@@ -30,6 +30,8 @@ try {
  await page.keyboard.press('b');await page.locator('.minimal-construction').waitFor();
  assert.equal(await page.locator('.minimal-bottom').count(),1);assert.equal(await page.locator('.town-actions').count(),0);
  await snap('03-construction');
+ // The first required facility has a tab of its own (homes and civic buildings were in no tab, only the full list).
+ await page.getByRole('tab',{name:'주거·도시',exact:true}).click();assert.equal(await page.getByRole('button',{name:'주민 주택 건설'}).count(),1);
  await page.getByRole('tab',{name:'생산',exact:true}).click();assert.ok(await page.locator('.minimal-build-items .build-item').count()>0);
  await page.getByLabel('전체 건설 분류',{exact:true}).selectOption('all');assert.ok(await page.locator('.minimal-build-items .build-item:disabled').count()>0);
  await page.getByRole('tab',{name:'기초',exact:true}).click();

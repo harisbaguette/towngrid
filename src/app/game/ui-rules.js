@@ -105,7 +105,7 @@ export function tutorialStep(s){
  const p=s.promotion(),need=p?[...p.requirements.filter(r=>!r.done).map(r=>r.name+' '+r.target),...(p.trial&&!p.trial.done?[p.trial.name]:[]),...(s.money<p.fee?['승급비 '+p.fee+'G']:[])].join(' · '):'';
  const steps=[
  {done:!!s.warehouse,title:'첫 창고',text:'밝은 경계 안에 창고를 놓으세요.',tool:'warehouse'},
- {done:s.workerCount>0,title:'주민을 맞이하세요',text:'주거 탭에서 주민 주택을 지으세요. 주민이 짐을 나릅니다.',tool:'house'},
+ {done:s.workerCount>0,title:'주민을 맞이하세요',text:'주거·도시 탭에서 주민 주택을 지으세요. 주민이 짐을 나릅니다.',tool:'house'},
  {done:s.buildings.some(b=>b.type==='well'),title:'물을 공급하세요',text:'창고 주변에 우물을 지으세요.',tool:'well'},
  {done:s.buildings.some(b=>b.type==='field'),title:'밀을 생산하세요',text:'우물 근처에 밀밭을 놓고 통로를 남기세요.',tool:'field'},
  {done:s.buildings.some(b=>b.type==='lumber'),title:'목재를 확보하세요',text:'나무에서 네 칸 이내에 벌목장을 지으세요.',tool:'lumber'},

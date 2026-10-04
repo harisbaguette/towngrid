@@ -39,7 +39,7 @@ export const MODERN_BUILDINGS={
  kiln:{name:'벽돌 가마',group:'craft',cost:200,materials:{stone:8,wood:4},period:12,inputs:{stone:2,wood:1},output:'brick',amount:3,description:'석재를 구워 벽돌을 만듭니다. 3단계 개선과 중급 시설 건설에 쓰입니다. 연기가 한 칸 퍼집니다.'},
  tailor:{name:'봉제소',group:'craft',cost:320,materials:{plank:6,brick:4},period:16,inputs:{cloth:3},output:'workwear',amount:2,description:'직물로 작업복을 짓습니다. 경비대 편성에도 쓰입니다.'},
  glassworks:{name:'유리 공방',group:'craft',cost:340,materials:{brick:6,plank:4},period:14,inputs:{stone:2,wood:2},output:'glass',amount:2,description:'석재를 장작 불로 녹여 유리를 만듭니다. 연기가 두 칸 퍼집니다.'},
- coppermine:{name:'구리 광산',group:'industry',cost:400,materials:{brick:6,gear:2},period:18,output:'copper',amount:3,description:'타일 광물량에 따라 구리광석을 캡니다. 물가에 붙이면 침수로 30% 느려집니다.'},
+ coppermine:{name:'구리 광산',group:'industry',cost:400,materials:{brick:6,gear:2},period:18,output:'copper',amount:4,description:'타일 광물량에 따라 구리광석을 캡니다. 물가에 붙이면 침수로 30% 느려집니다.'},
  wiremill:{name:'전선 공장',group:'industry',cost:1100,materials:{brick:6,steel:4,gear:2},period:20,inputs:{copper:2,coal:1},output:'wire',amount:3,power:true,road:true,description:'구리를 녹여 전선을 뽑습니다. 회로와 마력 기관에 쓰입니다.'},
  cementworks:{name:'시멘트 공장',group:'industry',cost:1200,materials:{brick:8,steel:4},period:24,inputs:{stone:3,coal:1,water:1},output:'concrete',amount:3,power:true,road:true,description:'석재와 석탄으로 콘크리트를 만듭니다. 후반 시설의 건설 자재입니다.'},
  cannery:{name:'통조림 공장',group:'industry',cost:1500,materials:{steel:6,glass:2,gear:2},period:22,inputs:{smokedfish:2,steel:1},output:'canned',amount:4,power:true,road:true,description:'훈제 생선을 강철 캔에 담습니다. 방위 요새와 경비대 편성의 보급품입니다.'},

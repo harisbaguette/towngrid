@@ -329,7 +329,7 @@
     },
     "period": 18,
     "output": "copper",
-    "amount": 3,
+    "amount": 4,
     "description": "타일 광물량에 따라 구리광석을 캡니다."
    },
    "wiremill": {
@@ -6443,5 +6443,25 @@
   "contractImport": "납품 품목을 만들고 있는데 모자라고 자금이 수입가의 3배 + 300G 이상이면 계약 목표 버튼이 나머지 수입을 안내한다",
   "relocation": "나무·바위 칸으로 이전하면 부지 정리비를 더 내고 목재·석재 2개를 얻는다",
   "depletedMove": "자원 고갈 벌목장·채석장을 자원이 남은 가장 가까운 내 땅으로 옮기는 버튼"
+ },
+ "audit20261004": {
+  "coppermine": {
+   "before": {
+    "amount": 3,
+    "period": 18
+   },
+   "after": {
+    "amount": 4,
+    "period": 18
+   },
+   "reason": "채석장 구리 광맥 선광(물 1 → 3 / 16초)과 철광산 구리 광맥(3 / 18초)이 15단계 전용 구리 광산과 같거나 빨랐다"
+  },
+  "verification": {
+   "balanceReport": "C1~C15 PASS",
+   "fullCampaign": {
+    "pass": true,
+    "day": 55
+   }
+  }
  }
 }
