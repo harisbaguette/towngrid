@@ -150,6 +150,9 @@ export class SoftwareRenderer {
    ctx.transform(sx.x-sc.x,sx.y-sc.y,sy.x-sc.x,sy.y-sc.y,sc.x,sc.y);ctx.beginPath();ctx.arc(0,0,1,0,Math.PI*2);ctx.fill();ctx.restore();
   }
   ctx.globalAlpha=u.sprite.material.opacity;
+  // Reduced cels average their art pixels; enlarged ones keep square pixels.
+  ctx.imageSmoothingEnabled=size<cellHeight;ctx.imageSmoothingQuality='high';
+  if(u.flash>0)ctx.filter=`brightness(${1+u.flash*1.6})`;
   if(u.sprite.material.rotation){
    // Authored defeat frames already contain the fallen body. Only rotate
    // legacy sprites, around the same anchor and with the WebGL rotation sign.

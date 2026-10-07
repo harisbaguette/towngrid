@@ -19,7 +19,7 @@ function add(sim,type){
 }
 function button(label,fn){const b=document.createElement('button');b.textContent=label;b.onclick=()=>{fn();game.lastPaint=null;};document.querySelector('#actions').append(b);}
 function reset(){
- const id=effect.value,sim=biomePreview(biome.value);manualClock=id!=='vehicles';
+ const id=effect.value,sim=biomePreview(biome.value);manualClock=!['vehicles','characters'].includes(id);
  for(const type of id==='chimneys'?['bakery','smelter','distillery']:id==='magic'?['magetower','arcanepower']:id==='work'?['sawmill','smelter']:id==='all'?['bakery','smelter','sawmill']:[])add(sim,type);
  sim.paused=manualClock||paused;sim.nextEvent=1e9;sim.time=id==='lighting'?44:0;
  if(id==='rain')sim.events=[{type:'storm',time:sim.time}];if(id==='magic')sim.wardUntil=9999;
@@ -28,7 +28,7 @@ function reset(){
  if(manualClock)sim.poweredAt=()=>true;
  game.setSimulation(sim);game.effects.only=id==='all'?null:id;
  game.atmosphere.fog.group.visible=['all','fog'].includes(id);game.atmosphere.clouds.group.visible=['all','clouds'].includes(id);
- const [ox,oz]=sim.layout.cell.map(v=>v*24);game.flyToWorld(ox+11.5,oz+11.5,['chimneys','work','actions','magic','lighting','vehicles'].includes(id)?22:52,{animate:false});
+ const [ox,oz]=sim.layout.cell.map(v=>v*24);game.flyToWorld(ox+11.5,oz+11.5,['chimneys','work','actions','magic','lighting','vehicles'].includes(id)?22:id==='characters'?12:52,{animate:false});
  document.querySelector('#actions').replaceChildren();sampleBuilding=sim.buildings.find(b=>b.type==='well');
  if(id==='actions'){
   button('건설',()=>{sampleBuilding=add(sim,'well')||sampleBuilding;});
@@ -44,6 +44,8 @@ function reset(){
  const url=new URL(location);url.searchParams.set('effect',id);url.searchParams.set('biome',biome.value);history.replaceState(null,'',url);
  const alternate=new URL(url);if(game.renderer.isSoftware){alternate.searchParams.delete('renderer');document.querySelector('#renderer').textContent='WebGL 비교';}else alternate.searchParams.set('renderer','canvas');document.querySelector('#renderer').href=alternate.pathname+alternate.search;
  game.effects.update();
+ // Flocks circle fixed points; centre the nearest one so the fixture shows birds.
+ if(id==='birds'){const [x,z]=(game.effects.components.birds.flocks||[]).map(p=>[p,Math.hypot(p[0]-game.controls.target.x-sim.layout.cell[0]*24,p[1]-game.controls.target.z-sim.layout.cell[1]*24)]).sort((a,b)=>a[1]-b[1])[0]?.[0]||[];if(x!==undefined){game.flyToWorld(x,z,40,{animate:false});game.effects.update();}}
 }
 effect.onchange=()=>{biome.value=defaults[effect.value]||biome.value;reset();};biome.onchange=reset;
 document.querySelector('#rotate').onclick=()=>game.rotate(1);

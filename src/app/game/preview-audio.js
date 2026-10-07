@@ -104,7 +104,8 @@ export function mountPreviewAudio({read=()=>({scene:'menu',presentation:'room'})
    if(audio.front!=='game')audio.setInterface('game');
    // Display fixtures freeze the simulation while advancing their own animation clock.
    // Only the audio view is adapted; the fixture and campaign are never changed.
-   const view={...sim,paused:!!s.paused,buildings:s.working&&!s.staticLandscape?sim.buildings:sim.buildings.map(b=>({...b,working:false})),soundEvents:sim.soundEvents};
+   // A spread copy would drop Simulation methods (tile, at) that vehicle sounds read.
+   const view=Object.assign(Object.create(sim),{paused:!!s.paused,buildings:s.working&&!s.staticLandscape?sim.buildings:sim.buildings.map(b=>({...b,working:false})),soundEvents:sim.soundEvents});
    audio.update(view,game.controls.target,{span:game.worldSpan()});
   }else{
    if(s.scene!==lastScene){audio.setInterface(s.scene);lastScene=s.scene;}

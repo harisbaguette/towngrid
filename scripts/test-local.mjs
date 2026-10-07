@@ -32,6 +32,7 @@ const suites = [
   'tests/seamless-world.mjs',
   'tests/landforms.mjs',
   'tests/world-effects.mjs',
+  'tests/character-effects.mjs',
   'tests/world-realms.mjs',
   'tests/wilderness.mjs',
   'tests/frontier-land.mjs',

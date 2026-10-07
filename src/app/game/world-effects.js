@@ -4,6 +4,7 @@ import {RainLayer,SnowLayer,WindParticles,TerrainVapor} from './weather-effects.
 import {WaterRipples,ShoreFoam,BirdFlock} from './nature-effects.js';
 import {ChimneyPlumes,WorkParticles,MagicField} from './industry-effects.js';
 import {ActionBursts,VehicleTrails} from './action-effects.js';
+import {CharacterMotion} from './character-effects.js';
 import {DayNightLighting} from './day-night-lighting.js';
 import {WorldTerrainData,worldOrigin} from './world-space.js';
 import {localWeatherState} from './effect-state.js';
@@ -13,14 +14,14 @@ export const EFFECT_COMPONENTS=[
  ['rain','비','폭풍 예고와 실제 폭풍'],['snow','눈','설원 위의 눈발'],['wind','바람','지형에 따른 낙엽·모래·꽃가루'],
  ['geology','지형 효과','화산 증기·계류 포말'],
  ['ripples','수면','실제 수역의 잔물결·반짝임'],['shore','물가','육지와 맞닿은 수역의 포말'],['birds','새 떼','숲·평야·물가 위 비행'],
- ['chimneys','굴뚝','가동 중인 설비의 연기·증기'],['work','작업','채굴 분진·나무 조각·불티'],['vehicles','차량','이동 중인 육상 수출·화물 차량의 먼지·눈가루'],
+ ['chimneys','굴뚝','가동 중인 설비의 연기·증기'],['work','작업','채굴 분진·나무 조각·불티'],['vehicles','차량','이동 중인 육상 수출·화물 차량의 먼지·눈가루'],['characters','인물 동작','발걸음 먼지·작업 타격·짐 내려놓기·피격·쓰러짐'],
  ['actions','시설 변화','건설·철거·이전·수리·피해·생산 완료'],['magic','마력','가동 중인 마법 시설·결계·정전'],['lighting','낮과 밤','게임 시간에 맞는 색조·가동 시설과 주택의 불빛']
 ];
 
 export class WorldEffects{
  constructor(owner){
   this.owner=owner;this.atlas=createEffectAtlas();this.data=new WorldTerrainData(owner.sim);this.vector=new THREE.Vector3();
-  const constructors={rain:RainLayer,snow:SnowLayer,wind:WindParticles,geology:TerrainVapor,ripples:WaterRipples,shore:ShoreFoam,birds:BirdFlock,chimneys:ChimneyPlumes,work:WorkParticles,vehicles:VehicleTrails,actions:ActionBursts,magic:MagicField};
+  const constructors={rain:RainLayer,snow:SnowLayer,wind:WindParticles,geology:TerrainVapor,ripples:WaterRipples,shore:ShoreFoam,birds:BirdFlock,chimneys:ChimneyPlumes,work:WorkParticles,vehicles:VehicleTrails,characters:CharacterMotion,actions:ActionBursts,magic:MagicField};
   this.components=Object.fromEntries(Object.entries(constructors).map(([key,Type])=>[key,new Type(owner.scene,this.atlas)]));
   this.components.lighting=new DayNightLighting(owner,this.atlas);
  }

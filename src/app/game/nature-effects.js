@@ -41,13 +41,13 @@ export class ShoreFoam{
 export class BirdFlock{
  constructor(scene,atlas){this.batch=new EffectBatch(scene,atlas,'bird-flocks',12);}
  update(f){
-  const b=this.batch;b.begin();if(f.near&&f.weather.rain<.35){
+  const b=this.batch;b.begin();this.flocks=[];if(f.near&&f.weather.rain<.35){
    const cx=Math.floor(f.focus[0]/38),cz=Math.floor(f.focus[1]/38);
    for(let z=cz-1;z<=cz+1;z++)for(let x=cx-1;x<=cx+1;x++){
    const h=hash(x+18,z-41),eco=f.sample(x*38+19,z*38+19).layout.ecology;
     if(['snow','desert','volcanic'].includes(eco)||h>.6)continue;
     const a=f.time*.055+h*6.28,wx=x*38+19+Math.cos(a)*12,wz=z*38+19+Math.sin(a)*7;
-    const y=(f.sample(wx,wz).height||0)+3.5;if(!f.visible(wx,wz,y))continue;
+    const y=(f.sample(wx,wz).height||0)+3.5;this.flocks.push([wx,wz]);if(!f.visible(wx,wz,y))continue;
     for(let i=0;i<3;i++)b.add(FX.bird+Math.floor(f.time*5+i)%4,wx-f.origin[0]+i*.6,y+i*.12,wz-f.origin[1]+i*.3,.48,.48,.72);
     if(b.items.length>=(f.low?6:12))break;
    }

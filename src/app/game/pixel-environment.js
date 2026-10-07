@@ -10,6 +10,7 @@ import {CRANE_RIGS,vehicleMotion} from './pixel-motion-data.js';
 import {logisticsVisualEvents} from './logistics-visual-events.js';
 import {attachFarmAnimals} from './pixel-farm-motion.js';
 import {groundSprite} from './sprite-grounding.js';
+import {configurePixelTexture,sharpPixelMaterial} from './pixel-sampling.js';
 
 const images = new Map(), pending = new Map(), alphaMasks = new Map(), baseTextures = new Map();
 export async function loadPixelEnvironment() {
@@ -36,18 +37,22 @@ export async function loadPixelEnvironment() {
  }));
 }
 
-function textureFor(id) {
- const spec = ENVIRONMENT_ASSETS[id];
- if (!baseTextures.has(id)) {
+// Billboards stand up to the camera and change size with zoom, so they use the
+// mipmapped sharp-pixel sampling. Terrain batches keep their own nearest copy:
+// they tile frames with a half-texel inset that mip levels would bleed across.
+const spriteTextures = new Map();
+function textureFor(id, sprite = false) {
+ const spec = ENVIRONMENT_ASSETS[id], cache = sprite ? spriteTextures : baseTextures;
+ if (!cache.has(id)) {
   const base = new THREE.Texture(images.get(id));
   base.colorSpace = THREE.SRGBColorSpace;
-  base.magFilter = base.minFilter = THREE.NearestFilter;
-  base.generateMipmaps = false;
-  baseTextures.set(id, base);
+  if (sprite) configurePixelTexture(base);
+  else { base.magFilter = base.minFilter = THREE.NearestFilter; base.generateMipmaps = false; }
+  cache.set(id, base);
  }
- if(images.has(id)&&baseTextures.get(id).image!==images.get(id))baseTextures.get(id).image=images.get(id);
+ if(images.has(id)&&cache.get(id).image!==images.get(id))cache.get(id).image=images.get(id);
  // Clones have independent frame UVs but share one GPU image source per atlas.
- const texture = baseTextures.get(id).clone();
+ const texture = cache.get(id).clone();
  texture.repeat.set(1 / spec.frames, 1 / (spec.directions || 1));
  texture.offset.y = 1 - 1 / (spec.directions || 1);
  texture.needsUpdate = images.has(id);
@@ -85,8 +90,8 @@ function setFrame(object, frame, direction = 0) {
 }
 
 function createSprite(id, scale = 1) {
- const spec = ENVIRONMENT_ASSETS[id], texture = textureFor(id);
- const material = new THREE.SpriteMaterial({ map: texture, transparent: true, alphaTest: .5, depthWrite: true, toneMapped: false });
+ const spec = ENVIRONMENT_ASSETS[id], texture = textureFor(id, true);
+ const material = sharpPixelMaterial(new THREE.SpriteMaterial({ map: texture, transparent: true, alphaTest: .5, depthWrite: true, toneMapped: false }));
  const sprite = new THREE.Sprite(material);
  sprite.geometry.userData.shared = true;
  sprite.userData.ownedMaterial = true;

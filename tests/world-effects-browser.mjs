@@ -25,6 +25,18 @@ try{
  }
  await page.locator('#effect').selectOption('vehicles');await page.getByRole('button',{name:'화물 출발',exact:true}).click();
  await page.waitForFunction(()=>window.effectsPreview.game.effects.components.vehicles.batch.items.length>0,null,{timeout:45000});await shot(page,'vehicles.png');
+ // Resident motion: real foot strikes paint dust, and Bron's authored walk
+ // (no per-foot joints) never stops the render loop.
+ await page.locator('#effect').selectOption('characters');
+ await page.waitForFunction(()=>window.effectsPreview.game.effects.components.characters.batch.items.length>0,null,{timeout:45000});
+ const people=await page.evaluate(()=>{const g=window.effectsPreview.game;return {bron:[...g.workerModels.values()].filter(m=>m.visible&&m.userData.identity.id==='bron').length,kinds:[...new Set(g.effects.components.characters.events.map(e=>e.kind))]};});
+ assert.ok(people.bron>0,'dwarf residents (Bron) are on screen');assert.ok(people.kinds.includes('step'));
+ // An exception inside effects.update() would stop the scene loop for good.
+ const loop=await page.evaluate(async()=>{const g=window.effectsPreview.game,first=g.frame;await new Promise(r=>setTimeout(r,3000));return {first,later:g.frame};});
+ assert.ok(loop.later>loop.first,'render loop keeps running with Bron on screen');
+ console.log('characters',JSON.stringify(people),JSON.stringify(loop));
+ assert.ok(await page.evaluate(()=>{const g=window.effectsPreview.game,c=g.effects.components.characters;g.renderer.render(g.scene,g.camera);const before=g.renderer.domElement.toDataURL();c.batch.mesh.visible=false;g.renderer.render(g.scene,g.camera);const after=g.renderer.domElement.toDataURL();c.batch.mesh.visible=true;return before!==after||c.batch.items.length===0;}));
+ await shot(page,'characters.png');
  // Stopped and broken factories cannot emit active-production effects.
  await page.locator('#effect').selectOption('chimneys');await page.waitForTimeout(500);assert.ok((await counts(page)).chimneys>0);
  await page.evaluate(()=>{for(const b of window.effectsPreview.game.sim.buildings)b.enabled=false;});await page.waitForTimeout(150);assert.equal((await counts(page)).chimneys,0);
@@ -51,8 +63,8 @@ try{
  for(const id of ['rain','snow','chimneys','lighting']){await cpu.locator('#effect').selectOption(id);await cpu.waitForTimeout(600);assert.ok((await counts(cpu))[id]>0);await shot(cpu,'canvas-'+id+'.png');}
  const cpuPainted=await cpu.evaluate(()=>{const g=window.effectsPreview.game,c=g.effects.components.lighting;g.renderer.render(g.scene,g.camera);const before=g.renderer.domElement.toDataURL();c.batch.mesh.visible=false;g.renderer.worldTint=null;g.renderer.render(g.scene,g.camera);return before!==g.renderer.domElement.toDataURL();});assert.ok(cpuPainted);
  const disposed=await cpu.evaluate(()=>{const e=window.effectsPreview.game.effects;let textures=0,geometry=0,material=0;e.atlas.addEventListener('dispose',()=>textures++);for(const c of Object.values(e.components)){c.batch.mesh.geometry.addEventListener('dispose',()=>geometry++);c.batch.mesh.material.addEventListener('dispose',()=>material++);}e.dispose();e.dispose();return {textures,geometry,material};});
- assert.deepEqual(disposed,{textures:1,geometry:13,material:13});
+ assert.deepEqual(disposed,{textures:1,geometry:14,material:14});
  assert.deepEqual(R.errors,[]);assert.deepEqual(R.consoleErrors,[]);assert.deepEqual(R.failedRequests,[]);
- await save('results.json',{passed:true,metrics,checks:['all twelve live components','real facility gates','five action triggers','real export vehicle movement','four-view exploration is read-only','reduced motion','mobile','Canvas','bounded GPU batches and disposal'],...R});console.log('WORLD_EFFECTS_OK');
+ await save('results.json',{passed:true,metrics,checks:['all thirteen live components','real facility gates','five action triggers','real export vehicle movement','four-view exploration is read-only','reduced motion','mobile','Canvas','bounded GPU batches and disposal'],...R});console.log('WORLD_EFFECTS_OK');
 }catch(error){console.log('EFFECTS_ERROR',JSON.stringify(R),JSON.stringify(metrics));await shot(page,'failure.png').catch(()=>{});throw error;}
 finally{await browser.close();}

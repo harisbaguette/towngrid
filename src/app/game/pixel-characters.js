@@ -5,6 +5,7 @@ import { characterDistance } from './character-movement.js';
 import { characterPose } from './character-motion-state.js';
 import { groundSprite } from './sprite-grounding.js';
 import { characterGroundHeight } from './character-ground-contact.js';
+import { configurePixelTexture, sharpPixelMaterial } from './pixel-sampling.js';
 
 const images = new Map(), loading = new Map(), textures = new Map();
 export async function loadPixelCharacters(race) {
@@ -29,8 +30,7 @@ export function createPixelCharacter(index, race, appearance) {
  if (!textures.has(identity.id)) {
   const base = new THREE.Texture(image);
   base.colorSpace = THREE.SRGBColorSpace;
-  base.magFilter = base.minFilter = THREE.NearestFilter;
-  base.generateMipmaps = false;
+  configurePixelTexture(base);
   base.needsUpdate = !!image;
   textures.set(identity.id, base);
  }
@@ -39,7 +39,7 @@ export function createPixelCharacter(index, race, appearance) {
  texture.repeat.set(1 / initial.columns, 1 / initial.rows);
  texture.offset.set(0, (initial.rows - 1 - initial.row) / initial.rows);
  texture.needsUpdate = !!image;
- const material = new THREE.SpriteMaterial({ map: texture, transparent: true, alphaTest: .08, depthWrite: true, toneMapped: false });
+ const material = sharpPixelMaterial(new THREE.SpriteMaterial({ map: texture, transparent: true, alphaTest: .08, depthWrite: true, toneMapped: false }));
  const sprite = new THREE.Sprite(material);
  sprite.geometry.userData.shared = true;
  sprite.userData.ownedMaterial = true;
@@ -94,6 +94,16 @@ export function animatePixelCharacter(group, worker, time, camera, groundHeight=
  u.shadow.material.opacity = .16 * u.sprite.material.opacity;
  if(defeated)u.sprite.position.y=metadata?.authoredDefeat ? (grounded ? 0 : .035) : .08;
  groundSprite(u.sprite, { azimuth: cameraAzimuth, height: u.sprite.position.y });
+ // Hit reaction: a short white flash and a recoil away from the camera's
+ // right side, both decaying within the authored hurt clip.
+ const hitAge = u.motionState.hurtAt === undefined ? Infinity : time - u.motionState.hurtAt;
+ u.flash = defeated ? 0 : Math.max(0, 1 - hitAge / .14);
+ u.sprite.material.userData.pixelFlash.value = u.flash;
+ if (hitAge < .3 && !defeated && camera) {
+  const recoil = Math.sin(Math.min(1, hitAge / .3) * Math.PI) * .05 * (1 - hitAge / .3);
+  u.sprite.position.x -= camera.matrixWorld.elements[0] * recoil;
+  u.sprite.position.z -= camera.matrixWorld.elements[2] * recoil;
+ }
  u.lastTime = time;
  return true;
 }
