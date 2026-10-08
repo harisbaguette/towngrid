@@ -1,4 +1,19 @@
 {
+ "characterTravel": {
+  "base": 0.8,
+  "road": 1.25,
+  "paved": 1.5,
+  "horse": 1.1,
+  "automatic": 1.1,
+  "guardReturn": 0.72,
+  "guardChase": 0.84,
+  "raider": 0.336,
+  "beastRaider": 0.48,
+  "baseLoad": 6,
+  "inputBatches": 4,
+  "automaticInputBatches": 8,
+  "units": "tiles per game second; live 1x uses BASE_TIME_SCALE 0.5"
+ },
  "worldSettlement": {
   "domesticStage": 8,
   "foreignStage": 13,
@@ -6562,7 +6577,7 @@
     "items": {
      "plank": 12
     },
-    "load": 4
+    "load": 8
    },
    {
     "id": "wagon",
@@ -6572,7 +6587,7 @@
      "plank": 20,
      "brick": 10
     },
-    "load": 5
+    "load": 10
    }
   ],
   "stockCaps": [

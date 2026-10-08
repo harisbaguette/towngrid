@@ -34,10 +34,10 @@ let n=0;const ok=label=>{n++;console.log('PASS',label);};
  assert.ok(s.setStockCap('water',s.stock.water).ok);run(c,120);const well=s.buildings.find(b=>b.type==='well');assert.equal(well.status,'재고 상한');
  assert.equal(roundTrip(c).active.stockCap.water,s.stockCap.water);assert.ok(s.setStockCap('water',0).ok);assert.equal(s.stockCap.water,undefined);ok('stock cap');}
 
-// 4. Hauling gear: 3 → 4 → 5 goods a trip, bought with money and goods at its rank; shared by the campaign and saved.
-{const c=new Campaign({nation:'estern'}),s=c.active;assert.equal(haulLoad(s),3);assert.match(s.haulGearOffer().error,/승급/);
- c.treasury.rank=HAUL_GEAR[1].rank;s.money+=5000;s.stock.plank+=40;s.stock.brick+=20;assert.ok(s.buyHaulGear().ok);assert.equal(haulLoad(s),4);assert.ok(s.buyHaulGear().ok);assert.equal(haulLoad(s),5);assert.equal(s.haulGearOffer(),null);
- assert.equal(haulLoad(roundTrip(c).active),5);ok('hauling gear');}
+// 4. Hauling gear: 6 → 8 → 10 goods a trip; purchased tier survives saving.
+{const c=new Campaign({nation:'estern'}),s=c.active;assert.equal(haulLoad(s),6);assert.match(s.haulGearOffer().error,/승급/);
+ c.treasury.rank=HAUL_GEAR[1].rank;s.money+=5000;s.stock.plank+=40;s.stock.brick+=20;assert.ok(s.buyHaulGear().ok);assert.equal(haulLoad(s),8);assert.ok(s.buyHaulGear().ok);assert.equal(haulLoad(s),10);assert.equal(s.haulGearOffer(),null);
+ assert.equal(haulLoad(roundTrip(c).active),10);ok('hauling gear');}
 
 // 5. A depot set to one kind of goods holds only those, several times as many; it refuses a switch while holding others.
 {const c=new Campaign({nation:'estern'}),s=c.active;c.treasury.rank=6;const [x,z]=freeTile(s,'depot');const id=s.build('depot',x,z,true).id,b=s.buildings.find(v=>v.id===id);

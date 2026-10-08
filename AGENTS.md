@@ -59,6 +59,11 @@
 
 ## 개발 및 검증
 
+- v14 개별 작화를 이어 붙인 결과도 **연속 재생 불합격**이다. `continuity/review.json`은 디딘 신발이 게임 크기에서 한 번에 약 7px 옮겨지는 구간을 기록한다. 머리 정렬과 장별 검수만으로는 발·손·골반 궤적, 좌우 걸음의 노출 시간, 마지막→처음 연결이 맞지 않는다. 추가 중간 작화 4장도 전체 연결을 해결하지 못해 적용하지 않았다. 패킹의 `continuityVerdict: rejected`와 `runtimeEligible: false`를 유지하며, 브라우저 조작 검사 통과를 동작 품질 합격으로 읽지 않는다.
+
+- **캐릭터 동작 원화는 한 번에 한 장씩 생성하고, 앞뒤 자세·크기·양발과 팔의 교대·접점을 확인한 뒤 다음 장을 만든다.** 32장 묶음 생성이나 병렬 이미지 생성으로 되돌리지 않는다. `authored-actions-v14/mira/`는 이 방식의 개별 작화 검토본이며 `generation.json`에 입력·프롬프트·제외 사유가 있다. `scripts/pack-mira-single-cels.py`는 기존 12장과 새 9장을 균등 축척·위치 정렬해 `/character-preview/slow-walk/`에만 연결한다. 게임의 v13c는 유지된다. 반대 발·팔 교대와 통과 자세는 추가됐지만 디딘 발의 높이·착지 전환·소매와 장갑 세부·NW/NE 및 다른 동작은 미완료다.
+
+- 주민의 기본 보행은 `character-movement.js`의 `CHARACTER_TRAVEL`을 따른다. 게임 초당 0.8칸, 실제 1배속 초당 0.4칸이며 귀가도 같다. 흙길·포장도로 보정은 1.25·1.5배, 말 축사·자동 물류는 각각 1.1배다. 기본 운반량은 6개, 손수레 8개, 짐마차 10개이며 원료 공급은 기본 4회분·자동 물류 8회분이다. 수치는 밸런스 문서 27절에 있다. 캐릭터 비교 화면도 `BASE_TIME_SCALE`을 적용하며, 네 방향 화면을 축소하지 않고 화면 폭에 따라 줄바꿈한다.
 - **미라의 SW 걷기와 SE(좌우 반전)는 신규 전신 원화 두 걸음 20장이다(`authored-walk-v14a`).** 가까운 다리로 딛는 걸음은 `authored-actions-v13/mira/`의 0~11번 12장, 먼 다리로 딛는 걸음은 v13 16번과 `authored-actions-v14/mira/`의 18·20·22·24·26·30번, `continuity/second-pass-in.png` 8장이다. `scripts/pack-mira-slow-walk.py`가 머리 기준으로 크기·위치를 맞추고, 허벅지 아래를 늘여 지면에 세우고, 흔드는 발 위치 순서로 놓고, 디딘 다리만 가로로 기울여 디딘 발이 바닥과 함께 뒤로 가게 한다. 그림을 새로 칠하지는 않는다. 보폭은 그림에서 잰 값(0.513)이며 방향별 `clips.walk.strideLengths`로 SW·SE에만 쓰고 NW·NE는 0.5다. `scripts/mira_authored_walk.py`가 게임 아틀라스에 넣고 발 위치를 `rigAudit`에 기록하며 `mira_rig.py`가 마지막에 호출한다. 디딘 발은 화면 세로로 걸음마다 약 10px 미끄러진다. NW/NE·운반·서기·회전은 관절 동작이다. 검사는 `tests/mira-authored-walk.py`(npm test 포함), 비교 화면은 `/character-preview/slow-walk/`다.
 
 - 브론은 `bron-authored-contact-2`다. `art-source/pixel-characters/bron-locomotion-v2/`의 걷기·운반 8자세를 접지 보정한 32프레임으로 재생하며 보폭은 0.38이다. 대기·상자 들기·상하차·회전은 같은 묶음의 서 있는 원화를 사용한다. 작업·공격은 `bron-motion-v1/`의 망치 자세로, 작업은 짧은 동작 범위, 공격은 머리 위 준비 자세를 포함한다. `roster-v4/bron/rig.json`이 두 묶음을 연결하며 `python scripts/roster_rig.py bron`으로 재생성한다. 게임·CPU·주민 패널은 `frames.json`의 `atlasColumns`·`atlasRows`·`anchors`·`frameScales`를 함께 적용한다. `terrainHeightAt`이 접지 동작의 지면 높이를 정한다. `/character-preview/bron-motion/`에서 비교한다. 반대편 두 방향은 좌우 반전이다.

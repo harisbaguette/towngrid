@@ -30,7 +30,7 @@ dwarf.task=null;assignJob(s,dwarf);assert.equal(dwarf.task?.targetId,shop.id,'a 
 s.refundTask(dwarf);s.stock.plank=0;s.stock.steel=50;titan.task=null;assignJob(s,titan);assert.ok(!titan.task||titan.task.targetId!==lab.id,'titans skip high-intelligence work');
 s.buildings=s.buildings.filter(b=>b.type!=='electronics');s.revision++;s.stock.steel=0;s.build('sawmill',12,10,true);s.at(12,10).out=20;
 titan.task=null;human.task=null;assignJob(s,titan);assignJob(s,human);
-assert.equal(titan.task?.amount,6,'titans carry twice as much');assert.equal(human.task?.amount,3);
+assert.equal(human.task?.amount,6,'basic hauling carries six units');assert.equal(titan.task?.amount,human.task.amount*2,'titans carry twice as much');
 
 // A special workshop without its crew says so instead of silently waiting.
 const lone=town();lone.rank=14;lone.build('warehouse',10,12);lone.build('house',9,14);lone.build('steamworks',12,12,true);run(lone,1);

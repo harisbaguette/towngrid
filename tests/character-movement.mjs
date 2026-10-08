@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { advanceCharacterRoute, characterDistance } from '../src/app/game/character-movement.js';
 import { createPixelCharacter, animatePixelCharacter } from '../src/app/game/pixel-characters.js';
 import { moveWorkers } from '../src/app/game/logistics.js';
+import { advanceGame } from '../src/app/game/game-time.js';
 
 const close = (actual, expected, message) => assert.ok(Math.abs(actual - expected) < 1e-9, `${message}: ${actual} != ${expected}`);
 const actor = route => ({ x: 0, z: 0, dir: 0, route: structuredClone(route), race: 'human' });
@@ -52,9 +53,31 @@ for (const fps of [20, 30, 60, 144]) {
 const carrier = { ...actor(turn), task: { carried: true, item: 'wood', amount: 3 }, phase: 'destination', stepDistance: .4 };
 const simulation = { workers: [carrier], warehouse: { x: 2, z: 2, health: 100 }, buildings: [], roads: new Set(), time: 1, strikeUntil: 0, money: 100, walkable: () => true, sound: () => {} };
 moveWorkers(simulation, 1);
-close(carrier.x, 1, 'logistics reaches corner'); close(carrier.z, .25, 'logistics spends remainder');
+close(carrier.x, .8, 'logistics uses the slow walking speed'); close(carrier.z, 0, 'logistics stays on its route');
 assert.equal(carrier.task.amount, 3); assert.equal(carrier.task.carried, true);
 assert.ok(carrier.stepDistance < .42, 'footstep accumulator preserves fractional remainder');
+
+for(const [label,changes,race,expected] of [
+ ['dirt road',{roads:new Set(['0,0'])},'human',1],
+ ['paved',{paved:new Set(['0,0'])},'human',1.2],
+ ['centaur',{},'centaur',.92],
+ ['upgraded paving',{paved:new Set(['0,0']),horse:true,automatic:true},'human',1.452],
+ ['debt and strike',{money:-1,strikeUntil:10},'human',.286],
+]){
+ const resident={...actor([{x:20,z:0}]),race,task:{carried:true,item:'wood',amount:3},phase:'destination'};
+ const test={...simulation,...changes,workers:[resident]};
+ moveWorkers(test,1);
+ close(resident.x,expected,`${label}: shared preview speed preserves logistics distance`);
+}
+
+// The live frame clock and an idle resident's trip home must use the same pace.
+const liveWorker={...actor([{x:20,z:0}]),task:{carried:true,item:'wood',amount:3},phase:'destination'};
+const live={...simulation,workers:[liveWorker],paused:false,tick(dt){moveWorkers(this,dt);this.time+=dt;}};
+for(let i=0;i<180;i++)advanceGame(live,1/60);
+close(liveWorker.x,1.2,'three real seconds at 1x travel 1.2 tiles');
+const returning={...actor([{x:20,z:0}]),homeId:4,phase:'home',idleFor:7,think:10};
+moveWorkers({...simulation,workers:[returning],buildings:[{id:4,health:100}]},1);
+close(returning.x,.8,'trip home uses the same slow walking speed');
 
 // World sprites advance by distance, not by elapsedTime * latestSpeed.
 const walker = actor([{ x: 100, z: 0 }]);

@@ -30,9 +30,9 @@ export function canEnter(s,race,b){
  if(!b||isStore(b))return true;const crew=crewFor(s,b.type);if(crew&&crewOf(race)!==crew)return false;
  return !(BUILDINGS[b.type].skilled&&RACES[race]?.hauler);
 }
-/** Goods one resident carries: 3, one more per hauling gear tier (HAUL_GEAR). */
-export const HAUL_GEAR=[{id:'handcart',name:'손수레',rank:3,money:400,items:{plank:12},load:4},{id:'wagon',name:'짐마차',rank:9,money:1800,items:{plank:20,brick:10},load:5}];
-export const haulLoad=s=>HAUL_GEAR[(s.haulGear||0)-1]?.load||3;
+/** A slower trip carries a larger batch; hauling gear increases its capacity. */
+export const HAUL_GEAR=[{id:'handcart',name:'손수레',rank:3,money:400,items:{plank:12},load:8},{id:'wagon',name:'짐마차',rank:9,money:1800,items:{plank:20,brick:10},load:10}];
+export const haulLoad=s=>HAUL_GEAR[(s.haulGear||0)-1]?.load||6;
 /** The stock cap the player set for a good (0 or none = no cap). */
 export const atStockCap=(s,item)=>s.stockCap?.[item]>0&&(s.stock[item]||0)>=s.stockCap[item];
 export function assignJob(s,w){
@@ -43,7 +43,7 @@ export function assignJob(s,w){
   const allowed=canEnter(s,w.race,b);
   if(allowed&&b.enabled!==false)for(const [item,need] of Object.entries(s.effectiveInputs(b))){
    const pending=s.workers.reduce((n,p)=>n+(p.task?.targetId===b.id&&p.task.item===item?p.task.amount:0),0);
-   const demand=need*2-(b.inputs[item]||0)-pending;if(demand<=0)continue;
+   const demand=need*(s.automatic?8:4)-(b.inputs[item]||0)-pending;if(demand<=0)continue;
    const sources=s.buildings.filter(p=>p.id!==b.id&&p.health>0&&!(p.movingUntil>s.time)&&outputStock(s,p,item)-reserved(s,item,p.id)>0&&canEnter(s,w.race,p));
    sources.push(...nearbyStores(s,b).filter(store=>storeStock(s,store,item)>0));
    for(const source of sources){const stock=isStore(source)?storeStock(s,source,item):outputStock(s,source,item)-reserved(s,item,source.id);
@@ -82,7 +82,7 @@ export function moveWorkers(s,dt){
    const home=s.buildings.find(b=>b.id===w.homeId&&b.health>0&&!(b.movingUntil>s.time));
    if(home&&w.idleFor>=6&&!w.atHome){
     if(w.phase!=='home'||!w.route.length||!s.walkable(w.route[0].x,w.route[0].z)){const route=s.routeTo(w,home);w.route=route?.path||[];w.phase='home';if(!route)continue;}
-    if(w.route.length)advanceCharacterRoute(w,dt,1.25,(x,z)=>s.walkable(x,z));
+    if(w.route.length)advanceCharacterRoute(w,dt,characterTravelSpeed(s,w),(x,z)=>s.walkable(x,z));
     if(!w.route.length){w.atHome=true;w.walking=false;w.phase='rest';}
    }
    continue;

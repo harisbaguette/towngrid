@@ -1,7 +1,7 @@
 import {FACTIONS} from './world.js';
 import {BUILDINGS,MOBILIZE} from './simulation.js';
 import {assignResidentAppearance} from './resident-roster.js';
-import {advanceCharacterRoute} from './character-movement.js';
+import {advanceCharacterRoute,CHARACTER_TRAVEL} from './character-movement.js';
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 // Guards hold ids GUARD_ID_BASE..+7 and attackers ATTACKER_ID_BASE and up, so the two never share an id however many raids
 // a site has fought (audit C10: attackers were 500+3n and reached the guards' 800 at the 100th raid).
@@ -62,7 +62,7 @@ export function tickRaid(s,dt){
   }
   if(!target)continue;
   const nearby=distance(w,target)<(guard?MELEE:1.2);w.attacking=nearby;
-  if(!nearby)walk(s,w,target,dt,r.faction==='beast'?1.2:.84);
+  if(!nearby)walk(s,w,target,dt,r.faction==='beast'?CHARACTER_TRAVEL.beastRaider:CHARACTER_TRAVEL.raider);
   else{w.walking=false;w.dir=Math.atan2(target.x-w.x,target.z-w.z);if(s.time>=w.lastAttack+(guard?1.05:3.2)){
    w.lastAttack=s.time;s.sound('impact',w.x,w.z);
    if(guard)guard.hp=Math.max(0,guard.hp-5*r.strength);
@@ -81,9 +81,9 @@ export function tickRaid(s,dt){
   // rule for striking a guard) and one striking a facility just past the range line (audit C3: attackers hovering at the
   // line hit guards or facilities unanswered, so the same raid turned on a tenth of a tile).
   const enemy=active.filter(w=>w.hp>0&&w.delay<=0&&(distance(w,home)<range||distance(w,g)<MELEE||w.attacking&&distance(w,home)<range+LEASH)).sort((a,b)=>distance(g,a)-distance(g,b))[0];
-  if(!enemy){if(distance(g,home)>1.6)walk(s,g,home,dt,1.8);continue;}
+  if(!enemy){if(distance(g,home)>1.6)walk(s,g,home,dt,CHARACTER_TRAVEL.guardReturn);continue;}
   if(g.target!==enemy.id){g.target=enemy.id;g.route=[];}
-  if(distance(g,enemy)>=MELEE)walk(s,g,enemy,dt,2.1);
+  if(distance(g,enemy)>=MELEE)walk(s,g,enemy,dt,CHARACTER_TRAVEL.guardChase);
   else{g.route=[];g.dir=Math.atan2(enemy.x-g.x,enemy.z-g.z);g.attacking=true;if(s.time>=g.attackAt){enemy.hp=Math.max(0,enemy.hp-9);g.attackAt=s.time+.7;s.sound('guardHit',g.x,g.z);}}
  }
  for(const w of active)if(w.hp<=0){r.defeated++;w.walking=false;w.attacking=false;w.until=s.time+2;s.sound('defeat',w.x,w.z);}

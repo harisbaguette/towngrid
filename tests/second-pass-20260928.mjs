@@ -16,7 +16,7 @@ const reload=s=>new Simulation(s.region,decodeSave(encodeSave(s.save())));
 // 1. Products. Every producer lists its products and the first one is the facility's own definition.
 for(const [id,d] of Object.entries(BUILDINGS))if(d.period){const r=d.recipes[0];assert.deepEqual([r.output,r.amount,r.period,r.inputs],[d.output,d.amount,d.period,d.inputs||{}],id);}
 const multi=Object.keys(BUILDINGS).filter(t=>BUILDINGS[t].recipes?.length>1);assert.ok(multi.length>=10,'at least ten facilities make more than one product: '+multi.length);
-{const s=town();s.money=1e5;for(const r of Object.keys(RESOURCES))s.stock[r]=60;/* stock set directly */s.rank=6;s.build('bakery',13,12,true);const b=s.at(13,12);
+{const s=town();s.money=1e5;for(const r of Object.keys(RESOURCES))s.stock[r]=['flour','water','wood','egg'].includes(r)?60:0;/* ingredients set directly, within storage capacity so returned ingredients can be hauled */s.rank=6;s.build('bakery',13,12,true);const b=s.at(13,12);
  assert.equal(s.recipeOf(b).output,'bread','a facility starts on its first product');
  assert.match(s.setRecipe(b.id,'cake').error,/승급이 필요합니다/,'a locked product is refused');assert.equal(s.recipeOf(b).output,'bread');
  assert.equal(s.setRecipe(b.id,'nothing').ok,false);assert.equal(s.setRecipe(s.warehouse.id,'cake').ok,false,'a facility without products cannot switch');

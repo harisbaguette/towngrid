@@ -2,14 +2,19 @@
 const distances = new WeakMap();
 export const characterDistance = actor => distances.get(actor) || 0;
 
-// Shared with the animation preview, so road/upgrade speeds are not hidden by
-// a slower presentation-only walk. This does not alter simulation timing.
+// Tiles per game second. The live clock applies BASE_TIME_SCALE separately.
+export const CHARACTER_TRAVEL = Object.freeze({
+ base: .8, road: 1.25, paved: 1.5, horse: 1.1, automatic: 1.1,
+ guardReturn: .72, guardChase: .84, raider: .336, beastRaider: .48,
+});
+
+// Shared with previews and the trip home as well as loaded transport.
 export function characterTravelSpeed(sim, actor) {
  const tile = `${Math.round(actor.x)},${Math.round(actor.z)}`;
- const surface = sim.paved?.has(tile) ? 2.2 : sim.roads.has(tile) ? 1.7 : 1;
- return 1.25 * (actor.race === 'centaur' ? 1.15 : 1)
+ const surface = sim.paved?.has(tile) ? CHARACTER_TRAVEL.paved : sim.roads.has(tile) ? CHARACTER_TRAVEL.road : 1;
+ return CHARACTER_TRAVEL.base * (actor.race === 'centaur' ? 1.15 : 1)
   * (sim.time < sim.strikeUntil ? .55 : 1) * surface
-  * (sim.horse ? 1.35 : 1) * (sim.automatic ? 1.65 : 1)
+  * (sim.horse ? CHARACTER_TRAVEL.horse : 1) * (sim.automatic ? CHARACTER_TRAVEL.automatic : 1)
   * (1 - (sim.health?.infection || 0) * .005) * (sim.money < 0 ? .65 : 1);
 }
 
