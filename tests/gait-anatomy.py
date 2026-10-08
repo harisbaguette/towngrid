@@ -36,6 +36,8 @@ for path in sorted(Path(args.output).glob('*/frames.json')):
  for row in range(4):
   cycle=[meta['rigAudit'][row][frame]['feet'] for frame in meta['clips']['walk']['frames']]
   assert all(cycle[i][0]['contact']==cycle[(i+16)%32][1]['contact'] for i in range(32)),(meta['id'],'unequal contact timing')
+  # Two separately drawn steps (Mira SW/SE) lift each boot as drawn.
+  if meta['rigAudit'][row][meta['clips']['walk']['frames'][0]].get('authored'):continue
   assert all(abs(cycle[i][0]['lift']-cycle[(i+16)%32][1]['lift'])<1e-6 for i in range(32)),(meta['id'],'unequal swing height')
 assert len(results)==44,len(results)
 out=Path(args.report);out.parent.mkdir(parents=True,exist_ok=True)

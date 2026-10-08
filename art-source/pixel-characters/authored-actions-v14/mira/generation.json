@@ -1,0 +1,134 @@
+{
+  "method": "sequential-single-image",
+  "tool": "image_gen",
+  "status": "review-only",
+  "remaining": [
+    "디딘 발의 높이와 착지 전환",
+    "소매·장갑 세부 일관성",
+    "NW/NE 및 다른 동작"
+  ],
+  "records": [
+    {
+      "file": "walk-SW-22.png",
+      "phase": 0.6875,
+      "prompt": "Use case: precise-object-edit. ONE single animation cel, transparent background.\nEdit the supplied Mira image into the MIDDLE OF THE OPPOSITE STEP of her slow SW walk. Preserve her exact head, face, ponytail, torso size, costume, camera, pixel painting and placement. Do not mirror her.\nLeg identity matters: in the reference, the leg emerging from the shorts on VIEWER-RIGHT, directly below the large right-side belt pouch, trails behind. NOW lift that SAME near-side leg and swing its knee FORWARD toward lower-left, passing IN FRONT OF the other leg. Bend that knee gently so its boot is airborne beside the supporting ankle, toe pointing down-left. The far-side leg emerging on viewer-left stays planted, nearly vertical under the pelvis; its boot is the lower boot. Draw a convincing overlapping passing pose, not the old split-leg pose.\nThe sleeve with the round gold badge is on viewer-right. Let this near arm hang almost vertically, its glove beside the right pouch; the opposite arm is also near neutral. No extreme arm swing. Keep the head at the identical size and location; do not shorten legs or enlarge the head. Maintain both boots and both hands. No floor, no shadow, no text, no sheet. One complete 2D character, same square framing.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-65ffba85-15b7-4cc9-8bd1-94f57f29e31f.png",
+      "review": "가까운 다리가 먼 다리 앞을 통과하며 무릎이 굽혀짐. 신발은 아직 지지 발 뒤에 있어 다음 그림에서 앞으로 나와야 함.",
+      "references": [
+        "art-source/pixel-characters/authored-actions-v13/mira/original-proportions-key-16.png"
+      ],
+      "status": "review-candidate"
+    },
+    {
+      "file": "walk-SW-30.png",
+      "phase": 0.9375,
+      "prompt": "Use case: precise-object-edit. A single next cel of this same slow SW walk, transparent. KEEP head, face, hair, torso and clothing identical in size, drawing style and canvas position.\nContinue the raised NEAR LEG (from viewer-right shorts, crossing in FRONT). Unfold its lower leg forward toward screen lower-left. Its raised boot must now pass IN FRONT OF and TO THE LEFT OF the planted boot, rather than staying on the right as in the reference. Keep its knee gently bent and its sole just above the ground. The far leg stays the support leg, foot flat; as the body travels forward, that planted foot lies slightly farther screen-right/up, beneath the right half of the pelvis.\nThe gold-badge arm swings a little BACK toward screen-right, opposite the near leg. Opposite hand begins moving forward left. Small relaxed walking gestures, no running, no high kicking. Preserve limb length, boots, buckles, belt pouches, pixel detail. ONE whole character, not a sheet. No mirror, no floor/shadow/text.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-dc2f54db-3728-4864-b4b9-f66d7c0cc01d.png",
+      "review": "가까운 다리가 앞에 나오고 배지 팔이 뒤로 감. 무릎이 이미 펴져 있어 의도한 26번보다 뒤인 착지 직전 30번 후보로 배치.",
+      "references": [
+        "art-source/pixel-characters/authored-actions-v14/mira/walk-SW-22.png"
+      ],
+      "status": "review-candidate"
+    },
+    {
+      "file": "walk-SW-24.png",
+      "phase": 0.75,
+      "prompt": "Use case: precise-object-edit. Edit ONE walking animation cel from image1. Image2 is a LATER endpoint for limb identity only; do not jump to it.\nAdvance image1 by a SMALL amount: the raised near boot, now to the right of the supporting shin, moves leftward until its toe is directly in front of that supporting shin. Keep the moving knee bent. Its heel is still visibly above the planted ankle; it must NOT become the fully straight, far-forward leg of image2. Near thigh overlaps far thigh, and the raised near boot overlaps the planted far shin. The planted boot shifts just a little right/up. This is the close passing pose between these two references.\nMove the gold-badge arm only slightly backward; its glove remains beside the pouch. Preserve image1 head, face, ponytail, body proportions, same size and position, pixel style and clothing exactly. Slow relaxed walk, not a high kick. Transparent background. One full character. No shadow, no mirror, no sheet, no text.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-4c197ac7-91f3-434d-ae90-8c2223ed1f8f.png",
+      "review": "가까운 무릎·신발이 지지 다리 앞에 겹침. 22번보다 신발이 앞으로 이동, 팔은 조금 뒤로 이동.",
+      "references": [
+        "art-source/pixel-characters/authored-actions-v14/mira/walk-SW-22.png",
+        "art-source/pixel-characters/authored-actions-v14/mira/walk-SW-30.png"
+      ],
+      "status": "review-candidate"
+    },
+    {
+      "file": "walk-SW-26.png",
+      "phase": 0.8125,
+      "prompt": "Use case: precise-object-edit. ONE very small next step of this animation. Preserve this exact Mira drawing, same body, face, head and hair size/position, same costume and pixel style.\nONLY advance the swinging near leg a little: unfold its bent lower leg so the airborne near boot moves LEFT about HALF A BOOT LENGTH. Its toe should now be just left of the planted boot's toe, and still a little higher. Keep a visible bend in the knee; do not fully extend the leg. This near leg starts at the viewer-right shorts and overlaps IN FRONT of the planted far leg throughout. The planted far boot moves a tiny bit screen-right/up as the pelvis advances.\nKeep the gold-badge arm near its current position, only a tiny swing back. No changes to character proportions or camera. Slow low step, not running. Transparent background; one whole character, no floor, shadow, text or sheet.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-798231da-2c7d-4c08-b58a-6b1c9ae55ba1.png",
+      "review": "가까운 발끝이 지지 발의 앞을 지남. 무릎이 여전히 굽혀져 30번과 구별됨. 지지 발 위치 이동량은 연속 재생에서 확인 필요.",
+      "references": [
+        "art-source/pixel-characters/authored-actions-v14/mira/walk-SW-24.png"
+      ],
+      "status": "review-candidate"
+    },
+    {
+      "file": "rejected-28-reach.png",
+      "status": "rejected",
+      "prompt": "Use case: precise-object-edit. ONE animation inbetween. Image1 is the current cel; image2 is the next endpoint. Draw EXACTLY halfway between their leg poses.\nNear leg (from viewer-right shorts, visible in front) unfolds partway toward the lower-left. Its boot is halfway between its position in image1 and image2; ankle lower and left, knee less bent than image1 but still clearly bent. Toe begins lifting for heel landing. Far boot remains planted behind, halfway between the references' far boot positions. Far leg must keep its natural length.\nGold-badge glove moves just a little right/back toward image2. Keep image1 head and body size/placement unchanged. Same 2D pixel texture, face, hair, proportions, teal jacket, cream cuffs, shorts, belt pouches, boots. No redraw of the design. Transparent background. One whole character only; no mirror, no floor, no shadow, no text, no sheet.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-42b05a89-8f87-493e-9750-f94c277a695a.png",
+      "review": "26→30 사이여야 하나 30보다 더 뻗은 자세라 제외.",
+      "references": [
+        "art-source/pixel-characters/authored-actions-v14/mira/walk-SW-26.png",
+        "art-source/pixel-characters/authored-actions-v14/mira/walk-SW-30.png"
+      ]
+    },
+    {
+      "file": "walk-SW-28.png",
+      "phase": 0.875,
+      "prompt": "Edit this one sprite with ONE TINY LOWER-LEG CHANGE, preserving everything else exactly. This is an animation cel, not a redesign.\nThe raised boot on the LEFT of the image moves only 25 pixels left and 20 pixels down in this 1280-square reference. Its knee stays at almost the same point and remains softly bent. Rotate that boot just slightly toe-up. The supporting boot on the right moves 10 pixels up. These are SMALL changes, about a sixth of a boot length; do not turn it into a long stride or straighten the whole leg.\nHead, hair, face, jacket, arms, hands, belt, shorts, and thighs remain unchanged in size, location and pixel texture. One character only. Genuine transparent background; no shadow, text or grid.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-c73f35d6-11c2-4a97-99b1-633e243b497a.png",
+      "review": "무릎 굽힘을 남기고 발목이 앞으로 이동. 26과30 사이 신발 위치.",
+      "references": [
+        "art-source/pixel-characters/authored-actions-v14/mira/walk-SW-26.png"
+      ],
+      "status": "review-candidate"
+    },
+    {
+      "file": "walk-SW-20.png",
+      "phase": 0.625,
+      "prompt": "Use case: precise-object-edit. Make ONE next animation cel, a SMALL advance from this reference. Preserve the exact Mira face, head, hair, torso, size, pixel-art design and canvas placement.\nThe far leg on VIEWER-LEFT bears her weight; keep that foot flat, with its sole at almost the same height. The near leg starting below the viewer-right shorts/pouch begins recovery from behind: bend its knee a little more and bring that knee about 40 pixels LEFT, lifting the trailing boot about 25 pixels UP and 20 pixels LEFT in this 1280-square drawing. It is still behind the support leg, not yet passing.\nThe near gold-badge arm is currently forward with its hand across the shorts. Let that same hand drop slightly and move about 40 pixels RIGHT toward neutral; the far hand begins its forward swing only slightly. Slow gentle walking. Keep all limb lengths and clothing consistent. One entire character on genuine transparency. No mirror, no ground, shadow, text or sheet.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-0863a609-862a-4637-b4f9-cabe84d36643.png",
+      "review": "발이 뒤에서 들리고 무릎이 골반 아래로 들어옴. 배지 팔이 요청보다 빨리 중립으로 이동하므로 18 대신20 후보, 16과 사이에 추가 작화 필요.",
+      "references": [
+        "art-source/pixel-characters/authored-actions-v13/mira/original-proportions-key-16.png"
+      ],
+      "status": "review-candidate"
+    },
+    {
+      "file": "rejected-18-arm.png",
+      "status": "rejected",
+      "prompt": "Use case: precise-object-edit. Draw ONE exact halfway animation cel between these two images. They are the SAME character and SAME camera; preserve her head, face, torso, size, hair and pixel painting.\nImage1: near glove is forward across shorts, near leg trails far behind. Image2: near glove is beside hip, near knee is under hip and rear heel raised. Draw a small halfway pose: near gold-badge glove centered HALFWAY from image1 hand to image2 hand, still across the right half of the shorts, not yet beside the hip. Elbow remains slightly bent. Near knee and rear boot also HALFWAY between their two positions. Far support leg stays straight with foot firmly planted on the lower-left. Far hand halfway between its reference positions.\nExact same outfit, proportions and scale. Gentle walking, not running. Whole character on transparent background. ONE drawing, not a sequence. No mirror, floor, shadow or text.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-1b7781d4-203c-4632-94be-051a319712a0.png",
+      "review": "팔·다리가 거의16번에 머물러 중간 자세 역할을 못 함.",
+      "references": [
+        "art-source/pixel-characters/authored-actions-v13/mira/original-proportions-key-16.png",
+        "art-source/pixel-characters/authored-actions-v14/mira/walk-SW-20.png"
+      ]
+    },
+    {
+      "file": "walk-SW-18.png",
+      "phase": 0.5625,
+      "prompt": "Make a precise local edit to this single transparent sprite. Change ONLY THE NEAR ARM with the round gold sleeve badge on viewer-right.\nCurrently that forearm hangs straight down and the glove sits beside the hip. Bend the elbow gently to swing that glove forward: move the glove center about 55 pixels LEFT and 20 pixels UP on this 1280-square canvas. The glove should cover the OUTER HALF of the viewer-right shorts cuff, halfway between the hanging position and the center of her waist. Keep the shoulder and gold badge fixed; draw a coherent elbow, cream cuff and natural forearm connecting to that new hand.\nEvery other part, particularly BOTH LEGS, head, face, hair, torso, other arm, costume, scale and canvas placement, stays identical. Do not redesign. Pixel painting exactly matching the input. One full-body sprite, genuine transparency, no text or background.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-9ee89ad6-4d0f-4797-b396-0e28908dd650.png",
+      "review": "배지 손이16과20 사이로 이동. 다리는20과 같은 들림 단계이므로 재생상 정체 여부 확인 필요.",
+      "references": [
+        "art-source/pixel-characters/authored-actions-v14/mira/walk-SW-20.png"
+      ],
+      "status": "review-candidate"
+    },
+    {
+      "file": "walk-SW-07.png",
+      "phase": 0.21875,
+      "prompt": "Use case: precise-object-edit. ONE slow-walk animation cel, immediately after this reference. Preserve this exact Mira design, head, face, hair, torso proportions, canvas size and pixel art.\nThe straight NEAR leg under viewer-right shorts remains the support leg. The FAR boot currently visible on the right behind that straight shin now swings a small distance LEFT and slightly UP until it is almost entirely HIDDEN BEHIND the supporting shin. Only a small edge of the far boot should peek out; do not teleport it fully out to the left. The bent far knee stays behind the near thigh. This is an occluded passing pose.\nThe near arm with gold badge moves a small amount inward toward her side, so its glove sits a little closer to the belt pouch. Keep both hands anatomically correct. Supporting leg natural length; no squat. Same exact costume and clean 2D pixel painting, same scale. One character on transparent background, no floor/shadow/text/mirror/sheet.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-c77fda8a-5f3e-4fe7-8ddc-b0c3a1c66652.png",
+      "review": "먼 신발이 지지 정강이 뒤에 가려지는 통과 중간 자세. 기존6→7 점프 사이 삽입 후보.",
+      "references": [
+        "art-source/pixel-characters/authored-actions-v13/mira/precise-inbetween-06.png"
+      ],
+      "status": "review-candidate"
+    },
+    {
+      "file": "walk-SW-14.png",
+      "phase": 0.4375,
+      "prompt": "Use case: precise-object-edit. ONE carefully edited walk cel from this exact character.\nAdvance her weight onto the forward FAR boot on viewer-left: lower that toe so the sole is nearly flat, keeping its heel in place. The NEAR leg from the viewer-right shorts is beginning to trail: move its rear boot only about 30 pixels RIGHT and 40 pixels UP, heel starting to rise; knee remains gently bent. Maintain leg length and the same quarter-view ground plane.\nSwing the gold-badge forearm a small amount forward, its glove about 35 pixels LEFT across the shorts. Other arm relaxes back slightly. No large gestures.\nPreserve the exact head, face, hair, size, body proportions, all costume details and pixel painting. Same canvas placement. No mirroring. One full body on genuine transparency, no floor/shadow/text or sheet.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-f9d0d00c-0f25-4bcc-abe7-508542b2ddc1.png",
+      "review": "먼 발 착지, 가까운 뒤꿈치 들기와 배지 팔 앞으로 이동. 기존11과16 사이 후보.",
+      "references": [
+        "art-source/pixel-characters/authored-actions-v13/mira/precise-inbetween-11.png"
+      ],
+      "status": "review-candidate"
+    }
+  ]
+}

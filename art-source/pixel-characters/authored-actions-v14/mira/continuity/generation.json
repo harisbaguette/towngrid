@@ -1,0 +1,47 @@
+{
+  "tool": "image_gen",
+  "method": "one-image-at-a-time",
+  "status": "continuity-not-resolved",
+  "records": [
+    {
+      "file": "first-reach-a.png",
+      "prompt": "Use case: precise-object-edit. Make ONE tiny next cel of this specific slow walking animation. Do not redesign anything.\nLOCK this exact head, hair, face, torso, costume, camera, pixel detail, size and location.\nThe planted boot on VIEWER-RIGHT belongs to the near leg. Move that boot only 20 pixels RIGHT and 15 pixels UP on this 1280-square canvas, keeping its sole flat; adjust the knee naturally by the same small amount. The airborne far boot on viewer-left moves just 10 pixels LEFT and 25 pixels DOWN, beginning to unfold its knee, but must remain raised. This is a SMALL inbetween, not the end of the step and not a standing pose.\nThe near glove below the gold-badge sleeve moves only 20 pixels LEFT toward the shorts; keep the elbow almost straight. Other arm moves only slightly back.\nBoth hands remain brown fingerless gloves with tiny visible fingertips. Keep all clothing edges and body proportions. One entire character, true transparent background, no ground/shadow/text/grid.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-83763f84-d81c-4c15-8ad1-d8f7a67d1ecc.png",
+      "references": [
+        "art-source/pixel-characters/authored-actions-v13/mira/precise-inbetween-09.png"
+      ],
+      "status": "unapplied",
+      "review": "디딘 발은 앞뒤 두 자세 사이로 이동했지만 전체 보행 연결은 해결되지 않음."
+    },
+    {
+      "file": "rejected-first-reach-b.png",
+      "prompt": "Edit ONE single animation cel with a tiny change. Keep the supplied character's head, face, hair, torso, belt, shorts and pixel texture identical, at the identical size and position.\nMove ONLY the planted near boot on viewer-right 25 pixels LEFT and 20 pixels DOWN within this 1280-square reference. Adjust that leg with a small shift, not a bend or crouch. Keep that boot's exact shape and flat sole. Keep the airborne far boot on viewer-left and its bent knee exactly where they are.\nMove the gold-badge forearm and glove only 15 pixels RIGHT, slightly away from the shorts. Keep the other arm as is. This is a very small earlier inbetween, no large walk pose change. Brown fingerless gloves. Preserve all costume details and proportions. Full character, true transparency, no floor/shadow/text/sheet.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-befec00b-e680-46b4-91ea-32566946542b.png",
+      "references": [
+        "first-reach-a.png"
+      ],
+      "status": "rejected",
+      "review": "머리와 의상 질감이 달라지고 가까운 허리 주머니가 사라짐."
+    },
+    {
+      "file": "second-pass-in.png",
+      "prompt": "ONE precise animation inbetween, directly editing this image. Keep the EXACT head, hair, face, torso, belt pouches, costume detail, scale and camera.\nAdvance the slow step by a tiny amount. The planted FAR boot on screen lower-left moves only 30 pixels RIGHT and 10 pixels UP in this 1280-square image. Keep that sole flat and that leg nearly straight. Meanwhile the bent NEAR knee on viewer-right moves 25 pixels LEFT, starting to cross in front of the supporting thigh. The airborne near boot stays almost in place, with a slightly more bent knee. This is before the crossing pose, not fully crossed yet.\nGold-badge glove moves just 15 pixels right/back; keep the forearm relaxed. Preserve both belt pouches and fingerless gloves, exact same 2D pixel style. One full character on genuine transparency, no ground or shadow, no text or sheet.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-ee058f5b-6f1b-464a-abf0-2f258a10cb73.png",
+      "references": [
+        "../walk-SW-20.png"
+      ],
+      "status": "unapplied",
+      "review": "디딘 발의 가로 위치는20과22 사이. 세로 위치와 팔은 여전히 별도 검수 필요."
+    },
+    {
+      "file": "rejected-second-pass-out.png",
+      "prompt": "ONE very small walk-animation edit. Preserve this exact character, head, hair, face, torso, arms, belt pouches and shorts, size and placement. Do not redraw the design.\nOnly adjust the lower legs halfway to the next pose:\nThe airborne NEAR boot, overlapping the other shin in the middle, moves 30 pixels LEFT and 8 pixels DOWN on this 1280-square canvas. Keep the near knee bent, not straight. The FAR planted boot currently lowest moves 30 pixels RIGHT and 8 pixels UP with its leg still supporting the body. Both boots remain close and partially overlap; do not open into a wide stride. This is one tiny increment of a gentle walk.\nKeep identical pixel texture and costume details. One entire character, genuine transparent background, no floor/shadow/text/sheet.",
+      "generated": "C:/Users/ghd12/.codex/generated_images/01a0fc4a-9830-77d0-92d7-71da779b65c0/exec-480ea1ed-dfc5-429f-86c8-3efd2548c18f.png",
+      "references": [
+        "../walk-SW-24.png"
+      ],
+      "status": "rejected",
+      "review": "지지 발이 과도하게 올라가 양발의 바닥 관계가 무너짐."
+    }
+  ]
+}

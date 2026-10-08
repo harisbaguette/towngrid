@@ -1,10 +1,17 @@
 {
-  "drawings": 12,
+  "drawings": 20,
+  "steps": [
+    12,
+    8
+  ],
+  "individualDrawings": 21,
+  "newDrawings": 9,
+  "individualStatus": "review-only",
   "cells": 32,
   "directions": [
     "SW",
     "SE"
   ],
-  "cycleSeconds": 1.025,
+  "cycleSeconds": 1.2825,
   "errors": []
 }

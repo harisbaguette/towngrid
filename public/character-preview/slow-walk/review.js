@@ -5,12 +5,12 @@ const state={elapsed:0,paused:reduced.matches,speed:1,direction:'SW'};
 const image=src=>new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(Error(src));im.src=src;});
 async function asset(sheet,json){const [atlas,response]=await Promise.all([image(sheet),fetch(json)]);if(!response.ok)throw Error(json);return {atlas,meta:await response.json()};}
 async function main(){
- const [before,after]=await Promise.all([asset('./mira/rig-before.png','./mira/rig-before.json'),asset('./mira/sprites.png','./mira/frames.json')]);
+ const [before,after,individual]=await Promise.all([asset('./mira/rig-before.png','./mira/rig-before.json'),asset('./mira/sprites.png','./mira/frames.json'),asset('./individual/sprites.png','./individual/frames.json')]);
  const velocity=BASE_TIME_SCALE*characterTravelSpeed({time:0,money:1,roads:new Set()},{x:0,z:0,race:'human'});
  const period=after.meta.strideLength/velocity,sequence=after.meta.sequence,count=sequence.length;
- // Screen pixels per world unit in the drawn SW view at the game's 100px body:
- // one step carries a planted boot 16.1px right and 10.9px up.
- const perWorld=[16.1/(after.meta.strideLength/2),-10.9/(after.meta.strideLength/2)];
+ // Screen pixels per world unit of ground along the SW diagonal for the game's
+ // 1.05-unit, 128px sprite in the quarter view.
+ const perWorld=[128/1.05*Math.SQRT1_2,-128/1.05/Math.sqrt(6)];
  function ground(ctx,scale,mirror){
   // Marks fixed to the ground drift under the walker at the game speed; a
   // planted boot should drift with them.
@@ -19,12 +19,12 @@ async function main(){
  }
  function draw(){
   const phase=state.elapsed/period%1,index=Math.floor(phase*count+1e-7)%count,mirror=state.direction==='SE'?-1:1;
-  for(const [id,a,authored]of [['before',before,false],['after',after,true]]){
+  for(const [id,a,authored]of [['before',before,false],['after',after,true],['individual',individual,true]]){
    const ctx=$(id).getContext('2d');ctx.imageSmoothingEnabled=false;ctx.fillStyle='#e4ebdd';ctx.fillRect(0,0,320,280);
    const row=a.meta.directions.indexOf(state.direction),scale=2;
    ctx.fillStyle='#789073';ctx.fillRect(45,251,230,1);ground(ctx,scale,mirror);
    if(authored){
-    const cell=a.meta.cell,col=sequence[index];
+    const cell=a.meta.cell,col=a.meta.sequence[index];
     // The review sheet is drawn at twice the game size.
     ctx.drawImage(a.atlas,col*cell,row*cell,cell,cell,Math.round(160-a.meta.anchor[0]),Math.round(250-a.meta.anchor[1]),cell,cell);
    }else{
@@ -33,6 +33,8 @@ async function main(){
    }
   }
   $('frame').textContent=`${index+1} / ${count}`;$('timeline').value=index;
+  const selected=individual.meta.frames[individual.meta.sequence[index]];
+  $('individual-pose').textContent=`${selected.new?'새 작화':'기존 작화'} · ${selected.supportLeg==='near'?'가까운 다리':'먼 다리'} 지지 · ${selected.source.split('/').pop()}`;
  }
  function seek(index){state.paused=true;state.elapsed=((index%count+count)%count)/count*period;$('play').textContent='재생';draw();}
  $('play').onclick=()=>{state.paused=!state.paused;$('play').textContent=state.paused?'재생':'일시정지';};
@@ -40,8 +42,8 @@ async function main(){
  $('next').onclick=()=>seek(Math.floor(state.elapsed/period*count+1e-7)+1);
  $('timeline').oninput=()=>seek(Number($('timeline').value));$('direction').onchange=()=>{state.direction=$('direction').value;draw();};$('speed').onchange=()=>state.speed=Number($('speed').value);
  reduced.addEventListener('change',event=>{if(event.matches){state.paused=true;$('play').textContent='재생';}});
- $('play').textContent=state.paused?'재생':'일시정지';$('status').textContent=`맨땅에서 두 걸음 주기 ${period.toFixed(2)}초 · 원화 ${after.meta.usedDrawings}장을 걸음 순서대로 재생`;
- window.slowWalkReview={state,before,after,period,draw,seek};let previous;
+ $('play').textContent=state.paused?'재생':'일시정지';$('status').textContent=`맨땅에서 두 걸음 주기 ${period.toFixed(2)}초 · 원화 ${after.meta.usedDrawings}장, 걸음마다 ${after.meta.steps.join('장과 ')}장`;
+ window.slowWalkReview={state,before,after,individual,period,draw,seek};let previous;
  function tick(now){if(previous!==undefined&&!state.paused&&!document.hidden)state.elapsed+=Math.min(.05,(now-previous)/1000)*state.speed;previous=now;draw();requestAnimationFrame(tick);}requestAnimationFrame(tick);
 }
 main().catch(error=>{$('status').textContent='불러오기 실패: '+error.message;console.error(error);});

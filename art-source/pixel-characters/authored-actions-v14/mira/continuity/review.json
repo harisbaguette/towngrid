@@ -1,0 +1,18 @@
+{
+  "status": "continuity-rejected",
+  "method": "256px 검토 셀의 갈색 신발 아래쪽 영역 중심을 추적. 화면상 위치 변화이며 월드 미끄러짐 실측은 아님.",
+  "gameScale": 0.5,
+  "transitions": [
+    {"fromPhase": 10, "toPhase": 11, "supportLeg": "near", "from": [124.6, 227], "to": [138.7, 225], "horizontalJumpAtGameSize": 7.05},
+    {"fromPhase": 20, "toPhase": 22, "supportLeg": "far", "from": [101.2, 227], "to": [115.5, 227], "horizontalJumpAtGameSize": 7.15},
+    {"fromPhase": 24, "toPhase": 26, "supportLeg": "far", "from": [116.3, 221], "to": [130.2, 219], "horizontalJumpAtGameSize": 6.95}
+  ],
+  "unresolved": [
+    "사진별 머리 정렬만으로 발·골반·팔의 이동 속도가 이어지지 않음",
+    "지지 구간의 발 궤적과 게임 이동량이 일치하지 않음",
+    "좌우 걸음의 자세 변화와 노출 시간이 비대칭",
+    "마지막 그림에서 첫 그림으로 돌아오는 착지와 팔 연결",
+    "일부 신규 중간 그림의 의상·질감 변화"
+  ],
+  "runtimeEligible": false
+}

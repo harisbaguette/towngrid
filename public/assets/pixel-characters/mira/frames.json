@@ -3360,8 +3360,8 @@
       "fps": 40,
       "strideLength": 0.5,
       "strideLengths": {
-        "SW": 0.41,
-        "SE": 0.41
+        "SW": 0.513,
+        "SE": 0.513
       }
     },
     "carry": {
@@ -14765,7 +14765,7 @@
       {
         "action": "walk",
         "phase": 0.0,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 0,
         "coreOffset": [
           0,
@@ -14776,11 +14776,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              56.7,
+              57.37,
               107.5
             ],
             "supportPoint": [
-              56.7,
+              57.37,
               107.5
             ],
             "role": "support"
@@ -14803,7 +14803,7 @@
       {
         "action": "walk",
         "phase": 0.03125,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 0,
         "coreOffset": [
           0,
@@ -14814,11 +14814,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              56.7,
+              57.37,
               107.5
             ],
             "supportPoint": [
-              56.7,
+              57.37,
               107.5
             ],
             "role": "support"
@@ -14841,7 +14841,7 @@
       {
         "action": "walk",
         "phase": 0.0625,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 1,
         "coreOffset": [
           0,
@@ -14852,11 +14852,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              58.98,
+              59.46,
               107.5
             ],
             "supportPoint": [
-              58.98,
+              59.46,
               107.5
             ],
             "role": "support"
@@ -14865,11 +14865,11 @@
             "contact": false,
             "lift": 15.0,
             "sole": [
-              73.32,
+              73.76,
               94.0
             ],
             "supportPoint": [
-              73.32,
+              73.76,
               94.0
             ],
             "role": "swing"
@@ -14879,7 +14879,7 @@
       {
         "action": "walk",
         "phase": 0.09375,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 2,
         "coreOffset": [
           0,
@@ -14890,11 +14890,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              60.09,
+              60.82,
               107.5
             ],
             "supportPoint": [
-              60.09,
+              60.82,
               107.5
             ],
             "role": "support"
@@ -14903,11 +14903,11 @@
             "contact": false,
             "lift": 13.9,
             "sole": [
-              74.2,
+              74.14,
               95.1
             ],
             "supportPoint": [
-              74.2,
+              74.14,
               95.1
             ],
             "role": "swing"
@@ -14917,7 +14917,7 @@
       {
         "action": "walk",
         "phase": 0.125,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 3,
         "coreOffset": [
           0,
@@ -14928,11 +14928,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              61.21,
+              62.19,
               107.8
             ],
             "supportPoint": [
-              61.21,
+              62.19,
               107.8
             ],
             "role": "support"
@@ -14941,11 +14941,11 @@
             "contact": false,
             "lift": 13.8,
             "sole": [
-              74.66,
+              73.95,
               95.2
             ],
             "supportPoint": [
-              74.66,
+              73.95,
               95.2
             ],
             "role": "swing"
@@ -14955,7 +14955,7 @@
       {
         "action": "walk",
         "phase": 0.15625,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 4,
         "coreOffset": [
           0,
@@ -14966,11 +14966,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              62.34,
+              63.55,
               107.4
             ],
             "supportPoint": [
-              62.34,
+              63.55,
               107.4
             ],
             "role": "support"
@@ -14979,11 +14979,11 @@
             "contact": false,
             "lift": 12.3,
             "sole": [
-              73.13,
+              72.48,
               96.7
             ],
             "supportPoint": [
-              73.13,
+              72.48,
               96.7
             ],
             "role": "swing"
@@ -14993,7 +14993,7 @@
       {
         "action": "walk",
         "phase": 0.1875,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 5,
         "coreOffset": [
           0,
@@ -15004,11 +15004,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              63.41,
+              64.87,
               107.5
             ],
             "supportPoint": [
-              63.41,
+              64.87,
               107.5
             ],
             "role": "support"
@@ -15017,11 +15017,11 @@
             "contact": false,
             "lift": 12.2,
             "sole": [
-              74.04,
+              71.64,
               96.8
             ],
             "supportPoint": [
-              74.04,
+              71.64,
               96.8
             ],
             "role": "swing"
@@ -15031,7 +15031,7 @@
       {
         "action": "walk",
         "phase": 0.21875,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 6,
         "coreOffset": [
           0,
@@ -15042,11 +15042,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              64.62,
+              67.0,
               107.5
             ],
             "supportPoint": [
-              64.62,
+              67.0,
               107.5
             ],
             "role": "support"
@@ -15055,11 +15055,11 @@
             "contact": false,
             "lift": 16.8,
             "sole": [
-              62.57,
+              62.61,
               92.2
             ],
             "supportPoint": [
-              62.57,
+              62.61,
               92.2
             ],
             "role": "swing"
@@ -15069,7 +15069,7 @@
       {
         "action": "walk",
         "phase": 0.25,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 6,
         "coreOffset": [
           0,
@@ -15080,11 +15080,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              64.62,
+              67.0,
               107.5
             ],
             "supportPoint": [
-              64.62,
+              67.0,
               107.5
             ],
             "role": "support"
@@ -15093,11 +15093,11 @@
             "contact": false,
             "lift": 16.8,
             "sole": [
-              62.57,
+              62.61,
               92.2
             ],
             "supportPoint": [
-              62.57,
+              62.61,
               92.2
             ],
             "role": "swing"
@@ -15107,7 +15107,7 @@
       {
         "action": "walk",
         "phase": 0.28125,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 7,
         "coreOffset": [
           0,
@@ -15118,11 +15118,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              66.81,
+              69.0,
               107.3
             ],
             "supportPoint": [
-              66.81,
+              69.0,
               107.3
             ],
             "role": "support"
@@ -15131,11 +15131,11 @@
             "contact": false,
             "lift": 15.2,
             "sole": [
-              64.16,
+              62.19,
               93.8
             ],
             "supportPoint": [
-              64.16,
+              62.19,
               93.8
             ],
             "role": "swing"
@@ -15145,7 +15145,7 @@
       {
         "action": "walk",
         "phase": 0.3125,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 8,
         "coreOffset": [
           0,
@@ -15156,11 +15156,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              67.93,
+              70.38,
               107.7
             ],
             "supportPoint": [
-              67.93,
+              70.38,
               107.7
             ],
             "role": "support"
@@ -15169,11 +15169,11 @@
             "contact": false,
             "lift": 15.0,
             "sole": [
-              63.77,
+              60.81,
               94.0
             ],
             "supportPoint": [
-              63.77,
+              60.81,
               94.0
             ],
             "role": "swing"
@@ -15183,7 +15183,7 @@
       {
         "action": "walk",
         "phase": 0.34375,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 9,
         "coreOffset": [
           0,
@@ -15194,11 +15194,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              69.02,
+              72.38,
               107.5
             ],
             "supportPoint": [
-              69.02,
+              72.38,
               107.5
             ],
             "role": "support"
@@ -15207,11 +15207,11 @@
             "contact": false,
             "lift": 16.2,
             "sole": [
-              59.07,
+              55.33,
               92.8
             ],
             "supportPoint": [
-              59.07,
+              55.33,
               92.8
             ],
             "role": "swing"
@@ -15221,7 +15221,7 @@
       {
         "action": "walk",
         "phase": 0.375,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 9,
         "coreOffset": [
           0,
@@ -15232,11 +15232,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              69.02,
+              72.38,
               107.5
             ],
             "supportPoint": [
-              69.02,
+              72.38,
               107.5
             ],
             "role": "support"
@@ -15245,11 +15245,11 @@
             "contact": false,
             "lift": 16.2,
             "sole": [
-              59.07,
+              55.33,
               92.8
             ],
             "supportPoint": [
-              59.07,
+              55.33,
               92.8
             ],
             "role": "swing"
@@ -15259,7 +15259,7 @@
       {
         "action": "walk",
         "phase": 0.40625,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 10,
         "coreOffset": [
           0,
@@ -15270,11 +15270,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              71.41,
+              74.57,
               107.4
             ],
             "supportPoint": [
-              71.41,
+              74.57,
               107.4
             ],
             "role": "support"
@@ -15283,11 +15283,11 @@
             "contact": false,
             "lift": 7.2,
             "sole": [
-              55.18,
+              54.86,
               101.8
             ],
             "supportPoint": [
-              55.18,
+              54.86,
               101.8
             ],
             "role": "swing"
@@ -15297,7 +15297,7 @@
       {
         "action": "walk",
         "phase": 0.4375,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 11,
         "coreOffset": [
           0,
@@ -15308,11 +15308,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              72.42,
+              76.34,
               105.2
             ],
             "supportPoint": [
-              72.42,
+              76.34,
               105.2
             ],
             "role": "support"
@@ -15321,11 +15321,11 @@
             "contact": false,
             "lift": 3.2,
             "sole": [
-              56.42,
+              54.6,
               105.8
             ],
             "supportPoint": [
-              56.42,
+              54.6,
               105.8
             ],
             "role": "swing"
@@ -15335,7 +15335,7 @@
       {
         "action": "walk",
         "phase": 0.46875,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 11,
         "coreOffset": [
           0,
@@ -15346,11 +15346,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              72.42,
+              76.34,
               105.2
             ],
             "supportPoint": [
-              72.42,
+              76.34,
               105.2
             ],
             "role": "support"
@@ -15359,11 +15359,11 @@
             "contact": false,
             "lift": 3.2,
             "sole": [
-              56.42,
+              54.6,
               105.8
             ],
             "supportPoint": [
-              56.42,
+              54.6,
               105.8
             ],
             "role": "swing"
@@ -15373,8 +15373,8 @@
       {
         "action": "walk",
         "phase": 0.5,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 0,
+        "authored": "authored-walk-v14a",
+        "drawing": 12,
         "coreOffset": [
           0,
           0
@@ -15382,14 +15382,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 12.4,
+            "lift": 13.1,
             "sole": [
-              74.81,
-              96.6
+              77.89,
+              95.9
             ],
             "supportPoint": [
-              74.81,
-              96.6
+              77.89,
+              95.9
             ],
             "role": "swing"
           },
@@ -15397,12 +15397,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              56.7,
-              107.5
+              52.44,
+              107.4
             ],
             "supportPoint": [
-              56.7,
-              107.5
+              52.44,
+              107.4
             ],
             "role": "support"
           }
@@ -15411,8 +15411,8 @@
       {
         "action": "walk",
         "phase": 0.53125,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 0,
+        "authored": "authored-walk-v14a",
+        "drawing": 12,
         "coreOffset": [
           0,
           0
@@ -15420,14 +15420,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 12.4,
+            "lift": 13.1,
             "sole": [
-              74.81,
-              96.6
+              77.89,
+              95.9
             ],
             "supportPoint": [
-              74.81,
-              96.6
+              77.89,
+              95.9
             ],
             "role": "swing"
           },
@@ -15435,12 +15435,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              56.7,
-              107.5
+              52.44,
+              107.4
             ],
             "supportPoint": [
-              56.7,
-              107.5
+              52.44,
+              107.4
             ],
             "role": "support"
           }
@@ -15449,8 +15449,8 @@
       {
         "action": "walk",
         "phase": 0.5625,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 1,
+        "authored": "authored-walk-v14a",
+        "drawing": 13,
         "coreOffset": [
           0,
           0
@@ -15458,14 +15458,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 15.0,
+            "lift": 15.7,
             "sole": [
-              73.32,
-              94.0
+              72.79,
+              93.3
             ],
             "supportPoint": [
-              73.32,
-              94.0
+              72.79,
+              93.3
             ],
             "role": "swing"
           },
@@ -15473,12 +15473,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              58.98,
-              107.5
+              55.14,
+              107.4
             ],
             "supportPoint": [
-              58.98,
-              107.5
+              55.14,
+              107.4
             ],
             "role": "support"
           }
@@ -15487,8 +15487,8 @@
       {
         "action": "walk",
         "phase": 0.59375,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 2,
+        "authored": "authored-walk-v14a",
+        "drawing": 13,
         "coreOffset": [
           0,
           0
@@ -15496,14 +15496,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 13.9,
+            "lift": 15.7,
             "sole": [
-              74.2,
-              95.1
+              72.79,
+              93.3
             ],
             "supportPoint": [
-              74.2,
-              95.1
+              72.79,
+              93.3
             ],
             "role": "swing"
           },
@@ -15511,12 +15511,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              60.09,
-              107.5
+              55.14,
+              107.4
             ],
             "supportPoint": [
-              60.09,
-              107.5
+              55.14,
+              107.4
             ],
             "role": "support"
           }
@@ -15525,8 +15525,8 @@
       {
         "action": "walk",
         "phase": 0.625,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 3,
+        "authored": "authored-walk-v14a",
+        "drawing": 14,
         "coreOffset": [
           0,
           0
@@ -15534,14 +15534,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 13.8,
+            "lift": 15.7,
             "sole": [
-              74.66,
-              95.2
+              72.94,
+              93.3
             ],
             "supportPoint": [
-              74.66,
-              95.2
+              72.94,
+              93.3
             ],
             "role": "swing"
           },
@@ -15549,12 +15549,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              61.21,
-              107.8
+              57.16,
+              107.5
             ],
             "supportPoint": [
-              61.21,
-              107.8
+              57.16,
+              107.5
             ],
             "role": "support"
           }
@@ -15563,8 +15563,8 @@
       {
         "action": "walk",
         "phase": 0.65625,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 4,
+        "authored": "authored-walk-v14a",
+        "drawing": 15,
         "coreOffset": [
           0,
           0
@@ -15572,14 +15572,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 12.3,
+            "lift": 14.5,
             "sole": [
-              73.13,
-              96.7
+              70.03,
+              94.5
             ],
             "supportPoint": [
-              73.13,
-              96.7
+              70.03,
+              94.5
             ],
             "role": "swing"
           },
@@ -15587,12 +15587,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              62.34,
-              107.4
+              58.59,
+              107.3
             ],
             "supportPoint": [
-              62.34,
-              107.4
+              58.59,
+              107.3
             ],
             "role": "support"
           }
@@ -15601,8 +15601,8 @@
       {
         "action": "walk",
         "phase": 0.6875,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 5,
+        "authored": "authored-walk-v14a",
+        "drawing": 16,
         "coreOffset": [
           0,
           0
@@ -15610,14 +15610,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 12.2,
+            "lift": 12.6,
             "sole": [
-              74.04,
-              96.8
+              72.42,
+              96.4
             ],
             "supportPoint": [
-              74.04,
-              96.8
+              72.42,
+              96.4
             ],
             "role": "swing"
           },
@@ -15625,12 +15625,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              63.41,
-              107.5
+              60.72,
+              107.3
             ],
             "supportPoint": [
-              63.41,
-              107.5
+              60.72,
+              107.3
             ],
             "role": "support"
           }
@@ -15639,8 +15639,8 @@
       {
         "action": "walk",
         "phase": 0.71875,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 6,
+        "authored": "authored-walk-v14a",
+        "drawing": 16,
         "coreOffset": [
           0,
           0
@@ -15648,14 +15648,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 16.8,
+            "lift": 12.6,
             "sole": [
-              62.57,
-              92.2
+              72.42,
+              96.4
             ],
             "supportPoint": [
-              62.57,
-              92.2
+              72.42,
+              96.4
             ],
             "role": "swing"
           },
@@ -15663,12 +15663,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              64.62,
-              107.5
+              60.72,
+              107.3
             ],
             "supportPoint": [
-              64.62,
-              107.5
+              60.72,
+              107.3
             ],
             "role": "support"
           }
@@ -15677,8 +15677,8 @@
       {
         "action": "walk",
         "phase": 0.75,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 6,
+        "authored": "authored-walk-v14a",
+        "drawing": 17,
         "coreOffset": [
           0,
           0
@@ -15686,14 +15686,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 16.8,
+            "lift": 9.9,
             "sole": [
-              62.57,
-              92.2
+              66.08,
+              99.1
             ],
             "supportPoint": [
-              62.57,
-              92.2
+              66.08,
+              99.1
             ],
             "role": "swing"
           },
@@ -15701,12 +15701,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              64.62,
-              107.5
+              63.39,
+              106.9
             ],
             "supportPoint": [
-              64.62,
-              107.5
+              63.39,
+              106.9
             ],
             "role": "support"
           }
@@ -15715,8 +15715,8 @@
       {
         "action": "walk",
         "phase": 0.78125,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 7,
+        "authored": "authored-walk-v14a",
+        "drawing": 17,
         "coreOffset": [
           0,
           0
@@ -15724,14 +15724,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 15.2,
+            "lift": 9.9,
             "sole": [
-              64.16,
-              93.8
+              66.08,
+              99.1
             ],
             "supportPoint": [
-              64.16,
-              93.8
+              66.08,
+              99.1
             ],
             "role": "swing"
           },
@@ -15739,12 +15739,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              66.81,
-              107.3
+              63.39,
+              106.9
             ],
             "supportPoint": [
-              66.81,
-              107.3
+              63.39,
+              106.9
             ],
             "role": "support"
           }
@@ -15753,8 +15753,8 @@
       {
         "action": "walk",
         "phase": 0.8125,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 8,
+        "authored": "authored-walk-v14a",
+        "drawing": 18,
         "coreOffset": [
           0,
           0
@@ -15762,14 +15762,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 15.0,
+            "lift": 6.9,
             "sole": [
-              63.77,
-              94.0
+              58.05,
+              102.1
             ],
             "supportPoint": [
-              63.77,
-              94.0
+              58.05,
+              102.1
             ],
             "role": "swing"
           },
@@ -15777,12 +15777,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              67.93,
-              107.7
+              66.98,
+              106.6
             ],
             "supportPoint": [
-              67.93,
-              107.7
+              66.98,
+              106.6
             ],
             "role": "support"
           }
@@ -15791,8 +15791,8 @@
       {
         "action": "walk",
         "phase": 0.84375,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 9,
+        "authored": "authored-walk-v14a",
+        "drawing": 18,
         "coreOffset": [
           0,
           0
@@ -15800,14 +15800,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 16.2,
+            "lift": 6.9,
             "sole": [
-              59.07,
-              92.8
+              58.05,
+              102.1
             ],
             "supportPoint": [
-              59.07,
-              92.8
+              58.05,
+              102.1
             ],
             "role": "swing"
           },
@@ -15815,12 +15815,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              69.02,
-              107.5
+              66.98,
+              106.6
             ],
             "supportPoint": [
-              69.02,
-              107.5
+              66.98,
+              106.6
             ],
             "role": "support"
           }
@@ -15829,8 +15829,8 @@
       {
         "action": "walk",
         "phase": 0.875,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 9,
+        "authored": "authored-walk-v14a",
+        "drawing": 18,
         "coreOffset": [
           0,
           0
@@ -15838,14 +15838,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 16.2,
+            "lift": 6.9,
             "sole": [
-              59.07,
-              92.8
+              58.05,
+              102.1
             ],
             "supportPoint": [
-              59.07,
-              92.8
+              58.05,
+              102.1
             ],
             "role": "swing"
           },
@@ -15853,12 +15853,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              69.02,
-              107.5
+              66.98,
+              106.6
             ],
             "supportPoint": [
-              69.02,
-              107.5
+              66.98,
+              106.6
             ],
             "role": "support"
           }
@@ -15867,8 +15867,8 @@
       {
         "action": "walk",
         "phase": 0.90625,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 10,
+        "authored": "authored-walk-v14a",
+        "drawing": 19,
         "coreOffset": [
           0,
           0
@@ -15876,14 +15876,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 7.2,
+            "lift": 3.2,
             "sole": [
-              55.18,
-              101.8
+              57.68,
+              105.8
             ],
             "supportPoint": [
-              55.18,
-              101.8
+              57.68,
+              105.8
             ],
             "role": "swing"
           },
@@ -15891,12 +15891,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              71.41,
-              107.4
+              70.79,
+              99.8
             ],
             "supportPoint": [
-              71.41,
-              107.4
+              70.79,
+              99.8
             ],
             "role": "support"
           }
@@ -15905,8 +15905,8 @@
       {
         "action": "walk",
         "phase": 0.9375,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 11,
+        "authored": "authored-walk-v14a",
+        "drawing": 19,
         "coreOffset": [
           0,
           0
@@ -15916,11 +15916,11 @@
             "contact": false,
             "lift": 3.2,
             "sole": [
-              56.42,
+              57.68,
               105.8
             ],
             "supportPoint": [
-              56.42,
+              57.68,
               105.8
             ],
             "role": "swing"
@@ -15929,12 +15929,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              72.42,
-              105.2
+              70.79,
+              99.8
             ],
             "supportPoint": [
-              72.42,
-              105.2
+              70.79,
+              99.8
             ],
             "role": "support"
           }
@@ -15943,8 +15943,8 @@
       {
         "action": "walk",
         "phase": 0.96875,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 11,
+        "authored": "authored-walk-v14a",
+        "drawing": 19,
         "coreOffset": [
           0,
           0
@@ -15954,11 +15954,11 @@
             "contact": false,
             "lift": 3.2,
             "sole": [
-              56.42,
+              57.68,
               105.8
             ],
             "supportPoint": [
-              56.42,
+              57.68,
               105.8
             ],
             "role": "swing"
@@ -15967,12 +15967,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              72.42,
-              105.2
+              70.79,
+              99.8
             ],
             "supportPoint": [
-              72.42,
-              105.2
+              70.79,
+              99.8
             ],
             "role": "support"
           }
@@ -107530,7 +107530,7 @@
       {
         "action": "walk",
         "phase": 0.0,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 0,
         "coreOffset": [
           0,
@@ -107541,11 +107541,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              71.3,
+              70.63,
               107.5
             ],
             "supportPoint": [
-              71.3,
+              70.63,
               107.5
             ],
             "role": "support"
@@ -107568,7 +107568,7 @@
       {
         "action": "walk",
         "phase": 0.03125,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 0,
         "coreOffset": [
           0,
@@ -107579,11 +107579,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              71.3,
+              70.63,
               107.5
             ],
             "supportPoint": [
-              71.3,
+              70.63,
               107.5
             ],
             "role": "support"
@@ -107606,7 +107606,7 @@
       {
         "action": "walk",
         "phase": 0.0625,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 1,
         "coreOffset": [
           0,
@@ -107617,11 +107617,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              69.02,
+              68.54,
               107.5
             ],
             "supportPoint": [
-              69.02,
+              68.54,
               107.5
             ],
             "role": "support"
@@ -107630,11 +107630,11 @@
             "contact": false,
             "lift": 15.0,
             "sole": [
-              54.68,
+              54.24,
               94.0
             ],
             "supportPoint": [
-              54.68,
+              54.24,
               94.0
             ],
             "role": "swing"
@@ -107644,7 +107644,7 @@
       {
         "action": "walk",
         "phase": 0.09375,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 2,
         "coreOffset": [
           0,
@@ -107655,11 +107655,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              67.91,
+              67.18,
               107.5
             ],
             "supportPoint": [
-              67.91,
+              67.18,
               107.5
             ],
             "role": "support"
@@ -107668,11 +107668,11 @@
             "contact": false,
             "lift": 13.9,
             "sole": [
-              53.8,
+              53.86,
               95.1
             ],
             "supportPoint": [
-              53.8,
+              53.86,
               95.1
             ],
             "role": "swing"
@@ -107682,7 +107682,7 @@
       {
         "action": "walk",
         "phase": 0.125,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 3,
         "coreOffset": [
           0,
@@ -107693,11 +107693,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              66.79,
+              65.81,
               107.8
             ],
             "supportPoint": [
-              66.79,
+              65.81,
               107.8
             ],
             "role": "support"
@@ -107706,11 +107706,11 @@
             "contact": false,
             "lift": 13.8,
             "sole": [
-              53.34,
+              54.05,
               95.2
             ],
             "supportPoint": [
-              53.34,
+              54.05,
               95.2
             ],
             "role": "swing"
@@ -107720,7 +107720,7 @@
       {
         "action": "walk",
         "phase": 0.15625,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 4,
         "coreOffset": [
           0,
@@ -107731,11 +107731,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              65.66,
+              64.45,
               107.4
             ],
             "supportPoint": [
-              65.66,
+              64.45,
               107.4
             ],
             "role": "support"
@@ -107744,11 +107744,11 @@
             "contact": false,
             "lift": 12.3,
             "sole": [
-              54.87,
+              55.52,
               96.7
             ],
             "supportPoint": [
-              54.87,
+              55.52,
               96.7
             ],
             "role": "swing"
@@ -107758,7 +107758,7 @@
       {
         "action": "walk",
         "phase": 0.1875,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 5,
         "coreOffset": [
           0,
@@ -107769,11 +107769,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              64.59,
+              63.13,
               107.5
             ],
             "supportPoint": [
-              64.59,
+              63.13,
               107.5
             ],
             "role": "support"
@@ -107782,11 +107782,11 @@
             "contact": false,
             "lift": 12.2,
             "sole": [
-              53.96,
+              56.36,
               96.8
             ],
             "supportPoint": [
-              53.96,
+              56.36,
               96.8
             ],
             "role": "swing"
@@ -107796,7 +107796,7 @@
       {
         "action": "walk",
         "phase": 0.21875,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 6,
         "coreOffset": [
           0,
@@ -107807,11 +107807,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              63.38,
+              61.0,
               107.5
             ],
             "supportPoint": [
-              63.38,
+              61.0,
               107.5
             ],
             "role": "support"
@@ -107820,11 +107820,11 @@
             "contact": false,
             "lift": 16.8,
             "sole": [
-              65.43,
+              65.39,
               92.2
             ],
             "supportPoint": [
-              65.43,
+              65.39,
               92.2
             ],
             "role": "swing"
@@ -107834,7 +107834,7 @@
       {
         "action": "walk",
         "phase": 0.25,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 6,
         "coreOffset": [
           0,
@@ -107845,11 +107845,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              63.38,
+              61.0,
               107.5
             ],
             "supportPoint": [
-              63.38,
+              61.0,
               107.5
             ],
             "role": "support"
@@ -107858,11 +107858,11 @@
             "contact": false,
             "lift": 16.8,
             "sole": [
-              65.43,
+              65.39,
               92.2
             ],
             "supportPoint": [
-              65.43,
+              65.39,
               92.2
             ],
             "role": "swing"
@@ -107872,7 +107872,7 @@
       {
         "action": "walk",
         "phase": 0.28125,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 7,
         "coreOffset": [
           0,
@@ -107883,11 +107883,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              61.19,
+              59.0,
               107.3
             ],
             "supportPoint": [
-              61.19,
+              59.0,
               107.3
             ],
             "role": "support"
@@ -107896,11 +107896,11 @@
             "contact": false,
             "lift": 15.2,
             "sole": [
-              63.84,
+              65.81,
               93.8
             ],
             "supportPoint": [
-              63.84,
+              65.81,
               93.8
             ],
             "role": "swing"
@@ -107910,7 +107910,7 @@
       {
         "action": "walk",
         "phase": 0.3125,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 8,
         "coreOffset": [
           0,
@@ -107921,11 +107921,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              60.07,
+              57.62,
               107.7
             ],
             "supportPoint": [
-              60.07,
+              57.62,
               107.7
             ],
             "role": "support"
@@ -107934,11 +107934,11 @@
             "contact": false,
             "lift": 15.0,
             "sole": [
-              64.23,
+              67.19,
               94.0
             ],
             "supportPoint": [
-              64.23,
+              67.19,
               94.0
             ],
             "role": "swing"
@@ -107948,7 +107948,7 @@
       {
         "action": "walk",
         "phase": 0.34375,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 9,
         "coreOffset": [
           0,
@@ -107959,11 +107959,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              58.98,
+              55.62,
               107.5
             ],
             "supportPoint": [
-              58.98,
+              55.62,
               107.5
             ],
             "role": "support"
@@ -107972,11 +107972,11 @@
             "contact": false,
             "lift": 16.2,
             "sole": [
-              68.93,
+              72.67,
               92.8
             ],
             "supportPoint": [
-              68.93,
+              72.67,
               92.8
             ],
             "role": "swing"
@@ -107986,7 +107986,7 @@
       {
         "action": "walk",
         "phase": 0.375,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 9,
         "coreOffset": [
           0,
@@ -107997,11 +107997,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              58.98,
+              55.62,
               107.5
             ],
             "supportPoint": [
-              58.98,
+              55.62,
               107.5
             ],
             "role": "support"
@@ -108010,11 +108010,11 @@
             "contact": false,
             "lift": 16.2,
             "sole": [
-              68.93,
+              72.67,
               92.8
             ],
             "supportPoint": [
-              68.93,
+              72.67,
               92.8
             ],
             "role": "swing"
@@ -108024,7 +108024,7 @@
       {
         "action": "walk",
         "phase": 0.40625,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 10,
         "coreOffset": [
           0,
@@ -108035,11 +108035,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              56.59,
+              53.43,
               107.4
             ],
             "supportPoint": [
-              56.59,
+              53.43,
               107.4
             ],
             "role": "support"
@@ -108048,11 +108048,11 @@
             "contact": false,
             "lift": 7.2,
             "sole": [
-              72.82,
+              73.14,
               101.8
             ],
             "supportPoint": [
-              72.82,
+              73.14,
               101.8
             ],
             "role": "swing"
@@ -108062,7 +108062,7 @@
       {
         "action": "walk",
         "phase": 0.4375,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 11,
         "coreOffset": [
           0,
@@ -108073,11 +108073,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              55.58,
+              51.66,
               105.2
             ],
             "supportPoint": [
-              55.58,
+              51.66,
               105.2
             ],
             "role": "support"
@@ -108086,11 +108086,11 @@
             "contact": false,
             "lift": 3.2,
             "sole": [
-              71.58,
+              73.4,
               105.8
             ],
             "supportPoint": [
-              71.58,
+              73.4,
               105.8
             ],
             "role": "swing"
@@ -108100,7 +108100,7 @@
       {
         "action": "walk",
         "phase": 0.46875,
-        "authored": "authored-slow-walk-v13c",
+        "authored": "authored-walk-v14a",
         "drawing": 11,
         "coreOffset": [
           0,
@@ -108111,11 +108111,11 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              55.58,
+              51.66,
               105.2
             ],
             "supportPoint": [
-              55.58,
+              51.66,
               105.2
             ],
             "role": "support"
@@ -108124,11 +108124,11 @@
             "contact": false,
             "lift": 3.2,
             "sole": [
-              71.58,
+              73.4,
               105.8
             ],
             "supportPoint": [
-              71.58,
+              73.4,
               105.8
             ],
             "role": "swing"
@@ -108138,8 +108138,8 @@
       {
         "action": "walk",
         "phase": 0.5,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 0,
+        "authored": "authored-walk-v14a",
+        "drawing": 12,
         "coreOffset": [
           0,
           0
@@ -108147,14 +108147,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 12.4,
+            "lift": 13.1,
             "sole": [
-              53.19,
-              96.6
+              50.11,
+              95.9
             ],
             "supportPoint": [
-              53.19,
-              96.6
+              50.11,
+              95.9
             ],
             "role": "swing"
           },
@@ -108162,12 +108162,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              71.3,
-              107.5
+              75.56,
+              107.4
             ],
             "supportPoint": [
-              71.3,
-              107.5
+              75.56,
+              107.4
             ],
             "role": "support"
           }
@@ -108176,8 +108176,8 @@
       {
         "action": "walk",
         "phase": 0.53125,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 0,
+        "authored": "authored-walk-v14a",
+        "drawing": 12,
         "coreOffset": [
           0,
           0
@@ -108185,14 +108185,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 12.4,
+            "lift": 13.1,
             "sole": [
-              53.19,
-              96.6
+              50.11,
+              95.9
             ],
             "supportPoint": [
-              53.19,
-              96.6
+              50.11,
+              95.9
             ],
             "role": "swing"
           },
@@ -108200,12 +108200,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              71.3,
-              107.5
+              75.56,
+              107.4
             ],
             "supportPoint": [
-              71.3,
-              107.5
+              75.56,
+              107.4
             ],
             "role": "support"
           }
@@ -108214,8 +108214,8 @@
       {
         "action": "walk",
         "phase": 0.5625,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 1,
+        "authored": "authored-walk-v14a",
+        "drawing": 13,
         "coreOffset": [
           0,
           0
@@ -108223,14 +108223,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 15.0,
+            "lift": 15.7,
             "sole": [
-              54.68,
-              94.0
+              55.21,
+              93.3
             ],
             "supportPoint": [
-              54.68,
-              94.0
+              55.21,
+              93.3
             ],
             "role": "swing"
           },
@@ -108238,12 +108238,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              69.02,
-              107.5
+              72.86,
+              107.4
             ],
             "supportPoint": [
-              69.02,
-              107.5
+              72.86,
+              107.4
             ],
             "role": "support"
           }
@@ -108252,8 +108252,8 @@
       {
         "action": "walk",
         "phase": 0.59375,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 2,
+        "authored": "authored-walk-v14a",
+        "drawing": 13,
         "coreOffset": [
           0,
           0
@@ -108261,14 +108261,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 13.9,
+            "lift": 15.7,
             "sole": [
-              53.8,
-              95.1
+              55.21,
+              93.3
             ],
             "supportPoint": [
-              53.8,
-              95.1
+              55.21,
+              93.3
             ],
             "role": "swing"
           },
@@ -108276,12 +108276,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              67.91,
-              107.5
+              72.86,
+              107.4
             ],
             "supportPoint": [
-              67.91,
-              107.5
+              72.86,
+              107.4
             ],
             "role": "support"
           }
@@ -108290,8 +108290,8 @@
       {
         "action": "walk",
         "phase": 0.625,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 3,
+        "authored": "authored-walk-v14a",
+        "drawing": 14,
         "coreOffset": [
           0,
           0
@@ -108299,14 +108299,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 13.8,
+            "lift": 15.7,
             "sole": [
-              53.34,
-              95.2
+              55.06,
+              93.3
             ],
             "supportPoint": [
-              53.34,
-              95.2
+              55.06,
+              93.3
             ],
             "role": "swing"
           },
@@ -108314,12 +108314,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              66.79,
-              107.8
+              70.84,
+              107.5
             ],
             "supportPoint": [
-              66.79,
-              107.8
+              70.84,
+              107.5
             ],
             "role": "support"
           }
@@ -108328,8 +108328,8 @@
       {
         "action": "walk",
         "phase": 0.65625,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 4,
+        "authored": "authored-walk-v14a",
+        "drawing": 15,
         "coreOffset": [
           0,
           0
@@ -108337,14 +108337,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 12.3,
+            "lift": 14.5,
             "sole": [
-              54.87,
-              96.7
+              57.97,
+              94.5
             ],
             "supportPoint": [
-              54.87,
-              96.7
+              57.97,
+              94.5
             ],
             "role": "swing"
           },
@@ -108352,12 +108352,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              65.66,
-              107.4
+              69.41,
+              107.3
             ],
             "supportPoint": [
-              65.66,
-              107.4
+              69.41,
+              107.3
             ],
             "role": "support"
           }
@@ -108366,8 +108366,8 @@
       {
         "action": "walk",
         "phase": 0.6875,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 5,
+        "authored": "authored-walk-v14a",
+        "drawing": 16,
         "coreOffset": [
           0,
           0
@@ -108375,14 +108375,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 12.2,
+            "lift": 12.6,
             "sole": [
-              53.96,
-              96.8
+              55.58,
+              96.4
             ],
             "supportPoint": [
-              53.96,
-              96.8
+              55.58,
+              96.4
             ],
             "role": "swing"
           },
@@ -108390,12 +108390,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              64.59,
-              107.5
+              67.28,
+              107.3
             ],
             "supportPoint": [
-              64.59,
-              107.5
+              67.28,
+              107.3
             ],
             "role": "support"
           }
@@ -108404,8 +108404,8 @@
       {
         "action": "walk",
         "phase": 0.71875,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 6,
+        "authored": "authored-walk-v14a",
+        "drawing": 16,
         "coreOffset": [
           0,
           0
@@ -108413,14 +108413,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 16.8,
+            "lift": 12.6,
             "sole": [
-              65.43,
-              92.2
+              55.58,
+              96.4
             ],
             "supportPoint": [
-              65.43,
-              92.2
+              55.58,
+              96.4
             ],
             "role": "swing"
           },
@@ -108428,12 +108428,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              63.38,
-              107.5
+              67.28,
+              107.3
             ],
             "supportPoint": [
-              63.38,
-              107.5
+              67.28,
+              107.3
             ],
             "role": "support"
           }
@@ -108442,8 +108442,8 @@
       {
         "action": "walk",
         "phase": 0.75,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 6,
+        "authored": "authored-walk-v14a",
+        "drawing": 17,
         "coreOffset": [
           0,
           0
@@ -108451,14 +108451,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 16.8,
+            "lift": 9.9,
             "sole": [
-              65.43,
-              92.2
+              61.92,
+              99.1
             ],
             "supportPoint": [
-              65.43,
-              92.2
+              61.92,
+              99.1
             ],
             "role": "swing"
           },
@@ -108466,12 +108466,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              63.38,
-              107.5
+              64.61,
+              106.9
             ],
             "supportPoint": [
-              63.38,
-              107.5
+              64.61,
+              106.9
             ],
             "role": "support"
           }
@@ -108480,8 +108480,8 @@
       {
         "action": "walk",
         "phase": 0.78125,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 7,
+        "authored": "authored-walk-v14a",
+        "drawing": 17,
         "coreOffset": [
           0,
           0
@@ -108489,14 +108489,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 15.2,
+            "lift": 9.9,
             "sole": [
-              63.84,
-              93.8
+              61.92,
+              99.1
             ],
             "supportPoint": [
-              63.84,
-              93.8
+              61.92,
+              99.1
             ],
             "role": "swing"
           },
@@ -108504,12 +108504,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              61.19,
-              107.3
+              64.61,
+              106.9
             ],
             "supportPoint": [
-              61.19,
-              107.3
+              64.61,
+              106.9
             ],
             "role": "support"
           }
@@ -108518,8 +108518,8 @@
       {
         "action": "walk",
         "phase": 0.8125,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 8,
+        "authored": "authored-walk-v14a",
+        "drawing": 18,
         "coreOffset": [
           0,
           0
@@ -108527,14 +108527,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 15.0,
+            "lift": 6.9,
             "sole": [
-              64.23,
-              94.0
+              69.95,
+              102.1
             ],
             "supportPoint": [
-              64.23,
-              94.0
+              69.95,
+              102.1
             ],
             "role": "swing"
           },
@@ -108542,12 +108542,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              60.07,
-              107.7
+              61.02,
+              106.6
             ],
             "supportPoint": [
-              60.07,
-              107.7
+              61.02,
+              106.6
             ],
             "role": "support"
           }
@@ -108556,8 +108556,8 @@
       {
         "action": "walk",
         "phase": 0.84375,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 9,
+        "authored": "authored-walk-v14a",
+        "drawing": 18,
         "coreOffset": [
           0,
           0
@@ -108565,14 +108565,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 16.2,
+            "lift": 6.9,
             "sole": [
-              68.93,
-              92.8
+              69.95,
+              102.1
             ],
             "supportPoint": [
-              68.93,
-              92.8
+              69.95,
+              102.1
             ],
             "role": "swing"
           },
@@ -108580,12 +108580,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              58.98,
-              107.5
+              61.02,
+              106.6
             ],
             "supportPoint": [
-              58.98,
-              107.5
+              61.02,
+              106.6
             ],
             "role": "support"
           }
@@ -108594,8 +108594,8 @@
       {
         "action": "walk",
         "phase": 0.875,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 9,
+        "authored": "authored-walk-v14a",
+        "drawing": 18,
         "coreOffset": [
           0,
           0
@@ -108603,14 +108603,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 16.2,
+            "lift": 6.9,
             "sole": [
-              68.93,
-              92.8
+              69.95,
+              102.1
             ],
             "supportPoint": [
-              68.93,
-              92.8
+              69.95,
+              102.1
             ],
             "role": "swing"
           },
@@ -108618,12 +108618,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              58.98,
-              107.5
+              61.02,
+              106.6
             ],
             "supportPoint": [
-              58.98,
-              107.5
+              61.02,
+              106.6
             ],
             "role": "support"
           }
@@ -108632,8 +108632,8 @@
       {
         "action": "walk",
         "phase": 0.90625,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 10,
+        "authored": "authored-walk-v14a",
+        "drawing": 19,
         "coreOffset": [
           0,
           0
@@ -108641,14 +108641,14 @@
         "feet": [
           {
             "contact": false,
-            "lift": 7.2,
+            "lift": 3.2,
             "sole": [
-              72.82,
-              101.8
+              70.32,
+              105.8
             ],
             "supportPoint": [
-              72.82,
-              101.8
+              70.32,
+              105.8
             ],
             "role": "swing"
           },
@@ -108656,12 +108656,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              56.59,
-              107.4
+              57.21,
+              99.8
             ],
             "supportPoint": [
-              56.59,
-              107.4
+              57.21,
+              99.8
             ],
             "role": "support"
           }
@@ -108670,8 +108670,8 @@
       {
         "action": "walk",
         "phase": 0.9375,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 11,
+        "authored": "authored-walk-v14a",
+        "drawing": 19,
         "coreOffset": [
           0,
           0
@@ -108681,11 +108681,11 @@
             "contact": false,
             "lift": 3.2,
             "sole": [
-              71.58,
+              70.32,
               105.8
             ],
             "supportPoint": [
-              71.58,
+              70.32,
               105.8
             ],
             "role": "swing"
@@ -108694,12 +108694,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              55.58,
-              105.2
+              57.21,
+              99.8
             ],
             "supportPoint": [
-              55.58,
-              105.2
+              57.21,
+              99.8
             ],
             "role": "support"
           }
@@ -108708,8 +108708,8 @@
       {
         "action": "walk",
         "phase": 0.96875,
-        "authored": "authored-slow-walk-v13c",
-        "drawing": 11,
+        "authored": "authored-walk-v14a",
+        "drawing": 19,
         "coreOffset": [
           0,
           0
@@ -108719,11 +108719,11 @@
             "contact": false,
             "lift": 3.2,
             "sole": [
-              71.58,
+              70.32,
               105.8
             ],
             "supportPoint": [
-              71.58,
+              70.32,
               105.8
             ],
             "role": "swing"
@@ -108732,12 +108732,12 @@
             "contact": true,
             "lift": 0,
             "sole": [
-              55.58,
-              105.2
+              57.21,
+              99.8
             ],
             "supportPoint": [
-              55.58,
-              105.2
+              57.21,
+              99.8
             ],
             "role": "support"
           }
@@ -124760,7 +124760,7 @@
   "armMotionSource": "scripts/character_arm_motion.py",
   "armMotionSourceHash": "c78195f8c4c3596f2d4c5d3f00757836a932d182f1c8968a524256330a16efc9",
   "authoredWalk": {
-    "revision": "authored-slow-walk-v13c",
+    "revision": "authored-walk-v14a",
     "source": "art-source/pixel-characters/authored-actions-v13/mira",
     "directions": [
       "SW",
@@ -124769,7 +124769,7 @@
     "mirroredDirections": {
       "SE": "SW"
     },
-    "drawings": 12,
-    "strideLength": 0.41
+    "drawings": 20,
+    "strideLength": 0.513
   }
 }

@@ -5,8 +5,8 @@
 </style></head><body><main>
 <a href="../">← 전체 캐릭터</a><h1>미라 · 느린 보행 원화 비교</h1>
 <div class="reference"><img src="/assets/pixel-characters/mira/portrait.png" alt="미라 기준 일러스트"><p>기존 일러스트를 기준으로<br>착지부터 다음 발을 내딛기까지 본다.</p></div>
-<p class="notice">새 원화 32장 가운데 한 걸음이 온전히 이어지는 12장을 머리 크기와 땅 높이를 맞춰 걸음 순서대로 다시 배열했다. 이 걸음은 게임의 SW·SE 걷기에 들어가 있다. 뒤쪽 두 방향과 운반·서기 같은 다른 동작은 아직 예전 관절 동작이다.</p>
+<p class="notice">게임의 SW·SE 걷기는 두 걸음 20장이다. 가까운 다리로 딛는 걸음은 v13 12장, 먼 다리로 딛는 걸음은 v14에서 새로 그린 그림을 중심으로 8장이다. 모든 장을 머리 크기와 땅 높이에 맞추고, 흔드는 발 위치 순서로 놓고, 디딘 발이 바닥과 함께 뒤로 가게 다리 아래쪽을 기울였다. 뒤쪽 두 방향과 운반·서기 같은 다른 동작은 아직 예전 관절 동작이다.</p>
 <div class="controls"><button id="play">일시정지</button><button id="previous" aria-label="이전 프레임">◀</button><button id="next" aria-label="다음 프레임">▶</button><output id="frame">1 / 32</output><input id="timeline" aria-label="프레임" type="range" min="0" max="31" value="0"><label>방향 <select id="direction"><option>SW</option><option>SE</option></select></label><label>재생 <select id="speed"><option value="1">게임 1배속</option><option value=".5">0.5배속</option><option value=".25">0.25배속</option></select></label></div>
-<div class="boards"><section><h2>바꾸기 전 · 관절 변형</h2><canvas id="before" width="320" height="280" aria-label="바꾸기 전 미라 걷기"></canvas></section><section><h2>지금 게임 · 원화 12장</h2><canvas id="after" width="320" height="280" aria-label="게임에 들어간 미라 걷기"></canvas></section></div>
+<div class="boards"><section><h2>지금 게임 · 두 걸음 20장</h2><canvas id="after" width="320" height="280" aria-label="게임에 들어간 미라 걷기"></canvas></section><section><h2>정리 전 · 원화를 그대로 이은 것</h2><canvas id="individual" width="320" height="280" aria-label="한 장씩 그린 미라 두 걸음"></canvas><p id="individual-pose"></p></section></div>
 <p id="status" role="status">불러오는 중…</p><p>두 그림 모두 게임 크기의 2배다. SE는 SW의 좌우 반전이다. 바닥 점은 게임의 이동 속도로 흐르며, 디딘 발은 점과 함께 움직여야 한다.</p>
-</main><script type="module" src="review.js"></script><script type="module" src="/preview-audio.js"></script></body></html>
+<details><summary>이전 관절 동작 보기</summary><canvas id="before" width="320" height="280" aria-label="바꾸기 전 미라 걷기"></canvas></details></main><script type="module" src="review.js"></script><script type="module" src="/preview-audio.js"></script></body></html>
