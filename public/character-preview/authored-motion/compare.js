@@ -1,3 +1,5 @@
+import {characterTravelSpeed} from '/src/app/game/character-movement.js';
+import {BASE_TIME_SCALE} from '/src/app/game/game-time.js';
 const $=id=>document.getElementById(id);
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const state={time:0,paused:reduced.matches,direction:'SW',action:'walk',scale:1.8,speed:1,travel:true};
@@ -14,7 +16,7 @@ async function main(){
  ]);
  const currentClip=()=>after.meta.clips[state.action];
  const count=()=>currentClip().frames.length;
- const speed=.625;
+ const speed=BASE_TIME_SCALE*characterTravelSpeed({time:0,money:1,roads:new Set()},{x:0,z:0,race:'human'});
  const phase=()=>state.time*speed/currentClip().strideLength%1;
  for(const direction of after.meta.directions){const option=document.createElement('option');option.value=direction;option.textContent=direction;$('direction').append(option);}
  function floor(ctx,distance){

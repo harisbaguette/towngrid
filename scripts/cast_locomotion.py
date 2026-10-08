@@ -167,6 +167,7 @@ def bind_rigs(rigs,profile):
             for limb in rig['legs']+rig['arms']:
                 limb['joints']=np.array(limb['joints'])+offset
                 limb.pop('_skin',None)
+                limb.pop('_palm',None)
                 for name in ['upper','lower','foot']:
                     if name in limb:limb[name]=move(limb[name],offset)
             for extra in rig.get('extras',[]):
@@ -199,7 +200,8 @@ def apply_contact_motion(atlas,meta,rigs,spec,render,crate,tool):
                 old=meta['rigAudit'][direction][col]
                 old['coreOffset']=(np.array(old.get('coreOffset',[0,0]))+offset).tolist()
                 for arm in old.get('arms',[]):
-                    for key in ['shoulder','elbow','wrist']:
+                    for key in ['shoulder','elbow','wrist','palm','grip']:
+                        if key not in arm:continue
                         arm[key]=(np.array(arm[key])+offset).tolist()
                 for foot in old['feet']:
                     for key in ['ankle','hip','knee']:

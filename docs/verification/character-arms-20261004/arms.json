@@ -3,357 +3,408 @@
     "id": "ael",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 2.3092638912203256e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.7763568394002505e-14,
+    "maximumGripError": 2.842170943040401e-14
   },
   {
     "id": "aira",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 2.1316282072803006e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.7763568394002505e-14,
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "aster",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 120,
     "maximumLengthError": 2.1316282072803006e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.842170943040401e-14
   },
   {
     "id": "bel",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 2.1316282072803006e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.7763568394002505e-14,
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "borik",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 2.3092638912203256e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.5618982671915014e-14
   },
   {
     "id": "bron",
     "armPoses": 672,
     "lockedGrips": 184,
-    "maximumLengthError": 2.1316282072803006e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 0,
+    "maximumLengthError": 1.7763568394002505e-14,
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "cedric",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 1.7763568394002505e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.4210854715202004e-14,
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "dax",
     "armPoses": 1440,
     "lockedGrips": 600,
+    "toolPoses": 0,
     "maximumLengthError": 1.9539925233402755e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.929642751054232e-14
   },
   {
     "id": "dew",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.7763568394002505e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.842170943040401e-14
   },
   {
     "id": "dorin",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.5987211554602254e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.842170943040401e-14
   },
   {
     "id": "eil",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.7763568394002505e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "elion",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 2.3092638912203256e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "elvar",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.9539925233402755e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.842170943040401e-14
   },
   {
     "id": "erena",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 1.9539925233402755e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.7763568394002505e-14,
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "ethan",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.5987211554602254e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "fia",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 2.1316282072803006e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.5987211554602254e-14,
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "garen",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 1.9539925233402755e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 120,
+    "maximumLengthError": 1.5987211554602254e-14,
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "garron",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.9539925233402755e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "grum",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 120,
     "maximumLengthError": 1.4210854715202004e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "hana",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 1.4210854715202004e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.5987211554602254e-14,
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "hugo",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 1.9539925233402755e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.7763568394002505e-14,
+    "maximumGripError": 2.5618982671915014e-14
   },
   {
     "id": "iris",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.9539925233402755e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "kael",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 120,
     "maximumLengthError": 2.1316282072803006e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "kai",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 1.5987211554602254e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.7763568394002505e-14,
+    "maximumGripError": 2.929642751054232e-14
   },
   {
     "id": "lana",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.9539925233402755e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 1.5888218580782548e-14
   },
   {
     "id": "lien",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 1.865174681370263e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.7763568394002505e-14,
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "luth",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 1.7763568394002505e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.5987211554602254e-14,
+    "maximumGripError": 2.842170943040401e-14
   },
   {
     "id": "lyra",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 2.1316282072803006e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.5987211554602254e-14,
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "maren",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.9539925233402755e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.929642751054232e-14
   },
   {
     "id": "marna",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 1.7763568394002505e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.5987211554602254e-14,
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "mira",
-    "armPoses": 1440,
+    "armPoses": 1312,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.5987211554602254e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "mist",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 1.7763568394002505e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.5987211554602254e-14,
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "nalia",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 2.1316282072803006e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.9539925233402755e-14,
+    "maximumGripError": 2.842170943040401e-14
   },
   {
     "id": "nara",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 1.7763568394002505e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.4210854715202004e-14,
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "neris",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 2.1316282072803006e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 120,
+    "maximumLengthError": 1.5987211554602254e-14,
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "niki",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 2.3092638912203256e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 120,
+    "maximumLengthError": 1.9539925233402755e-14,
+    "maximumGripError": 2.842170943040401e-14
   },
   {
     "id": "norin",
     "armPoses": 1440,
     "lockedGrips": 600,
+    "toolPoses": 0,
     "maximumLengthError": 1.9539925233402755e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "oriel",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.9539925233402755e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "oswin",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 2.1316282072803006e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "otto",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.9539925233402755e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.842170943040401e-14
   },
   {
     "id": "ravik",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 120,
     "maximumLengthError": 2.1316282072803006e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.842170943040401e-14
   },
   {
     "id": "roa",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 2.1316282072803006e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.9539925233402755e-14,
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "rowan",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 2.1316282072803006e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.842170943040401e-14
   },
   {
     "id": "selia",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.9539925233402755e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.842170943040401e-14
   },
   {
     "id": "serin",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.5987211554602254e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "silen",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.7763568394002505e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "sora",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 120,
     "maximumLengthError": 2.042810365310288e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "taron",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.7763568394002505e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 3.1776437161565096e-14
   },
   {
     "id": "terin",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.7763568394002505e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "vera",
     "armPoses": 1440,
     "lockedGrips": 440,
+    "toolPoses": 80,
     "maximumLengthError": 1.7763568394002505e-14,
-    "maximumGripError": 0.0
+    "maximumGripError": 2.0097183471152322e-14
   },
   {
     "id": "vian",
     "armPoses": 1440,
     "lockedGrips": 440,
-    "maximumLengthError": 1.7763568394002505e-14,
-    "maximumGripError": 0.0
+    "toolPoses": 80,
+    "maximumLengthError": 1.9539925233402755e-14,
+    "maximumGripError": 2.5618982671915014e-14
   }
 ]

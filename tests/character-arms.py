@@ -13,7 +13,8 @@ for path in sorted(Path(args.output).glob('*/frames.json')):
     identity=meta['id']
     assert meta['armMotionRevision']=='fixed-arm-lengths-1',identity
     assert hashlib.sha256(Path(meta['armMotionSource']).read_bytes()).hexdigest()==meta['armMotionSourceHash'],(identity,'stale arm pack')
-    checked=grips=0;max_length_error=max_grip_error=0.
+    assert hashlib.sha256(Path(meta['toolAttachmentSource']).read_bytes()).hexdigest()==meta['toolAttachmentSourceHash']
+    checked=grips=tools=0;max_length_error=max_grip_error=0.
     for row in range(4):
         clips={**meta['clips'],'hurtCarry':meta['variants']['hurt']['carry']}
         for action,clip in clips.items():
@@ -30,15 +31,21 @@ for path in sorted(Path(args.output).glob('*/frames.json')):
                     max_length_error=max(max_length_error,float(error));checked+=1
                     assert error<.001,(identity,row,action,frame,index,'arm shrinks/stretches',error)
                     mirror=meta['rigAudit'][3-row][frame]['arms'][index]
-                    for key in ['shoulder','elbow','wrist','grip']:
+                    for key in ['shoulder','elbow','wrist','palm','grip']:
                         if key in arm:assert np.allclose([128-arm[key][0],arm[key][1]],mirror[key]),(identity,row,action,frame,key,'wrong mirror')
                 held='cargoCenter' in audit and audit.get('handling',{}).get('reach',1)==1
                 if held:
                     assert arms[0]['grip'][0]!=arms[1]['grip'][0],(identity,row,action,frame,'both hands use one corner')
                     for arm in arms:
-                        error=float(np.linalg.norm(np.array(arm['wrist'])-arm['grip']))
+                        error=float(np.linalg.norm(np.array(arm['palm'])-arm['grip']))
                         max_grip_error=max(max_grip_error,error);grips+=1
                         assert error<.051,(identity,row,action,frame,'hand loses box',error)
+                if audit.get('tool'):
+                    tool=audit['tool'];hand=np.array(tool['hand'])
+                    assert np.allclose(hand,arms[1]['palm']),(identity,row,action,frame,'tool is on wrist, not palm')
+                    mapped=np.array(tool['inverse'])@hand+tool['origin']
+                    assert np.allclose(mapped,tool['sourceGrip']),(identity,row,action,frame,'tool slides during rotation')
+                    tools+=1
         if identity!='bron' and not meta['rigAudit'][row][meta['clips']['walk']['frames'][0]].get('authored'):
             cycle=[meta['rigAudit'][row][f]['arms'] for f in meta['clips']['walk']['frames']]
             # At the opposite contact, each hand must exchange front/back
@@ -49,8 +56,8 @@ for path in sorted(Path(args.output).glob('*/frames.json')):
                 swing.append(coordinates[:,0])
                 assert np.ptp(coordinates[:,0])>(.5 if meta['locomotionMode']=='hover' else 4.),(identity,row,index,'arm barely moves')
             assert np.corrcoef(swing)[0,1]<-.95,(identity,row,'arms do not alternate')
-    results.append({'id':identity,'armPoses':checked,'lockedGrips':grips,'maximumLengthError':max_length_error,'maximumGripError':max_grip_error})
+    results.append({'id':identity,'armPoses':checked,'lockedGrips':grips,'toolPoses':tools,'maximumLengthError':max_length_error,'maximumGripError':max_grip_error})
 assert len(results)==51,len(results)
 report=Path(args.report);report.parent.mkdir(parents=True,exist_ok=True)
 report.write_text(json.dumps(results,indent=2)+'\n',encoding='utf-8')
-print(f"51 characters: {sum(r['armPoses'] for r in results)} arm poses, {sum(r['lockedGrips'] for r in results)} locked cargo grips PASS")
+print(f"51 characters: {sum(r['armPoses'] for r in results)} arm poses, {sum(r['lockedGrips'] for r in results)} palm grips, {sum(r['toolPoses'] for r in results)} tool pivots PASS")

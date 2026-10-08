@@ -94,4 +94,8 @@ def install_action_finish(atlas,meta,rigs,spec,render,crate,tool):
     arm_source=Path('scripts/character_arm_motion.py')
     meta['armMotionSource']=arm_source.as_posix()
     meta['armMotionSourceHash']=hashlib.sha256(arm_source.read_bytes()).hexdigest()
+    from character_tool_motion import SOURCE as TOOL_SOURCE,configuration
+    meta['toolAttachmentRevision']=configuration()['revision']
+    meta['toolAttachmentSource']=TOOL_SOURCE.as_posix()
+    meta['toolAttachmentSourceHash']=hashlib.sha256(TOOL_SOURCE.read_bytes()).hexdigest()
     return result,meta

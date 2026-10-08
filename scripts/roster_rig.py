@@ -15,7 +15,7 @@ from mira_rig import clean, move, joint, foot_phase, prop_image
 from mira_portrait import bake_portrait
 from rig_skinning import limb_layers, SKINNING_REVISION
 from character_body_motion import gait_bob, handling_pose, ease
-from character_arm_motion import reach_pose, walk_pose, handling_lowering, arm_audit, mirror_arms, grip_point, carry_center
+from character_arm_motion import reach_pose, walk_pose, handling_lowering, arm_audit, mirror_arms, grip_point, carry_center, cargo_pose, palm_point
 
 ROOT=Path('art-source/pixel-characters/roster-v4')
 COUNTS={'idle':4,'walk':12,'carry':12,'work':8,'pickup':6,'greet':6}
@@ -227,7 +227,9 @@ def render(rig,action,phase,spec,crate,tool):
         end=c+[3 if c[0]<a[0] else -3,0]+offset
         if cargo:
             grip=grip_point(limb,rig['arms'],crate_center,crate.width)
-            reach=handling_state['reach'] if handling else 1;end=end*(1-reach)+grip*reach
+            reach=handling_state['reach'] if handling else 1
+            rest_pose=reach_pose(limb,root,end,-f)
+            hand=palm_point(limb,rest_pose)*(1-reach)+grip*reach
         elif action=='work':
             from profession_motion import hand_pose
             end=hand_pose(style,i,root,shoulders+offset,f,phase,end)
@@ -236,7 +238,7 @@ def render(rig,action,phase,spec,crate,tool):
         elif action=='greet' and i==1:
             amount=ease(phase/.3)*(1-ease((phase-.72)/.28))
             end=end*(1-amount)+(root+[5*math.sin(phase*math.pi*6),-12])*amount
-        pose=walk_pose(limb,root,f,phase,i,mode) if moving and not cargo else reach_pose(limb,root,end,-f)
+        pose=(cargo_pose(limb,root,hand,-f) if reach else rest_pose) if cargo else walk_pose(limb,root,f,phase,i,mode) if moving else reach_pose(limb,root,end,-f)
         root,elbow,end=pose
         audit['arms'].append(arm_audit(limb,pose))
         if cargo:audit['arms'][-1]['grip']=grip.tolist()
@@ -258,8 +260,9 @@ def render(rig,action,phase,spec,crate,tool):
     for img in arms[1][:2]:layer.alpha_composite(img)
     if action=='work' and style!='carrier':
         from profession_motion import tool_angle
-        hand=arms[1][2];prop=tool.rotate(tool_angle(style,phase),Image.Resampling.NEAREST,expand=True)
-        layer.alpha_composite(prop,(round(hand[0]-prop.width/2),round(hand[1]-prop.height*.75)))
+        from character_tool_motion import tool_layer
+        prop,audit['tool']=tool_layer(tool,np.array(audit['arms'][1]['palm']),tool_angle(style,phase),spec)
+        layer.alpha_composite(prop)
     head_bottom=min(arm['joints'][0,1] for arm in rig['arms'])-2+offset[1]
     if cargo:audit.update(cargoCenter=crate_center.tolist(),cargoSize=list(crate.size))
     if handling:audit.update(handling=handling_state,cargoCenter=crate_center.tolist())

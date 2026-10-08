@@ -129,10 +129,13 @@ def render_action(rig,action,phase,spec,weapon=None):
     output.alpha_composite(transform_image(rig['core'],pivot,angle,offset))
     for img in arm_layers[1][:2]:output.alpha_composite(img)
     if action=='attack' and weapon is not None:
-        hand=arm_layers[1][2];prop=weapon.rotate(35-105*strike,Image.Resampling.NEAREST,expand=True)
-        output.alpha_composite(prop,(round(hand[0]-prop.width/2),round(hand[1]-prop.height*.8)))
+        from character_tool_motion import tool_layer
+        prop,tool_audit=tool_layer(weapon,np.array(arm_details[1]['palm']),35-105*strike,spec,weapon=True)
+        output.alpha_composite(prop)
     from roster_rig import remove_specks
-    return remove_specks(clean(output),0),{'action':action,'phase':phase,'coreOffset':offset.tolist(),'coreAngle':angle,'feet':audit,'arms':arm_details}
+    details={'action':action,'phase':phase,'coreOffset':offset.tolist(),'coreAngle':angle,'feet':audit,'arms':arm_details}
+    if action=='attack' and weapon is not None:details['tool']=tool_audit
+    return remove_specks(clean(output),0),details
 
 def append_actions(atlas,meta,rigs,spec):
     assert len(meta['columns'])==48

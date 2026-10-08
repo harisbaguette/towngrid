@@ -10,9 +10,8 @@ def lengths_of(limb):
     return np.array([np.linalg.norm(b-a), np.linalg.norm(c-b)])
 
 
-def reach_pose(limb, root, target, pole):
-    """Keep both painted segments at their source length, including tight folds."""
-    first, second = lengths_of(limb)
+def solve_chain(root, target, lengths, pole):
+    first, second = lengths
     vector = np.asarray(target)-root
     distance = float(np.linalg.norm(vector))
     direction = vector/max(distance, .0001) if distance > .0001 else np.array([0., 1.])
@@ -25,6 +24,57 @@ def reach_pose(limb, root, target, pole):
         perpendicular *= -1
     elbow = root+direction*along+perpendicular*height
     return root, elbow, end
+
+
+def reach_pose(limb, root, target, pole):
+    """Keep both painted segments at their source length, including tight folds."""
+    return solve_chain(root, target, lengths_of(limb), pole)
+
+
+def palm_source(limb):
+    """Locate the palm in the existing hand pixels beyond the wrist landmark."""
+    if '_palm' not in limb:
+        _,b,c=np.asarray(limb['joints'],dtype=float)
+        axis=(c-b)/np.linalg.norm(c-b)
+        ys,xs=np.where(np.asarray(limb['lower'])[:,:,3]>0)
+        points=np.stack((xs+.5,ys+.5),axis=-1)
+        along=(points-c)@axis
+        side=(points-c)@np.array([-axis[1],axis[0]])
+        candidates=points[(along>=0)&(along<=8)&(abs(side)<=4)]
+        if not len(candidates):candidates=points[np.linalg.norm(points-c,axis=1).argsort()[:5]]
+        if not len(candidates):raise ValueError('Arm has no painted hand pixels')
+        center=candidates.mean(axis=0)
+        limb['_palm']=candidates[np.linalg.norm(candidates-center,axis=1).argmin()]
+    return limb['_palm']
+
+
+def palm_components(limb):
+    _,b,c=np.asarray(limb['joints'],dtype=float)
+    axis=(c-b)/np.linalg.norm(c-b);delta=palm_source(limb)-c
+    return float(delta@axis),float(delta@np.array([-axis[1],axis[0]]))
+
+
+def palm_point(limb, pose):
+    _,elbow,wrist=pose;axis=(wrist-elbow)/np.linalg.norm(wrist-elbow)
+    along,side=palm_components(limb)
+    return wrist+axis*along+np.array([-axis[1],axis[0]])*side
+
+
+def hand_reach(limb):
+    first,second=lengths_of(limb);along,side=palm_components(limb)
+    return first+math.hypot(second+along,side)
+
+
+def cargo_pose(limb, root, grip, pole):
+    # Solve to the painted palm, not the wrist. The glove extends beyond the
+    # wrist; treating those points as identical puts it through the box edge.
+    first,second=lengths_of(limb);along,side=palm_components(limb)
+    phi=math.atan2(side,second+along)
+    root,elbow,hand=solve_chain(root,grip,[first,math.hypot(second+along,side)],pole)
+    axis=(hand-elbow)/np.linalg.norm(hand-elbow)
+    rotation=np.array([[math.cos(phi),math.sin(phi)],[-math.sin(phi),math.cos(phi)]])
+    wrist=elbow+rotation@axis*second
+    return root,elbow,wrist
 
 
 def walk_pose(limb, root, forward, phase, index, mode='biped'):
@@ -57,7 +107,7 @@ def carry_center(arms, offset, desired, width):
     for limb in arms:
         grip_offset = grip_point(limb, arms, np.zeros(2), width)
         circle = np.asarray(limb['joints'][0])+offset-grip_offset
-        constraints.append((circle, float(sum(lengths_of(limb)))-.05))
+        constraints.append((circle, hand_reach(limb)-.05))
     left = max(c[0]-r for c,r in constraints)
     right = min(c[0]+r for c,r in constraints)
     if left >= right:
@@ -77,7 +127,7 @@ def handling_lowering(arms, offset, center, width, reach):
     for limb in arms:
         root = np.asarray(limb['joints'][0])+offset
         grip = grip_point(limb, arms, center, width)
-        radius = float(sum(lengths_of(limb)))-.05
+        radius = hand_reach(limb)-.05
         horizontal = abs(float(grip[0]-root[0]))
         if horizontal < radius:
             lower = max(lower, float(grip[1]-root[1])-math.sqrt(radius*radius-horizontal*horizontal))
@@ -87,10 +137,15 @@ def handling_lowering(arms, offset, center, width, reach):
 def arm_audit(limb, pose):
     root, elbow, end = pose
     return {'shoulder':root.tolist(), 'elbow':elbow.tolist(), 'wrist':end.tolist(),
-            'lengths':lengths_of(limb).tolist()}
+            'palm':palm_point(limb,pose).tolist(), 'lengths':lengths_of(limb).tolist()}
 
 
 def mirror_arms(audit):
     for arm in audit.get('arms', []):
-        for key in ['shoulder', 'elbow', 'wrist', 'grip']:
+        for key in ['shoulder', 'elbow', 'wrist', 'palm', 'grip']:
             if key in arm:arm[key][0] = 128-arm[key][0]
+    if audit.get('tool'):
+        tool=audit['tool'];inverse=np.array(tool['inverse'])
+        tool['origin']=(np.array(tool['origin'])+inverse@np.array([128.,0.])).tolist()
+        tool['inverse']=(inverse@np.diag([-1.,1.])).tolist()
+        tool['hand'][0]=128-tool['hand'][0]

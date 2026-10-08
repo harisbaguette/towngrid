@@ -1,0 +1,27 @@
+{
+  "revision": "painted-hand-tool-pivots-1",
+  "grips": {
+    "roster-v4/tools/axe.png": [2.5, 21.5],
+    "roster-v4/tools/crystal.png": [4.5, 20.5],
+    "roster-v4/tools/hammer.png": [5.5, 22.5],
+    "roster-v4/tools/hoe.png": [1.5, 21.5],
+    "roster-v4/tools/medical.png": [8.5, 21.5],
+    "roster-v4/tools/peel.png": [4.5, 22.5],
+    "roster-v4/tools/wrench.png": [4.5, 12.5],
+    "professions-v5/tools/axe.png": [2.5, 22.5],
+    "professions-v5/tools/blowpipe.png": [3.5, 25.5],
+    "professions-v5/tools/hammer.png": [5.5, 22.5],
+    "professions-v5/tools/hook.png": [2.5, 22.5],
+    "professions-v5/tools/ledger.png": [9.5, 8.5],
+    "professions-v5/tools/net.png": [8.5, 24.5],
+    "professions-v5/tools/pickaxe.png": [11.5, 21.5],
+    "professions-v5/tools/rope.png": [8.5, 1.5],
+    "professions-v5/tools/scroll.png": [5.5, 13.5],
+    "professions-v5/tools/shears.png": [3.5, 21.5],
+    "professions-v5/tools/signal.png": [1.5, 21.5],
+    "professions-v5/tools/staff.png": [4.5, 24.5],
+    "professions-v5/tools/sword.png": [5.5, 22.5],
+    "professions-v5/tools/wrench.png": [4.5, 16.5]
+  },
+  "miraWrenchNormalized": [0.5, 0.65]
+}

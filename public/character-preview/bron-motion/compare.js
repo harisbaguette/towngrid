@@ -1,3 +1,5 @@
+import {characterTravelSpeed} from '/src/app/game/character-movement.js';
+import {BASE_TIME_SCALE} from '/src/app/game/game-time.js';
 const $=id=>document.getElementById(id);
 const state={action:'walk',time:0,paused:matchMedia('(prefers-reduced-motion: reduce)').matches,scale:1,speed:1,travel:true};
 const image=src=>new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(Error(src));img.src=src;});
@@ -11,12 +13,12 @@ const [before,after]=await Promise.all([
  load('/assets/pixel-characters/bron/sprites.png','/assets/pixel-characters/bron/frames.json'),
 ]);
 const contexts=[$('before').getContext('2d'),$('after').getContext('2d')];
-const stepSpeed=.36;
+const stepSpeed=BASE_TIME_SCALE*characterTravelSpeed({time:0,money:1,roads:new Set()},{x:0,z:0,race:'dwarf'});
 function drawOne(ctx,asset){
  const {meta,atlas}=asset,clip=meta.clips[state.action];
  const moving=state.action==='walk'||state.action==='carry';
  const distance=state.time*stepSpeed;
- const elapsed=moving?distance/clip.strideLength*clip.frames.length/clip.fps:state.time;
+ const elapsed=moving?distance/clip.strideLength*clip.frames.length/clip.fps:state.time*BASE_TIME_SCALE;
  const frame=clip.frames[Math.floor(elapsed*clip.fps)%clip.frames.length];
  ctx.fillStyle='#e9efe3';ctx.fillRect(0,0,520,550);ctx.imageSmoothingEnabled=false;
  ctx.font='14px system-ui';ctx.textAlign='center';
@@ -46,7 +48,7 @@ $('travel').onchange=()=>{state.travel=$('travel').checked;draw();};
 $('timeline').oninput=()=>{
  state.paused=true;updatePlay();
  const clip=after.meta.clips[state.action];
- const duration=['walk','carry'].includes(state.action)?clip.strideLength/stepSpeed:clip.frames.length/clip.fps;
+ const duration=['walk','carry'].includes(state.action)?clip.strideLength/stepSpeed:clip.frames.length/(clip.fps*BASE_TIME_SCALE);
  state.time=Number($('timeline').value)/120*duration;
  $('phase').value=Math.round(Number($('timeline').value)/120*100)+'%';draw();
 };
