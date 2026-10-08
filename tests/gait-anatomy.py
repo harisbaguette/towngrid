@@ -14,6 +14,7 @@ def measure(meta):
  for row in range(4):
   for action in ['walk','carry']:
    for col in meta['clips'][action]['frames']:
+    if meta['rigAudit'][row][col].get('authored'):continue  # drawn cels have no leg joints
     for leg,foot in enumerate(meta['rigAudit'][row][col]['feet']):
      a,b,c=[np.array(foot[key]) for key in ['hip','knee','ankle']]
      for segment,(start,end,length) in enumerate(zip([a,b],[b,c],foot['lengths'])):

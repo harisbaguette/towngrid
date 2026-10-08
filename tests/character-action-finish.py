@@ -37,7 +37,9 @@ for path in sorted(Path(args.output).glob('*/frames.json')):
     assert ImageOps.mirror(target).tobytes()==tile(mirror,frame).tobytes(),(meta['id'],row,frame,'wrong mirror')
   if meta.get('locomotionMode')!='biped' or meta['id']=='bron':continue
   for action in ['walk','carry']:
-   frames=meta['clips'][action]['frames'];feet=[meta['rigAudit'][row][f]['feet'] for f in frames]
+   frames=meta['clips'][action]['frames']
+   if any(meta['rigAudit'][row][f].get('authored') for f in frames):continue  # drawn walk: tests/mira-authored-walk.py
+   feet=[meta['rigAudit'][row][f]['feet'] for f in frames]
    for index in [0,1]:
     states={p[index]['supportPart'] for p in feet}
     assert states=={'heel','flat','toe','swing'},(meta['id'],row,states)

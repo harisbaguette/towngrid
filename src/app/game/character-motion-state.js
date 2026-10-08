@@ -1,4 +1,4 @@
-import {pixelAction,pixelDirection,pixelClip,pixelFrame} from './pixel-character-data.js';
+import {pixelAction,pixelDirection,pixelClip,pixelFrame,PIXEL_DIRECTIONS} from './pixel-character-data.js';
 
 // Animation state stays with the rendered model, never in a saved worker.
 export function characterPose(state,worker,time,cameraAzimuth,metadata,distance=0){
@@ -26,7 +26,9 @@ export function characterPose(state,worker,time,cameraAzimuth,metadata,distance=
  if(action==='turn')elapsed=time-state.turnAt;
  if(action==='walk'||action==='carry'){
   const clip=pixelClip(action,metadata);
-  elapsed=clip.strideLength?distance/clip.strideLength*clip.frames.length/clip.fps:distance/1.25;
+  // Drawn views can cover a different ground distance per stride than the rig.
+  const stride=clip.strideLengths?.[PIXEL_DIRECTIONS[direction]]??clip.strideLength;
+  elapsed=stride?distance/stride*clip.frames.length/clip.fps:distance/1.25;
  }
  // The final lift pose has planted feet and the box held at carrying height.
  // Keep it between pickup and the first moving tick, or while a carrier waits.

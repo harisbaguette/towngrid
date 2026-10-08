@@ -21,6 +21,7 @@ for path in sorted(Path(args.output).glob('*/frames.json')):
             if identity=='bron' and action in ['walk','carry','work','attack']:continue
             for frame in clip['frames']:
                 audit=meta['rigAudit'][row][frame]
+                if audit.get('authored'):continue  # drawn cels keep their painted arms
                 arms=audit.get('arms',[])
                 assert len(arms)==2,(identity,row,action,frame,'arm audit missing')
                 for index,arm in enumerate(arms):
@@ -38,7 +39,7 @@ for path in sorted(Path(args.output).glob('*/frames.json')):
                         error=float(np.linalg.norm(np.array(arm['wrist'])-arm['grip']))
                         max_grip_error=max(max_grip_error,error);grips+=1
                         assert error<.051,(identity,row,action,frame,'hand loses box',error)
-        if identity!='bron':
+        if identity!='bron' and not meta['rigAudit'][row][meta['clips']['walk']['frames'][0]].get('authored'):
             cycle=[meta['rigAudit'][row][f]['arms'] for f in meta['clips']['walk']['frames']]
             # At the opposite contact, each hand must exchange front/back
             # positions. A static forearm or two hands swinging together fails.

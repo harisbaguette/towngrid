@@ -91,7 +91,8 @@ assert.equal(pixelFrame('drop', 10, 1, mira), mira.clips.drop.frames.at(-1));
 assert.equal(mira.legacyActions, undefined, 'no mixed legacy body');
 assert.equal(mira.clips.walk.strideLength, mira.clips.carry.strideLength);
 for (const clip of Object.values(mira.clips)) for (const frame of clip.frames) assert.ok(frame >= 0 && frame < mira.columns.length);
-for (const row of mira.rigAudit) {
+// SW/SE walk cels are drawings (tests/mira-authored-walk.py); NW/NE stay rigged.
+for (const row of mira.rigAudit.filter(row=>!row[mira.clips.walk.frames[0]].authored)) {
  const walk = mira.clips.walk.frames.map(frame=>row[frame]);
  assert.equal(walk.length,32);
  assert.equal(walk[0].feet[0].travel,1);assert.ok(walk[16].feet[0].travel<-.5);
@@ -106,8 +107,8 @@ for (const row of mira.rigAudit) {
  }
 }
 // A planted foot cancels the actor's translation, in the actual camera projection.
-const stride=mira.clips.walk.strideLength, forward=[-Math.SQRT1_2,1/Math.sqrt(6)];
-const cycle=mira.clips.walk.frames.map(frame=>mira.rigAudit[0][frame]);
+const stride=mira.clips.walk.strideLength, forward=[-Math.SQRT1_2,-1/Math.sqrt(6)];
+const cycle=mira.clips.walk.frames.map(frame=>mira.rigAudit[1][frame]);
 assert.ok(cycle.some(frame=>frame.feet[0].contact)&&cycle.some(frame=>!frame.feet[0].contact),'the first foot both supports and swings');
 for(let i=0;i<cycle.length;i++) for(let axis=0;axis<2;axis++) {
  if(!cycle[i].feet[0].contact)continue;
@@ -115,8 +116,13 @@ for(let i=0;i<cycle.length;i++) for(let axis=0;axis<2;axis++) {
  assert.ok(Math.abs(worldPixel-cycle[0].feet[0].sole[axis])<.001,'stance sole stays planted as the actor moves');
 }
 group.userData.motionState={};
-const paced={id:99,x:0,z:0,route:[{x:10,z:0}],race:'human'};
-advanceCharacterRoute(paced,stride/4,1);
+// Walk and carry share one stride only in the rigged views; head NW.
+const paced={id:99,x:0,z:0,route:[{x:-10,z:0}],race:'human'};
+advanceCharacterRoute(paced,1e-9,1);animatePixelCharacter(group,paced,49);
+// The drawn SW/SE walk covers its own ground distance per stride.
+const facingStride=mira.clips.walk.strideLengths?.[mira.directions[group.userData.direction]]??stride;
+group.userData.motionState={};
+advanceCharacterRoute(paced,facingStride/4,1);
 animatePixelCharacter(group,paced,50);
 assert.equal(group.userData.frame,72,'quarter of a stride selects the ninth walking pose');
 paced.task={carried:true};

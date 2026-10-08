@@ -276,6 +276,9 @@ def pack_mira_rig(spec_path, output):
         atlas,metadata=install_handling(atlas,metadata,rigs,spec,render,crate,wrench)
     from character_action_finish import install_action_finish
     atlas,metadata=install_action_finish(atlas,metadata,rigs,spec,render,crate,wrench)
+    # Drawn SW/SE walk cels replace the rig walk; NW/NE stay rigged.
+    from mira_authored_walk import install as install_authored_walk
+    atlas,metadata=install_authored_walk(atlas,metadata)
     atlas.save(target/'sprites.png',optimize=True)
     (target/'frames.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     proof = []

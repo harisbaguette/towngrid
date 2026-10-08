@@ -37,6 +37,7 @@ for path in sorted(Path(args.output).glob('*/frames.json')):
             planted={};last_contact={}
             for tick in range(count*2):
                 frame=frames[tick%count];audit=meta['rigAudit'][row][frame]
+                if audit.get('authored'):continue  # drawn cels: tests/mira-authored-walk.py
                 tile=atlas[(row+4)*128:(row+5)*128,(frame%64)*128:(frame%64+1)*128]
                 alpha=tile[:,:,3]>0
                 if tick<count:report['frames']+=1
@@ -82,6 +83,7 @@ for path in sorted(Path(args.output).glob('*/frames.json')):
             if row in [2,3]:face_mask=face_mask[:,::-1]
             face_mask=face_mask[10:30,44:84]
             for frame in meta['clips']['walk']['frames']:
+                if meta['rigAudit'][row][frame].get('authored'):continue
                 old_frame=old_meta['clips']['walk']['frames'][0]
                 shift=round(meta['rigAudit'][row][frame]['coreOffset'][1])-round(old_meta['rigAudit'][row][old_frame]['coreOffset'][1])
                 x=(frame%64)*128;y=(row+4)*128

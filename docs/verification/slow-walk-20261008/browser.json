@@ -1,0 +1,10 @@
+{
+  "drawings": 12,
+  "cells": 32,
+  "directions": [
+    "SW",
+    "SE"
+  ],
+  "cycleSeconds": 1.025,
+  "errors": []
+}

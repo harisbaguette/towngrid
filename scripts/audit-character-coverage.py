@@ -131,7 +131,7 @@ def main():
             methods=Counter()
             for f in set(frames):
                 audit=meta.get('rigAudit',[[]])[0][f]
-                method='authored-key-pose-contact-adjusted' if 'sourceCel' in audit else 'authored-hammer-pose' if 'authoredCel' in audit else 'authored-rest-transformed' if 'authoredRest' in audit else 'original-texture-joint-rig'
+                method='authored-whole-cel' if 'authored' in audit else 'authored-key-pose-contact-adjusted' if 'sourceCel' in audit else 'authored-hammer-pose' if 'authoredCel' in audit else 'authored-rest-transformed' if 'authoredRest' in audit else 'original-texture-joint-rig'
                 methods[method]+=1
             record['actions'][action]={
                 'present':valid,'playbackFrames':len(frames),'uniqueFrameIndices':len(set(frames)),

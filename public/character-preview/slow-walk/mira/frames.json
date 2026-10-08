@@ -1,0 +1,353 @@
+{
+  "id": "mira",
+  "revision": "authored-slow-walk-v13c",
+  "cell": 256,
+  "atlasColumns": 12,
+  "atlasRows": 2,
+  "directions": [
+    "SW",
+    "SE"
+  ],
+  "mirroredDirections": {
+    "SE": "SW"
+  },
+  "sourceDrawings": 32,
+  "usedDrawings": 12,
+  "sequence": [
+    0,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    6,
+    7,
+    8,
+    9,
+    9,
+    10,
+    11,
+    11,
+    0,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    6,
+    7,
+    8,
+    9,
+    9,
+    10,
+    11,
+    11
+  ],
+  "anchor": [
+    128,
+    232
+  ],
+  "strideLength": 0.41,
+  "frames": [
+    {
+      "column": 0,
+      "source": "original-proportions-key-00.png",
+      "register": {
+        "score": 1.0,
+        "scale": 1.0,
+        "head": [
+          364,
+          138
+        ],
+        "masterHead": [
+          364,
+          138
+        ]
+      },
+      "legFit": 1.0038,
+      "bodyHeight": 1001.53,
+      "stanceShear": [
+        0.0,
+        0.0
+      ],
+      "sha256": "b642ad13c2bcf3ad5ee538966864256fbd8f6e000dd125c26b715d6cdff7aee0",
+      "packedHash": "b55192a882b457d6bb0a48ecacea996cca595a20bf5e1f94d249c848e691a35f"
+    },
+    {
+      "column": 1,
+      "source": "precise-inbetween-01.png",
+      "register": {
+        "score": 0.9584,
+        "scale": 1.0,
+        "head": [
+          364,
+          138
+        ],
+        "masterHead": [
+          364,
+          138
+        ]
+      },
+      "legFit": 1.0002,
+      "bodyHeight": 1000.1,
+      "stanceShear": [
+        -5.94,
+        0.0
+      ],
+      "sha256": "90ce61239bcf5e116cda3d76c30fd01a9c6d033f6e492817c4fadac36569d056",
+      "packedHash": "0d52b2133c6afcd2ae6a2aca64c5f1d3563c23bf20187f300e51d1c4d63c7ce4"
+    },
+    {
+      "column": 2,
+      "source": "precise-inbetween-02.png",
+      "register": {
+        "score": 0.9563,
+        "scale": 1.0,
+        "head": [
+          364,
+          138
+        ],
+        "masterHead": [
+          364,
+          138
+        ]
+      },
+      "legFit": 1.0182,
+      "bodyHeight": 1001.18,
+      "stanceShear": [
+        0.79,
+        0.0
+      ],
+      "sha256": "9bfe6f043af9a472c18f43ff67eb084974ecd7b22b1b3a3e922da77848dac98c",
+      "packedHash": "f27a5490e27f96247ee24d9faaa860f8bb9947b35a4e26d8190677a3421bbaa4"
+    },
+    {
+      "column": 3,
+      "source": "precise-inbetween-03.png",
+      "register": {
+        "score": 0.9475,
+        "scale": 1.01,
+        "head": [
+          361,
+          136
+        ],
+        "masterHead": [
+          364,
+          138
+        ]
+      },
+      "legFit": 1.0418,
+      "bodyHeight": 1003.3,
+      "stanceShear": [
+        9.24,
+        0.0
+      ],
+      "sha256": "97b8912d0c4189c919f417ab5ce031d069f85285b8d8021d75a12ba4c2f3af36",
+      "packedHash": "bab0e44ccee4adcd1374eb450847debdf259dcbdd32ea527910ec1919da72ad0"
+    },
+    {
+      "column": 4,
+      "source": "precise-inbetween-05.png",
+      "register": {
+        "score": 0.9554,
+        "scale": 1.0,
+        "head": [
+          364,
+          138
+        ],
+        "masterHead": [
+          364,
+          138
+        ]
+      },
+      "legFit": 1.0282,
+      "bodyHeight": 1006.13,
+      "stanceShear": [
+        8.26,
+        0.0
+      ],
+      "sha256": "56bdc5d94c3d06a0bafef35eb19e961d96ca3920ed1278519c4fc7ff5d42f32f",
+      "packedHash": "5d232477c7fdf20aa294dd2311b0f5186ac3c419579870137a7bedc28155d5cf"
+    },
+    {
+      "column": 5,
+      "source": "precise-inbetween-06.png",
+      "register": {
+        "score": 0.9556,
+        "scale": 1.0,
+        "head": [
+          364,
+          138
+        ],
+        "masterHead": [
+          364,
+          138
+        ]
+      },
+      "legFit": 1.0548,
+      "bodyHeight": 1009.25,
+      "stanceShear": [
+        30.39,
+        0.0
+      ],
+      "sha256": "2345d2f81cddf99c34587e6ed2fd0a4ebc2776c6132837ae1125035623efd8b7",
+      "packedHash": "2b7dcdf6d4a06480237d8e8b59a805db3cbc4eed9422eb5b8fddbe8f9e1a138e"
+    },
+    {
+      "column": 6,
+      "source": "precise-inbetween-07.png",
+      "register": {
+        "score": 0.9622,
+        "scale": 1.0,
+        "head": [
+          364,
+          138
+        ],
+        "masterHead": [
+          364,
+          138
+        ]
+      },
+      "legFit": 1.0847,
+      "bodyHeight": 1012.18,
+      "stanceShear": [
+        -0.5,
+        0.0
+      ],
+      "sha256": "c4110cf843e025bf6a7bc4a43a00cc7510ec65ec15eaacd803fec538c192d201",
+      "packedHash": "25db422d4911f436f6f73a85c9a44e39137c87fa49b6abfc2f30f043293556fc"
+    },
+    {
+      "column": 7,
+      "source": "precise-inbetween-04.png",
+      "register": {
+        "score": 0.9521,
+        "scale": 1.01,
+        "head": [
+          361,
+          136
+        ],
+        "masterHead": [
+          364,
+          138
+        ]
+      },
+      "legFit": 1.16,
+      "bodyHeight": 1015.78,
+      "stanceShear": [
+        26.56,
+        0.0
+      ],
+      "sha256": "a9a3bed7215f1f604c6ce611e6b5f360841b88d170e97481e17894dea12da63b",
+      "packedHash": "caf80d07b1e64d5794400096f7f429932aad1f02acd8e6dca2767d179740d997"
+    },
+    {
+      "column": 8,
+      "source": "original-proportions-key-08.png",
+      "register": {
+        "score": 0.9457,
+        "scale": 0.98,
+        "head": [
+          375,
+          160
+        ],
+        "masterHead": [
+          364,
+          138
+        ]
+      },
+      "legFit": 1.067,
+      "bodyHeight": 1015.9,
+      "stanceShear": [
+        39.86,
+        0.0
+      ],
+      "sha256": "4e0ca7989457699389de4ef27cc1c4179ee814389c3688d891f3ca3a3f62d369",
+      "packedHash": "900c48841c747a89fdfba6438c6bd6ef0301589ef114a2e12ebdf4aaaddbf2b8"
+    },
+    {
+      "column": 9,
+      "source": "precise-inbetween-09.png",
+      "register": {
+        "score": 0.9309,
+        "scale": 0.98,
+        "head": [
+          375,
+          160
+        ],
+        "masterHead": [
+          364,
+          138
+        ]
+      },
+      "legFit": 1.0614,
+      "bodyHeight": 1014.82,
+      "stanceShear": [
+        51.68,
+        0.0
+      ],
+      "sha256": "f28b8aeddd8a8caf8fb66c03f75db4619b1e6175fe6b4bcc34d86e1857e1f4b8",
+      "packedHash": "14bbc8c9b25082b980ec66c0151995bb5293cfb62eab503cd9bd772f5423978b"
+    },
+    {
+      "column": 10,
+      "source": "precise-inbetween-10.png",
+      "register": {
+        "score": 0.9421,
+        "scale": 0.98,
+        "head": [
+          375,
+          160
+        ],
+        "masterHead": [
+          364,
+          138
+        ]
+      },
+      "legFit": 1.0626,
+      "bodyHeight": 1009.87,
+      "stanceShear": [
+        3.71,
+        0.0
+      ],
+      "sha256": "2962b48a7239646fa8382e2c4e025702aecf01bba308f9b1ae6a9b4d05d649fd",
+      "packedHash": "7f358cb5e9ad94914a1bae374fc7432a1a79f5adab8ee8ba07c62c7196359aad"
+    },
+    {
+      "column": 11,
+      "source": "precise-inbetween-11.png",
+      "register": {
+        "score": 0.9364,
+        "scale": 0.98,
+        "head": [
+          375,
+          160
+        ],
+        "masterHead": [
+          364,
+          138
+        ]
+      },
+      "legFit": 1.063,
+      "bodyHeight": 1006.75,
+      "stanceShear": [
+        19.33,
+        0.0
+      ],
+      "sha256": "1855b19fce2244cb85380e1a013fa967fc47ef92890542896fc7c9640d9e66d9",
+      "packedHash": "f591490dc0157449b1b025350b4885cc0ee15a8a81ecf77dc3e57ea4432159f9"
+    }
+  ],
+  "rejected": {
+    "10-15": "앞발이 닿는 착지 자세가 다른 묶음보다 작고 손 위치가 달라 이어지지 않음",
+    "16-31": "뒷발이 앞으로 나오지 않아 두 번째 걸음이 그려지지 않음"
+  },
+  "remaining": [
+    "NW/NE 방향",
+    "운반·출발·정지와 나머지 동작"
+  ]
+}

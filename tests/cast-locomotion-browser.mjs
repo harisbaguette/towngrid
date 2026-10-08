@@ -64,7 +64,7 @@ try{
    for(let view=0;view<4;view++)for(const action of ['walk','carry']){
     Object.assign(worker,{x:clear.x,z:clear.z,dir:0,working:false,attacking:false,handling:null,phase:null,task:action==='carry'?{carried:true}:null,route:[{x:clear.x,z:clear.z+2}]});
     scene.controls.target.set(clear.x,0,clear.z);scene.camera.zoom=2;scene.camera.updateProjectionMatrix();scene.setQuarterView(view);model.userData.motionState={};
-    const clip=meta.clips[action],stepLength=clip.strideLength/32,distance=characterDistance(worker);
+    const clip=meta.clips[action],stepLength=(clip.strideLengths?.[['SW','NW','NE','SE'][view]]??clip.strideLength)/32,distance=characterDistance(worker);
     let first=(Math.floor(distance/stepLength)+.5)*stepLength-distance;if(first<=0)first+=stepLength;
     const frames=[];
     for(let step=0;step<32;step++){

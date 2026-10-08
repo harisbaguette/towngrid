@@ -28,10 +28,12 @@ for(const person of people){
   camera.position.setFromSphericalCoords(20,Math.acos(1/Math.sqrt(3)),Math.PI/4+view*Math.PI/2);camera.lookAt(0,0,0);camera.updateMatrixWorld();
   for(const action of ['walk','carry']){
    const clip=meta.clips[action];assert.equal(clip.frames.length,32);
+   // Drawn views (Mira SW/SE) set their own ground distance per stride.
+   const stride=clip.strideLengths?.[['SW','NW','NE','SE'][view]]??clip.strideLength;
    const worker={id:0,x:0,z:0,dir:0,route:[{x:0,z:20}],task:action==='carry'?{carried:true}:null};
    model.userData.motionState={};
    for(let step=0;step<32;step++){
-    advanceCharacterRoute(worker,clip.strideLength/32*(step?1:.5),1);
+    advanceCharacterRoute(worker,stride/32*(step?1:.5),1);
     const ground=[.013,.026,.036,.040][view];animatePixelCharacter(model,worker,step/40,camera,ground);
     const u=model.userData;
     assert.equal(u.frame,clip.frames[step],`${person.id}: distance frame`);
@@ -40,7 +42,7 @@ for(const person of people){
     assert.equal(model.position.y,ground+.002);
     const contacts=meta.rigAudit[view][u.frame].feet.filter(foot=>foot.contact).length;
     assert.ok(expected==='hover'?contacts===0:contacts>=(expected==='centaur'?2:1));
-    if(expected==='biped')for(const foot of meta.rigAudit[view][u.frame].feet){
+    if(expected==='biped'&&!meta.rigAudit[view][u.frame].authored)for(const foot of meta.rigAudit[view][u.frame].feet){
      for(const [start,end,length] of [[foot.hip,foot.knee,foot.lengths[0]],[foot.knee,foot.ankle,foot.lengths[1]]]){
       assert.ok(Math.hypot(end[0]-start[0],end[1]-start[1])/length>.40,`${person.id}: projected leg collapses despite valid 3D lengths`);
      }

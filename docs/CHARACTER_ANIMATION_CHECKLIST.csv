@@ -3,10 +3,10 @@
 일반 일꾼,mira,미라,인간,일반 일꾼,idle,대기,NW,있음,8,2,기존 원화 관절 변형,해당 시점 원화,미완료,검수 대기,art-source/pixel-characters/prototypes/mira-v3/runtime-pack.json
 일반 일꾼,mira,미라,인간,일반 일꾼,idle,대기,NE,있음,8,2,기존 원화 관절 변형,NW 좌우 반전,미완료,검수 대기,art-source/pixel-characters/prototypes/mira-v3/runtime-pack.json
 일반 일꾼,mira,미라,인간,일반 일꾼,idle,대기,SE,있음,8,2,기존 원화 관절 변형,SW 좌우 반전,미완료,검수 대기,art-source/pixel-characters/prototypes/mira-v3/runtime-pack.json
-일반 일꾼,mira,미라,인간,일반 일꾼,walk,걷기·이동,SW,있음,32,32,기존 원화 관절 변형,해당 시점 원화,미완료,검수 대기,art-source/pixel-characters/prototypes/mira-v3/runtime-pack.json
+일반 일꾼,mira,미라,인간,일반 일꾼,walk,걷기·이동,SW,있음,32,12,신규 전신 원화 12장(v13c),해당 시점 원화,미완료,검수 대기,art-source/pixel-characters/authored-actions-v13/mira/pack.json
 일반 일꾼,mira,미라,인간,일반 일꾼,walk,걷기·이동,NW,있음,32,32,기존 원화 관절 변형,해당 시점 원화,미완료,검수 대기,art-source/pixel-characters/prototypes/mira-v3/runtime-pack.json
 일반 일꾼,mira,미라,인간,일반 일꾼,walk,걷기·이동,NE,있음,32,32,기존 원화 관절 변형,NW 좌우 반전,미완료,검수 대기,art-source/pixel-characters/prototypes/mira-v3/runtime-pack.json
-일반 일꾼,mira,미라,인간,일반 일꾼,walk,걷기·이동,SE,있음,32,32,기존 원화 관절 변형,SW 좌우 반전,미완료,검수 대기,art-source/pixel-characters/prototypes/mira-v3/runtime-pack.json
+일반 일꾼,mira,미라,인간,일반 일꾼,walk,걷기·이동,SE,있음,32,12,신규 전신 원화 12장(v13c),SW 좌우 반전,미완료,검수 대기,art-source/pixel-characters/authored-actions-v13/mira/pack.json
 일반 일꾼,mira,미라,인간,일반 일꾼,carry,운반,SW,있음,32,32,기존 원화 관절 변형,해당 시점 원화,미완료,검수 대기,art-source/pixel-characters/prototypes/mira-v3/runtime-pack.json
 일반 일꾼,mira,미라,인간,일반 일꾼,carry,운반,NW,있음,32,32,기존 원화 관절 변형,해당 시점 원화,미완료,검수 대기,art-source/pixel-characters/prototypes/mira-v3/runtime-pack.json
 일반 일꾼,mira,미라,인간,일반 일꾼,carry,운반,NE,있음,32,32,기존 원화 관절 변형,NW 좌우 반전,미완료,검수 대기,art-source/pixel-characters/prototypes/mira-v3/runtime-pack.json

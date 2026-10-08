@@ -72,13 +72,16 @@ const suites = [
   'tests/screen-art.mjs',
   'tests/screen-motion.mjs',
   'scripts/check-pixel-characters.mjs',
+  'tests/mira-authored-walk.py',
   // 2026-09-28 audit probes whose simulation-side defects are fixed; --regression fails if one comes back.
   ...['export-chokepoint','raid-gated-trial','events-early','progression-and-docs','stock-ledger','save-edges','debt-spiral','branch-site','sapling-timer'].map(p=>['tests/audit/'+p+'.mjs','--regression']),
 ];
 for (const entry of suites) {
   const [suite, ...args] = [].concat(entry);
   console.log(`\n[${suite}]`);
-  const result = spawnSync(process.execPath, [suite, ...args], { cwd: root, stdio: 'inherit' });
+  // Pixel-art checks that read the atlases with numpy run under Python.
+  const runner = suite.endsWith('.py') ? process.env.PYTHON || 'python' : process.execPath;
+  const result = spawnSync(runner, [suite, ...args], { cwd: root, stdio: 'inherit' });
   if (result.error) throw result.error;
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
